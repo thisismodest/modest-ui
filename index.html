@@ -3,82 +3,210 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>modest-components Preview</title>
-    <link rel="stylesheet" href="base/tokens.css" />
+    <title>modest-components</title>
+    <link rel="stylesheet" href="index.css" />
     <style>
-      * {
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
         margin: 0;
+        padding: 0;
       }
 
       body {
         font-family: var(--mdst-font-sans);
-        padding: var(--mdst-space-xl);
-        max-width: 64rem;
-        margin: 0 auto;
         background: var(--mdst-color-bg);
         color: var(--mdst-color-fg);
       }
 
-      h1 {
-        font-size: var(--mdst-text-xl);
-        margin-bottom: var(--mdst-space-xl);
+      .layout {
+        display: flex;
+        height: 100%;
       }
 
-      .components {
+      .sidebar {
+        width: 14rem;
+        flex-shrink: 0;
+        border-right: 0.0625em solid var(--mdst-color-border);
+        padding: var(--mdst-space-md);
         display: flex;
         flex-direction: column;
-        gap: var(--mdst-space-xl);
+        gap: var(--mdst-space-md);
+        overflow-y: auto;
       }
 
-      .component {
-        border: 0.0625em solid var(--mdst-color-border);
-      }
-
-      .component-header {
-        padding: var(--mdst-space-sm) var(--mdst-space-md);
-        border-bottom: 0.0625em solid var(--mdst-color-border);
+      .sidebar-title {
         font-size: var(--mdst-text-sm);
+        font-weight: 700;
+        letter-spacing: 0.025em;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-xs);
+      }
+
+      .sidebar-link {
+        display: block;
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        text-decoration: none;
+        border-radius: var(--mdst-radius);
+        transition:
+          color var(--mdst-transition),
+          background var(--mdst-transition);
+      }
+
+      .sidebar-link:hover {
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+      }
+
+      .sidebar-link.active {
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        font-weight: 500;
+      }
+
+      .main {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .main-header {
+        padding: var(--mdst-space-md);
+        border-bottom: 0.0625em solid var(--mdst-color-border);
+        font-size: var(--mdst-text-lg);
         font-weight: 600;
         background: var(--mdst-color-subtle);
       }
 
-      .component iframe {
-        display: block;
+      .main-content {
+        flex: 1;
+        overflow: hidden;
+      }
+
+      .main-content iframe {
         width: 100%;
+        height: 100%;
         border: none;
-        background: var(--mdst-color-bg);
+      }
+
+      .github-link {
+        margin-top: auto;
+        padding-top: var(--mdst-space-md);
+        border-top: 0.0625em solid var(--mdst-color-border);
+      }
+
+      .github-link a {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        text-decoration: none;
+      }
+
+      .github-link a:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      @media (max-width: 640px) {
+        .layout {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          height: auto;
+          border-right: none;
+          border-bottom: 0.0625em solid var(--mdst-color-border);
+        }
+
+        .sidebar-nav {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .github-link {
+          display: none;
+        }
       }
     </style>
   </head>
   <body>
-    <h1>modest-components</h1>
-
-    <div class="components">
-      <div class="component">
-        <div class="component-header">Button</div>
-        <iframe src="components/button/preview.html" height="140"></iframe>
-      </div>
-
-      <div class="component">
-        <div class="component-header">Input</div>
-        <iframe src="components/input/preview.html" height="320"></iframe>
-      </div>
-
-      <div class="component">
-        <div class="component-header">OTP Input</div>
-        <iframe src="components/otp-input/preview.html" height="280"></iframe>
-      </div>
-
-      <div class="component">
-        <div class="component-header">Code (inline)</div>
-        <iframe src="components/code/preview.html" height="120"></iframe>
-      </div>
-
-      <div class="component">
-        <div class="component-header">Pre (code blocks)</div>
-        <iframe src="components/pre/preview.html" height="420"></iframe>
-      </div>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-title">modest-components</div>
+        <nav class="sidebar-nav">
+          <!-- COMPONENTS_LIST_START -->
+          <a href="#button" class="sidebar-link" data-component="button">Button</a>
+          <a href="#code" class="sidebar-link" data-component="code">Code</a>
+          <a href="#input" class="sidebar-link" data-component="input">Input</a>
+          <a href="#otp-input" class="sidebar-link" data-component="otp-input">OTP Input</a>
+          <a href="#pre" class="sidebar-link" data-component="pre">Pre</a>
+<!-- COMPONENTS_LIST_END -->
+        </nav>
+        <div class="github-link">
+          <a href="https://github.com/thisismodest/modest-components">GitHub</a>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="main-header" id="component-title">Button</header>
+        <div class="main-content">
+          <iframe id="component-frame" src="components/button/preview.html"></iframe>
+        </div>
+      </main>
     </div>
+
+    <script>
+      const links = document.querySelectorAll(".sidebar-link");
+      const frame = document.getElementById("component-frame");
+      const title = document.getElementById("component-title");
+
+      function setActive(component) {
+        links.forEach((link) => {
+          link.classList.toggle("active", link.dataset.component === component);
+        });
+      }
+
+      function loadComponent(component) {
+        const link = document.querySelector(`[data-component="${component}"]`);
+        if (!link) return;
+
+        frame.src = `components/${component}/preview.html`;
+        title.textContent = link.textContent;
+        setActive(component);
+      }
+
+      links.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const component = link.dataset.component;
+          loadComponent(component);
+          history.pushState(null, "", `#${component}`);
+        });
+      });
+
+      // Load from hash or default to first component
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        loadComponent(hash);
+      } else {
+        setActive("button");
+      }
+
+      window.addEventListener("hashchange", () => {
+        const hash = window.location.hash.slice(1);
+        if (hash) loadComponent(hash);
+      });
+    </script>
   </body>
 </html>
