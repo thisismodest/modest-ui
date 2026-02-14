@@ -1,0 +1,58 @@
+/* Pre — block code/JSON display */
+
+.mdst-pre {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: var(--mdst-space-md);
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+  font-family: var(--mdst-font-mono);
+  font-size: var(--mdst-text-sm);
+  line-height: var(--mdst-line-height);
+  color: var(--mdst-color-fg);
+  background-color: var(--mdst-color-subtle);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
+
+.mdst-pre:focus {
+  outline: 0.125em solid var(--mdst-color-focus);
+  outline-offset: 0.125em;
+}
+
+/* Nested code inside pre — reset styles */
+.mdst-pre code,
+.mdst-pre .mdst-code {
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-size: inherit;
+  word-break: break-word;
+}
+
+/* Variants */
+.mdst-pre--borderless {
+  border: none;
+}
+
+.mdst-pre--compact {
+  padding: var(--mdst-space-sm);
+}
+
+/* Allow horizontal scroll if explicitly needed */
+.mdst-pre--scroll {
+  overflow-x: auto;
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: normal;
+  white-space: pre;
+}

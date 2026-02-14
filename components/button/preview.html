@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="button.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-sm);
+        align-items: center;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .label {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xs);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="label">Variants</div>
+    <div class="row">
+      <button class="mdst-button">Default</button>
+      <button class="mdst-button mdst-button--solid">Solid</button>
+      <button class="mdst-button mdst-button--ghost">Ghost</button>
+      <button class="mdst-button" disabled>Disabled</button>
+    </div>
+
+    <div class="label">Sizes</div>
+    <div class="row">
+      <button class="mdst-button mdst-button--sm">Small</button>
+      <button class="mdst-button">Default</button>
+      <button class="mdst-button mdst-button--lg">Large</button>
+    </div>
+  </body>
+</html>

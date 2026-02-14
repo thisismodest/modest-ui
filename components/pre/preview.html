@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pre Component</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="pre.css" />
+    <style>
+      html,
+      body {
+        overflow-x: hidden;
+        max-width: 100%;
+      }
+
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+        background: var(--mdst-color-bg);
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-md);
+        max-width: 100%;
+      }
+
+      label {
+        display: block;
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xs);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stack">
+      <div>
+        <label>Default</label>
+        <pre class="mdst-pre">
+{
+  "name": "modest-components",
+  "version": "0.1.0",
+  "description": "Minimal CSS component library"
+}</pre
+        >
+      </div>
+
+      <div>
+        <label>Code block</label>
+        <pre class="mdst-pre">
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet('World'));</pre
+        >
+      </div>
+
+      <div>
+        <label>Compact variant</label>
+        <pre class="mdst-pre mdst-pre--compact">npm install modest-components</pre>
+      </div>
+
+      <div>
+        <label>Borderless variant</label>
+        <pre class="mdst-pre mdst-pre--borderless">
+{
+  "minimal": true
+}</pre
+        >
+      </div>
+    </div>
+  </body>
+</html>

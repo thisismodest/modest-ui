@@ -1,0 +1,48 @@
+:root {
+  /* Colors */
+  --mdst-color-fg: #000;
+  --mdst-color-bg: #fff;
+  --mdst-color-border: #000;
+  --mdst-color-muted: #666;
+  --mdst-color-subtle: #f5f5f5;
+  --mdst-color-surface: #f5f5f5;
+  --mdst-color-focus: #000;
+  --mdst-color-error: #dc2626;
+  --mdst-color-success: #16a34a;
+
+  /* Typography */
+  --mdst-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --mdst-line-height: 1.5;
+
+  /* Font sizes */
+  --mdst-text-xs: 0.75rem;
+  --mdst-text-sm: 0.875rem;
+  --mdst-text-base: 1rem;
+  --mdst-text-lg: 1.125rem;
+  --mdst-text-xl: 1.25rem;
+
+  /* Spacing */
+  --mdst-space-1: 0.25rem;
+  --mdst-space-2: 0.5rem;
+  --mdst-space-3: 0.75rem;
+  --mdst-space-4: 1rem;
+  --mdst-space-5: 1.25rem;
+  --mdst-space-6: 1.5rem;
+  --mdst-space-8: 2rem;
+
+  /* Semantic spacing aliases */
+  --mdst-space-xs: var(--mdst-space-1);
+  --mdst-space-sm: var(--mdst-space-2);
+  --mdst-space-md: var(--mdst-space-4);
+  --mdst-space-lg: var(--mdst-space-6);
+  --mdst-space-xl: var(--mdst-space-8);
+
+  /* Border */
+  --mdst-radius: 0;
+  --mdst-border-width: 0.0625em;
+
+  /* Transitions */
+  --mdst-transition-fast: 100ms ease;
+  --mdst-transition: 150ms ease;
+}

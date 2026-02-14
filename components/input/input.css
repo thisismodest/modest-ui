@@ -1,0 +1,38 @@
+/* Input */
+
+.mdst-input {
+  appearance: none;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: var(--mdst-space-sm) var(--mdst-space-md);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: var(--mdst-line-height);
+  color: var(--mdst-color-fg);
+  background-color: var(--mdst-color-bg);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  outline: none;
+  transition: border-color var(--mdst-transition);
+}
+
+.mdst-input::placeholder {
+  color: var(--mdst-color-muted);
+  opacity: 1;
+}
+
+.mdst-input:focus {
+  border-color: var(--mdst-color-focus);
+}
+
+.mdst-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Textarea variant */
+textarea.mdst-input {
+  min-height: 6rem;
+  resize: vertical;
+}
