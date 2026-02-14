@@ -2,7 +2,7 @@
   "name": "modest-components",
   "version": "0.1.0",
   "description": "Minimal, themeable CSS component library",
-  "author": "",
+  "author": "thisismodest",
   "license": "MIT",
   "type": "module",
   "main": "index.css",
@@ -12,6 +12,9 @@
     "components",
     "index.css"
   ],
+  "scripts": {
+    "generate": "node scripts/generate-preview.js"
+  },
   "keywords": [
     "css",
     "components",

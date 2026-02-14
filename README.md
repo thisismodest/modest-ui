@@ -172,6 +172,31 @@ Components use minimal, functional styles. Add your own on top:
 }
 ```
 
+## Adding New Components
+
+1. Create a new folder in `components/`:
+
+```
+components/
+└── my-component/
+    ├── my-component.css    # Component styles
+    └── preview.html        # Preview for the docs
+```
+
+2. Add the CSS import to `index.css`:
+
+```css
+@import "./components/my-component/my-component.css";
+```
+
+3. Run the generate script to update the preview:
+
+```bash
+npm run generate
+```
+
+This scans `components/` for folders with `preview.html` and updates the sidebar in `index.html`.
+
 ## Preview
 
 View the live preview at [thisismodest.github.io/modest-components](https://thisismodest.github.io/modest-components/)
