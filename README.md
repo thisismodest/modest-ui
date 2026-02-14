@@ -174,7 +174,9 @@ Components use minimal, functional styles. Add your own on top:
 
 ## Preview
 
-Open `preview.html` in your browser to see all components.
+View the live preview at [thisismodest.github.io/modest-components](https://thisismodest.github.io/modest-components/)
+
+Or open `index.html` locally in your browser.
 
 ## License
 
