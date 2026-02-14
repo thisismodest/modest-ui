@@ -1,0 +1,77 @@
+/*
+ * OTP Input
+ *
+ * Usage:
+ * <div class="mdst-otp">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ * </div>
+ *
+ * With separator:
+ * <div class="mdst-otp">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <span class="mdst-otp-separator"></span>
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ * </div>
+ */
+
+.mdst-otp {
+  display: inline-flex;
+  gap: var(--mdst-space-sm);
+  align-items: center;
+}
+
+.mdst-otp-digit {
+  width: 2.5em;
+  height: 3em;
+  padding: 0;
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  font-family: var(--mdst-font-mono);
+  font-size: 1.25em;
+  text-align: center;
+  caret-color: var(--mdst-color-fg);
+  transition: border-color var(--mdst-transition);
+}
+
+.mdst-otp-digit:focus {
+  outline: none;
+  border-color: var(--mdst-color-focus);
+}
+
+.mdst-otp-digit::placeholder {
+  color: var(--mdst-color-muted);
+}
+
+.mdst-otp-digit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Separator (e.g., dash between groups) */
+.mdst-otp-separator {
+  width: 0.5em;
+  height: 0.0625em;
+  background: var(--mdst-color-border);
+}
+
+/* Filled state - when digit has a value */
+.mdst-otp-digit:not(:placeholder-shown) {
+  border-color: var(--mdst-color-fg);
+}
+
+/* Error state */
+.mdst-otp--error .mdst-otp-digit {
+  border-color: var(--mdst-color-error, #c00);
+}
+
+/* Success state */
+.mdst-otp--success .mdst-otp-digit {
+  border-color: var(--mdst-color-success, #0a0);
+}

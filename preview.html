@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modest-components Preview</title>
+    <link rel="stylesheet" href="base/tokens.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-xl);
+        max-width: 64rem;
+        margin: 0 auto;
+        background: var(--mdst-color-bg);
+        color: var(--mdst-color-fg);
+      }
+
+      h1 {
+        font-size: var(--mdst-text-xl);
+        margin-bottom: var(--mdst-space-xl);
+      }
+
+      .components {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-xl);
+      }
+
+      .component {
+        border: 0.0625em solid var(--mdst-color-border);
+      }
+
+      .component-header {
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border-bottom: 0.0625em solid var(--mdst-color-border);
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        background: var(--mdst-color-subtle);
+      }
+
+      .component iframe {
+        display: block;
+        width: 100%;
+        border: none;
+        background: var(--mdst-color-bg);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>modest-components</h1>
+
+    <div class="components">
+      <div class="component">
+        <div class="component-header">Button</div>
+        <iframe src="components/button/preview.html" height="140"></iframe>
+      </div>
+
+      <div class="component">
+        <div class="component-header">Input</div>
+        <iframe src="components/input/preview.html" height="320"></iframe>
+      </div>
+
+      <div class="component">
+        <div class="component-header">OTP Input</div>
+        <iframe src="components/otp-input/preview.html" height="280"></iframe>
+      </div>
+
+      <div class="component">
+        <div class="component-header">Code (inline)</div>
+        <iframe src="components/code/preview.html" height="120"></iframe>
+      </div>
+
+      <div class="component">
+        <div class="component-header">Pre (code blocks)</div>
+        <iframe src="components/pre/preview.html" height="420"></iframe>
+      </div>
+    </div>
+  </body>
+</html>

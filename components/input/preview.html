@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="input.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-md);
+        max-width: 20rem;
+      }
+
+      label {
+        display: block;
+        font-size: var(--mdst-text-sm);
+        margin-bottom: var(--mdst-space-xs);
+        color: var(--mdst-color-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stack">
+      <div>
+        <label>Text input</label>
+        <input type="text" class="mdst-input" placeholder="Enter your name" />
+      </div>
+      <div>
+        <label>Email input</label>
+        <input type="email" class="mdst-input" placeholder="you@example.com" />
+      </div>
+      <div>
+        <label>Disabled</label>
+        <input type="text" class="mdst-input" placeholder="Disabled" disabled />
+      </div>
+      <div>
+        <label>Textarea</label>
+        <textarea class="mdst-input" placeholder="Write something..."></textarea>
+      </div>
+    </div>
+  </body>
+</html>
