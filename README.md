@@ -1,29 +1,39 @@
 # modest-components
 
-A minimal, themeable CSS component library. Black and white by default, easy to customize.
+A minimal, themeable CSS component library. Black and white by default, easy to customise.
 
 ## Installation
 
+### From local path
+
 ```bash
-npm install modest-components
+npm install ../path/to/modest-components
+```
+
+### From GitHub
+
+```bash
+npm install github:thisismodest/modest-components
 ```
 
 ## Usage
 
 ### Import everything
 
-```html
-<link rel="stylesheet" href="modest-components/index.css" />
-```
-
-Or in your CSS/JS:
-
 ```css
 @import "modest-components/index.css";
 ```
 
+Or in JS (with a bundler):
+
 ```js
 import "modest-components/index.css";
+```
+
+Or via HTML:
+
+```html
+<link rel="stylesheet" href="node_modules/modest-components/index.css" />
 ```
 
 ### Cherry-pick components
@@ -121,7 +131,7 @@ otp.destroy(); // Remove event listeners
 ### Code (inline)
 
 ```html
-<p>Use <code class="mdst-code">npm install</code> to install dependencies.</p>
+<p>Use <code class="mdst-code">const x = 1</code> to declare a variable.</p>
 ```
 
 ### Pre (code blocks)
@@ -130,6 +140,7 @@ otp.destroy(); // Remove event listeners
 <pre class="mdst-pre">{ "json": "content" }</pre>
 <pre class="mdst-pre mdst-pre--compact">single line</pre>
 <pre class="mdst-pre mdst-pre--borderless">no border</pre>
+<pre class="mdst-pre mdst-pre--scroll">horizontal scroll for long lines</pre>
 ```
 
 ## Theming
@@ -160,6 +171,10 @@ Components use minimal, functional styles. Add your own on top:
   letter-spacing: 0.05em;
 }
 ```
+
+## Preview
+
+Open `preview.html` in your browser to see all components.
 
 ## License
 
