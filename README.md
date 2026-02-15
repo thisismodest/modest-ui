@@ -223,18 +223,6 @@ npm run build
 
 This creates/updates `dist/modest-components.css` with all styles bundled into a single file.
 
-## Development
-
-### Building
-
-To generate the bundled CSS file:
-
-```bash
-npm run build
-```
-
-This processes `index.css` and all its imports to create a single `dist/modest-components.css` file with all styles included.
-
 ## Preview
 
 View the live preview at [thisismodest.github.io/modest-components](https://thisismodest.github.io/modest-components/)

@@ -16,6 +16,7 @@ const BUNDLE_OUTPUT = join(DIST_DIR, "modest-components.css");
 async function resolveImports(filePath, processedFiles = new Set()) {
   // Prevent circular imports
   if (processedFiles.has(filePath)) {
+    console.warn(`Warning: Circular import detected for ${filePath}`);
     return "";
   }
   processedFiles.add(filePath);
@@ -25,7 +26,7 @@ async function resolveImports(filePath, processedFiles = new Set()) {
   const resolvedLines = [];
 
   for (const line of lines) {
-    const importMatch = line.match(/@import\s+["'](.+?)["'];?/);
+    const importMatch = line.match(/@import\s+(?:url\()?["']([^"']+)["']\)?;?/);
 
     if (importMatch) {
       const importPath = importMatch[1];
@@ -40,7 +41,10 @@ async function resolveImports(filePath, processedFiles = new Set()) {
         );
         resolvedLines.push(importedContent);
       } catch (err) {
-        console.error(`Error importing ${importPath}:`, err.message);
+        console.error(
+          `Error importing ${importPath} from ${filePath}:`,
+          err.message
+        );
         // Keep the original import if resolution fails
         resolvedLines.push(line);
       }
