@@ -22,14 +22,22 @@ npm install github:thisismodest/modest-components
 
 For the simplest setup, use the pre-bundled CSS file that contains all styles in a single file:
 
+Via CDN:
+
 ```html
-<link rel="stylesheet" href="node_modules/modest-components/dist/modest-components.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-components@0.1.0/dist/modest-components.css" />
 ```
 
-Or via CDN (if published):
+Or with a package manager:
 
-```html
-<link rel="stylesheet" href="https://unpkg.com/modest-components/dist/modest-components.css" />
+```css
+@import "modest-components/dist/modest-components.css";
+```
+
+Or in JS (with a bundler):
+
+```js
+import "modest-components/dist/modest-components.css";
 ```
 
 ### Import everything (with build tool)
@@ -44,12 +52,6 @@ Or in JS (with a bundler):
 
 ```js
 import "modest-components/index.css";
-```
-
-Or via HTML:
-
-```html
-<link rel="stylesheet" href="node_modules/modest-components/index.css" />
 ```
 
 ### Cherry-pick components
