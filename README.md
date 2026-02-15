@@ -18,7 +18,23 @@ npm install github:thisismodest/modest-components
 
 ## Usage
 
-### Import everything
+### Use the bundled CSS (recommended)
+
+For the simplest setup, use the pre-bundled CSS file that contains all styles in a single file:
+
+```html
+<link rel="stylesheet" href="node_modules/modest-components/dist/modest-components.css" />
+```
+
+Or via CDN (if published):
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/modest-components/dist/modest-components.css" />
+```
+
+### Import everything (with build tool)
+
+If you're using a build tool that supports CSS imports:
 
 ```css
 @import "modest-components/index.css";
@@ -51,7 +67,9 @@ Or via HTML:
 
 ```
 modest-components/
-├── index.css                          # All styles bundled
+├── index.css                          # All styles with @import statements
+├── dist/
+│   └── modest-components.css          # Bundled single-file CSS (no imports)
 ├── base/
 │   ├── tokens.css                     # CSS custom properties (--mdst-*)
 │   └── reset.css                      # Minimal reset
@@ -196,6 +214,26 @@ npm run generate
 ```
 
 This scans `components/` for folders with `preview.html` and updates the sidebar in `index.html`.
+
+4. Build the bundled CSS file:
+
+```bash
+npm run build
+```
+
+This creates/updates `dist/modest-components.css` with all styles bundled into a single file.
+
+## Development
+
+### Building
+
+To generate the bundled CSS file:
+
+```bash
+npm run build
+```
+
+This processes `index.css` and all its imports to create a single `dist/modest-components.css` file with all styles included.
 
 ## Preview
 

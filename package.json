@@ -10,10 +10,12 @@
   "files": [
     "base",
     "components",
-    "index.css"
+    "index.css",
+    "dist"
   ],
   "scripts": {
-    "generate": "node scripts/generate-preview.js"
+    "generate": "node scripts/generate-preview.js",
+    "build": "node scripts/build-bundle.js"
   },
   "keywords": [
     "css",
