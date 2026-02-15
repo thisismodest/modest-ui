@@ -1,0 +1,368 @@
+/* modest-components - Bundled CSS
+ * Generated from index.css and all component styles
+ * This file contains all styles in a single file for easy distribution
+ */
+
+/* ui-lib - Minimal CSS component library */
+
+/* Base */
+:root {
+  /* Colors */
+  --mdst-color-fg: #000;
+  --mdst-color-bg: #fff;
+  --mdst-color-border: #000;
+  --mdst-color-muted: #666;
+  --mdst-color-subtle: #f5f5f5;
+  --mdst-color-surface: #f5f5f5;
+  --mdst-color-focus: #000;
+  --mdst-color-error: #dc2626;
+  --mdst-color-success: #16a34a;
+
+  /* Typography */
+  --mdst-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --mdst-line-height: 1.5;
+
+  /* Font sizes */
+  --mdst-text-xs: 0.75rem;
+  --mdst-text-sm: 0.875rem;
+  --mdst-text-base: 1rem;
+  --mdst-text-lg: 1.125rem;
+  --mdst-text-xl: 1.25rem;
+
+  /* Spacing */
+  --mdst-space-1: 0.25rem;
+  --mdst-space-2: 0.5rem;
+  --mdst-space-3: 0.75rem;
+  --mdst-space-4: 1rem;
+  --mdst-space-5: 1.25rem;
+  --mdst-space-6: 1.5rem;
+  --mdst-space-8: 2rem;
+
+  /* Semantic spacing aliases */
+  --mdst-space-xs: var(--mdst-space-1);
+  --mdst-space-sm: var(--mdst-space-2);
+  --mdst-space-md: var(--mdst-space-4);
+  --mdst-space-lg: var(--mdst-space-6);
+  --mdst-space-xl: var(--mdst-space-8);
+
+  /* Border */
+  --mdst-radius: 0;
+  --mdst-border-width: 0.0625em;
+
+  /* Transitions */
+  --mdst-transition-fast: 100ms ease;
+  --mdst-transition: 150ms ease;
+}
+
+/*
+ * Minimal reset
+ * Only the essentials — no opinions
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+
+/* Components */
+/* Button */
+
+.mdst-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mdst-space-xs);
+  padding: var(--mdst-space-sm) var(--mdst-space-md);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: var(--mdst-line-height);
+  color: var(--mdst-color-fg);
+  background: var(--mdst-color-bg);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  cursor: pointer;
+  transition:
+    background var(--mdst-transition),
+    color var(--mdst-transition);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mdst-button:hover {
+  background: var(--mdst-color-fg);
+  color: var(--mdst-color-bg);
+}
+
+.mdst-button:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+  outline-offset: var(--mdst-border-width);
+}
+
+.mdst-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mdst-button:disabled:hover {
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+}
+
+/* Variants */
+
+.mdst-button--ghost {
+  border-color: transparent;
+}
+
+.mdst-button--ghost:hover {
+  border-color: var(--mdst-color-border);
+}
+
+.mdst-button--solid {
+  background: var(--mdst-color-fg);
+  color: var(--mdst-color-bg);
+}
+
+.mdst-button--solid:hover {
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+}
+
+/* Sizes */
+
+.mdst-button--sm {
+  padding: var(--mdst-space-xs) var(--mdst-space-sm);
+  font-size: var(--mdst-text-sm);
+}
+
+.mdst-button--lg {
+  padding: var(--mdst-space-md) var(--mdst-space-lg);
+}
+
+/* Input */
+
+.mdst-input {
+  appearance: none;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: var(--mdst-space-sm) var(--mdst-space-md);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: var(--mdst-line-height);
+  color: var(--mdst-color-fg);
+  background-color: var(--mdst-color-bg);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  outline: none;
+  transition: border-color var(--mdst-transition);
+}
+
+.mdst-input::placeholder {
+  color: var(--mdst-color-muted);
+  opacity: 1;
+}
+
+.mdst-input:focus {
+  border-color: var(--mdst-color-focus);
+}
+
+.mdst-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Textarea variant */
+textarea.mdst-input {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+/*
+ * OTP Input
+ *
+ * Usage:
+ * <div class="mdst-otp">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ * </div>
+ *
+ * With separator:
+ * <div class="mdst-otp">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <span class="mdst-otp-separator"></span>
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ * </div>
+ */
+
+.mdst-otp {
+  display: inline-flex;
+  gap: var(--mdst-space-sm);
+  align-items: center;
+}
+
+.mdst-otp-digit {
+  width: 2.5em;
+  height: 3em;
+  padding: 0;
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  font-family: var(--mdst-font-mono);
+  font-size: 1.25em;
+  text-align: center;
+  caret-color: var(--mdst-color-fg);
+  transition: border-color var(--mdst-transition);
+}
+
+.mdst-otp-digit:focus {
+  outline: none;
+  border-color: var(--mdst-color-focus);
+}
+
+.mdst-otp-digit::placeholder {
+  color: var(--mdst-color-muted);
+}
+
+.mdst-otp-digit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Separator (e.g., dash between groups) */
+.mdst-otp-separator {
+  width: 0.5em;
+  height: 0.0625em;
+  background: var(--mdst-color-border);
+}
+
+/* Filled state - when digit has a value */
+.mdst-otp-digit:not(:placeholder-shown) {
+  border-color: var(--mdst-color-fg);
+}
+
+/* Error state */
+.mdst-otp--error .mdst-otp-digit {
+  border-color: var(--mdst-color-error, #c00);
+}
+
+/* Success state */
+.mdst-otp--success .mdst-otp-digit {
+  border-color: var(--mdst-color-success, #0a0);
+}
+
+/* Code - Inline code snippets */
+
+.mdst-code {
+  font-family: var(--mdst-font-mono);
+  font-size: 0.875em;
+  background: var(--mdst-color-subtle);
+  border: 0.0625em solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  padding: 0.125em 0.375em;
+  word-break: break-word;
+}
+
+/* Pre — block code/JSON display */
+
+.mdst-pre {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: var(--mdst-space-md);
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+  font-family: var(--mdst-font-mono);
+  font-size: var(--mdst-text-sm);
+  line-height: var(--mdst-line-height);
+  color: var(--mdst-color-fg);
+  background-color: var(--mdst-color-subtle);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
+
+.mdst-pre:focus {
+  outline: 0.125em solid var(--mdst-color-focus);
+  outline-offset: 0.125em;
+}
+
+/* Nested code inside pre — reset styles */
+.mdst-pre code,
+.mdst-pre .mdst-code {
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-size: inherit;
+  word-break: break-word;
+}
+
+/* Variants */
+.mdst-pre--borderless {
+  border: none;
+}
+
+.mdst-pre--compact {
+  padding: var(--mdst-space-sm);
+}
+
+/* Allow horizontal scroll if explicitly needed */
+.mdst-pre--scroll {
+  overflow-x: auto;
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: normal;
+  white-space: pre;
+}
+

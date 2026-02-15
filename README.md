@@ -18,7 +18,31 @@ npm install github:thisismodest/modest-components
 
 ## Usage
 
-### Import everything
+### Use the bundled CSS (recommended)
+
+For the simplest setup, use the pre-bundled CSS file that contains all styles in a single file:
+
+Via CDN:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-components@0.1.0/dist/modest-components.css" />
+```
+
+Or with a package manager:
+
+```css
+@import "modest-components/dist/modest-components.css";
+```
+
+Or in JS (with a bundler):
+
+```js
+import "modest-components/dist/modest-components.css";
+```
+
+### Import everything (with build tool)
+
+If you're using a build tool that supports CSS imports:
 
 ```css
 @import "modest-components/index.css";
@@ -28,12 +52,6 @@ Or in JS (with a bundler):
 
 ```js
 import "modest-components/index.css";
-```
-
-Or via HTML:
-
-```html
-<link rel="stylesheet" href="node_modules/modest-components/index.css" />
 ```
 
 ### Cherry-pick components
@@ -51,7 +69,9 @@ Or via HTML:
 
 ```
 modest-components/
-├── index.css                          # All styles bundled
+├── index.css                          # All styles with @import statements
+├── dist/
+│   └── modest-components.css          # Bundled single-file CSS (no imports)
 ├── base/
 │   ├── tokens.css                     # CSS custom properties (--mdst-*)
 │   └── reset.css                      # Minimal reset
@@ -196,6 +216,14 @@ npm run generate
 ```
 
 This scans `components/` for folders with `preview.html` and updates the sidebar in `index.html`.
+
+4. Build the bundled CSS file:
+
+```bash
+npm run build
+```
+
+This creates/updates `dist/modest-components.css` with all styles bundled into a single file.
 
 ## Preview
 
