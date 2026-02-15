@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dialog</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="dialog.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-sm);
+        align-items: center;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .label {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xs);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="label">Modal Dialog</div>
+    <div class="row">
+      <button class="mdst-button" onclick="document.getElementById('modal-dialog').showModal()">
+        Open Modal Dialog
+      </button>
+    </div>
+
+    <div class="label">Non-Modal Dialog</div>
+    <div class="row">
+      <button class="mdst-button" onclick="document.getElementById('non-modal-dialog').show()">
+        Open Non-Modal Dialog
+      </button>
+    </div>
+
+    <div class="label">Size Variants</div>
+    <div class="row">
+      <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('small-dialog').showModal()">
+        Small
+      </button>
+      <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('large-dialog').showModal()">
+        Large
+      </button>
+      <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('full-dialog').showModal()">
+        Full Width
+      </button>
+    </div>
+
+    <!-- Modal Dialog -->
+    <dialog id="modal-dialog" class="mdst-dialog">
+      <div class="mdst-dialog-header">
+        <h2 class="mdst-dialog-title">Modal Dialog</h2>
+        <button class="mdst-dialog-close" onclick="this.closest('dialog').close()">✕</button>
+      </div>
+      <div class="mdst-dialog-body">
+        <p>This is a modal dialog. It blocks interaction with the rest of the page.</p>
+        <p>Click outside or press ESC to close.</p>
+      </div>
+      <div class="mdst-dialog-footer">
+        <button class="mdst-button mdst-button--ghost" onclick="this.closest('dialog').close()">Cancel</button>
+        <button class="mdst-button mdst-button--solid" onclick="this.closest('dialog').close()">Confirm</button>
+      </div>
+    </dialog>
+
+    <!-- Non-Modal Dialog -->
+    <dialog id="non-modal-dialog" class="mdst-dialog">
+      <div class="mdst-dialog-header">
+        <h2 class="mdst-dialog-title">Non-Modal Dialog</h2>
+        <button class="mdst-dialog-close" onclick="this.closest('dialog').close()">✕</button>
+      </div>
+      <div class="mdst-dialog-body">
+        <p>This is a non-modal dialog. You can still interact with the page behind it.</p>
+      </div>
+      <div class="mdst-dialog-footer">
+        <button class="mdst-button" onclick="this.closest('dialog').close()">Close</button>
+      </div>
+    </dialog>
+
+    <!-- Small Dialog -->
+    <dialog id="small-dialog" class="mdst-dialog mdst-dialog--sm">
+      <div class="mdst-dialog-header">
+        <h2 class="mdst-dialog-title">Small Dialog</h2>
+        <button class="mdst-dialog-close" onclick="this.closest('dialog').close()">✕</button>
+      </div>
+      <div class="mdst-dialog-body">
+        <p>A smaller dialog for simple messages.</p>
+      </div>
+      <div class="mdst-dialog-footer">
+        <button class="mdst-button" onclick="this.closest('dialog').close()">OK</button>
+      </div>
+    </dialog>
+
+    <!-- Large Dialog -->
+    <dialog id="large-dialog" class="mdst-dialog mdst-dialog--lg">
+      <div class="mdst-dialog-header">
+        <h2 class="mdst-dialog-title">Large Dialog</h2>
+        <button class="mdst-dialog-close" onclick="this.closest('dialog').close()">✕</button>
+      </div>
+      <div class="mdst-dialog-body">
+        <p>A larger dialog for more content.</p>
+        <p>Perfect for forms or detailed information.</p>
+      </div>
+      <div class="mdst-dialog-footer">
+        <button class="mdst-button mdst-button--ghost" onclick="this.closest('dialog').close()">Cancel</button>
+        <button class="mdst-button mdst-button--solid" onclick="this.closest('dialog').close()">Save</button>
+      </div>
+    </dialog>
+
+    <!-- Full Width Dialog -->
+    <dialog id="full-dialog" class="mdst-dialog mdst-dialog--full">
+      <div class="mdst-dialog-header">
+        <h2 class="mdst-dialog-title">Full Width Dialog</h2>
+        <button class="mdst-dialog-close" onclick="this.closest('dialog').close()">✕</button>
+      </div>
+      <div class="mdst-dialog-body">
+        <p>A full-width dialog for maximum content space.</p>
+      </div>
+      <div class="mdst-dialog-footer">
+        <button class="mdst-button" onclick="this.closest('dialog').close()">Close</button>
+      </div>
+    </dialog>
+  </body>
+</html>

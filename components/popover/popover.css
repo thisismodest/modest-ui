@@ -1,0 +1,46 @@
+/* Popover */
+
+.mdst-popover {
+  padding: var(--mdst-space-md);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+.mdst-popover:popover-open {
+  opacity: 1;
+}
+
+/* Popover Variants */
+
+.mdst-popover--sm {
+  padding: var(--mdst-space-sm);
+  font-size: var(--mdst-text-sm);
+}
+
+.mdst-popover--lg {
+  padding: var(--mdst-space-lg);
+  max-width: 24rem;
+}
+
+/* Tooltip (Popover-based) */
+
+.mdst-tooltip {
+  padding: var(--mdst-space-xs) var(--mdst-space-sm);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-fg);
+  color: var(--mdst-color-bg);
+  font-size: var(--mdst-text-sm);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+  margin: 0;
+  max-width: 16rem;
+  text-align: center;
+}
+
+.mdst-tooltip:popover-open {
+  opacity: 1;
+}

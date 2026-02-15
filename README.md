@@ -85,8 +85,14 @@ modest-components/
     │   └── otp-input.js               # Optional interactivity
     ├── code/
     │   └── code.css
-    └── pre/
-        └── pre.css
+    ├── pre/
+    │   └── pre.css
+    ├── dialog/
+    │   └── dialog.css
+    ├── details/
+    │   └── details.css
+    └── popover/
+        └── popover.css
 ```
 
 ## Components
@@ -161,6 +167,83 @@ otp.destroy(); // Remove event listeners
 <pre class="mdst-pre mdst-pre--compact">single line</pre>
 <pre class="mdst-pre mdst-pre--borderless">no border</pre>
 <pre class="mdst-pre mdst-pre--scroll">horizontal scroll for long lines</pre>
+```
+
+### Dialog
+
+Native HTML `<dialog>` element with styling:
+
+```html
+<!-- Modal Dialog -->
+<dialog id="my-dialog" class="mdst-dialog">
+  <div class="mdst-dialog-header">
+    <h2 class="mdst-dialog-title">Dialog Title</h2>
+    <button class="mdst-dialog-close" onclick="this.closest('dialog').close()">✕</button>
+  </div>
+  <div class="mdst-dialog-body">
+    <p>Dialog content goes here.</p>
+  </div>
+  <div class="mdst-dialog-footer">
+    <button class="mdst-button mdst-button--ghost" onclick="this.closest('dialog').close()">Cancel</button>
+    <button class="mdst-button mdst-button--solid" onclick="this.closest('dialog').close()">Confirm</button>
+  </div>
+</dialog>
+
+<button onclick="document.getElementById('my-dialog').showModal()">Open Dialog</button>
+```
+
+Size variants:
+
+```html
+<dialog class="mdst-dialog mdst-dialog--sm">...</dialog>
+<dialog class="mdst-dialog mdst-dialog--lg">...</dialog>
+<dialog class="mdst-dialog mdst-dialog--full">...</dialog>
+```
+
+### Details (Toggle/Accordion)
+
+Native HTML `<details>` element for collapsible content:
+
+```html
+<details class="mdst-details">
+  <summary>Click to expand</summary>
+  <div class="mdst-details-content">
+    <p>Hidden content that appears when expanded.</p>
+  </div>
+</details>
+```
+
+Variants:
+
+```html
+<details class="mdst-details mdst-details--borderless">...</details>
+<details class="mdst-details mdst-details--compact">...</details>
+```
+
+### Popover
+
+Native HTML popover API with styling:
+
+```html
+<button popovertarget="my-popover">Toggle Popover</button>
+
+<div id="my-popover" class="mdst-popover" popover>
+  <p>This is a popover!</p>
+</div>
+```
+
+Size variants:
+
+```html
+<div class="mdst-popover mdst-popover--sm" popover>Small popover</div>
+<div class="mdst-popover mdst-popover--lg" popover>Large popover</div>
+```
+
+Tooltip variant:
+
+```html
+<button popovertarget="tooltip" popovertargetaction="hover">Hover me</button>
+<div id="tooltip" class="mdst-tooltip" popover>Helpful tooltip text</div>
 ```
 
 ## Theming
