@@ -178,18 +178,18 @@ Native HTML `<dialog>` element with styling:
 <dialog id="my-dialog" class="mdst-dialog">
   <div class="mdst-dialog-header">
     <h2 class="mdst-dialog-title">Dialog Title</h2>
-    <button class="mdst-dialog-close" onclick="this.closest('dialog').close()">✕</button>
+    <button class="mdst-dialog-close" commandfor="my-dialog" command="close">✕</button>
   </div>
   <div class="mdst-dialog-body">
     <p>Dialog content goes here.</p>
   </div>
   <div class="mdst-dialog-footer">
-    <button class="mdst-button mdst-button--ghost" onclick="this.closest('dialog').close()">Cancel</button>
-    <button class="mdst-button mdst-button--solid" onclick="this.closest('dialog').close()">Confirm</button>
+    <button class="mdst-button mdst-button--ghost" commandfor="my-dialog" command="close">Cancel</button>
+    <button class="mdst-button mdst-button--solid" commandfor="my-dialog" command="close">Confirm</button>
   </div>
 </dialog>
 
-<button onclick="document.getElementById('my-dialog').showModal()">Open Dialog</button>
+<button class="mdst-button" commandfor="my-dialog" command="show-modal">Open Dialog</button>
 ```
 
 Size variants:
