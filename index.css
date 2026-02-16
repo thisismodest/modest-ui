@@ -10,3 +10,6 @@
 @import "./components/otp-input/otp-input.css";
 @import "./components/code/code.css";
 @import "./components/pre/pre.css";
+@import "./components/dialog/dialog.css";
+@import "./components/details/details.css";
+@import "./components/popover/popover.css";

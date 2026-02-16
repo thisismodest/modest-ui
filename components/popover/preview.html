@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popover</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="popover.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-sm);
+        align-items: center;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .label {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .example {
+        margin-bottom: var(--mdst-space-lg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="example">
+      <div class="label">Basic Popover</div>
+      <div class="row">
+        <button class="mdst-button" popovertarget="basic-popover">Toggle Popover</button>
+      </div>
+      <div id="basic-popover" class="mdst-popover" popover>
+        <p>This is a popover! Click outside or press ESC to close.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="label">Popover with Content</div>
+      <div class="row">
+        <button class="mdst-button mdst-button--solid" popovertarget="content-popover">Show Info</button>
+      </div>
+      <div id="content-popover" class="mdst-popover" popover>
+        <h3 style="margin: 0 0 0.5rem 0; font-size: var(--mdst-text-lg);">Popover Title</h3>
+        <p style="margin: 0;">This popover contains more structured content with a title and description.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="label">Small Popover</div>
+      <div class="row">
+        <button class="mdst-button mdst-button--ghost" popovertarget="small-popover">Small</button>
+      </div>
+      <div id="small-popover" class="mdst-popover mdst-popover--sm" popover>
+        Compact popover
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="label">Large Popover</div>
+      <div class="row">
+        <button class="mdst-button mdst-button--ghost" popovertarget="large-popover">Large</button>
+      </div>
+      <div id="large-popover" class="mdst-popover mdst-popover--lg" popover>
+        <h3 style="margin: 0 0 0.5rem 0;">Large Popover</h3>
+        <p style="margin: 0 0 0.5rem 0;">This is a larger popover that can contain more content.</p>
+        <p style="margin: 0;">Perfect for forms, menus, or detailed information.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="label">Tooltips (Popover-based)</div>
+      <div class="row">
+        <button class="mdst-button" popovertarget="tooltip-1" popovertargetaction="hover">
+          Hover for Tooltip
+        </button>
+        <button class="mdst-button" popovertarget="tooltip-2" popovertargetaction="hover">
+          Another Tooltip
+        </button>
+        <button class="mdst-button" popovertarget="tooltip-3" popovertargetaction="hover">
+          Third Tooltip
+        </button>
+      </div>
+      <div id="tooltip-1" class="mdst-tooltip" popover>This is a helpful tooltip</div>
+      <div id="tooltip-2" class="mdst-tooltip" popover>Tooltips provide extra context</div>
+      <div id="tooltip-3" class="mdst-tooltip" popover>Keep them short and clear</div>
+    </div>
+
+    <div class="example">
+      <div class="label">Manual Popover (with auto behavior)</div>
+      <div class="row">
+        <button class="mdst-button" popovertarget="manual-popover" popovertargetaction="toggle">
+          Toggle Manual
+        </button>
+        <button class="mdst-button mdst-button--ghost" popovertarget="manual-popover" popovertargetaction="show">
+          Show
+        </button>
+        <button class="mdst-button mdst-button--ghost" popovertarget="manual-popover" popovertargetaction="hide">
+          Hide
+        </button>
+      </div>
+      <div id="manual-popover" class="mdst-popover" popover="manual">
+        <p style="margin: 0;">Manual popover won't close when clicking outside.</p>
+      </div>
+    </div>
+  </body>
+</html>

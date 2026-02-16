@@ -1,0 +1,88 @@
+/* Dialog */
+
+.mdst-dialog {
+  padding: 0;
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  max-width: min(90vw, 32rem);
+  max-height: 90vh;
+}
+
+.mdst-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Dialog Header */
+
+.mdst-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mdst-space-md);
+  padding: var(--mdst-space-md);
+  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+}
+
+.mdst-dialog-title {
+  margin: 0;
+  font-size: var(--mdst-text-lg);
+  font-weight: 600;
+  line-height: var(--mdst-line-height);
+}
+
+.mdst-dialog-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mdst-space-xs);
+  background: transparent;
+  border: none;
+  border-radius: var(--mdst-radius);
+  cursor: pointer;
+  color: var(--mdst-color-muted);
+  transition: color var(--mdst-transition);
+}
+
+.mdst-dialog-close:hover {
+  color: var(--mdst-color-fg);
+}
+
+.mdst-dialog-close:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+  outline-offset: var(--mdst-border-width);
+}
+
+/* Dialog Body */
+
+.mdst-dialog-body {
+  padding: var(--mdst-space-md);
+  overflow-y: auto;
+}
+
+/* Dialog Footer */
+
+.mdst-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--mdst-space-sm);
+  padding: var(--mdst-space-md);
+  border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+}
+
+/* Variants */
+
+.mdst-dialog--sm {
+  max-width: min(90vw, 24rem);
+}
+
+.mdst-dialog--lg {
+  max-width: min(90vw, 48rem);
+}
+
+.mdst-dialog--full {
+  max-width: 90vw;
+  max-height: 90vh;
+}
