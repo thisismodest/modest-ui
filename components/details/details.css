@@ -25,7 +25,7 @@
 .mdst-details summary::before {
   content: "▸";
   display: inline-block;
-  width: 1em;
+  width: 0.5em;
   flex-shrink: 0;
   transition: transform var(--mdst-transition);
 }
@@ -44,7 +44,7 @@
 }
 
 .mdst-details-content {
-  padding: 0 var(--mdst-space-md) var(--mdst-space-md) var(--mdst-space-md);
+  padding: var(--mdst-space-md);
   border-top: var(--mdst-border-width) solid var(--mdst-color-border);
 }
 
