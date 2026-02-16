@@ -8,7 +8,7 @@
  * - Arrow key navigation
  *
  * Usage:
- *   import { createOTPInput } from 'modest-components/components/otp-input/otp-input.js';
+ *   import { createOTPInput } from 'modest-ui/components/otp-input/otp-input.js';
  *
  *   const otp = createOTPInput(document.querySelector('.mdst-otp'), {
  *     onComplete: (code) => console.log('Code entered:', code),

@@ -1,4 +1,4 @@
-# modest-components
+# modest-ui
 
 A minimal, themeable CSS component library. Black and white by default, easy to customise.
 
@@ -7,13 +7,13 @@ A minimal, themeable CSS component library. Black and white by default, easy to 
 ### From local path
 
 ```bash
-npm install ../path/to/modest-components
+npm install ../path/to/modest-ui
 ```
 
 ### From GitHub
 
 ```bash
-npm install github:thisismodest/modest-components
+npm install github:thisismodest/modest-ui
 ```
 
 ## Usage
@@ -25,19 +25,19 @@ For the simplest setup, use the pre-bundled CSS file that contains all styles in
 Via CDN:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-components@0.1.0/dist/modest-components.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@0.1.0/dist/modest-ui.css" />
 ```
 
 Or with a package manager:
 
 ```css
-@import "modest-components/dist/modest-components.css";
+@import "modest-ui/dist/modest-ui.css";
 ```
 
 Or in JS (with a bundler):
 
 ```js
-import "modest-components/dist/modest-components.css";
+import "modest-ui/dist/modest-ui.css";
 ```
 
 ### Import everything (with build tool)
@@ -45,33 +45,33 @@ import "modest-components/dist/modest-components.css";
 If you're using a build tool that supports CSS imports:
 
 ```css
-@import "modest-components/index.css";
+@import "modest-ui/index.css";
 ```
 
 Or in JS (with a bundler):
 
 ```js
-import "modest-components/index.css";
+import "modest-ui/index.css";
 ```
 
 ### Cherry-pick components
 
 ```css
 /* Always include tokens first */
-@import "modest-components/base/tokens.css";
+@import "modest-ui/base/tokens.css";
 
 /* Then pick what you need */
-@import "modest-components/components/button/button.css";
-@import "modest-components/components/otp-input/otp-input.css";
+@import "modest-ui/components/button/button.css";
+@import "modest-ui/components/otp-input/otp-input.css";
 ```
 
 ## Structure
 
 ```
-modest-components/
+modest-ui/
 ├── index.css                          # All styles with @import statements
 ├── dist/
-│   └── modest-components.css          # Bundled single-file CSS (no imports)
+│   └── modest-ui.css          # Bundled single-file CSS (no imports)
 ├── base/
 │   ├── tokens.css                     # CSS custom properties (--mdst-*)
 │   └── reset.css                      # Minimal reset
@@ -139,7 +139,7 @@ With separator:
 Optional JS for auto-advance, paste support, and keyboard navigation:
 
 ```js
-import { createOTPInput } from "modest-components/components/otp-input/otp-input.js";
+import { createOTPInput } from "modest-ui/components/otp-input/otp-input.js";
 
 const otp = createOTPInput(document.querySelector(".mdst-otp"), {
   onComplete: (code) => console.log("Code entered:", code),
@@ -306,11 +306,11 @@ This scans `components/` for folders with `preview.html` and updates the sidebar
 npm run build
 ```
 
-This creates/updates `dist/modest-components.css` with all styles bundled into a single file.
+This creates/updates `dist/modest-ui.css` with all styles bundled into a single file.
 
 ## Preview
 
-View the live preview at [thisismodest.github.io/modest-components](https://thisismodest.github.io/modest-components/)
+View the live preview at [thisismodest.github.io/modest-ui](https://thisismodest.github.io/modest-ui/)
 
 Or open `index.html` locally in your browser.
 

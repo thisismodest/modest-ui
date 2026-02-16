@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const INDEX_CSS = join(ROOT, "index.css");
 const DIST_DIR = join(ROOT, "dist");
-const BUNDLE_OUTPUT = join(DIST_DIR, "modest-components.css");
+const BUNDLE_OUTPUT = join(DIST_DIR, "modest-ui.css");
 
 /**
  * Resolve @import statements recursively
@@ -67,7 +67,7 @@ async function buildBundle() {
     const bundledContent = await resolveImports(INDEX_CSS);
 
     // Add header comment
-    const header = `/* modest-components - Bundled CSS
+    const header = `/* modest-ui - Bundled CSS
  * Generated from index.css and all component styles
  * This file contains all styles in a single file for easy distribution
  */
