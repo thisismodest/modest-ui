@@ -39,6 +39,10 @@
   margin: 0;
   max-width: 16rem;
   text-align: center;
+
+  /* Anchor positioning - use anchor attribute on HTML to link to trigger */
+  position-area: bottom;
+  margin-top: var(--mdst-space-xs);
 }
 
 .mdst-tooltip:popover-open {

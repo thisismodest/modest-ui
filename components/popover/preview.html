@@ -80,19 +80,19 @@
     <div class="example">
       <div class="label">Tooltips (Popover-based)</div>
       <div class="row">
-        <button class="mdst-button" popovertarget="tooltip-1" popovertargetaction="hover">
-          Hover for Tooltip
+        <button id="btn-tooltip-1" class="mdst-button" popovertarget="tooltip-1">
+          Click for Tooltip
         </button>
-        <button class="mdst-button" popovertarget="tooltip-2" popovertargetaction="hover">
+        <button id="btn-tooltip-2" class="mdst-button" popovertarget="tooltip-2">
           Another Tooltip
         </button>
-        <button class="mdst-button" popovertarget="tooltip-3" popovertargetaction="hover">
+        <button id="btn-tooltip-3" class="mdst-button" popovertarget="tooltip-3">
           Third Tooltip
         </button>
       </div>
-      <div id="tooltip-1" class="mdst-tooltip" popover>This is a helpful tooltip</div>
-      <div id="tooltip-2" class="mdst-tooltip" popover>Tooltips provide extra context</div>
-      <div id="tooltip-3" class="mdst-tooltip" popover>Keep them short and clear</div>
+      <div id="tooltip-1" class="mdst-tooltip" popover anchor="btn-tooltip-1">This is a helpful tooltip</div>
+      <div id="tooltip-2" class="mdst-tooltip" popover anchor="btn-tooltip-2">Tooltips provide extra context</div>
+      <div id="tooltip-3" class="mdst-tooltip" popover anchor="btn-tooltip-3">Keep them short and clear</div>
     </div>
 
     <div class="example">
