@@ -78,21 +78,25 @@
     </div>
 
     <div class="example">
-      <div class="label">Tooltips (Popover-based)</div>
+      <div class="label">Anchored Popovers</div>
       <div class="row">
-        <button id="btn-tooltip-1" class="mdst-button" popovertarget="tooltip-1">
-          Click for Tooltip
+        <button id="btn-anchored-1" class="mdst-button" popovertarget="anchored-popover-1">
+          Anchored Menu
         </button>
-        <button id="btn-tooltip-2" class="mdst-button" popovertarget="tooltip-2">
-          Another Tooltip
-        </button>
-        <button id="btn-tooltip-3" class="mdst-button" popovertarget="tooltip-3">
-          Third Tooltip
+        <button id="btn-anchored-2" class="mdst-button mdst-button--ghost" popovertarget="anchored-popover-2">
+          Anchored Info
         </button>
       </div>
-      <div id="tooltip-1" class="mdst-tooltip" popover anchor="btn-tooltip-1">This is a helpful tooltip</div>
-      <div id="tooltip-2" class="mdst-tooltip" popover anchor="btn-tooltip-2">Tooltips provide extra context</div>
-      <div id="tooltip-3" class="mdst-tooltip" popover anchor="btn-tooltip-3">Keep them short and clear</div>
+      <div id="anchored-popover-1" class="mdst-popover mdst-popover--anchored mdst-popover--sm" popover anchor="btn-anchored-1">
+        <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+          <a href="#" style="text-decoration: none; color: inherit;">Edit</a>
+          <a href="#" style="text-decoration: none; color: inherit;">Duplicate</a>
+          <a href="#" style="text-decoration: none; color: inherit;">Delete</a>
+        </div>
+      </div>
+      <div id="anchored-popover-2" class="mdst-popover mdst-popover--anchored" popover anchor="btn-anchored-2">
+        <p style="margin: 0;">This popover is anchored below its trigger button.</p>
+      </div>
     </div>
 
     <div class="example">

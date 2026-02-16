@@ -7,11 +7,26 @@
   background: var(--mdst-color-bg);
   color: var(--mdst-color-fg);
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  margin: 0;
+
+  /* Default: centered on page */
+  margin: auto;
+  position: fixed;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
 }
 
 .mdst-popover:popover-open {
   opacity: 1;
+}
+
+/* Anchored positioning - use with anchor="" HTML attribute */
+.mdst-popover--anchored {
+  position: absolute;
+  inset: unset;
+  margin: 0;
+  position-area: bottom;
+  margin-top: var(--mdst-space-xs);
 }
 
 /* Popover Variants */
@@ -24,27 +39,4 @@
 .mdst-popover--lg {
   padding: var(--mdst-space-lg);
   max-width: 24rem;
-}
-
-/* Tooltip (Popover-based) */
-
-.mdst-tooltip {
-  padding: var(--mdst-space-xs) var(--mdst-space-sm);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-fg);
-  color: var(--mdst-color-bg);
-  font-size: var(--mdst-text-sm);
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
-  margin: 0;
-  max-width: 16rem;
-  text-align: center;
-
-  /* Anchor positioning - use anchor attribute on HTML to link to trigger */
-  position-area: bottom;
-  margin-top: var(--mdst-space-xs);
-}
-
-.mdst-tooltip:popover-open {
-  opacity: 1;
 }
