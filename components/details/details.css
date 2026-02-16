@@ -48,7 +48,8 @@
   outline-offset: calc(-1 * var(--mdst-border-width));
 }
 
-.mdst-details-content {
+/* Content area - only style when open */
+.mdst-details[open]::details-content {
   padding: var(--mdst-space-md);
   border-top: var(--mdst-border-width) solid var(--mdst-color-border);
 }
@@ -59,7 +60,7 @@
   border: none;
 }
 
-.mdst-details--borderless .mdst-details-content {
+.mdst-details--borderless[open]::details-content {
   border-top: none;
   padding-left: calc(1em + var(--mdst-space-sm));
 }
@@ -68,6 +69,6 @@
   padding: var(--mdst-space-sm) var(--mdst-space-md);
 }
 
-.mdst-details--compact .mdst-details-content {
-  padding: 0 var(--mdst-space-md) var(--mdst-space-sm) var(--mdst-space-md);
+.mdst-details--compact[open]::details-content {
+  padding: var(--mdst-space-sm) var(--mdst-space-md);
 }
