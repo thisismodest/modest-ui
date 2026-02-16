@@ -24,9 +24,14 @@
 
 .mdst-details summary::before {
   content: "▸";
-  display: inline-block;
-  width: 0.5em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height:0;
+  width: 1em;
+  height: 1em;
   flex-shrink: 0;
+  transform-origin: center center;
   transition: transform var(--mdst-transition);
 }
 
