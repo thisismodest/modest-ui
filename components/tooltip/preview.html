@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tooltip</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="tooltip.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-sm);
+        align-items: center;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .label {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .example {
+        margin-bottom: var(--mdst-space-lg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="example">
+      <div class="label">Basic Tooltips</div>
+      <div class="row">
+        <button id="btn-tooltip-1" class="mdst-button" popovertarget="tooltip-1">
+          Click for Tooltip
+        </button>
+        <button id="btn-tooltip-2" class="mdst-button" popovertarget="tooltip-2">
+          Another Tooltip
+        </button>
+        <button id="btn-tooltip-3" class="mdst-button" popovertarget="tooltip-3">
+          Third Tooltip
+        </button>
+      </div>
+      <div id="tooltip-1" class="mdst-tooltip" popover anchor="btn-tooltip-1">This is a helpful tooltip</div>
+      <div id="tooltip-2" class="mdst-tooltip" popover anchor="btn-tooltip-2">Tooltips provide extra context</div>
+      <div id="tooltip-3" class="mdst-tooltip" popover anchor="btn-tooltip-3">Keep them short and clear</div>
+    </div>
+  </body>
+</html>

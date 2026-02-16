@@ -8,6 +8,13 @@
   color: var(--mdst-color-fg);
   max-width: min(90vw, 32rem);
   max-height: 90vh;
+
+  /* Center the dialog */
+  margin: auto;
+  position: fixed;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
 }
 
 .mdst-dialog::backdrop {
