@@ -1,0 +1,94 @@
+/* Color Picker */
+
+.mdst-color-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mdst-space-sm);
+}
+
+.mdst-color-picker__input {
+  appearance: none;
+  width: var(--mdst-space-8);
+  height: var(--mdst-space-8);
+  padding: 0;
+  background: none;
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--mdst-transition);
+}
+
+.mdst-color-picker__input:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+  outline-offset: var(--mdst-border-width);
+}
+
+.mdst-color-picker__input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Webkit (Chrome, Safari, Edge) */
+
+.mdst-color-picker__input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.mdst-color-picker__input::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+/* Firefox */
+
+.mdst-color-picker__input::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+/* Text input variant */
+
+.mdst-color-picker__text {
+  appearance: none;
+  width: 5rem;
+  height: var(--mdst-space-8);
+  padding: 0 var(--mdst-space-sm);
+  font-family: var(--mdst-font-mono);
+  font-size: var(--mdst-text-sm);
+  text-transform: uppercase;
+  color: var(--mdst-color-fg);
+  background: var(--mdst-color-bg);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  outline: none;
+  transition: border-color var(--mdst-transition);
+}
+
+.mdst-color-picker__text::placeholder {
+  color: var(--mdst-color-muted);
+  text-transform: none;
+}
+
+.mdst-color-picker__text:focus {
+  border-color: var(--mdst-color-focus);
+}
+
+.mdst-color-picker__text:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Square variant */
+
+.mdst-color-picker--square .mdst-color-picker__input {
+  border-radius: var(--mdst-radius);
+}
+
+.mdst-color-picker--square .mdst-color-picker__input::-webkit-color-swatch {
+  border-radius: var(--mdst-radius);
+}
+
+.mdst-color-picker--square .mdst-color-picker__input::-moz-color-swatch {
+  border-radius: var(--mdst-radius);
+}
