@@ -7,6 +7,7 @@
 }
 
 .mdst-color-picker__input {
+  -webkit-appearance: none;
   appearance: none;
   width: var(--mdst-space-8);
   height: var(--mdst-space-8);
@@ -50,6 +51,7 @@
 /* Text input variant */
 
 .mdst-color-picker__text {
+  -webkit-appearance: none;
   appearance: none;
   width: 5rem;
   height: var(--mdst-space-8);

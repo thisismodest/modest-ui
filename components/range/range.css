@@ -1,6 +1,7 @@
 /* Range Slider */
 
 .mdst-range {
+  -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: var(--mdst-space-1);
@@ -23,6 +24,7 @@
 /* Webkit (Chrome, Safari, Edge) */
 
 .mdst-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
   appearance: none;
   width: var(--mdst-space-4);
   height: var(--mdst-space-4);

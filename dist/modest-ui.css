@@ -178,9 +178,69 @@ h6 {
   padding: var(--mdst-space-md) var(--mdst-space-lg);
 }
 
+/* Checkbox */
+
+.mdst-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+  width: var(--mdst-space-4);
+  height: var(--mdst-space-4);
+  margin: 0;
+  background: var(--mdst-color-bg);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--mdst-transition);
+}
+
+.mdst-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: var(--mdst-color-fg);
+}
+
+.mdst-checkbox:hover {
+  border-color: var(--mdst-color-muted);
+}
+
+.mdst-checkbox:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+  outline-offset: var(--mdst-border-width);
+}
+
+.mdst-checkbox:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mdst-checkbox:disabled:hover {
+  border-color: var(--mdst-color-border);
+}
+
+/* Checkbox with label wrapper */
+
+.mdst-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mdst-space-sm);
+  font-size: inherit;
+  line-height: var(--mdst-line-height);
+  cursor: pointer;
+  user-select: none;
+}
+
+.mdst-checkbox-label:has(.mdst-checkbox:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Input */
 
 .mdst-input {
+  -webkit-appearance: none;
   appearance: none;
   display: block;
   width: 100%;
@@ -215,6 +275,79 @@ h6 {
 textarea.mdst-input {
   min-height: 6rem;
   resize: vertical;
+}
+
+/* Radio */
+
+.mdst-radio {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+  width: var(--mdst-space-4);
+  height: var(--mdst-space-4);
+  margin: 0;
+  background: var(--mdst-color-bg);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--mdst-transition);
+}
+
+.mdst-radio:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--mdst-color-fg);
+  border-radius: 50%;
+}
+
+.mdst-radio:hover {
+  border-color: var(--mdst-color-muted);
+}
+
+.mdst-radio:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+  outline-offset: var(--mdst-border-width);
+}
+
+.mdst-radio:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mdst-radio:disabled:hover {
+  border-color: var(--mdst-color-border);
+}
+
+/* Radio with label wrapper */
+
+.mdst-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mdst-space-sm);
+  font-size: inherit;
+  line-height: var(--mdst-line-height);
+  cursor: pointer;
+  user-select: none;
+}
+
+.mdst-radio-label:has(.mdst-radio:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Radio group */
+
+.mdst-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mdst-space-sm);
+}
+
+.mdst-radio-group--horizontal {
+  flex-direction: row;
+  gap: var(--mdst-space-md);
 }
 
 /*
@@ -583,6 +716,7 @@ textarea.mdst-input {
 /* Range Slider */
 
 .mdst-range {
+  -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: var(--mdst-space-1);
@@ -605,6 +739,7 @@ textarea.mdst-input {
 /* Webkit (Chrome, Safari, Edge) */
 
 .mdst-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
   appearance: none;
   width: var(--mdst-space-4);
   height: var(--mdst-space-4);
@@ -658,6 +793,7 @@ textarea.mdst-input {
 }
 
 .mdst-color-picker__input {
+  -webkit-appearance: none;
   appearance: none;
   width: var(--mdst-space-8);
   height: var(--mdst-space-8);
@@ -701,6 +837,7 @@ textarea.mdst-input {
 /* Text input variant */
 
 .mdst-color-picker__text {
+  -webkit-appearance: none;
   appearance: none;
   width: 5rem;
   height: var(--mdst-space-8);
