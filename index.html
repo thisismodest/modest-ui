@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>modest-ui</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="index.css" />
     <style>
       *,
@@ -17,6 +18,7 @@
         height: 100%;
         margin: 0;
         padding: 0;
+        min-width: 230px;
       }
 
       body {
@@ -31,20 +33,101 @@
       }
 
       .sidebar {
-        width: 14rem;
+        width: 48px;
         flex-shrink: 0;
         border-right: 0.0625em solid var(--mdst-color-border);
-        padding: var(--mdst-space-md);
+        /*margin: var(--mdst-space-md);*/
         display: flex;
         flex-direction: column;
         gap: var(--mdst-space-md);
-        overflow-y: auto;
+        overflow: hidden;
+        background: var(--mdst-color-bg);
+        transition: width var(--mdst-transition);
+      }
+
+      .sidebar:not([open]) .sidebar-title {
+        display: block;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+
+      .sidebar[open] {
+        width: 14rem;
+        overflow: hidden;
+        padding: var(--mdst-space-md);
+      }
+
+      @media (max-width: 640px) {
+        .sidebar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100%;
+          z-index: 100;
+        }
+
+        .main {
+          margin-left: 48px;
+        }
+
+        .sidebar-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.3);
+          z-index: 99;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity var(--mdst-transition);
+        }
+
+        .sidebar[open] ~ .sidebar-overlay {
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
+
+      .sidebar-content {
+        width: calc(14rem - (2 * var(--mdst-space-md)));
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: var(--mdst-space-md);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--mdst-transition);
+      }
+
+      .sidebar[open] .sidebar-content {
+        opacity: 1;
+        pointer-events: auto;
       }
 
       .sidebar-title {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
         font-size: var(--mdst-text-sm);
         font-weight: 700;
         letter-spacing: 0.025em;
+        list-style: none;
+        cursor: pointer;
+      }
+
+      .sidebar-title::-webkit-details-marker {
+        display: none;
+      }
+
+      .sidebar-logo {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-logo svg {
+        display: block;
+        width: 100%;
+        height: 100%;
       }
 
       .sidebar-nav {
@@ -118,52 +201,98 @@
         color: var(--mdst-color-fg);
       }
 
+      .logo {
+        margin-top: 2px;
+        font-size: 0.8rem;
+        line-height: 0;
+        font-weight: normal;
+        letter-spacing: 1px;
+        font-family: monospace;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .sidebar:not([open]) .logo,
+      .sidebar:not([open]) .sidebar-close {
+        display: none;
+      }
+
+      .sidebar:not([open]) .sidebar-logo {
+        margin: var(--mdst-space-md);
+        margin-top: 1.5rem;
+      }
+
+      .sidebar-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        margin-left: auto;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.25rem;
+        color: var(--mdst-color-fg);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--mdst-transition);
+      }
+
+      .sidebar[open] .sidebar-close {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .sidebar-overlay {
+        display: none;
+      }
+
       @media (max-width: 640px) {
-        .layout {
-          flex-direction: column;
-        }
-
-        .sidebar {
-          width: 100%;
-          height: auto;
-          border-right: none;
-          border-bottom: 0.0625em solid var(--mdst-color-border);
-        }
-
-        .sidebar-nav {
-          flex-direction: row;
-          flex-wrap: wrap;
-        }
-
-        .github-link {
-          display: none;
+        .sidebar-overlay {
+          display: block;
         }
       }
     </style>
   </head>
   <body>
     <div class="layout">
-      <aside class="sidebar">
-        <div class="sidebar-title">modest-ui</div>
-        <nav class="sidebar-nav">
-          <!-- COMPONENTS_LIST_START -->
-          <a href="#button" class="sidebar-link" data-component="button">Button</a>
-          <a href="#code" class="sidebar-link" data-component="code">Code</a>
-          <a href="#color-picker" class="sidebar-link" data-component="color-picker">Color Picker</a>
-          <a href="#details" class="sidebar-link" data-component="details">Details</a>
-          <a href="#dialog" class="sidebar-link" data-component="dialog">Dialog</a>
-          <a href="#input" class="sidebar-link" data-component="input">Input</a>
-          <a href="#otp-input" class="sidebar-link" data-component="otp-input">OTP Input</a>
-          <a href="#popover" class="sidebar-link" data-component="popover">Popover</a>
-          <a href="#pre" class="sidebar-link" data-component="pre">Pre</a>
-          <a href="#range" class="sidebar-link" data-component="range">Range</a>
-          <a href="#tooltip" class="sidebar-link" data-component="tooltip">Tooltip</a>
-<!-- COMPONENTS_LIST_END -->
-        </nav>
-        <div class="github-link">
-          <a href="https://github.com/thisismodest/modest-ui">GitHub</a>
+      <details class="sidebar" id="sidebar">
+        <summary class="sidebar-title">
+          <div class="sidebar-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+              <rect x="6" y="10" width="4" height="16" fill="currentColor" />
+              <rect x="14" y="6" width="4" height="20" fill="currentColor" />
+              <rect x="22" y="10" width="4" height="16" fill="currentColor" />
+            </svg>
+          </div>
+          <div class="logo">modest-ui</div>
+          <span class="sidebar-close" aria-label="Close sidebar">‹</span>
+        </summary>
+        <div class="sidebar-content">
+          <nav class="sidebar-nav">
+            <!-- COMPONENTS_LIST_START -->
+            <a href="#button" class="sidebar-link" data-component="button">Button</a>
+            <a href="#code" class="sidebar-link" data-component="code">Code</a>
+            <a href="#color-picker" class="sidebar-link" data-component="color-picker">Color Picker</a>
+            <a href="#details" class="sidebar-link" data-component="details">Details</a>
+            <a href="#dialog" class="sidebar-link" data-component="dialog">Dialog</a>
+            <a href="#input" class="sidebar-link" data-component="input">Input</a>
+            <a href="#otp-input" class="sidebar-link" data-component="otp-input">OTP Input</a>
+            <a href="#popover" class="sidebar-link" data-component="popover">Popover</a>
+            <a href="#pre" class="sidebar-link" data-component="pre">Pre</a>
+            <a href="#range" class="sidebar-link" data-component="range">Range</a>
+            <a href="#tooltip" class="sidebar-link" data-component="tooltip">Tooltip</a>
+            <a href="#typography" class="sidebar-link" data-component="typography">Typography</a>
+            <!-- COMPONENTS_LIST_END -->
+          </nav>
+          <div class="github-link">
+            <a href="https://github.com/thisismodest/modest-ui">GitHub</a>
+          </div>
         </div>
-      </aside>
+      </details>
+
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
       <main class="main">
         <header class="main-header" id="component-title">OTP Input</header>
         <div class="main-content">
@@ -176,6 +305,8 @@
       const links = document.querySelectorAll(".sidebar-link");
       const frame = document.getElementById("component-frame");
       const title = document.getElementById("component-title");
+      const sidebar = document.getElementById("sidebar");
+      const sidebarOverlay = document.getElementById("sidebar-overlay");
 
       function setActive(component) {
         links.forEach((link) => {
@@ -191,6 +322,13 @@
         title.textContent = link.textContent;
         setActive(component);
       }
+
+      function closeSidebar() {
+        sidebar.removeAttribute("open");
+      }
+
+      // Close sidebar when clicking overlay (mobile)
+      sidebarOverlay.addEventListener("click", closeSidebar);
 
       links.forEach((link) => {
         link.addEventListener("click", (e) => {

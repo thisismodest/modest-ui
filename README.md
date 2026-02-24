@@ -91,12 +91,14 @@ modest-ui/
     │   └── dialog.css
     ├── details/
     │   └── details.css
-    └── popover/
-        └── popover.css
+    ├── popover/
+    │   └── popover.css
     ├── range/
     │   └── range.css
-    └── color-picker/
-        └── color-picker.css
+    ├── color-picker/
+    │   └── color-picker.css
+    └── typography/
+        └── typography.css
 ```
 
 ## Components
@@ -251,6 +253,51 @@ Variants:
   <input type="color" class="mdst-color-picker__input" value="#F4E3C1" />
   <input type="text" class="mdst-color-picker__text" value="#F4E3C1" />
 </div>
+```
+
+### Typography
+
+```html
+<!-- Headings -->
+<h1 class="mdst-h1">Heading 1</h1>
+<h2 class="mdst-h2">Heading 2</h2>
+<h3 class="mdst-h3">Heading 3</h3>
+<h4 class="mdst-h4">Heading 4</h4>
+<h5 class="mdst-h5">Heading 5</h5>
+<h6 class="mdst-h6">Heading 6</h6>
+
+<!-- Paragraph -->
+<p class="mdst-p">Default paragraph text.</p>
+<p class="mdst-p mdst-p--sm">Small paragraph.</p>
+<p class="mdst-p mdst-p--lg">Large paragraph.</p>
+<p class="mdst-p mdst-p--muted">Muted paragraph.</p>
+
+<!-- Inline elements -->
+<a href="#" class="mdst-a">Link</a>
+<strong class="mdst-strong">Bold</strong>
+<em class="mdst-em">Italic</em>
+<small class="mdst-small">Small</small>
+<mark class="mdst-mark">Highlight</mark>
+
+<!-- Blockquote -->
+<blockquote class="mdst-blockquote">A quoted passage of text.</blockquote>
+
+<!-- Horizontal rule -->
+<hr class="mdst-hr" />
+
+<!-- Lists -->
+<ul class="mdst-ul">
+  <li class="mdst-li">Item</li>
+</ul>
+
+<ol class="mdst-ol">
+  <li class="mdst-li">Item</li>
+</ol>
+
+<!-- Unstyled list -->
+<ul class="mdst-ul mdst-ul--unstyled">
+  <li class="mdst-li">No bullets</li>
+</ul>
 ```
 
 ### Popover
