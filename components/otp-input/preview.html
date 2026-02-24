@@ -27,6 +27,15 @@
         flex-direction: column;
         gap: var(--mdst-space-xs);
       }
+
+      .footnote {
+        font-size: var(--mdst-text-xs);
+        line-height: 1.2;
+        color: var(--mdst-color-muted);
+        margin-top: var(--mdst-space-md);
+        padding-top: var(--mdst-space-md);
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
     </style>
   </head>
   <body>
@@ -72,6 +81,11 @@
         <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="4" />
       </div>
     </div>
+
+    <p class="footnote">
+      <strong>NOTE:</strong> This preview uses JavaScript to handle paste support and auto-advance to the next input on completion. Without
+      JS, the inputs still work but require manual tabbing between fields.
+    </p>
 
     <script>
       function createOTPInput(container, options) {
