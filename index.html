@@ -258,7 +258,7 @@
 
       /* Auto-open sidebar on desktop for modern browsers */
       @supports selector(::details-content) {
-        @media (min-width: 860px) {
+        @media (min-width: 720px) {
           .sidebar {
             width: 14rem;
             overflow-y: auto;
@@ -316,6 +316,7 @@
         </summary>
         <div class="sidebar-content">
           <nav class="sidebar-nav">
+            <a href="#intro" class="sidebar-link" data-component="intro">Introduction</a>
             <!-- COMPONENTS_LIST_START -->
             <a href="#button" class="sidebar-link" data-component="button">Button</a>
             <a href="#checkbox" class="sidebar-link" data-component="checkbox">Checkbox</a>
@@ -343,7 +344,7 @@
       <main class="main">
         <header class="main-header" id="component-title">Introduction</header>
         <div class="main-content">
-          <iframe id="component-frame" src="intro.html"></iframe>
+          <iframe id="component-frame" src="components/intro/preview.html"></iframe>
         </div>
       </main>
     </div>

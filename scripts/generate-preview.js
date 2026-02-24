@@ -29,7 +29,8 @@ async function getComponents() {
   const components = [];
 
   for (const entry of entries) {
-    if (entry.isDirectory()) {
+    // Skip intro - it's hardcoded at the top of the sidebar
+    if (entry.isDirectory() && entry.name !== "intro") {
       // Check if preview.html exists
       try {
         await readFile(join(COMPONENTS_DIR, entry.name, "preview.html"));

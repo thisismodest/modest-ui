@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../index.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+        line-height: var(--mdst-line-height);
+      }
+
+      .intro-section {
+        margin-bottom: var(--mdst-space-xl);
+      }
+
+      h1 {
+        font-size: var(--mdst-text-xl);
+        font-weight: 600;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      h2 {
+        font-size: var(--mdst-text-lg);
+        font-weight: 600;
+        margin-top: var(--mdst-space-lg);
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      h3 {
+        font-size: var(--mdst-text-base);
+        font-weight: 600;
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      p {
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      code {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        background: var(--mdst-color-subtle);
+        padding: 0.1em 0.3em;
+      }
+
+      pre {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        background: var(--mdst-color-subtle);
+        padding: var(--mdst-space-md);
+        overflow-x: auto;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      /* Example page styles */
+      .example-container {
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .example-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .example-logo {
+        font-weight: 600;
+        font-size: var(--mdst-text-sm);
+      }
+
+      .example-nav {
+        display: flex;
+        gap: var(--mdst-space-sm);
+      }
+
+      .example-body {
+        padding: var(--mdst-space-lg);
+      }
+
+      .example-hero {
+        text-align: center;
+        padding: var(--mdst-space-xl) 0;
+      }
+
+      .example-hero h2 {
+        margin-top: 0;
+        font-size: var(--mdst-text-xl);
+      }
+
+      .example-hero p {
+        max-width: 400px;
+        margin: 0 auto var(--mdst-space-md);
+      }
+
+      .example-hero-buttons {
+        display: flex;
+        gap: var(--mdst-space-sm);
+        justify-content: center;
+      }
+
+      .example-form {
+        max-width: 300px;
+        margin: 3rem auto 0;
+        padding: var(--mdst-space-md);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .example-form h3 {
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .example-form-group {
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      .example-form-group label {
+        display: block;
+        font-size: var(--mdst-text-sm);
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .example-form-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: var(--mdst-space-md);
+      }
+
+      .example-features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--mdst-space-md);
+        margin-top: var(--mdst-space-lg);
+        padding-top: var(--mdst-space-lg);
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .example-feature h4 {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .example-feature p {
+        font-size: var(--mdst-text-sm);
+        margin: 0;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 480px) {
+        .example-header {
+          flex-direction: column;
+          gap: var(--mdst-space-sm);
+        }
+
+        .example-nav {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .example-body {
+          padding: var(--mdst-space-md);
+        }
+
+        .example-hero-buttons {
+          flex-direction: column;
+        }
+
+        .example-hero-buttons .mdst-button {
+          width: 100%;
+        }
+
+        .example-form {
+          margin-top: var(--mdst-space-md);
+        }
+
+        .example-form-footer {
+          flex-direction: column;
+          gap: var(--mdst-space-sm);
+        }
+
+        .example-form-footer .mdst-button {
+          width: 100%;
+        }
+
+        .example-features {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="intro-section">
+      <h1>modest-ui</h1>
+      <p>A minimal, themeable CSS component library. Black and white by default, easy to customise.</p>
+
+      <h2>Example</h2>
+      <p>Here's what a page built with modest-ui looks like:</p>
+
+      <div class="example-container">
+        <header class="example-header">
+          <div class="example-logo">LOGO</div>
+          <nav class="example-nav">
+            <button class="mdst-button mdst-button--ghost mdst-button--sm">Features</button>
+            <button class="mdst-button mdst-button--ghost mdst-button--sm">Pricing</button>
+            <button class="mdst-button mdst-button--sm">Sign In</button>
+          </nav>
+        </header>
+
+        <div class="example-body">
+          <div class="example-hero">
+            <h2>Build something great</h2>
+            <p>A platform for creators who value simplicity. No clutter, no distractions — just the tools you need.</p>
+            <div class="example-hero-buttons">
+              <button class="mdst-button mdst-button--solid">Get Started</button>
+              <button class="mdst-button">Learn More</button>
+            </div>
+
+            <div class="example-form">
+              <h3>Create an account</h3>
+              <div class="example-form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="mdst-input" placeholder="you@example.com" />
+              </div>
+              <div class="example-form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="mdst-input" placeholder="••••••••" />
+              </div>
+              <div class="example-form-footer">
+                <label class="mdst-checkbox-label">
+                  <input type="checkbox" class="mdst-checkbox" />
+                  Remember me
+                </label>
+                <button class="mdst-button mdst-button--solid mdst-button--sm">Sign Up</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="example-features">
+            <div class="example-feature">
+              <h4>Minimal</h4>
+              <p>No unnecessary styles. Just the essentials to get you started.</p>
+            </div>
+            <div class="example-feature">
+              <h4>Themeable</h4>
+              <p>Customise everything with CSS variables. Make it yours.</p>
+            </div>
+            <div class="example-feature">
+              <h4>Native</h4>
+              <p>Built on native HTML elements. No JavaScript required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Installation</h2>
+      <p>Via CDN:</p>
+      <pre>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@0.1.0/dist/modest-ui.css" /&gt;</pre>
+
+      <p>Or with a package manager:</p>
+      <pre>npm install github:thisismodest/modest-ui</pre>
+
+      <p>Then import in CSS:</p>
+      <pre>@import "modest-ui/dist/modest-ui.css";</pre>
+
+      <p>Or cherry-pick components:</p>
+      <pre>
+/* Always include tokens first */
+@import "modest-ui/base/tokens.css";
+
+/* Then pick what you need */
+@import "modest-ui/components/button/button.css";
+@import "modest-ui/components/input/input.css";</pre
+      >
+
+      <h2>Usage</h2>
+      <p>Add the appropriate class to your HTML elements:</p>
+      <pre>
+&lt;button class="mdst-button"&gt;Default&lt;/button&gt;
+&lt;button class="mdst-button mdst-button--solid"&gt;Solid&lt;/button&gt;
+&lt;input type="text" class="mdst-input" placeholder="Enter text" /&gt;</pre
+      >
+
+      <h2>Theming</h2>
+      <p>Override CSS custom properties to theme:</p>
+      <pre>
+:root {
+  --mdst-color-fg: #000;
+  --mdst-color-bg: #fff;
+  --mdst-color-border: #000;
+  --mdst-color-muted: #666;
+  --mdst-color-subtle: #f5f5f5;
+  --mdst-color-focus: #000;
+  --mdst-radius: 0;
+}</pre
+      >
+
+      <p>Browse the components in the sidebar to see examples.</p>
+    </div>
+  </body>
+</html>
