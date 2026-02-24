@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Range</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="range.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-lg);
+        max-width: 20rem;
+      }
+
+      label {
+        display: block;
+        font-size: var(--mdst-text-sm);
+        margin-bottom: var(--mdst-space-sm);
+        color: var(--mdst-color-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stack">
+      <div>
+        <label>Default</label>
+        <input type="range" class="mdst-range" min="0" max="100" value="50" />
+      </div>
+      <div>
+        <label>With steps</label>
+        <input type="range" class="mdst-range" min="0" max="100" value="25" step="25" />
+      </div>
+      <div>
+        <label>Disabled</label>
+        <input type="range" class="mdst-range" min="0" max="100" value="75" disabled />
+      </div>
+    </div>
+  </body>
+</html>

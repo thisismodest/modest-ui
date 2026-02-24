@@ -93,6 +93,10 @@ modest-ui/
     │   └── details.css
     └── popover/
         └── popover.css
+    ├── range/
+    │   └── range.css
+    └── color-picker/
+        └── color-picker.css
 ```
 
 ## Components
@@ -218,6 +222,35 @@ Variants:
 ```html
 <details class="mdst-details mdst-details--borderless">...</details>
 <details class="mdst-details mdst-details--compact">...</details>
+```
+
+### Range
+
+```html
+<input type="range" class="mdst-range" min="0" max="100" value="50" />
+<input type="range" class="mdst-range" min="0" max="100" value="25" step="25" />
+<input type="range" class="mdst-range" min="0" max="100" value="75" disabled />
+```
+
+### Color Picker
+
+```html
+<!-- Color input only -->
+<div class="mdst-color-picker">
+  <input type="color" class="mdst-color-picker__input" value="#000000" />
+</div>
+
+<!-- With text input -->
+<div class="mdst-color-picker">
+  <input type="color" class="mdst-color-picker__input" value="#4A3F1F" />
+  <input type="text" class="mdst-color-picker__text" value="#4A3F1F" />
+</div>
+
+<!-- Square variant -->
+<div class="mdst-color-picker mdst-color-picker--square">
+  <input type="color" class="mdst-color-picker__input" value="#F4E3C1" />
+  <input type="text" class="mdst-color-picker__text" value="#F4E3C1" />
+</div>
 ```
 
 ### Popover

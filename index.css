@@ -13,3 +13,5 @@
 @import "./components/dialog/dialog.css";
 @import "./components/details/details.css";
 @import "./components/popover/popover.css";
+@import "./components/range/range.css";
+@import "./components/color-picker/color-picker.css";
