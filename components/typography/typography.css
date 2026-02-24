@@ -1,0 +1,150 @@
+/* Typography */
+
+.mdst-h1,
+.mdst-h2,
+.mdst-h3,
+.mdst-h4,
+.mdst-h5,
+.mdst-h6 {
+  font-family: var(--mdst-font-sans);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--mdst-color-fg);
+}
+
+.mdst-h1 {
+  font-size: 2.5rem;
+}
+
+.mdst-h2 {
+  font-size: 2rem;
+}
+
+.mdst-h3 {
+  font-size: 1.5rem;
+}
+
+.mdst-h4 {
+  font-size: 1.25rem;
+}
+
+.mdst-h5 {
+  font-size: 1rem;
+}
+
+.mdst-h6 {
+  font-size: 0.875rem;
+}
+
+/* Paragraph */
+
+.mdst-p {
+  font-family: var(--mdst-font-sans);
+  font-size: var(--mdst-text-base);
+  line-height: var(--mdst-line-height);
+  color: var(--mdst-color-fg);
+}
+
+.mdst-p--sm {
+  font-size: var(--mdst-text-sm);
+}
+
+.mdst-p--lg {
+  font-size: var(--mdst-text-lg);
+}
+
+.mdst-p--muted {
+  color: var(--mdst-color-muted);
+}
+
+/* Links */
+
+.mdst-a {
+  color: var(--mdst-color-fg);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: opacity var(--mdst-transition);
+}
+
+.mdst-a:hover {
+  opacity: 0.6;
+}
+
+.mdst-a:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+  outline-offset: var(--mdst-border-width);
+}
+
+/* Strong / Bold */
+
+.mdst-strong {
+  font-weight: 600;
+}
+
+/* Emphasis / Italic */
+
+.mdst-em {
+  font-style: italic;
+}
+
+/* Small */
+
+.mdst-small {
+  font-size: var(--mdst-text-sm);
+}
+
+/* Mark / Highlight */
+
+.mdst-mark {
+  background-color: var(--mdst-color-subtle);
+  padding: 0.1em 0.2em;
+}
+
+/* Blockquote */
+
+.mdst-blockquote {
+  margin: 0;
+  padding-left: var(--mdst-space-md);
+  border-left: var(--mdst-space-1) solid var(--mdst-color-border);
+  font-style: italic;
+  color: var(--mdst-color-muted);
+}
+
+/* Horizontal Rule */
+
+.mdst-hr {
+  border: none;
+  border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+  margin: var(--mdst-space-lg) 0;
+}
+
+/* Lists */
+
+.mdst-ul,
+.mdst-ol {
+  padding-left: var(--mdst-space-lg);
+  line-height: var(--mdst-line-height);
+}
+
+.mdst-ul {
+  list-style-type: disc;
+}
+
+.mdst-ol {
+  list-style-type: decimal;
+}
+
+.mdst-li {
+  margin-bottom: var(--mdst-space-xs);
+}
+
+.mdst-li:last-child {
+  margin-bottom: 0;
+}
+
+/* Unstyled list */
+
+.mdst-ul--unstyled {
+  list-style: none;
+  padding-left: 0;
+}
