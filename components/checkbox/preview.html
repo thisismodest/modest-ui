@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkbox</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="checkbox.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-md);
+        align-items: center;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .label {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xs);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="label">States</div>
+    <div class="row">
+      <label class="mdst-checkbox-label">
+        <input type="checkbox" class="mdst-checkbox" />
+        Unchecked
+      </label>
+      <label class="mdst-checkbox-label">
+        <input type="checkbox" class="mdst-checkbox" checked />
+        Checked
+      </label>
+      <label class="mdst-checkbox-label">
+        <input type="checkbox" class="mdst-checkbox" disabled />
+        Disabled
+      </label>
+      <label class="mdst-checkbox-label">
+        <input type="checkbox" class="mdst-checkbox" checked disabled />
+        Checked & Disabled
+      </label>
+    </div>
+
+    <div class="label">Standalone</div>
+    <div class="row">
+      <input type="checkbox" class="mdst-checkbox" />
+      <input type="checkbox" class="mdst-checkbox" checked />
+      <input type="checkbox" class="mdst-checkbox" disabled />
+    </div>
+  </body>
+</html>

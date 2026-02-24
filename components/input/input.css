@@ -1,6 +1,7 @@
 /* Input */
 
 .mdst-input {
+  -webkit-appearance: none;
   appearance: none;
   display: block;
   width: 100%;
