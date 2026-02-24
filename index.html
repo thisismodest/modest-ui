@@ -54,7 +54,7 @@
 
       .sidebar[open] {
         width: 14rem;
-        overflow: hidden;
+        overflow-y: auto;
         padding: var(--mdst-space-md);
       }
 
@@ -96,6 +96,7 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity var(--mdst-transition);
+        height: 100%;
       }
 
       .sidebar[open] .sidebar-content {
@@ -105,6 +106,7 @@
 
       .sidebar-title {
         display: flex;
+        min-height: 2rem;
         align-items: center;
         gap: var(--mdst-space-sm);
         font-size: var(--mdst-text-sm);
@@ -253,6 +255,49 @@
           display: block;
         }
       }
+
+      /* Auto-open sidebar on desktop for modern browsers */
+      @supports selector(::details-content) {
+        @media (min-width: 860px) {
+          .sidebar {
+            width: 14rem;
+            overflow-y: auto;
+            padding: var(--mdst-space-md);
+          }
+
+          .sidebar::details-content {
+            content-visibility: visible;
+          }
+
+          .sidebar:not([open]) .sidebar-title {
+            display: flex;
+            height: auto;
+          }
+
+          .sidebar[open] .sidebar-title,
+          .sidebar:not([open]) .sidebar-title {
+            pointer-events: none;
+          }
+
+          .sidebar:not([open]) .logo {
+            display: flex;
+          }
+
+          .sidebar:not([open]) .sidebar-close,
+          .sidebar[open] .sidebar-close {
+            display: none;
+          }
+
+          .sidebar:not([open]) .sidebar-logo {
+            margin: 0;
+          }
+
+          .sidebar .sidebar-content {
+            opacity: 1;
+            pointer-events: auto;
+          }
+        }
+      }
     </style>
   </head>
   <body>
@@ -272,21 +317,21 @@
         <div class="sidebar-content">
           <nav class="sidebar-nav">
             <!-- COMPONENTS_LIST_START -->
-          <a href="#button" class="sidebar-link" data-component="button">Button</a>
-          <a href="#checkbox" class="sidebar-link" data-component="checkbox">Checkbox</a>
-          <a href="#code" class="sidebar-link" data-component="code">Code</a>
-          <a href="#color-picker" class="sidebar-link" data-component="color-picker">Color Picker</a>
-          <a href="#details" class="sidebar-link" data-component="details">Details</a>
-          <a href="#dialog" class="sidebar-link" data-component="dialog">Dialog</a>
-          <a href="#input" class="sidebar-link" data-component="input">Input</a>
-          <a href="#otp-input" class="sidebar-link" data-component="otp-input">OTP Input</a>
-          <a href="#popover" class="sidebar-link" data-component="popover">Popover</a>
-          <a href="#pre" class="sidebar-link" data-component="pre">Pre</a>
-          <a href="#radio" class="sidebar-link" data-component="radio">Radio</a>
-          <a href="#range" class="sidebar-link" data-component="range">Range</a>
-          <a href="#tooltip" class="sidebar-link" data-component="tooltip">Tooltip</a>
-          <a href="#typography" class="sidebar-link" data-component="typography">Typography</a>
-<!-- COMPONENTS_LIST_END -->
+            <a href="#button" class="sidebar-link" data-component="button">Button</a>
+            <a href="#checkbox" class="sidebar-link" data-component="checkbox">Checkbox</a>
+            <a href="#code" class="sidebar-link" data-component="code">Code</a>
+            <a href="#color-picker" class="sidebar-link" data-component="color-picker">Color Picker</a>
+            <a href="#details" class="sidebar-link" data-component="details">Details</a>
+            <a href="#dialog" class="sidebar-link" data-component="dialog">Dialog</a>
+            <a href="#input" class="sidebar-link" data-component="input">Input</a>
+            <a href="#otp-input" class="sidebar-link" data-component="otp-input">OTP Input</a>
+            <a href="#popover" class="sidebar-link" data-component="popover">Popover</a>
+            <a href="#pre" class="sidebar-link" data-component="pre">Pre</a>
+            <a href="#radio" class="sidebar-link" data-component="radio">Radio</a>
+            <a href="#range" class="sidebar-link" data-component="range">Range</a>
+            <a href="#tooltip" class="sidebar-link" data-component="tooltip">Tooltip</a>
+            <a href="#typography" class="sidebar-link" data-component="typography">Typography</a>
+            <!-- COMPONENTS_LIST_END -->
           </nav>
           <div class="github-link">
             <a href="https://github.com/thisismodest/modest-ui">GitHub</a>
@@ -296,9 +341,9 @@
 
       <div class="sidebar-overlay" id="sidebar-overlay"></div>
       <main class="main">
-        <header class="main-header" id="component-title">OTP Input</header>
+        <header class="main-header" id="component-title">Introduction</header>
         <div class="main-content">
-          <iframe id="component-frame" src="components/otp-input/preview.html"></iframe>
+          <iframe id="component-frame" src="intro.html"></iframe>
         </div>
       </main>
     </div>
@@ -341,12 +386,10 @@
         });
       });
 
-      // Load from hash or default to first component
+      // Load from hash or show intro
       const hash = window.location.hash.slice(1);
       if (hash) {
         loadComponent(hash);
-      } else {
-        setActive("otp-input");
       }
 
       window.addEventListener("hashchange", () => {
