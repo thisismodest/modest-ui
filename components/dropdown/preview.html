@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdown</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="dropdown.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-md);
+        align-items: center;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .label {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .example {
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .example select {
+        max-width: 16rem;
+      }
+
+      .example select.mdst-dropdown--inline {
+        max-width: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="example">
+      <div class="label">Basic Dropdown</div>
+      <select class="mdst-dropdown">
+        <option value="">Select an option</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+      </select>
+    </div>
+
+    <div class="example">
+      <div class="label">With Optgroups</div>
+      <select class="mdst-dropdown">
+        <option value="">Choose a fruit</option>
+        <optgroup label="Citrus">
+          <option value="orange">Orange</option>
+          <option value="lemon">Lemon</option>
+          <option value="lime">Lime</option>
+        </optgroup>
+        <optgroup label="Berries">
+          <option value="strawberry">Strawberry</option>
+          <option value="blueberry">Blueberry</option>
+          <option value="raspberry">Raspberry</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="example">
+      <div class="label">Sizes</div>
+      <div class="row">
+        <select class="mdst-dropdown mdst-dropdown--sm">
+          <option value="">Small</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+        <select class="mdst-dropdown">
+          <option value="">Default</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+        <select class="mdst-dropdown mdst-dropdown--lg">
+          <option value="">Large</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="label">Variants</div>
+      <div class="row">
+        <select class="mdst-dropdown">
+          <option value="">Default</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+        <select class="mdst-dropdown mdst-dropdown--ghost">
+          <option value="">Ghost</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="label">Inline</div>
+      <p style="color: var(--mdst-color-fg);">
+        Sort by
+        <select class="mdst-dropdown mdst-dropdown--inline mdst-dropdown--ghost">
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="popular">Most Popular</option>
+        </select>
+      </p>
+    </div>
+
+    <div class="example">
+      <div class="label">States</div>
+      <div class="row">
+        <select class="mdst-dropdown">
+          <option value="">Normal</option>
+          <option value="1">Option 1</option>
+        </select>
+        <select class="mdst-dropdown" disabled>
+          <option value="">Disabled</option>
+          <option value="1">Option 1</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="label">Pre-selected Value</div>
+      <select class="mdst-dropdown">
+        <option value="">Select a color</option>
+        <option value="red">Red</option>
+        <option value="green" selected>Green</option>
+        <option value="blue">Blue</option>
+      </select>
+    </div>
+  </body>
+</html>
