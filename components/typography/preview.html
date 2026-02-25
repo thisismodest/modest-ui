@@ -7,107 +7,268 @@
     <link rel="stylesheet" href="../../base/tokens.css" />
     <link rel="stylesheet" href="../../base/reset.css" />
     <link rel="stylesheet" href="typography.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
     <style>
       body {
         font-family: var(--mdst-font-sans);
         padding: var(--mdst-space-md);
       }
 
-      .stack {
-        display: flex;
-        flex-direction: column;
-        gap: var(--mdst-space-xl);
-        max-width: 36rem;
+      .section {
+        margin-bottom: var(--mdst-space-lg);
       }
 
-      .label {
+      .section-header {
         font-size: var(--mdst-text-sm);
-        color: var(--mdst-color-muted);
-        margin-bottom: var(--mdst-space-xs);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
 
-      .headings-demo h1,
-      .headings-demo h2,
-      .headings-demo h3,
-      .headings-demo h4,
-      .headings-demo h5,
-      .headings-demo h6 {
-        border-top: 1px dotted var(--mdst-color-muted);
-        border-bottom: 1px dotted var(--mdst-color-muted);
-        padding: var(--mdst-space-sm) 0;
+      .class-name {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        padding: 0.125em 0.375em;
+        border-radius: 2px;
+        white-space: nowrap;
+      }
+
+      .class-name .dim {
+        opacity: 0.4;
+      }
+
+      .mdst-table th:first-child,
+      .mdst-table td:first-child {
+        width: 50%;
+      }
+
+      .code-section {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .code-section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
         margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     </style>
   </head>
   <body>
-    <div class="stack">
-      <div class="headings-demo">
-        <div class="label">Headings</div>
-        <h1 class="mdst-h1">Heading 1</h1>
-        <h2 class="mdst-h2">Heading 2</h2>
-        <h3 class="mdst-h3">Heading 3</h3>
-        <h4 class="mdst-h4">Heading 4</h4>
-        <h5 class="mdst-h5">Heading 5</h5>
-        <h6 class="mdst-h6">Heading 6</h6>
-      </div>
+    <div class="section">
+      <div class="section-header">Headings</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-h1</span></td>
+            <td><h1 class="mdst-h1" style="margin: 0">Heading 1</h1></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-h2</span></td>
+            <td><h2 class="mdst-h2" style="margin: 0">Heading 2</h2></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-h3</span></td>
+            <td><h3 class="mdst-h3" style="margin: 0">Heading 3</h3></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-h4</span></td>
+            <td><h4 class="mdst-h4" style="margin: 0">Heading 4</h4></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-h5</span></td>
+            <td><h5 class="mdst-h5" style="margin: 0">Heading 5</h5></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-h6</span></td>
+            <td><h6 class="mdst-h6" style="margin: 0">Heading 6</h6></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <div>
-        <div class="label">Paragraph</div>
-        <p class="mdst-p" style="margin-bottom: var(--mdst-space-sm)">
-          This is a paragraph of text. It uses the base font size and line height for comfortable reading.
-        </p>
-        <p class="mdst-p mdst-p--sm" style="margin-bottom: var(--mdst-space-sm)">Small paragraph variant.</p>
-        <p class="mdst-p mdst-p--lg" style="margin-bottom: var(--mdst-space-sm)">Large paragraph variant.</p>
-        <p class="mdst-p mdst-p--muted">Muted paragraph for secondary text.</p>
-      </div>
+    <div class="section">
+      <div class="section-header">Paragraph</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-p</span></td>
+            <td><p class="mdst-p" style="margin: 0">Default paragraph text.</p></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-p</span>--sm</span>
+            </td>
+            <td><p class="mdst-p mdst-p--sm" style="margin: 0">Small paragraph text.</p></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-p</span>--lg</span>
+            </td>
+            <td><p class="mdst-p mdst-p--lg" style="margin: 0">Large paragraph text.</p></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-p</span>--muted</span>
+            </td>
+            <td><p class="mdst-p mdst-p--muted" style="margin: 0">Muted paragraph text.</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <div>
-        <div class="label">Inline elements</div>
-        <p class="mdst-p">
-          This is <a href="#" class="mdst-a">a link</a> and this is <strong class="mdst-strong">bold text</strong> and this is
-          <em class="mdst-em">italic text</em> and this is <small class="mdst-small">small text</small> and this is
-          <mark class="mdst-mark">highlighted text</mark>.
-        </p>
-      </div>
+    <div class="section">
+      <div class="section-header">Inline Elements</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-a</span></td>
+            <td><a href="#" class="mdst-a">Link text</a></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-strong</span></td>
+            <td><strong class="mdst-strong">Bold text</strong></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-em</span></td>
+            <td><em class="mdst-em">Italic text</em></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-small</span></td>
+            <td><small class="mdst-small">Small text</small></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-mark</span></td>
+            <td><mark class="mdst-mark">Highlighted text</mark></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <div>
-        <div class="label">Blockquote</div>
-        <blockquote class="mdst-blockquote">
-          This is a blockquote. It's useful for highlighting quotes or important passages of text.
-        </blockquote>
-      </div>
+    <div class="section">
+      <div class="section-header">Block Elements</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-blockquote</span></td>
+            <td>
+              <blockquote class="mdst-blockquote">A quoted passage of text.</blockquote>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-hr</span></td>
+            <td>
+              <hr class="mdst-hr" style="margin: var(--mdst-space-sm) 0" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <div>
-        <div class="label">Horizontal rule</div>
-        <hr class="mdst-hr" />
-      </div>
+    <div class="section">
+      <div class="section-header">Lists</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-ul</span><br />
+              <span class="class-name">.mdst-li</span>
+            </td>
+            <td>
+              <ul class="mdst-ul" style="margin: 0">
+                <li class="mdst-li">Unordered item</li>
+                <li class="mdst-li">Another item</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-ol</span><br />
+              <span class="class-name">.mdst-li</span>
+            </td>
+            <td>
+              <ol class="mdst-ol" style="margin: 0">
+                <li class="mdst-li">First item</li>
+                <li class="mdst-li">Second item</li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-ul</span>--unstyled</span>
+            </td>
+            <td>
+              <ul class="mdst-ul mdst-ul--unstyled" style="margin: 0">
+                <li class="mdst-li">No bullets</li>
+                <li class="mdst-li">No padding</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <div>
-        <div class="label">Unordered list</div>
-        <ul class="mdst-ul" style="margin-bottom: var(--mdst-space-md)">
-          <li class="mdst-li">First item</li>
-          <li class="mdst-li">Second item</li>
-          <li class="mdst-li">Third item</li>
-        </ul>
-      </div>
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Headings --&gt;
+&lt;h1 class="mdst-h1"&gt;Heading 1&lt;/h1&gt;
+&lt;h2 class="mdst-h2"&gt;Heading 2&lt;/h2&gt;
 
-      <div>
-        <div class="label">Ordered list</div>
-        <ol class="mdst-ol" style="margin-bottom: var(--mdst-space-md)">
-          <li class="mdst-li">First item</li>
-          <li class="mdst-li">Second item</li>
-          <li class="mdst-li">Third item</li>
-        </ol>
-      </div>
+&lt;!-- Paragraph --&gt;
+&lt;p class="mdst-p"&gt;Default paragraph.&lt;/p&gt;
+&lt;p class="mdst-p mdst-p--muted"&gt;Muted text.&lt;/p&gt;
 
-      <div>
-        <div class="label">Unstyled list</div>
-        <ul class="mdst-ul mdst-ul--unstyled" style="margin-bottom: var(--mdst-space-md)">
-          <li class="mdst-li">No bullets</li>
-          <li class="mdst-li">No padding</li>
-          <li class="mdst-li">Clean slate</li>
-        </ul>
-      </div>
+&lt;!-- Inline --&gt;
+&lt;a href="#" class="mdst-a"&gt;Link&lt;/a&gt;
+&lt;strong class="mdst-strong"&gt;Bold&lt;/strong&gt;
+&lt;em class="mdst-em"&gt;Italic&lt;/em&gt;
+&lt;mark class="mdst-mark"&gt;Highlight&lt;/mark&gt;
+
+&lt;!-- Blockquote --&gt;
+&lt;blockquote class="mdst-blockquote"&gt;Quote&lt;/blockquote&gt;
+
+&lt;!-- Lists --&gt;
+&lt;ul class="mdst-ul"&gt;
+  &lt;li class="mdst-li"&gt;Item&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
     </div>
   </body>
 </html>

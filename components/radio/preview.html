@@ -7,85 +7,212 @@
     <link rel="stylesheet" href="../../base/tokens.css" />
     <link rel="stylesheet" href="../../base/reset.css" />
     <link rel="stylesheet" href="radio.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
     <style>
       body {
         font-family: var(--mdst-font-sans);
         padding: var(--mdst-space-md);
       }
 
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--mdst-space-md);
-        align-items: center;
-        margin-bottom: var(--mdst-space-md);
+      .section {
+        margin-bottom: var(--mdst-space-lg);
       }
 
-      .label {
+      .section-header {
         font-size: var(--mdst-text-sm);
-        color: var(--mdst-color-muted);
-        margin-bottom: var(--mdst-space-xs);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .class-name {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        padding: 0.125em 0.375em;
+        border-radius: 2px;
+        white-space: nowrap;
+      }
+
+      .class-name .dim {
+        opacity: 0.4;
+      }
+
+      .mdst-table th:first-child,
+      .mdst-table td:first-child {
+        width: 50%;
+      }
+
+      .code-section {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .code-section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     </style>
   </head>
   <body>
-    <div class="label">States</div>
-    <div class="row">
-      <label class="mdst-radio-label">
-        <input type="radio" name="states" class="mdst-radio" />
-        Unselected
-      </label>
-      <label class="mdst-radio-label">
-        <input type="radio" name="states" class="mdst-radio" checked />
-        Selected
-      </label>
-      <label class="mdst-radio-label">
-        <input type="radio" name="disabled" class="mdst-radio" disabled />
-        Disabled
-      </label>
-      <label class="mdst-radio-label">
-        <input type="radio" name="disabled-checked" class="mdst-radio" checked disabled />
-        Selected & Disabled
-      </label>
+    <div class="section">
+      <div class="section-header">With Label</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-radio-label</span><br />
+              <span class="class-name">.mdst-radio</span>
+            </td>
+            <td>
+              <label class="mdst-radio-label">
+                <input type="radio" name="demo1" class="mdst-radio" />
+                Unselected
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">checked</span>
+            </td>
+            <td>
+              <label class="mdst-radio-label">
+                <input type="radio" name="demo2" class="mdst-radio" checked />
+                Selected
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">disabled</span>
+            </td>
+            <td>
+              <label class="mdst-radio-label">
+                <input type="radio" name="demo3" class="mdst-radio" disabled />
+                Disabled
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="label">Radio Group (Vertical)</div>
-    <div class="mdst-radio-group">
-      <label class="mdst-radio-label">
-        <input type="radio" name="vertical" class="mdst-radio" checked />
-        Option 1
-      </label>
-      <label class="mdst-radio-label">
-        <input type="radio" name="vertical" class="mdst-radio" />
-        Option 2
-      </label>
-      <label class="mdst-radio-label">
-        <input type="radio" name="vertical" class="mdst-radio" />
-        Option 3
-      </label>
+    <div class="section">
+      <div class="section-header">Radio Group</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-radio-group</span>
+            </td>
+            <td>
+              <div class="mdst-radio-group">
+                <label class="mdst-radio-label">
+                  <input type="radio" name="vertical" class="mdst-radio" checked />
+                  Option 1
+                </label>
+                <label class="mdst-radio-label">
+                  <input type="radio" name="vertical" class="mdst-radio" />
+                  Option 2
+                </label>
+                <label class="mdst-radio-label">
+                  <input type="radio" name="vertical" class="mdst-radio" />
+                  Option 3
+                </label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-radio-group</span>--horizontal</span>
+            </td>
+            <td>
+              <div class="mdst-radio-group mdst-radio-group--horizontal">
+                <label class="mdst-radio-label">
+                  <input type="radio" name="horizontal" class="mdst-radio" checked />
+                  Option 1
+                </label>
+                <label class="mdst-radio-label">
+                  <input type="radio" name="horizontal" class="mdst-radio" />
+                  Option 2
+                </label>
+                <label class="mdst-radio-label">
+                  <input type="radio" name="horizontal" class="mdst-radio" />
+                  Option 3
+                </label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="label" style="margin-top: var(--mdst-space-md);">Radio Group (Horizontal)</div>
-    <div class="mdst-radio-group mdst-radio-group--horizontal">
-      <label class="mdst-radio-label">
-        <input type="radio" name="horizontal" class="mdst-radio" checked />
-        Option 1
-      </label>
-      <label class="mdst-radio-label">
-        <input type="radio" name="horizontal" class="mdst-radio" />
-        Option 2
-      </label>
-      <label class="mdst-radio-label">
-        <input type="radio" name="horizontal" class="mdst-radio" />
-        Option 3
-      </label>
+    <div class="section">
+      <div class="section-header">Standalone</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-radio</span>
+            </td>
+            <td>
+              <input type="radio" name="standalone" class="mdst-radio" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="label" style="margin-top: var(--mdst-space-md);">Standalone</div>
-    <div class="row">
-      <input type="radio" name="standalone" class="mdst-radio" />
-      <input type="radio" name="standalone" class="mdst-radio" checked />
-      <input type="radio" name="standalone-disabled" class="mdst-radio" disabled />
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- With label (recommended) --&gt;
+&lt;label class="mdst-radio-label"&gt;
+  &lt;input type="radio" name="group" class="mdst-radio" /&gt;
+  Label text
+&lt;/label&gt;
+
+&lt;!-- Radio group (vertical) --&gt;
+&lt;div class="mdst-radio-group"&gt;
+  &lt;label class="mdst-radio-label"&gt;
+    &lt;input type="radio" name="group" class="mdst-radio" checked /&gt;
+    Option 1
+  &lt;/label&gt;
+  &lt;label class="mdst-radio-label"&gt;
+    &lt;input type="radio" name="group" class="mdst-radio" /&gt;
+    Option 2
+  &lt;/label&gt;
+&lt;/div&gt;
+
+&lt;!-- Radio group (horizontal) --&gt;
+&lt;div class="mdst-radio-group mdst-radio-group--horizontal"&gt;
+  ...
+&lt;/div&gt;</code></pre>
     </div>
   </body>
 </html>

@@ -5,251 +5,205 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OTP Input</title>
     <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
     <link rel="stylesheet" href="otp-input.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
     <style>
       body {
         font-family: var(--mdst-font-sans);
         padding: var(--mdst-space-md);
-        display: flex;
-        flex-direction: column;
-        gap: var(--mdst-space-md);
       }
 
-      label {
-        display: block;
+      .section {
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .section-header {
         font-size: var(--mdst-text-sm);
-        margin-bottom: var(--mdst-space-xs);
-        color: var(--mdst-color-muted);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
 
-      .example {
-        display: flex;
-        flex-direction: column;
-        gap: var(--mdst-space-xs);
+      .class-name {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        padding: 0.125em 0.375em;
+        border-radius: 2px;
+        white-space: nowrap;
+      }
+
+      .class-name .dim {
+        opacity: 0.4;
       }
 
       .footnote {
         font-size: var(--mdst-text-xs);
-        line-height: 1.2;
+        line-height: 1.4;
         color: var(--mdst-color-muted);
         margin-top: var(--mdst-space-md);
         padding-top: var(--mdst-space-md);
         border-top: var(--mdst-border-width) solid var(--mdst-color-border);
       }
+
+      .mdst-table th:first-child,
+      .mdst-table td:first-child {
+        width: 50%;
+      }
+
+      .code-section {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .code-section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
     </style>
   </head>
   <body>
-    <div class="example">
-      <label>4-digit code</label>
-      <div class="mdst-otp">
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-      </div>
+    <div class="section">
+      <div class="section-header">Structure</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-otp</span><br />
+              <span class="class-name"><span class="dim">.mdst-otp</span>-digit</span>
+            </td>
+            <td>
+              <div class="mdst-otp" id="otp-basic">
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-otp</span>-separator</span>
+            </td>
+            <td>
+              <div class="mdst-otp" id="otp-separator">
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+                <span class="mdst-otp-separator"></span>
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="example">
-      <label>6-digit code with separator</label>
-      <div class="mdst-otp">
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-        <span class="mdst-otp-separator"></span>
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" placeholder="0" />
-      </div>
-    </div>
-
-    <div class="example">
-      <label>Error state</label>
-      <div class="mdst-otp mdst-otp--error">
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="1" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="2" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="3" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="4" />
-      </div>
-    </div>
-
-    <div class="example">
-      <label>Success state</label>
-      <div class="mdst-otp mdst-otp--success">
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="1" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="2" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="3" />
-        <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="4" />
-      </div>
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-otp</span>--error</span>
+            </td>
+            <td>
+              <div class="mdst-otp mdst-otp--error">
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="1" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="2" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="3" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="4" readonly />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-otp</span>--success</span>
+            </td>
+            <td>
+              <div class="mdst-otp mdst-otp--success">
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="1" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="2" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="3" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" value="4" readonly />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <p class="footnote">
-      <strong>NOTE:</strong> This preview uses JavaScript to handle paste support and auto-advance to the next input on completion. Without
-      JS, the inputs still work but require manual tabbing between fields.
+      <strong>Note:</strong> This preview uses JavaScript to handle paste support and auto-advance to the next input. Without JS, the inputs
+      still work but require manual tabbing between fields.
     </p>
 
-    <script>
-      function createOTPInput(container, options) {
-        options = options || {};
-        var onComplete = options.onComplete || function () {};
-        var onChange = options.onChange || function () {};
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- 4-digit code --&gt;
+&lt;div class="mdst-otp"&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" /&gt;
+&lt;/div&gt;
 
-        var inputs = Array.from(container.querySelectorAll(".mdst-otp-digit"));
+&lt;!-- With separator --&gt;
+&lt;div class="mdst-otp"&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" /&gt;
+  &lt;span class="mdst-otp-separator"&gt;&lt;/span&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" /&gt;
+&lt;/div&gt;
 
-        if (inputs.length === 0) {
-          console.warn("createOTPInput: No .mdst-otp-digit elements found");
-          return null;
-        }
+&lt;!-- Error state --&gt;
+&lt;div class="mdst-otp mdst-otp--error"&gt;...&lt;/div&gt;
 
-        function getValue() {
-          return inputs
-            .map(function (input) {
-              return input.value;
-            })
-            .join("");
-        }
+&lt;!-- Success state --&gt;
+&lt;div class="mdst-otp mdst-otp--success"&gt;...&lt;/div&gt;</code></pre>
+    </div>
 
-        function setValue(value) {
-          var digits = value.replace(/\D/g, "").split("");
-          inputs.forEach(function (input, i) {
-            input.value = digits[i] || "";
-          });
-          onChange(getValue());
-        }
+    <p class="footnote">
+      <strong>Note:</strong> This preview uses JavaScript to handle paste support and auto-advance to the next input. Without JS, the inputs
+      still work but require manual tabbing between fields.
+    </p>
 
-        function clear() {
-          inputs.forEach(function (input) {
-            input.value = "";
-          });
-          onChange("");
-        }
+    <script type="module">
+      import { createOTPInput } from "./otp-input.js";
 
-        function focus() {
-          if (inputs[0]) inputs[0].focus();
-        }
-
-        function focusInput(index) {
-          var target = inputs[Math.max(0, Math.min(index, inputs.length - 1))];
-          if (target) {
-            target.focus();
-            target.select();
-          }
-        }
-
-        function checkComplete() {
-          var value = getValue();
-          onChange(value);
-          if (value.length === inputs.length && value.indexOf("") === -1) {
-            onComplete(value);
-          }
-        }
-
-        function handleInput(e) {
-          var input = e.target;
-          var index = inputs.indexOf(input);
-
-          if (input.value.length > 1) {
-            input.value = input.value.slice(-1);
-          }
-
-          input.value = input.value.replace(/\D/g, "");
-
-          if (input.value && index < inputs.length - 1) {
-            focusInput(index + 1);
-          }
-
-          checkComplete();
-        }
-
-        function handleKeyDown(e) {
-          var input = e.target;
-          var index = inputs.indexOf(input);
-
-          switch (e.key) {
-            case "Backspace":
-              if (!input.value && index > 0) {
-                e.preventDefault();
-                focusInput(index - 1);
-                inputs[index - 1].value = "";
-                onChange(getValue());
-              }
-              break;
-
-            case "Delete":
-              input.value = "";
-              onChange(getValue());
-              break;
-
-            case "ArrowLeft":
-              e.preventDefault();
-              focusInput(index - 1);
-              break;
-
-            case "ArrowRight":
-              e.preventDefault();
-              focusInput(index + 1);
-              break;
-          }
-        }
-
-        function handlePaste(e) {
-          e.preventDefault();
-          var pastedData = e.clipboardData.getData("text");
-          var digits = pastedData.replace(/\D/g, "").split("");
-          var startIndex = inputs.indexOf(e.target);
-
-          digits.forEach(function (digit, i) {
-            var targetIndex = startIndex + i;
-            if (targetIndex < inputs.length) {
-              inputs[targetIndex].value = digit;
-            }
-          });
-
-          var nextEmptyIndex = inputs.findIndex(function (input) {
-            return !input.value;
-          });
-          focusInput(nextEmptyIndex === -1 ? inputs.length - 1 : nextEmptyIndex);
-
-          checkComplete();
-        }
-
-        function handleFocus(e) {
-          e.target.select();
-        }
-
-        inputs.forEach(function (input) {
-          input.addEventListener("input", handleInput);
-          input.addEventListener("keydown", handleKeyDown);
-          input.addEventListener("paste", handlePaste);
-          input.addEventListener("focus", handleFocus);
-        });
-
-        function destroy() {
-          inputs.forEach(function (input) {
-            input.removeEventListener("input", handleInput);
-            input.removeEventListener("keydown", handleKeyDown);
-            input.removeEventListener("paste", handlePaste);
-            input.removeEventListener("focus", handleFocus);
+      // Initialize only the interactive OTP inputs (not the readonly state examples)
+      ["otp-basic", "otp-separator"].forEach((id) => {
+        const container = document.getElementById(id);
+        if (container) {
+          createOTPInput(container, {
+            onComplete: (code) => console.log("OTP complete:", code),
+            onChange: (code) => console.log("OTP changed:", code),
           });
         }
-
-        return {
-          getValue: getValue,
-          setValue: setValue,
-          clear: clear,
-          focus: focus,
-          destroy: destroy,
-        };
-      }
-
-      document.querySelectorAll(".mdst-otp").forEach(function (container) {
-        createOTPInput(container, {
-          onComplete: function (code) {
-            console.log("OTP complete:", code);
-          },
-          onChange: function (code) {
-            console.log("OTP changed:", code);
-          },
-        });
       });
     </script>
   </body>
