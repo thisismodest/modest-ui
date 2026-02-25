@@ -7,41 +7,128 @@
     <link rel="stylesheet" href="../../base/tokens.css" />
     <link rel="stylesheet" href="../../base/reset.css" />
     <link rel="stylesheet" href="range.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
     <style>
       body {
         font-family: var(--mdst-font-sans);
         padding: var(--mdst-space-md);
       }
 
-      .stack {
-        display: flex;
-        flex-direction: column;
-        gap: var(--mdst-space-lg);
-        max-width: 20rem;
+      .section {
+        margin-bottom: var(--mdst-space-lg);
       }
 
-      label {
-        display: block;
+      .section-header {
         font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
         margin-bottom: var(--mdst-space-sm);
-        color: var(--mdst-color-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .class-name {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        padding: 0.125em 0.375em;
+        border-radius: 2px;
+        white-space: nowrap;
+      }
+
+      .class-name .dim {
+        opacity: 0.4;
+      }
+
+      .mdst-table th:first-child,
+      .mdst-table td:first-child {
+        width: 50%;
+      }
+
+      .mdst-table .mdst-range {
+        max-width: 12rem;
+      }
+
+      .code-section {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .code-section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     </style>
   </head>
   <body>
-    <div class="stack">
-      <div>
-        <label>Default</label>
-        <input type="range" class="mdst-range" min="0" max="100" value="50" />
-      </div>
-      <div>
-        <label>With steps</label>
-        <input type="range" class="mdst-range" min="0" max="100" value="25" step="25" />
-      </div>
-      <div>
-        <label>Disabled</label>
-        <input type="range" class="mdst-range" min="0" max="100" value="75" disabled />
-      </div>
+    <div class="section">
+      <div class="section-header">Basic</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-range</span>
+            </td>
+            <td>
+              <input type="range" class="mdst-range" min="0" max="100" value="50" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">step="25"</span>
+            </td>
+            <td>
+              <input type="range" class="mdst-range" min="0" max="100" value="25" step="25" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">disabled</span>
+            </td>
+            <td>
+              <input type="range" class="mdst-range" min="0" max="100" value="75" disabled />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Basic range --&gt;
+&lt;input type="range" class="mdst-range" min="0" max="100" value="50" /&gt;
+
+&lt;!-- With steps --&gt;
+&lt;input type="range" class="mdst-range" min="0" max="100" value="25" step="25" /&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;input type="range" class="mdst-range" min="0" max="100" value="75" disabled /&gt;</code></pre>
     </div>
   </body>
 </html>

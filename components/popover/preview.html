@@ -6,114 +6,181 @@
     <title>Popover</title>
     <link rel="stylesheet" href="../../base/tokens.css" />
     <link rel="stylesheet" href="../../base/reset.css" />
-    <link rel="stylesheet" href="../button/button.css" />
     <link rel="stylesheet" href="popover.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
     <style>
       body {
         font-family: var(--mdst-font-sans);
         padding: var(--mdst-space-md);
       }
 
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--mdst-space-sm);
-        align-items: center;
-        margin-bottom: var(--mdst-space-md);
-      }
-
-      .label {
-        font-size: var(--mdst-text-sm);
-        color: var(--mdst-color-muted);
-        margin-bottom: var(--mdst-space-xs);
-      }
-
-      .example {
+      .section {
         margin-bottom: var(--mdst-space-lg);
+      }
+
+      .section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .class-name {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        padding: 0.125em 0.375em;
+        border-radius: 2px;
+        white-space: nowrap;
+      }
+
+      .class-name .dim {
+        opacity: 0.4;
+      }
+
+      .mdst-table th:first-child,
+      .mdst-table td:first-child {
+        width: 50%;
+      }
+
+      .code-section {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .code-section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     </style>
   </head>
   <body>
-    <div class="example">
-      <div class="label">Basic Popover</div>
-      <div class="row">
-        <button class="mdst-button" popovertarget="basic-popover">Toggle Popover</button>
-      </div>
-      <div id="basic-popover" class="mdst-popover" popover>
-        <p>This is a popover! Click outside or press ESC to close.</p>
-      </div>
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-popover</span>
+            </td>
+            <td>
+              <button class="mdst-button" popovertarget="basic-popover">Default Popover</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-popover</span>--sm</span>
+            </td>
+            <td>
+              <button class="mdst-button" popovertarget="small-popover">Small</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-popover</span>--lg</span>
+            </td>
+            <td>
+              <button class="mdst-button" popovertarget="large-popover">Large</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-popover</span>--anchored</span>
+            </td>
+            <td>
+              <button id="anchor-btn" class="mdst-button" popovertarget="anchored-popover">Anchored</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="example">
-      <div class="label">Popover with Content</div>
-      <div class="row">
-        <button class="mdst-button mdst-button--solid" popovertarget="content-popover">Show Info</button>
-      </div>
-      <div id="content-popover" class="mdst-popover" popover>
-        <h3 style="margin: 0 0 0.5rem 0; font-size: var(--mdst-text-lg);">Popover Title</h3>
-        <p style="margin: 0;">This popover contains more structured content with a title and description.</p>
-      </div>
+    <div class="section">
+      <div class="section-header">Attributes</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">popover</span>
+            </td>
+            <td>Auto-dismiss popover (closes on outside click or ESC)</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">popover="manual"</span>
+            </td>
+            <td>Manual popover (requires explicit close)</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">anchor="id"</span>
+            </td>
+            <td>Anchors popover to an element (use with --anchored)</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="example">
-      <div class="label">Small Popover</div>
-      <div class="row">
-        <button class="mdst-button mdst-button--ghost" popovertarget="small-popover">Small</button>
-      </div>
-      <div id="small-popover" class="mdst-popover mdst-popover--sm" popover>
-        Compact popover
-      </div>
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Basic popover --&gt;
+&lt;button popovertarget="my-popover"&gt;Toggle Popover&lt;/button&gt;
+
+&lt;div id="my-popover" class="mdst-popover" popover&gt;
+  &lt;p&gt;Popover content&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Anchored popover --&gt;
+&lt;button id="trigger" popovertarget="anchored"&gt;Open Menu&lt;/button&gt;
+
+&lt;div id="anchored" class="mdst-popover mdst-popover--anchored" popover anchor="trigger"&gt;
+  &lt;p&gt;Anchored below the button&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Manual popover --&gt;
+&lt;div id="manual" class="mdst-popover" popover="manual"&gt;
+  &lt;p&gt;Won't close on outside click&lt;/p&gt;
+&lt;/div&gt;</code></pre>
     </div>
 
-    <div class="example">
-      <div class="label">Large Popover</div>
-      <div class="row">
-        <button class="mdst-button mdst-button--ghost" popovertarget="large-popover">Large</button>
-      </div>
-      <div id="large-popover" class="mdst-popover mdst-popover--lg" popover>
-        <h3 style="margin: 0 0 0.5rem 0;">Large Popover</h3>
-        <p style="margin: 0 0 0.5rem 0;">This is a larger popover that can contain more content.</p>
-        <p style="margin: 0;">Perfect for forms, menus, or detailed information.</p>
-      </div>
+    <!-- Popover elements -->
+    <div id="basic-popover" class="mdst-popover" popover>
+      <p style="margin: 0">This is a default popover. Click outside or press ESC to close.</p>
     </div>
 
-    <div class="example">
-      <div class="label">Anchored Popovers</div>
-      <div class="row">
-        <button id="btn-anchored-1" class="mdst-button" popovertarget="anchored-popover-1">
-          Anchored Menu
-        </button>
-        <button id="btn-anchored-2" class="mdst-button mdst-button--ghost" popovertarget="anchored-popover-2">
-          Anchored Info
-        </button>
-      </div>
-      <div id="anchored-popover-1" class="mdst-popover mdst-popover--anchored mdst-popover--sm" popover anchor="btn-anchored-1">
-        <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-          <a href="#" style="text-decoration: none; color: inherit;">Edit</a>
-          <a href="#" style="text-decoration: none; color: inherit;">Duplicate</a>
-          <a href="#" style="text-decoration: none; color: inherit;">Delete</a>
-        </div>
-      </div>
-      <div id="anchored-popover-2" class="mdst-popover mdst-popover--anchored" popover anchor="btn-anchored-2">
-        <p style="margin: 0;">This popover is anchored below its trigger button.</p>
-      </div>
+    <div id="small-popover" class="mdst-popover mdst-popover--sm" popover>Compact popover</div>
+
+    <div id="large-popover" class="mdst-popover mdst-popover--lg" popover>
+      <h3 style="margin: 0 0 0.5rem 0">Large Popover</h3>
+      <p style="margin: 0">This is a larger popover with more room for content.</p>
     </div>
 
-    <div class="example">
-      <div class="label">Manual Popover (with auto behavior)</div>
-      <div class="row">
-        <button class="mdst-button" popovertarget="manual-popover" popovertargetaction="toggle">
-          Toggle Manual
-        </button>
-        <button class="mdst-button mdst-button--ghost" popovertarget="manual-popover" popovertargetaction="show">
-          Show
-        </button>
-        <button class="mdst-button mdst-button--ghost" popovertarget="manual-popover" popovertargetaction="hide">
-          Hide
-        </button>
-      </div>
-      <div id="manual-popover" class="mdst-popover" popover="manual">
-        <p style="margin: 0;">Manual popover won't close when clicking outside.</p>
+    <div id="anchored-popover" class="mdst-popover mdst-popover--anchored mdst-popover--sm" popover anchor="anchor-btn">
+      <div style="display: flex; flex-direction: column; gap: 0.25rem">
+        <a href="#" style="text-decoration: none; color: inherit">Edit</a>
+        <a href="#" style="text-decoration: none; color: inherit">Duplicate</a>
+        <a href="#" style="text-decoration: none; color: inherit">Delete</a>
       </div>
     </div>
   </body>
