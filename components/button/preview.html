@@ -39,6 +39,10 @@
         white-space: nowrap;
       }
 
+      .class-name .dim {
+        opacity: 0.4;
+      }
+
       .code-section {
         margin-top: var(--mdst-space-lg);
       }
@@ -56,7 +60,7 @@
   <body>
     <div class="section">
       <div class="section-header">Variants</div>
-      <table class="mdst-table">
+      <table class="mdst-table mdst-table--stack">
         <thead>
           <tr>
             <th>Class</th>
@@ -69,11 +73,15 @@
             <td><button class="mdst-button">Default</button></td>
           </tr>
           <tr>
-            <td><span class="class-name">--solid</span></td>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-button</span>--solid</span>
+            </td>
             <td><button class="mdst-button mdst-button--solid">Solid</button></td>
           </tr>
           <tr>
-            <td><span class="class-name">--ghost</span></td>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-button</span>--ghost</span>
+            </td>
             <td><button class="mdst-button mdst-button--ghost">Ghost</button></td>
           </tr>
         </tbody>
@@ -82,7 +90,7 @@
 
     <div class="section">
       <div class="section-header">Sizes</div>
-      <table class="mdst-table">
+      <table class="mdst-table mdst-table--stack">
         <thead>
           <tr>
             <th>Class</th>
@@ -91,7 +99,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="class-name">--sm</span></td>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-button</span>--sm</span>
+            </td>
             <td><button class="mdst-button mdst-button--sm">Small</button></td>
           </tr>
           <tr>
@@ -99,7 +109,9 @@
             <td><button class="mdst-button">Default</button></td>
           </tr>
           <tr>
-            <td><span class="class-name">--lg</span></td>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-button</span>--lg</span>
+            </td>
             <td><button class="mdst-button mdst-button--lg">Large</button></td>
           </tr>
         </tbody>
@@ -108,7 +120,7 @@
 
     <div class="section">
       <div class="section-header">States</div>
-      <table class="mdst-table">
+      <table class="mdst-table mdst-table--stack">
         <thead>
           <tr>
             <th>Class / Attribute</th>
@@ -121,7 +133,9 @@
             <td><button class="mdst-button" disabled>Disabled</button></td>
           </tr>
           <tr>
-            <td><span class="class-name">--solid</span> <span class="class-name">disabled</span></td>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-button</span>--solid</span> <span class="class-name">disabled</span>
+            </td>
             <td><button class="mdst-button mdst-button--solid" disabled>Disabled Solid</button></td>
           </tr>
         </tbody>

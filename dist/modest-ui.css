@@ -1004,6 +1004,11 @@ textarea.mdst-input {
 
 /* Table */
 
+.mdst-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .mdst-table {
   width: 100%;
   border-collapse: collapse;
@@ -1072,6 +1077,39 @@ textarea.mdst-input {
 
 .mdst-table--fixed {
   table-layout: fixed;
+}
+
+/* Stack variant - stacks rows on mobile */
+
+@media (max-width: 480px) {
+  .mdst-table--stack thead {
+    display: none;
+  }
+
+  .mdst-table--stack tbody,
+  .mdst-table--stack tr,
+  .mdst-table--stack td {
+    display: block;
+    width: 100%;
+  }
+
+  .mdst-table--stack tr {
+    padding: var(--mdst-space-md) 0;
+    border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+  }
+
+  .mdst-table--stack tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .mdst-table--stack td {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .mdst-table--stack td:first-child {
+    margin-bottom: var(--mdst-space-sm);
+  }
 }
 
 /* Typography */
