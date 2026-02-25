@@ -3,25 +3,96 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Code Component</title>
+    <title>Code</title>
     <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
     <link rel="stylesheet" href="code.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
     <style>
       body {
         font-family: var(--mdst-font-sans);
         padding: var(--mdst-space-md);
-        color: var(--mdst-color-fg);
       }
 
-      p {
+      .section {
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
         margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .class-name {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        padding: 0.125em 0.375em;
+        border-radius: 2px;
+        white-space: nowrap;
+      }
+
+      .examples {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-sm);
+        color: var(--mdst-color-fg);
         line-height: var(--mdst-line-height);
+      }
+
+      .code-section {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .code-section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     </style>
   </head>
   <body>
-    <p>Use <code class="mdst-code">const x = 1</code> to declare a variable.</p>
-    <p>Run <code class="mdst-code">npm install modest-ui</code> to install the library.</p>
-    <p>The <code class="mdst-code">createOTPInput()</code> function returns an object with methods.</p>
+    <div class="section">
+      <div class="section-header">Inline Code</div>
+      <table class="mdst-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-code</span></td>
+            <td>Use <code class="mdst-code">const x = 1</code> to declare a variable.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Examples</div>
+      <div class="examples">
+        <p>Run <code class="mdst-code">npm install modest-ui</code> to install the library.</p>
+        <p>The <code class="mdst-code">createOTPInput()</code> function returns an object with methods.</p>
+        <p>Set <code class="mdst-code">--mdst-color-fg</code> to change the foreground color.</p>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre
+        class="mdst-pre"
+      ><code>&lt;p&gt;Use &lt;code class="mdst-code"&gt;const x = 1&lt;/code&gt; to declare a variable.&lt;/p&gt;</code></pre>
+    </div>
   </body>
 </html>
