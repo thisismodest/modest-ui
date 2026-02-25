@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theme Playground</title>
+    <link rel="stylesheet" href="../base/tokens.css" />
+    <link rel="stylesheet" href="../base/reset.css" />
+    <link rel="stylesheet" href="../index.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+        line-height: var(--mdst-line-height);
+        background-color: var(--mdst-color-bg);
+        color: var(--mdst-color-fg);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: var(--mdst-text-xl);
+        font-weight: 600;
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      .description {
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      h2 {
+        font-size: var(--mdst-text-lg);
+        font-weight: 600;
+        margin-top: var(--mdst-space-lg);
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .controls {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-md);
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-xs);
+      }
+
+      .control-group label {
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+      }
+
+      .control-group code {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      .control-row {
+        display: flex;
+        gap: var(--mdst-space-sm);
+        align-items: center;
+      }
+
+      .control-row input[type="range"] {
+        flex: 1;
+      }
+
+      .control-row .value {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        min-width: 3rem;
+        text-align: right;
+      }
+
+      .presets {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-sm);
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .preview-section {
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-md);
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .preview-section h3 {
+        font-size: var(--mdst-text-base);
+        font-weight: 600;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .preview-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-sm);
+        align-items: center;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .preview-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .output-section {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .output-section pre {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        background: var(--mdst-color-subtle);
+        padding: var(--mdst-space-md);
+        overflow-x: auto;
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      @media (max-width: 480px) {
+        .presets {
+          flex-direction: column;
+        }
+
+        .presets .mdst-button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Theme Playground</h1>
+    <p class="description">Customise the design tokens to create your own theme. Changes apply to this page only.</p>
+
+    <h2>Presets</h2>
+    <div class="presets">
+      <button class="mdst-button" data-preset="default">Default</button>
+      <button class="mdst-button" data-preset="dark">Dark</button>
+      <button class="mdst-button" data-preset="rounded">Rounded</button>
+      <button class="mdst-button" data-preset="blue">Blue Accent</button>
+    </div>
+
+    <h2>Colors</h2>
+    <div class="controls">
+      <div class="control-group">
+        <label>Foreground <code>--mdst-color-fg</code></label>
+        <div class="mdst-color-picker">
+          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-fg" value="#000000" />
+          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-fg" value="#000000" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Background <code>--mdst-color-bg</code></label>
+        <div class="mdst-color-picker">
+          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-bg" value="#ffffff" />
+          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-bg" value="#ffffff" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Border <code>--mdst-color-border</code></label>
+        <div class="mdst-color-picker">
+          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-border" value="#000000" />
+          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-border" value="#000000" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Muted <code>--mdst-color-muted</code></label>
+        <div class="mdst-color-picker">
+          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-muted" value="#666666" />
+          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-muted" value="#666666" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Subtle <code>--mdst-color-subtle</code></label>
+        <div class="mdst-color-picker">
+          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-subtle" value="#f5f5f5" />
+          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-subtle" value="#f5f5f5" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Focus <code>--mdst-color-focus</code></label>
+        <div class="mdst-color-picker">
+          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-focus" value="#000000" />
+          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-focus" value="#000000" />
+        </div>
+      </div>
+    </div>
+
+    <h2>Border Radius</h2>
+    <div class="controls">
+      <div class="control-group">
+        <label>Radius <code>--mdst-radius</code></label>
+        <div class="control-row">
+          <input type="range" class="mdst-range" data-var="--mdst-radius" min="0" max="16" step="1" value="0" />
+          <span class="value" data-value="--mdst-radius">0px</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Preview</h2>
+    <div class="preview-section">
+      <h3>Components</h3>
+      <div class="preview-row">
+        <button class="mdst-button">Default</button>
+        <button class="mdst-button mdst-button--solid">Solid</button>
+        <button class="mdst-button mdst-button--ghost">Ghost</button>
+        <button class="mdst-button" disabled>Disabled</button>
+      </div>
+      <div class="preview-row">
+        <input type="text" class="mdst-input" placeholder="Text input" style="max-width: 200px" />
+        <input type="range" class="mdst-range" value="50" style="max-width: 150px" />
+      </div>
+      <div class="preview-row">
+        <label class="mdst-checkbox-label">
+          <input type="checkbox" class="mdst-checkbox" checked />
+          Checkbox
+        </label>
+        <label class="mdst-radio-label">
+          <input type="radio" name="preview-radio" class="mdst-radio" checked />
+          Radio
+        </label>
+        <label class="mdst-radio-label">
+          <input type="radio" name="preview-radio" class="mdst-radio" />
+          Radio
+        </label>
+      </div>
+      <div class="preview-row">
+        <details class="mdst-details" style="max-width: 300px">
+          <summary>Details element</summary>
+          <div class="mdst-details-content">
+            <p>This is the expandable content inside the details element.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="output-section">
+      <h2>Generated CSS</h2>
+      <pre id="output">
+:root {
+  --mdst-color-fg: #000;
+  --mdst-color-bg: #fff;
+  --mdst-color-border: #000;
+  --mdst-color-muted: #666;
+  --mdst-color-subtle: #f5f5f5;
+  --mdst-color-focus: #000;
+  --mdst-radius: 0;
+}</pre
+      >
+      <button class="mdst-button mdst-button--sm" id="copy-btn">Copy CSS</button>
+    </div>
+
+    <script>
+      const presets = {
+        default: {
+          "--mdst-color-fg": "#000000",
+          "--mdst-color-bg": "#ffffff",
+          "--mdst-color-border": "#000000",
+          "--mdst-color-muted": "#666666",
+          "--mdst-color-subtle": "#f5f5f5",
+          "--mdst-color-focus": "#000000",
+          "--mdst-radius": "0",
+        },
+        dark: {
+          "--mdst-color-fg": "#ffffff",
+          "--mdst-color-bg": "#1a1a1a",
+          "--mdst-color-border": "#ffffff",
+          "--mdst-color-muted": "#999999",
+          "--mdst-color-subtle": "#2a2a2a",
+          "--mdst-color-focus": "#ffffff",
+          "--mdst-radius": "0",
+        },
+        rounded: {
+          "--mdst-color-fg": "#000000",
+          "--mdst-color-bg": "#ffffff",
+          "--mdst-color-border": "#000000",
+          "--mdst-color-muted": "#666666",
+          "--mdst-color-subtle": "#f5f5f5",
+          "--mdst-color-focus": "#000000",
+          "--mdst-radius": "8",
+        },
+        blue: {
+          "--mdst-color-fg": "#1e3a5f",
+          "--mdst-color-bg": "#ffffff",
+          "--mdst-color-border": "#1e3a5f",
+          "--mdst-color-muted": "#5a7a9a",
+          "--mdst-color-subtle": "#e8f0f8",
+          "--mdst-color-focus": "#2563eb",
+          "--mdst-radius": "4",
+        },
+      };
+
+      const currentValues = { ...presets.default };
+
+      function updateCSSVar(varName, value) {
+        currentValues[varName] = value;
+
+        const cssValue = varName === "--mdst-radius" ? value + "px" : value;
+
+        // Update this document only
+        document.documentElement.style.setProperty(varName, cssValue);
+
+        updateOutput();
+      }
+
+      function updateOutput() {
+        const output = document.getElementById("output");
+        const lines = [":root {"];
+
+        for (const [key, value] of Object.entries(currentValues)) {
+          if (key === "--mdst-radius") {
+            lines.push(`  ${key}: ${value}px;`);
+          } else {
+            lines.push(`  ${key}: ${value};`);
+          }
+        }
+
+        lines.push("}");
+        output.textContent = lines.join("\n");
+      }
+
+      function syncInputs(varName, value) {
+        // Sync color pickers
+        const colorInputs = document.querySelectorAll(`input[data-var="${varName}"]`);
+        colorInputs.forEach((input) => {
+          if (input.type === "color") {
+            input.value = value;
+          } else if (input.type === "text") {
+            input.value = value.toUpperCase();
+          } else if (input.type === "range") {
+            input.value = value;
+          }
+        });
+
+        // Sync value displays
+        const valueDisplay = document.querySelector(`[data-value="${varName}"]`);
+        if (valueDisplay) {
+          valueDisplay.textContent = value + "px";
+        }
+      }
+
+      function applyPreset(presetName) {
+        const preset = presets[presetName];
+        if (!preset) return;
+
+        for (const [varName, value] of Object.entries(preset)) {
+          updateCSSVar(varName, value);
+          syncInputs(varName, value);
+        }
+      }
+
+      // Color picker handlers
+      document.querySelectorAll(".mdst-color-picker__input").forEach((input) => {
+        input.addEventListener("input", (e) => {
+          const varName = e.target.dataset.var;
+          const value = e.target.value;
+          updateCSSVar(varName, value);
+
+          // Sync text input
+          const textInput = document.querySelector(`.mdst-color-picker__text[data-var="${varName}"]`);
+          if (textInput) {
+            textInput.value = value.toUpperCase();
+          }
+        });
+      });
+
+      document.querySelectorAll(".mdst-color-picker__text").forEach((input) => {
+        input.addEventListener("input", (e) => {
+          let value = e.target.value;
+          if (value && !value.startsWith("#")) {
+            value = "#" + value;
+          }
+
+          if (/^#[0-9A-Fa-f]{6}$/.test(value)) {
+            const varName = e.target.dataset.var;
+            updateCSSVar(varName, value);
+
+            // Sync color input
+            const colorInput = document.querySelector(`.mdst-color-picker__input[data-var="${varName}"]`);
+            if (colorInput) {
+              colorInput.value = value;
+            }
+          }
+        });
+      });
+
+      // Range slider handler
+      document.querySelectorAll('input[type="range"][data-var]').forEach((input) => {
+        input.addEventListener("input", (e) => {
+          const varName = e.target.dataset.var;
+          const value = e.target.value;
+          updateCSSVar(varName, value);
+
+          // Update value display
+          const valueDisplay = document.querySelector(`[data-value="${varName}"]`);
+          if (valueDisplay) {
+            valueDisplay.textContent = value + "px";
+          }
+        });
+      });
+
+      // Preset buttons
+      document.querySelectorAll("[data-preset]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          applyPreset(e.target.dataset.preset);
+        });
+      });
+
+      // Copy button
+      document.getElementById("copy-btn").addEventListener("click", async () => {
+        const output = document.getElementById("output").textContent;
+        try {
+          await navigator.clipboard.writeText(output);
+          const btn = document.getElementById("copy-btn");
+          const originalText = btn.textContent;
+          btn.textContent = "Copied!";
+          setTimeout(() => {
+            btn.textContent = originalText;
+          }, 1500);
+        } catch (err) {
+          console.error("Failed to copy:", err);
+        }
+      });
+
+      // Initialize
+      updateOutput();
+    </script>
+  </body>
+</html>
