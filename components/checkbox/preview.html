@@ -7,53 +7,143 @@
     <link rel="stylesheet" href="../../base/tokens.css" />
     <link rel="stylesheet" href="../../base/reset.css" />
     <link rel="stylesheet" href="checkbox.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
     <style>
       body {
         font-family: var(--mdst-font-sans);
         padding: var(--mdst-space-md);
       }
 
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--mdst-space-md);
-        align-items: center;
-        margin-bottom: var(--mdst-space-md);
+      .section {
+        margin-bottom: var(--mdst-space-lg);
       }
 
-      .label {
+      .section-header {
         font-size: var(--mdst-text-sm);
-        color: var(--mdst-color-muted);
-        margin-bottom: var(--mdst-space-xs);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .class-name {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        padding: 0.125em 0.375em;
+        border-radius: 2px;
+        white-space: nowrap;
+      }
+
+      .code-section {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .code-section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     </style>
   </head>
   <body>
-    <div class="label">States</div>
-    <div class="row">
-      <label class="mdst-checkbox-label">
-        <input type="checkbox" class="mdst-checkbox" />
-        Unchecked
-      </label>
-      <label class="mdst-checkbox-label">
-        <input type="checkbox" class="mdst-checkbox" checked />
-        Checked
-      </label>
-      <label class="mdst-checkbox-label">
-        <input type="checkbox" class="mdst-checkbox" disabled />
-        Disabled
-      </label>
-      <label class="mdst-checkbox-label">
-        <input type="checkbox" class="mdst-checkbox" checked disabled />
-        Checked & Disabled
-      </label>
+    <div class="section">
+      <div class="section-header">With Label</div>
+      <table class="mdst-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-checkbox-label</span> <span class="class-name">.mdst-checkbox</span></td>
+            <td>
+              <label class="mdst-checkbox-label">
+                <input type="checkbox" class="mdst-checkbox" />
+                Unchecked
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">checked</span></td>
+            <td>
+              <label class="mdst-checkbox-label">
+                <input type="checkbox" class="mdst-checkbox" checked />
+                Checked
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">disabled</span></td>
+            <td>
+              <label class="mdst-checkbox-label">
+                <input type="checkbox" class="mdst-checkbox" disabled />
+                Disabled
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">checked</span> <span class="class-name">disabled</span></td>
+            <td>
+              <label class="mdst-checkbox-label">
+                <input type="checkbox" class="mdst-checkbox" checked disabled />
+                Checked & Disabled
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="label">Standalone</div>
-    <div class="row">
-      <input type="checkbox" class="mdst-checkbox" />
-      <input type="checkbox" class="mdst-checkbox" checked />
-      <input type="checkbox" class="mdst-checkbox" disabled />
+    <div class="section">
+      <div class="section-header">Standalone</div>
+      <table class="mdst-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-checkbox</span></td>
+            <td><input type="checkbox" class="mdst-checkbox" /></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">checked</span></td>
+            <td><input type="checkbox" class="mdst-checkbox" checked /></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">disabled</span></td>
+            <td><input type="checkbox" class="mdst-checkbox" disabled /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- With label (recommended) --&gt;
+&lt;label class="mdst-checkbox-label"&gt;
+  &lt;input type="checkbox" class="mdst-checkbox" /&gt;
+  Label text
+&lt;/label&gt;
+
+&lt;!-- Standalone --&gt;
+&lt;input type="checkbox" class="mdst-checkbox" /&gt;
+
+&lt;!-- States --&gt;
+&lt;input type="checkbox" class="mdst-checkbox" checked /&gt;
+&lt;input type="checkbox" class="mdst-checkbox" disabled /&gt;</code></pre>
     </div>
   </body>
 </html>
