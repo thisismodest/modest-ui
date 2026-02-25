@@ -3,7 +3,7 @@
  * This file contains all styles in a single file for easy distribution
  */
 
-/* ui-lib - Minimal CSS component library */
+/* modest-ui - Minimal CSS component library */
 
 /* Base */
 :root {
@@ -432,30 +432,30 @@ textarea.mdst-input {
  * OTP Input
  *
  * Usage:
- * <div class="mdst-otp">
- *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ * <div class="mdst-otp-input">
+ *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
  * </div>
  *
  * With separator:
- * <div class="mdst-otp">
- *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
- *   <span class="mdst-otp-separator"></span>
- *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric">
+ * <div class="mdst-otp-input">
+ *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
+ *   <span class="mdst-otp-input-separator"></span>
+ *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
+ *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
  * </div>
  */
 
-.mdst-otp {
+.mdst-otp-input {
   display: inline-flex;
   gap: var(--mdst-space-sm);
   align-items: center;
 }
 
-.mdst-otp-digit {
+.mdst-otp-input-digit {
   width: 1.5em;
   height: 2em;
   padding: 0;
@@ -470,39 +470,39 @@ textarea.mdst-input {
   transition: border-color var(--mdst-transition);
 }
 
-.mdst-otp-digit:focus {
+.mdst-otp-input-digit:focus {
   outline: none;
   border-color: var(--mdst-color-focus);
 }
 
-.mdst-otp-digit::placeholder {
+.mdst-otp-input-digit::placeholder {
   color: var(--mdst-color-muted);
 }
 
-.mdst-otp-digit:disabled {
+.mdst-otp-input-digit:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 /* Separator (e.g., dash between groups) */
-.mdst-otp-separator {
+.mdst-otp-input-separator {
   width: 0.5em;
   height: 0.0625em;
   background: var(--mdst-color-border);
 }
 
 /* Filled state - when digit has a value */
-.mdst-otp-digit:not(:placeholder-shown) {
+.mdst-otp-input-digit:not(:placeholder-shown) {
   border-color: var(--mdst-color-fg);
 }
 
 /* Error state */
-.mdst-otp--error .mdst-otp-digit {
+.mdst-otp-input--error .mdst-otp-input-digit {
   border-color: var(--mdst-color-error, #c00);
 }
 
 /* Success state */
-.mdst-otp--success .mdst-otp-digit {
+.mdst-otp-input--success .mdst-otp-input-digit {
   border-color: var(--mdst-color-success, #0a0);
 }
 
@@ -1115,6 +1115,29 @@ textarea.mdst-input {
   .mdst-table--stack td:first-child {
     margin-bottom: var(--mdst-space-sm);
   }
+}
+
+/* Tooltip (Popover-based) */
+
+.mdst-tooltip {
+  padding: var(--mdst-space-xs) var(--mdst-space-sm);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-fg);
+  color: var(--mdst-color-bg);
+  font-size: var(--mdst-text-sm);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+  margin: 0;
+  max-width: 16rem;
+  text-align: center;
+
+  /* Anchor positioning - use anchor attribute on HTML to link to trigger */
+  position-area: bottom;
+  margin-top: var(--mdst-space-xs);
+}
+
+.mdst-tooltip:popover-open {
+  opacity: 1;
 }
 
 /* Typography */

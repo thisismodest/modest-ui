@@ -1,10 +1,10 @@
 /* Details (Toggle/Disclosure) */
 
 .mdst-details {
+  display: relative;
   border: var(--mdst-border-width) solid var(--mdst-color-border);
   border-radius: var(--mdst-radius);
   background: var(--mdst-color-bg);
-  overflow: hidden;
 }
 
 .mdst-details summary {
@@ -46,7 +46,7 @@
 }
 
 .mdst-details summary:hover {
-  background: var(--mdst-color-subtle);
+  color: var(--mdst-color-muted);
 }
 
 .mdst-details summary:focus-visible {
@@ -92,11 +92,6 @@
   font-size: var(--mdst-text-lg);
   font-weight: 600;
   border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-}
-
-.mdst-details--section summary:hover {
-  background: transparent;
-  color: var(--mdst-color-muted);
 }
 
 .mdst-details--section summary::before {
