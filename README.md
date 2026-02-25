@@ -4,54 +4,24 @@ A minimal, themeable CSS component library. Black and white by default, easy to 
 
 ## Installation
 
-### From local path
-
-```bash
-npm install ../path/to/modest-ui
-```
-
-### From GitHub
-
 ```bash
 npm install github:thisismodest/modest-ui
 ```
 
 ## Usage
 
-### Use the bundled CSS (recommended)
+### Bundled CSS (recommended)
 
-For the simplest setup, use the pre-bundled CSS file that contains all styles in a single file:
-
-Via CDN:
+Use the pre-bundled CSS file that contains all styles:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@0.1.0/dist/modest-ui.css" />
 ```
 
-Or with a package manager:
-
-```css
-@import "modest-ui/dist/modest-ui.css";
-```
-
-Or in JS (with a bundler):
+Or with a bundler:
 
 ```js
 import "modest-ui/dist/modest-ui.css";
-```
-
-### Import everything (with build tool)
-
-If you're using a build tool that supports CSS imports:
-
-```css
-@import "modest-ui/index.css";
-```
-
-Or in JS (with a bundler):
-
-```js
-import "modest-ui/index.css";
 ```
 
 ### Cherry-pick components
@@ -62,273 +32,16 @@ import "modest-ui/index.css";
 
 /* Then pick what you need */
 @import "modest-ui/components/button/button.css";
-@import "modest-ui/components/otp-input/otp-input.css";
+@import "modest-ui/components/input/input.css";
 ```
 
-## Structure
+## Documentation
 
-```
-modest-ui/
-├── index.css                          # All styles with @import statements
-├── dist/
-│   └── modest-ui.css          # Bundled single-file CSS (no imports)
-├── base/
-│   ├── tokens.css                     # CSS custom properties (--mdst-*)
-│   └── reset.css                      # Minimal reset
-└── components/
-    ├── button/
-    │   └── button.css
-    ├── input/
-    │   └── input.css
-    ├── otp-input/
-    │   ├── otp-input.css
-    │   └── otp-input.js               # Optional interactivity
-    ├── code/
-    │   └── code.css
-    ├── pre/
-    │   └── pre.css
-    ├── dialog/
-    │   └── dialog.css
-    ├── details/
-    │   └── details.css
-    ├── popover/
-    │   └── popover.css
-    ├── range/
-    │   └── range.css
-    ├── color-picker/
-    │   └── color-picker.css
-    └── typography/
-        └── typography.css
-```
-
-## Components
-
-### Button
-
-```html
-<button class="mdst-button">Default</button>
-<button class="mdst-button mdst-button--solid">Solid</button>
-<button class="mdst-button mdst-button--ghost">Ghost</button>
-<button class="mdst-button mdst-button--sm">Small</button>
-<button class="mdst-button mdst-button--lg">Large</button>
-```
-
-### Input
-
-```html
-<input type="text" class="mdst-input" placeholder="Enter text" /> <textarea class="mdst-input" placeholder="Write something..."></textarea>
-```
-
-### OTP Input
-
-```html
-<div class="mdst-otp">
-  <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" />
-  <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" />
-  <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" />
-  <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" />
-</div>
-```
-
-With separator:
-
-```html
-<div class="mdst-otp">
-  <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" />
-  <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" />
-  <span class="mdst-otp-separator"></span>
-  <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" />
-  <input type="text" maxlength="1" class="mdst-otp-digit" inputmode="numeric" />
-</div>
-```
-
-Optional JS for auto-advance, paste support, and keyboard navigation:
-
-```js
-import { createOTPInput } from "modest-ui/components/otp-input/otp-input.js";
-
-const otp = createOTPInput(document.querySelector(".mdst-otp"), {
-  onComplete: (code) => console.log("Code entered:", code),
-  onChange: (code) => console.log("Current value:", code),
-});
-
-// Methods
-otp.getValue(); // Get current value
-otp.setValue("1234"); // Set value programmatically
-otp.clear(); // Clear all inputs
-otp.focus(); // Focus first input
-otp.destroy(); // Remove event listeners
-```
-
-### Code (inline)
-
-```html
-<p>Use <code class="mdst-code">const x = 1</code> to declare a variable.</p>
-```
-
-### Pre (code blocks)
-
-```html
-<pre class="mdst-pre">{ "json": "content" }</pre>
-<pre class="mdst-pre mdst-pre--compact">single line</pre>
-<pre class="mdst-pre mdst-pre--borderless">no border</pre>
-<pre class="mdst-pre mdst-pre--scroll">horizontal scroll for long lines</pre>
-```
-
-### Dialog
-
-Native HTML `<dialog>` element with styling:
-
-```html
-<!-- Modal Dialog -->
-<dialog id="my-dialog" class="mdst-dialog">
-  <div class="mdst-dialog-header">
-    <h2 class="mdst-dialog-title">Dialog Title</h2>
-    <button class="mdst-dialog-close" commandfor="my-dialog" command="close">✕</button>
-  </div>
-  <div class="mdst-dialog-body">
-    <p>Dialog content goes here.</p>
-  </div>
-  <div class="mdst-dialog-footer">
-    <button class="mdst-button mdst-button--ghost" commandfor="my-dialog" command="close">Cancel</button>
-    <button class="mdst-button mdst-button--solid" commandfor="my-dialog" command="close">Confirm</button>
-  </div>
-</dialog>
-
-<button class="mdst-button" commandfor="my-dialog" command="show-modal">Open Dialog</button>
-```
-
-Size variants:
-
-```html
-<dialog class="mdst-dialog mdst-dialog--sm">...</dialog>
-<dialog class="mdst-dialog mdst-dialog--lg">...</dialog>
-<dialog class="mdst-dialog mdst-dialog--full">...</dialog>
-```
-
-### Details (Toggle/Accordion)
-
-Native HTML `<details>` element for collapsible content:
-
-```html
-<details class="mdst-details">
-  <summary>Click to expand</summary>
-  <div class="mdst-details-content">
-    <p>Hidden content that appears when expanded.</p>
-  </div>
-</details>
-```
-
-Variants:
-
-```html
-<details class="mdst-details mdst-details--borderless">...</details>
-<details class="mdst-details mdst-details--compact">...</details>
-```
-
-### Range
-
-```html
-<input type="range" class="mdst-range" min="0" max="100" value="50" />
-<input type="range" class="mdst-range" min="0" max="100" value="25" step="25" />
-<input type="range" class="mdst-range" min="0" max="100" value="75" disabled />
-```
-
-### Color Picker
-
-```html
-<!-- Color input only -->
-<div class="mdst-color-picker">
-  <input type="color" class="mdst-color-picker__input" value="#000000" />
-</div>
-
-<!-- With text input -->
-<div class="mdst-color-picker">
-  <input type="color" class="mdst-color-picker__input" value="#4A3F1F" />
-  <input type="text" class="mdst-color-picker__text" value="#4A3F1F" />
-</div>
-
-<!-- Square variant -->
-<div class="mdst-color-picker mdst-color-picker--square">
-  <input type="color" class="mdst-color-picker__input" value="#F4E3C1" />
-  <input type="text" class="mdst-color-picker__text" value="#F4E3C1" />
-</div>
-```
-
-### Typography
-
-```html
-<!-- Headings -->
-<h1 class="mdst-h1">Heading 1</h1>
-<h2 class="mdst-h2">Heading 2</h2>
-<h3 class="mdst-h3">Heading 3</h3>
-<h4 class="mdst-h4">Heading 4</h4>
-<h5 class="mdst-h5">Heading 5</h5>
-<h6 class="mdst-h6">Heading 6</h6>
-
-<!-- Paragraph -->
-<p class="mdst-p">Default paragraph text.</p>
-<p class="mdst-p mdst-p--sm">Small paragraph.</p>
-<p class="mdst-p mdst-p--lg">Large paragraph.</p>
-<p class="mdst-p mdst-p--muted">Muted paragraph.</p>
-
-<!-- Inline elements -->
-<a href="#" class="mdst-a">Link</a>
-<strong class="mdst-strong">Bold</strong>
-<em class="mdst-em">Italic</em>
-<small class="mdst-small">Small</small>
-<mark class="mdst-mark">Highlight</mark>
-
-<!-- Blockquote -->
-<blockquote class="mdst-blockquote">A quoted passage of text.</blockquote>
-
-<!-- Horizontal rule -->
-<hr class="mdst-hr" />
-
-<!-- Lists -->
-<ul class="mdst-ul">
-  <li class="mdst-li">Item</li>
-</ul>
-
-<ol class="mdst-ol">
-  <li class="mdst-li">Item</li>
-</ol>
-
-<!-- Unstyled list -->
-<ul class="mdst-ul mdst-ul--unstyled">
-  <li class="mdst-li">No bullets</li>
-</ul>
-```
-
-### Popover
-
-Native HTML popover API with styling:
-
-```html
-<button popovertarget="my-popover">Toggle Popover</button>
-
-<div id="my-popover" class="mdst-popover" popover>
-  <p>This is a popover!</p>
-</div>
-```
-
-Size variants:
-
-```html
-<div class="mdst-popover mdst-popover--sm" popover>Small popover</div>
-<div class="mdst-popover mdst-popover--lg" popover>Large popover</div>
-```
-
-Tooltip variant:
-
-```html
-<button popovertarget="tooltip" popovertargetaction="hover">Hover me</button>
-<div id="tooltip" class="mdst-tooltip" popover>Helpful tooltip text</div>
-```
+View the component documentation and examples at [thisismodest.github.io/modest-ui](https://thisismodest.github.io/modest-ui/)
 
 ## Theming
 
-Override CSS custom properties to theme:
+Override CSS custom properties to create your own theme:
 
 ```css
 :root {
@@ -341,58 +54,47 @@ Override CSS custom properties to theme:
   --mdst-color-error: #dc2626;
   --mdst-color-success: #16a34a;
   --mdst-radius: 0;
+  --mdst-border-width: 0.0625em;
 }
 ```
 
-## Extending styles
+Use the [Theme Playground](https://thisismodest.github.io/modest-ui/#theme) to experiment with different themes.
 
-Components use minimal, functional styles. Add your own on top:
+## Development
 
-```css
-.mdst-button {
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
+Start a local server to preview components:
+
+```bash
+npm run dev
 ```
 
-## Adding New Components
+Then open [http://localhost:8000](http://localhost:8000)
 
-1. Create a new folder in `components/`:
+### Adding a new component
+
+1. Create a folder in `components/` with your component CSS and a `preview.html`:
 
 ```
 components/
 └── my-component/
-    ├── my-component.css    # Component styles
-    └── preview.html        # Preview for the docs
+    ├── my-component.css
+    └── preview.html
 ```
 
-2. Add the CSS import to `index.css`:
+2. Add the import to `index.css`:
 
 ```css
 @import "./components/my-component/my-component.css";
 ```
 
-3. Run the generate script to update the preview:
+3. Generate and build:
 
 ```bash
-npm run generate
+npm run generate  # Updates sidebar in index.html
+npm run build     # Bundles CSS to dist/
 ```
 
-This scans `components/` for folders with `preview.html` and updates the sidebar in `index.html`.
-
-4. Build the bundled CSS file:
-
-```bash
-npm run build
-```
-
-This creates/updates `dist/modest-ui.css` with all styles bundled into a single file.
-
-## Preview
-
-View the live preview at [thisismodest.github.io/modest-ui](https://thisismodest.github.io/modest-ui/)
-
-Or open `index.html` locally in your browser.
+See [CONVENTIONS.md](CONVENTIONS.md) for component and preview formatting guidelines.
 
 ## License
 
