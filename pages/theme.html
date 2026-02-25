@@ -42,6 +42,18 @@
         margin-bottom: var(--mdst-space-lg);
       }
 
+      .controls--grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--mdst-space-md);
+      }
+
+      @media (max-width: 600px) {
+        .controls--grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       .control-group {
         display: flex;
         flex-direction: column;
@@ -77,10 +89,8 @@
       }
 
       .presets {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--mdst-space-sm);
         margin-bottom: var(--mdst-space-lg);
+        max-width: 16rem;
       }
 
       .preview-section {
@@ -122,11 +132,7 @@
 
       @media (max-width: 480px) {
         .presets {
-          flex-direction: column;
-        }
-
-        .presets .mdst-button {
-          width: 100%;
+          max-width: 100%;
         }
       }
     </style>
@@ -135,128 +141,194 @@
     <h1>Theme Playground</h1>
     <p class="description">Customise the design tokens to create your own theme. Changes apply to this page only.</p>
 
-    <h2>Presets</h2>
-    <div class="presets">
-      <button class="mdst-button" data-preset="default">Default</button>
-      <button class="mdst-button" data-preset="dark">Dark</button>
-      <button class="mdst-button" data-preset="rounded">Rounded</button>
-      <button class="mdst-button" data-preset="blue">Blue Accent</button>
-    </div>
-
-    <h2>Colors</h2>
-    <div class="controls">
-      <div class="control-group">
-        <label>Foreground <code>--mdst-color-fg</code></label>
-        <div class="mdst-color-picker">
-          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-fg" value="#000000" />
-          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-fg" value="#000000" />
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label>Background <code>--mdst-color-bg</code></label>
-        <div class="mdst-color-picker">
-          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-bg" value="#ffffff" />
-          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-bg" value="#ffffff" />
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label>Border <code>--mdst-color-border</code></label>
-        <div class="mdst-color-picker">
-          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-border" value="#000000" />
-          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-border" value="#000000" />
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label>Muted <code>--mdst-color-muted</code></label>
-        <div class="mdst-color-picker">
-          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-muted" value="#666666" />
-          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-muted" value="#666666" />
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label>Subtle <code>--mdst-color-subtle</code></label>
-        <div class="mdst-color-picker">
-          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-subtle" value="#f5f5f5" />
-          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-subtle" value="#f5f5f5" />
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label>Focus <code>--mdst-color-focus</code></label>
-        <div class="mdst-color-picker">
-          <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-focus" value="#000000" />
-          <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-focus" value="#000000" />
-        </div>
-      </div>
-    </div>
-
-    <h2>Border Radius</h2>
-    <div class="controls">
-      <div class="control-group">
-        <label>Radius <code>--mdst-radius</code></label>
-        <div class="control-row">
-          <input type="range" class="mdst-range" data-var="--mdst-radius" min="0" max="16" step="1" value="0" />
-          <span class="value" data-value="--mdst-radius">0px</span>
-        </div>
-      </div>
-    </div>
-
-    <h2>Preview</h2>
-    <div class="preview-section">
-      <h3>Components</h3>
-      <div class="preview-row">
-        <button class="mdst-button">Default</button>
-        <button class="mdst-button mdst-button--solid">Solid</button>
-        <button class="mdst-button mdst-button--ghost">Ghost</button>
-        <button class="mdst-button" disabled>Disabled</button>
-      </div>
-      <div class="preview-row">
-        <input type="text" class="mdst-input" placeholder="Text input" style="max-width: 200px" />
-        <input type="range" class="mdst-range" value="50" style="max-width: 150px" />
-      </div>
-      <div class="preview-row">
-        <label class="mdst-checkbox-label">
-          <input type="checkbox" class="mdst-checkbox" checked />
-          Checkbox
-        </label>
-        <label class="mdst-radio-label">
-          <input type="radio" name="preview-radio" class="mdst-radio" checked />
-          Radio
-        </label>
-        <label class="mdst-radio-label">
-          <input type="radio" name="preview-radio" class="mdst-radio" />
-          Radio
-        </label>
-      </div>
-      <div class="preview-row">
-        <details class="mdst-details" style="max-width: 300px">
-          <summary>Details element</summary>
-          <div class="mdst-details-content">
-            <p>This is the expandable content inside the details element.</p>
-          </div>
-        </details>
-      </div>
-    </div>
-
     <div class="output-section">
       <h2>Generated CSS</h2>
       <pre id="output">
-:root {
-  --mdst-color-fg: #000;
-  --mdst-color-bg: #fff;
-  --mdst-color-border: #000;
-  --mdst-color-muted: #666;
-  --mdst-color-subtle: #f5f5f5;
-  --mdst-color-focus: #000;
-  --mdst-radius: 0;
-}</pre
+        :root {
+          --mdst-color-fg: #000000;
+          --mdst-color-bg: #ffffff;
+          --mdst-color-border: #000000;
+          --mdst-color-muted: #666666;
+          --mdst-color-subtle: #f5f5f5;
+          --mdst-color-focus: #000000;
+          --mdst-color-error: #dc2626;
+          --mdst-color-success: #16a34a;
+          --mdst-radius: 0;
+          --mdst-border-width: 1;
+        }</pre
       >
       <button class="mdst-button mdst-button--sm" id="copy-btn">Copy CSS</button>
     </div>
+
+    <details class="mdst-details mdst-details--section" open>
+      <summary>Presets</summary>
+      <div class="presets">
+        <select class="mdst-dropdown" id="preset-select">
+          <option value="default">Default</option>
+          <option value="dark">Dark</option>
+          <option value="rounded">Rounded</option>
+          <option value="blue">Blue</option>
+          <option value="brutalist">Brutalist</option>
+          <option value="pastel">Pastel</option>
+          <option value="terminal">Terminal</option>
+          <option value="warm">Warm</option>
+          <option value="highcontrast">High Contrast</option>
+        </select>
+      </div>
+    </details>
+
+    <details class="mdst-details mdst-details--section" open>
+      <summary>Colors</summary>
+      <div class="controls controls--grid">
+        <div class="control-group">
+          <label>Foreground <code>--mdst-color-fg</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-fg" value="#000000" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-fg" value="#000000" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Background <code>--mdst-color-bg</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-bg" value="#ffffff" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-bg" value="#ffffff" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Border <code>--mdst-color-border</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-border" value="#000000" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-border" value="#000000" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Muted <code>--mdst-color-muted</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-muted" value="#666666" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-muted" value="#666666" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Subtle <code>--mdst-color-subtle</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-subtle" value="#f5f5f5" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-subtle" value="#f5f5f5" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Focus <code>--mdst-color-focus</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-focus" value="#000000" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-focus" value="#000000" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Error <code>--mdst-color-error</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-error" value="#dc2626" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-error" value="#dc2626" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Success <code>--mdst-color-success</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-success" value="#16a34a" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-success" value="#16a34a" />
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="mdst-details mdst-details--section" open>
+      <summary>Border</summary>
+      <div class="controls">
+        <div class="control-group">
+          <label>Radius <code>--mdst-radius</code></label>
+          <div class="control-row">
+            <input type="range" class="mdst-range" data-var="--mdst-radius" min="0" max="16" step="1" value="0" />
+            <span class="value" data-value="--mdst-radius">0px</span>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Width <code>--mdst-border-width</code></label>
+          <div class="control-row">
+            <input type="range" class="mdst-range" data-var="--mdst-border-width" min="1" max="4" step="0.5" value="1" />
+            <span class="value" data-value="--mdst-border-width">1px</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="mdst-details mdst-details--section" open>
+      <summary>Preview</summary>
+      <div class="preview-section">
+        <h3>Components</h3>
+        <div class="preview-row">
+          <button class="mdst-button">Default</button>
+          <button class="mdst-button mdst-button--solid">Solid</button>
+          <button class="mdst-button mdst-button--ghost">Ghost</button>
+          <button class="mdst-button" disabled>Disabled</button>
+        </div>
+        <div class="preview-row">
+          <input type="text" class="mdst-input" placeholder="Text input" style="max-width: 200px" />
+          <select class="mdst-dropdown" style="max-width: 150px">
+            <option value="">Dropdown</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+          </select>
+          <input type="range" class="mdst-range" value="50" style="max-width: 150px" />
+        </div>
+        <div class="preview-row">
+          <label class="mdst-checkbox-label">
+            <input type="checkbox" class="mdst-checkbox" checked />
+            Checkbox
+          </label>
+          <label class="mdst-radio-label">
+            <input type="radio" name="preview-radio" class="mdst-radio" checked />
+            Radio
+          </label>
+          <label class="mdst-radio-label">
+            <input type="radio" name="preview-radio" class="mdst-radio" />
+            Radio
+          </label>
+        </div>
+        <div class="preview-row">
+          <details class="mdst-details" style="max-width: 300px">
+            <summary>Details element</summary>
+            <div class="mdst-details-content">
+              <p>This is the expandable content inside the details element.</p>
+            </div>
+          </details>
+        </div>
+        <h3 style="margin-top: var(--mdst-space-md); margin-bottom: var(--mdst-space-sm)">States</h3>
+        <div class="preview-row">
+          <div class="mdst-otp mdst-otp--error">
+            <input type="text" maxlength="1" class="mdst-otp-digit" value="1" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-digit" value="2" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-digit" value="3" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-digit" value="4" readonly />
+          </div>
+          <span style="font-size: var(--mdst-text-sm); color: var(--mdst-color-error)">Error state</span>
+        </div>
+        <div class="preview-row">
+          <div class="mdst-otp mdst-otp--success">
+            <input type="text" maxlength="1" class="mdst-otp-digit" value="1" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-digit" value="2" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-digit" value="3" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-digit" value="4" readonly />
+          </div>
+          <span style="font-size: var(--mdst-text-sm); color: var(--mdst-color-success)">Success state</span>
+        </div>
+      </div>
+    </details>
 
     <script>
       const presets = {
@@ -267,7 +339,10 @@
           "--mdst-color-muted": "#666666",
           "--mdst-color-subtle": "#f5f5f5",
           "--mdst-color-focus": "#000000",
+          "--mdst-color-error": "#dc2626",
+          "--mdst-color-success": "#16a34a",
           "--mdst-radius": "0",
+          "--mdst-border-width": "1",
         },
         dark: {
           "--mdst-color-fg": "#ffffff",
@@ -276,16 +351,22 @@
           "--mdst-color-muted": "#999999",
           "--mdst-color-subtle": "#2a2a2a",
           "--mdst-color-focus": "#ffffff",
+          "--mdst-color-error": "#f87171",
+          "--mdst-color-success": "#4ade80",
           "--mdst-radius": "0",
+          "--mdst-border-width": "1",
         },
         rounded: {
           "--mdst-color-fg": "#000000",
           "--mdst-color-bg": "#ffffff",
-          "--mdst-color-border": "#000000",
-          "--mdst-color-muted": "#666666",
-          "--mdst-color-subtle": "#f5f5f5",
-          "--mdst-color-focus": "#000000",
+          "--mdst-color-border": "#d1d5db",
+          "--mdst-color-muted": "#6b7280",
+          "--mdst-color-subtle": "#f9fafb",
+          "--mdst-color-focus": "#3b82f6",
+          "--mdst-color-error": "#ef4444",
+          "--mdst-color-success": "#22c55e",
           "--mdst-radius": "8",
+          "--mdst-border-width": "1",
         },
         blue: {
           "--mdst-color-fg": "#1e3a5f",
@@ -294,7 +375,70 @@
           "--mdst-color-muted": "#5a7a9a",
           "--mdst-color-subtle": "#e8f0f8",
           "--mdst-color-focus": "#2563eb",
+          "--mdst-color-error": "#dc2626",
+          "--mdst-color-success": "#16a34a",
           "--mdst-radius": "4",
+          "--mdst-border-width": "1",
+        },
+        brutalist: {
+          "--mdst-color-fg": "#000000",
+          "--mdst-color-bg": "#ffffff",
+          "--mdst-color-border": "#000000",
+          "--mdst-color-muted": "#000000",
+          "--mdst-color-subtle": "#ffff00",
+          "--mdst-color-focus": "#ff0000",
+          "--mdst-color-error": "#ff0000",
+          "--mdst-color-success": "#00ff00",
+          "--mdst-radius": "0",
+          "--mdst-border-width": "3",
+        },
+        pastel: {
+          "--mdst-color-fg": "#5b4b8a",
+          "--mdst-color-bg": "#fdf4f5",
+          "--mdst-color-border": "#d4a5a5",
+          "--mdst-color-muted": "#9a8c98",
+          "--mdst-color-subtle": "#f0e6ef",
+          "--mdst-color-focus": "#c9ada7",
+          "--mdst-color-error": "#e07a7a",
+          "--mdst-color-success": "#7ab08e",
+          "--mdst-radius": "12",
+          "--mdst-border-width": "1.5",
+        },
+        terminal: {
+          "--mdst-color-fg": "#00EE00",
+          "--mdst-color-bg": "#0d0d0d",
+          "--mdst-color-border": "#00EE00",
+          "--mdst-color-muted": "#098109",
+          "--mdst-color-subtle": "#1a1a1a",
+          "--mdst-color-focus": "#52017e",
+          "--mdst-color-error": "#ff0000",
+          "--mdst-color-success": "#00d5ff",
+          "--mdst-radius": "0",
+          "--mdst-border-width": "1",
+        },
+        warm: {
+          "--mdst-color-fg": "#3d2c29",
+          "--mdst-color-bg": "#faf6f1",
+          "--mdst-color-border": "#c9b99a",
+          "--mdst-color-muted": "#8b7355",
+          "--mdst-color-subtle": "#f0e9df",
+          "--mdst-color-focus": "#b08968",
+          "--mdst-color-error": "#c44536",
+          "--mdst-color-success": "#6b8f71",
+          "--mdst-radius": "4",
+          "--mdst-border-width": "1",
+        },
+        highcontrast: {
+          "--mdst-color-fg": "#000000",
+          "--mdst-color-bg": "#ffffff",
+          "--mdst-color-border": "#000000",
+          "--mdst-color-muted": "#000000",
+          "--mdst-color-subtle": "#ffffff",
+          "--mdst-color-focus": "#0000ff",
+          "--mdst-color-error": "#ff0000",
+          "--mdst-color-success": "#008000",
+          "--mdst-radius": "0",
+          "--mdst-border-width": "2",
         },
       };
 
@@ -303,7 +447,10 @@
       function updateCSSVar(varName, value) {
         currentValues[varName] = value;
 
-        const cssValue = varName === "--mdst-radius" ? value + "px" : value;
+        let cssValue = value;
+        if (varName === "--mdst-radius" || varName === "--mdst-border-width") {
+          cssValue = value + "px";
+        }
 
         // Update this document only
         document.documentElement.style.setProperty(varName, cssValue);
@@ -316,7 +463,7 @@
         const lines = [":root {"];
 
         for (const [key, value] of Object.entries(currentValues)) {
-          if (key === "--mdst-radius") {
+          if (key === "--mdst-radius" || key === "--mdst-border-width") {
             lines.push(`  ${key}: ${value}px;`);
           } else {
             lines.push(`  ${key}: ${value};`);
@@ -402,16 +549,15 @@
           // Update value display
           const valueDisplay = document.querySelector(`[data-value="${varName}"]`);
           if (valueDisplay) {
-            valueDisplay.textContent = value + "px";
+            const unit = varName === "--mdst-border-width" ? "px" : "px";
+            valueDisplay.textContent = value + unit;
           }
         });
       });
 
-      // Preset buttons
-      document.querySelectorAll("[data-preset]").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          applyPreset(e.target.dataset.preset);
-        });
+      // Preset dropdown
+      document.getElementById("preset-select").addEventListener("change", (e) => {
+        applyPreset(e.target.value);
       });
 
       // Copy button

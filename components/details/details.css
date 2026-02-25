@@ -4,6 +4,7 @@
   border: var(--mdst-border-width) solid var(--mdst-color-border);
   border-radius: var(--mdst-radius);
   background: var(--mdst-color-bg);
+  overflow: hidden;
 }
 
 .mdst-details summary {
@@ -23,15 +24,20 @@
 }
 
 .mdst-details summary::before {
-  content: "▸";
+  content: "";
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  line-height:0;
   width: 1em;
   height: 1em;
   flex-shrink: 0;
-  transform-origin: center center;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
   transition: transform var(--mdst-transition);
 }
 
@@ -71,4 +77,41 @@
 
 .mdst-details--compact[open]::details-content {
   padding: var(--mdst-space-sm) var(--mdst-space-md);
+}
+
+/* Section variant - collapsible header style */
+
+.mdst-details--section {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.mdst-details--section summary {
+  padding: var(--mdst-space-sm) 0;
+  font-size: var(--mdst-text-lg);
+  font-weight: 600;
+  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+}
+
+.mdst-details--section summary:hover {
+  background: transparent;
+  color: var(--mdst-color-muted);
+}
+
+.mdst-details--section summary::before {
+  order: 1;
+  margin-left: auto;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.mdst-details--section[open] summary {
+  border-bottom-color: transparent;
+}
+
+.mdst-details--section[open]::details-content {
+  padding: var(--mdst-space-md) 0;
+  border-top: none;
+  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
 }
