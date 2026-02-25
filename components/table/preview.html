@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="table.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        padding: var(--mdst-space-md);
+      }
+
+      .section {
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Basic Table</div>
+      <table class="mdst-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>--mdst-color-fg</td>
+            <td>Color</td>
+            <td>Foreground / text color</td>
+          </tr>
+          <tr>
+            <td>--mdst-color-bg</td>
+            <td>Color</td>
+            <td>Background color</td>
+          </tr>
+          <tr>
+            <td>--mdst-color-border</td>
+            <td>Color</td>
+            <td>Border color</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Bordered Variant</div>
+      <table class="mdst-table mdst-table--bordered">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>.mdst-button</code></td>
+            <td>Default button style</td>
+          </tr>
+          <tr>
+            <td><code>--solid</code></td>
+            <td>Filled button variant</td>
+          </tr>
+          <tr>
+            <td><code>--ghost</code></td>
+            <td>Borderless button variant</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Striped Variant</div>
+      <table class="mdst-table mdst-table--striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>radius</td>
+            <td>0</td>
+            <td>Border radius for components</td>
+          </tr>
+          <tr>
+            <td>border-width</td>
+            <td>1px</td>
+            <td>Default border thickness</td>
+          </tr>
+          <tr>
+            <td>transition</td>
+            <td>150ms</td>
+            <td>Animation duration</td>
+          </tr>
+          <tr>
+            <td>line-height</td>
+            <td>1.5</td>
+            <td>Default line height</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Compact Variant</div>
+      <table class="mdst-table mdst-table--compact">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>--sm</td>
+            <td>Small</td>
+          </tr>
+          <tr>
+            <td>default</td>
+            <td>Default</td>
+          </tr>
+          <tr>
+            <td>--lg</td>
+            <td>Large</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Combined Variants</div>
+      <table class="mdst-table mdst-table--bordered mdst-table--striped mdst-table--compact">
+        <thead>
+          <tr>
+            <th>Variant</th>
+            <th>Class</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bordered</td>
+            <td><code>--bordered</code></td>
+          </tr>
+          <tr>
+            <td>Striped</td>
+            <td><code>--striped</code></td>
+          </tr>
+          <tr>
+            <td>Compact</td>
+            <td><code>--compact</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

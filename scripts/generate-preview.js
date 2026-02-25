@@ -47,7 +47,9 @@ async function getComponents() {
 }
 
 function generateLinks(components) {
-  return components.map((c) => `          <a href="#${c.slug}" class="sidebar-link" data-component="${c.slug}">${c.title}</a>`).join("\n");
+  return components
+    .map((c) => `            <a href="#${c.slug}" class="sidebar-link" data-component="${c.slug}">${c.title}</a>`)
+    .join("\n");
 }
 
 async function updateIndexHtml(components) {
