@@ -378,8 +378,8 @@ textarea.mdst-input {
 }
 
 .mdst-otp-digit {
-  width: 2.5em;
-  height: 3em;
+  width: 1.5em;
+  height: 2em;
   padding: 0;
   border: var(--mdst-border-width) solid var(--mdst-color-border);
   border-radius: var(--mdst-radius);
