@@ -211,7 +211,9 @@
 
       .github-link {
         margin-top: auto;
-
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         padding: var(--mdst-space-md) var(--mdst-space-sm);
         border-top: 0.0625em solid var(--mdst-color-border);
       }
@@ -224,6 +226,11 @@
 
       .github-link a:hover {
         color: var(--mdst-color-fg);
+      }
+
+      .version {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
       }
 
       .logo {
@@ -359,7 +366,7 @@
             <a href="#table" class="sidebar-link" data-component="table">Table</a>
             <a href="#tooltip" class="sidebar-link" data-component="tooltip">Tooltip</a>
             <a href="#typography" class="sidebar-link" data-component="typography">Typography</a>
-<!-- COMPONENTS_LIST_END -->
+            <!-- COMPONENTS_LIST_END -->
           </nav>
           <div class="github-link">
             <a href="https://github.com/thisismodest/modest-ui" aria-label="GitHub">
@@ -370,6 +377,7 @@
                 ></path>
               </svg>
             </a>
+            <span class="version">v0.1.0</span>
           </div>
         </div>
       </details>
@@ -392,6 +400,7 @@
       const title = document.getElementById("component-title");
       const componentClass = document.getElementById("component-class");
 
+      /* CLASSNAMES_START */
       const classNames = {
         button: ".mdst-button",
         checkbox: ".mdst-checkbox",
@@ -401,7 +410,7 @@
         dialog: ".mdst-dialog",
         dropdown: ".mdst-dropdown",
         input: ".mdst-input",
-        "otp-input": ".mdst-otp",
+        "otp-input": ".mdst-otp-input",
         popover: ".mdst-popover",
         pre: ".mdst-pre",
         radio: ".mdst-radio",
@@ -410,6 +419,7 @@
         tooltip: ".mdst-tooltip",
         typography: ".mdst-*",
       };
+      /* CLASSNAMES_END */
       const sidebar = document.getElementById("sidebar");
       const sidebarOverlay = document.getElementById("sidebar-overlay");
 

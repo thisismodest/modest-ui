@@ -10,7 +10,7 @@
  * Usage:
  *   import { createOTPInput } from 'modest-ui/components/otp-input/otp-input.js';
  *
- *   const otp = createOTPInput(document.querySelector('.mdst-otp'), {
+ *   const otp = createOTPInput(document.querySelector('.mdst-otp-input'), {
  *     onComplete: (code) => console.log('Code entered:', code),
  *     onChange: (code) => console.log('Current value:', code),
  *   });
@@ -26,10 +26,10 @@
 export function createOTPInput(container, options = {}) {
   const { onComplete = () => {}, onChange = () => {} } = options;
 
-  const inputs = Array.from(container.querySelectorAll(".mdst-otp-digit"));
+  const inputs = Array.from(container.querySelectorAll(".mdst-otp-input-digit"));
 
   if (inputs.length === 0) {
-    console.warn("createOTPInput: No .mdst-otp-digit elements found");
+    console.warn("createOTPInput: No .mdst-otp-input-digit elements found");
     return null;
   }
 
