@@ -23,6 +23,7 @@
   --mdst-text-xl: 1.25rem;
 
   /* Spacing */
+  --mdst-space-px: 0.0625rem;
   --mdst-space-1: 0.25rem;
   --mdst-space-2: 0.5rem;
   --mdst-space-3: 0.75rem;
