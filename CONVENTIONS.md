@@ -117,66 +117,23 @@ Each component's `preview.html` should follow this structure:
 ```html
 <link rel="stylesheet" href="../../base/tokens.css" />
 <link rel="stylesheet" href="../../base/reset.css" />
-<link rel="stylesheet" href="my-component.css" />
+<link rel="stylesheet" href="../../base/preview.css" />
 <link rel="stylesheet" href="../table/table.css" />
 <link rel="stylesheet" href="../pre/pre.css" />
 <link rel="stylesheet" href="../code/code.css" />
+<link rel="stylesheet" href="my-component.css" />
 ```
 
-### Page Styles
+The `preview.css` file provides all the standard preview page styles (body, `.section`, `.section-header`, `.class-name`, `.examples`, `.footnote`, `.code-section`, etc.). Import the component's own CSS file last.
 
-Include these standard styles in your preview:
+### Component-Specific Styles
+
+If your component preview needs additional styles (e.g., constraining input widths in tables), add a minimal `<style>` block:
 
 ```html
 <style>
-  body {
-    font-family: var(--mdst-font-sans);
-    padding: var(--mdst-space-md);
-  }
-
-  .section {
-    margin-bottom: var(--mdst-space-lg);
-  }
-
-  .section-header {
-    font-size: var(--mdst-text-sm);
-    font-weight: 600;
-    color: var(--mdst-color-fg);
-    margin-bottom: var(--mdst-space-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .class-name {
-    font-family: var(--mdst-font-mono);
-    font-size: var(--mdst-text-sm);
-    color: var(--mdst-color-fg);
-    background: var(--mdst-color-subtle);
-    padding: 0.125em 0.375em;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-
-  .class-name .dim {
-    opacity: 0.4;
-  }
-
-  .mdst-table th:first-child,
-  .mdst-table td:first-child {
-    width: 50%;
-  }
-
-  .code-section {
-    margin-top: var(--mdst-space-lg);
-  }
-
-  .code-section-header {
-    font-size: var(--mdst-text-sm);
-    font-weight: 600;
-    color: var(--mdst-color-fg);
-    margin-bottom: var(--mdst-space-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .mdst-table input {
+    max-width: 16rem;
   }
 </style>
 ```
@@ -245,18 +202,25 @@ End each preview with a usage section:
 ## Scripts
 
 - `npm run dev` - Start local server at http://localhost:8000
-- `npm run generate` - Scan components and update sidebar in index.html
+- `npm run generate` - Scan components and update sidebar + classNames in index.html
 - `npm run build` - Bundle all CSS into dist/modest-ui.css
 
-## Adding to index.html
+## Adding a New Component
 
-When adding a new component, also add its class name to the `classNames` object in `index.html`:
+1. Create the component folder with CSS and preview.html (see Component Structure above)
+2. Add the import to `index.css`
+3. Run `npm run generate` — this automatically updates:
+   - The sidebar links in `index.html`
+   - The `classNames` object used for displaying the class in the header
+
+### Class Name Convention
+
+By default, the generate script derives class names using `.mdst-{slug}` (e.g., `button` → `.mdst-button`).
+
+For components that don't follow this convention, add an override in `scripts/generate-preview.js`:
 
 ```javascript
-const classNames = {
-  // ...existing components
-  "my-component": ".mdst-my-component",
+const classOverrides = {
+  typography: ".mdst-*",
 };
 ```
-
-This displays the main class in the header when viewing the component.

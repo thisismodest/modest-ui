@@ -9,6 +9,11 @@ const ROOT = join(__dirname, "..");
 const COMPONENTS_DIR = join(ROOT, "components");
 const INDEX_HTML = join(ROOT, "index.html");
 
+// Override map for components that don't follow the .mdst-{slug} convention
+const classOverrides = {
+  typography: ".mdst-*",
+};
+
 function toTitleCase(str) {
   // Handle special acronyms
   const acronyms = ["otp", "url", "api", "css", "html", "json"];
@@ -24,6 +29,11 @@ function toTitleCase(str) {
     .join(" ");
 }
 
+function getClassName(slug) {
+  // Use override if exists, otherwise derive from convention
+  return classOverrides[slug] || `.mdst-${slug}`;
+}
+
 async function getComponents() {
   const entries = await readdir(COMPONENTS_DIR, { withFileTypes: true });
   const components = [];
@@ -36,6 +46,7 @@ async function getComponents() {
         components.push({
           slug: entry.name,
           title: toTitleCase(entry.name),
+          className: getClassName(entry.name),
         });
       } catch {
         // No preview.html, skip
@@ -52,30 +63,62 @@ function generateLinks(components) {
     .join("\n");
 }
 
+function generateClassNames(components) {
+  const entries = components
+    .map((c) => {
+      // Quote the key if it contains a hyphen
+      const key = c.slug.includes("-") ? `"${c.slug}"` : c.slug;
+      return `        ${key}: "${c.className}",`;
+    })
+    .join("\n");
+
+  return `const classNames = {\n${entries}\n      };`;
+}
+
 async function updateIndexHtml(components) {
-  const html = await readFile(INDEX_HTML, "utf-8");
+  let html = await readFile(INDEX_HTML, "utf-8");
 
-  const startMarker = "<!-- COMPONENTS_LIST_START -->";
-  const endMarker = "<!-- COMPONENTS_LIST_END -->";
+  // Update component links
+  const linksStartMarker = "<!-- COMPONENTS_LIST_START -->";
+  const linksEndMarker = "<!-- COMPONENTS_LIST_END -->";
 
-  const startIndex = html.indexOf(startMarker);
-  const endIndex = html.indexOf(endMarker);
+  const linksStartIndex = html.indexOf(linksStartMarker);
+  const linksEndIndex = html.indexOf(linksEndMarker);
 
-  if (startIndex === -1 || endIndex === -1) {
+  if (linksStartIndex === -1 || linksEndIndex === -1) {
     console.error("Could not find component list markers in index.html");
     process.exit(1);
   }
 
-  const before = html.slice(0, startIndex + startMarker.length);
-  const after = html.slice(endIndex);
+  const beforeLinks = html.slice(0, linksStartIndex + linksStartMarker.length);
+  const afterLinks = html.slice(linksEndIndex);
   const links = generateLinks(components);
 
-  const newHtml = `${before}\n${links}\n${after}`;
+  html = `${beforeLinks}\n${links}\n${afterLinks}`;
 
-  await writeFile(INDEX_HTML, newHtml);
+  // Update classNames object
+  const classNamesStartMarker = "/* CLASSNAMES_START */";
+  const classNamesEndMarker = "/* CLASSNAMES_END */";
+
+  const classNamesStartIndex = html.indexOf(classNamesStartMarker);
+  const classNamesEndIndex = html.indexOf(classNamesEndMarker);
+
+  if (classNamesStartIndex === -1 || classNamesEndIndex === -1) {
+    console.error("Could not find classNames markers in index.html");
+    console.error("Add /* CLASSNAMES_START */ and /* CLASSNAMES_END */ markers around the classNames object");
+    process.exit(1);
+  }
+
+  const beforeClassNames = html.slice(0, classNamesStartIndex + classNamesStartMarker.length);
+  const afterClassNames = html.slice(classNamesEndIndex);
+  const classNamesObj = generateClassNames(components);
+
+  html = `${beforeClassNames}\n      ${classNamesObj}\n      ${afterClassNames}`;
+
+  await writeFile(INDEX_HTML, html);
 
   console.log(`Updated index.html with ${components.length} components:`);
-  components.forEach((c) => console.log(`  - ${c.title}`));
+  components.forEach((c) => console.log(`  - ${c.title} (${c.className})`));
 }
 
 async function main() {
