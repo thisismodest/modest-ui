@@ -177,11 +177,25 @@
       }
 
       .main-header {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-md);
         padding: var(--mdst-space-md);
         border-bottom: 0.0625em solid var(--mdst-color-border);
         font-size: var(--mdst-text-lg);
         font-weight: 600;
         background: var(--mdst-color-subtle);
+      }
+
+      .main-header-class {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        font-weight: 400;
+        color: var(--mdst-color-muted);
+        background: var(--mdst-color-bg);
+        padding: 0.125em 0.5em;
+        border-radius: 2px;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
       }
 
       .main-content {
@@ -329,21 +343,22 @@
             <a href="#theme" class="sidebar-link" data-page="theme">Theme Playground</a>
             <hr class="sidebar-separator" />
             <!-- COMPONENTS_LIST_START -->
-          <a href="#button" class="sidebar-link" data-component="button">Button</a>
-          <a href="#checkbox" class="sidebar-link" data-component="checkbox">Checkbox</a>
-          <a href="#code" class="sidebar-link" data-component="code">Code</a>
-          <a href="#color-picker" class="sidebar-link" data-component="color-picker">Color Picker</a>
-          <a href="#details" class="sidebar-link" data-component="details">Details</a>
-          <a href="#dialog" class="sidebar-link" data-component="dialog">Dialog</a>
-          <a href="#dropdown" class="sidebar-link" data-component="dropdown">Dropdown</a>
-          <a href="#input" class="sidebar-link" data-component="input">Input</a>
-          <a href="#otp-input" class="sidebar-link" data-component="otp-input">OTP Input</a>
-          <a href="#popover" class="sidebar-link" data-component="popover">Popover</a>
-          <a href="#pre" class="sidebar-link" data-component="pre">Pre</a>
-          <a href="#radio" class="sidebar-link" data-component="radio">Radio</a>
-          <a href="#range" class="sidebar-link" data-component="range">Range</a>
-          <a href="#tooltip" class="sidebar-link" data-component="tooltip">Tooltip</a>
-          <a href="#typography" class="sidebar-link" data-component="typography">Typography</a>
+            <a href="#button" class="sidebar-link" data-component="button">Button</a>
+            <a href="#checkbox" class="sidebar-link" data-component="checkbox">Checkbox</a>
+            <a href="#code" class="sidebar-link" data-component="code">Code</a>
+            <a href="#color-picker" class="sidebar-link" data-component="color-picker">Color Picker</a>
+            <a href="#details" class="sidebar-link" data-component="details">Details</a>
+            <a href="#dialog" class="sidebar-link" data-component="dialog">Dialog</a>
+            <a href="#dropdown" class="sidebar-link" data-component="dropdown">Dropdown</a>
+            <a href="#input" class="sidebar-link" data-component="input">Input</a>
+            <a href="#otp-input" class="sidebar-link" data-component="otp-input">OTP Input</a>
+            <a href="#popover" class="sidebar-link" data-component="popover">Popover</a>
+            <a href="#pre" class="sidebar-link" data-component="pre">Pre</a>
+            <a href="#radio" class="sidebar-link" data-component="radio">Radio</a>
+            <a href="#range" class="sidebar-link" data-component="range">Range</a>
+            <a href="#table" class="sidebar-link" data-component="table">Table</a>
+            <a href="#tooltip" class="sidebar-link" data-component="tooltip">Tooltip</a>
+            <a href="#typography" class="sidebar-link" data-component="typography">Typography</a>
 <!-- COMPONENTS_LIST_END -->
           </nav>
           <div class="github-link">
@@ -361,7 +376,10 @@
 
       <div class="sidebar-overlay" id="sidebar-overlay"></div>
       <main class="main">
-        <header class="main-header" id="component-title">Introduction</header>
+        <header class="main-header">
+          <span id="component-title">Introduction</span>
+          <span class="main-header-class" id="component-class" hidden></span>
+        </header>
         <div class="main-content">
           <iframe id="component-frame" src="pages/intro.html"></iframe>
         </div>
@@ -372,6 +390,26 @@
       const links = document.querySelectorAll(".sidebar-link");
       const frame = document.getElementById("component-frame");
       const title = document.getElementById("component-title");
+      const componentClass = document.getElementById("component-class");
+
+      const classNames = {
+        button: ".mdst-button",
+        checkbox: ".mdst-checkbox",
+        code: ".mdst-code",
+        "color-picker": ".mdst-color-picker",
+        details: ".mdst-details",
+        dialog: ".mdst-dialog",
+        dropdown: ".mdst-dropdown",
+        input: ".mdst-input",
+        "otp-input": ".mdst-otp",
+        popover: ".mdst-popover",
+        pre: ".mdst-pre",
+        radio: ".mdst-radio",
+        range: ".mdst-range",
+        table: ".mdst-table",
+        tooltip: ".mdst-tooltip",
+        typography: ".mdst-*",
+      };
       const sidebar = document.getElementById("sidebar");
       const sidebarOverlay = document.getElementById("sidebar-overlay");
 
@@ -390,6 +428,14 @@
         frame.src = isPage ? `pages/${slug}.html` : `components/${slug}/preview.html`;
         title.textContent = link.textContent;
         setActive(slug);
+
+        // Show class name for components
+        if (classNames[slug]) {
+          componentClass.textContent = classNames[slug];
+          componentClass.hidden = false;
+        } else {
+          componentClass.hidden = true;
+        }
       }
 
       function closeSidebar() {
