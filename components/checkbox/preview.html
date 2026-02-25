@@ -39,6 +39,10 @@
         white-space: nowrap;
       }
 
+      .class-name .dim {
+        opacity: 0.4;
+      }
+
       .code-section {
         margin-top: var(--mdst-space-lg);
       }
@@ -56,7 +60,7 @@
   <body>
     <div class="section">
       <div class="section-header">With Label</div>
-      <table class="mdst-table">
+      <table class="mdst-table mdst-table--stack">
         <thead>
           <tr>
             <th>Class</th>
@@ -65,7 +69,10 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="class-name">.mdst-checkbox-label</span> <span class="class-name">.mdst-checkbox</span></td>
+            <td>
+              <span class="class-name">.mdst-checkbox-label</span><br />
+              <span class="class-name">.mdst-checkbox</span>
+            </td>
             <td>
               <label class="mdst-checkbox-label">
                 <input type="checkbox" class="mdst-checkbox" />
@@ -106,7 +113,7 @@
 
     <div class="section">
       <div class="section-header">Standalone</div>
-      <table class="mdst-table">
+      <table class="mdst-table mdst-table--stack">
         <thead>
           <tr>
             <th>Class</th>
