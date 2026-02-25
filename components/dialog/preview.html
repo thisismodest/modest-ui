@@ -6,48 +6,169 @@
     <title>Dialog</title>
     <link rel="stylesheet" href="../../base/tokens.css" />
     <link rel="stylesheet" href="../../base/reset.css" />
-    <link rel="stylesheet" href="../button/button.css" />
     <link rel="stylesheet" href="dialog.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
     <style>
       body {
         font-family: var(--mdst-font-sans);
         padding: var(--mdst-space-md);
       }
 
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--mdst-space-sm);
-        align-items: center;
-        margin-bottom: var(--mdst-space-md);
+      .section {
+        margin-bottom: var(--mdst-space-lg);
       }
 
-      .label {
+      .section-header {
         font-size: var(--mdst-text-sm);
-        color: var(--mdst-color-muted);
-        margin-bottom: var(--mdst-space-xs);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .class-name {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        padding: 0.125em 0.375em;
+        border-radius: 2px;
+        white-space: nowrap;
+      }
+
+      .class-name .dim {
+        opacity: 0.4;
+      }
+
+      .mdst-table th:first-child,
+      .mdst-table td:first-child {
+        width: 50%;
+      }
+
+      .code-section {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .code-section-header {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+        margin-bottom: var(--mdst-space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     </style>
   </head>
   <body>
-    <div class="label">Modal Dialog</div>
-    <div class="row">
-      <button class="mdst-button" commandfor="modal-dialog" command="show-modal">
-        Open Modal Dialog
-      </button>
+    <div class="section">
+      <div class="section-header">Structure</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-dialog</span>
+            </td>
+            <td>Container, applied to <code class="mdst-code">&lt;dialog&gt;</code> element</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>-header</span>
+            </td>
+            <td>Header section with title and close button</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>-title</span>
+            </td>
+            <td>Dialog heading text</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>-close</span>
+            </td>
+            <td>Close button in header</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>-body</span>
+            </td>
+            <td>Main content area</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>-footer</span>
+            </td>
+            <td>Footer with action buttons</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="label">Size Variants</div>
-    <div class="row">
-      <button class="mdst-button mdst-button--ghost" commandfor="small-dialog" command="show-modal">
-        Small
-      </button>
-      <button class="mdst-button mdst-button--ghost" commandfor="large-dialog" command="show-modal">
-        Large
-      </button>
-      <button class="mdst-button mdst-button--ghost" commandfor="full-dialog" command="show-modal">
-        Full Width
-      </button>
+    <div class="section">
+      <div class="section-header">Sizes</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-dialog</span>
+            </td>
+            <td><button class="mdst-button" commandfor="modal-dialog" command="show-modal">Default (32rem)</button></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>--sm</span>
+            </td>
+            <td><button class="mdst-button" commandfor="small-dialog" command="show-modal">Small (24rem)</button></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>--lg</span>
+            </td>
+            <td><button class="mdst-button" commandfor="large-dialog" command="show-modal">Large (48rem)</button></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>--full</span>
+            </td>
+            <td><button class="mdst-button" commandfor="full-dialog" command="show-modal">Full Width (90vw)</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;dialog id="my-dialog" class="mdst-dialog"&gt;
+  &lt;div class="mdst-dialog-header"&gt;
+    &lt;h2 class="mdst-dialog-title"&gt;Dialog Title&lt;/h2&gt;
+    &lt;button class="mdst-dialog-close" commandfor="my-dialog" command="close"&gt;✕&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="mdst-dialog-body"&gt;
+    &lt;p&gt;Dialog content goes here.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="mdst-dialog-footer"&gt;
+    &lt;button class="mdst-button mdst-button--ghost" commandfor="my-dialog" command="close"&gt;Cancel&lt;/button&gt;
+    &lt;button class="mdst-button mdst-button--solid" commandfor="my-dialog" command="close"&gt;Confirm&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;
+
+&lt;button commandfor="my-dialog" command="show-modal"&gt;Open Dialog&lt;/button&gt;</code></pre>
     </div>
 
     <!-- Modal Dialog -->
