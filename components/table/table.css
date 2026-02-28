@@ -30,7 +30,7 @@
   padding: var(--mdst-space-md) var(--mdst-space-md) var(--mdst-space-md) 0;
   vertical-align: middle;
   border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .mdst-table td > .mdst-pre {
