@@ -1,0 +1,114 @@
+/* Table */
+
+.mdst-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.mdst-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: inherit;
+}
+
+.mdst-table th {
+  text-align: left;
+  font-size: var(--mdst-text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mdst-color-muted);
+  padding: var(--mdst-space-sm) var(--mdst-space-md) var(--mdst-space-sm) 0;
+  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+}
+
+.mdst-table th:last-child {
+  padding-right: 0;
+}
+
+.mdst-table td {
+  padding: var(--mdst-space-md) var(--mdst-space-md) var(--mdst-space-md) 0;
+  vertical-align: middle;
+  border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+  /*overflow: hidden;*/
+}
+
+.mdst-table td > .mdst-pre {
+  overflow-x: auto;
+}
+
+.mdst-table td:last-child {
+  padding-right: 0;
+}
+
+.mdst-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Variants */
+
+.mdst-table--bordered {
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+}
+
+.mdst-table--bordered th,
+.mdst-table--bordered td {
+  padding: var(--mdst-space-sm) var(--mdst-space-md);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+}
+
+.mdst-table--striped tbody tr:nth-child(odd) {
+  background: var(--mdst-color-subtle);
+}
+
+.mdst-table--compact th {
+  padding: var(--mdst-space-xs) var(--mdst-space-sm) var(--mdst-space-xs) 0;
+}
+
+.mdst-table--compact td {
+  padding: var(--mdst-space-sm) var(--mdst-space-sm) var(--mdst-space-sm) 0;
+}
+
+.mdst-table--compact th:last-child,
+.mdst-table--compact td:last-child {
+  padding-right: 0;
+}
+
+/* Fixed/Equal column widths */
+
+.mdst-table--fixed {
+  table-layout: fixed;
+}
+
+/* Stack variant - stacks rows on mobile */
+
+@media (max-width: 480px) {
+  .mdst-table--stack thead {
+    display: none;
+  }
+
+  .mdst-table--stack tbody,
+  .mdst-table--stack tr,
+  .mdst-table--stack td {
+    display: block;
+    width: 100%;
+  }
+
+  .mdst-table--stack tr {
+    padding: var(--mdst-space-md) 0;
+    border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+  }
+
+  .mdst-table--stack tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .mdst-table--stack td {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .mdst-table--stack td:first-child {
+    margin-bottom: var(--mdst-space-sm);
+  }
+}

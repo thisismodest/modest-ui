@@ -9,29 +9,17 @@ const ROOT = join(__dirname, "..");
 const COMPONENTS_DIR = join(ROOT, "components");
 const INDEX_HTML = join(ROOT, "index.html");
 
-// Override map for components that don't follow the .mdst-{slug} convention
-const classOverrides = {
-  typography: ".mdst-*",
-};
-
-function toTitleCase(str) {
-  // Handle special acronyms
-  const acronyms = ["otp", "url", "api", "css", "html", "json"];
-
-  return str
-    .split("-")
-    .map((word) => {
-      if (acronyms.includes(word.toLowerCase())) {
-        return word.toUpperCase();
-      }
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    })
-    .join(" ");
-}
-
-function getClassName(slug) {
-  // Use override if exists, otherwise derive from convention
-  return classOverrides[slug] || `.mdst-${slug}`;
+/**
+ * Load a component's config.js, returning null if it doesn't exist.
+ */
+async function loadComponentConfig(slug) {
+  try {
+    const configPath = join(COMPONENTS_DIR, slug, "config.js");
+    const config = await import(configPath);
+    return config.default;
+  } catch {
+    return null;
+  }
 }
 
 async function getComponents() {
@@ -39,19 +27,29 @@ async function getComponents() {
   const components = [];
 
   for (const entry of entries) {
-    if (entry.isDirectory()) {
-      // Check if preview.html exists
-      try {
-        await readFile(join(COMPONENTS_DIR, entry.name, "preview.html"));
-        components.push({
-          slug: entry.name,
-          title: toTitleCase(entry.name),
-          className: getClassName(entry.name),
-        });
-      } catch {
-        // No preview.html, skip
-      }
+    if (!entry.isDirectory()) continue;
+
+    const slug = entry.name;
+
+    // Check if preview.html exists
+    try {
+      await readFile(join(COMPONENTS_DIR, slug, "preview.html"));
+    } catch {
+      continue;
     }
+
+    // Load config (title, className) from config.js
+    const config = await loadComponentConfig(slug);
+    if (!config) {
+      console.warn(`  Warning: ${slug} has preview.html but no config.js — skipping`);
+      continue;
+    }
+
+    components.push({
+      slug,
+      title: config.title,
+      className: config.className,
+    });
   }
 
   return components.sort((a, b) => a.slug.localeCompare(b.slug));
@@ -126,7 +124,7 @@ async function main() {
     const components = await getComponents();
 
     if (components.length === 0) {
-      console.warn("No components found with preview.html");
+      console.warn("No components found with preview.html and config.js");
       return;
     }
 

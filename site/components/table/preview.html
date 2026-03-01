@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="table.css" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Basic Table</div>
+      <table class="mdst-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>--mdst-color-fg</td>
+            <td>Color</td>
+            <td>Foreground / text color</td>
+          </tr>
+          <tr>
+            <td>--mdst-color-bg</td>
+            <td>Color</td>
+            <td>Background color</td>
+          </tr>
+          <tr>
+            <td>--mdst-color-border</td>
+            <td>Color</td>
+            <td>Border color</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-table</span>--bordered</span>
+            </td>
+            <td>Adds borders to all cells</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-table</span>--striped</span>
+            </td>
+            <td>Alternating row backgrounds</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-table</span>--compact</span>
+            </td>
+            <td>Smaller cell padding</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-table</span>--fixed</span>
+            </td>
+            <td>Fixed column widths</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-table</span>--stack</span>
+            </td>
+            <td>Stacks rows vertically on mobile</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Scroll Wrapper</div>
+      <p style="color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-sm); font-size: var(--mdst-text-sm)">
+        Wrap tables in <span class="class-name">.mdst-table-wrap</span> for horizontal scrolling on overflow.
+      </p>
+      <div class="mdst-table-wrap">
+        <table class="mdst-table">
+          <thead>
+            <tr>
+              <th>Column 1</th>
+              <th>Column 2</th>
+              <th>Column 3</th>
+              <th>Column 4</th>
+              <th>Column 5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cell content</td>
+              <td>Cell content</td>
+              <td>Cell content</td>
+              <td>Cell content</td>
+              <td>Cell content</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Stack Variant (resize to see)</div>
+      <table class="mdst-table mdst-table--stack">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-button</span></td>
+            <td><button class="mdst-button">Default</button></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-button</span>--solid</span>
+            </td>
+            <td><button class="mdst-button mdst-button--solid">Solid</button></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-button</span>--ghost</span>
+            </td>
+            <td><button class="mdst-button mdst-button--ghost">Ghost</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Bordered Variant</div>
+      <div class="mdst-table-wrap">
+        <table class="mdst-table mdst-table--bordered">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>radius</td>
+              <td>0</td>
+              <td>Border radius for components</td>
+            </tr>
+            <tr>
+              <td>border-width</td>
+              <td>1px</td>
+              <td>Default border thickness</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Striped Variant</div>
+      <table class="mdst-table mdst-table--striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>transition</td>
+            <td>150ms</td>
+          </tr>
+          <tr>
+            <td>line-height</td>
+            <td>1.5</td>
+          </tr>
+          <tr>
+            <td>radius</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>border-width</td>
+            <td>1px</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Basic table --&gt;
+&lt;table class="mdst-table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Header&lt;/th&gt;
+      &lt;th&gt;Header&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Cell&lt;/td&gt;
+      &lt;td&gt;Cell&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- With scroll wrapper --&gt;
+&lt;div class="mdst-table-wrap"&gt;
+  &lt;table class="mdst-table"&gt;...&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;!-- Stack on mobile --&gt;
+&lt;table class="mdst-table mdst-table--stack"&gt;...&lt;/table&gt;
+
+&lt;!-- Combined variants --&gt;
+&lt;table class="mdst-table mdst-table--bordered mdst-table--striped"&gt;...&lt;/table&gt;</code></pre>
+    </div>
+  </body>
+</html>

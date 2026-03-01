@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Picker</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="color-picker.css" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Structure</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-color-picker</span>__input</span>
+            </td>
+            <td>
+              <div class="mdst-color-picker">
+                <input type="color" class="mdst-color-picker__input" value="#000000" />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-color-picker</span>__input</span><br />
+              <span class="class-name"><span class="dim">.mdst-color-picker</span>__text</span>
+            </td>
+            <td>
+              <div class="mdst-color-picker">
+                <input type="color" class="mdst-color-picker__input" value="#4A3F1F" />
+                <input type="text" class="mdst-color-picker__text" value="#4A3F1F" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-color-picker</span>--square</span>
+            </td>
+            <td>
+              <div class="mdst-color-picker mdst-color-picker--square">
+                <input type="color" class="mdst-color-picker__input" value="#F4E3C1" />
+                <input type="text" class="mdst-color-picker__text" value="#F4E3C1" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">disabled</span></td>
+            <td>
+              <div class="mdst-color-picker">
+                <input type="color" class="mdst-color-picker__input" value="#666666" disabled />
+                <input type="text" class="mdst-color-picker__text" value="#666666" disabled />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Color input only --&gt;
+&lt;div class="mdst-color-picker"&gt;
+  &lt;input type="color" class="mdst-color-picker__input" value="#000000" /&gt;
+&lt;/div&gt;
+
+&lt;!-- With text input --&gt;
+&lt;div class="mdst-color-picker"&gt;
+  &lt;input type="color" class="mdst-color-picker__input" value="#4A3F1F" /&gt;
+  &lt;input type="text" class="mdst-color-picker__text" value="#4A3F1F" /&gt;
+&lt;/div&gt;
+
+&lt;!-- Square variant --&gt;
+&lt;div class="mdst-color-picker mdst-color-picker--square"&gt;
+  &lt;input type="color" class="mdst-color-picker__input" value="#F4E3C1" /&gt;
+  &lt;input type="text" class="mdst-color-picker__text" value="#F4E3C1" /&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Input</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="otp-input.css" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Structure</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-otp-input</span><br />
+              <span class="class-name"><span class="dim">.mdst-otp-input</span>-digit</span>
+            </td>
+            <td>
+              <div class="mdst-otp-input" id="otp-basic">
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-otp-input</span>-separator</span>
+            </td>
+            <td>
+              <div class="mdst-otp-input" id="otp-separator">
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+                <span class="mdst-otp-input-separator"></span>
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" placeholder="0" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-otp-input</span>--error</span>
+            </td>
+            <td>
+              <div class="mdst-otp-input mdst-otp-input--error">
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" value="1" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" value="2" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" value="3" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" value="4" readonly />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-otp-input</span>--success</span>
+            </td>
+            <td>
+              <div class="mdst-otp-input mdst-otp-input--success">
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" value="1" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" value="2" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" value="3" readonly />
+                <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" value="4" readonly />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="footnote">
+      <strong>Note:</strong> This preview uses JavaScript to handle paste support and auto-advance to the next input. Without JS, the inputs
+      still work but require manual tabbing between fields.
+    </p>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- 4-digit code --&gt;
+&lt;div class="mdst-otp-input"&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" /&gt;
+&lt;/div&gt;
+
+&lt;!-- With separator --&gt;
+&lt;div class="mdst-otp-input"&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" /&gt;
+  &lt;span class="mdst-otp-input-separator"&gt;&lt;/span&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" /&gt;
+  &lt;input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric" /&gt;
+&lt;/div&gt;
+
+&lt;!-- Error state --&gt;
+&lt;div class="mdst-otp-input mdst-otp-input--error"&gt;...&lt;/div&gt;
+
+&lt;!-- Success state --&gt;
+&lt;div class="mdst-otp-input mdst-otp-input--success"&gt;...&lt;/div&gt;</code></pre>
+    </div>
+
+    <script type="module">
+      import { createOTPInput } from "./otp-input.js";
+
+      // Initialize only the interactive OTP inputs (not the readonly state examples)
+      ["otp-basic", "otp-separator"].forEach((id) => {
+        const container = document.getElementById(id);
+        if (container) {
+          createOTPInput(container, {
+            onComplete: (code) => console.log("OTP complete:", code),
+            onChange: (code) => console.log("OTP changed:", code),
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
