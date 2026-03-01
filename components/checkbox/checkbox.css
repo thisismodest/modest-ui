@@ -9,6 +9,7 @@
   margin: 0;
   background: var(--mdst-color-bg);
   border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: 0;
   cursor: pointer;
   position: relative;
   transition: border-color var(--mdst-transition);

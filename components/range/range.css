@@ -7,6 +7,7 @@
   height: var(--mdst-space-1);
   background: var(--mdst-color-border);
   border-radius: var(--mdst-space-1);
+  box-shadow: none;
   cursor: pointer;
   outline: none;
 }
@@ -32,6 +33,7 @@
   background: var(--mdst-color-bg);
   border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-border);
   border-radius: 50%;
+  box-shadow: none;
   cursor: pointer;
   transition: background var(--mdst-transition);
 }
