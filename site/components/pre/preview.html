@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pre</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="pre.css" />
+    <style>
+      .mdst-table {
+        table-layout: fixed;
+      }
+
+      .mdst-table .mdst-pre {
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-pre</span>
+            </td>
+            <td>
+              <pre class="mdst-pre">
+{
+  "name": "modest-ui",
+  "version": "0.1.0"
+}</pre
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-pre</span>--compact</span>
+            </td>
+            <td>
+              <pre class="mdst-pre mdst-pre--compact">npm install modest-ui</pre>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-pre</span>--borderless</span>
+            </td>
+            <td>
+              <pre class="mdst-pre mdst-pre--borderless">const x = 1;</pre>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-pre</span>--scroll</span>
+            </td>
+            <td>
+              <pre class="mdst-pre mdst-pre--scroll">This variant allows horizontal scrolling for long lines instead of wrapping text.</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Default (wraps text) --&gt;
+&lt;pre class="mdst-pre"&gt;{
+  "json": "content"
+}&lt;/pre&gt;
+
+&lt;!-- Compact --&gt;
+&lt;pre class="mdst-pre mdst-pre--compact"&gt;single line&lt;/pre&gt;
+
+&lt;!-- Borderless --&gt;
+&lt;pre class="mdst-pre mdst-pre--borderless"&gt;no border&lt;/pre&gt;
+
+&lt;!-- Horizontal scroll --&gt;
+&lt;pre class="mdst-pre mdst-pre--scroll"&gt;long content...&lt;/pre&gt;</code></pre>
+    </div>
+  </body>
+</html>

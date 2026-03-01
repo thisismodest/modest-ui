@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="details.css" />
+    <style>
+      .examples {
+        gap: var(--mdst-space-md);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-details</span>
+            </td>
+            <td>
+              <details class="mdst-details">
+                <summary>Click to expand</summary>
+                <p>This is the content inside the details element.</p>
+              </details>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-details</span>--borderless</span>
+            </td>
+            <td>
+              <details class="mdst-details mdst-details--borderless">
+                <summary>Borderless details</summary>
+                <p>This variant has no border for a cleaner look.</p>
+              </details>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-details</span>--compact</span>
+            </td>
+            <td>
+              <details class="mdst-details mdst-details--compact">
+                <summary>Compact details</summary>
+                <p>This variant uses less padding.</p>
+              </details>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-details</span>--section</span>
+            </td>
+            <td>
+              <details class="mdst-details mdst-details--section">
+                <summary>Section header style</summary>
+                <p>Ideal for collapsible page sections. Chevron on the right, underline style.</p>
+              </details>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">open</span>
+            </td>
+            <td>
+              <details class="mdst-details" open>
+                <summary>Open by default</summary>
+                <p>The details element has the "open" attribute.</p>
+              </details>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Examples</div>
+      <div class="examples">
+        <details class="mdst-details mdst-details--section" open>
+          <summary>Colors</summary>
+          <p>Configure your color palette including foreground, background, and accent colors.</p>
+        </details>
+        <details class="mdst-details mdst-details--section">
+          <summary>Typography</summary>
+          <p>Set up your font families, sizes, and line heights for consistent text styling.</p>
+        </details>
+        <details class="mdst-details mdst-details--section">
+          <summary>Spacing</summary>
+          <p>Define your spacing scale for margins, padding, and gaps throughout your design.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Basic details --&gt;
+&lt;details class="mdst-details"&gt;
+  &lt;summary&gt;Click to expand&lt;/summary&gt;
+  &lt;p&gt;Content goes here.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;!-- Open by default --&gt;
+&lt;details class="mdst-details" open&gt;
+  &lt;summary&gt;Already open&lt;/summary&gt;
+  &lt;p&gt;Content goes here.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;!-- Section variant --&gt;
+&lt;details class="mdst-details mdst-details--section"&gt;
+  &lt;summary&gt;Section Title&lt;/summary&gt;
+  &lt;p&gt;Content goes here.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+    </div>
+  </body>
+</html>

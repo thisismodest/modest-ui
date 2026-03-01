@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="input.css" />
+    <style>
+      .mdst-table input,
+      .mdst-table textarea {
+        max-width: 16rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Types</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-input</span>
+            </td>
+            <td>
+              <input type="text" class="mdst-input" placeholder="Text input" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-input</span> on <span class="class-name">&lt;textarea&gt;</span></td>
+            <td>
+              <textarea class="mdst-input" placeholder="Textarea"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">placeholder</span>
+            </td>
+            <td>
+              <input type="text" class="mdst-input" placeholder="Placeholder text" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">disabled</span>
+            </td>
+            <td>
+              <input type="text" class="mdst-input" placeholder="Disabled" disabled />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Text input --&gt;
+&lt;input type="text" class="mdst-input" placeholder="Enter text" /&gt;
+
+&lt;!-- Email input --&gt;
+&lt;input type="email" class="mdst-input" placeholder="you@example.com" /&gt;
+
+&lt;!-- Textarea --&gt;
+&lt;textarea class="mdst-input" placeholder="Write something..."&gt;&lt;/textarea&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;input type="text" class="mdst-input" disabled /&gt;</code></pre>
+    </div>
+  </body>
+</html>

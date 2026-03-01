@@ -16,7 +16,8 @@
   "scripts": {
     "dev": "python3 -m http.server 8000",
     "generate": "node scripts/generate-preview.js",
-    "build": "node scripts/build-bundle.js"
+    "build": "node scripts/build-bundle.js",
+    "build:site": "node scripts/build-site.js"
   },
   "keywords": [
     "css",

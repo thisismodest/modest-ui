@@ -1,0 +1,11 @@
+/* Code - Inline code snippets */
+
+.mdst-code {
+  font-family: var(--mdst-font-mono);
+  font-size: 0.875em;
+  background: var(--mdst-color-subtle);
+  border: 0.0625em solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  padding: 0.125em 0.375em;
+  word-break: break-word;
+}

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdown</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="dropdown.css" />
+    <style>
+      .mdst-table select {
+        max-width: 12rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-dropdown</span>
+            </td>
+            <td>
+              <select class="mdst-dropdown">
+                <option value="">Choose a fruit</option>
+                <optgroup label="Citrus">
+                  <option value="orange">Orange</option>
+                  <option value="lemon">Lemon</option>
+                </optgroup>
+                <optgroup label="Berries">
+                  <option value="strawberry">Strawberry</option>
+                  <option value="blueberry">Blueberry</option>
+                </optgroup>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dropdown</span>--ghost</span>
+            </td>
+            <td>
+              <select class="mdst-dropdown mdst-dropdown--ghost">
+                <option value="">Ghost variant</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dropdown</span>--inline</span>
+            </td>
+            <td>
+              Sort by
+              <select class="mdst-dropdown mdst-dropdown--inline mdst-dropdown--ghost">
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="popular">Most Popular</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Sizes</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dropdown</span>--sm</span>
+            </td>
+            <td>
+              <select class="mdst-dropdown mdst-dropdown--sm">
+                <option value="">Small</option>
+                <option value="1">Option 1</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-dropdown</span>
+            </td>
+            <td>
+              <select class="mdst-dropdown">
+                <option value="">Default</option>
+                <option value="1">Option 1</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-dropdown</span>--lg</span>
+            </td>
+            <td>
+              <select class="mdst-dropdown mdst-dropdown--lg">
+                <option value="">Large</option>
+                <option value="1">Option 1</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">disabled</span>
+            </td>
+            <td>
+              <select class="mdst-dropdown" disabled>
+                <option value="">Disabled</option>
+                <option value="1">Option 1</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Basic dropdown --&gt;
+&lt;select class="mdst-dropdown"&gt;
+  &lt;option value=""&gt;Select an option&lt;/option&gt;
+  &lt;option value="1"&gt;Option 1&lt;/option&gt;
+  &lt;option value="2"&gt;Option 2&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- With optgroups --&gt;
+&lt;select class="mdst-dropdown"&gt;
+  &lt;option value=""&gt;Choose a fruit&lt;/option&gt;
+  &lt;optgroup label="Citrus"&gt;
+    &lt;option value="orange"&gt;Orange&lt;/option&gt;
+    &lt;option value="lemon"&gt;Lemon&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="Berries"&gt;
+    &lt;option value="strawberry"&gt;Strawberry&lt;/option&gt;
+    &lt;option value="blueberry"&gt;Blueberry&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;
+
+&lt;!-- Inline usage --&gt;
+&lt;p&gt;Sort by
+  &lt;select class="mdst-dropdown mdst-dropdown--inline mdst-dropdown--ghost"&gt;
+    &lt;option value="newest"&gt;Newest&lt;/option&gt;
+    &lt;option value="oldest"&gt;Oldest&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/p&gt;</code></pre>
+    </div>
+  </body>
+</html>

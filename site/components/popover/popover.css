@@ -1,0 +1,42 @@
+/* Popover */
+
+.mdst-popover {
+  padding: var(--mdst-space-md);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+
+  /* Default: centered on page */
+  margin: auto;
+  position: fixed;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+}
+
+.mdst-popover:popover-open {
+  opacity: 1;
+}
+
+/* Anchored positioning - use with anchor="" HTML attribute */
+.mdst-popover--anchored {
+  position: absolute;
+  inset: unset;
+  margin: 0;
+  position-area: bottom;
+  margin-top: var(--mdst-space-xs);
+}
+
+/* Popover Variants */
+
+.mdst-popover--sm {
+  padding: var(--mdst-space-sm);
+  font-size: var(--mdst-text-sm);
+}
+
+.mdst-popover--lg {
+  padding: var(--mdst-space-lg);
+  max-width: 24rem;
+}
