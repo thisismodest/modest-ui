@@ -143,27 +143,36 @@ function buildSidebar(components, pages, activeSlug) {
   return `${pageLinks}\n            <hr class="sidebar-separator" />\n${componentLinks}`;
 }
 
+/**
+ * Replace a slot marker in the template, matching it regardless of
+ * leading whitespace so the template can be freely indented.
+ */
+function replaceSlot(html, marker, value, all = false) {
+  const re = new RegExp(`[ \\t]*${marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, all ? "g" : "");
+  return html.replace(re, value);
+}
+
 function render(template, slots) {
   let html = template;
 
-  html = html.replaceAll("<!-- TITLE -->", slots.title);
-  html = html.replaceAll("<!-- DESCRIPTION -->", slots.description);
-  html = html.replaceAll("<!-- CANONICAL -->", slots.canonical);
-  html = html.replaceAll("<!-- VERSION -->", siteConfig.version);
-  html = html.replace("<!-- DISPLAY_TITLE -->", slots.displayTitle);
-  html = html.replace("<!-- SIDEBAR -->", slots.sidebar);
-  html = html.replace("<!-- CONTENT -->", slots.content);
+  html = replaceSlot(html, "<!-- TITLE -->", slots.title, true);
+  html = replaceSlot(html, "<!-- DESCRIPTION -->", slots.description, true);
+  html = replaceSlot(html, "<!-- CANONICAL -->", slots.canonical, true);
+  html = replaceSlot(html, "<!-- VERSION -->", siteConfig.version, true);
+  html = replaceSlot(html, "<!-- DISPLAY_TITLE -->", slots.displayTitle);
+  html = replaceSlot(html, "<!-- SIDEBAR -->", slots.sidebar);
+  html = replaceSlot(html, "<!-- CONTENT -->", slots.content);
 
   // Class name badge (optional)
   const classNameHtml = slots.className ? `          <span class="main-header-class">${slots.className}</span>` : "";
-  html = html.replace("<!-- CLASS_NAME -->", classNameHtml);
+  html = replaceSlot(html, "<!-- CLASS_NAME -->", classNameHtml);
 
   // Extra <style> blocks from the source page's <head>
-  html = html.replace("<!-- HEAD_EXTRA -->", slots.headExtra || "");
+  html = replaceSlot(html, "<!-- HEAD_EXTRA -->", slots.headExtra || "");
 
   // Extra <script> blocks from the source page's <body>
   const scriptsHtml = slots.scripts.length ? slots.scripts.map((s) => `    ${s}`).join("\n") : "";
-  html = html.replace("<!-- SCRIPTS -->", scriptsHtml);
+  html = replaceSlot(html, "<!-- SCRIPTS -->", scriptsHtml);
 
   return html;
 }
