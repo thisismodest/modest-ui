@@ -61,10 +61,3 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-
-/* Table adjustments for previews */
-
-.mdst-table th:first-child,
-.mdst-table td:first-child {
-  width: 50%;
-}
