@@ -306,6 +306,38 @@
             <p>This is the expandable content inside the details element.</p>
           </details>
         </div>
+        <div class="preview-row">
+          <span class="mdst-tag">Default</span>
+          <span class="mdst-tag mdst-tag--solid">Solid</span>
+          <span class="mdst-tag mdst-tag--subtle">Subtle</span>
+          <span class="mdst-tag mdst-tag--success mdst-tag--pill">Active</span>
+          <span class="mdst-tag mdst-tag--error mdst-tag--solid mdst-tag--pill">Outage</span>
+          <span class="mdst-tag mdst-tag--muted mdst-tag--sm">Meta</span>
+          <span class="mdst-tag mdst-tag--subtle">Dismiss <button class="mdst-tag-dismiss" aria-label="Remove">&times;</button></span>
+        </div>
+        <div class="preview-row" style="align-items: flex-start">
+          <div class="mdst-card" style="max-width: 220px; flex: 1">
+            <div class="mdst-card-header">Card Title</div>
+            <div class="mdst-card-body">
+              <p style="margin: 0; font-size: var(--mdst-text-sm)">Body content with header and footer.</p>
+            </div>
+            <div class="mdst-card-footer" style="display: flex; gap: var(--mdst-space-sm)">
+              <button class="mdst-button mdst-button--solid mdst-button--sm">Action</button>
+              <button class="mdst-button mdst-button--ghost mdst-button--sm">Cancel</button>
+            </div>
+          </div>
+          <div class="mdst-card mdst-card--interactive" style="max-width: 220px; flex: 1">
+            <div class="mdst-card-body">
+              <p style="margin: 0; font-size: var(--mdst-text-sm)">Interactive card — hover to preview.</p>
+            </div>
+          </div>
+          <div class="mdst-card mdst-card--compact" style="max-width: 220px; flex: 1">
+            <div class="mdst-card-body">
+              <p style="margin: 0; font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Status</p>
+              <p style="margin: var(--mdst-space-xs) 0 0; font-weight: 600">All systems operational</p>
+            </div>
+          </div>
+        </div>
         <h3 style="margin-top: var(--mdst-space-md); margin-bottom: var(--mdst-space-sm)">States</h3>
         <div class="preview-row">
           <div class="mdst-otp-input mdst-otp-input--error">

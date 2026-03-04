@@ -264,7 +264,7 @@ function generateRobotsTxt() {
 // ---------------------------------------------------------------------------
 
 async function copyStaticAssets() {
-  const assets = ["favicon.svg", "index.css", "base", "components", "dist"];
+  const assets = ["favicon.svg", "index.css", "base", "components", "dist", "llms.txt"];
 
   for (const asset of assets) {
     try {
