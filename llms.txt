@@ -49,6 +49,14 @@ Override these CSS custom properties on `:root` to theme the entire library.
 | --mdst-color-error   | #dc2626  |
 | --mdst-color-success | #16a34a  |
 
+### Button hover
+
+| Token                      | Value                |
+| -------------------------- | -------------------- |
+| --mdst-button-hover-bg     | var(--mdst-color-fg) |
+| --mdst-button-hover-color  | var(--mdst-color-bg) |
+| --mdst-button-hover-border | var(--mdst-color-fg) |
+
 ### Typography
 
 | Token              | Value                                                                        |
@@ -99,10 +107,10 @@ Override these CSS custom properties on `:root` to theme the entire library.
 
 ### Transitions
 
-| Token                  | Value      |
-| ---------------------- | ---------- |
-| --mdst-transition-fast | 100ms ease |
-| --mdst-transition      | 150ms ease |
+| Token                  | Value          |
+| ---------------------- | -------------- |
+| --mdst-transition-fast | 50ms ease-out  |
+| --mdst-transition      | 100ms ease-out |
 
 ---
 
@@ -112,18 +120,18 @@ Override these CSS custom properties on `:root` to theme the entire library.
 
 ### Button `.mdst-button`
 
-Button component with solid, ghost, and outline variants in multiple sizes.
+Button component with inverted, ghost, and outline variants in multiple sizes.
 
 Classes:
 - `.mdst-button`
 - `.mdst-button--ghost`
+- `.mdst-button--inverted`
 - `.mdst-button--lg`
 - `.mdst-button--sm`
-- `.mdst-button--solid`
 
 ```html
 <button class="mdst-button">Default</button>
-<button class="mdst-button mdst-button--solid">Solid</button>
+<button class="mdst-button mdst-button--inverted">Inverted</button>
 <button class="mdst-button mdst-button--ghost">Ghost</button>
 <button class="mdst-button mdst-button--sm">Small</button>
 <button class="mdst-button mdst-button--lg">Large</button>
@@ -308,7 +316,7 @@ Classes:
   </div>
   <div class="mdst-dialog-footer">
     <button class="mdst-button mdst-button--ghost" commandfor="my-dialog" command="close">Cancel</button>
-    <button class="mdst-button mdst-button--solid" commandfor="my-dialog" command="close">Confirm</button>
+    <button class="mdst-button mdst-button--inverted" commandfor="my-dialog" command="close">Confirm</button>
   </div>
 </dialog>
 
@@ -768,8 +776,8 @@ Classes:
   --mdst-space-8: 2rem;
   --mdst-radius: 0;
   --mdst-border-width: 0.0625em;
-  --mdst-transition-fast: 100ms ease;
-  --mdst-transition: 150ms ease;
+  --mdst-transition-fast: 50ms ease-out;
+  --mdst-transition: 100ms ease-out;
 }
 ```
 
@@ -777,7 +785,7 @@ Classes:
 
 ## Quick Class Reference
 
-Button:         .mdst-button  |  --ghost  --lg  --sm  --solid
+Button:         .mdst-button  |  --ghost  --inverted  --lg  --sm
 Card:           .mdst-card  +  -body  -footer  -header  |  --borderless  --compact  --flush  --interactive
 Checkbox:       .mdst-checkbox  +  -label
 Code:           .mdst-code

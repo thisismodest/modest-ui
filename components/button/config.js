@@ -1,6 +1,5 @@
 export default {
   title: "Button",
   className: ".mdst-button",
-  description:
-    "Button component with solid, ghost, and outline variants in multiple sizes.",
+  description: "Button component with inverted, ghost, and outline variants in multiple sizes.",
 };
