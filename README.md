@@ -15,7 +15,7 @@ npm install github:thisismodest/modest-ui
 Use the pre-bundled CSS file that contains all styles:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@main/dist/modest-ui.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.1/dist/modest-ui.css" />
 ```
 
 Or with a bundler:
@@ -95,6 +95,39 @@ npm run build     # Bundles CSS to dist/
 ```
 
 See [CONVENTIONS.md](CONVENTIONS.md) for component and preview formatting guidelines.
+
+### Releasing a new version
+
+The version in `package.json` is the single source of truth. Running `npm run build` propagates it everywhere — the site, this README, CDN links, and `llms.txt`.
+
+1. Bump the version in `package.json`:
+
+```bash
+npm version patch  # or minor / major
+```
+
+2. Rebuild everything:
+
+```bash
+npm run build
+```
+
+3. Commit and push:
+
+```bash
+git add -A
+git commit -m "release vX.Y.Z"
+git push origin main
+```
+
+4. Tag the release:
+
+```bash
+git tag vX.Y.Z
+git push origin vX.Y.Z
+```
+
+The tag is what jsDelivr resolves against, so this step is required for the CDN to serve the new version.
 
 ## License
 
