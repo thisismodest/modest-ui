@@ -686,6 +686,7 @@ Classes:
 - `.mdst-small`
 - `.mdst-strong`
 - `.mdst-ul`
+- `.mdst-hr--flush`
 - `.mdst-p--lg`
 - `.mdst-p--muted`
 - `.mdst-p--sm`
@@ -802,5 +803,5 @@ Range:          .mdst-range
 Table:          .mdst-table  +  -wrap  |  --bordered  --compact  --fixed  --stack  --striped
 Tag:            .mdst-tag  +  -dismiss  |  --error  --ghost  --interactive  --lg  --muted  --pill  --sm  --solid  --subtle  --success
 Tooltip:        .mdst-tooltip
-Typography:     .mdst-a  .mdst-blockquote  .mdst-em  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-small  .mdst-strong  .mdst-ul  |  --lg  --muted  --sm  --unstyled
+Typography:     .mdst-a  .mdst-blockquote  .mdst-em  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-small  .mdst-strong  .mdst-ul  |  --flush  --lg  --muted  --sm  --unstyled
 Utilities:      .mdst-mono  .mdst-muted  .mdst-sr-only  .mdst-truncate

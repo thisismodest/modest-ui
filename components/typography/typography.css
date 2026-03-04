@@ -118,6 +118,10 @@
   margin: var(--mdst-space-lg) 0;
 }
 
+.mdst-hr--flush {
+  margin: 0;
+}
+
 /* Lists */
 
 .mdst-ul,
