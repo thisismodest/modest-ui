@@ -3,11 +3,13 @@
 import { readdir, readFile, writeFile } from "fs/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import siteConfig from "../site.config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const COMPONENTS_DIR = join(ROOT, "components");
 const INDEX_HTML = join(ROOT, "index.html");
+const README_PATH = join(ROOT, "README.md");
 
 /**
  * Load a component's config.js, returning null if it doesn't exist.
@@ -113,10 +115,28 @@ async function updateIndexHtml(components) {
 
   html = `${beforeClassNames}\n      ${classNamesObj}\n      ${afterClassNames}`;
 
+  // Stamp version between markers
+  const versionStartMarker = "<!-- VERSION_START -->";
+  const versionEndMarker = "<!-- VERSION_END -->";
+  const versionStartIndex = html.indexOf(versionStartMarker);
+  const versionEndIndex = html.indexOf(versionEndMarker);
+
+  if (versionStartIndex !== -1 && versionEndIndex !== -1) {
+    const beforeVersion = html.slice(0, versionStartIndex + versionStartMarker.length);
+    const afterVersion = html.slice(versionEndIndex);
+    html = `${beforeVersion}v${siteConfig.version}${afterVersion}`;
+  }
+
   await writeFile(INDEX_HTML, html);
 
   console.log(`Updated index.html with ${components.length} components:`);
   components.forEach((c) => console.log(`  - ${c.title} (${c.className})`));
+}
+
+async function updateReadmeCdnUrl() {
+  let readme = await readFile(README_PATH, "utf-8");
+  readme = readme.replace(/modest-ui@v[^/]+/g, `modest-ui@v${siteConfig.version}`);
+  await writeFile(README_PATH, readme);
 }
 
 async function main() {
@@ -129,6 +149,7 @@ async function main() {
     }
 
     await updateIndexHtml(components);
+    await updateReadmeCdnUrl();
   } catch (err) {
     console.error("Error:", err.message);
     process.exit(1);

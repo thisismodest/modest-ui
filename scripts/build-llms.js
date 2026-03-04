@@ -362,7 +362,7 @@ async function main() {
 ## Installation
 
 CDN:
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@main/dist/modest-ui.css" />
+  <link rel="stylesheet" href="${siteConfig.cdnUrl}" />
 
 npm:
   npm install github:thisismodest/modest-ui

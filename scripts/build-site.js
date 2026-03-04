@@ -174,6 +174,9 @@ function render(template, slots) {
   const scriptsHtml = slots.scripts.length ? slots.scripts.map((s) => `    ${s}`).join("\n") : "";
   html = replaceSlot(html, "<!-- SCRIPTS -->", scriptsHtml);
 
+  // Replace CDN_URL last so it resolves inside injected content (e.g. intro page)
+  html = replaceSlot(html, "<!-- CDN_URL -->", siteConfig.cdnUrl, true);
+
   return html;
 }
 
