@@ -10,6 +10,11 @@
   --mdst-color-error: #dc2626;
   --mdst-color-success: #16a34a;
 
+  /* Button hover */
+  --mdst-button-hover-bg: var(--mdst-color-fg);
+  --mdst-button-hover-color: var(--mdst-color-bg);
+  --mdst-button-hover-border: var(--mdst-color-fg);
+
   /* Typography */
   --mdst-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
@@ -44,6 +49,6 @@
   --mdst-border-width: 0.0625em;
 
   /* Transitions */
-  --mdst-transition-fast: 100ms ease;
-  --mdst-transition: 150ms ease;
+  --mdst-transition-fast: 50ms ease-out;
+  --mdst-transition: 100ms ease-out;
 }

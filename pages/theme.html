@@ -153,6 +153,9 @@
           --mdst-color-focus: #000000;
           --mdst-color-error: #dc2626;
           --mdst-color-success: #16a34a;
+          --mdst-button-hover-bg: #000000;
+          --mdst-button-hover-color: #ffffff;
+          --mdst-button-hover-border: #000000;
           --mdst-radius: 0;
           --mdst-border-width: 1;
         }</pre
@@ -243,6 +246,30 @@
             <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-success" value="#16a34a" />
           </div>
         </div>
+
+        <div class="control-group">
+          <label>Button Hover BG <code>--mdst-button-hover-bg</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-button-hover-bg" value="#000000" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-button-hover-bg" value="#000000" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Button Hover Text <code>--mdst-button-hover-color</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-button-hover-color" value="#ffffff" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-button-hover-color" value="#ffffff" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Button Hover Border <code>--mdst-button-hover-border</code></label>
+          <div class="mdst-color-picker">
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-button-hover-border" value="#000000" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-button-hover-border" value="#000000" />
+          </div>
+        </div>
       </div>
     </details>
 
@@ -273,7 +300,7 @@
         <h3>Components</h3>
         <div class="preview-row">
           <button class="mdst-button">Default</button>
-          <button class="mdst-button mdst-button--solid">Solid</button>
+          <button class="mdst-button mdst-button--inverted">Inverted</button>
           <button class="mdst-button mdst-button--ghost">Ghost</button>
           <button class="mdst-button" disabled>Disabled</button>
         </div>
@@ -322,7 +349,7 @@
               <p style="margin: 0; font-size: var(--mdst-text-sm)">Body content with header and footer.</p>
             </div>
             <div class="mdst-card-footer" style="display: flex; gap: var(--mdst-space-sm)">
-              <button class="mdst-button mdst-button--solid mdst-button--sm">Action</button>
+              <button class="mdst-button mdst-button--inverted mdst-button--sm">Action</button>
               <button class="mdst-button mdst-button--ghost mdst-button--sm">Cancel</button>
             </div>
           </div>
@@ -371,6 +398,9 @@
           "--mdst-color-focus": "#000000",
           "--mdst-color-error": "#dc2626",
           "--mdst-color-success": "#16a34a",
+          "--mdst-button-hover-bg": "#000000",
+          "--mdst-button-hover-color": "#ffffff",
+          "--mdst-button-hover-border": "#000000",
           "--mdst-radius": "0",
           "--mdst-border-width": "1",
         },
@@ -383,6 +413,9 @@
           "--mdst-color-focus": "#ffffff",
           "--mdst-color-error": "#f87171",
           "--mdst-color-success": "#4ade80",
+          "--mdst-button-hover-bg": "#ffffff",
+          "--mdst-button-hover-color": "#1a1a1a",
+          "--mdst-button-hover-border": "#ffffff",
           "--mdst-radius": "0",
           "--mdst-border-width": "1",
         },
@@ -395,6 +428,9 @@
           "--mdst-color-focus": "#3b82f6",
           "--mdst-color-error": "#ef4444",
           "--mdst-color-success": "#22c55e",
+          "--mdst-button-hover-bg": "#f9fafb",
+          "--mdst-button-hover-color": "#000000",
+          "--mdst-button-hover-border": "#000000",
           "--mdst-radius": "8",
           "--mdst-border-width": "1",
         },
@@ -407,6 +443,9 @@
           "--mdst-color-focus": "#2563eb",
           "--mdst-color-error": "#dc2626",
           "--mdst-color-success": "#16a34a",
+          "--mdst-button-hover-bg": "#1e3a5f",
+          "--mdst-button-hover-color": "#ffffff",
+          "--mdst-button-hover-border": "#1e3a5f",
           "--mdst-radius": "4",
           "--mdst-border-width": "1",
         },
@@ -419,6 +458,9 @@
           "--mdst-color-focus": "#ff0000",
           "--mdst-color-error": "#ff0000",
           "--mdst-color-success": "#00ff00",
+          "--mdst-button-hover-bg": "#000000",
+          "--mdst-button-hover-color": "#ffffff",
+          "--mdst-button-hover-border": "#000000",
           "--mdst-radius": "0",
           "--mdst-border-width": "3",
         },
@@ -431,6 +473,9 @@
           "--mdst-color-focus": "#c9ada7",
           "--mdst-color-error": "#e07a7a",
           "--mdst-color-success": "#7ab08e",
+          "--mdst-button-hover-bg": "#f0e6ef",
+          "--mdst-button-hover-color": "#5b4b8a",
+          "--mdst-button-hover-border": "#5b4b8a",
           "--mdst-radius": "12",
           "--mdst-border-width": "1.5",
         },
@@ -443,6 +488,9 @@
           "--mdst-color-focus": "#52017e",
           "--mdst-color-error": "#ff0000",
           "--mdst-color-success": "#00d5ff",
+          "--mdst-button-hover-bg": "#00EE00",
+          "--mdst-button-hover-color": "#0d0d0d",
+          "--mdst-button-hover-border": "#00EE00",
           "--mdst-radius": "0",
           "--mdst-border-width": "1",
         },
@@ -455,6 +503,9 @@
           "--mdst-color-focus": "#b08968",
           "--mdst-color-error": "#c44536",
           "--mdst-color-success": "#6b8f71",
+          "--mdst-button-hover-bg": "#f0e9df",
+          "--mdst-button-hover-color": "#3d2c29",
+          "--mdst-button-hover-border": "#3d2c29",
           "--mdst-radius": "4",
           "--mdst-border-width": "1",
         },
@@ -467,6 +518,9 @@
           "--mdst-color-focus": "#0000ff",
           "--mdst-color-error": "#ff0000",
           "--mdst-color-success": "#008000",
+          "--mdst-button-hover-bg": "#000000",
+          "--mdst-button-hover-color": "#ffffff",
+          "--mdst-button-hover-border": "#000000",
           "--mdst-radius": "0",
           "--mdst-border-width": "2",
         },

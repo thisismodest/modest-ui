@@ -16,14 +16,16 @@
   cursor: pointer;
   transition:
     background var(--mdst-transition),
-    color var(--mdst-transition);
+    color var(--mdst-transition),
+    border-color var(--mdst-transition);
   -webkit-appearance: none;
   appearance: none;
 }
 
 .mdst-button:hover {
-  background: var(--mdst-color-fg);
-  color: var(--mdst-color-bg);
+  background: var(--mdst-button-hover-bg);
+  color: var(--mdst-button-hover-color);
+  border-color: var(--mdst-button-hover-border);
 }
 
 .mdst-button:focus-visible {
@@ -39,6 +41,7 @@
 .mdst-button:disabled:hover {
   background: var(--mdst-color-bg);
   color: var(--mdst-color-fg);
+  border-color: var(--mdst-color-border);
 }
 
 /* Variants */
@@ -48,15 +51,15 @@
 }
 
 .mdst-button--ghost:hover {
-  border-color: var(--mdst-color-border);
+  border-color: var(--mdst-button-hover-border);
 }
 
-.mdst-button--solid {
+.mdst-button--inverted {
   background: var(--mdst-color-fg);
   color: var(--mdst-color-bg);
 }
 
-.mdst-button--solid:hover {
+.mdst-button--inverted:hover {
   background: var(--mdst-color-bg);
   color: var(--mdst-color-fg);
 }

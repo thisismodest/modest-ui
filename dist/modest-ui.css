@@ -18,6 +18,11 @@
   --mdst-color-error: #dc2626;
   --mdst-color-success: #16a34a;
 
+  /* Button hover */
+  --mdst-button-hover-bg: var(--mdst-color-fg);
+  --mdst-button-hover-color: var(--mdst-color-bg);
+  --mdst-button-hover-border: var(--mdst-color-fg);
+
   /* Typography */
   --mdst-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
@@ -52,8 +57,8 @@
   --mdst-border-width: 0.0625em;
 
   /* Transitions */
-  --mdst-transition-fast: 100ms ease;
-  --mdst-transition: 150ms ease;
+  --mdst-transition-fast: 50ms ease-out;
+  --mdst-transition: 100ms ease-out;
 }
 
 /*
@@ -123,14 +128,16 @@ h6 {
   cursor: pointer;
   transition:
     background var(--mdst-transition),
-    color var(--mdst-transition);
+    color var(--mdst-transition),
+    border-color var(--mdst-transition);
   -webkit-appearance: none;
   appearance: none;
 }
 
 .mdst-button:hover {
-  background: var(--mdst-color-fg);
-  color: var(--mdst-color-bg);
+  background: var(--mdst-button-hover-bg);
+  color: var(--mdst-button-hover-color);
+  border-color: var(--mdst-button-hover-border);
 }
 
 .mdst-button:focus-visible {
@@ -146,6 +153,7 @@ h6 {
 .mdst-button:disabled:hover {
   background: var(--mdst-color-bg);
   color: var(--mdst-color-fg);
+  border-color: var(--mdst-color-border);
 }
 
 /* Variants */
@@ -155,15 +163,15 @@ h6 {
 }
 
 .mdst-button--ghost:hover {
-  border-color: var(--mdst-color-border);
+  border-color: var(--mdst-button-hover-border);
 }
 
-.mdst-button--solid {
+.mdst-button--inverted {
   background: var(--mdst-color-fg);
   color: var(--mdst-color-bg);
 }
 
-.mdst-button--solid:hover {
+.mdst-button--inverted:hover {
   background: var(--mdst-color-bg);
   color: var(--mdst-color-fg);
 }
@@ -1367,9 +1375,9 @@ textarea.mdst-input {
   display: inline-flex;
   align-items: center;
   gap: var(--mdst-space-xs);
-  padding: 0.125em 0.5em;
+  padding: 0.25em 0.5em;
   font-size: var(--mdst-text-sm);
-  line-height: 1.5;
+  line-height: 1;
   border: var(--mdst-border-width) solid var(--mdst-color-border);
   border-radius: var(--mdst-radius);
   background: var(--mdst-color-bg);
@@ -1450,12 +1458,12 @@ textarea.mdst-input {
 
 .mdst-tag--sm {
   font-size: var(--mdst-text-xs);
-  padding: 0.0625em 0.375em;
+  padding: 0.1875em 0.375em;
 }
 
 .mdst-tag--lg {
   font-size: var(--mdst-text-base);
-  padding: 0.25em 0.625em;
+  padding: 0.3125em 0.625em;
 }
 
 /* Pill shape */
