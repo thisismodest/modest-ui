@@ -10,7 +10,7 @@ const version = pkg.version;
 export default {
   url: "https://modest-ui.com",
   version,
-  cdnUrl: `https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v${version}/dist/modest-ui.css`,
+  cdnUrl: `https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v${version}/dist/modest-ui.min.css`,
   name: "modest-ui",
   tagline: "A minimal, themeable CSS component library.",
 

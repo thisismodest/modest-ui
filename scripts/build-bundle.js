@@ -3,12 +3,14 @@
 import { readFile, writeFile, mkdir } from "fs/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { transform } from "lightningcss";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const INDEX_CSS = join(ROOT, "index.css");
 const DIST_DIR = join(ROOT, "dist");
 const BUNDLE_OUTPUT = join(DIST_DIR, "modest-ui.css");
+const BUNDLE_MIN_OUTPUT = join(DIST_DIR, "modest-ui.min.css");
 
 /**
  * Resolve @import statements recursively
@@ -35,16 +37,10 @@ async function resolveImports(filePath, processedFiles = new Set()) {
 
       try {
         // Recursively resolve the imported file
-        const importedContent = await resolveImports(
-          absolutePath,
-          processedFiles
-        );
+        const importedContent = await resolveImports(absolutePath, processedFiles);
         resolvedLines.push(importedContent);
       } catch (err) {
-        console.error(
-          `Error importing ${importPath} from ${filePath}:`,
-          err.message
-        );
+        console.error(`Error importing ${importPath} from ${filePath}:`, err.message);
         // Keep the original import if resolution fails
         resolvedLines.push(line);
       }
@@ -76,11 +72,25 @@ async function buildBundle() {
 
     const finalContent = header + bundledContent;
 
-    // Write the bundled file
+    // Write the unminified bundle
     await writeFile(BUNDLE_OUTPUT, finalContent);
 
+    const size = (finalContent.length / 1024).toFixed(2);
     console.log(`✓ Bundle created: ${BUNDLE_OUTPUT}`);
-    console.log(`  Size: ${(finalContent.length / 1024).toFixed(2)} KB`);
+    console.log(`  Size: ${size} KB`);
+
+    // Minify with Lightning CSS
+    const { code } = transform({
+      filename: "modest-ui.css",
+      code: Buffer.from(finalContent),
+      minify: true,
+    });
+
+    await writeFile(BUNDLE_MIN_OUTPUT, code);
+
+    const minSize = (code.length / 1024).toFixed(2);
+    console.log(`✓ Minified bundle created: ${BUNDLE_MIN_OUTPUT}`);
+    console.log(`  Size: ${minSize} KB`);
   } catch (err) {
     console.error("Error building bundle:", err.message);
     process.exit(1);

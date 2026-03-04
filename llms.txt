@@ -10,7 +10,7 @@
 ## Installation
 
 CDN:
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.1/dist/modest-ui.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.1/dist/modest-ui.min.css" />
 
 npm:
   npm install github:thisismodest/modest-ui
