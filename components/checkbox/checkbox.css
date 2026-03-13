@@ -3,9 +3,10 @@
 .mdst-checkbox {
   -webkit-appearance: none;
   appearance: none;
+  box-sizing: content-box;
   flex-shrink: 0;
-  width: var(--mdst-space-4);
-  height: var(--mdst-space-4);
+  width: 0.875rem;
+  height: 0.875rem;
   margin: 0;
   background: var(--mdst-color-bg);
   border: var(--mdst-border-width) solid var(--mdst-color-border);

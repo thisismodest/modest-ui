@@ -4,11 +4,12 @@
   -webkit-appearance: none;
   appearance: none;
   flex-shrink: 0;
-  width: var(--mdst-space-4);
-  height: var(--mdst-space-4);
+  width: 0.875rem;
+  height: 0.875rem;
   margin: 0;
   background: var(--mdst-color-bg);
   border: var(--mdst-border-width) solid var(--mdst-color-border);
+  box-sizing: content-box;
   border-radius: 50%;
   cursor: pointer;
   position: relative;
