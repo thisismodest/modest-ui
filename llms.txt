@@ -2,7 +2,7 @@
 
 > A minimal, themeable CSS component library.
 
-- Version: 0.1.3
+- Version: 0.1.4
 - Docs: https://modest-ui.com
 - GitHub: https://github.com/thisismodest/modest-ui
 - License: MIT
@@ -10,7 +10,7 @@
 ## Installation
 
 CDN:
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.3/dist/modest-ui.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.4/dist/modest-ui.min.css" />
 
 npm:
   npm install github:thisismodest/modest-ui
