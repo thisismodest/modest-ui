@@ -13,9 +13,16 @@
   line-height: var(--mdst-line-height);
   color: var(--mdst-color-fg);
   background-color: var(--mdst-color-bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-image:
+    linear-gradient(to top right, transparent 50%, var(--mdst-color-fg) 50%),
+    linear-gradient(to top left, transparent 50%, var(--mdst-color-fg) 50%);
+  background-size:
+    0.25rem 0.25rem,
+    0.25rem 0.25rem;
+  background-position:
+    right calc(var(--mdst-space-md) + 0.25rem) center,
+    right var(--mdst-space-md) center;
   background-repeat: no-repeat;
-  background-position: right var(--mdst-space-md) center;
   border: var(--mdst-border-width) solid var(--mdst-color-border);
   border-radius: var(--mdst-radius);
   outline: none;
@@ -61,13 +68,17 @@
   padding: var(--mdst-space-xs) var(--mdst-space-sm);
   padding-right: calc(var(--mdst-space-sm) + 1.5em);
   font-size: var(--mdst-text-sm);
-  background-position: right var(--mdst-space-sm) center;
+  background-position:
+    right calc(var(--mdst-space-sm) + 0.25rem) center,
+    right var(--mdst-space-sm) center;
 }
 
 .mdst-dropdown--lg {
   padding: var(--mdst-space-md) var(--mdst-space-lg);
   padding-right: calc(var(--mdst-space-lg) + 1.5em);
-  background-position: right var(--mdst-space-lg) center;
+  background-position:
+    right calc(var(--mdst-space-lg) + 0.25rem) center,
+    right var(--mdst-space-lg) center;
 }
 
 /* Inline variant (auto-width) */
