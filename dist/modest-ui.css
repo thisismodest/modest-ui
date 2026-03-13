@@ -192,9 +192,10 @@ h6 {
 .mdst-checkbox {
   -webkit-appearance: none;
   appearance: none;
+  box-sizing: content-box;
   flex-shrink: 0;
-  width: var(--mdst-space-4);
-  height: var(--mdst-space-4);
+  width: 0.875rem;
+  height: 0.875rem;
   margin: 0;
   background: var(--mdst-color-bg);
   border: var(--mdst-border-width) solid var(--mdst-color-border);
@@ -254,16 +255,23 @@ h6 {
   display: block;
   width: 100%;
   margin: 0;
-  padding: var(--mdst-space-sm) var(--mdst-space-md);
-  padding-right: calc(var(--mdst-space-md) + 1.5em);
+  padding: var(--mdst-space-sm);
+  padding-right: calc(var(--mdst-space-sm) + 1.2em);
   font-family: inherit;
   font-size: inherit;
   line-height: var(--mdst-line-height);
   color: var(--mdst-color-fg);
   background-color: var(--mdst-color-bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-image:
+    linear-gradient(to top right, transparent 50%, var(--mdst-color-fg) 50%),
+    linear-gradient(to top left, transparent 50%, var(--mdst-color-fg) 50%);
+  background-size:
+    0.3rem 0.3rem,
+    0.3rem 0.3rem;
+  background-position:
+    right calc(var(--mdst-space-sm) + 0.3rem) center,
+    right var(--mdst-space-sm) center;
   background-repeat: no-repeat;
-  background-position: right var(--mdst-space-md) center;
   border: var(--mdst-border-width) solid var(--mdst-color-border);
   border-radius: var(--mdst-radius);
   outline: none;
@@ -309,13 +317,17 @@ h6 {
   padding: var(--mdst-space-xs) var(--mdst-space-sm);
   padding-right: calc(var(--mdst-space-sm) + 1.5em);
   font-size: var(--mdst-text-sm);
-  background-position: right var(--mdst-space-sm) center;
+  background-position:
+    right calc(var(--mdst-space-sm) + 0.3rem) center,
+    right var(--mdst-space-sm) center;
 }
 
 .mdst-dropdown--lg {
-  padding: var(--mdst-space-md) var(--mdst-space-lg);
-  padding-right: calc(var(--mdst-space-lg) + 1.5em);
-  background-position: right var(--mdst-space-lg) center;
+  padding: var(--mdst-space-md) var(--mdst-space-md);
+  padding-right: calc(var(--mdst-space-md) + 1.2em);
+  background-position:
+    right calc(var(--mdst-space-md) + 0.3rem) center,
+    right var(--mdst-space-md) center;
 }
 
 /* Inline variant (auto-width) */
@@ -532,11 +544,12 @@ textarea.mdst-input {
   -webkit-appearance: none;
   appearance: none;
   flex-shrink: 0;
-  width: var(--mdst-space-4);
-  height: var(--mdst-space-4);
+  width: 0.875rem;
+  height: 0.875rem;
   margin: 0;
   background: var(--mdst-color-bg);
   border: var(--mdst-border-width) solid var(--mdst-color-border);
+  box-sizing: content-box;
   border-radius: 50%;
   cursor: pointer;
   position: relative;
