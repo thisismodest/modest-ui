@@ -161,22 +161,13 @@
         }</pre
       >
       <button class="mdst-button mdst-button--sm" id="copy-btn">Copy CSS</button>
+      <button class="mdst-button mdst-button--sm mdst-button--ghost" id="reset-btn">Reset</button>
     </div>
 
     <details class="mdst-details mdst-details--section" open>
       <summary>Presets</summary>
       <div class="presets">
-        <select class="mdst-dropdown" id="preset-select">
-          <option value="default">Default</option>
-          <option value="dark">Dark</option>
-          <option value="rounded">Rounded</option>
-          <option value="blue">Blue</option>
-          <option value="brutalist">Brutalist</option>
-          <option value="pastel">Pastel</option>
-          <option value="terminal">Terminal</option>
-          <option value="warm">Warm</option>
-          <option value="highcontrast">High Contrast</option>
-        </select>
+        <select class="mdst-dropdown" id="preset-select"></select>
       </div>
     </details>
 
@@ -524,7 +515,9 @@
       });
 
       // Playground preset dropdown
-      document.getElementById("preset-select").addEventListener("change", (e) => {
+      const presetSelect = document.getElementById("preset-select");
+      mdstTheme.buildSelectOptions(presetSelect, false);
+      presetSelect.addEventListener("change", (e) => {
         applyPreset(e.target.value);
       });
 
@@ -542,6 +535,16 @@
           document.getElementById("preset-select").value = e.target.value;
         });
       }
+
+      // Reset button
+      document.getElementById("reset-btn").addEventListener("click", () => {
+        mdstTheme.reset();
+        Object.assign(currentValues, presets.default);
+        syncAllInputs();
+        updateOutput();
+        presetSelect.value = "default";
+        syncHeaderSwitcher();
+      });
 
       // Copy button
       document.getElementById("copy-btn").addEventListener("click", async () => {
