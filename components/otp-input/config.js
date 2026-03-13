@@ -1,6 +1,6 @@
 export default {
-  title: "OTP Input",
+  title: "OTP",
   className: ".mdst-otp-input",
-  description:
-    "One-time password input with auto-advance, paste support, and validation states.",
+  group: "Input",
+  description: "One-time password input with auto-advance, paste support, and validation states.",
 };

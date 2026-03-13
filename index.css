@@ -9,6 +9,8 @@
 @import "./components/checkbox/checkbox.css";
 @import "./components/dropdown/dropdown.css";
 @import "./components/input/input.css";
+@import "./components/file-input/file-input.css";
+@import "./components/password-input/password-input.css";
 @import "./components/radio/radio.css";
 @import "./components/otp-input/otp-input.css";
 @import "./components/code/code.css";

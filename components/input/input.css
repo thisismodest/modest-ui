@@ -6,7 +6,7 @@
   display: block;
   width: 100%;
   margin: 0;
-  padding: var(--mdst-space-sm) var(--mdst-space-md);
+  padding: var(--mdst-space-sm);
   font-family: inherit;
   font-size: inherit;
   line-height: var(--mdst-line-height);

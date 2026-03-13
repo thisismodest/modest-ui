@@ -1,0 +1,73 @@
+/* File Input */
+
+.mdst-file-input {
+  display: block;
+  width: 100%;
+}
+
+.mdst-file-input__field {
+  color: var(--mdst-color-muted);
+  cursor: pointer;
+}
+
+/* File selector button (the "Choose File" / "Browse" part) */
+
+.mdst-file-input__field::file-selector-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mdst-space-xs);
+  padding: var(--mdst-space-xs) var(--mdst-space-md);
+  margin-right: var(--mdst-space-md);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: var(--mdst-line-height);
+  color: var(--mdst-color-fg);
+  background: var(--mdst-color-bg);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  cursor: pointer;
+  transition:
+    background var(--mdst-transition),
+    color var(--mdst-transition),
+    border-color var(--mdst-transition);
+}
+
+.mdst-file-input__field::file-selector-button:hover {
+  background: var(--mdst-button-hover-bg);
+  color: var(--mdst-button-hover-color);
+  border-color: var(--mdst-button-hover-border);
+}
+
+.mdst-file-input__field:disabled::file-selector-button {
+  cursor: not-allowed;
+}
+
+.mdst-file-input__field:disabled::file-selector-button:hover {
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  border-color: var(--mdst-color-border);
+}
+
+/* Inverted variant — filled button */
+
+.mdst-file-input--inverted .mdst-file-input__field::file-selector-button {
+  background: var(--mdst-color-fg);
+  color: var(--mdst-color-bg);
+}
+
+.mdst-file-input--inverted .mdst-file-input__field::file-selector-button:hover {
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+}
+
+/* Borderless variant — no outer border, just the button */
+
+.mdst-file-input--borderless .mdst-file-input__field {
+  border-color: transparent;
+  padding: 0;
+}
+
+.mdst-file-input--borderless .mdst-file-input__field:focus-visible {
+  border-color: var(--mdst-color-focus);
+}

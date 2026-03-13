@@ -4,6 +4,7 @@ import { readdir, readFile, writeFile } from "fs/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import siteConfig from "../site.config.js";
+import { buildSidebarItems, renderComponentLinks } from "./sidebar.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -40,7 +41,7 @@ async function getComponents() {
       continue;
     }
 
-    // Load config (title, className) from config.js
+    // Load config (title, className, group) from config.js
     const config = await loadComponentConfig(slug);
     if (!config) {
       console.warn(`  Warning: ${slug} has preview.html but no config.js — skipping`);
@@ -51,6 +52,7 @@ async function getComponents() {
       slug,
       title: config.title,
       className: config.className,
+      group: config.group || null,
     });
   }
 
@@ -58,9 +60,10 @@ async function getComponents() {
 }
 
 function generateLinks(components) {
-  return components
-    .map((c) => `            <a href="#${c.slug}" class="sidebar-link" data-component="${c.slug}">${c.title}</a>`)
-    .join("\n");
+  return renderComponentLinks(components, {
+    href: (c) => `#${c.slug}`,
+    linkAttrs: (c) => ` data-component="${c.slug}"`,
+  });
 }
 
 function generateClassNames(components) {
@@ -129,8 +132,21 @@ async function updateIndexHtml(components) {
 
   await writeFile(INDEX_HTML, html);
 
-  console.log(`Updated index.html with ${components.length} components:`);
-  components.forEach((c) => console.log(`  - ${c.title} (${c.className})`));
+  // Log output — show groups
+  const items = buildSidebarItems(components);
+  const totalCount = components.length;
+  const groupCount = items.filter((i) => i.type === "group").length;
+  console.log(`Updated index.html with ${totalCount} components${groupCount ? ` (${groupCount} group${groupCount > 1 ? "s" : ""})` : ""}:`);
+  for (const item of items) {
+    if (item.type === "link") {
+      console.log(`  - ${item.component.title} (${item.component.className})`);
+    } else {
+      console.log(`  ▸ ${item.groupName}`);
+      for (const c of item.children) {
+        console.log(`    - ${c.title} (${c.className})`);
+      }
+    }
+  }
 }
 
 async function updateReadmeCdnUrl() {

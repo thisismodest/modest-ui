@@ -15,7 +15,7 @@ npm install github:thisismodest/modest-ui
 Use the pre-bundled CSS file that contains all styles:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.2/dist/modest-ui.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.3/dist/modest-ui.min.css" />
 ```
 
 Or with a bundler:

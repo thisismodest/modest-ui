@@ -161,6 +161,60 @@
         font-weight: 500;
       }
 
+      .sidebar-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar-group-title {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-xs);
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        cursor: pointer;
+        list-style: none;
+        border-radius: var(--mdst-radius);
+        transition:
+          color var(--mdst-transition),
+          background var(--mdst-transition);
+      }
+
+      .sidebar-group-title::-webkit-details-marker {
+        display: none;
+      }
+
+      .sidebar-group-title::before {
+        content: "";
+        width: 0.75em;
+        height: 0.75em;
+        flex-shrink: 0;
+        background-color: currentColor;
+        transition: transform var(--mdst-transition);
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+      }
+
+      .sidebar-group[open] > .sidebar-group-title::before {
+        transform: rotate(90deg);
+      }
+
+      .sidebar-group-title:hover {
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+      }
+
+      .sidebar-link--grouped {
+        padding-left: calc(var(--mdst-space-sm) + 0.75em + var(--mdst-space-xs));
+      }
+
       .sidebar-separator {
         border: none;
         border-top: var(--mdst-border-width) solid var(--mdst-color-border);
@@ -358,8 +412,13 @@
             <a href="#details" class="sidebar-link" data-component="details">Details</a>
             <a href="#dialog" class="sidebar-link" data-component="dialog">Dialog</a>
             <a href="#dropdown" class="sidebar-link" data-component="dropdown">Dropdown</a>
-            <a href="#input" class="sidebar-link" data-component="input">Input</a>
-            <a href="#otp-input" class="sidebar-link" data-component="otp-input">OTP Input</a>
+            <details class="sidebar-group">
+              <summary class="sidebar-group-title">Input</summary>
+              <a href="#file-input" class="sidebar-link sidebar-link--grouped" data-component="file-input">File</a>
+              <a href="#input" class="sidebar-link sidebar-link--grouped" data-component="input">Text</a>
+              <a href="#otp-input" class="sidebar-link sidebar-link--grouped" data-component="otp-input">OTP</a>
+              <a href="#password-input" class="sidebar-link sidebar-link--grouped" data-component="password-input">Password</a>
+            </details>
             <a href="#popover" class="sidebar-link" data-component="popover">Popover</a>
             <a href="#pre" class="sidebar-link" data-component="pre">Pre</a>
             <a href="#radio" class="sidebar-link" data-component="radio">Radio</a>
@@ -380,7 +439,7 @@
                 ></path>
               </svg>
             </a>
-            <span class="version"><!-- VERSION_START -->v0.1.2<!-- VERSION_END --></span>
+            <span class="version"><!-- VERSION_START -->v0.1.3<!-- VERSION_END --></span>
           </div>
         </div>
       </details>
@@ -414,8 +473,10 @@
         details: ".mdst-details",
         dialog: ".mdst-dialog",
         dropdown: ".mdst-dropdown",
+        "file-input": ".mdst-file-input",
         input: ".mdst-input",
         "otp-input": ".mdst-otp-input",
+        "password-input": ".mdst-password-input",
         popover: ".mdst-popover",
         pre: ".mdst-pre",
         radio: ".mdst-radio",
@@ -434,7 +495,14 @@
       function setActive(slug) {
         links.forEach((link) => {
           const linkSlug = link.dataset.component || link.dataset.page;
-          link.classList.toggle("active", linkSlug === slug);
+          const isActive = linkSlug === slug;
+          link.classList.toggle("active", isActive);
+
+          // Auto-open parent group if this link is active
+          if (isActive) {
+            const group = link.closest(".sidebar-group");
+            if (group) group.open = true;
+          }
         });
       }
 
@@ -444,7 +512,10 @@
 
         const isPage = link.dataset.page;
         frame.src = isPage ? `pages/${slug}.html` : `components/${slug}/preview.html`;
-        title.textContent = link.textContent;
+
+        const group = link.closest(".sidebar-group");
+        const groupName = group ? group.querySelector(".sidebar-group-title").textContent.trim() : null;
+        title.textContent = groupName ? `${groupName} / ${link.textContent}` : link.textContent;
         setActive(slug);
 
         // Show class name for components

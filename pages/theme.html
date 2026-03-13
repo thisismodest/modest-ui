@@ -306,12 +306,21 @@
         </div>
         <div class="preview-row">
           <input type="text" class="mdst-input" placeholder="Text input" style="max-width: 200px" />
+          <div class="mdst-password-input" style="max-width: 200px">
+            <input type="text" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Password" />
+            <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+          </div>
           <select class="mdst-dropdown" style="max-width: 150px">
             <option value="">Dropdown</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
           <input type="range" class="mdst-range" value="50" style="max-width: 150px" />
+        </div>
+        <div class="preview-row">
+          <div class="mdst-file-input" style="max-width: 250px">
+            <input type="file" class="mdst-input mdst-file-input__field" />
+          </div>
         </div>
         <div class="preview-row">
           <label class="mdst-checkbox-label">

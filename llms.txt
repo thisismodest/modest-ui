@@ -2,7 +2,7 @@
 
 > A minimal, themeable CSS component library.
 
-- Version: 0.1.2
+- Version: 0.1.3
 - Docs: https://modest-ui.com
 - GitHub: https://github.com/thisismodest/modest-ui
 - License: MIT
@@ -10,7 +10,7 @@
 ## Installation
 
 CDN:
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.2/dist/modest-ui.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.3/dist/modest-ui.min.css" />
 
 npm:
   npm install github:thisismodest/modest-ui
@@ -368,7 +368,51 @@ Classes:
 
 ---
 
-### Input `.mdst-input`
+### File `.mdst-file-input`
+
+Styled native file input with drag-and-drop support. No JavaScript required.
+
+Classes:
+- `.mdst-file-input`
+- `.mdst-file-input__field`
+- `.mdst-file-input--borderless`
+- `.mdst-file-input--inverted`
+
+```html
+<!-- Basic file input -->
+<div class="mdst-file-input">
+  <input type="file" class="mdst-input mdst-file-input__field" />
+</div>
+
+<!-- Borderless -->
+<div class="mdst-file-input mdst-file-input--borderless">
+  <input type="file" class="mdst-input mdst-file-input__field" />
+</div>
+
+<!-- Inverted button -->
+<div class="mdst-file-input mdst-file-input--inverted">
+  <input type="file" class="mdst-input mdst-file-input__field" />
+</div>
+
+<!-- Disabled -->
+<div class="mdst-file-input">
+  <input type="file" class="mdst-input mdst-file-input__field" disabled />
+</div>
+
+<!-- Accept only images -->
+<div class="mdst-file-input">
+  <input type="file" class="mdst-input mdst-file-input__field" accept=".png,.jpg,.jpeg,.gif,.webp" />
+</div>
+
+<!-- Multiple files -->
+<div class="mdst-file-input">
+  <input type="file" class="mdst-input mdst-file-input__field" multiple />
+</div>
+```
+
+---
+
+### Text `.mdst-input`
 
 Text input component with ghost variant, sizes, and error states.
 
@@ -391,7 +435,7 @@ Classes:
 
 ---
 
-### OTP Input `.mdst-otp-input`
+### OTP `.mdst-otp-input`
 
 One-time password input with auto-advance, paste support, and validation states.
 
@@ -425,6 +469,42 @@ Classes:
 
 <!-- Success state -->
 <div class="mdst-otp-input mdst-otp-input--success">...</div>
+```
+
+---
+
+### Password `.mdst-password-input`
+
+Password input with a CSS-only visibility toggle. No JavaScript required.
+
+Classes:
+- `.mdst-password-input`
+- `.mdst-password-input__field`
+- `.mdst-password-input__toggle`
+
+```html
+<!-- Basic password input -->
+<div class="mdst-password-input">
+  <input type="text" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Enter password" />
+  <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+</div>
+
+<!-- Disabled -->
+<div class="mdst-password-input">
+  <input type="text" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Disabled" disabled />
+  <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" disabled />
+</div>
+
+<!-- Multiple instances (no IDs needed) -->
+<div class="mdst-password-input">
+  <input type="text" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Current password" />
+  <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+</div>
+
+<div class="mdst-password-input">
+  <input type="text" autocomplete="new-password" class="mdst-input mdst-password-input__field" placeholder="New password" />
+  <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+</div>
 ```
 
 ---
@@ -794,8 +874,10 @@ Color Picker:   .mdst-color-picker  +  __input  __text  |  --square
 Details:        .mdst-details  |  --borderless  --compact  --section
 Dialog:         .mdst-dialog  +  -body  -close  -footer  -header  -title  |  --full  --lg  --sm
 Dropdown:       .mdst-dropdown  |  --ghost  --inline  --lg  --sm
-Input:          .mdst-input
-OTP Input:      .mdst-otp-input  +  -digit  -separator  |  --error  --success
+File:           .mdst-file-input  +  __field  |  --borderless  --inverted
+Text:           .mdst-input
+OTP:            .mdst-otp-input  +  -digit  -separator  |  --error  --success
+Password:       .mdst-password-input  +  __field  __toggle
 Popover:        .mdst-popover  |  --anchored  --lg  --sm
 Pre:            .mdst-pre  |  --borderless  --compact  --scroll
 Radio:          .mdst-radio  +  -group  -label  |  --horizontal
