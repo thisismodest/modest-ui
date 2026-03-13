@@ -139,7 +139,7 @@
   </head>
   <body>
     <h1>Theme Playground</h1>
-    <p class="description">Customise the design tokens to create your own theme. Changes apply to this page only.</p>
+    <p class="description">Customise the design tokens to create your own theme. Changes persist across all pages.</p>
 
     <div class="output-section">
       <h2>Generated CSS</h2>
@@ -397,157 +397,30 @@
     </details>
 
     <script>
-      const presets = {
-        default: {
-          "--mdst-color-fg": "#000000",
-          "--mdst-color-bg": "#ffffff",
-          "--mdst-color-border": "#000000",
-          "--mdst-color-muted": "#666666",
-          "--mdst-color-subtle": "#f5f5f5",
-          "--mdst-color-focus": "#000000",
-          "--mdst-color-error": "#dc2626",
-          "--mdst-color-success": "#16a34a",
-          "--mdst-button-hover-bg": "#000000",
-          "--mdst-button-hover-color": "#ffffff",
-          "--mdst-button-hover-border": "#000000",
-          "--mdst-radius": "0",
-          "--mdst-border-width": "1",
-        },
-        dark: {
-          "--mdst-color-fg": "#ffffff",
-          "--mdst-color-bg": "#1a1a1a",
-          "--mdst-color-border": "#ffffff",
-          "--mdst-color-muted": "#999999",
-          "--mdst-color-subtle": "#2a2a2a",
-          "--mdst-color-focus": "#ffffff",
-          "--mdst-color-error": "#f87171",
-          "--mdst-color-success": "#4ade80",
-          "--mdst-button-hover-bg": "#ffffff",
-          "--mdst-button-hover-color": "#1a1a1a",
-          "--mdst-button-hover-border": "#ffffff",
-          "--mdst-radius": "0",
-          "--mdst-border-width": "1",
-        },
-        rounded: {
-          "--mdst-color-fg": "#000000",
-          "--mdst-color-bg": "#ffffff",
-          "--mdst-color-border": "#d1d5db",
-          "--mdst-color-muted": "#6b7280",
-          "--mdst-color-subtle": "#f9fafb",
-          "--mdst-color-focus": "#3b82f6",
-          "--mdst-color-error": "#ef4444",
-          "--mdst-color-success": "#22c55e",
-          "--mdst-button-hover-bg": "#f9fafb",
-          "--mdst-button-hover-color": "#000000",
-          "--mdst-button-hover-border": "#000000",
-          "--mdst-radius": "8",
-          "--mdst-border-width": "1",
-        },
-        blue: {
-          "--mdst-color-fg": "#1e3a5f",
-          "--mdst-color-bg": "#ffffff",
-          "--mdst-color-border": "#1e3a5f",
-          "--mdst-color-muted": "#5a7a9a",
-          "--mdst-color-subtle": "#e8f0f8",
-          "--mdst-color-focus": "#2563eb",
-          "--mdst-color-error": "#dc2626",
-          "--mdst-color-success": "#16a34a",
-          "--mdst-button-hover-bg": "#1e3a5f",
-          "--mdst-button-hover-color": "#ffffff",
-          "--mdst-button-hover-border": "#1e3a5f",
-          "--mdst-radius": "4",
-          "--mdst-border-width": "1",
-        },
-        brutalist: {
-          "--mdst-color-fg": "#000000",
-          "--mdst-color-bg": "#ffffff",
-          "--mdst-color-border": "#000000",
-          "--mdst-color-muted": "#000000",
-          "--mdst-color-subtle": "#ffff00",
-          "--mdst-color-focus": "#ff0000",
-          "--mdst-color-error": "#ff0000",
-          "--mdst-color-success": "#00ff00",
-          "--mdst-button-hover-bg": "#000000",
-          "--mdst-button-hover-color": "#ffffff",
-          "--mdst-button-hover-border": "#000000",
-          "--mdst-radius": "0",
-          "--mdst-border-width": "3",
-        },
-        pastel: {
-          "--mdst-color-fg": "#5b4b8a",
-          "--mdst-color-bg": "#fdf4f5",
-          "--mdst-color-border": "#d4a5a5",
-          "--mdst-color-muted": "#9a8c98",
-          "--mdst-color-subtle": "#f0e6ef",
-          "--mdst-color-focus": "#c9ada7",
-          "--mdst-color-error": "#e07a7a",
-          "--mdst-color-success": "#7ab08e",
-          "--mdst-button-hover-bg": "#f0e6ef",
-          "--mdst-button-hover-color": "#5b4b8a",
-          "--mdst-button-hover-border": "#5b4b8a",
-          "--mdst-radius": "12",
-          "--mdst-border-width": "1.5",
-        },
-        terminal: {
-          "--mdst-color-fg": "#00EE00",
-          "--mdst-color-bg": "#0d0d0d",
-          "--mdst-color-border": "#00EE00",
-          "--mdst-color-muted": "#098109",
-          "--mdst-color-subtle": "#1a1a1a",
-          "--mdst-color-focus": "#52017e",
-          "--mdst-color-error": "#ff0000",
-          "--mdst-color-success": "#00d5ff",
-          "--mdst-button-hover-bg": "#00EE00",
-          "--mdst-button-hover-color": "#0d0d0d",
-          "--mdst-button-hover-border": "#00EE00",
-          "--mdst-radius": "0",
-          "--mdst-border-width": "1",
-        },
-        warm: {
-          "--mdst-color-fg": "#3d2c29",
-          "--mdst-color-bg": "#faf6f1",
-          "--mdst-color-border": "#c9b99a",
-          "--mdst-color-muted": "#8b7355",
-          "--mdst-color-subtle": "#f0e9df",
-          "--mdst-color-focus": "#b08968",
-          "--mdst-color-error": "#c44536",
-          "--mdst-color-success": "#6b8f71",
-          "--mdst-button-hover-bg": "#f0e9df",
-          "--mdst-button-hover-color": "#3d2c29",
-          "--mdst-button-hover-border": "#3d2c29",
-          "--mdst-radius": "4",
-          "--mdst-border-width": "1",
-        },
-        highcontrast: {
-          "--mdst-color-fg": "#000000",
-          "--mdst-color-bg": "#ffffff",
-          "--mdst-color-border": "#000000",
-          "--mdst-color-muted": "#000000",
-          "--mdst-color-subtle": "#ffffff",
-          "--mdst-color-focus": "#0000ff",
-          "--mdst-color-error": "#ff0000",
-          "--mdst-color-success": "#008000",
-          "--mdst-button-hover-bg": "#000000",
-          "--mdst-button-hover-color": "#ffffff",
-          "--mdst-button-hover-border": "#000000",
-          "--mdst-radius": "0",
-          "--mdst-border-width": "2",
-        },
-      };
+      const { presets, unitVars, toCSSValue, toRawValue, buildCSSVars, persist, load, detectPreset } = mdstTheme;
 
       const currentValues = { ...presets.default };
+
+      function syncHeaderSwitcher() {
+        const switcher = document.getElementById("theme-switcher");
+        if (!switcher) return;
+        const cssVars = buildCSSVars(currentValues);
+        const match = detectPreset(cssVars);
+        switcher.value = match || "";
+      }
+
+      function persistTheme() {
+        const cssVars = buildCSSVars(currentValues);
+        persist(cssVars);
+        syncHeaderSwitcher();
+      }
 
       function updateCSSVar(varName, value) {
         currentValues[varName] = value;
 
-        let cssValue = value;
-        if (varName === "--mdst-radius" || varName === "--mdst-border-width") {
-          cssValue = value + "px";
-        }
+        document.documentElement.style.setProperty(varName, toCSSValue(varName, value));
 
-        // Update this document only
-        document.documentElement.style.setProperty(varName, cssValue);
-
+        persistTheme();
         updateOutput();
       }
 
@@ -556,11 +429,7 @@
         const lines = [":root {"];
 
         for (const [key, value] of Object.entries(currentValues)) {
-          if (key === "--mdst-radius" || key === "--mdst-border-width") {
-            lines.push(`  ${key}: ${value}px;`);
-          } else {
-            lines.push(`  ${key}: ${value};`);
-          }
+          lines.push(`  ${key}: ${toCSSValue(key, value)};`);
         }
 
         lines.push("}");
@@ -584,6 +453,13 @@
         const valueDisplay = document.querySelector(`[data-value="${varName}"]`);
         if (valueDisplay) {
           valueDisplay.textContent = value + "px";
+        }
+      }
+
+      function syncAllInputs() {
+        for (const [varName, value] of Object.entries(currentValues)) {
+          document.documentElement.style.setProperty(varName, toCSSValue(varName, value));
+          syncInputs(varName, value);
         }
       }
 
@@ -642,16 +518,30 @@
           // Update value display
           const valueDisplay = document.querySelector(`[data-value="${varName}"]`);
           if (valueDisplay) {
-            const unit = varName === "--mdst-border-width" ? "px" : "px";
-            valueDisplay.textContent = value + unit;
+            valueDisplay.textContent = value + "px";
           }
         });
       });
 
-      // Preset dropdown
+      // Playground preset dropdown
       document.getElementById("preset-select").addEventListener("change", (e) => {
         applyPreset(e.target.value);
       });
+
+      // Header theme switcher — sync playground controls when it changes
+      const headerSwitcher = document.getElementById("theme-switcher");
+      if (headerSwitcher) {
+        headerSwitcher.addEventListener("change", (e) => {
+          if (!e.target.value) return;
+          const preset = presets[e.target.value];
+          if (!preset) return;
+          Object.assign(currentValues, preset);
+          syncAllInputs();
+          persistTheme();
+          updateOutput();
+          document.getElementById("preset-select").value = e.target.value;
+        });
+      }
 
       // Copy button
       document.getElementById("copy-btn").addEventListener("click", async () => {
@@ -669,7 +559,29 @@
         }
       });
 
-      // Initialize
+      // Restore persisted theme (or fall back to defaults)
+      try {
+        const stored = load();
+        if (stored) {
+          const knownKeys = Object.keys(presets.default);
+
+          for (const key of knownKeys) {
+            if (key in stored) {
+              currentValues[key] = toRawValue(key, stored[key]);
+            }
+          }
+
+          syncAllInputs();
+
+          // Try to match a preset for the dropdown
+          const match = detectPreset(buildCSSVars(currentValues));
+          if (match) document.getElementById("preset-select").value = match;
+          syncHeaderSwitcher();
+        }
+      } catch (e) {
+        localStorage.removeItem("mdst-theme");
+      }
+
       updateOutput();
     </script>
   </body>

@@ -21,6 +21,7 @@
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/index.css" />
+    <script src="/base/theme-persist.js"></script>
     <link rel="stylesheet" href="/base/preview.css" />
     <!-- HEAD_EXTRA -->
     <style>
@@ -248,13 +249,21 @@
 
       .main-header {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: var(--mdst-space-md);
-        padding: var(--mdst-space-md);
+        gap: var(--mdst-space-sm) var(--mdst-space-md);
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
         border-bottom: 0.0625em solid var(--mdst-color-border);
         font-size: var(--mdst-text-lg);
         font-weight: 600;
         background: var(--mdst-color-subtle);
+      }
+
+      .theme-switcher {
+        margin-left: auto;
+        font-size: var(--mdst-text-xs);
+        font-weight: 400;
+        color: var(--mdst-color-muted);
       }
 
       .main-header-class {
@@ -431,6 +440,10 @@
         <header class="main-header">
           <span><!-- DISPLAY_TITLE --></span>
           <!-- CLASS_NAME -->
+          <div class="theme-switcher">
+            <label for="theme-switcher">Theme</label>
+            <select id="theme-switcher" class="mdst-dropdown mdst-dropdown--sm mdst-dropdown--ghost mdst-dropdown--inline"></select>
+          </div>
         </header>
         <div class="main-content">
           <!-- CONTENT -->
@@ -438,12 +451,44 @@
       </main>
     </div>
 
+    <script src="/base/theme-presets.js"></script>
     <script>
       const sidebar = document.getElementById("sidebar");
       const sidebarOverlay = document.getElementById("sidebar-overlay");
       sidebarOverlay.addEventListener("click", () => {
         sidebar.removeAttribute("open");
       });
+
+      // Theme switcher
+      (function () {
+        const select = document.getElementById("theme-switcher");
+        const names = Object.keys(mdstTheme.presets);
+
+        // Build options
+        names.forEach(function (name) {
+          const opt = document.createElement("option");
+          opt.value = name;
+          opt.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+          select.appendChild(opt);
+        });
+        const customOpt = document.createElement("option");
+        customOpt.value = "";
+        customOpt.textContent = "Custom";
+        customOpt.disabled = true;
+        select.appendChild(customOpt);
+
+        // Set initial value from stored theme
+        const stored = mdstTheme.load();
+        if (stored) {
+          const match = mdstTheme.detectPreset(stored);
+          select.value = match || "";
+        }
+
+        select.addEventListener("change", function () {
+          if (select.value === "") return;
+          mdstTheme.applyPreset(select.value);
+        });
+      })();
     </script>
     <!-- SCRIPTS -->
   </body>

@@ -15,7 +15,6 @@
   ],
   "scripts": {
     "dev": "node scripts/build-site.js && python3 -m http.server 8000 -d site",
-    "dev:components": "python3 -m http.server 8000",
     "build": "node scripts/generate-preview.js && node scripts/build-bundle.js && node scripts/build-llms.js && node scripts/build-site.js"
   },
   "keywords": [
