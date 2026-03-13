@@ -1,6 +1,6 @@
 export default {
-  title: "Input",
+  title: "Text",
   className: ".mdst-input",
-  description:
-    "Text input component with ghost variant, sizes, and error states.",
+  group: "Input",
+  description: "Text input component with ghost variant, sizes, and error states.",
 };

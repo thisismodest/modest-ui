@@ -4,6 +4,7 @@ import { readdir, readFile, writeFile, mkdir, cp } from "fs/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import siteConfig from "../site.config.js";
+import { renderComponentLinks } from "./sidebar.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -133,12 +134,10 @@ function buildSidebar(components, pages, activeSlug) {
     })
     .join("\n");
 
-  const componentLinks = components
-    .map((c) => {
-      const active = c.slug === activeSlug ? " active" : "";
-      return `            <a href="/${c.slug}/" class="sidebar-link${active}">${c.title}</a>`;
-    })
-    .join("\n");
+  const componentLinks = renderComponentLinks(components, {
+    href: (c) => `/${c.slug}/`,
+    activeSlug,
+  });
 
   return `${pageLinks}\n            <hr class="sidebar-separator" />\n${componentLinks}`;
 }
@@ -191,14 +190,15 @@ async function buildComponentPage(template, component, components, pages) {
   const bodyContent = extractBody(previewHtml);
   const { cleanBody, scripts } = extractScripts(bodyContent, component.slug, "component");
 
-  const pageTitle = `${component.title} — ${siteConfig.name}`;
+  const displayTitle = component.group ? `${component.group} / ${component.title}` : component.title;
+  const pageTitle = `${displayTitle} — ${siteConfig.name}`;
   const canonicalPath = `/${component.slug}/`;
 
   const html = render(template, {
     title: pageTitle,
     description: component.description,
     canonical: `${siteConfig.url}${canonicalPath}`,
-    displayTitle: component.title,
+    displayTitle,
     className: component.className,
     sidebar: buildSidebar(components, pages, component.slug),
     content: cleanBody,

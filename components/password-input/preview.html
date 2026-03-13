@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Input</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../input/input.css" />
+    <link rel="stylesheet" href="password-input.css" />
+    <style>
+      .mdst-table .mdst-password-input {
+        max-width: 16rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Structure</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-password-input</span><br />
+              <span class="class-name"><span class="dim">.mdst-input</span> <span class="dim">.mdst-password-input</span>__field</span
+              ><br />
+              <span class="class-name"><span class="dim">.mdst-password-input</span>__toggle</span>
+            </td>
+            <td>
+              <div class="mdst-password-input">
+                <input
+                  type="text"
+                  autocomplete="current-password"
+                  class="mdst-input mdst-password-input__field"
+                  placeholder="Enter password"
+                />
+                <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">placeholder</span>
+            </td>
+            <td>
+              <div class="mdst-password-input">
+                <input
+                  type="text"
+                  autocomplete="current-password"
+                  class="mdst-input mdst-password-input__field"
+                  placeholder="Placeholder text"
+                />
+                <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">disabled</span>
+            </td>
+            <td>
+              <div class="mdst-password-input">
+                <input
+                  type="text"
+                  autocomplete="current-password"
+                  class="mdst-input mdst-password-input__field"
+                  placeholder="Disabled"
+                  disabled
+                />
+                <input
+                  type="checkbox"
+                  class="mdst-password-input__toggle"
+                  name="password-toggle"
+                  aria-label="Toggle password visibility"
+                  disabled
+                />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Multiple Instances</div>
+      <div class="examples">
+        <div class="mdst-password-input" style="max-width: 16rem">
+          <input type="text" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Current password" />
+          <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+        </div>
+        <div class="mdst-password-input" style="max-width: 16rem">
+          <input type="text" autocomplete="new-password" class="mdst-input mdst-password-input__field" placeholder="New password" />
+          <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+        </div>
+        <div class="mdst-password-input" style="max-width: 16rem">
+          <input type="text" autocomplete="new-password" class="mdst-input mdst-password-input__field" placeholder="Confirm password" />
+          <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+        </div>
+      </div>
+    </div>
+
+    <p class="footnote">
+      <strong>No JavaScript required.</strong> The toggle is a checkbox styled with <span class="class-name">appearance: none</span> and a
+      CSS mask-image eye icon. Clicking it checks/unchecks the checkbox, and <span class="class-name">:has(:checked)</span> swaps the field
+      masking via <span class="class-name">-webkit-text-security</span>. Each instance is self-contained — no IDs needed, multiple inputs
+      work independently on the same page.
+    </p>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Basic password input --&gt;
+&lt;div class="mdst-password-input"&gt;
+  &lt;input type="text" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Enter password" /&gt;
+  &lt;input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" /&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;div class="mdst-password-input"&gt;
+  &lt;input type="text" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Disabled" disabled /&gt;
+  &lt;input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" disabled /&gt;
+&lt;/div&gt;
+
+&lt;!-- Multiple instances (no IDs needed) --&gt;
+&lt;div class="mdst-password-input"&gt;
+  &lt;input type="text" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Current password" /&gt;
+  &lt;input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" /&gt;
+&lt;/div&gt;
+
+&lt;div class="mdst-password-input"&gt;
+  &lt;input type="text" autocomplete="new-password" class="mdst-input mdst-password-input__field" placeholder="New password" /&gt;
+  &lt;input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" /&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </body>
+</html>
