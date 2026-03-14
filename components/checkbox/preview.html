@@ -92,6 +92,46 @@
       </table>
     </div>
 
+    <div class="section">
+      <div class="section-header">Toggle</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-checkbox</span>--toggle</span>
+            </td>
+            <td>
+              <input type="checkbox" class="mdst-checkbox--toggle" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">checked</span></td>
+            <td>
+              <input type="checkbox" class="mdst-checkbox--toggle" checked />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">disabled</span></td>
+            <td>
+              <input type="checkbox" class="mdst-checkbox--toggle" disabled />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">checked</span> <span class="class-name">disabled</span></td>
+            <td>
+              <input type="checkbox" class="mdst-checkbox--toggle" checked disabled />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- With label (recommended) --&gt;
@@ -105,7 +145,12 @@
 
 &lt;!-- States --&gt;
 &lt;input type="checkbox" class="mdst-checkbox" checked /&gt;
-&lt;input type="checkbox" class="mdst-checkbox" disabled /&gt;</code></pre>
+&lt;input type="checkbox" class="mdst-checkbox" disabled /&gt;
+
+&lt;!-- Toggle --&gt;
+&lt;input type="checkbox" class="mdst-checkbox--toggle" /&gt;
+&lt;input type="checkbox" class="mdst-checkbox--toggle" checked /&gt;
+&lt;input type="checkbox" class="mdst-checkbox--toggle" disabled /&gt;</code></pre>
     </div>
   </body>
 </html>

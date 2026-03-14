@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog — modest-ui Example</title>
+    <meta
+      name="description"
+      content="A minimal blog built with modest-ui — featuring an article list, tags, and a full article reading view."
+    />
+    <link rel="canonical" href="https://modest-ui.com/examples/blog.html" />
+    <meta property="og:title" content="Blog — modest-ui Example" />
+    <meta
+      property="og:description"
+      content="A minimal blog built with modest-ui — featuring an article list, tags, and a full article reading view."
+    />
+    <meta property="og:url" content="https://modest-ui.com/examples/blog.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="modest-ui" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Blog — modest-ui Example" />
+    <meta
+      name="twitter:description"
+      content="A minimal blog built with modest-ui — featuring an article list, tags, and a full article reading view."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="../dist/modest-ui.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        line-height: var(--mdst-line-height);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-bg);
+      }
+
+      /* Header */
+      .site-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-md) var(--mdst-space-lg);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        position: sticky;
+        top: 0;
+        background: var(--mdst-color-bg);
+        z-index: 10;
+      }
+
+      .site-logo {
+        font-weight: 700;
+        font-size: var(--mdst-text-lg);
+        letter-spacing: -0.02em;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      /* Layout */
+      .page {
+        max-width: 52rem;
+        margin: 0 auto;
+        padding: var(--mdst-space-xl) var(--mdst-space-lg);
+      }
+
+      /* Blog list view */
+      .blog-header {
+        margin-bottom: var(--mdst-space-xl);
+      }
+
+      .blog-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .blog-header p {
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-lg);
+        max-width: 32rem;
+      }
+
+      .blog-filters {
+        display: flex;
+        gap: var(--mdst-space-xs);
+        flex-wrap: wrap;
+      }
+
+      .blog-filters .mdst-tag {
+        cursor: pointer;
+        transition:
+          background var(--mdst-transition),
+          color var(--mdst-transition);
+      }
+
+      /* Featured post */
+      .featured-post {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--mdst-space-lg);
+        margin-bottom: var(--mdst-space-xl);
+        padding-bottom: var(--mdst-space-xl);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .featured-image {
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        aspect-ratio: 16 / 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-sm);
+      }
+
+      .featured-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .featured-content .post-meta {
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      .featured-content h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-sm);
+        line-height: 1.25;
+      }
+
+      .featured-content h2 a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .featured-content h2 a:hover {
+        text-decoration: underline;
+      }
+
+      .featured-content p {
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-sm);
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      /* Post meta */
+      .post-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      .post-meta-sep::before {
+        content: "·";
+      }
+
+      .post-author {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-xs);
+      }
+
+      .post-avatar {
+        width: 1.25rem;
+        height: 1.25rem;
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.5rem;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      /* Post list */
+      .post-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .post-item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--mdst-space-lg);
+        padding: var(--mdst-space-lg) 0;
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+        align-items: start;
+      }
+
+      .post-item:first-child {
+        padding-top: 0;
+      }
+
+      .post-item:last-child {
+        border-bottom: none;
+      }
+
+      .post-item-content h3 {
+        font-size: var(--mdst-text-lg);
+        font-weight: 600;
+        margin: 0 0 var(--mdst-space-xs);
+        line-height: 1.3;
+      }
+
+      .post-item-content h3 a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .post-item-content h3 a:hover {
+        text-decoration: underline;
+      }
+
+      .post-item-content p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-sm);
+        max-width: 36rem;
+      }
+
+      .post-item-tags {
+        display: flex;
+        gap: var(--mdst-space-xs);
+        flex-wrap: wrap;
+      }
+
+      .post-item-image {
+        width: 8rem;
+        aspect-ratio: 4 / 3;
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-xs);
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--mdst-space-sm);
+        padding-top: var(--mdst-space-xl);
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .pagination-info {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0 var(--mdst-space-sm);
+      }
+
+      /* Article view */
+      .article-view {
+        display: none;
+      }
+
+      .article-back {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--mdst-space-xs);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        text-decoration: none;
+        margin-bottom: var(--mdst-space-lg);
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+        font-family: inherit;
+      }
+
+      .article-back:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      .article-header {
+        margin-bottom: var(--mdst-space-xl);
+        padding-bottom: var(--mdst-space-lg);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        max-width: 38rem;
+      }
+
+      .article-header .post-meta {
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .article-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.2;
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .article-header p {
+        font-size: var(--mdst-text-lg);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .article-body {
+        max-width: 38rem;
+      }
+
+      .article-body h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin: var(--mdst-space-xl) 0 var(--mdst-space-sm);
+      }
+
+      .article-body p {
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .article-body blockquote {
+        border-left: 3px solid var(--mdst-color-border);
+        padding-left: var(--mdst-space-md);
+        margin: var(--mdst-space-lg) 0;
+        font-style: italic;
+        color: var(--mdst-color-muted);
+      }
+
+      .article-body pre {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-md);
+        overflow-x: auto;
+        margin: var(--mdst-space-lg) 0;
+      }
+
+      .article-body code {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        background: var(--mdst-color-subtle);
+        padding: 0.1em 0.35em;
+      }
+
+      .article-body ul {
+        padding-left: var(--mdst-space-lg);
+        margin: 0 0 var(--mdst-space-md);
+        color: var(--mdst-color-muted);
+      }
+
+      .article-body li {
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .article-image {
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        aspect-ratio: 16 / 8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-sm);
+        margin: var(--mdst-space-lg) 0;
+        max-width: 38rem;
+      }
+
+      /* Article footer */
+      .article-footer {
+        max-width: 38rem;
+        margin-top: var(--mdst-space-xl);
+        padding-top: var(--mdst-space-xl);
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .article-author-card {
+        display: flex;
+        gap: var(--mdst-space-md);
+        align-items: start;
+        margin-bottom: var(--mdst-space-xl);
+      }
+
+      .article-author-avatar {
+        width: 3rem;
+        height: 3rem;
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: var(--mdst-text-sm);
+        flex-shrink: 0;
+      }
+
+      .article-author-info h4 {
+        font-weight: 600;
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .article-author-info p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .related-posts h3 {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .related-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--mdst-space-md);
+      }
+
+      .related-grid .mdst-card-body h4 {
+        font-weight: 600;
+        font-size: var(--mdst-text-base);
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .related-grid .mdst-card-body p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .related-grid .post-meta {
+        margin: 0;
+      }
+
+      /* Newsletter */
+      .newsletter {
+        max-width: 38rem;
+        margin-top: var(--mdst-space-xl);
+        padding: var(--mdst-space-lg);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        background: var(--mdst-color-subtle);
+        text-align: center;
+      }
+
+      .newsletter h3 {
+        font-weight: 600;
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .newsletter p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .newsletter-form {
+        display: flex;
+        gap: var(--mdst-space-sm);
+        max-width: 20rem;
+        margin: 0 auto;
+      }
+
+      .newsletter-form .mdst-input {
+        flex: 1;
+      }
+
+      /* Footer */
+      .site-footer {
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-lg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        max-width: 52rem;
+        margin: var(--mdst-space-xl) auto 0;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: var(--mdst-space-md);
+      }
+
+      .footer-links a {
+        color: var(--mdst-color-muted);
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .featured-post {
+          grid-template-columns: 1fr;
+        }
+
+        .post-item {
+          grid-template-columns: 1fr;
+        }
+
+        .post-item-image {
+          width: 100%;
+          aspect-ratio: 16 / 8;
+        }
+
+        .related-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .page {
+          padding: var(--mdst-space-lg) var(--mdst-space-md);
+        }
+
+        .blog-header h1,
+        .article-header h1 {
+          font-size: 1.5rem;
+        }
+
+        .site-nav .mdst-button--ghost {
+          display: none;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+
+        .site-footer {
+          flex-direction: column;
+          gap: var(--mdst-space-sm);
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
+      <nav class="site-nav">
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">Archive</button>
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">About</button>
+        <button class="mdst-button mdst-button--sm mdst-button--inverted">Subscribe</button>
+      </nav>
+    </header>
+
+    <!-- Blog list view -->
+    <div class="page" id="blog-list">
+      <div class="blog-header">
+        <h1>Blog</h1>
+        <p>Thoughts on design, engineering, and building products that last.</p>
+        <div class="blog-filters">
+          <span class="mdst-tag mdst-tag--solid mdst-tag--sm">All</span>
+          <span class="mdst-tag mdst-tag--sm">Design</span>
+          <span class="mdst-tag mdst-tag--sm">Engineering</span>
+          <span class="mdst-tag mdst-tag--sm">Product</span>
+          <span class="mdst-tag mdst-tag--sm">Culture</span>
+        </div>
+      </div>
+
+      <!-- Featured post -->
+      <div class="featured-post">
+        <div class="featured-image">848 × 530</div>
+        <div class="featured-content">
+          <div class="post-meta">
+            <span class="mdst-tag mdst-tag--success mdst-tag--sm mdst-tag--pill">Featured</span>
+            <span class="post-meta-sep"></span>
+            <span>8 min read</span>
+          </div>
+          <h2><a href="#article" onclick="showArticle(); return false;">The case for boring technology</a></h2>
+          <p>
+            Why the most successful engineering teams choose proven tools over shiny new ones, and how "boring" choices compound into
+            extraordinary reliability.
+          </p>
+          <div class="post-meta">
+            <div class="post-author">
+              <div class="post-avatar">EN</div>
+              <span>Elena Novak</span>
+            </div>
+            <span class="post-meta-sep"></span>
+            <span>Dec 15, 2024</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post list -->
+      <div class="post-list">
+        <div class="post-item">
+          <div class="post-item-content">
+            <div class="post-meta" style="margin-bottom: var(--mdst-space-xs)">
+              <div class="post-author">
+                <div class="post-avatar">JC</div>
+                <span>James Chen</span>
+              </div>
+              <span class="post-meta-sep"></span>
+              <span>Dec 10, 2024</span>
+              <span class="post-meta-sep"></span>
+              <span>5 min read</span>
+            </div>
+            <h3><a href="#article" onclick="showArticle(); return false;">Design tokens are a Trojan horse for design systems</a></h3>
+            <p>
+              Tokens seem simple — just variables, right? But they quietly enforce consistency, bridge design and engineering, and create a
+              shared language that scales.
+            </p>
+            <div class="post-item-tags">
+              <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Design</span>
+              <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Engineering</span>
+            </div>
+          </div>
+          <div class="post-item-image">320 × 240</div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-item-content">
+            <div class="post-meta" style="margin-bottom: var(--mdst-space-xs)">
+              <div class="post-author">
+                <div class="post-avatar">EN</div>
+                <span>Elena Novak</span>
+              </div>
+              <span class="post-meta-sep"></span>
+              <span>Dec 3, 2024</span>
+              <span class="post-meta-sep"></span>
+              <span>6 min read</span>
+            </div>
+            <h3><a href="#article" onclick="showArticle(); return false;">Rethinking error states: when failure is a feature</a></h3>
+            <p>
+              Most apps treat errors as afterthoughts. But thoughtful error handling is a competitive advantage — and an opportunity to
+              build trust with users.
+            </p>
+            <div class="post-item-tags">
+              <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Product</span>
+              <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Design</span>
+            </div>
+          </div>
+          <div class="post-item-image">320 × 240</div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-item-content">
+            <div class="post-meta" style="margin-bottom: var(--mdst-space-xs)">
+              <div class="post-author">
+                <div class="post-avatar">AW</div>
+                <span>Alex Wright</span>
+              </div>
+              <span class="post-meta-sep"></span>
+              <span>Nov 28, 2024</span>
+              <span class="post-meta-sep"></span>
+              <span>4 min read</span>
+            </div>
+            <h3>
+              <a href="#article" onclick="showArticle(); return false;"
+                >Ship small, ship often: a practical guide to incremental delivery</a
+              >
+            </h3>
+            <p>
+              Big launches feel heroic, but they're a trap. Here's a framework for breaking any project into shippable slices that deliver
+              value from day one.
+            </p>
+            <div class="post-item-tags">
+              <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Engineering</span>
+              <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Culture</span>
+            </div>
+          </div>
+          <div class="post-item-image">320 × 240</div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-item-content">
+            <div class="post-meta" style="margin-bottom: var(--mdst-space-xs)">
+              <div class="post-author">
+                <div class="post-avatar">SR</div>
+                <span>Sofia Reyes</span>
+              </div>
+              <span class="post-meta-sep"></span>
+              <span>Nov 20, 2024</span>
+              <span class="post-meta-sep"></span>
+              <span>7 min read</span>
+            </div>
+            <h3><a href="#article" onclick="showArticle(); return false;">Why your CSS doesn't need a framework</a></h3>
+            <p>
+              With modern CSS features like custom properties, container queries, and :has(), you might not need that 50KB framework
+              anymore. Here's what native CSS can do today.
+            </p>
+            <div class="post-item-tags">
+              <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Engineering</span>
+              <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Design</span>
+            </div>
+          </div>
+          <div class="post-item-image">320 × 240</div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-item-content">
+            <div class="post-meta" style="margin-bottom: var(--mdst-space-xs)">
+              <div class="post-author">
+                <div class="post-avatar">JC</div>
+                <span>James Chen</span>
+              </div>
+              <span class="post-meta-sep"></span>
+              <span>Nov 12, 2024</span>
+              <span class="post-meta-sep"></span>
+              <span>3 min read</span>
+            </div>
+            <h3><a href="#article" onclick="showArticle(); return false;">The art of the one-line README change</a></h3>
+            <p>
+              Small documentation improvements are the highest-leverage contribution most developers overlook. A love letter to incremental
+              clarity.
+            </p>
+            <div class="post-item-tags">
+              <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Culture</span>
+            </div>
+          </div>
+          <div class="post-item-image">320 × 240</div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="mdst-button mdst-button--sm" disabled>← Newer</button>
+        <span class="pagination-info">Page 1 of 4</span>
+        <button class="mdst-button mdst-button--sm">Older →</button>
+      </div>
+    </div>
+
+    <!-- Article view -->
+    <div class="page article-view" id="article-view">
+      <button class="article-back" onclick="showList()">← Back to all posts</button>
+
+      <article>
+        <div class="article-header">
+          <div class="post-meta">
+            <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Engineering</span>
+            <span class="mdst-tag mdst-tag--sm mdst-tag--subtle">Culture</span>
+            <span class="post-meta-sep"></span>
+            <span>8 min read</span>
+          </div>
+          <h1>The case for boring technology</h1>
+          <p>
+            Why the most successful engineering teams choose proven tools over shiny new ones, and how "boring" choices compound into
+            extraordinary reliability.
+          </p>
+        </div>
+
+        <div class="post-meta" style="margin-bottom: var(--mdst-space-xl)">
+          <div class="post-author">
+            <div class="post-avatar">EN</div>
+            <span style="font-weight: 500">Elena Novak</span>
+          </div>
+          <span class="post-meta-sep"></span>
+          <span>December 15, 2024</span>
+        </div>
+
+        <div class="article-body">
+          <p>
+            Every few months, a new tool captures the collective imagination of the developer community. It's faster, more elegant, more
+            "developer-friendly." Twitter lights up with benchmarks. Blog posts proliferate. And somewhere, a team rewrites their working
+            system to adopt it.
+          </p>
+
+          <p>Six months later, they're debugging edge cases that the old tool solved years ago.</p>
+
+          <div class="article-image">Article illustration — 720 × 360</div>
+
+          <h2>The innovation token budget</h2>
+
+          <p>
+            Dan McKinley introduced the concept of <strong>"innovation tokens"</strong> — the idea that every team has a finite budget for
+            new, unproven technology. Spend too many tokens, and you're no longer building a product. You're fighting your tools.
+          </p>
+
+          <p>The most effective teams I've worked with are ruthlessly conservative about their technology choices. They ask:</p>
+
+          <ul>
+            <li>Does this solve a problem we actually have?</li>
+            <li>What's the operational cost of adopting this?</li>
+            <li>Who on the team has deep expertise with it?</li>
+            <li>What happens when the maintainer moves on?</li>
+          </ul>
+
+          <p>If you can't answer all four confidently, the answer is probably "not yet."</p>
+
+          <h2>Boring compounds</h2>
+
+          <p>
+            Here's what boring technology gives you: predictability. When your database is PostgreSQL and your language is Python, every
+            engineer you hire can contribute on day one. Every bug has a Stack Overflow answer. Every failure mode is well-documented.
+          </p>
+
+          <blockquote>
+            <p>"The best technology is the one you understand deeply, not the one that's trending on Hacker News."</p>
+          </blockquote>
+
+          <p>
+            This predictability compounds over time. Less time debugging infrastructure means more time building features. More
+            institutional knowledge means faster onboarding. Fewer surprises means calmer on-call rotations.
+          </p>
+
+          <h2>When to be exciting</h2>
+
+          <p>
+            None of this means you should never adopt new technology. Innovation is essential — you just need to be deliberate about where
+            you spend your tokens. The best rule I've found:
+          </p>
+
+          <pre><code>if (technology.solves_core_problem && technology.has_strong_community) {
+  consider_adopting();
+} else {
+  stick_with_boring();
+}</code></pre>
+
+          <p>
+            Use your innovation tokens on the things that make your product unique. Use boring technology for everything else. Your future
+            self — and your on-call rotation — will thank you.
+          </p>
+
+          <h2>The quiet confidence of boring</h2>
+
+          <p>
+            There's something deeply satisfying about a system built on proven foundations. It doesn't need to be defended in architecture
+            reviews. It doesn't require specialized hiring. It just works, day after day, deploy after deploy.
+          </p>
+
+          <p>That's not a lack of ambition. That's engineering maturity. And it's one of the most undervalued skills in our industry.</p>
+        </div>
+      </article>
+
+      <!-- Article footer -->
+      <div class="article-footer">
+        <div class="article-author-card">
+          <div class="article-author-avatar">EN</div>
+          <div class="article-author-info">
+            <h4>Elena Novak</h4>
+            <p>
+              Staff engineer and writer. Building reliable systems and arguing for boring technology since 2016. Currently leading platform
+              at a mid-stage startup.
+            </p>
+          </div>
+        </div>
+
+        <div class="related-posts">
+          <h3>Related Posts</h3>
+          <div class="related-grid">
+            <div class="mdst-card mdst-card--interactive" onclick="window.scrollTo(0, 0)">
+              <div class="mdst-card-body">
+                <h4>Ship small, ship often</h4>
+                <p>A practical guide to incremental delivery that keeps momentum high and risk low.</p>
+                <div class="post-meta">
+                  <span>Alex Wright</span>
+                  <span class="post-meta-sep"></span>
+                  <span>Nov 28, 2024</span>
+                </div>
+              </div>
+            </div>
+            <div class="mdst-card mdst-card--interactive" onclick="window.scrollTo(0, 0)">
+              <div class="mdst-card-body">
+                <h4>Why your CSS doesn't need a framework</h4>
+                <p>Modern CSS is more capable than you think. Here's what it can do natively.</p>
+                <div class="post-meta">
+                  <span>Sofia Reyes</span>
+                  <span class="post-meta-sep"></span>
+                  <span>Nov 20, 2024</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter">
+          <h3>Stay in the loop</h3>
+          <p>Get new posts delivered to your inbox. No spam, unsubscribe anytime.</p>
+          <div class="newsletter-form">
+            <input type="email" class="mdst-input" placeholder="you@example.com" />
+            <button class="mdst-button mdst-button--inverted">Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>&copy; 2026 Example Blog. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#">RSS</a>
+        <a href="#">Twitter</a>
+        <a href="#">GitHub</a>
+      </div>
+    </footer>
+
+    <script>
+      function showArticle() {
+        document.getElementById("blog-list").style.display = "none";
+        document.getElementById("article-view").style.display = "block";
+        window.scrollTo(0, 0);
+      }
+
+      function showList() {
+        document.getElementById("blog-list").style.display = "block";
+        document.getElementById("article-view").style.display = "none";
+        window.scrollTo(0, 0);
+      }
+    </script>
+  </body>
+</html>

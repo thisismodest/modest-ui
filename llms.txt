@@ -152,6 +152,8 @@ Classes:
 - `.mdst-card--compact`
 - `.mdst-card--flush`
 - `.mdst-card--interactive`
+- `.mdst-card-footer--borderless`
+- `.mdst-card-header--borderless`
 
 ```html
 <!-- Basic card -->
@@ -185,6 +187,20 @@ Classes:
     <table class="mdst-table">...</table>
   </div>
 </div>
+
+<!-- Borderless header (no bottom border) -->
+<div class="mdst-card">
+  <div class="mdst-card-header mdst-card-header--borderless">Title</div>
+  <div class="mdst-card-body">Content</div>
+</div>
+
+<!-- Borderless footer (no top border) -->
+<div class="mdst-card">
+  <div class="mdst-card-body">Content</div>
+  <div class="mdst-card-footer mdst-card-footer--borderless">
+    Tags or metadata here
+  </div>
+</div>
 ```
 
 ---
@@ -196,6 +212,7 @@ Checkbox component with label support, checked, and disabled states.
 Classes:
 - `.mdst-checkbox`
 - `.mdst-checkbox-label`
+- `.mdst-checkbox--toggle`
 
 ```html
 <!-- With label (recommended) -->
@@ -210,6 +227,11 @@ Classes:
 <!-- States -->
 <input type="checkbox" class="mdst-checkbox" checked />
 <input type="checkbox" class="mdst-checkbox" disabled />
+
+<!-- Toggle -->
+<input type="checkbox" class="mdst-checkbox--toggle" />
+<input type="checkbox" class="mdst-checkbox--toggle" checked />
+<input type="checkbox" class="mdst-checkbox--toggle" disabled />
 ```
 
 ---
@@ -867,8 +889,8 @@ Classes:
 ## Quick Class Reference
 
 Button:         .mdst-button  |  --ghost  --inverted  --lg  --sm
-Card:           .mdst-card  +  -body  -footer  -header  |  --borderless  --compact  --flush  --interactive
-Checkbox:       .mdst-checkbox  +  -label
+Card:           .mdst-card  +  -body  -footer  -header  |  --borderless  --compact  --flush  --interactive  --borderless  --borderless
+Checkbox:       .mdst-checkbox  +  -label  |  --toggle
 Code:           .mdst-code
 Color Picker:   .mdst-color-picker  +  __input  __text  |  --square
 Details:        .mdst-details  |  --borderless  --compact  --section

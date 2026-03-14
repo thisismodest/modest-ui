@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing — modest-ui Example</title>
+    <meta
+      name="description"
+      content="A pricing page built with modest-ui — featuring tiered plan cards, feature comparison table, FAQ section, and monthly/yearly billing toggle."
+    />
+    <link rel="canonical" href="https://modest-ui.com/examples/pricing.html" />
+    <meta property="og:title" content="Pricing — modest-ui Example" />
+    <meta
+      property="og:description"
+      content="A pricing page built with modest-ui — featuring tiered plan cards, feature comparison table, FAQ section, and monthly/yearly billing toggle."
+    />
+    <meta property="og:url" content="https://modest-ui.com/examples/pricing.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="modest-ui" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Pricing — modest-ui Example" />
+    <meta
+      name="twitter:description"
+      content="A pricing page built with modest-ui — featuring tiered plan cards, feature comparison table, FAQ section, and monthly/yearly billing toggle."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="../dist/modest-ui.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        line-height: var(--mdst-line-height);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-bg);
+      }
+
+      /* Header */
+      .site-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-md) var(--mdst-space-lg);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        position: sticky;
+        top: 0;
+        background: var(--mdst-color-bg);
+        z-index: 10;
+      }
+
+      .site-logo {
+        font-weight: 700;
+        font-size: var(--mdst-text-lg);
+        letter-spacing: -0.02em;
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      /* Hero */
+      .pricing-hero {
+        text-align: center;
+        padding: 4rem var(--mdst-space-lg) 3rem;
+        max-width: 36rem;
+        margin: 0 auto;
+      }
+
+      .pricing-hero h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .pricing-hero p {
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-lg);
+        margin: 0 0 var(--mdst-space-lg);
+      }
+
+      /* Billing toggle */
+      .billing-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-xs);
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .billing-option {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--mdst-space-xs) var(--mdst-space-md);
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+        cursor: pointer;
+        background: none;
+        border: var(--mdst-border-width) solid transparent;
+        font-family: inherit;
+        color: var(--mdst-color-muted);
+        transition:
+          color var(--mdst-transition),
+          background var(--mdst-transition),
+          border-color var(--mdst-transition);
+      }
+
+      .billing-option:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      .billing-option.active {
+        background: var(--mdst-color-fg);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-fg);
+      }
+
+      .billing-badge {
+        font-size: var(--mdst-text-xs);
+        font-weight: 500;
+        margin-left: var(--mdst-space-xs);
+      }
+
+      /* Pricing grid */
+      .pricing-section {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0 var(--mdst-space-lg) 4rem;
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--mdst-space-md);
+        align-items: start;
+      }
+
+      /* Pricing card */
+      .pricing-card--featured {
+        border-width: 2px;
+        position: relative;
+      }
+
+      .pricing-card-badge {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--mdst-color-fg);
+        color: var(--mdst-color-bg);
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        padding: 0.15em 0.75em;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .pricing-card > .mdst-card-header {
+        padding: var(--mdst-space-lg) var(--mdst-space-lg) 0;
+        font-weight: normal;
+      }
+
+      .pricing-card > .mdst-card-body {
+        padding: 0 var(--mdst-space-lg) var(--mdst-space-lg);
+      }
+
+      .pricing-card > .mdst-card-footer {
+        padding: var(--mdst-space-lg);
+        flex: 1;
+      }
+
+      .pricing-card-name {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .pricing-card-price {
+        display: flex;
+        align-items: baseline;
+        gap: var(--mdst-space-xs);
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .pricing-amount {
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+
+      .pricing-period {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+      }
+
+      .pricing-annual-note {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-md);
+        min-height: 1.2em;
+      }
+
+      .pricing-card-desc {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-lg);
+      }
+
+      .pricing-card-cta .mdst-button {
+        width: 100%;
+      }
+
+      /* Feature list */
+      .pricing-features-title {
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .pricing-features-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-sm);
+      }
+
+      .pricing-features-list li {
+        font-size: var(--mdst-text-sm);
+        display: flex;
+        align-items: start;
+        gap: var(--mdst-space-sm);
+      }
+
+      .pricing-features-list li::before {
+        content: "✓";
+        font-weight: 700;
+        flex-shrink: 0;
+        line-height: 1.5;
+      }
+
+      .feature-muted {
+        color: var(--mdst-color-muted);
+      }
+
+      .feature-muted::before {
+        content: "—" !important;
+        color: var(--mdst-color-muted);
+        font-weight: 400;
+      }
+
+      .feature-highlight {
+        font-weight: 500;
+      }
+
+      /* Comparison table section */
+      .comparison-section {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0 var(--mdst-space-lg) 4rem;
+      }
+
+      .comparison-header {
+        text-align: center;
+        margin-bottom: var(--mdst-space-xl);
+      }
+
+      .comparison-header h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .comparison-header p {
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .comparison-table-wrap {
+        overflow-x: auto;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .comparison-table th {
+        text-align: left;
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--mdst-color-muted);
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        background: var(--mdst-color-subtle);
+      }
+
+      .comparison-table th:first-child {
+        width: 40%;
+      }
+
+      .comparison-table th.plan-col {
+        text-align: center;
+        width: 20%;
+      }
+
+      .comparison-table td {
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+        font-size: var(--mdst-text-sm);
+        vertical-align: middle;
+      }
+
+      .comparison-table td.plan-col {
+        text-align: center;
+      }
+
+      .comparison-table .category-row td {
+        font-weight: 600;
+        font-size: var(--mdst-text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--mdst-color-muted);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        background: var(--mdst-color-subtle);
+      }
+
+      .check-icon {
+        color: var(--mdst-color-fg);
+        font-weight: 700;
+      }
+
+      .dash-icon {
+        color: var(--mdst-color-muted);
+      }
+
+      /* FAQ section */
+      .faq-section {
+        max-width: 40rem;
+        margin: 0 auto;
+        padding: 0 var(--mdst-space-lg) 4rem;
+      }
+
+      .faq-header {
+        text-align: center;
+        margin-bottom: var(--mdst-space-xl);
+      }
+
+      .faq-header h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0;
+      }
+
+      .faq-header p {
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .faq-item summary {
+        font-weight: 500;
+      }
+
+      .faq-item p {
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-sm);
+      }
+
+      /* CTA section */
+      .cta-section {
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        background: var(--mdst-color-subtle);
+        padding: 4rem var(--mdst-space-lg);
+      }
+
+      .cta-inner {
+        max-width: 40rem;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .cta-inner h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .cta-inner p {
+        color: var(--mdst-color-muted);
+        margin: var(--mdst-space-sm) 0 var(--mdst-space-lg);
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: var(--mdst-space-sm);
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .cta-sub {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      /* Footer */
+      .site-footer {
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-lg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        max-width: 72rem;
+        margin: 0 auto;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: var(--mdst-space-md);
+      }
+
+      .footer-links a {
+        color: var(--mdst-color-muted);
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      /* Enterprise card extras */
+      .enterprise-contact {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-sm);
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .pricing-grid {
+          grid-template-columns: 1fr;
+          max-width: 28rem;
+          margin: 0 auto;
+        }
+
+        .pricing-card--featured {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .pricing-hero h1 {
+          font-size: 1.75rem;
+        }
+
+        .pricing-hero {
+          padding: 3rem var(--mdst-space-md) 2rem;
+        }
+
+        .comparison-section {
+          padding: 0 var(--mdst-space-md) 3rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+          padding: var(--mdst-space-xs) var(--mdst-space-sm);
+          font-size: var(--mdst-text-xs);
+        }
+
+        .comparison-table th:first-child {
+          width: 30%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .site-nav .mdst-button--ghost {
+          display: none;
+        }
+
+        .billing-toggle {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .billing-option {
+          width: 100%;
+          text-align: center;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+        }
+
+        .cta-buttons .mdst-button {
+          width: 100%;
+        }
+
+        .site-footer {
+          flex-direction: column;
+          gap: var(--mdst-space-sm);
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
+      <nav class="site-nav">
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">Product</button>
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">Docs</button>
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">Blog</button>
+        <button class="mdst-button mdst-button--sm">Sign In</button>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="pricing-hero">
+      <h1>Simple, transparent pricing</h1>
+      <p>Start for free, upgrade when you're ready. No hidden fees, no surprises.</p>
+
+      <!-- Billing toggle -->
+      <div class="billing-toggle">
+        <button class="billing-option active" id="toggle-monthly" onclick="setBilling('monthly')">Monthly</button>
+        <button class="billing-option" id="toggle-yearly" onclick="setBilling('yearly')">
+          Yearly<span class="billing-badge mdst-tag mdst-tag--success mdst-tag--sm" style="margin-left: var(--mdst-space-xs)"
+            >Save 20%</span
+          >
+        </button>
+      </div>
+    </section>
+
+    <!-- Pricing cards -->
+    <section class="pricing-section">
+      <div class="pricing-grid">
+        <!-- Free -->
+        <div class="mdst-card pricing-card">
+          <div class="mdst-card-header mdst-card-header--borderless">
+            <div class="pricing-card-name">Starter</div>
+            <div class="pricing-card-price">
+              <span class="pricing-amount">$0</span>
+              <span class="pricing-period">/ month</span>
+            </div>
+            <div class="pricing-annual-note">&nbsp;</div>
+          </div>
+          <div class="mdst-card-body">
+            <p class="pricing-card-desc">Perfect for side projects, experiments, and trying things out.</p>
+            <div class="pricing-card-cta">
+              <button class="mdst-button">Get Started</button>
+            </div>
+          </div>
+          <div class="mdst-card-footer">
+            <div class="pricing-features-title">What's included</div>
+            <ul class="pricing-features-list">
+              <li>Up to 3 projects</li>
+              <li>1,000 API requests / month</li>
+              <li>500 MB storage</li>
+              <li>Community support</li>
+              <li>Basic analytics</li>
+              <li class="feature-muted">Custom domains</li>
+              <li class="feature-muted">Team members</li>
+              <li class="feature-muted">Priority support</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Pro (featured) -->
+        <div class="mdst-card pricing-card pricing-card--featured">
+          <div class="pricing-card-badge">Most Popular</div>
+          <div class="mdst-card-header mdst-card-header--borderless">
+            <div class="pricing-card-name">Pro</div>
+            <div class="pricing-card-price">
+              <span class="pricing-amount" data-monthly="$24" data-yearly="$19">$24</span>
+              <span class="pricing-period">/ month</span>
+            </div>
+            <div class="pricing-annual-note" data-monthly="&nbsp;" data-yearly="$228 billed annually">&nbsp;</div>
+          </div>
+          <div class="mdst-card-body">
+            <p class="pricing-card-desc">For professionals and growing teams who need more power and flexibility.</p>
+            <div class="pricing-card-cta">
+              <button class="mdst-button mdst-button--inverted">Start Free Trial</button>
+            </div>
+          </div>
+          <div class="mdst-card-footer">
+            <div class="pricing-features-title">Everything in Starter, plus</div>
+            <ul class="pricing-features-list">
+              <li class="feature-highlight">Unlimited projects</li>
+              <li>100,000 API requests / month</li>
+              <li>50 GB storage</li>
+              <li class="feature-highlight">Up to 5 team members</li>
+              <li>Custom domains</li>
+              <li>Advanced analytics</li>
+              <li>Email support</li>
+              <li class="feature-muted">SSO / SAML</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="mdst-card pricing-card">
+          <div class="mdst-card-header mdst-card-header--borderless">
+            <div class="pricing-card-name">Enterprise</div>
+            <div class="pricing-card-price">
+              <span class="pricing-amount" data-monthly="$89" data-yearly="$71">$89</span>
+              <span class="pricing-period">/ month</span>
+            </div>
+            <div class="pricing-annual-note" data-monthly="&nbsp;" data-yearly="$852 billed annually">&nbsp;</div>
+          </div>
+          <div class="mdst-card-body">
+            <p class="pricing-card-desc">For orgs that need advanced security, compliance, and dedicated support.</p>
+            <div class="pricing-card-cta">
+              <button class="mdst-button">Contact Sales</button>
+            </div>
+          </div>
+          <div class="mdst-card-footer">
+            <div class="pricing-features-title">Everything in Pro, plus</div>
+            <ul class="pricing-features-list">
+              <li class="feature-highlight">Unlimited team members</li>
+              <li>Unlimited API requests</li>
+              <li>500 GB storage</li>
+              <li>SSO / SAML authentication</li>
+              <li>Audit logs</li>
+              <li>99.99% SLA</li>
+              <li>Dedicated account manager</li>
+              <li>Custom contracts &amp; invoicing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature comparison table -->
+    <section class="comparison-section">
+      <div class="comparison-header">
+        <h2>Compare plans in detail</h2>
+        <p>A complete breakdown of what's included in each plan.</p>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="plan-col">Starter</th>
+              <th class="plan-col">Pro</th>
+              <th class="plan-col">Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Usage -->
+            <tr class="category-row">
+              <td colspan="4">Usage</td>
+            </tr>
+            <tr>
+              <td>Projects</td>
+              <td class="plan-col">3</td>
+              <td class="plan-col">Unlimited</td>
+              <td class="plan-col">Unlimited</td>
+            </tr>
+            <tr>
+              <td>API requests / month</td>
+              <td class="plan-col">1,000</td>
+              <td class="plan-col">100,000</td>
+              <td class="plan-col">Unlimited</td>
+            </tr>
+            <tr>
+              <td>Storage</td>
+              <td class="plan-col">500 MB</td>
+              <td class="plan-col">50 GB</td>
+              <td class="plan-col">500 GB</td>
+            </tr>
+            <tr>
+              <td>Team members</td>
+              <td class="plan-col">1</td>
+              <td class="plan-col">5</td>
+              <td class="plan-col">Unlimited</td>
+            </tr>
+            <tr>
+              <td>Custom domains</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+
+            <!-- Features -->
+            <tr class="category-row">
+              <td colspan="4">Features</td>
+            </tr>
+            <tr>
+              <td>Analytics</td>
+              <td class="plan-col">Basic</td>
+              <td class="plan-col">Advanced</td>
+              <td class="plan-col">Advanced</td>
+            </tr>
+            <tr>
+              <td>Webhooks</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+            <tr>
+              <td>API access</td>
+              <td class="plan-col">Read only</td>
+              <td class="plan-col">Full</td>
+              <td class="plan-col">Full</td>
+            </tr>
+            <tr>
+              <td>Integrations</td>
+              <td class="plan-col">3</td>
+              <td class="plan-col">Unlimited</td>
+              <td class="plan-col">Unlimited</td>
+            </tr>
+            <tr>
+              <td>Preview environments</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+
+            <!-- Security -->
+            <tr class="category-row">
+              <td colspan="4">Security &amp; Compliance</td>
+            </tr>
+            <tr>
+              <td>Two-factor auth</td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+            <tr>
+              <td>SSO / SAML</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+            <tr>
+              <td>Audit logs</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+            <tr>
+              <td>SOC 2 report</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+            <tr>
+              <td>SLA</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col">99.9%</td>
+              <td class="plan-col">99.99%</td>
+            </tr>
+
+            <!-- Support -->
+            <tr class="category-row">
+              <td colspan="4">Support</td>
+            </tr>
+            <tr>
+              <td>Community forum</td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+            <tr>
+              <td>Email support</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+            <tr>
+              <td>Priority support</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+            <tr>
+              <td>Dedicated account manager</td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="dash-icon">—</span></td>
+              <td class="plan-col"><span class="check-icon">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="faq-header">
+        <h2>Frequently asked questions</h2>
+        <p>Everything you need to know about our pricing.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="mdst-details mdst-details--section faq-item" open>
+          <summary>Can I switch plans at any time?</summary>
+          <p>
+            Yes. You can upgrade or downgrade your plan at any time. When upgrading, you'll be charged the prorated difference for the
+            remainder of your billing cycle. When downgrading, the new rate takes effect at your next billing date.
+          </p>
+        </details>
+
+        <details class="mdst-details mdst-details--section faq-item">
+          <summary>Is there a free trial for the Pro plan?</summary>
+          <p>
+            Absolutely. Every Pro plan starts with a 14-day free trial — no credit card required. You'll have full access to all Pro
+            features during the trial period. If you choose not to continue, your account will automatically revert to the Starter plan.
+          </p>
+        </details>
+
+        <details class="mdst-details mdst-details--section faq-item">
+          <summary>What happens if I exceed my API request limit?</summary>
+          <p>
+            We won't cut you off. If you go over your monthly limit, we'll send you a notification and give you a grace period. Consistent
+            overages may require an upgrade, but we'll always work with you on the best path forward.
+          </p>
+        </details>
+
+        <details class="mdst-details mdst-details--section faq-item">
+          <summary>Do you offer discounts for startups or non-profits?</summary>
+          <p>
+            Yes! We offer 50% off Pro and Enterprise plans for verified non-profits and early-stage startups (under $1M in funding). Reach
+            out to our sales team with details and we'll get you set up.
+          </p>
+        </details>
+
+        <details class="mdst-details mdst-details--section faq-item">
+          <summary>What payment methods do you accept?</summary>
+          <p>
+            We accept all major credit cards (Visa, Mastercard, American Express) and can arrange invoicing for annual Enterprise contracts.
+            All payments are processed securely through Stripe.
+          </p>
+        </details>
+
+        <details class="mdst-details mdst-details--section faq-item">
+          <summary>Can I cancel at any time?</summary>
+          <p>
+            Yes, you can cancel at any time with no cancellation fees. Your plan will remain active until the end of your current billing
+            period. All your data is available for export for 30 days after cancellation.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-inner">
+        <h2>Not sure which plan is right for you?</h2>
+        <p>Talk to our team and we'll help you figure out the best option for your needs. No pressure, no commitment.</p>
+        <div class="cta-buttons">
+          <button class="mdst-button mdst-button--inverted">Talk to Sales</button>
+          <button class="mdst-button">View Documentation</button>
+        </div>
+        <p class="cta-sub">Or start free and upgrade later — no credit card required.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>&copy; 2026 Example Pricing. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Twitter</a>
+        <a href="#">GitHub</a>
+      </div>
+    </footer>
+
+    <script>
+      function setBilling(period) {
+        var monthly = document.getElementById("toggle-monthly");
+        var yearly = document.getElementById("toggle-yearly");
+
+        if (period === "monthly") {
+          monthly.classList.add("active");
+          yearly.classList.remove("active");
+        } else {
+          yearly.classList.add("active");
+          monthly.classList.remove("active");
+        }
+
+        // Update prices
+        document.querySelectorAll("[data-monthly]").forEach(function (el) {
+          var value = period === "monthly" ? el.getAttribute("data-monthly") : el.getAttribute("data-yearly");
+          if (el.classList.contains("pricing-amount")) {
+            el.textContent = value;
+          } else {
+            el.innerHTML = value;
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

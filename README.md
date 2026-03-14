@@ -37,7 +37,7 @@ import "modest-ui/dist/modest-ui.css";
 
 ## Documentation
 
-View the component documentation and examples at [thisismodest.github.io/modest-ui](https://thisismodest.github.io/modest-ui/)
+View the component documentation and examples at [modest-ui.com](https://modest-ui.com/)
 
 ## Theming
 
@@ -58,7 +58,7 @@ Override CSS custom properties to create your own theme:
 }
 ```
 
-Use the [Theme Playground](https://thisismodest.github.io/modest-ui/#theme) to experiment with different themes.
+Use the [Theme Playground](https://modest-ui.com/theme/) to experiment with different themes.
 
 ## Development
 

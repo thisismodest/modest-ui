@@ -17,6 +17,7 @@
 }
 
 .mdst-card-footer {
+  margin-top: auto;
   padding: var(--mdst-space-md);
   border-top: var(--mdst-border-width) solid var(--mdst-color-border);
 }
@@ -68,6 +69,18 @@
 .mdst-card--compact > .mdst-card-body,
 .mdst-card--compact > .mdst-card-footer {
   padding: var(--mdst-space-sm);
+}
+
+/* Borderless header — removes the bottom border from the header */
+
+.mdst-card-header--borderless.mdst-card-header--borderless {
+  border-bottom: none;
+}
+
+/* Borderless footer — removes the top border from the footer */
+
+.mdst-card-footer--borderless.mdst-card-footer--borderless {
+  border-top: none;
 }
 
 /* Flush — no padding, for embedding raw content like tables or images */
