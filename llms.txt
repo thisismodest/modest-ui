@@ -213,26 +213,7 @@ Classes:
 - `.mdst-checkbox`
 - `.mdst-checkbox-label`
 - `.mdst-checkbox--toggle`
-
-```html
-<!-- With label (recommended) -->
-<label class="mdst-checkbox-label">
-  <input type="checkbox" class="mdst-checkbox" />
-  Label text
-</label>
-
-<!-- Standalone -->
-<input type="checkbox" class="mdst-checkbox" />
-
-<!-- States -->
-<input type="checkbox" class="mdst-checkbox" checked />
-<input type="checkbox" class="mdst-checkbox" disabled />
-
-<!-- Toggle -->
-<input type="checkbox" class="mdst-checkbox--toggle" />
-<input type="checkbox" class="mdst-checkbox--toggle" checked />
-<input type="checkbox" class="mdst-checkbox--toggle" disabled />
-```
+- `.mdst-checkbox--toggle-rounded`
 
 ---
 
@@ -890,7 +871,7 @@ Classes:
 
 Button:         .mdst-button  |  --ghost  --inverted  --lg  --sm
 Card:           .mdst-card  +  -body  -footer  -header  |  --borderless  --compact  --flush  --interactive  --borderless  --borderless
-Checkbox:       .mdst-checkbox  +  -label  |  --toggle
+Checkbox:       .mdst-checkbox  +  -label  |  --toggle  --toggle-rounded
 Code:           .mdst-code
 Color Picker:   .mdst-color-picker  +  __input  __text  |  --square
 Details:        .mdst-details  |  --borderless  --compact  --section

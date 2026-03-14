@@ -399,18 +399,6 @@
         padding: var(--mdst-space-xl) 0;
       }
 
-      .auth-success-icon {
-        width: 3rem;
-        height: 3rem;
-        border: var(--mdst-border-width) solid var(--mdst-color-success);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto var(--mdst-space-md);
-        color: var(--mdst-color-success);
-        font-size: var(--mdst-text-lg);
-      }
-
       .auth-success h2 {
         font-size: var(--mdst-text-lg);
         font-weight: 600;
@@ -428,19 +416,8 @@
 
       /* OTP group */
       .otp-group {
-        display: flex;
-        gap: var(--mdst-space-sm);
         justify-content: center;
         margin: var(--mdst-space-lg) 0;
-      }
-
-      .otp-group .mdst-input {
-        width: 3rem;
-        height: 3rem;
-        text-align: center;
-        font-size: var(--mdst-text-lg);
-        font-weight: 600;
-        padding: 0;
       }
 
       /* Error state */
@@ -525,7 +502,7 @@
           grid-template-columns: 1fr;
         }
 
-        .otp-group .mdst-input {
+        .otp-group .mdst-otp-input-digit {
           width: 2.5rem;
           height: 2.5rem;
         }
@@ -620,7 +597,16 @@
                   <label for="login-password">Password</label>
                   <button class="form-link" type="button" onclick="showView('forgot')">Forgot password?</button>
                 </div>
-                <input type="password" id="login-password" class="mdst-input" placeholder="••••••••" />
+                <div class="mdst-password-input">
+                  <input
+                    type="text"
+                    autocomplete="current-password"
+                    id="login-password"
+                    class="mdst-input mdst-password-input__field"
+                    placeholder="••••••••"
+                  />
+                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                </div>
               </div>
 
               <div class="form-row" style="margin-top: var(--mdst-space-xs)">
@@ -630,7 +616,7 @@
                 </label>
               </div>
 
-              <button class="mdst-button mdst-button--inverted form-submit" type="submit">Sign In</button>
+              <button class="mdst-button mdst-button--inverted form-submit" onclick="showView('verify')" type="submit">Sign In</button>
             </form>
 
             <div class="auth-footer">Don't have an account? <button onclick="showView('signup')">Sign up</button></div>
@@ -702,13 +688,17 @@
 
               <div class="form-group">
                 <label for="signup-password">Password</label>
-                <input
-                  type="password"
-                  id="signup-password"
-                  class="mdst-input"
-                  placeholder="Create a strong password"
-                  oninput="updatePasswordStrength(this.value)"
-                />
+                <div class="mdst-password-input">
+                  <input
+                    type="text"
+                    autocomplete="new-password"
+                    id="signup-password"
+                    class="mdst-input mdst-password-input__field"
+                    placeholder="Create a strong password"
+                    oninput="updatePasswordStrength(this.value)"
+                  />
+                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                </div>
                 <div class="password-strength">
                   <div class="password-strength-bar" id="strength-1"></div>
                   <div class="password-strength-bar" id="strength-2"></div>
@@ -739,7 +729,7 @@
               <div style="margin-top: var(--mdst-space-xs)">
                 <label class="mdst-checkbox-label">
                   <input type="checkbox" class="mdst-checkbox" />
-                  I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                  <span> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> </span>
                 </label>
               </div>
 
@@ -756,19 +746,19 @@
           <!-- ============================================ -->
           <div class="auth-view" id="view-verify">
             <div class="auth-success">
-              <div class="auth-success-icon">✉</div>
               <h2>Check your email</h2>
               <p>We've sent a 6-digit verification code to <strong>you@company.com</strong>. Enter it below to verify your account.</p>
             </div>
 
             <form class="auth-form" onsubmit="return false;" style="align-items: center">
-              <div class="otp-group">
-                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
+              <div class="mdst-otp-input otp-group">
+                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <span class="mdst-otp-input-separator"></span>
+                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
               </div>
 
               <button class="mdst-button mdst-button--inverted" style="width: 100%" onclick="showView('login')">Verify Email</button>
@@ -837,13 +827,31 @@
             <form class="auth-form" onsubmit="return false;">
               <div class="form-group">
                 <label for="reset-password">New password</label>
-                <input type="password" id="reset-password" class="mdst-input" placeholder="••••••••" />
+                <div class="mdst-password-input">
+                  <input
+                    type="text"
+                    autocomplete="new-password"
+                    id="reset-password"
+                    class="mdst-input mdst-password-input__field"
+                    placeholder="••••••••"
+                  />
+                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                </div>
                 <span class="form-hint">Must be at least 8 characters</span>
               </div>
 
               <div class="form-group">
                 <label for="reset-confirm">Confirm new password</label>
-                <input type="password" id="reset-confirm" class="mdst-input" placeholder="••••••••" />
+                <div class="mdst-password-input">
+                  <input
+                    type="text"
+                    autocomplete="new-password"
+                    id="reset-confirm"
+                    class="mdst-input mdst-password-input__field"
+                    placeholder="••••••••"
+                  />
+                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                </div>
               </div>
 
               <button class="mdst-button mdst-button--inverted form-submit" type="submit" onclick="showView('reset-success')">
@@ -926,7 +934,7 @@
       }
 
       // OTP auto-advance
-      document.querySelectorAll(".otp-group .mdst-input").forEach(function (input, index, inputs) {
+      document.querySelectorAll(".otp-group .mdst-otp-input-digit").forEach(function (input, index, inputs) {
         input.addEventListener("input", function () {
           if (this.value.length === 1 && index < inputs.length - 1) {
             inputs[index + 1].focus();
