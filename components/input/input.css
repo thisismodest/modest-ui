@@ -16,24 +16,25 @@
   border-radius: var(--mdst-radius);
   outline: none;
   transition: border-color var(--mdst-transition);
-}
 
-.mdst-input::placeholder {
-  color: var(--mdst-color-muted);
-  opacity: 1;
-}
+  &::placeholder {
+    color: var(--mdst-color-muted);
+    opacity: 1;
+  }
 
-.mdst-input:focus {
-  border-color: var(--mdst-color-focus);
-}
+  &:focus {
+    border-color: var(--mdst-color-focus);
+  }
 
-.mdst-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
-/* Textarea variant */
-textarea.mdst-input {
-  min-height: 6rem;
-  resize: vertical;
+  /* Textarea variant */
+
+  &:is(textarea) {
+    min-height: 6rem;
+    resize: vertical;
+  }
 }

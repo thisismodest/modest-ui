@@ -25,20 +25,6 @@ Small, dismissible messages that appear temporarily (success, error, warning, in
 </output>
 ```
 
-### Badge / Tag
-
-Small inline labels for status, categories, or counts.
-
-- Variants: `--solid`, `--outline`
-- Semantic colors: `--success`, `--warning`, `--error`, `--info`
-- Sizes: `--sm`, default
-
-```html
-<span class="mdst-badge">Default</span>
-<span class="mdst-badge mdst-badge--success">Active</span>
-<span class="mdst-badge mdst-badge--outline">Draft</span>
-```
-
 ### Kbd (Keyboard Shortcut)
 
 Styled `<kbd>` element for displaying keyboard shortcuts and hotkeys.
@@ -74,23 +60,6 @@ Dedicated textarea styling (currently `textarea.mdst-input` exists but is minima
 ```html
 <textarea class="mdst-textarea" rows="3" placeholder="Type a message..."></textarea>
 <textarea class="mdst-textarea mdst-textarea--ghost" rows="1"></textarea>
-```
-
-### Card
-
-A generic bordered container for grouping content — headers, bodies, footers.
-
-- Structural children: `-header`, `-body`, `-footer`
-- Variants: `--borderless`, `--interactive` (hover state)
-
-```html
-<div class="mdst-card">
-  <div class="mdst-card-header">Title</div>
-  <div class="mdst-card-body">Content goes here.</div>
-  <div class="mdst-card-footer">
-    <button class="mdst-button mdst-button--sm">Action</button>
-  </div>
-</div>
 ```
 
 ### Avatar / Icon Button
@@ -181,11 +150,6 @@ A styled horizontal rule, optionally with centered text.
 
 Small utility classes that reduce the need for bespoke CSS in consuming apps. These should be opt-in (separate import or included in the bundle with low specificity).
 
-| Utility         | Class            | Purpose                                                       |
-| --------------- | ---------------- | ------------------------------------------------------------- |
-| Visually hidden | `.mdst-sr-only`  | Screen-reader-only content                                    |
-| Truncate        | `.mdst-truncate` | Single-line text overflow ellipsis                            |
-| Muted text      | `.mdst-muted`    | `color: var(--mdst-color-muted)`                              |
-| Small text      | `.mdst-small`    | `font-size: var(--mdst-text-sm)`                              |
-| Mono text       | `.mdst-mono`     | `font-family: var(--mdst-font-mono)`                          |
-| Flex center     | `.mdst-center`   | `display: flex; align-items: center; justify-content: center` |
+| Utility     | Class          | Purpose                                                       |
+| ----------- | -------------- | ------------------------------------------------------------- |
+| Flex center | `.mdst-center` | `display: flex; align-items: center; justify-content: center` |
