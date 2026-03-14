@@ -13,33 +13,32 @@
   border-radius: 50%;
   cursor: pointer;
   position: relative;
-  transition: border-color var(--mdst-transition);
-}
 
-.mdst-radio:checked::after {
-  content: "";
-  position: absolute;
-  inset: 3px;
-  background: var(--mdst-color-fg);
-  border-radius: 50%;
-}
+  &:checked::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background: var(--mdst-color-fg);
+    border-radius: 50%;
+  }
 
-.mdst-radio:hover {
-  border-color: var(--mdst-color-muted);
-}
+  &:hover {
+    border-color: var(--mdst-color-muted);
+  }
 
-.mdst-radio:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
+  &:focus-visible {
+    outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+    outline-offset: var(--mdst-border-width);
+  }
 
-.mdst-radio:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 
-.mdst-radio:disabled:hover {
-  border-color: var(--mdst-color-border);
+    &:hover {
+      border-color: var(--mdst-color-border);
+    }
+  }
 }
 
 /* Radio with label wrapper */
@@ -52,11 +51,11 @@
   line-height: var(--mdst-line-height);
   cursor: pointer;
   user-select: none;
-}
 
-.mdst-radio-label:has(.mdst-radio:disabled) {
-  opacity: 0.5;
-  cursor: not-allowed;
+  &:has(.mdst-radio:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 /* Radio group */
@@ -65,9 +64,61 @@
   display: flex;
   flex-direction: column;
   gap: var(--mdst-space-sm);
+
+  &.mdst-radio-group--horizontal {
+    flex-direction: row;
+    gap: var(--mdst-space-md);
+  }
 }
 
-.mdst-radio-group--horizontal {
-  flex-direction: row;
-  gap: var(--mdst-space-md);
+/* Radio card — content-rich selectable cards */
+
+.mdst-radio-card {
+  display: block;
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  padding: var(--mdst-space-md);
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  border-radius: var(--mdst-radius);
+  overflow: hidden;
+
+  /* Visually hide the native radio input while keeping it keyboard-accessible */
+  & .mdst-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background: var(--mdst-color-subtle);
+  }
+
+  &:has(.mdst-radio:checked) {
+    border-color: var(--mdst-color-fg);
+    outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-fg);
+    outline-offset: calc(-1 * var(--mdst-border-width));
+  }
+
+  &:has(.mdst-radio:focus-visible) {
+    outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-focus);
+    outline-offset: calc(-1 * var(--mdst-border-width));
+  }
+
+  &:has(.mdst-radio:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+/* Radio card group — grid layout for cards */
+
+.mdst-radio-card-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mdst-space-sm);
 }

@@ -23,55 +23,58 @@
   display: inline-flex;
   gap: var(--mdst-space-sm);
   align-items: center;
-}
 
-.mdst-otp-input-digit {
-  width: 1.5em;
-  height: 2em;
-  padding: 0;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  font-family: var(--mdst-font-mono);
-  font-size: 1.25em;
-  text-align: center;
-  caret-color: var(--mdst-color-fg);
-  transition: border-color var(--mdst-transition);
-}
+  & .mdst-otp-input-digit {
+    width: 1.5em;
+    height: 2em;
+    padding: 0;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    font-family: var(--mdst-font-mono);
+    font-size: 1.25em;
+    text-align: center;
+    caret-color: var(--mdst-color-fg);
+    transition: border-color var(--mdst-transition);
 
-.mdst-otp-input-digit:focus {
-  outline: none;
-  border-color: var(--mdst-color-focus);
-}
+    &:focus {
+      outline: none;
+      border-color: var(--mdst-color-focus);
+    }
 
-.mdst-otp-input-digit::placeholder {
-  color: var(--mdst-color-muted);
-}
+    &::placeholder {
+      color: var(--mdst-color-muted);
+    }
 
-.mdst-otp-input-digit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
-/* Separator (e.g., dash between groups) */
-.mdst-otp-input-separator {
-  width: 0.5em;
-  height: 0.0625em;
-  background: var(--mdst-color-border);
-}
+    /* Filled state - when digit has a value */
+    &:not(:placeholder-shown) {
+      border-color: var(--mdst-color-fg);
+    }
+  }
 
-/* Filled state - when digit has a value */
-.mdst-otp-input-digit:not(:placeholder-shown) {
-  border-color: var(--mdst-color-fg);
-}
+  /* Separator (e.g., dash between groups) */
 
-/* Error state */
-.mdst-otp-input--error .mdst-otp-input-digit {
-  border-color: var(--mdst-color-error, #c00);
-}
+  & .mdst-otp-input-separator {
+    width: 0.5em;
+    height: 0.0625em;
+    background: var(--mdst-color-border);
+  }
 
-/* Success state */
-.mdst-otp-input--success .mdst-otp-input-digit {
-  border-color: var(--mdst-color-success, #0a0);
+  /* Error state */
+
+  &.mdst-otp-input--error .mdst-otp-input-digit {
+    border-color: var(--mdst-color-error, #c00);
+  }
+
+  /* Success state */
+
+  &.mdst-otp-input--success .mdst-otp-input-digit {
+    border-color: var(--mdst-color-success, #0a0);
+  }
 }

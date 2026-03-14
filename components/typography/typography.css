@@ -64,15 +64,15 @@
   text-decoration: underline;
   text-underline-offset: 0.15em;
   transition: opacity var(--mdst-transition);
-}
 
-.mdst-a:hover {
-  opacity: 0.6;
-}
+  &:hover {
+    opacity: 0.6;
+  }
 
-.mdst-a:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
+  &:focus-visible {
+    outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+    outline-offset: var(--mdst-border-width);
+  }
 }
 
 /* Strong / Bold */
@@ -140,10 +140,10 @@
 
 .mdst-li {
   margin-bottom: var(--mdst-space-xs);
-}
 
-.mdst-li:last-child {
-  margin-bottom: 0;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 /* Unstyled list */

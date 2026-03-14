@@ -357,39 +357,11 @@
       }
 
       /* Appearance section */
-      .theme-options {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--mdst-space-sm);
+      .mdst-radio-card-group {
         margin-bottom: var(--mdst-space-md);
       }
 
-      .theme-option {
-        border: var(--mdst-border-width) solid var(--mdst-color-border);
-        padding: var(--mdst-space-md);
-        cursor: pointer;
-        text-align: center;
-        transition:
-          background var(--mdst-transition),
-          border-color var(--mdst-transition);
-        position: relative;
-      }
-
-      .theme-option:hover {
-        background: var(--mdst-color-subtle);
-      }
-
-      .theme-option.active {
-        border-width: 2px;
-      }
-
-      .theme-option input[type="radio"] {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .theme-option-preview {
+      .theme-preview {
         width: 100%;
         aspect-ratio: 16 / 10;
         border: var(--mdst-border-width) solid var(--mdst-color-border);
@@ -398,32 +370,6 @@
         align-items: center;
         justify-content: center;
         font-size: var(--mdst-text-lg);
-      }
-
-      .theme-option-preview--light {
-        background: #fff;
-        color: #000;
-      }
-
-      .theme-option-preview--dark {
-        background: #111;
-        color: #fff;
-      }
-
-      .theme-option-preview--system {
-        background: linear-gradient(135deg, #fff 50%, #111 50%);
-        color: #666;
-      }
-
-      .theme-option-label {
-        font-size: var(--mdst-text-sm);
-        font-weight: 500;
-      }
-
-      .theme-option-desc {
-        font-size: var(--mdst-text-xs);
-        color: var(--mdst-color-muted);
-        margin-top: 2px;
       }
 
       /* Danger zone */
@@ -960,24 +906,24 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             <!-- Theme -->
             <div class="form-group">
               <label>Theme</label>
-              <div class="theme-options">
-                <label class="theme-option active" id="theme-light">
-                  <input type="radio" name="theme" value="light" checked onchange="selectTheme('light')" />
-                  <div class="theme-option-preview theme-option-preview--light">☀</div>
-                  <div class="theme-option-label">Light</div>
-                  <div class="theme-option-desc">Clean and bright</div>
+              <div class="mdst-radio-card-group">
+                <label class="mdst-radio-card">
+                  <input type="radio" name="theme" value="light" class="mdst-radio" checked />
+                  <div class="theme-preview" style="background: #fff; color: #000">☀</div>
+                  <div class="mdst-small mdst-strong">Light</div>
+                  <div class="mdst-small mdst-muted">Clean and bright</div>
                 </label>
-                <label class="theme-option" id="theme-dark">
-                  <input type="radio" name="theme" value="dark" onchange="selectTheme('dark')" />
-                  <div class="theme-option-preview theme-option-preview--dark">☾</div>
-                  <div class="theme-option-label">Dark</div>
-                  <div class="theme-option-desc">Easy on the eyes</div>
+                <label class="mdst-radio-card">
+                  <input type="radio" name="theme" value="dark" class="mdst-radio" />
+                  <div class="theme-preview" style="background: #111; color: #fff">☾</div>
+                  <div class="mdst-small mdst-strong">Dark</div>
+                  <div class="mdst-small mdst-muted">Easy on the eyes</div>
                 </label>
-                <label class="theme-option" id="theme-system">
-                  <input type="radio" name="theme" value="system" onchange="selectTheme('system')" />
-                  <div class="theme-option-preview theme-option-preview--system">◑</div>
-                  <div class="theme-option-label">System</div>
-                  <div class="theme-option-desc">Follow OS setting</div>
+                <label class="mdst-radio-card">
+                  <input type="radio" name="theme" value="system" class="mdst-radio" />
+                  <div class="theme-preview" style="background: linear-gradient(135deg, #fff 50%, #111 50%); color: #666">◑</div>
+                  <div class="mdst-small mdst-strong">System</div>
+                  <div class="mdst-small mdst-muted">Follow OS setting</div>
                 </label>
               </div>
             </div>
@@ -1420,17 +1366,6 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
 
         // Scroll to top
         window.scrollTo(0, 0);
-      }
-
-      // Theme selection
-      function selectTheme(theme) {
-        document.querySelectorAll(".theme-option").forEach(function (option) {
-          option.classList.remove("active");
-        });
-        var target = document.getElementById("theme-" + theme);
-        if (target) {
-          target.classList.add("active");
-        }
       }
 
       // Toast notification

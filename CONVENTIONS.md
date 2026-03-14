@@ -69,6 +69,26 @@ Always use design tokens from `base/tokens.css`:
 --mdst-transition
 ```
 
+### Native CSS Nesting
+
+All component CSS must use native CSS nesting. Each component should have a **single top-level selector** (the root block class), with everything else nested inside it:
+
+- **Pseudo-classes** (`:hover`, `:focus-visible`, `:disabled`, `:checked`) nest with `&:pseudo`
+- **Pseudo-elements** (`::before`, `::after`, `::backdrop`) nest with `&::pseudo`
+- **Sub-states** (e.g. `:disabled:hover`, `:checked::before`) nest further inside their parent state block
+- **Child elements** (`-header`, `-body`, `__field`, `__input`) nest with `& .mdst-component-child`
+- **Modifier classes** (`--variant`, `--sm`) nest with `&.mdst-component--variant`
+- **Contextual selectors** (`:has()`) nest with `&:has()`
+
+Exceptions for separate top-level blocks:
+
+- **Wrapper/sibling elements** that are not DOM children of the root (e.g. `.mdst-checkbox-label` wraps the checkbox, `.mdst-radio-label` wraps the radio)
+- **Replacement elements** that go on a different element entirely (e.g. `.mdst-checkbox--toggle` replaces `.mdst-checkbox` on the input)
+- **Unrelated element collections** (e.g. typography classes like `.mdst-h1`, `.mdst-p`, `.mdst-a`)
+- **`@media` blocks** remain at the top level with their component selector nested inside
+
+**Pseudo-element hover note:** Never nest `:hover` inside a pseudo-element like `&::file-selector-button`. Instead, put `:hover` on the element and target the pseudo-element: `&:hover::file-selector-button`.
+
 ### Component CSS Pattern
 
 ```css
@@ -76,35 +96,49 @@ Always use design tokens from `base/tokens.css`:
 
 .mdst-component {
   /* Base styles */
-}
 
-.mdst-component:hover {
-  /* Hover state */
-}
+  &:hover {
+    /* Hover state */
+  }
 
-.mdst-component:focus-visible {
-  /* Focus state - use outline */
-}
+  &:focus-visible {
+    /* Focus state - use outline */
+  }
 
-.mdst-component:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 
-/* Variants */
+    &:hover {
+      /* Reset hover when disabled */
+    }
+  }
 
-.mdst-component--variant {
-  /* Variant styles */
-}
+  /* Child elements */
 
-/* Sizes */
+  & .mdst-component-child {
+    /* Child styles */
+  }
 
-.mdst-component--sm {
-  /* Small size */
-}
+  /* Variants */
 
-.mdst-component--lg {
-  /* Large size */
+  &.mdst-component--variant {
+    /* Variant styles */
+
+    &:hover {
+      /* Variant hover state */
+    }
+  }
+
+  /* Sizes */
+
+  &.mdst-component--sm {
+    /* Small size */
+  }
+
+  &.mdst-component--lg {
+    /* Large size */
+  }
 }
 ```
 

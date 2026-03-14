@@ -21,38 +21,40 @@
   border-radius: var(--mdst-radius);
   tab-size: 2;
   -moz-tab-size: 2;
-}
 
-.mdst-pre:focus {
-  outline: 0.125em solid var(--mdst-color-focus);
-  outline-offset: 0.125em;
-}
+  &:focus {
+    outline: 0.125em solid var(--mdst-color-focus);
+    outline-offset: 0.125em;
+  }
 
-/* Nested code inside pre — reset styles */
-.mdst-pre code,
-.mdst-pre .mdst-code {
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  font-size: inherit;
-  word-break: break-word;
-}
+  /* Nested code inside pre — reset styles */
+  & code,
+  & .mdst-code {
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    font-size: inherit;
+    word-break: break-word;
+  }
 
-/* Variants */
-.mdst-pre--borderless {
-  border: none;
-}
+  /* Variants */
 
-.mdst-pre--compact {
-  padding: var(--mdst-space-sm);
-}
+  &.mdst-pre--borderless {
+    border: none;
+  }
 
-/* Allow horizontal scroll if explicitly needed */
-.mdst-pre--scroll {
-  overflow-x: auto;
-  overflow-wrap: normal;
-  word-wrap: normal;
-  word-break: normal;
-  white-space: pre;
+  &.mdst-pre--compact {
+    padding: var(--mdst-space-sm);
+  }
+
+  /* Allow horizontal scroll if explicitly needed */
+
+  &.mdst-pre--scroll {
+    overflow-x: auto;
+    overflow-wrap: normal;
+    word-wrap: normal;
+    word-break: normal;
+    white-space: pre;
+  }
 }

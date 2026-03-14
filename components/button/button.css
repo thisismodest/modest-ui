@@ -20,57 +20,57 @@
     border-color var(--mdst-transition);
   -webkit-appearance: none;
   appearance: none;
-}
 
-.mdst-button:hover {
-  background: var(--mdst-button-hover-bg);
-  color: var(--mdst-button-hover-color);
-  border-color: var(--mdst-button-hover-border);
-}
+  &:hover {
+    background: var(--mdst-button-hover-bg);
+    color: var(--mdst-button-hover-color);
+    border-color: var(--mdst-button-hover-border);
+  }
 
-.mdst-button:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
+  &:focus-visible {
+    outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+    outline-offset: var(--mdst-border-width);
+  }
 
-.mdst-button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 
-.mdst-button:disabled:hover {
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  border-color: var(--mdst-color-border);
-}
+    &:hover {
+      background: var(--mdst-color-bg);
+      color: var(--mdst-color-fg);
+      border-color: var(--mdst-color-border);
+    }
+  }
 
-/* Variants */
+  /* Variants */
 
-.mdst-button--ghost {
-  border-color: transparent;
-}
+  &.mdst-button--ghost {
+    border-color: transparent;
 
-.mdst-button--ghost:hover {
-  border-color: var(--mdst-button-hover-border);
-}
+    &:hover {
+      border-color: var(--mdst-button-hover-border);
+    }
+  }
 
-.mdst-button--inverted {
-  background: var(--mdst-color-fg);
-  color: var(--mdst-color-bg);
-}
+  &.mdst-button--inverted {
+    background: var(--mdst-color-fg);
+    color: var(--mdst-color-bg);
 
-.mdst-button--inverted:hover {
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-}
+    &:hover {
+      background: var(--mdst-color-bg);
+      color: var(--mdst-color-fg);
+    }
+  }
 
-/* Sizes */
+  /* Sizes */
 
-.mdst-button--sm {
-  padding: var(--mdst-space-xs) var(--mdst-space-sm);
-  font-size: var(--mdst-text-sm);
-}
+  &.mdst-button--sm {
+    padding: var(--mdst-space-xs) var(--mdst-space-sm);
+    font-size: var(--mdst-text-sm);
+  }
 
-.mdst-button--lg {
-  padding: var(--mdst-space-md) var(--mdst-space-lg);
+  &.mdst-button--lg {
+    padding: var(--mdst-space-md) var(--mdst-space-lg);
+  }
 }
