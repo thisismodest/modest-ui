@@ -119,3 +119,13 @@
 .mdst-checkbox--toggle:disabled:hover {
   border-color: var(--mdst-color-border);
 }
+
+/* Toggle rounded variant */
+
+.mdst-checkbox--toggle-rounded {
+  border-radius: 9999px;
+}
+
+.mdst-checkbox--toggle-rounded::before {
+  border-radius: 50%;
+}

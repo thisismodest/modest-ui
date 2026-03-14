@@ -310,6 +310,16 @@ h6 {
   border-color: var(--mdst-color-border);
 }
 
+/* Toggle rounded variant */
+
+.mdst-checkbox--toggle-rounded {
+  border-radius: 9999px;
+}
+
+.mdst-checkbox--toggle-rounded::before {
+  border-radius: 50%;
+}
+
 /* Dropdown (Native Select) */
 
 .mdst-dropdown {
