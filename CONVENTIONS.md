@@ -8,6 +8,7 @@ Guidelines for contributing to modest-ui.
 - **Minimal CSS** - Lightweight styling that enhances without overriding browser defaults
 - **No JavaScript required** - CSS-only components, with optional JS for enhanced functionality
 - **Themeable** - All colors, spacing, and radii use CSS custom properties
+- **Two modes** - Class-based (`.mdst-*`) for explicit opt-in; classless (`body.mdst-ui`) for automatic element styling
 
 ## Naming
 
@@ -18,6 +19,31 @@ Guidelines for contributing to modest-ui.
   - Modifier: `.mdst-component--variant`
 - **Child elements**: Use single dash for children (`.mdst-dialog-header`, `.mdst-dialog-body`)
 - **BEM `__` syntax**: Reserved for tightly coupled sub-elements (`.mdst-color-picker__input`)
+
+## Classless Mode
+
+`base/classless.css` provides an alternative to class-based styling. All selectors are scoped to `body.mdst-ui` to prevent conflicts with pages that don't opt in.
+
+**Key rules:**
+
+- All classless selectors **must** be nested inside `body.mdst-ui { }`.
+- Variant classes use **simple, unprefixed names** (`.inverted`, `.ghost`, `.sm`, `.lg`, `.toggle`, `.rounded`, `.bordered`, `.compact`, etc.).
+- The same design tokens are used as the class-based components.
+- Complex components with no native element equivalent (cards, tooltips, popovers, tags) remain class-based only.
+- For dialog inner structure, target `dialog > header`, `dialog > div`, and `dialog > footer`.
+
+**What is classless:**
+- Typography (`h1`–`h6`, `p`, `a`, `strong`, `em`, `small`, `mark`, `blockquote`, `hr`, `ul`, `ol`, `li`, `code`, `pre`)
+- `button` (variants: `.ghost`, `.inverted`, `.sm`, `.lg`)
+- `input` text types and `textarea`
+- `select` (variants: `.ghost`, `.sm`, `.lg`, `.inline`)
+- `input[type="range"]`
+- `input[type="checkbox"]` (variants: `.toggle`, `.toggle.rounded`)
+- `input[type="radio"]`
+- `label:has(input[type="checkbox/radio"])`
+- `table` (variants: `.bordered`, `.striped`, `.compact`)
+- `details` (variants: `.borderless`, `.compact`)
+- `dialog` (sizes: `.sm`, `.lg`, `.full`)
 
 ## Component Structure
 

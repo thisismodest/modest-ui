@@ -109,6 +109,971 @@ h6 {
   overflow-wrap: break-word;
 }
 
+/* Classless styles
+ *
+ * Opt in by adding class="mdst-ui" to the <body> element:
+ *   <body class="mdst-ui">
+ *
+ * Native HTML elements are styled automatically — no class names required.
+ * Apply variants using simple, unprefixed classes (e.g. <button class="inverted">).
+ *
+ * The existing .mdst-* class-based approach remains fully supported and is
+ * unaffected by this file.
+ */
+
+body.mdst-ui {
+  font-family: var(--mdst-font-sans);
+  color: var(--mdst-color-fg);
+  background: var(--mdst-color-bg);
+
+  /* -------------------------
+   * Typography
+   * -------------------------
+   */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--mdst-font-sans);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--mdst-color-fg);
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.875rem;
+  }
+
+  p {
+    font-family: var(--mdst-font-sans);
+    font-size: var(--mdst-text-base);
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+
+    &.sm {
+      font-size: var(--mdst-text-sm);
+    }
+
+    &.lg {
+      font-size: var(--mdst-text-lg);
+    }
+
+    &.muted {
+      color: var(--mdst-color-muted);
+    }
+  }
+
+  a {
+    color: var(--mdst-color-fg);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    transition: opacity var(--mdst-transition);
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &:focus-visible {
+      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+      outline-offset: var(--mdst-border-width);
+    }
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  small {
+    font-size: var(--mdst-text-sm);
+  }
+
+  mark {
+    background-color: var(--mdst-color-subtle);
+    padding: 0.1em 0.2em;
+  }
+
+  blockquote {
+    margin: 0;
+    padding-left: var(--mdst-space-md);
+    border-left: var(--mdst-space-1) solid var(--mdst-color-border);
+    font-style: italic;
+    color: var(--mdst-color-muted);
+  }
+
+  hr {
+    border: none;
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+    margin: var(--mdst-space-lg) 0;
+
+    &.flush {
+      margin: 0;
+    }
+  }
+
+  ul {
+    padding-left: var(--mdst-space-lg);
+    line-height: var(--mdst-line-height);
+    list-style-type: disc;
+
+    &.unstyled {
+      list-style: none;
+      padding-left: 0;
+    }
+  }
+
+  ol {
+    padding-left: var(--mdst-space-lg);
+    line-height: var(--mdst-line-height);
+    list-style-type: decimal;
+  }
+
+  li {
+    margin-bottom: var(--mdst-space-xs);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  code {
+    font-family: var(--mdst-font-mono);
+    font-size: 0.875em;
+    background: var(--mdst-color-subtle);
+    border: 0.0625em solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    padding: 0.125em 0.375em;
+    word-break: break-word;
+  }
+
+  pre {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: var(--mdst-space-md);
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+    font-family: var(--mdst-font-mono);
+    font-size: var(--mdst-text-sm);
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background-color: var(--mdst-color-subtle);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    tab-size: 2;
+    -moz-tab-size: 2;
+
+    /* Nested code inside pre — reset styles */
+    & code {
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      font-size: inherit;
+      word-break: break-word;
+    }
+  }
+
+  /* -------------------------
+   * Button
+   * -------------------------
+   *
+   * Variants: .ghost  .inverted
+   * Sizes:    .sm  .lg
+   */
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mdst-space-xs);
+    padding: var(--mdst-space-sm) var(--mdst-space-md);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    cursor: pointer;
+    transition:
+      background var(--mdst-transition),
+      color var(--mdst-transition),
+      border-color var(--mdst-transition);
+    -webkit-appearance: none;
+    appearance: none;
+
+    &:hover {
+      background: var(--mdst-button-hover-bg);
+      color: var(--mdst-button-hover-color);
+      border-color: var(--mdst-button-hover-border);
+    }
+
+    &:focus-visible {
+      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+      outline-offset: var(--mdst-border-width);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+
+      &:hover {
+        background: var(--mdst-color-bg);
+        color: var(--mdst-color-fg);
+        border-color: var(--mdst-color-border);
+      }
+    }
+
+    /* Variants */
+
+    &.ghost {
+      border-color: transparent;
+
+      &:hover {
+        border-color: var(--mdst-button-hover-border);
+      }
+    }
+
+    &.inverted {
+      background: var(--mdst-color-fg);
+      color: var(--mdst-color-bg);
+
+      &:hover {
+        background: var(--mdst-color-bg);
+        color: var(--mdst-color-fg);
+      }
+    }
+
+    /* Sizes */
+
+    &.sm {
+      padding: var(--mdst-space-xs) var(--mdst-space-sm);
+      font-size: var(--mdst-text-sm);
+    }
+
+    &.lg {
+      padding: var(--mdst-space-md) var(--mdst-space-lg);
+    }
+  }
+
+  /* -------------------------
+   * Input & Textarea
+   * -------------------------
+   */
+
+  :is(
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="search"],
+      input[type="tel"],
+      input[type="url"],
+      input[type="number"],
+      input[type="date"],
+      input[type="time"],
+      input[type="datetime-local"],
+      input[type="month"],
+      input[type="week"],
+      textarea
+    ) {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: var(--mdst-space-sm);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background-color: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    outline: none;
+    transition: border-color var(--mdst-transition);
+
+    &::placeholder {
+      color: var(--mdst-color-muted);
+      opacity: 1;
+    }
+
+    &:focus {
+      border-color: var(--mdst-color-focus);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  textarea {
+    min-height: 6rem;
+    resize: vertical;
+  }
+
+  /* -------------------------
+   * Select (Dropdown)
+   * -------------------------
+   *
+   * Variants: .ghost  .inline
+   * Sizes:    .sm  .lg
+   */
+
+  select {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: var(--mdst-space-sm);
+    padding-right: calc(var(--mdst-space-sm) + 1.2em);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background-color: var(--mdst-color-bg);
+    background-image:
+      linear-gradient(to top right, transparent 50%, var(--mdst-color-fg) 50%),
+      linear-gradient(to top left, transparent 50%, var(--mdst-color-fg) 50%);
+    background-size:
+      0.3rem 0.3rem,
+      0.3rem 0.3rem;
+    background-position:
+      right calc(var(--mdst-space-sm) + 0.3rem) center,
+      right var(--mdst-space-sm) center;
+    background-repeat: no-repeat;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    outline: none;
+    cursor: pointer;
+    transition: border-color var(--mdst-transition);
+
+    &:hover {
+      border-color: var(--mdst-color-muted);
+    }
+
+    &:focus {
+      border-color: var(--mdst-color-focus);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &:hover {
+        border-color: var(--mdst-color-border);
+      }
+    }
+
+    /* Variants */
+
+    &.ghost {
+      border-color: transparent;
+      background-color: transparent;
+
+      &:hover {
+        border-color: var(--mdst-color-border);
+      }
+
+      &:focus {
+        border-color: var(--mdst-color-focus);
+      }
+    }
+
+    /* Sizes */
+
+    &.sm {
+      padding: var(--mdst-space-xs) var(--mdst-space-sm);
+      padding-right: calc(var(--mdst-space-sm) + 1.5em);
+      font-size: var(--mdst-text-sm);
+      background-position:
+        right calc(var(--mdst-space-sm) + 0.3rem) center,
+        right var(--mdst-space-sm) center;
+    }
+
+    &.lg {
+      padding: var(--mdst-space-md);
+      padding-right: calc(var(--mdst-space-md) + 1.2em);
+      background-position:
+        right calc(var(--mdst-space-md) + 0.3rem) center,
+        right var(--mdst-space-md) center;
+    }
+
+    /* Inline variant (auto-width) */
+
+    &.inline {
+      display: inline-block;
+      width: auto;
+    }
+  }
+
+  /* -------------------------
+   * Range Slider
+   * -------------------------
+   */
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: var(--mdst-space-1);
+    background: var(--mdst-color-border);
+    border-radius: var(--mdst-space-1);
+    box-shadow: none;
+    cursor: pointer;
+    outline: none;
+
+    &:focus-visible {
+      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+      outline-offset: var(--mdst-space-1);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &::-webkit-slider-thumb {
+        cursor: not-allowed;
+      }
+
+      &::-moz-range-thumb {
+        cursor: not-allowed;
+      }
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: var(--mdst-space-4);
+      height: var(--mdst-space-4);
+      box-sizing: border-box;
+      background: var(--mdst-color-bg);
+      border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-border);
+      border-radius: 50%;
+      box-shadow: none;
+      cursor: pointer;
+      transition: background var(--mdst-transition);
+    }
+
+    &::-moz-range-thumb {
+      appearance: none;
+      width: var(--mdst-space-4);
+      height: var(--mdst-space-4);
+      box-sizing: border-box;
+      background: var(--mdst-color-bg);
+      border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-border);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background var(--mdst-transition);
+    }
+
+    &::-moz-range-track {
+      background: transparent;
+    }
+  }
+
+  /* -------------------------
+   * Checkbox
+   * -------------------------
+   *
+   * Variants: .toggle  .toggle.rounded
+   */
+
+  input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: content-box;
+    flex-shrink: 0;
+    width: 0.875rem;
+    height: 0.875rem;
+    margin: 0;
+    background: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    transition: border-color var(--mdst-transition);
+
+    &:checked::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      background: var(--mdst-color-fg);
+    }
+
+    &:hover {
+      border-color: var(--mdst-color-muted);
+    }
+
+    &:focus-visible {
+      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+      outline-offset: var(--mdst-border-width);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &:hover {
+        border-color: var(--mdst-color-border);
+      }
+    }
+
+    /* Toggle variant */
+
+    &.toggle {
+      width: 2.125rem;
+      height: 1.125rem;
+      background: var(--mdst-color-subtle);
+      border-radius: 0;
+      transition:
+        background var(--mdst-transition),
+        border-color var(--mdst-transition);
+
+      /* Suppress the default checkmark */
+      &:checked::after {
+        content: none;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 0.875rem;
+        width: 0.875rem;
+        left: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--mdst-color-muted);
+        transition:
+          transform var(--mdst-transition),
+          background var(--mdst-transition);
+      }
+
+      &:checked {
+        background: var(--mdst-color-fg);
+        border-color: var(--mdst-color-fg);
+
+        &::before {
+          transform: translateY(-50%) translateX(1rem);
+          background: var(--mdst-color-bg);
+        }
+      }
+
+      &:hover {
+        border-color: var(--mdst-color-muted);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--mdst-color-focus);
+        outline-offset: 2px;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        &:hover {
+          border-color: var(--mdst-color-border);
+        }
+      }
+
+      /* Rounded toggle */
+
+      &.rounded {
+        border-radius: 9999px;
+
+        &::before {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  /* -------------------------
+   * Radio
+   * -------------------------
+   */
+
+  input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex-shrink: 0;
+    width: 0.875rem;
+    height: 0.875rem;
+    margin: 0;
+    background: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    box-sizing: content-box;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+
+    &:checked::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      background: var(--mdst-color-fg);
+      border-radius: 50%;
+    }
+
+    &:hover {
+      border-color: var(--mdst-color-muted);
+    }
+
+    &:focus-visible {
+      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+      outline-offset: var(--mdst-border-width);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &:hover {
+        border-color: var(--mdst-color-border);
+      }
+    }
+  }
+
+  /* -------------------------
+   * Label (wrapping checkbox or radio)
+   * -------------------------
+   */
+
+  label:has(input[type="checkbox"]),
+  label:has(input[type="radio"]) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    cursor: pointer;
+    user-select: none;
+
+    &:has(:disabled) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  /* -------------------------
+   * Table
+   * -------------------------
+   *
+   * Variants: .bordered  .striped  .compact
+   */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: inherit;
+
+    & th {
+      text-align: left;
+      font-size: var(--mdst-text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--mdst-color-muted);
+      padding: var(--mdst-space-sm) var(--mdst-space-md) var(--mdst-space-sm) 0;
+      border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    & td {
+      padding: var(--mdst-space-md) var(--mdst-space-md) var(--mdst-space-md) 0;
+      vertical-align: middle;
+      border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    & tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Variants */
+
+    &.bordered {
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
+
+      & th,
+      & td {
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+    }
+
+    &.striped {
+      & tbody tr:nth-child(odd) {
+        background: var(--mdst-color-subtle);
+      }
+    }
+
+    &.compact {
+      & th {
+        padding: var(--mdst-space-xs) var(--mdst-space-sm) var(--mdst-space-xs) 0;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+
+      & td {
+        padding: var(--mdst-space-sm) var(--mdst-space-sm) var(--mdst-space-sm) 0;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+
+  /* -------------------------
+   * Details (Disclosure)
+   * -------------------------
+   *
+   * Variants: .borderless  .compact
+   */
+
+  details {
+    position: relative;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+
+    & > summary {
+      display: flex;
+      align-items: center;
+      gap: var(--mdst-space-sm);
+      padding: var(--mdst-space-md);
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      font-weight: 500;
+      transition: background var(--mdst-transition);
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      &::before {
+        content: "";
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1em;
+        height: 1em;
+        flex-shrink: 0;
+        background-color: currentColor;
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        transition: transform var(--mdst-transition);
+      }
+
+      &:hover {
+        color: var(--mdst-color-muted);
+      }
+
+      &:focus-visible {
+        outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+        outline-offset: calc(-1 * var(--mdst-border-width));
+      }
+    }
+
+    &[open] > summary::before {
+      transform: rotate(90deg);
+    }
+
+    &[open]::details-content {
+      padding: var(--mdst-space-md);
+      border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+    }
+
+    /* Variants */
+
+    &.borderless {
+      border: none;
+
+      &[open]::details-content {
+        border-top: none;
+        padding-left: calc(1em + var(--mdst-space-sm));
+      }
+    }
+
+    &.compact {
+      & > summary {
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+      }
+
+      &[open]::details-content {
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+      }
+    }
+  }
+
+  /* -------------------------
+   * Dialog
+   * -------------------------
+   *
+   * Use semantic <header> and <footer> inside <dialog> for structured layout.
+   * The last <button> in <header> is styled as a close button.
+   *
+   * Sizes: .sm  .lg  .full
+   *
+   * Example:
+   *   <dialog>
+   *     <header>
+   *       <h2>Title</h2>
+   *       <button onclick="this.closest('dialog').close()">✕</button>
+   *     </header>
+   *     <div>Body content</div>
+   *     <footer>
+   *       <button>Cancel</button>
+   *       <button class="inverted">Confirm</button>
+   *     </footer>
+   *   </dialog>
+   */
+
+  dialog {
+    padding: 0;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    max-width: min(90vw, 32rem);
+    max-height: 90vh;
+    margin: auto;
+    position: fixed;
+    inset: 0;
+    width: fit-content;
+    height: fit-content;
+
+    &::backdrop {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Dialog header — use a <header> element */
+
+    & > header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--mdst-space-md);
+      padding: var(--mdst-space-md);
+      border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+
+      & :is(h1, h2, h3, h4, h5, h6) {
+        margin: 0;
+        font-size: var(--mdst-text-lg);
+        font-weight: 600;
+        line-height: var(--mdst-line-height);
+      }
+
+      /* Close button — last <button> in <header> */
+
+      & > button:last-child {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--mdst-space-xs);
+        background: transparent;
+        border: none;
+        border-radius: var(--mdst-radius);
+        cursor: pointer;
+        color: var(--mdst-color-muted);
+        transition: color var(--mdst-transition);
+
+        &:hover {
+          color: var(--mdst-color-fg);
+          background: transparent;
+          border-color: transparent;
+        }
+
+        &:focus-visible {
+          outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+          outline-offset: var(--mdst-border-width);
+        }
+      }
+    }
+
+    /* Dialog body — use a <div> for the content area */
+
+    & > div {
+      padding: var(--mdst-space-md);
+      overflow-y: auto;
+    }
+
+    /* Dialog footer — use a <footer> element */
+
+    & > footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--mdst-space-sm);
+      padding: var(--mdst-space-md);
+      border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+    }
+
+    /* Size variants */
+
+    &.sm {
+      max-width: min(90vw, 24rem);
+    }
+
+    &.lg {
+      max-width: min(90vw, 48rem);
+    }
+
+    &.full {
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+  }
+}
+
 
 /* Components */
 /* Button */

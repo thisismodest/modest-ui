@@ -35,6 +35,49 @@ import "modest-ui/dist/modest-ui.css";
 @import "modest-ui/components/input/input.css";
 ```
 
+## Classless mode
+
+Add `class="mdst-ui"` to the `<body>` element to enable classless mode. Native HTML elements are styled automatically — no class names required on common elements.
+
+```html
+<body class="mdst-ui">
+  <h1>Heading</h1>
+  <p>Paragraph with a <a href="#">link</a>.</p>
+
+  <!-- Buttons use the element directly; variants use simple classes -->
+  <button>Default</button>
+  <button class="inverted">Inverted</button>
+  <button class="ghost">Ghost</button>
+
+  <!-- Inputs, selects, checkboxes and radios are styled automatically -->
+  <input type="text" placeholder="Text input" />
+  <select><option>Option</option></select>
+  <input type="checkbox" />
+  <input type="radio" />
+
+  <!-- Checkbox toggle variant -->
+  <input type="checkbox" class="toggle" />
+  <input type="checkbox" class="toggle rounded" />
+
+  <!-- Tables, details and dialogs are styled automatically -->
+  <table>...</table>
+  <details><summary>Toggle</summary>Content</details>
+  <dialog>
+    <header>
+      <h2>Title</h2>
+      <button onclick="this.closest('dialog').close()">✕</button>
+    </header>
+    <div>Body content</div>
+    <footer>
+      <button>Cancel</button>
+      <button class="inverted">Confirm</button>
+    </footer>
+  </dialog>
+</body>
+```
+
+The existing `.mdst-*` class-based approach continues to work independently — classless mode is strictly additive.
+
 ## Documentation
 
 View the component documentation and examples at [modest-ui.com](https://modest-ui.com/)
