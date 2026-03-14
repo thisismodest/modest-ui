@@ -3,6 +3,7 @@
 /* Base */
 @import "./base/tokens.css";
 @import "./base/reset.css";
+@import "./base/classless.css";
 
 /* Components */
 @import "./components/button/button.css";

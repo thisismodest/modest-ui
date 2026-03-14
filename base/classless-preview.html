@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classless Mode Preview</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/classless.css" />
+    <style>
+      body {
+        max-width: 48rem;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .section {
+        margin-bottom: 2rem;
+      }
+      .section-header {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #666;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #eee;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        margin-bottom: 0.75rem;
+      }
+    </style>
+  </head>
+  <body class="mdst-ui">
+
+    <h1>Classless Mode</h1>
+    <p>Add <code>class="mdst-ui"</code> to <code>&lt;body&gt;</code> to enable automatic element styling.</p>
+
+    <hr />
+
+    <div class="section">
+      <div class="section-header">Typography</div>
+      <h1>Heading 1</h1>
+      <h2>Heading 2</h2>
+      <h3>Heading 3</h3>
+      <h4>Heading 4</h4>
+      <h5>Heading 5</h5>
+      <h6>Heading 6</h6>
+      <p>A paragraph with a <a href="#">link</a>, <strong>bold</strong>, <em>italic</em>, and <small>small</small> text.</p>
+      <p class="muted">A muted paragraph using <code>class="muted"</code>.</p>
+      <p class="sm">A small paragraph using <code>class="sm"</code>.</p>
+      <p class="lg">A large paragraph using <code>class="lg"</code>.</p>
+      <blockquote>A blockquote styled automatically.</blockquote>
+      <ul>
+        <li>List item one</li>
+        <li>List item two</li>
+        <li>List item three</li>
+      </ul>
+      <ol>
+        <li>Ordered item one</li>
+        <li>Ordered item two</li>
+      </ol>
+      <pre><code>pre code { automatic: true; }</code></pre>
+      <p>Inline: <code>code element</code> and <mark>mark highlight</mark>.</p>
+    </div>
+
+    <hr />
+
+    <div class="section">
+      <div class="section-header">Button — variants via simple classes</div>
+      <div class="row">
+        <button>Default</button>
+        <button class="inverted">Inverted</button>
+        <button class="ghost">Ghost</button>
+        <button disabled>Disabled</button>
+      </div>
+      <div class="row">
+        <button class="sm">Small</button>
+        <button>Default size</button>
+        <button class="lg">Large</button>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="section">
+      <div class="section-header">Inputs</div>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem; max-width: 20rem;">
+        <input type="text" placeholder="Text input" />
+        <input type="email" placeholder="Email input" />
+        <input type="password" placeholder="Password input" />
+        <input type="number" placeholder="Number input" />
+        <textarea placeholder="Textarea"></textarea>
+        <select>
+          <option>Select option one</option>
+          <option>Select option two</option>
+          <option>Select option three</option>
+        </select>
+        <input type="range" />
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="section">
+      <div class="section-header">Checkbox &amp; Radio</div>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <label>
+          <input type="checkbox" />
+          Default checkbox
+        </label>
+        <label>
+          <input type="checkbox" checked />
+          Checked checkbox
+        </label>
+        <label>
+          <input type="checkbox" class="toggle" />
+          Toggle (class="toggle")
+        </label>
+        <label>
+          <input type="checkbox" class="toggle" checked />
+          Toggle checked
+        </label>
+        <label>
+          <input type="checkbox" class="toggle rounded" />
+          Toggle rounded (class="toggle rounded")
+        </label>
+        <label>
+          <input type="radio" name="demo" />
+          Radio option one
+        </label>
+        <label>
+          <input type="radio" name="demo" checked />
+          Radio option two
+        </label>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="section">
+      <div class="section-header">Table</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alice</td>
+            <td>Designer</td>
+            <td>Active</td>
+          </tr>
+          <tr>
+            <td>Bob</td>
+            <td>Developer</td>
+            <td>Active</td>
+          </tr>
+          <tr>
+            <td>Carol</td>
+            <td>Manager</td>
+            <td>Away</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr />
+
+    <div class="section">
+      <div class="section-header">Details</div>
+      <details>
+        <summary>Default disclosure</summary>
+        Revealed content inside a classless <code>details</code> element.
+      </details>
+      <br />
+      <details class="borderless">
+        <summary>Borderless variant (class="borderless")</summary>
+        Revealed content without a border.
+      </details>
+    </div>
+
+    <hr />
+
+    <div class="section">
+      <div class="section-header">Dialog</div>
+      <button onclick="document.getElementById('demo-dialog').showModal()">Open Dialog</button>
+      <dialog id="demo-dialog">
+        <header>
+          <h2>Dialog Title</h2>
+          <button onclick="document.getElementById('demo-dialog').close()">✕</button>
+        </header>
+        <div>
+          <p>Dialog body content. Uses <code>&lt;header&gt;</code>, <code>&lt;div&gt;</code>, and <code>&lt;footer&gt;</code> inside <code>&lt;dialog&gt;</code>.</p>
+        </div>
+        <footer>
+          <button onclick="document.getElementById('demo-dialog').close()">Cancel</button>
+          <button class="inverted" onclick="document.getElementById('demo-dialog').close()">Confirm</button>
+        </footer>
+      </dialog>
+    </div>
+
+  </body>
+</html>
