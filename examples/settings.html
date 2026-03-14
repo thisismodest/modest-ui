@@ -1,0 +1,1463 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings — modest-ui Example</title>
+    <meta
+      name="description"
+      content="An application settings page built with modest-ui — featuring profile editing, notification preferences, session management, and a danger zone."
+    />
+    <link rel="canonical" href="https://modest-ui.com/examples/settings.html" />
+    <meta property="og:title" content="Settings — modest-ui Example" />
+    <meta
+      property="og:description"
+      content="An application settings page built with modest-ui — featuring profile editing, notification preferences, session management, and a danger zone."
+    />
+    <meta property="og:url" content="https://modest-ui.com/examples/settings.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="modest-ui" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Settings — modest-ui Example" />
+    <meta
+      name="twitter:description"
+      content="An application settings page built with modest-ui — featuring profile editing, notification preferences, session management, and a danger zone."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="../dist/modest-ui.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        line-height: var(--mdst-line-height);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-bg);
+      }
+
+      /* Header */
+      .site-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-md) var(--mdst-space-lg);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        position: sticky;
+        top: 0;
+        background: var(--mdst-color-bg);
+        z-index: 10;
+      }
+
+      .site-logo {
+        font-weight: 700;
+        font-size: var(--mdst-text-lg);
+        letter-spacing: -0.02em;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .header-avatar {
+        width: 2rem;
+        height: 2rem;
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      /* Layout */
+      .settings-layout {
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: var(--mdst-space-xl) var(--mdst-space-lg);
+        display: grid;
+        grid-template-columns: 12rem 1fr;
+        gap: var(--mdst-space-xl);
+      }
+
+      /* Settings nav */
+      .settings-nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-px);
+        position: sticky;
+        top: 5rem;
+        align-self: start;
+      }
+
+      .settings-nav-link {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        font-size: var(--mdst-text-sm);
+        text-decoration: none;
+        color: var(--mdst-color-muted);
+        border: var(--mdst-border-width) solid transparent;
+        transition:
+          color var(--mdst-transition),
+          background var(--mdst-transition);
+        cursor: pointer;
+        background: none;
+        font-family: inherit;
+        text-align: left;
+      }
+
+      .settings-nav-link:hover {
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+      }
+
+      .settings-nav-link--active {
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        border-color: var(--mdst-color-border);
+        font-weight: 500;
+      }
+
+      .settings-nav-link--danger {
+        color: var(--mdst-color-error);
+      }
+
+      .settings-nav-link--danger:hover {
+        color: var(--mdst-color-error);
+        background: var(--mdst-color-subtle);
+      }
+
+      /* Settings content */
+      .settings-content {
+        min-width: 0;
+      }
+
+      .settings-page-header {
+        margin-bottom: var(--mdst-space-xl);
+      }
+
+      .settings-page-header h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .settings-page-header p {
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-sm);
+        margin: 0;
+      }
+
+      /* Settings section */
+      .settings-section {
+        margin-bottom: var(--mdst-space-xl);
+        padding-bottom: var(--mdst-space-xl);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .settings-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .settings-section-header {
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .settings-section-header h2 {
+        font-size: var(--mdst-text-lg);
+        font-weight: 600;
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .settings-section-header p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      /* Form elements */
+      .form-group {
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .form-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .form-hint {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin-top: var(--mdst-space-xs);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--mdst-space-md);
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--mdst-space-sm);
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .form-actions--left {
+        justify-content: flex-start;
+      }
+
+      /* Avatar section */
+      .avatar-section {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-lg);
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .avatar-preview {
+        width: 5rem;
+        height: 5rem;
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        flex-shrink: 0;
+        color: var(--mdst-color-muted);
+      }
+
+      .avatar-actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-xs);
+      }
+
+      .avatar-actions p {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      /* Notification settings */
+      .notification-group {
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .notification-group:last-of-type {
+        margin-bottom: 0;
+      }
+
+      .notification-group-header {
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        font-weight: 600;
+        font-size: var(--mdst-text-sm);
+        background: var(--mdst-color-subtle);
+      }
+
+      .notification-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+        gap: var(--mdst-space-md);
+      }
+
+      .notification-item:last-child {
+        border-bottom: none;
+      }
+
+      .notification-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .notification-label {
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+        margin: 0 0 2px;
+      }
+
+      .notification-desc {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .notification-controls {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-md);
+        flex-shrink: 0;
+      }
+
+      .notification-channel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        min-width: 3.5rem;
+      }
+
+      .notification-channel-label {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      /* Sessions table */
+      .session-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+        gap: var(--mdst-space-md);
+      }
+
+      .session-item:last-child {
+        border-bottom: none;
+      }
+
+      .session-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .session-device {
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        margin: 0 0 2px;
+      }
+
+      .session-detail {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      /* Appearance section */
+      .theme-options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--mdst-space-sm);
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .theme-option {
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-md);
+        cursor: pointer;
+        text-align: center;
+        transition:
+          background var(--mdst-transition),
+          border-color var(--mdst-transition);
+        position: relative;
+      }
+
+      .theme-option:hover {
+        background: var(--mdst-color-subtle);
+      }
+
+      .theme-option.active {
+        border-width: 2px;
+      }
+
+      .theme-option input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .theme-option-preview {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        margin-bottom: var(--mdst-space-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--mdst-text-lg);
+      }
+
+      .theme-option-preview--light {
+        background: #fff;
+        color: #000;
+      }
+
+      .theme-option-preview--dark {
+        background: #111;
+        color: #fff;
+      }
+
+      .theme-option-preview--system {
+        background: linear-gradient(135deg, #fff 50%, #111 50%);
+        color: #666;
+      }
+
+      .theme-option-label {
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+      }
+
+      .theme-option-desc {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin-top: 2px;
+      }
+
+      /* Danger zone */
+      .danger-zone {
+        border: var(--mdst-border-width) solid var(--mdst-color-error);
+      }
+
+      .danger-zone .mdst-card-header {
+        color: var(--mdst-color-error);
+      }
+
+      .danger-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+        gap: var(--mdst-space-lg);
+      }
+
+      .danger-item:last-child {
+        border-bottom: none;
+      }
+
+      .danger-item-info {
+        flex: 1;
+      }
+
+      .danger-item-info h4 {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        margin: 0 0 2px;
+      }
+
+      .danger-item-info p {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .danger-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: var(--mdst-space-xs) var(--mdst-space-md);
+        font-size: var(--mdst-text-sm);
+        font-family: inherit;
+        border: var(--mdst-border-width) solid var(--mdst-color-error);
+        background: none;
+        color: var(--mdst-color-error);
+        cursor: pointer;
+        transition:
+          background var(--mdst-transition),
+          color var(--mdst-transition);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .danger-btn:hover {
+        background: var(--mdst-color-error);
+        color: var(--mdst-color-bg);
+      }
+
+      /* Connected accounts */
+      .connected-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+        gap: var(--mdst-space-md);
+      }
+
+      .connected-item:last-child {
+        border-bottom: none;
+      }
+
+      .connected-info {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        flex: 1;
+        min-width: 0;
+      }
+
+      .connected-icon {
+        width: 2rem;
+        height: 2rem;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--mdst-text-sm);
+        flex-shrink: 0;
+        background: var(--mdst-color-subtle);
+      }
+
+      .connected-name {
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+      }
+
+      .connected-detail {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      /* Dialog */
+      .mdst-dialog {
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: 0;
+        max-width: 28rem;
+        width: 90vw;
+      }
+
+      .mdst-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      .dialog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .dialog-header h2 {
+        font-size: var(--mdst-text-lg);
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .dialog-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-lg);
+        padding: 0;
+        line-height: 1;
+      }
+
+      .dialog-close:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      .dialog-body {
+        padding: var(--mdst-space-md);
+      }
+
+      .dialog-body p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .dialog-body .form-group {
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      .dialog-body label {
+        display: block;
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .dialog-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--mdst-space-sm);
+        padding: var(--mdst-space-md);
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      /* Toast / saved notification */
+      .toast {
+        position: fixed;
+        bottom: var(--mdst-space-lg);
+        right: var(--mdst-space-lg);
+        background: var(--mdst-color-fg);
+        color: var(--mdst-color-bg);
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        transform: translateY(calc(100% + 2rem));
+        transition: transform 200ms ease-out;
+        z-index: 100;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .toast.show {
+        transform: translateY(0);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .settings-layout {
+          grid-template-columns: 1fr;
+          gap: var(--mdst-space-lg);
+          padding: var(--mdst-space-lg) var(--mdst-space-md);
+        }
+
+        .settings-nav {
+          position: static;
+          flex-direction: row;
+          overflow-x: auto;
+          gap: var(--mdst-space-xs);
+          padding-bottom: var(--mdst-space-sm);
+          border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        }
+
+        .settings-nav-link {
+          white-space: nowrap;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .notification-controls {
+          flex-direction: column;
+          gap: var(--mdst-space-sm);
+        }
+
+        .notification-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        /*.theme-options {
+          grid-template-columns: 1fr;
+        }*/
+
+        .avatar-section {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header-right .mdst-button--ghost {
+          display: none;
+        }
+
+        .danger-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .connected-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .session-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .dialog-footer {
+          flex-direction: column;
+        }
+
+        .dialog-footer .mdst-button,
+        .dialog-footer .danger-btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .toast {
+          left: var(--mdst-space-md);
+          right: var(--mdst-space-md);
+          bottom: var(--mdst-space-md);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
+      <div class="header-right">
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">Docs</button>
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">Dashboard</button>
+        <div class="header-avatar">JD</div>
+      </div>
+    </header>
+
+    <!-- Settings layout -->
+    <div class="settings-layout">
+      <!-- Sidebar nav -->
+      <nav class="settings-nav">
+        <button class="settings-nav-link settings-nav-link--active" onclick="showSection('profile')">Profile</button>
+        <button class="settings-nav-link" onclick="showSection('account')">Account</button>
+        <button class="settings-nav-link" onclick="showSection('appearance')">Appearance</button>
+        <button class="settings-nav-link" onclick="showSection('notifications')">Notifications</button>
+        <button class="settings-nav-link" onclick="showSection('sessions')">Sessions</button>
+        <button class="settings-nav-link settings-nav-link--danger" onclick="showSection('danger')">Danger Zone</button>
+      </nav>
+
+      <!-- Content -->
+      <div class="settings-content">
+        <div class="settings-page-header">
+          <h1>Settings</h1>
+          <p>Manage your account settings and preferences.</p>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PROFILE SECTION -->
+        <!-- ============================================ -->
+        <div class="settings-panel" id="section-profile">
+          <div class="settings-section">
+            <div class="settings-section-header">
+              <h2>Profile</h2>
+              <p>This is how others see you on the platform. Your display name and avatar are visible to collaborators.</p>
+            </div>
+
+            <!-- Avatar -->
+            <div class="avatar-section">
+              <div class="avatar-preview">JD</div>
+              <div class="avatar-actions">
+                <div class="mdst-file-input mdst-file-input--borderless">
+                  <input type="file" class="mdst-input mdst-file-input__field" accept=".jpg,.jpeg,.png,.gif" />
+                </div>
+                <p>JPG, PNG, or GIF. Max 2MB. Recommended 256×256px.</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First name</label>
+                <input type="text" id="first-name" class="mdst-input" value="Jane" />
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last name</label>
+                <input type="text" id="last-name" class="mdst-input" value="Doe" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="display-name">Display name</label>
+              <input type="text" id="display-name" class="mdst-input" value="janedoe" />
+              <p class="form-hint">This is your public display name. It can be your real name or a pseudonym.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="mdst-input" value="jane@example.com" />
+              <p class="form-hint">Used for sign-in, notifications, and account recovery.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="bio">Bio</label>
+              <textarea id="bio" class="mdst-input" rows="3" placeholder="Tell us a little about yourself...">
+Staff engineer. Building reliable systems and occasionally writing about it.</textarea
+              >
+              <p class="form-hint">Brief description shown on your profile. Max 160 characters.</p>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="website">Website</label>
+                <input type="url" id="website" class="mdst-input" placeholder="https://yoursite.com" value="https://janedoe.dev" />
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" class="mdst-input" placeholder="City, Country" value="London, UK" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="timezone">Timezone</label>
+              <select id="timezone" class="mdst-dropdown" style="width: 100%">
+                <option>UTC-12:00 (Baker Island)</option>
+                <option>UTC-08:00 (Pacific Time)</option>
+                <option>UTC-05:00 (Eastern Time)</option>
+                <option selected>UTC+00:00 (London)</option>
+                <option>UTC+01:00 (Central European)</option>
+                <option>UTC+05:30 (India)</option>
+                <option>UTC+08:00 (Singapore)</option>
+                <option>UTC+09:00 (Tokyo)</option>
+              </select>
+            </div>
+
+            <div class="form-actions">
+              <button class="mdst-button mdst-button--ghost" onclick="showToast('Changes discarded')">Cancel</button>
+              <button class="mdst-button mdst-button--inverted" onclick="showToast('Profile saved')">Save Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- ACCOUNT SECTION -->
+        <!-- ============================================ -->
+        <div class="settings-panel" id="section-account" style="display: none">
+          <!-- Password -->
+          <div class="settings-section">
+            <div class="settings-section-header">
+              <h2>Password</h2>
+              <p>Update your password to keep your account secure.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="current-password">Current password</label>
+              <div class="mdst-password-input">
+                <input
+                  type="text"
+                  autocomplete="current-password"
+                  id="current-password"
+                  class="mdst-input mdst-password-input__field"
+                  placeholder="••••••••"
+                />
+                <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="new-password">New password</label>
+                <div class="mdst-password-input">
+                  <input
+                    type="text"
+                    autocomplete="new-password"
+                    id="new-password"
+                    class="mdst-input mdst-password-input__field"
+                    placeholder="••••••••"
+                  />
+                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                </div>
+                <p class="form-hint">Must be at least 8 characters with a mix of letters, numbers, and symbols.</p>
+              </div>
+              <div class="form-group">
+                <label for="confirm-password">Confirm new password</label>
+                <div class="mdst-password-input">
+                  <input
+                    type="text"
+                    autocomplete="new-password"
+                    id="confirm-password"
+                    class="mdst-input mdst-password-input__field"
+                    placeholder="••••••••"
+                  />
+                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="mdst-button mdst-button--inverted" onclick="showToast('Password updated')">Update Password</button>
+            </div>
+          </div>
+
+          <!-- Two-factor -->
+          <div class="settings-section">
+            <div class="settings-section-header">
+              <h2>Two-factor authentication</h2>
+              <p>Add an extra layer of security to your account by requiring a verification code in addition to your password.</p>
+            </div>
+
+            <div class="mdst-card mdst-card--compact">
+              <div
+                class="mdst-card-body"
+                style="display: flex; justify-content: space-between; align-items: center; gap: var(--mdst-space-md)"
+              >
+                <div>
+                  <p style="font-size: var(--mdst-text-sm); font-weight: 500; margin: 0 0 2px">Authenticator app</p>
+                  <p style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); margin: 0">
+                    Use an authenticator app like Google Authenticator or Authy to generate verification codes.
+                  </p>
+                </div>
+                <span class="mdst-tag mdst-tag--muted mdst-tag--sm">Not enabled</span>
+              </div>
+              <div class="mdst-card-footer">
+                <button class="mdst-button mdst-button--sm">Enable 2FA</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connected accounts -->
+          <div class="settings-section">
+            <div class="settings-section-header">
+              <h2>Connected accounts</h2>
+              <p>Manage third-party services connected to your account for authentication and integrations.</p>
+            </div>
+
+            <div class="mdst-card" style="padding: 0">
+              <div class="connected-item">
+                <div class="connected-info">
+                  <div class="connected-icon">G</div>
+                  <div>
+                    <div class="connected-name">Google</div>
+                    <div class="connected-detail">jane@example.com</div>
+                  </div>
+                </div>
+                <button class="mdst-button mdst-button--ghost mdst-button--sm">Disconnect</button>
+              </div>
+              <div class="connected-item">
+                <div class="connected-info">
+                  <div class="connected-icon">⌥</div>
+                  <div>
+                    <div class="connected-name">GitHub</div>
+                    <div class="connected-detail">@janedoe</div>
+                  </div>
+                </div>
+                <button class="mdst-button mdst-button--ghost mdst-button--sm">Disconnect</button>
+              </div>
+              <div class="connected-item">
+                <div class="connected-info">
+                  <div class="connected-icon">S</div>
+                  <div>
+                    <div class="connected-name">Slack</div>
+                    <div class="connected-detail" style="color: var(--mdst-color-muted)">Not connected</div>
+                  </div>
+                </div>
+                <button class="mdst-button mdst-button--sm">Connect</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- APPEARANCE SECTION -->
+        <!-- ============================================ -->
+        <div class="settings-panel" id="section-appearance" style="display: none">
+          <div class="settings-section">
+            <div class="settings-section-header">
+              <h2>Appearance</h2>
+              <p>Customize the look and feel of the application.</p>
+            </div>
+
+            <!-- Theme -->
+            <div class="form-group">
+              <label>Theme</label>
+              <div class="theme-options">
+                <label class="theme-option active" id="theme-light">
+                  <input type="radio" name="theme" value="light" checked onchange="selectTheme('light')" />
+                  <div class="theme-option-preview theme-option-preview--light">☀</div>
+                  <div class="theme-option-label">Light</div>
+                  <div class="theme-option-desc">Clean and bright</div>
+                </label>
+                <label class="theme-option" id="theme-dark">
+                  <input type="radio" name="theme" value="dark" onchange="selectTheme('dark')" />
+                  <div class="theme-option-preview theme-option-preview--dark">☾</div>
+                  <div class="theme-option-label">Dark</div>
+                  <div class="theme-option-desc">Easy on the eyes</div>
+                </label>
+                <label class="theme-option" id="theme-system">
+                  <input type="radio" name="theme" value="system" onchange="selectTheme('system')" />
+                  <div class="theme-option-preview theme-option-preview--system">◑</div>
+                  <div class="theme-option-label">System</div>
+                  <div class="theme-option-desc">Follow OS setting</div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Font size -->
+            <div class="form-group">
+              <label for="font-size">Interface font size</label>
+              <div style="display: flex; align-items: center; gap: var(--mdst-space-md); max-width: 20rem">
+                <input
+                  type="range"
+                  id="font-size"
+                  class="mdst-range"
+                  min="12"
+                  max="18"
+                  value="14"
+                  step="1"
+                  style="flex: 1"
+                  oninput="document.getElementById('font-size-value').textContent = this.value + 'px'"
+                />
+                <span
+                  id="font-size-value"
+                  style="font-size: var(--mdst-text-sm); font-family: var(--mdst-font-mono); min-width: 3rem; text-align: right"
+                  >14px</span
+                >
+              </div>
+            </div>
+
+            <!-- Density -->
+            <div class="form-group">
+              <label for="density">Layout density</label>
+              <select id="density" class="mdst-dropdown" style="max-width: 16rem">
+                <option>Comfortable</option>
+                <option selected>Default</option>
+                <option>Compact</option>
+              </select>
+              <p class="form-hint">Controls the spacing between elements throughout the interface.</p>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="form-group">
+              <div style="display: flex; align-items: center; justify-content: space-between; max-width: 20rem">
+                <div>
+                  <label style="margin-bottom: 0">Collapsed sidebar</label>
+                  <p class="form-hint" style="margin-top: 2px">Start with the sidebar collapsed on desktop.</p>
+                </div>
+                <input type="checkbox" class="mdst-checkbox--toggle" />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="mdst-button mdst-button--ghost" onclick="showToast('Reset to defaults')">Reset to Defaults</button>
+              <button class="mdst-button mdst-button--inverted" onclick="showToast('Appearance saved')">Save Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- NOTIFICATIONS SECTION -->
+        <!-- ============================================ -->
+        <div class="settings-panel" id="section-notifications" style="display: none">
+          <div class="settings-section">
+            <div class="settings-section-header">
+              <h2>Notifications</h2>
+              <p>Choose how and when you want to be notified. You can customise each notification type independently.</p>
+            </div>
+
+            <!-- Global toggle -->
+            <div class="mdst-card mdst-card--compact" style="margin-bottom: var(--mdst-space-lg)">
+              <div class="mdst-card-body" style="display: flex; justify-content: space-between; align-items: center">
+                <div>
+                  <p style="font-size: var(--mdst-text-sm); font-weight: 500; margin: 0 0 2px">Enable notifications</p>
+                  <p style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); margin: 0">
+                    Master toggle for all notification channels.
+                  </p>
+                </div>
+                <input type="checkbox" class="mdst-checkbox--toggle" checked />
+              </div>
+            </div>
+
+            <!-- Activity notifications -->
+            <div class="notification-group">
+              <div class="notification-group-header">Activity</div>
+              <div class="notification-item">
+                <div class="notification-info">
+                  <p class="notification-label">Comments & mentions</p>
+                  <p class="notification-desc">When someone mentions you or comments on your work.</p>
+                </div>
+                <div class="notification-controls">
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <span class="notification-channel-label">Email</span>
+                  </div>
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <span class="notification-channel-label">Push</span>
+                  </div>
+                </div>
+              </div>
+              <div class="notification-item">
+                <div class="notification-info">
+                  <p class="notification-label">Project updates</p>
+                  <p class="notification-desc">Deployments, builds, and status changes on your projects.</p>
+                </div>
+                <div class="notification-controls">
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <span class="notification-channel-label">Email</span>
+                  </div>
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" />
+                    <span class="notification-channel-label">Push</span>
+                  </div>
+                </div>
+              </div>
+              <div class="notification-item">
+                <div class="notification-info">
+                  <p class="notification-label">Team invitations</p>
+                  <p class="notification-desc">When you're invited to join a team or project.</p>
+                </div>
+                <div class="notification-controls">
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <span class="notification-channel-label">Email</span>
+                  </div>
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <span class="notification-channel-label">Push</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- System notifications -->
+            <div class="notification-group">
+              <div class="notification-group-header">System</div>
+              <div class="notification-item">
+                <div class="notification-info">
+                  <p class="notification-label">Security alerts</p>
+                  <p class="notification-desc">Unusual sign-in activity, password changes, and new device logins.</p>
+                </div>
+                <div class="notification-controls">
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <span class="notification-channel-label">Email</span>
+                  </div>
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <span class="notification-channel-label">Push</span>
+                  </div>
+                </div>
+              </div>
+              <div class="notification-item">
+                <div class="notification-info">
+                  <p class="notification-label">Usage & billing</p>
+                  <p class="notification-desc">Approaching limits, invoices, and payment reminders.</p>
+                </div>
+                <div class="notification-controls">
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <span class="notification-channel-label">Email</span>
+                  </div>
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" />
+                    <span class="notification-channel-label">Push</span>
+                  </div>
+                </div>
+              </div>
+              <div class="notification-item">
+                <div class="notification-info">
+                  <p class="notification-label">Product updates</p>
+                  <p class="notification-desc">New features, improvements, and changelog announcements.</p>
+                </div>
+                <div class="notification-controls">
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" />
+                    <span class="notification-channel-label">Email</span>
+                  </div>
+                  <div class="notification-channel">
+                    <input type="checkbox" class="mdst-checkbox--toggle" />
+                    <span class="notification-channel-label">Push</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Digest frequency -->
+            <div class="form-group" style="margin-top: var(--mdst-space-lg)">
+              <label for="digest">Email digest frequency</label>
+              <select id="digest" class="mdst-dropdown" style="max-width: 16rem">
+                <option>Real-time</option>
+                <option selected>Daily summary</option>
+                <option>Weekly summary</option>
+                <option>Never</option>
+              </select>
+              <p class="form-hint">Batch non-urgent notifications into a single email instead of receiving them individually.</p>
+            </div>
+
+            <div class="form-actions">
+              <button class="mdst-button mdst-button--inverted" onclick="showToast('Notification preferences saved')">
+                Save Preferences
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- SESSIONS SECTION -->
+        <!-- ============================================ -->
+        <div class="settings-panel" id="section-sessions" style="display: none">
+          <div class="settings-section">
+            <div class="settings-section-header">
+              <h2>Active sessions</h2>
+              <p>These are the devices currently signed in to your account. Revoke any sessions you don't recognise.</p>
+            </div>
+
+            <div class="mdst-card" style="padding: 0">
+              <div class="session-item">
+                <div class="session-info">
+                  <p class="session-device">
+                    Chrome on macOS
+                    <span class="mdst-tag mdst-tag--success mdst-tag--sm mdst-tag--pill">Current</span>
+                  </p>
+                  <p class="session-detail">London, UK · IP 82.132.40.1 · Active now</p>
+                </div>
+              </div>
+              <div class="session-item">
+                <div class="session-info">
+                  <p class="session-device">Safari on iPhone</p>
+                  <p class="session-detail">London, UK · IP 82.132.40.2 · Last active 2 hours ago</p>
+                </div>
+                <button class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
+              </div>
+              <div class="session-item">
+                <div class="session-info">
+                  <p class="session-device">Firefox on Windows</p>
+                  <p class="session-detail">Manchester, UK · IP 81.98.12.42 · Last active 3 days ago</p>
+                </div>
+                <button class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
+              </div>
+              <div class="session-item">
+                <div class="session-info">
+                  <p class="session-device">Relay CLI</p>
+                  <p class="session-detail">API token · Created Dec 1, 2024 · Last used 5 hours ago</p>
+                </div>
+                <button class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
+              </div>
+            </div>
+
+            <div class="form-actions form-actions--left" style="margin-top: var(--mdst-space-md)">
+              <button class="mdst-button mdst-button--sm" onclick="showToast('All other sessions revoked')">
+                Revoke All Other Sessions
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- DANGER ZONE SECTION -->
+        <!-- ============================================ -->
+        <div class="settings-panel" id="section-danger" style="display: none">
+          <div class="settings-section">
+            <div class="settings-section-header">
+              <h2>Danger Zone</h2>
+              <p>Irreversible actions that affect your account. Proceed with caution.</p>
+            </div>
+
+            <div class="mdst-card danger-zone" style="padding: 0">
+              <div class="danger-item">
+                <div class="danger-item-info">
+                  <h4>Export account data</h4>
+                  <p>Download a copy of all your data including projects, settings, and activity history.</p>
+                </div>
+                <button class="mdst-button mdst-button--sm" onclick="showToast(`Export started — you'll receive an email when ready`)">
+                  Export Data
+                </button>
+              </div>
+              <div class="danger-item">
+                <div class="danger-item-info">
+                  <h4>Transfer ownership</h4>
+                  <p>Transfer all your projects and data to another account. You'll retain read-only access.</p>
+                </div>
+                <button class="danger-btn" onclick="document.getElementById('transfer-dialog').showModal()">Transfer</button>
+              </div>
+              <div class="danger-item">
+                <div class="danger-item-info">
+                  <h4>Deactivate account</h4>
+                  <p>Temporarily disable your account. Your data will be preserved and you can reactivate at any time.</p>
+                </div>
+                <button class="danger-btn" onclick="document.getElementById('deactivate-dialog').showModal()">Deactivate</button>
+              </div>
+              <div class="danger-item">
+                <div class="danger-item-info">
+                  <h4>Delete account</h4>
+                  <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+                </div>
+                <button class="danger-btn" onclick="document.getElementById('delete-dialog').showModal()">Delete Account</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transfer Dialog -->
+    <dialog class="mdst-dialog" id="transfer-dialog">
+      <div class="dialog-header">
+        <h2>Transfer ownership</h2>
+        <button class="dialog-close" onclick="document.getElementById('transfer-dialog').close()">✕</button>
+      </div>
+      <div class="dialog-body">
+        <p>Enter the email address of the account you want to transfer ownership to. They must have an existing Relay account.</p>
+        <div class="form-group">
+          <label for="transfer-email">Recipient email</label>
+          <input type="email" id="transfer-email" class="mdst-input" placeholder="colleague@company.com" />
+        </div>
+        <div class="form-group">
+          <label for="transfer-confirm">Type <strong>TRANSFER</strong> to confirm</label>
+          <input type="text" id="transfer-confirm" class="mdst-input" placeholder="TRANSFER" />
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('transfer-dialog').close()">Cancel</button>
+        <button class="danger-btn" onclick="document.getElementById('transfer-dialog').close(); showToast('Transfer request sent')">
+          Transfer Ownership
+        </button>
+      </div>
+    </dialog>
+
+    <!-- Deactivate Dialog -->
+    <dialog class="mdst-dialog" id="deactivate-dialog">
+      <div class="dialog-header">
+        <h2>Deactivate account</h2>
+        <button class="dialog-close" onclick="document.getElementById('deactivate-dialog').close()">✕</button>
+      </div>
+      <div class="dialog-body">
+        <p>Deactivating your account will:</p>
+        <ul
+          style="
+            font-size: var(--mdst-text-sm);
+            color: var(--mdst-color-muted);
+            padding-left: var(--mdst-space-lg);
+            margin: 0 0 var(--mdst-space-md);
+          "
+        >
+          <li>Hide your profile from other users</li>
+          <li>Pause all active projects and deployments</li>
+          <li>Suspend any API keys and integrations</li>
+        </ul>
+        <p>Your data will be preserved. You can reactivate at any time by signing in again.</p>
+        <div class="form-group">
+          <label for="deactivate-reason">Reason (optional)</label>
+          <select id="deactivate-reason" class="mdst-dropdown" style="width: 100%">
+            <option value="">Select a reason</option>
+            <option>Taking a break</option>
+            <option>Switching to another service</option>
+            <option>Too expensive</option>
+            <option>Missing features</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('deactivate-dialog').close()">Cancel</button>
+        <button class="danger-btn" onclick="document.getElementById('deactivate-dialog').close(); showToast('Account deactivated')">
+          Deactivate Account
+        </button>
+      </div>
+    </dialog>
+
+    <!-- Delete Dialog -->
+    <dialog class="mdst-dialog" id="delete-dialog">
+      <div class="dialog-header">
+        <h2>Delete account</h2>
+        <button class="dialog-close" onclick="document.getElementById('delete-dialog').close()">✕</button>
+      </div>
+      <div class="dialog-body">
+        <p><strong>This action is permanent and cannot be undone.</strong></p>
+        <p>Deleting your account will immediately:</p>
+        <ul
+          style="
+            font-size: var(--mdst-text-sm);
+            color: var(--mdst-color-muted);
+            padding-left: var(--mdst-space-lg);
+            margin: 0 0 var(--mdst-space-md);
+          "
+        >
+          <li>Remove all projects, deployments, and data</li>
+          <li>Cancel any active subscriptions</li>
+          <li>Revoke all API keys and integrations</li>
+          <li>Remove you from all teams</li>
+        </ul>
+        <div class="form-group">
+          <label for="delete-email">Enter your email address to confirm</label>
+          <input type="email" id="delete-email" class="mdst-input" placeholder="jane@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="delete-confirm">Type <strong>DELETE MY ACCOUNT</strong> to confirm</label>
+          <input type="text" id="delete-confirm" class="mdst-input" placeholder="DELETE MY ACCOUNT" />
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('delete-dialog').close()">Cancel</button>
+        <button class="danger-btn" onclick="document.getElementById('delete-dialog').close(); showToast('Account deleted')">
+          Permanently Delete
+        </button>
+      </div>
+    </dialog>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast">
+      <span id="toast-message">Saved</span>
+    </div>
+
+    <script>
+      // Section switching
+      function showSection(sectionName) {
+        // Hide all panels
+        document.querySelectorAll(".settings-panel").forEach(function (panel) {
+          panel.style.display = "none";
+        });
+
+        // Show target panel
+        var target = document.getElementById("section-" + sectionName);
+        if (target) {
+          target.style.display = "block";
+        }
+
+        // Update nav
+        document.querySelectorAll(".settings-nav-link").forEach(function (link) {
+          link.classList.remove("settings-nav-link--active");
+        });
+
+        // Find the clicked link (match by onclick content)
+        document.querySelectorAll(".settings-nav-link").forEach(function (link) {
+          var onclick = link.getAttribute("onclick") || "";
+          if (onclick.indexOf("'" + sectionName + "'") !== -1) {
+            link.classList.add("settings-nav-link--active");
+          }
+        });
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+      }
+
+      // Theme selection
+      function selectTheme(theme) {
+        document.querySelectorAll(".theme-option").forEach(function (option) {
+          option.classList.remove("active");
+        });
+        var target = document.getElementById("theme-" + theme);
+        if (target) {
+          target.classList.add("active");
+        }
+      }
+
+      // Toast notification
+      var toastTimeout;
+      function showToast(message) {
+        var toast = document.getElementById("toast");
+        var toastMessage = document.getElementById("toast-message");
+        toastMessage.textContent = message;
+
+        // Clear any existing timeout
+        if (toastTimeout) {
+          clearTimeout(toastTimeout);
+        }
+
+        toast.classList.add("show");
+
+        toastTimeout = setTimeout(function () {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+
+      // Close dialogs on backdrop click
+      document.querySelectorAll(".mdst-dialog").forEach(function (dialog) {
+        dialog.addEventListener("click", function (e) {
+          if (e.target === this) this.close();
+        });
+      });
+    </script>
+  </body>
+</html>

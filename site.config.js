@@ -19,6 +19,10 @@ export default {
       title: "Introduction",
       description: "A minimal, themeable CSS component library. Black and white by default, easy to customise.",
     },
+    examples: {
+      title: "Examples",
+      description: "Standalone pages built entirely with modest-ui components — landing pages, dashboards, blogs, and more.",
+    },
     theme: {
       title: "Theme Playground",
       description: "Interactive theme playground to customise design tokens and generate CSS variables.",

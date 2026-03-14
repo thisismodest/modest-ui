@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page — modest-ui Example</title>
+    <meta
+      name="description"
+      content="A marketing landing page built with modest-ui — featuring a hero section, feature grid, testimonials, and call-to-action footer."
+    />
+    <link rel="canonical" href="https://modest-ui.com/examples/landing.html" />
+    <meta property="og:title" content="Landing Page — modest-ui Example" />
+    <meta
+      property="og:description"
+      content="A marketing landing page built with modest-ui — featuring a hero section, feature grid, testimonials, and call-to-action footer."
+    />
+    <meta property="og:url" content="https://modest-ui.com/examples/landing.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="modest-ui" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Landing Page — modest-ui Example" />
+    <meta
+      name="twitter:description"
+      content="A marketing landing page built with modest-ui — featuring a hero section, feature grid, testimonials, and call-to-action footer."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="../dist/modest-ui.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        line-height: var(--mdst-line-height);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-bg);
+      }
+
+      /* Header */
+      .site-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-md) var(--mdst-space-lg);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        position: sticky;
+        top: 0;
+        background: var(--mdst-color-bg);
+        z-index: 10;
+      }
+
+      .site-logo {
+        font-weight: 700;
+        font-size: var(--mdst-text-lg);
+        letter-spacing: -0.02em;
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      /* Hero */
+      .hero {
+        text-align: center;
+        padding: 5rem var(--mdst-space-lg) 4rem;
+        max-width: 42rem;
+        margin: 0 auto;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .hero p {
+        font-size: var(--mdst-text-lg);
+        color: var(--mdst-color-muted);
+        margin: var(--mdst-space-sm) 0 var(--mdst-space-lg);
+        max-width: 32rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: var(--mdst-space-sm);
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero-sub {
+        margin-top: var(--mdst-space-md);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+      }
+
+      /* Logos strip */
+      .logos-strip {
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-lg) var(--mdst-space-lg);
+        text-align: center;
+      }
+
+      .logos-strip p {
+        font-size: var(--mdst-text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .logos-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--mdst-space-xl);
+        flex-wrap: wrap;
+        color: var(--mdst-color-muted);
+        font-weight: 600;
+        font-size: var(--mdst-text-sm);
+        letter-spacing: 0.04em;
+      }
+
+      /* Features */
+      .features {
+        padding: 4rem var(--mdst-space-lg);
+        max-width: 60rem;
+        margin: 0 auto;
+      }
+
+      .features-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .features-header h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .features-header p {
+        color: var(--mdst-color-muted);
+        max-width: 28rem;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--mdst-space-md);
+      }
+
+      .feature-icon {
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        margin-bottom: var(--mdst-space-sm);
+        font-size: var(--mdst-text-lg);
+      }
+
+      .mdst-card-body h3 {
+        font-weight: 600;
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .mdst-card-body p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      /* Showcase / preview section */
+      .showcase {
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: 4rem var(--mdst-space-lg);
+        background: var(--mdst-color-subtle);
+      }
+
+      .showcase-inner {
+        max-width: 60rem;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--mdst-space-xl);
+        align-items: center;
+      }
+
+      .showcase-text h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .showcase-text p {
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .showcase-text ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 var(--mdst-space-lg);
+      }
+
+      .showcase-text li {
+        font-size: var(--mdst-text-sm);
+        padding: var(--mdst-space-xs) 0;
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .showcase-text li::before {
+        content: "✓";
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .showcase-preview {
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        background: var(--mdst-color-bg);
+        padding: var(--mdst-space-lg);
+      }
+
+      .showcase-preview h4 {
+        font-weight: 600;
+        font-size: var(--mdst-text-sm);
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .showcase-preview .form-group {
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      .showcase-preview label {
+        font-size: var(--mdst-text-sm);
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .showcase-preview .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--mdst-space-sm);
+      }
+
+      /* Testimonials */
+      .testimonials {
+        padding: 4rem var(--mdst-space-lg);
+        max-width: 60rem;
+        margin: 0 auto;
+      }
+
+      .testimonials-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .testimonials-header h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .testimonials-header p {
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--mdst-space-md);
+      }
+
+      .testimonial-quote {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-md);
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        margin-top: var(--mdst-space-md);
+        line-height: 1.2;
+      }
+
+      .testimonial-avatar {
+        width: 2rem;
+        height: 2rem;
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .testimonial-name {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+      }
+
+      .testimonial-role {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      /* CTA */
+      .cta {
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: 4rem var(--mdst-space-lg);
+        text-align: center;
+      }
+
+      .cta-inner {
+        max-width: 32rem;
+        margin: 0 auto;
+      }
+
+      .cta h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .cta p {
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-lg);
+      }
+
+      .cta-form {
+        display: flex;
+        gap: var(--mdst-space-sm);
+        justify-content: center;
+        max-width: 24rem;
+        margin: 0 auto;
+      }
+
+      .cta-form .mdst-input {
+        flex: 1;
+      }
+
+      .cta-note {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin-top: var(--mdst-space-sm);
+      }
+
+      /* Footer */
+      .site-footer {
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-xl) var(--mdst-space-lg);
+        max-width: 60rem;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: var(--mdst-space-xl);
+        margin-bottom: var(--mdst-space-xl);
+      }
+
+      .footer-brand .site-logo {
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      .footer-brand p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .footer-col h4 {
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .footer-col ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-col li {
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .footer-col a {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        text-decoration: none;
+      }
+
+      .footer-col a:hover {
+        text-decoration: underline;
+      }
+
+      .footer-bottom {
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding-top: var(--mdst-space-lg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: var(--mdst-space-md);
+      }
+
+      .footer-links a {
+        color: var(--mdst-color-muted);
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 1.75rem;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .showcase-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: var(--mdst-space-lg);
+        }
+
+        .cta-form {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero {
+          padding: 3rem var(--mdst-space-md) 2rem;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+        }
+
+        .hero-actions .mdst-button {
+          width: 100%;
+        }
+
+        .site-nav .mdst-button--ghost {
+          display: none;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: var(--mdst-space-sm);
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
+      <nav class="site-nav">
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">Features</button>
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">Pricing</button>
+        <button class="mdst-button mdst-button--ghost mdst-button--sm">Docs</button>
+        <button class="mdst-button mdst-button--sm">Sign In</button>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <span class="mdst-tag mdst-tag--subtle mdst-tag--pill mdst-tag--sm hero-badge">Now in public beta ✦</span>
+      <h1>Ship faster with less complexity</h1>
+      <p>
+        A developer platform that eliminates boilerplate, automates the boring parts, and lets you focus on what matters — your product.
+      </p>
+      <div class="hero-actions">
+        <button class="mdst-button mdst-button--inverted mdst-button--lg">Get Started Free</button>
+        <button class="mdst-button mdst-button--lg">View Documentation</button>
+      </div>
+      <p class="hero-sub">No credit card required · Free for up to 3 projects</p>
+    </section>
+
+    <!-- Trusted by -->
+    <section class="logos-strip">
+      <p>Trusted by teams at</p>
+      <div class="logos-row">
+        <span>VERCEL</span>
+        <span>STRIPE</span>
+        <span>LINEAR</span>
+        <span>NOTION</span>
+        <span>RESEND</span>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="features-header">
+        <h2>Everything you need, nothing you don't</h2>
+        <p>Built for developers who value their time. Every feature earns its place.</p>
+      </div>
+      <div class="features-grid">
+        <div class="mdst-card">
+          <div class="mdst-card-body">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant Deploys</h3>
+            <p>Push to git and your changes are live in seconds. Zero-config CI/CD built right in.</p>
+          </div>
+        </div>
+        <div class="mdst-card">
+          <div class="mdst-card-body">
+            <div class="feature-icon">🔒</div>
+            <h3>Secure by Default</h3>
+            <p>Automatic SSL, environment variable encryption, and SOC 2 compliance out of the box.</p>
+          </div>
+        </div>
+        <div class="mdst-card">
+          <div class="mdst-card-body">
+            <div class="feature-icon">📊</div>
+            <h3>Built-in Analytics</h3>
+            <p>Real-time performance metrics without third-party scripts slowing down your site.</p>
+          </div>
+        </div>
+        <div class="mdst-card">
+          <div class="mdst-card-body">
+            <div class="feature-icon">🌐</div>
+            <h3>Edge Network</h3>
+            <p>Served from 200+ edge locations worldwide. Your users get sub-50ms response times.</p>
+          </div>
+        </div>
+        <div class="mdst-card">
+          <div class="mdst-card-body">
+            <div class="feature-icon">🔌</div>
+            <h3>Integrations</h3>
+            <p>First-class support for databases, auth providers, and every major framework.</p>
+          </div>
+        </div>
+        <div class="mdst-card">
+          <div class="mdst-card-body">
+            <div class="feature-icon">👥</div>
+            <h3>Team Collaboration</h3>
+            <p>Preview deployments, branch environments, and granular role-based access for your team.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase -->
+    <section class="showcase">
+      <div class="showcase-inner">
+        <div class="showcase-text">
+          <h2>Set up in minutes, not days</h2>
+          <p>Connect your repo, configure your settings, and deploy. It really is that simple.</p>
+          <ul>
+            <li>Automatic framework detection</li>
+            <li>Environment variables synced across branches</li>
+            <li>Custom domains with instant SSL</li>
+            <li>Rollback to any previous deploy</li>
+          </ul>
+          <button class="mdst-button mdst-button--inverted">Start Building</button>
+        </div>
+        <div class="showcase-preview">
+          <h4>Create a new project</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Project Name</label>
+              <input type="text" class="mdst-input" placeholder="my-app" />
+            </div>
+            <div class="form-group">
+              <label>Framework</label>
+              <select class="mdst-dropdown">
+                <option>Next.js</option>
+                <option>Remix</option>
+                <option>Astro</option>
+                <option>SvelteKit</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Repository</label>
+            <input type="text" class="mdst-input" placeholder="github.com/you/my-app" />
+          </div>
+          <div class="form-group">
+            <label>Branch</label>
+            <select class="mdst-dropdown" style="width: 100%">
+              <option>main</option>
+              <option>develop</option>
+              <option>staging</option>
+            </select>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--mdst-space-md)">
+            <label class="mdst-checkbox-label">
+              <input type="checkbox" class="mdst-checkbox" checked />
+              Auto-deploy on push
+            </label>
+            <button class="mdst-button mdst-button--inverted mdst-button--sm">Deploy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <div class="testimonials-header">
+        <h2>Loved by developers</h2>
+        <p>Don't take our word for it — here's what our users say.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="mdst-card">
+          <div class="mdst-card-body">
+            <p class="testimonial-quote">
+              "Finally a CSS library that gets out of the way. Just clean, native HTML with a few classes — exactly how it should be."
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">JF</div>
+              <div>
+                <div class="testimonial-name">Jamie Fontaine</div>
+                <div class="testimonial-role">Frontend Lead at Pebblework</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mdst-card">
+          <div class="mdst-card-body">
+            <p class="testimonial-quote">
+              "Lightweight, themeable, and the components look great out of the box. Swapped our old UI kit in a day and haven't looked
+              back."
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">TN</div>
+              <div>
+                <div class="testimonial-name">Tomás Nuñez</div>
+                <div class="testimonial-role">Engineering Manager at Glassbox</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mdst-card">
+          <div class="mdst-card-body">
+            <p class="testimonial-quote">
+              "No JavaScript, no build step, just drop in a stylesheet and go. It's the simplest way to make something look polished fast."
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">RH</div>
+              <div>
+                <div class="testimonial-name">Ren Hayashi</div>
+                <div class="testimonial-role">Founder at Terracotta Labs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="cta-inner">
+        <h2>Ready to get started?</h2>
+        <p>Join thousands of developers shipping faster. Start free, upgrade when you're ready.</p>
+        <div class="cta-form">
+          <input type="email" class="mdst-input" placeholder="you@company.com" />
+          <button class="mdst-button mdst-button--inverted">Get Started</button>
+        </div>
+        <p class="cta-note">Free forever for personal projects. No credit card required.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="site-logo">acme</div>
+          <p>The developer platform for the modern web. Ship faster, scale easier.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Changelog</a></li>
+            <li><a href="#">Docs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">DPA</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Example Blog. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="#">Twitter</a>
+          <a href="#">GitHub</a>
+          <a href="#">Discord</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

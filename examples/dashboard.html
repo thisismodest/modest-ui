@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — modest-ui Example</title>
+    <meta
+      name="description"
+      content="An admin dashboard built with modest-ui — featuring stat cards, a data table, activity feed, and sidebar navigation."
+    />
+    <link rel="canonical" href="https://modest-ui.com/examples/dashboard.html" />
+    <meta property="og:title" content="Dashboard — modest-ui Example" />
+    <meta
+      property="og:description"
+      content="An admin dashboard built with modest-ui — featuring stat cards, a data table, activity feed, and sidebar navigation."
+    />
+    <meta property="og:url" content="https://modest-ui.com/examples/dashboard.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="modest-ui" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Dashboard — modest-ui Example" />
+    <meta
+      name="twitter:description"
+      content="An admin dashboard built with modest-ui — featuring stat cards, a data table, activity feed, and sidebar navigation."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="../dist/modest-ui.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        line-height: var(--mdst-line-height);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-bg);
+      }
+
+      /* Layout */
+      .dash-layout {
+        display: grid;
+        grid-template-columns: 14rem 1fr;
+        min-height: 100vh;
+      }
+
+      /* Sidebar */
+      .dash-sidebar {
+        border-right: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-md);
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+      }
+
+      .sidebar-logo {
+        font-weight: 700;
+        font-size: var(--mdst-text-lg);
+        letter-spacing: -0.02em;
+        padding-bottom: var(--mdst-space-md);
+        margin-bottom: var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-px);
+        flex: 1;
+      }
+
+      .dash-sidebar-link {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        font-size: var(--mdst-text-sm);
+        text-decoration: none;
+        color: var(--mdst-color-muted);
+        border: var(--mdst-border-width) solid transparent;
+        transition:
+          color var(--mdst-transition),
+          background var(--mdst-transition);
+      }
+
+      .dash-sidebar-link:hover {
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+      }
+
+      .dash-sidebar-link--active {
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-subtle);
+        border-color: var(--mdst-color-border);
+        font-weight: 500;
+      }
+
+      .dash-sidebar-link svg {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+      }
+
+      .dash-sidebar-section {
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--mdst-color-muted);
+        padding: var(--mdst-space-md) var(--mdst-space-sm) var(--mdst-space-xs);
+      }
+
+      .dash-sidebar-footer {
+        margin-top: auto;
+        padding-top: var(--mdst-space-md);
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .dash-sidebar-footer-avatar {
+        width: 2rem;
+        height: 2rem;
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .dash-sidebar-footer-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .dash-sidebar-footer-name {
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .dash-sidebar-footer-role {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      /* Main content */
+      .dash-main {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+
+      /* Top bar */
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-md) var(--mdst-space-lg);
+        /*border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);*/
+        gap: var(--mdst-space-md);
+        position: sticky;
+        top: 0;
+        background: var(--mdst-color-subtle);
+        z-index: 10;
+      }
+
+      .topbar-search {
+        flex: 1;
+        max-width: 24rem;
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .notification-btn {
+        position: relative;
+        background: none;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        cursor: pointer;
+        color: var(--mdst-color-fg);
+        font-size: var(--mdst-text-sm);
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-xs);
+        transition: background var(--mdst-transition);
+      }
+
+      .notification-btn:hover {
+        background: var(--mdst-color-subtle);
+      }
+
+      .notification-dot {
+        width: 0.375rem;
+        height: 0.375rem;
+        background: var(--mdst-color-error);
+        border-radius: 50%;
+      }
+
+      /* Content area */
+      .content {
+        padding: var(--mdst-space-lg);
+        flex: 1;
+      }
+
+      .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--mdst-space-lg);
+        flex-wrap: wrap;
+        gap: var(--mdst-space-sm);
+      }
+
+      .content-header h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0;
+      }
+
+      .content-header-actions {
+        display: flex;
+        gap: var(--mdst-space-sm);
+        align-items: center;
+      }
+
+      /* Stat cards */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--mdst-space-md);
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .stat-label {
+        font-size: var(--mdst-text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .stat-value {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-xs);
+        line-height: 1.2;
+      }
+
+      .stat-change {
+        font-size: var(--mdst-text-xs);
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-xs);
+      }
+
+      .stat-change--up {
+        color: var(--mdst-color-success);
+      }
+
+      .stat-change--down {
+        color: var(--mdst-color-error);
+      }
+
+      /* Content grid */
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 20rem;
+        gap: var(--mdst-space-md);
+      }
+
+      /* Table section */
+      .table-section {
+        min-width: 0;
+      }
+
+      .table-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--mdst-space-md);
+        gap: var(--mdst-space-sm);
+        flex-wrap: wrap;
+      }
+
+      .table-toolbar-left {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .table-toolbar-right {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      .table-wrap .mdst-table td {
+        white-space: nowrap;
+      }
+
+      .customer-cell {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .customer-avatar {
+        width: 1.75rem;
+        height: 1.75rem;
+        background: var(--mdst-color-subtle);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .customer-info {
+        min-width: 0;
+      }
+
+      .customer-name {
+        font-weight: 500;
+        font-size: var(--mdst-text-sm);
+      }
+
+      .customer-email {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      .table-pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: var(--mdst-space-md);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+      }
+
+      .table-pagination-btns {
+        display: flex;
+        gap: var(--mdst-space-xs);
+      }
+
+      /* Right column */
+      .right-col {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-md);
+      }
+
+      /* Activity feed */
+      .activity-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .activity-item {
+        display: flex;
+        gap: var(--mdst-space-sm);
+        padding: var(--mdst-space-sm) 0;
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+      }
+
+      .activity-item:last-child {
+        border-bottom: none;
+      }
+
+      .activity-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-radius: 50%;
+        margin-top: 0.4rem;
+        flex-shrink: 0;
+      }
+
+      .activity-dot--success {
+        background: var(--mdst-color-success);
+        border-color: var(--mdst-color-success);
+      }
+
+      .activity-dot--error {
+        background: var(--mdst-color-error);
+        border-color: var(--mdst-color-error);
+      }
+
+      .activity-dot--muted {
+        background: var(--mdst-color-muted);
+        border-color: var(--mdst-color-muted);
+      }
+
+      .activity-text {
+        font-size: var(--mdst-text-sm);
+        flex: 1;
+      }
+
+      .activity-text strong {
+        font-weight: 600;
+      }
+
+      .activity-time {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin-top: 2px;
+      }
+
+      /* Quick actions */
+      .quick-actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-xs);
+      }
+
+      .quick-action-btn {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        padding: var(--mdst-space-sm);
+        background: none;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        cursor: pointer;
+        text-align: left;
+        font-family: inherit;
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        transition: background var(--mdst-transition);
+      }
+
+      .quick-action-btn:hover {
+        background: var(--mdst-color-subtle);
+      }
+
+      .quick-action-icon {
+        font-size: var(--mdst-text-base);
+        width: 1.5rem;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      .quick-action-label {
+        flex: 1;
+      }
+
+      .quick-action-label small {
+        display: block;
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      /* Chart placeholder */
+      .chart-placeholder {
+        border: var(--mdst-border-width) dashed var(--mdst-color-border);
+        height: 10rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-sm);
+        background: var(--mdst-color-subtle);
+      }
+
+      /* Sidebar overlay — hidden by default, shown via JS on mobile */
+      .dash-sidebar-overlay {
+        display: none;
+      }
+
+      /* Mobile sidebar toggle */
+      .dash-mobile-menu-btn {
+        display: none;
+        background: none;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        cursor: pointer;
+        color: var(--mdst-color-fg);
+        font-size: var(--mdst-text-sm);
+      }
+
+      /* Dialog */
+      .mdst-dialog {
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        padding: 0;
+        max-width: 28rem;
+        width: 90vw;
+      }
+
+      .mdst-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      .dialog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .dialog-header h2 {
+        font-size: var(--mdst-text-lg);
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .dialog-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-lg);
+        padding: 0;
+        line-height: 1;
+      }
+
+      .dialog-close:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      .dialog-body {
+        padding: var(--mdst-space-md);
+      }
+
+      .dialog-body .form-group {
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      .dialog-body .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--mdst-space-sm);
+      }
+
+      .dialog-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--mdst-space-sm);
+        padding: var(--mdst-space-md);
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .dash-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .dash-sidebar {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 14rem;
+          height: 100vh;
+          z-index: 100;
+          background: var(--mdst-color-bg);
+        }
+
+        .dash-sidebar.open {
+          display: flex;
+        }
+
+        .dash-sidebar-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.3);
+          z-index: 99;
+        }
+
+        .dash-sidebar-overlay.open {
+          display: block;
+        }
+
+        .dash-mobile-menu-btn {
+          display: flex;
+          align-items: center;
+          gap: var(--mdst-space-xs);
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .content {
+          padding: var(--mdst-space-md);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .content-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .table-toolbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .topbar-search {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dash-layout">
+      <!-- Sidebar -->
+      <aside class="dash-sidebar" id="sidebar">
+        <strong>Dashboard</strong>
+        <nav class="sidebar-nav">
+          <div class="dash-sidebar-section">Overview</div>
+          <a href="#" class="dash-sidebar-link dash-sidebar-link--active">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25a2.25 2.25 0 0 1-2.25-2.25v-2.25Z"
+              />
+            </svg>
+            Dashboard
+          </a>
+          <a href="#" class="dash-sidebar-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"
+              />
+            </svg>
+            Analytics
+          </a>
+
+          <div class="dash-sidebar-section">Management</div>
+          <a href="#" class="dash-sidebar-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
+              />
+            </svg>
+            Customers
+          </a>
+          <a href="#" class="dash-sidebar-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20.25 7.5l-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
+              />
+            </svg>
+            Orders
+          </a>
+          <a href="#" class="dash-sidebar-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+              />
+            </svg>
+            Products
+          </a>
+
+          <div class="dash-sidebar-section">Settings</div>
+          <a href="#" class="dash-sidebar-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"
+              />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+            Settings
+          </a>
+        </nav>
+        <div class="dash-sidebar-footer">
+          <div class="dash-sidebar-footer-avatar">JD</div>
+          <div class="dash-sidebar-footer-info">
+            <div class="dash-sidebar-footer-name">Jane Doe</div>
+            <div class="dash-sidebar-footer-role">Admin</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Mobile overlay -->
+      <div class="dash-sidebar-overlay" id="sidebar-overlay"></div>
+
+      <!-- Main -->
+      <div class="dash-main">
+        <!-- Top bar -->
+        <header class="topbar">
+          <button class="dash-mobile-menu-btn" id="mobile-menu-btn">☰ Menu</button>
+          <div class="topbar-search">
+            <input type="text" class="mdst-input" placeholder="Search orders, customers, products..." />
+          </div>
+          <div class="topbar-actions">
+            <button class="notification-btn">🔔 <span class="notification-dot"></span></button>
+            <select class="mdst-dropdown mdst-dropdown--sm mdst-dropdown--ghost">
+              <option>Last 30 days</option>
+              <option>Last 7 days</option>
+              <option>Last 90 days</option>
+              <option>This year</option>
+            </select>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+          <div class="content-header">
+            <h1><a href="/examples/" style="text-decoration: none">← Examples</a></h1>
+            <div class="content-header-actions">
+              <button class="mdst-button mdst-button--sm mdst-button--ghost">Export</button>
+              <button class="mdst-button mdst-button--sm mdst-button--inverted" id="new-order-btn">+ New Order</button>
+            </div>
+          </div>
+
+          <!-- Stat cards -->
+          <div class="stats-grid">
+            <div class="mdst-card mdst-card--compact">
+              <div class="mdst-card-body">
+                <p class="stat-label">Total Revenue</p>
+                <p class="stat-value">$48,352</p>
+                <div class="stat-change stat-change--up">
+                  <span>↑ 12.5%</span>
+                  <span style="color: var(--mdst-color-muted)">vs last month</span>
+                </div>
+              </div>
+            </div>
+            <div class="mdst-card mdst-card--compact">
+              <div class="mdst-card-body">
+                <p class="stat-label">Orders</p>
+                <p class="stat-value">1,247</p>
+                <div class="stat-change stat-change--up">
+                  <span>↑ 8.2%</span>
+                  <span style="color: var(--mdst-color-muted)">vs last month</span>
+                </div>
+              </div>
+            </div>
+            <div class="mdst-card mdst-card--compact">
+              <div class="mdst-card-body">
+                <p class="stat-label">Customers</p>
+                <p class="stat-value">3,891</p>
+                <div class="stat-change stat-change--up">
+                  <span>↑ 4.1%</span>
+                  <span style="color: var(--mdst-color-muted)">vs last month</span>
+                </div>
+              </div>
+            </div>
+            <div class="mdst-card mdst-card--compact">
+              <div class="mdst-card-body">
+                <p class="stat-label">Refund Rate</p>
+                <p class="stat-value">2.4%</p>
+                <div class="stat-change stat-change--down">
+                  <span>↓ 0.3%</span>
+                  <span style="color: var(--mdst-color-muted)">vs last month</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content grid: table + right column -->
+          <div class="content-grid">
+            <!-- Table section -->
+            <div class="table-section">
+              <div class="mdst-card">
+                <div class="mdst-card-header" style="display: flex; justify-content: space-between; align-items: center">
+                  <span>Recent Orders</span>
+                  <span style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); font-weight: 400">1,247 total</span>
+                </div>
+                <div class="mdst-card-body" style="padding: 0">
+                  <div class="table-toolbar" style="padding: var(--mdst-space-sm) var(--mdst-space-md) 0">
+                    <div class="table-toolbar-left">
+                      <input type="text" class="mdst-input" placeholder="Search orders..." style="max-width: 14rem" />
+                      <select class="mdst-dropdown mdst-dropdown--sm">
+                        <option>All Status</option>
+                        <option>Completed</option>
+                        <option>Processing</option>
+                        <option>Shipped</option>
+                        <option>Cancelled</option>
+                      </select>
+                    </div>
+                    <div class="table-toolbar-right">
+                      <button class="mdst-button mdst-button--ghost mdst-button--sm">↓ Export</button>
+                    </div>
+                  </div>
+                  <div class="table-wrap">
+                    <table class="mdst-table">
+                      <thead>
+                        <tr>
+                          <th style="padding-left: var(--mdst-space-md)">
+                            <label class="mdst-checkbox-label" style="margin: 0">
+                              <input type="checkbox" class="mdst-checkbox" id="select-all" />
+                            </label>
+                          </th>
+                          <th>Order</th>
+                          <th>Customer</th>
+                          <th>Status</th>
+                          <th>Amount</th>
+                          <th>Date</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style="padding-left: var(--mdst-space-md)">
+                            <input type="checkbox" class="mdst-checkbox" />
+                          </td>
+                          <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7291</span></td>
+                          <td>
+                            <div class="customer-cell">
+                              <div class="customer-avatar">AK</div>
+                              <div class="customer-info">
+                                <div class="customer-name">Anika Kapoor</div>
+                                <div class="customer-email">anika@example.com</div>
+                              </div>
+                            </div>
+                          </td>
+                          <td><span class="mdst-tag mdst-tag--success mdst-tag--subtle mdst-tag--sm">Completed</span></td>
+                          <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$284.00</td>
+                          <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 15, 2024</td>
+                          <td>
+                            <button class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding-left: var(--mdst-space-md)">
+                            <input type="checkbox" class="mdst-checkbox" />
+                          </td>
+                          <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7290</span></td>
+                          <td>
+                            <div class="customer-cell">
+                              <div class="customer-avatar">MR</div>
+                              <div class="customer-info">
+                                <div class="customer-name">Marcus Reyes</div>
+                                <div class="customer-email">marcus@example.com</div>
+                              </div>
+                            </div>
+                          </td>
+                          <td><span class="mdst-tag mdst-tag--muted mdst-tag--subtle mdst-tag--sm">Processing</span></td>
+                          <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$1,420.00</td>
+                          <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 15, 2024</td>
+                          <td>
+                            <button class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding-left: var(--mdst-space-md)">
+                            <input type="checkbox" class="mdst-checkbox" />
+                          </td>
+                          <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7289</span></td>
+                          <td>
+                            <div class="customer-cell">
+                              <div class="customer-avatar">SL</div>
+                              <div class="customer-info">
+                                <div class="customer-name">Sara Liu</div>
+                                <div class="customer-email">sara@example.com</div>
+                              </div>
+                            </div>
+                          </td>
+                          <td><span class="mdst-tag mdst-tag--success mdst-tag--subtle mdst-tag--sm">Shipped</span></td>
+                          <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$89.50</td>
+                          <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 14, 2024</td>
+                          <td>
+                            <button class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding-left: var(--mdst-space-md)">
+                            <input type="checkbox" class="mdst-checkbox" />
+                          </td>
+                          <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7288</span></td>
+                          <td>
+                            <div class="customer-cell">
+                              <div class="customer-avatar">TN</div>
+                              <div class="customer-info">
+                                <div class="customer-name">Tom Nakamura</div>
+                                <div class="customer-email">tom@example.com</div>
+                              </div>
+                            </div>
+                          </td>
+                          <td><span class="mdst-tag mdst-tag--error mdst-tag--subtle mdst-tag--sm">Cancelled</span></td>
+                          <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$635.00</td>
+                          <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 14, 2024</td>
+                          <td>
+                            <button class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding-left: var(--mdst-space-md)">
+                            <input type="checkbox" class="mdst-checkbox" />
+                          </td>
+                          <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7287</span></td>
+                          <td>
+                            <div class="customer-cell">
+                              <div class="customer-avatar">LB</div>
+                              <div class="customer-info">
+                                <div class="customer-name">Lena Bergström</div>
+                                <div class="customer-email">lena@example.com</div>
+                              </div>
+                            </div>
+                          </td>
+                          <td><span class="mdst-tag mdst-tag--success mdst-tag--subtle mdst-tag--sm">Completed</span></td>
+                          <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$192.00</td>
+                          <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 13, 2024</td>
+                          <td>
+                            <button class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding-left: var(--mdst-space-md)">
+                            <input type="checkbox" class="mdst-checkbox" />
+                          </td>
+                          <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7286</span></td>
+                          <td>
+                            <div class="customer-cell">
+                              <div class="customer-avatar">DP</div>
+                              <div class="customer-info">
+                                <div class="customer-name">David Park</div>
+                                <div class="customer-email">david@example.com</div>
+                              </div>
+                            </div>
+                          </td>
+                          <td><span class="mdst-tag mdst-tag--muted mdst-tag--subtle mdst-tag--sm">Processing</span></td>
+                          <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$47.00</td>
+                          <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 13, 2024</td>
+                          <td>
+                            <button class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="mdst-card-footer">
+                  <div class="table-pagination" style="width: 100%">
+                    <span>Showing 1–6 of 1,247</span>
+                    <div class="table-pagination-btns">
+                      <button class="mdst-button mdst-button--sm" disabled>← Prev</button>
+                      <button class="mdst-button mdst-button--sm">Next →</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right column -->
+            <div class="right-col">
+              <!-- Revenue chart placeholder -->
+              <div class="mdst-card">
+                <div class="mdst-card-header">Revenue Overview</div>
+                <div class="mdst-card-body" style="padding: 0">
+                  <div class="chart-placeholder">Chart goes here</div>
+                </div>
+              </div>
+
+              <!-- Activity feed -->
+              <div class="mdst-card">
+                <div class="mdst-card-header" style="display: flex; justify-content: space-between; align-items: center">
+                  <span>Recent Activity</span>
+                  <button class="mdst-button mdst-button--ghost mdst-button--sm">View all</button>
+                </div>
+                <div class="mdst-card-body">
+                  <div class="activity-list">
+                    <div class="activity-item">
+                      <div class="activity-dot activity-dot--success"></div>
+                      <div>
+                        <div class="activity-text"><strong>Anika Kapoor</strong> placed order #ORD-7291</div>
+                        <div class="activity-time">2 minutes ago</div>
+                      </div>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-dot activity-dot--muted"></div>
+                      <div>
+                        <div class="activity-text"><strong>Marcus Reyes</strong> updated shipping address</div>
+                        <div class="activity-time">18 minutes ago</div>
+                      </div>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-dot activity-dot--error"></div>
+                      <div>
+                        <div class="activity-text"><strong>Tom Nakamura</strong> cancelled order #ORD-7288</div>
+                        <div class="activity-time">1 hour ago</div>
+                      </div>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-dot activity-dot--success"></div>
+                      <div>
+                        <div class="activity-text"><strong>Sara Liu</strong> order #ORD-7289 shipped</div>
+                        <div class="activity-time">2 hours ago</div>
+                      </div>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-dot activity-dot--muted"></div>
+                      <div>
+                        <div class="activity-text">New product <strong>"Ceramic Mug — Midnight"</strong> added</div>
+                        <div class="activity-time">3 hours ago</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick actions -->
+              <div class="mdst-card">
+                <div class="mdst-card-header">Quick Actions</div>
+                <div class="mdst-card-body">
+                  <div class="quick-actions">
+                    <button class="quick-action-btn" onclick="document.getElementById('new-order-dialog').showModal()">
+                      <span class="quick-action-icon">+</span>
+                      <span class="quick-action-label">New Order<small>Create a manual order</small></span>
+                    </button>
+                    <button class="quick-action-btn">
+                      <span class="quick-action-icon">↑</span>
+                      <span class="quick-action-label">Import CSV<small>Bulk import products</small></span>
+                    </button>
+                    <button class="quick-action-btn">
+                      <span class="quick-action-icon">⟐</span>
+                      <span class="quick-action-label">Generate Report<small>Monthly sales summary</small></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Order Dialog -->
+    <dialog class="mdst-dialog" id="new-order-dialog">
+      <div class="dialog-header">
+        <h2>New Order</h2>
+        <button class="dialog-close" onclick="document.getElementById('new-order-dialog').close()">✕</button>
+      </div>
+      <div class="dialog-body">
+        <div class="form-group">
+          <label>Customer</label>
+          <input type="text" class="mdst-input" placeholder="Search customers..." />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Product</label>
+            <select class="mdst-dropdown" style="width: 100%">
+              <option>Select product</option>
+              <option>Ceramic Mug — White</option>
+              <option>Ceramic Mug — Midnight</option>
+              <option>Notebook — A5</option>
+              <option>Tote Bag — Canvas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" class="mdst-input" value="1" min="1" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea class="mdst-input" rows="3" placeholder="Optional order notes..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="mdst-checkbox-label">
+            <input type="checkbox" class="mdst-checkbox" />
+            Send confirmation email to customer
+          </label>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('new-order-dialog').close()">Cancel</button>
+        <button class="mdst-button mdst-button--inverted" onclick="document.getElementById('new-order-dialog').close()">
+          Create Order
+        </button>
+      </div>
+    </dialog>
+
+    <script>
+      // Mobile sidebar toggle
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("sidebar-overlay");
+      const menuBtn = document.getElementById("mobile-menu-btn");
+
+      menuBtn.addEventListener("click", function () {
+        sidebar.classList.toggle("open");
+        overlay.classList.toggle("open");
+      });
+
+      overlay.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("open");
+      });
+
+      // New order dialog trigger
+      document.getElementById("new-order-btn").addEventListener("click", function () {
+        document.getElementById("new-order-dialog").showModal();
+      });
+
+      // Close dialog on backdrop click
+      document.getElementById("new-order-dialog").addEventListener("click", function (e) {
+        if (e.target === this) this.close();
+      });
+
+      // Select all checkboxes
+      document.getElementById("select-all").addEventListener("change", function () {
+        const checkboxes = document.querySelectorAll("tbody .mdst-checkbox");
+        checkboxes.forEach(
+          function (cb) {
+            cb.checked = this.checked;
+          }.bind(this),
+        );
+      });
+    </script>
+  </body>
+</html>

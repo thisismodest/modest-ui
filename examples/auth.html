@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login &amp; Signup — modest-ui Example</title>
+    <meta
+      name="description"
+      content="Authentication forms built with modest-ui — including login, registration, and password reset pages."
+    />
+    <link rel="canonical" href="https://modest-ui.com/examples/auth.html" />
+    <meta property="og:title" content="Login & Signup — modest-ui Example" />
+    <meta
+      property="og:description"
+      content="Authentication forms built with modest-ui — including login, registration, and password reset pages."
+    />
+    <meta property="og:url" content="https://modest-ui.com/examples/auth.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="modest-ui" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Login & Signup — modest-ui Example" />
+    <meta
+      name="twitter:description"
+      content="Authentication forms built with modest-ui — including login, registration, and password reset pages."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="../dist/modest-ui.css" />
+    <style>
+      body {
+        font-family: var(--mdst-font-sans);
+        line-height: var(--mdst-line-height);
+        color: var(--mdst-color-fg);
+        background: var(--mdst-color-bg);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Layout */
+      .auth-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        flex: 1;
+        min-height: 100vh;
+      }
+
+      /* Left panel — branding */
+      .auth-brand {
+        background: var(--mdst-color-fg);
+        color: var(--mdst-color-bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: var(--mdst-space-xl);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .auth-brand-logo {
+        font-weight: 700;
+        font-size: var(--mdst-text-lg);
+        letter-spacing: -0.02em;
+      }
+
+      .auth-brand-content {
+        max-width: 24rem;
+      }
+
+      .auth-brand-content h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.2;
+        margin: 0 0 var(--mdst-space-md);
+      }
+
+      .auth-brand-content p {
+        opacity: 0.7;
+        margin: 0 0 var(--mdst-space-xl);
+        font-size: var(--mdst-text-base);
+      }
+
+      .auth-brand-testimonial {
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding-top: var(--mdst-space-lg);
+      }
+
+      .auth-brand-testimonial blockquote {
+        font-style: italic;
+        opacity: 0.8;
+        margin: 0 0 var(--mdst-space-md);
+        font-size: var(--mdst-text-sm);
+        line-height: 1.6;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        margin-top: var(--mdst-space-sm);
+        line-height: 1.2;
+      }
+
+      .testimonial-avatar {
+        width: 2rem;
+        height: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .testimonial-name {
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+      }
+
+      .testimonial-role {
+        font-size: var(--mdst-text-xs);
+        opacity: 0.6;
+      }
+
+      .auth-brand-footer {
+        font-size: var(--mdst-text-xs);
+        opacity: 0.5;
+      }
+
+      /* Decorative grid pattern */
+      .auth-brand::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 2rem 2rem;
+        pointer-events: none;
+      }
+
+      /* Right panel — forms */
+      .auth-panel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--mdst-space-xl);
+        position: relative;
+      }
+
+      .auth-panel-inner {
+        width: 100%;
+        max-width: 22rem;
+      }
+
+      /* Top-right links */
+      .auth-top-link {
+        position: absolute;
+        top: var(--mdst-space-lg);
+        right: var(--mdst-space-lg);
+      }
+
+      /* Form header */
+      .auth-header {
+        margin-bottom: var(--mdst-space-xl);
+      }
+
+      .auth-header h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .auth-header p {
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-sm);
+        margin: 0;
+      }
+
+      /* OAuth buttons */
+      .oauth-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--mdst-space-sm);
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .oauth-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--mdst-space-xs);
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        background: none;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        cursor: pointer;
+        font-family: inherit;
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        transition: background var(--mdst-transition);
+      }
+
+      .oauth-btn:hover {
+        background: var(--mdst-color-subtle);
+      }
+
+      .oauth-btn svg {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      /* Divider */
+      .auth-divider {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-md);
+        margin-bottom: var(--mdst-space-lg);
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .auth-divider::before,
+      .auth-divider::after {
+        content: "";
+        flex: 1;
+        height: var(--mdst-border-width);
+        background: var(--mdst-color-border);
+      }
+
+      /* Form */
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-sm);
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-xs);
+      }
+
+      .form-group label {
+        font-size: var(--mdst-text-sm);
+        font-weight: 500;
+      }
+
+      .form-group-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--mdst-space-sm);
+      }
+
+      .form-hint {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      .form-link {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-fg);
+        text-decoration: underline;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        font-family: inherit;
+      }
+
+      .form-link:hover {
+        color: var(--mdst-color-muted);
+      }
+
+      .form-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .form-submit {
+        margin-top: var(--mdst-space-sm);
+      }
+
+      /* Password strength */
+      .password-strength {
+        display: flex;
+        gap: var(--mdst-space-xs);
+        margin-top: var(--mdst-space-xs);
+      }
+
+      .password-strength-bar {
+        flex: 1;
+        height: 3px;
+        background: var(--mdst-color-subtle);
+        transition: background var(--mdst-transition);
+      }
+
+      .password-strength-bar--filled {
+        background: var(--mdst-color-fg);
+      }
+
+      .password-strength-bar--weak {
+        background: var(--mdst-color-error);
+      }
+
+      .password-strength-bar--medium {
+        background: var(--mdst-color-muted);
+      }
+
+      .password-strength-bar--strong {
+        background: var(--mdst-color-success);
+      }
+
+      .password-strength-label {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        margin-top: var(--mdst-space-xs);
+      }
+
+      /* Requirements list */
+      .password-reqs {
+        list-style: none;
+        padding: 0;
+        margin: var(--mdst-space-xs) 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .password-reqs li {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-xs);
+      }
+
+      .password-reqs li.met {
+        color: var(--mdst-color-success);
+      }
+
+      .password-reqs li::before {
+        content: "○";
+        font-size: 0.5rem;
+      }
+
+      .password-reqs li.met::before {
+        content: "●";
+      }
+
+      /* Footer */
+      .auth-footer {
+        text-align: center;
+        margin-top: var(--mdst-space-lg);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+      }
+
+      .auth-footer a,
+      .auth-footer button {
+        color: var(--mdst-color-fg);
+        text-decoration: underline;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: inherit;
+        padding: 0;
+      }
+
+      .auth-footer a:hover,
+      .auth-footer button:hover {
+        color: var(--mdst-color-muted);
+      }
+
+      /* Terms */
+      .auth-terms {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        text-align: center;
+        margin-top: var(--mdst-space-md);
+      }
+
+      .auth-terms a {
+        color: var(--mdst-color-fg);
+        text-decoration: underline;
+      }
+
+      /* Success state */
+      .auth-success {
+        text-align: center;
+        padding: var(--mdst-space-xl) 0;
+      }
+
+      .auth-success-icon {
+        width: 3rem;
+        height: 3rem;
+        border: var(--mdst-border-width) solid var(--mdst-color-success);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--mdst-space-md);
+        color: var(--mdst-color-success);
+        font-size: var(--mdst-text-lg);
+      }
+
+      .auth-success h2 {
+        font-size: var(--mdst-text-lg);
+        font-weight: 600;
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .auth-success p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0 0 var(--mdst-space-lg);
+        max-width: 18rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* OTP group */
+      .otp-group {
+        display: flex;
+        gap: var(--mdst-space-sm);
+        justify-content: center;
+        margin: var(--mdst-space-lg) 0;
+      }
+
+      .otp-group .mdst-input {
+        width: 3rem;
+        height: 3rem;
+        text-align: center;
+        font-size: var(--mdst-text-lg);
+        font-weight: 600;
+        padding: 0;
+      }
+
+      /* Error state */
+      .form-error {
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-error);
+        margin-top: 2px;
+      }
+
+      .auth-alert {
+        display: flex;
+        align-items: start;
+        gap: var(--mdst-space-sm);
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        margin-bottom: var(--mdst-space-md);
+        font-size: var(--mdst-text-sm);
+        background: var(--mdst-color-subtle);
+      }
+
+      .auth-alert--error {
+        border-color: var(--mdst-color-error);
+        color: var(--mdst-color-error);
+        background: transparent;
+      }
+
+      /* View states */
+      .auth-view {
+        display: none;
+      }
+
+      .auth-view.active {
+        display: block;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .auth-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .auth-brand {
+          display: none;
+        }
+
+        .auth-panel {
+          padding: var(--mdst-space-lg) var(--mdst-space-md);
+        }
+
+        .auth-top-link {
+          position: static;
+          text-align: right;
+          margin-bottom: var(--mdst-space-lg);
+        }
+
+        .auth-panel-inner {
+          max-width: 24rem;
+        }
+
+        /* Show a simple logo on mobile */
+        .auth-mobile-logo {
+          display: block;
+          font-weight: 700;
+          font-size: var(--mdst-text-lg);
+          letter-spacing: -0.02em;
+          margin-bottom: var(--mdst-space-xl);
+        }
+      }
+
+      @media (min-width: 769px) {
+        .auth-mobile-logo {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .oauth-buttons {
+          grid-template-columns: 1fr;
+        }
+
+        .form-group-row {
+          grid-template-columns: 1fr;
+        }
+
+        .otp-group .mdst-input {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-layout">
+      <!-- Left panel — branding -->
+      <div class="auth-brand">
+        <a href="/examples/" class="auth-brand-logo" style="text-decoration: none; color: inherit">← Examples</a>
+        <div class="auth-brand-content">
+          <h1>Start building with confidence</h1>
+          <p>Join thousands of developers and teams who trust Vault to manage their infrastructure, secrets, and deployments.</p>
+          <div class="auth-brand-testimonial">
+            <blockquote>
+              "Vault simplified our entire auth pipeline. What used to take weeks of setup now takes minutes. The security defaults alone
+              saved us from two potential incidents."
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">RK</div>
+              <div>
+                <div class="testimonial-name">Ravi Kumar</div>
+                <div class="testimonial-role">Lead Engineer at Figment</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="auth-brand-footer">&copy; 2026 Example Auth. All rights reserved.</div>
+      </div>
+
+      <!-- Right panel — forms -->
+      <div class="auth-panel">
+        <div class="auth-panel-inner">
+          <a href="/examples/" class="auth-mobile-logo" style="text-decoration: none; color: inherit">← Examples</a>
+
+          <!-- ============================================ -->
+          <!-- LOGIN VIEW -->
+          <!-- ============================================ -->
+          <div class="auth-view active" id="view-login">
+            <div class="auth-top-link">
+              <button class="mdst-button mdst-button--ghost mdst-button--sm" onclick="showView('signup')">Create account</button>
+            </div>
+
+            <div class="auth-header">
+              <h2>Welcome back</h2>
+              <p>Enter your credentials to access your account.</p>
+            </div>
+
+            <div class="oauth-buttons">
+              <button class="oauth-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                    fill="#4285F4"
+                  />
+                  <path
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    fill="#34A853"
+                  />
+                  <path
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                    fill="#FBBC05"
+                  />
+                  <path
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                    fill="#EA4335"
+                  />
+                </svg>
+                Google
+              </button>
+              <button class="oauth-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
+                  />
+                </svg>
+                GitHub
+              </button>
+            </div>
+
+            <div class="auth-divider">or continue with email</div>
+
+            <form class="auth-form" onsubmit="return false;">
+              <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" class="mdst-input" placeholder="you@company.com" />
+              </div>
+
+              <div class="form-group">
+                <div class="form-row">
+                  <label for="login-password">Password</label>
+                  <button class="form-link" type="button" onclick="showView('forgot')">Forgot password?</button>
+                </div>
+                <input type="password" id="login-password" class="mdst-input" placeholder="••••••••" />
+              </div>
+
+              <div class="form-row" style="margin-top: var(--mdst-space-xs)">
+                <label class="mdst-checkbox-label">
+                  <input type="checkbox" class="mdst-checkbox" checked />
+                  Remember me
+                </label>
+              </div>
+
+              <button class="mdst-button mdst-button--inverted form-submit" type="submit">Sign In</button>
+            </form>
+
+            <div class="auth-footer">Don't have an account? <button onclick="showView('signup')">Sign up</button></div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- SIGNUP VIEW -->
+          <!-- ============================================ -->
+          <div class="auth-view" id="view-signup">
+            <div class="auth-top-link">
+              <button class="mdst-button mdst-button--ghost mdst-button--sm" onclick="showView('login')">Sign in</button>
+            </div>
+
+            <div class="auth-header">
+              <h2>Create an account</h2>
+              <p>Get started with a free account. No credit card required.</p>
+            </div>
+
+            <div class="oauth-buttons">
+              <button class="oauth-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                    fill="#4285F4"
+                  />
+                  <path
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    fill="#34A853"
+                  />
+                  <path
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                    fill="#FBBC05"
+                  />
+                  <path
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                    fill="#EA4335"
+                  />
+                </svg>
+                Google
+              </button>
+              <button class="oauth-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
+                  />
+                </svg>
+                GitHub
+              </button>
+            </div>
+
+            <div class="auth-divider">or continue with email</div>
+
+            <form class="auth-form" onsubmit="return false;">
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="signup-first">First name</label>
+                  <input type="text" id="signup-first" class="mdst-input" placeholder="Jane" />
+                </div>
+                <div class="form-group">
+                  <label for="signup-last">Last name</label>
+                  <input type="text" id="signup-last" class="mdst-input" placeholder="Doe" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="signup-email">Work email</label>
+                <input type="email" id="signup-email" class="mdst-input" placeholder="you@company.com" />
+              </div>
+
+              <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input
+                  type="password"
+                  id="signup-password"
+                  class="mdst-input"
+                  placeholder="Create a strong password"
+                  oninput="updatePasswordStrength(this.value)"
+                />
+                <div class="password-strength">
+                  <div class="password-strength-bar" id="strength-1"></div>
+                  <div class="password-strength-bar" id="strength-2"></div>
+                  <div class="password-strength-bar" id="strength-3"></div>
+                  <div class="password-strength-bar" id="strength-4"></div>
+                </div>
+                <div class="password-strength-label" id="strength-label"></div>
+                <ul class="password-reqs">
+                  <li id="req-length">At least 8 characters</li>
+                  <li id="req-upper">One uppercase letter</li>
+                  <li id="req-number">One number</li>
+                  <li id="req-special">One special character</li>
+                </ul>
+              </div>
+
+              <div class="form-group">
+                <label for="signup-team">Team size</label>
+                <select id="signup-team" class="mdst-dropdown" style="width: 100%">
+                  <option value="">Select team size</option>
+                  <option>Just me</option>
+                  <option>2–10</option>
+                  <option>11–50</option>
+                  <option>51–200</option>
+                  <option>200+</option>
+                </select>
+              </div>
+
+              <div style="margin-top: var(--mdst-space-xs)">
+                <label class="mdst-checkbox-label">
+                  <input type="checkbox" class="mdst-checkbox" />
+                  I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </label>
+              </div>
+
+              <button class="mdst-button mdst-button--inverted form-submit" type="submit" onclick="showView('verify')">
+                Create Account
+              </button>
+            </form>
+
+            <div class="auth-footer">Already have an account? <button onclick="showView('login')">Sign in</button></div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- EMAIL VERIFICATION VIEW -->
+          <!-- ============================================ -->
+          <div class="auth-view" id="view-verify">
+            <div class="auth-success">
+              <div class="auth-success-icon">✉</div>
+              <h2>Check your email</h2>
+              <p>We've sent a 6-digit verification code to <strong>you@company.com</strong>. Enter it below to verify your account.</p>
+            </div>
+
+            <form class="auth-form" onsubmit="return false;" style="align-items: center">
+              <div class="otp-group">
+                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="mdst-input" maxlength="1" inputmode="numeric" />
+              </div>
+
+              <button class="mdst-button mdst-button--inverted" style="width: 100%" onclick="showView('login')">Verify Email</button>
+            </form>
+
+            <div class="auth-footer" style="margin-top: var(--mdst-space-lg)">
+              <p style="margin: 0 0 var(--mdst-space-sm)">
+                Didn't receive the email? <button onclick="alert('Code resent!')">Resend code</button>
+              </p>
+              <p style="margin: 0"><button onclick="showView('signup')">← Back to signup</button></p>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- FORGOT PASSWORD VIEW -->
+          <!-- ============================================ -->
+          <div class="auth-view" id="view-forgot">
+            <div class="auth-header">
+              <h2>Reset your password</h2>
+              <p>Enter the email associated with your account and we'll send you a reset link.</p>
+            </div>
+
+            <form class="auth-form" onsubmit="return false;">
+              <div class="form-group">
+                <label for="forgot-email">Email address</label>
+                <input type="email" id="forgot-email" class="mdst-input" placeholder="you@company.com" />
+              </div>
+
+              <button class="mdst-button mdst-button--inverted form-submit" type="submit" onclick="showView('reset-sent')">
+                Send Reset Link
+              </button>
+            </form>
+
+            <div class="auth-footer">Remember your password? <button onclick="showView('login')">Sign in</button></div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- RESET LINK SENT VIEW -->
+          <!-- ============================================ -->
+          <div class="auth-view" id="view-reset-sent">
+            <div class="auth-success">
+              <div class="auth-success-icon">✓</div>
+              <h2>Reset link sent</h2>
+              <p>If an account exists for <strong>you@company.com</strong>, you'll receive a password reset link shortly.</p>
+            </div>
+
+            <div class="auth-alert" style="justify-content: center; text-align: center">
+              <span>Check your spam folder if you don't see the email within a few minutes.</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: var(--mdst-space-sm); margin-top: var(--mdst-space-md)">
+              <button class="mdst-button" onclick="showView('reset')">I have a reset link (demo)</button>
+              <button class="mdst-button mdst-button--ghost" onclick="showView('login')">← Back to sign in</button>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- SET NEW PASSWORD VIEW -->
+          <!-- ============================================ -->
+          <div class="auth-view" id="view-reset">
+            <div class="auth-header">
+              <h2>Set new password</h2>
+              <p>Your new password must be different from previously used passwords.</p>
+            </div>
+
+            <form class="auth-form" onsubmit="return false;">
+              <div class="form-group">
+                <label for="reset-password">New password</label>
+                <input type="password" id="reset-password" class="mdst-input" placeholder="••••••••" />
+                <span class="form-hint">Must be at least 8 characters</span>
+              </div>
+
+              <div class="form-group">
+                <label for="reset-confirm">Confirm new password</label>
+                <input type="password" id="reset-confirm" class="mdst-input" placeholder="••••••••" />
+              </div>
+
+              <button class="mdst-button mdst-button--inverted form-submit" type="submit" onclick="showView('reset-success')">
+                Reset Password
+              </button>
+            </form>
+
+            <div class="auth-footer">
+              <button onclick="showView('login')">← Back to sign in</button>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- RESET SUCCESS VIEW -->
+          <!-- ============================================ -->
+          <div class="auth-view" id="view-reset-success">
+            <div class="auth-success">
+              <div class="auth-success-icon">✓</div>
+              <h2>Password updated</h2>
+              <p>Your password has been successfully reset. You can now sign in with your new credentials.</p>
+            </div>
+
+            <button class="mdst-button mdst-button--inverted" style="width: 100%" onclick="showView('login')">Continue to Sign In</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // View switching
+      function showView(viewName) {
+        document.querySelectorAll(".auth-view").forEach(function (view) {
+          view.classList.remove("active");
+        });
+        var target = document.getElementById("view-" + viewName);
+        if (target) {
+          target.classList.add("active");
+        }
+      }
+
+      // Password strength indicator
+      function updatePasswordStrength(password) {
+        var score = 0;
+        var hasLength = password.length >= 8;
+        var hasUpper = /[A-Z]/.test(password);
+        var hasNumber = /[0-9]/.test(password);
+        var hasSpecial = /[^A-Za-z0-9]/.test(password);
+
+        if (hasLength) score++;
+        if (hasUpper) score++;
+        if (hasNumber) score++;
+        if (hasSpecial) score++;
+
+        // Update bars
+        var colors = [
+          "",
+          "password-strength-bar--weak",
+          "password-strength-bar--weak",
+          "password-strength-bar--medium",
+          "password-strength-bar--strong",
+        ];
+        var labels = ["", "Weak", "Fair", "Good", "Strong"];
+
+        for (var i = 1; i <= 4; i++) {
+          var bar = document.getElementById("strength-" + i);
+          bar.className = "password-strength-bar";
+          if (i <= score && password.length > 0) {
+            bar.classList.add(colors[score]);
+          }
+        }
+
+        var label = document.getElementById("strength-label");
+        label.textContent = password.length > 0 ? labels[score] : "";
+
+        // Update requirements
+        document.getElementById("req-length").className = hasLength ? "met" : "";
+        document.getElementById("req-upper").className = hasUpper ? "met" : "";
+        document.getElementById("req-number").className = hasNumber ? "met" : "";
+        document.getElementById("req-special").className = hasSpecial ? "met" : "";
+      }
+
+      // OTP auto-advance
+      document.querySelectorAll(".otp-group .mdst-input").forEach(function (input, index, inputs) {
+        input.addEventListener("input", function () {
+          if (this.value.length === 1 && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+        });
+
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Backspace" && this.value === "" && index > 0) {
+            inputs[index - 1].focus();
+          }
+        });
+
+        // Only allow numbers
+        input.addEventListener("input", function () {
+          this.value = this.value.replace(/[^0-9]/g, "");
+        });
+      });
+    </script>
+  </body>
+</html>

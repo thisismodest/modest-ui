@@ -127,6 +127,34 @@
               </div>
             </td>
           </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-card-header</span>--borderless</span>
+            </td>
+            <td>
+              <div class="mdst-card">
+                <div class="mdst-card-header mdst-card-header--borderless">Borderless Header</div>
+                <div class="mdst-card-body">
+                  <p class="mdst-p" style="margin: 0">Header without a bottom border — useful for pricing cards or hero sections.</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-card-footer</span>--borderless</span>
+            </td>
+            <td>
+              <div class="mdst-card">
+                <div class="mdst-card-body">
+                  <p class="mdst-p" style="margin: 0">Footer without a top border — useful for tags or metadata.</p>
+                </div>
+                <div class="mdst-card-footer mdst-card-footer--borderless" style="display: flex; gap: var(--mdst-space-xs)">
+                  <span style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted)">No divider above</span>
+                </div>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -188,6 +216,20 @@
   &lt;div class="mdst-card-header"&gt;Table card&lt;/div&gt;
   &lt;div class="mdst-card-body"&gt;
     &lt;table class="mdst-table"&gt;...&lt;/table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Borderless header (no bottom border) --&gt;
+&lt;div class="mdst-card"&gt;
+  &lt;div class="mdst-card-header mdst-card-header--borderless"&gt;Title&lt;/div&gt;
+  &lt;div class="mdst-card-body"&gt;Content&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Borderless footer (no top border) --&gt;
+&lt;div class="mdst-card"&gt;
+  &lt;div class="mdst-card-body"&gt;Content&lt;/div&gt;
+  &lt;div class="mdst-card-footer mdst-card-footer--borderless"&gt;
+    Tags or metadata here
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </div>

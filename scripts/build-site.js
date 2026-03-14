@@ -75,6 +75,14 @@ async function getPages() {
     });
   }
 
+  // Sort by key order in siteConfig.pages
+  const configOrder = Object.keys(siteConfig.pages);
+  pages.sort((a, b) => {
+    const ai = configOrder.indexOf(a.slug);
+    const bi = configOrder.indexOf(b.slug);
+    return (ai === -1 ? Infinity : ai) - (bi === -1 ? Infinity : bi);
+  });
+
   return pages;
 }
 
@@ -267,7 +275,7 @@ function generateRobotsTxt() {
 // ---------------------------------------------------------------------------
 
 async function copyStaticAssets() {
-  const assets = ["favicon.svg", "index.css", "base", "components", "dist", "llms.txt"];
+  const assets = ["favicon.svg", "index.css", "base", "components", "dist", "llms.txt", "examples"];
 
   for (const asset of assets) {
     try {
@@ -307,6 +315,18 @@ async function main() {
       console.log(`  ✓ Component: ${component.title} → /${component.slug}/index.html`);
     }
 
+    // Discover example pages
+    const examplesDir = join(ROOT, "examples");
+    let exampleEntries = [];
+    try {
+      const exFiles = await readdir(examplesDir, { withFileTypes: true });
+      exampleEntries = exFiles
+        .filter((f) => f.isFile() && f.name.endsWith(".html"))
+        .map((f) => ({ slug: f.name.replace(".html", ""), path: `/examples/${f.name}` }));
+    } catch {
+      // no examples directory, skip
+    }
+
     // Sitemap
     const allEntries = [
       ...pages.map((p) => ({
@@ -314,6 +334,7 @@ async function main() {
         path: p.slug === "intro" ? "/" : `/${p.slug}/`,
       })),
       ...components.map((c) => ({ slug: c.slug, path: `/${c.slug}/` })),
+      ...exampleEntries,
     ];
 
     await writeFile(join(SITE_DIR, "sitemap.xml"), generateSitemap(allEntries));

@@ -2,7 +2,7 @@
   "name": "modest-ui",
   "version": "0.1.4",
   "description": "Minimal, themeable CSS component library",
-  "author": "thisismodest",
+  "author": "Marcus Michaels",
   "license": "MIT",
   "type": "module",
   "main": "index.css",

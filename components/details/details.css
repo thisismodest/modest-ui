@@ -1,7 +1,7 @@
 /* Details (Toggle/Disclosure) */
 
 .mdst-details {
-  display: relative;
+  position: relative;
   border: var(--mdst-border-width) solid var(--mdst-color-border);
   border-radius: var(--mdst-radius);
   background: var(--mdst-color-bg);
@@ -106,7 +106,7 @@
 }
 
 .mdst-details--section[open]::details-content {
-  padding: var(--mdst-space-md) 0;
+  padding: var(--mdst-space-sm) 0 var(--mdst-space-md);
   border-top: none;
   border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
 }
