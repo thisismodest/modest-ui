@@ -29,6 +29,35 @@ All classes use the `mdst-` prefix with BEM-style naming:
 - Element: `.mdst-component-element`
 - Modifier: `.mdst-component--variant`
 
+## Classless Usage
+
+Add `.mdst-ui` to `<body>` and bare HTML elements are styled automatically — no classes needed.
+
+```html
+<body class="mdst-ui">
+  <button>Styled button</button>
+  <input type="text" placeholder="Styled input" />
+  <select><option>Styled select</option></select>
+  <details><summary>Styled disclosure</summary><p>Content</p></details>
+  <table><tr><th>Styled</th><th>Table</th></tr></table>
+</body>
+```
+
+Classless selectors use `:where(.mdst-ui)` so specificity stays at zero — any class-based selector always wins.
+
+Add variant modifiers directly to bare elements without the base class:
+
+```html
+<button class="mdst-button--ghost">Ghost</button>
+<button class="mdst-button--inverted">Inverted</button>
+<table class="mdst-table--striped">...</table>
+<details class="mdst-details--compact">...</details>
+```
+
+Elements that map to native tags: button, input (text/email/etc), textarea, select, input[type="checkbox"], input[type="radio"], input[type="range"], input[type="file"], details, dialog, table, code, pre, h1-h6, p, a, strong, em, small, mark, blockquote, hr, ul, ol, li.
+
+Elements that remain class-only (no native tag mapping): card, tag, tooltip, popover, password-input, otp-input, color-picker, utilities.
+
 ---
 
 ## Design Tokens
@@ -782,6 +811,7 @@ Classes:
 - `.mdst-p`
 - `.mdst-small`
 - `.mdst-strong`
+- `.mdst-ui`
 - `.mdst-ul`
 - `.mdst-hr--flush`
 - `.mdst-p--lg`
@@ -902,5 +932,5 @@ Range:          .mdst-range
 Table:          .mdst-table  +  -wrap  |  --bordered  --compact  --fixed  --stack  --striped
 Tag:            .mdst-tag  +  -dismiss  |  --error  --ghost  --interactive  --lg  --muted  --pill  --sm  --solid  --subtle  --success
 Tooltip:        .mdst-tooltip
-Typography:     .mdst-a  .mdst-blockquote  .mdst-em  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-small  .mdst-strong  .mdst-ul  |  --flush  --lg  --muted  --sm  --unstyled
+Typography:     .mdst-a  .mdst-blockquote  .mdst-em  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-small  .mdst-strong  .mdst-ui  .mdst-ul  |  --flush  --lg  --muted  --sm  --unstyled
 Utilities:      .mdst-mono  .mdst-muted  .mdst-sr-only  .mdst-truncate

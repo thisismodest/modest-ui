@@ -1,27 +1,81 @@
 # modest-ui
 
-A minimal, themeable CSS component library. Black and white by default, easy to customise.
+A minimal, themeable CSS component library. Write plain HTML and get styled components automatically — or use classes when you need more control.
+
+## Quick Start
+
+Add the stylesheet and put `.mdst-ui` on the body. That's it.
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.5/dist/modest-ui.min.css" />
+  </head>
+  <body class="mdst-ui">
+    <h1>Hello world</h1>
+    <p>This paragraph is styled automatically.</p>
+    <button>Click me</button>
+    <input type="text" placeholder="Type here" />
+  </body>
+</html>
+```
+
+Every native element — buttons, inputs, tables, details, typography — is styled out of the box. No classes needed.
+
+## Add classes when you need variants
+
+The classless defaults cover the base appearance. When you need a variant, add a modifier class. It overrides the default automatically.
+
+```html
+<!-- Classless — just works -->
+<button>Save</button>
+<table>
+  ...
+</table>
+<details>...</details>
+
+<!-- With variants — opt-in -->
+<button class="mdst-button--ghost">Cancel</button>
+<button class="mdst-button--inverted">Delete</button>
+<table class="mdst-table--striped">
+  ...
+</table>
+<details class="mdst-details--compact">...</details>
+```
+
+You can also use the full class-based API directly — `.mdst-button`, `.mdst-input`, `.mdst-table` — all the explicit classes still work exactly as before. Classes always win over the classless defaults, so there's never a specificity conflict.
+
+## How it works
+
+**Classless layer** — Bare elements inside `.mdst-ui` are styled using `:where()`, which keeps specificity at zero. Every native `<button>`, `<input>`, `<table>`, etc. gets a styled baseline for free.
+
+**Class layer** — Component classes like `.mdst-button` and `.mdst-input` have normal specificity, so they always override the classless defaults when applied.
+
+**Variant classes** — Modifiers like `.mdst-button--ghost` work directly on bare elements inside `.mdst-ui`. No need to pair them with the base class.
+
+### Scoped and safe
+
+Unlike classless frameworks that style every element on the page globally, modest-ui is scoped to `.mdst-ui`. Third-party widgets, embedded content, and anything outside the scope are unaffected.
 
 ## Installation
 
-```bash
-npm install github:thisismodest/modest-ui
-```
-
-## Usage
-
-### Bundled CSS (recommended)
-
-Use the pre-bundled CSS file that contains all styles:
+### CDN (recommended)
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.5/dist/modest-ui.min.css" />
 ```
 
-Or with a bundler:
+### npm
 
-```js
-import "modest-ui/dist/modest-ui.css";
+```bash
+npm install github:thisismodest/modest-ui
+```
+
+Then import in CSS:
+
+```css
+@import "modest-ui/dist/modest-ui.css";
 ```
 
 ### Cherry-pick components

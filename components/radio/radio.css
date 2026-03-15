@@ -1,5 +1,6 @@
 /* Radio */
 
+:where(.mdst-ui) input[type="radio"],
 .mdst-radio {
   -webkit-appearance: none;
   appearance: none;
@@ -13,36 +14,42 @@
   border-radius: 50%;
   cursor: pointer;
   position: relative;
+}
 
-  &:checked::after {
-    content: "";
-    position: absolute;
-    inset: 3px;
-    background: var(--mdst-color-fg);
-    border-radius: 50%;
-  }
+:where(.mdst-ui) input[type="radio"]:checked::after,
+.mdst-radio:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--mdst-color-fg);
+  border-radius: 50%;
+}
 
-  &:hover {
-    border-color: var(--mdst-color-muted);
-  }
+:where(.mdst-ui) input[type="radio"]:hover,
+.mdst-radio:hover {
+  border-color: var(--mdst-color-muted);
+}
 
-  &:focus-visible {
-    outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-    outline-offset: var(--mdst-border-width);
-  }
+:where(.mdst-ui) input[type="radio"]:focus-visible,
+.mdst-radio:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+  outline-offset: var(--mdst-border-width);
+}
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+:where(.mdst-ui) input[type="radio"]:disabled,
+.mdst-radio:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-    &:hover {
-      border-color: var(--mdst-color-border);
-    }
-  }
+:where(.mdst-ui) input[type="radio"]:disabled:hover,
+.mdst-radio:disabled:hover {
+  border-color: var(--mdst-color-border);
 }
 
 /* Radio with label wrapper */
 
+:where(.mdst-ui) label:has(> input[type="radio"]),
 .mdst-radio-label {
   display: inline-flex;
   align-items: center;
@@ -51,11 +58,12 @@
   line-height: var(--mdst-line-height);
   cursor: pointer;
   user-select: none;
+}
 
-  &:has(.mdst-radio:disabled) {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+:where(.mdst-ui) label:has(> input[type="radio"]:disabled),
+.mdst-radio-label:has(.mdst-radio:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Radio group */

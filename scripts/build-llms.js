@@ -379,7 +379,36 @@ Cherry-pick:
 All classes use the \`mdst-\` prefix with BEM-style naming:
 - Block: \`.mdst-component\`
 - Element: \`.mdst-component-element\`
-- Modifier: \`.mdst-component--variant\``);
+- Modifier: \`.mdst-component--variant\`
+
+## Classless Usage
+
+Add \`.mdst-ui\` to \`<body>\` and bare HTML elements are styled automatically — no classes needed.
+
+\`\`\`html
+<body class="mdst-ui">
+  <button>Styled button</button>
+  <input type="text" placeholder="Styled input" />
+  <select><option>Styled select</option></select>
+  <details><summary>Styled disclosure</summary><p>Content</p></details>
+  <table><tr><th>Styled</th><th>Table</th></tr></table>
+</body>
+\`\`\`
+
+Classless selectors use \`:where(.mdst-ui)\` so specificity stays at zero — any class-based selector always wins.
+
+Add variant modifiers directly to bare elements without the base class:
+
+\`\`\`html
+<button class="mdst-button--ghost">Ghost</button>
+<button class="mdst-button--inverted">Inverted</button>
+<table class="mdst-table--striped">...</table>
+<details class="mdst-details--compact">...</details>
+\`\`\`
+
+Elements that map to native tags: button, input (text/email/etc), textarea, select, input[type="checkbox"], input[type="radio"], input[type="range"], input[type="file"], details, dialog, table, code, pre, h1-h6, p, a, strong, em, small, mark, blockquote, hr, ul, ol, li.
+
+Elements that remain class-only (no native tag mapping): card, tag, tooltip, popover, password-input, otp-input, color-picker, utilities.`);
 
     // Tokens
     sections.push(formatTokens(tokenGroups));
