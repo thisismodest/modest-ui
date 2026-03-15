@@ -10,7 +10,7 @@ Add the stylesheet and put `.mdst-ui` on the body. That's it.
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.5/dist/modest-ui.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.6/dist/modest-ui.min.css" />
   </head>
   <body class="mdst-ui">
     <h1>Hello world</h1>
@@ -63,7 +63,7 @@ Unlike classless frameworks that style every element on the page globally, modes
 ### CDN (recommended)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.5/dist/modest-ui.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.1.6/dist/modest-ui.min.css" />
 ```
 
 ### npm
