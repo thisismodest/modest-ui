@@ -1,5 +1,6 @@
 /* Pre — block code/JSON display */
 
+:where(.mdst-ui) pre,
 .mdst-pre {
   display: block;
   width: 100%;
@@ -21,40 +22,47 @@
   border-radius: var(--mdst-radius);
   tab-size: 2;
   -moz-tab-size: 2;
+}
 
-  &:focus {
-    outline: 0.125em solid var(--mdst-color-focus);
-    outline-offset: 0.125em;
-  }
+:where(.mdst-ui) pre:focus,
+.mdst-pre:focus {
+  outline: 0.125em solid var(--mdst-color-focus);
+  outline-offset: 0.125em;
+}
 
-  /* Nested code inside pre — reset styles */
-  & code,
-  & .mdst-code {
-    padding: 0;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    font-size: inherit;
-    word-break: break-word;
-  }
+/* Nested code inside pre — reset styles */
 
-  /* Variants */
+:where(.mdst-ui) pre code,
+:where(.mdst-ui) pre .mdst-code,
+.mdst-pre code,
+.mdst-pre .mdst-code {
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-size: inherit;
+  word-break: break-word;
+}
 
-  &.mdst-pre--borderless {
-    border: none;
-  }
+/* Variants */
 
-  &.mdst-pre--compact {
-    padding: var(--mdst-space-sm);
-  }
+:where(.mdst-ui) pre.mdst-pre--borderless,
+.mdst-pre.mdst-pre--borderless {
+  border: none;
+}
 
-  /* Allow horizontal scroll if explicitly needed */
+:where(.mdst-ui) pre.mdst-pre--compact,
+.mdst-pre.mdst-pre--compact {
+  padding: var(--mdst-space-sm);
+}
 
-  &.mdst-pre--scroll {
-    overflow-x: auto;
-    overflow-wrap: normal;
-    word-wrap: normal;
-    word-break: normal;
-    white-space: pre;
-  }
+/* Allow horizontal scroll if explicitly needed */
+
+:where(.mdst-ui) pre.mdst-pre--scroll,
+.mdst-pre.mdst-pre--scroll {
+  overflow-x: auto;
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: normal;
+  white-space: pre;
 }

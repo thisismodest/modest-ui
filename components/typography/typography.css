@@ -1,5 +1,11 @@
 /* Typography */
 
+:where(.mdst-ui) h1,
+:where(.mdst-ui) h2,
+:where(.mdst-ui) h3,
+:where(.mdst-ui) h4,
+:where(.mdst-ui) h5,
+:where(.mdst-ui) h6,
 .mdst-h1,
 .mdst-h2,
 .mdst-h3,
@@ -12,32 +18,39 @@
   color: var(--mdst-color-fg);
 }
 
+:where(.mdst-ui) h1,
 .mdst-h1 {
   font-size: 2.5rem;
 }
 
+:where(.mdst-ui) h2,
 .mdst-h2 {
   font-size: 2rem;
 }
 
+:where(.mdst-ui) h3,
 .mdst-h3 {
   font-size: 1.5rem;
 }
 
+:where(.mdst-ui) h4,
 .mdst-h4 {
   font-size: 1.25rem;
 }
 
+:where(.mdst-ui) h5,
 .mdst-h5 {
   font-size: 1rem;
 }
 
+:where(.mdst-ui) h6,
 .mdst-h6 {
   font-size: 0.875rem;
 }
 
 /* Paragraph */
 
+:where(.mdst-ui) p,
 .mdst-p {
   font-family: var(--mdst-font-sans);
   font-size: var(--mdst-text-base);
@@ -45,56 +58,66 @@
   color: var(--mdst-color-fg);
 }
 
+:where(.mdst-ui) p.mdst-p--sm,
 .mdst-p--sm {
   font-size: var(--mdst-text-sm);
 }
 
+:where(.mdst-ui) p.mdst-p--lg,
 .mdst-p--lg {
   font-size: var(--mdst-text-lg);
 }
 
+:where(.mdst-ui) p.mdst-p--muted,
 .mdst-p--muted {
   color: var(--mdst-color-muted);
 }
 
 /* Links */
 
+:where(.mdst-ui) a,
 .mdst-a {
   color: var(--mdst-color-fg);
   text-decoration: underline;
   text-underline-offset: 0.15em;
   transition: opacity var(--mdst-transition);
+}
 
-  &:hover {
-    opacity: 0.6;
-  }
+:where(.mdst-ui) a:hover,
+.mdst-a:hover {
+  opacity: 0.6;
+}
 
-  &:focus-visible {
-    outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-    outline-offset: var(--mdst-border-width);
-  }
+:where(.mdst-ui) a:focus-visible,
+.mdst-a:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+  outline-offset: var(--mdst-border-width);
 }
 
 /* Strong / Bold */
 
+:where(.mdst-ui) strong,
 .mdst-strong {
   font-weight: 600;
 }
 
 /* Emphasis / Italic */
 
+:where(.mdst-ui) em,
 .mdst-em {
   font-style: italic;
 }
 
 /* Small */
 
+:where(.mdst-ui) small,
 .mdst-small {
   font-size: var(--mdst-text-sm);
 }
 
 /* Mark / Highlight */
 
+:where(.mdst-ui) mark,
 .mdst-mark {
   background-color: var(--mdst-color-subtle);
   padding: 0.1em 0.2em;
@@ -102,6 +125,7 @@
 
 /* Blockquote */
 
+:where(.mdst-ui) blockquote,
 .mdst-blockquote {
   margin: 0;
   padding-left: var(--mdst-space-md);
@@ -112,42 +136,51 @@
 
 /* Horizontal Rule */
 
+:where(.mdst-ui) hr,
 .mdst-hr {
   border: none;
   border-top: var(--mdst-border-width) solid var(--mdst-color-border);
   margin: var(--mdst-space-lg) 0;
 }
 
+:where(.mdst-ui) hr.mdst-hr--flush,
 .mdst-hr--flush {
   margin: 0;
 }
 
 /* Lists */
 
+:where(.mdst-ui) ul,
+:where(.mdst-ui) ol,
 .mdst-ul,
 .mdst-ol {
   padding-left: var(--mdst-space-lg);
   line-height: var(--mdst-line-height);
 }
 
+:where(.mdst-ui) ul,
 .mdst-ul {
   list-style-type: disc;
 }
 
+:where(.mdst-ui) ol,
 .mdst-ol {
   list-style-type: decimal;
 }
 
+:where(.mdst-ui) li,
 .mdst-li {
   margin-bottom: var(--mdst-space-xs);
+}
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+:where(.mdst-ui) li:last-child,
+.mdst-li:last-child {
+  margin-bottom: 0;
 }
 
 /* Unstyled list */
 
+:where(.mdst-ui) ul.mdst-ul--unstyled,
 .mdst-ul--unstyled {
   list-style: none;
   padding-left: 0;

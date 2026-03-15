@@ -16,18 +16,24 @@
 
       .intro-section {
         margin-bottom: var(--mdst-space-xl);
+        max-width: 40rem;
       }
 
       h1 {
         font-size: var(--mdst-text-xl);
         font-weight: 600;
-        margin-bottom: var(--mdst-space-md);
+        margin-bottom: var(--mdst-space-sm);
+      }
+
+      .tagline {
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xl);
       }
 
       h2 {
         font-size: var(--mdst-text-lg);
         font-weight: 600;
-        margin-top: var(--mdst-space-lg);
+        margin-top: var(--mdst-space-xl);
         margin-bottom: var(--mdst-space-sm);
       }
 
@@ -58,11 +64,110 @@
         margin-bottom: var(--mdst-space-md);
       }
 
+      /* Code + live demo panels */
+
+      .demo-block {
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        margin-bottom: var(--mdst-space-lg);
+      }
+
+      .demo-block-label {
+        font-size: var(--mdst-text-sm);
+        font-weight: 600;
+        padding: var(--mdst-space-xs) var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .demo-block pre {
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        background: none;
+        font-size: var(--mdst-text-xs);
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+      }
+
+      .demo-block-result {
+        padding: var(--mdst-space-md);
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-sm);
+      }
+
+      .demo-block-result-label {
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .demo-block-result input[type="text"] {
+        max-width: 20rem;
+      }
+
+      .demo-row {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        flex-wrap: wrap;
+      }
+
+      /* Pill tag */
+
+      .pill {
+        display: inline-block;
+        font-size: var(--mdst-text-xs);
+        font-weight: 600;
+        padding: 0.15em 0.5em;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        vertical-align: middle;
+        margin-left: 0.25em;
+      }
+
+      /* How it works */
+
+      .how-it-works {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--mdst-space-md);
+        margin-top: var(--mdst-space-md);
+        margin-bottom: var(--mdst-space-md);
+      }
+
+      .how-it-works-step {
+        padding: var(--mdst-space-md);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .how-it-works-step h3 {
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      .how-it-works-step p {
+        font-size: var(--mdst-text-sm);
+        margin: 0;
+      }
+
+      .step-number {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      @media (max-width: 600px) {
+        .how-it-works {
+          grid-template-columns: 1fr;
+        }
+      }
+
       /* Example page styles */
       .example-container {
         border: var(--mdst-border-width) solid var(--mdst-color-border);
         margin-top: var(--mdst-space-lg);
-        max-width: 40rem;
       }
 
       .example-header {
@@ -71,6 +176,7 @@
         align-items: center;
         padding: var(--mdst-space-sm) var(--mdst-space-md);
         border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        gap: var(--mdst-space-sm);
       }
 
       .example-logo {
@@ -156,12 +262,7 @@
         margin: 0;
       }
 
-      /* Responsive styles */
       @media (max-width: 480px) {
-        .example-header {
-          gap: var(--mdst-space-sm);
-        }
-
         .example-body {
           padding: var(--mdst-space-md);
         }
@@ -196,7 +297,116 @@
   <body>
     <div class="intro-section">
       <h1>modest-ui</h1>
-      <p>A minimal, themeable CSS component library. Black and white by default, easy to customise.</p>
+      <p class="tagline">
+        A minimal, themeable CSS component library. Write plain HTML and get styled components automatically — or use classes when you need
+        more control.
+      </p>
+
+      <h2>Just write HTML</h2>
+      <p>
+        Add <code>.mdst-ui</code> to your <code>&lt;body&gt;</code> and every native element — buttons, inputs, tables, details — is styled
+        out of the box. No classes needed.
+      </p>
+
+      <div class="demo-block">
+        <div class="demo-block-label">Your HTML</div>
+        <pre>
+&lt;body class="mdst-ui"&gt;
+
+  &lt;h1&gt;Welcome&lt;/h1&gt;
+  &lt;p&gt;This is styled automatically.&lt;/p&gt;
+
+  &lt;button&gt;Save&lt;/button&gt;
+  &lt;input type="text" placeholder="Your name" /&gt;
+
+&lt;/body&gt;</pre
+        >
+        <div class="demo-block-result mdst-ui">
+          <div class="demo-block-result-label">Result</div>
+          <button>Save</button>
+          <input type="text" placeholder="Your name" />
+        </div>
+      </div>
+
+      <p>
+        No classes. No JavaScript. Every element picks up your theme tokens and gets hover states, focus rings, and transitions for free.
+      </p>
+
+      <h2>Add classes when you need variants</h2>
+      <p>
+        The classless defaults cover the base appearance. When you need a variant — ghost, inverted, compact, small — add a modifier class.
+        It overrides the default automatically.
+      </p>
+
+      <div class="demo-block">
+        <div class="demo-block-label">Classless <span class="pill">default</span></div>
+        <pre><span style="opacity: 0.35">&lt;!-- Just works --&gt;</span>
+&lt;button&gt;Save&lt;/button&gt;
+&lt;button&gt;Cancel&lt;/button&gt;</pre>
+        <div class="demo-block-result mdst-ui">
+          <div class="demo-block-result-label">Result</div>
+          <div class="demo-row">
+            <button>Save</button>
+            <button>Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-block-label">With variants <span class="pill">opt-in</span></div>
+        <pre><span style="opacity: 0.35">&lt;!-- Add classes for control --&gt;</span>
+&lt;button class="mdst-button--inverted"&gt;Save&lt;/button&gt;
+&lt;button class="mdst-button--ghost"&gt;Cancel&lt;/button&gt;</pre>
+        <div class="demo-block-result mdst-ui">
+          <div class="demo-block-result-label">Result</div>
+          <div class="demo-row">
+            <button class="mdst-button--inverted">Save</button>
+            <button class="mdst-button--ghost">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        You can also use the full class-based API directly — <code>.mdst-button</code>, <code>.mdst-input</code>, <code>.mdst-table</code> —
+        all the explicit classes still work exactly as before. Classes always win over the classless defaults, so there's never a
+        specificity conflict.
+      </p>
+
+      <h2>How it works</h2>
+
+      <div class="how-it-works">
+        <div class="how-it-works-step">
+          <div class="step-number">01</div>
+          <h3>Classless layer</h3>
+          <p>
+            Bare elements inside <code>.mdst-ui</code> are styled using <code>:where()</code>, which keeps specificity at zero. Every native
+            <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;table&gt;</code>, etc. gets a styled baseline for free.
+          </p>
+        </div>
+        <div class="how-it-works-step">
+          <div class="step-number">02</div>
+          <h3>Class layer</h3>
+          <p>
+            Component classes like <code>.mdst-button</code> and <code>.mdst-input</code>
+            have normal specificity, so they always override the classless defaults when applied. Use them when you want explicit control.
+          </p>
+        </div>
+        <div class="how-it-works-step">
+          <div class="step-number">03</div>
+          <h3>Variant classes</h3>
+          <p>
+            Modifiers like <code>.mdst-button--ghost</code> work directly on bare elements inside <code>.mdst-ui</code>. No need to pair
+            them with the base class.
+          </p>
+        </div>
+      </div>
+
+      <h2>Scoped and safe</h2>
+      <p>
+        Unlike classless frameworks that style every element on the page globally, modest-ui is scoped to <code>.mdst-ui</code>. Third-party
+        widgets, embedded content, and anything outside the scope are unaffected. And because the classless layer uses
+        <code>:where()</code> selectors, your own styles and any class-based overrides always take priority — zero specificity battles.
+      </p>
 
       <h2>Example</h2>
       <p>Here's what a page built with modest-ui looks like. See more full-page <a href="/examples/">examples</a>.</p>
@@ -276,16 +486,26 @@
 @import "modest-ui/components/input/input.css";</pre
       >
 
-      <h2>Usage</h2>
-      <p>Add the appropriate class to your HTML elements:</p>
+      <h2>Quick start</h2>
+      <p>Add the stylesheet and put <code>.mdst-ui</code> on the body. That's it.</p>
       <pre>
-&lt;button class="mdst-button"&gt;Default&lt;/button&gt;
-&lt;button class="mdst-button mdst-button--inverted"&gt;Inverted&lt;/button&gt;
-&lt;input type="text" class="mdst-input" placeholder="Enter text" /&gt;</pre
-      >
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;link rel="stylesheet" href="<!-- CDN_URL -->" /&gt;
+&lt;/head&gt;
+&lt;body class="mdst-ui"&gt;
+
+  &lt;h1&gt;Hello world&lt;/h1&gt;
+  &lt;p&gt;This paragraph is styled automatically.&lt;/p&gt;
+  &lt;button&gt;Click me&lt;/button&gt;
+  &lt;input type="text" placeholder="Type here" /&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
 
       <h2>Theming</h2>
-      <p>Override CSS custom properties to theme:</p>
+      <p>Override CSS custom properties to make it yours:</p>
       <pre>
 :root {
   --mdst-color-fg: #000;
@@ -298,7 +518,7 @@
 }</pre
       >
 
-      <p>Browse the components in the sidebar to see examples.</p>
+      <p>Try the <a href="#theme">Theme Playground</a> to experiment, or browse the components in the sidebar to see every option.</p>
     </div>
   </body>
 </html>

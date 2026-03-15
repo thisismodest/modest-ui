@@ -1,5 +1,18 @@
 /* Input */
 
+:where(.mdst-ui)
+  input:not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="range"],
+    [type="file"],
+    [type="color"],
+    [type="submit"],
+    [type="reset"],
+    [type="button"],
+    [type="hidden"]
+  ),
+:where(.mdst-ui) textarea,
 .mdst-input {
   -webkit-appearance: none;
   appearance: none;
@@ -16,25 +29,65 @@
   border-radius: var(--mdst-radius);
   outline: none;
   transition: border-color var(--mdst-transition);
+}
 
-  &::placeholder {
-    color: var(--mdst-color-muted);
-    opacity: 1;
-  }
+:where(.mdst-ui)
+  input:not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="range"],
+    [type="file"],
+    [type="color"],
+    [type="submit"],
+    [type="reset"],
+    [type="button"],
+    [type="hidden"]
+  )::placeholder,
+:where(.mdst-ui) textarea::placeholder,
+.mdst-input::placeholder {
+  color: var(--mdst-color-muted);
+  opacity: 1;
+}
 
-  &:focus {
-    border-color: var(--mdst-color-focus);
-  }
+:where(.mdst-ui)
+  input:not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="range"],
+    [type="file"],
+    [type="color"],
+    [type="submit"],
+    [type="reset"],
+    [type="button"],
+    [type="hidden"]
+  ):focus,
+:where(.mdst-ui) textarea:focus,
+.mdst-input:focus {
+  border-color: var(--mdst-color-focus);
+}
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+:where(.mdst-ui)
+  input:not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="range"],
+    [type="file"],
+    [type="color"],
+    [type="submit"],
+    [type="reset"],
+    [type="button"],
+    [type="hidden"]
+  ):disabled,
+:where(.mdst-ui) textarea:disabled,
+.mdst-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-  /* Textarea variant */
+/* Textarea variant */
 
-  &:is(textarea) {
-    min-height: 6rem;
-    resize: vertical;
-  }
+:where(.mdst-ui) textarea,
+.mdst-input:is(textarea) {
+  min-height: 6rem;
+  resize: vertical;
 }

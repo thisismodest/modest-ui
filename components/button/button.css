@@ -1,5 +1,9 @@
 /* Button */
 
+:where(.mdst-ui) button,
+:where(.mdst-ui) input[type="submit"],
+:where(.mdst-ui) input[type="reset"],
+:where(.mdst-ui) input[type="button"],
 .mdst-button {
   display: inline-flex;
   align-items: center;
@@ -20,57 +24,79 @@
     border-color var(--mdst-transition);
   -webkit-appearance: none;
   appearance: none;
+}
 
-  &:hover {
-    background: var(--mdst-button-hover-bg);
-    color: var(--mdst-button-hover-color);
-    border-color: var(--mdst-button-hover-border);
-  }
+:where(.mdst-ui) button:hover,
+:where(.mdst-ui) input[type="submit"]:hover,
+:where(.mdst-ui) input[type="reset"]:hover,
+:where(.mdst-ui) input[type="button"]:hover,
+.mdst-button:hover {
+  background: var(--mdst-button-hover-bg);
+  color: var(--mdst-button-hover-color);
+  border-color: var(--mdst-button-hover-border);
+}
 
-  &:focus-visible {
-    outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-    outline-offset: var(--mdst-border-width);
-  }
+:where(.mdst-ui) button:focus-visible,
+:where(.mdst-ui) input[type="submit"]:focus-visible,
+:where(.mdst-ui) input[type="reset"]:focus-visible,
+:where(.mdst-ui) input[type="button"]:focus-visible,
+.mdst-button:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+  outline-offset: var(--mdst-border-width);
+}
 
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+:where(.mdst-ui) button:disabled,
+:where(.mdst-ui) input[type="submit"]:disabled,
+:where(.mdst-ui) input[type="reset"]:disabled,
+:where(.mdst-ui) input[type="button"]:disabled,
+.mdst-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
-    &:hover {
-      background: var(--mdst-color-bg);
-      color: var(--mdst-color-fg);
-      border-color: var(--mdst-color-border);
-    }
-  }
+:where(.mdst-ui) button:disabled:hover,
+:where(.mdst-ui) input[type="submit"]:disabled:hover,
+:where(.mdst-ui) input[type="reset"]:disabled:hover,
+:where(.mdst-ui) input[type="button"]:disabled:hover,
+.mdst-button:disabled:hover {
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  border-color: var(--mdst-color-border);
+}
 
-  /* Variants */
+/* Variants */
 
-  &.mdst-button--ghost {
-    border-color: transparent;
+:where(.mdst-ui) button.mdst-button--ghost,
+.mdst-button.mdst-button--ghost {
+  border-color: transparent;
+}
 
-    &:hover {
-      border-color: var(--mdst-button-hover-border);
-    }
-  }
+:where(.mdst-ui) button.mdst-button--ghost:hover,
+.mdst-button.mdst-button--ghost:hover {
+  border-color: var(--mdst-button-hover-border);
+}
 
-  &.mdst-button--inverted {
-    background: var(--mdst-color-fg);
-    color: var(--mdst-color-bg);
+:where(.mdst-ui) button.mdst-button--inverted,
+.mdst-button.mdst-button--inverted {
+  background: var(--mdst-color-fg);
+  color: var(--mdst-color-bg);
+}
 
-    &:hover {
-      background: var(--mdst-color-bg);
-      color: var(--mdst-color-fg);
-    }
-  }
+:where(.mdst-ui) button.mdst-button--inverted:hover,
+.mdst-button.mdst-button--inverted:hover {
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+}
 
-  /* Sizes */
+/* Sizes */
 
-  &.mdst-button--sm {
-    padding: var(--mdst-space-xs) var(--mdst-space-sm);
-    font-size: var(--mdst-text-sm);
-  }
+:where(.mdst-ui) button.mdst-button--sm,
+.mdst-button.mdst-button--sm {
+  padding: var(--mdst-space-xs) var(--mdst-space-sm);
+  font-size: var(--mdst-text-sm);
+}
 
-  &.mdst-button--lg {
-    padding: var(--mdst-space-md) var(--mdst-space-lg);
-  }
+:where(.mdst-ui) button.mdst-button--lg,
+.mdst-button.mdst-button--lg {
+  padding: var(--mdst-space-md) var(--mdst-space-lg);
 }

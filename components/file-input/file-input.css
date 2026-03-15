@@ -1,5 +1,91 @@
 /* File Input */
 
+/* Classless: bare input[type="file"] inside .mdst-ui */
+
+:where(.mdst-ui) input[type="file"] {
+  display: block;
+  width: 100%;
+  color: var(--mdst-color-muted);
+  cursor: pointer;
+  padding: var(--mdst-space-sm);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: var(--mdst-line-height);
+  background-color: var(--mdst-color-bg);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  outline: none;
+  transition: border-color var(--mdst-transition);
+}
+
+:where(.mdst-ui) input[type="file"]:focus {
+  border-color: var(--mdst-color-focus);
+}
+
+:where(.mdst-ui) input[type="file"]::file-selector-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mdst-space-xs);
+  padding: var(--mdst-space-xs) var(--mdst-space-md);
+  margin-right: var(--mdst-space-md);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: var(--mdst-line-height);
+  color: var(--mdst-color-fg);
+  background: var(--mdst-color-bg);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  cursor: pointer;
+  transition:
+    background var(--mdst-transition),
+    color var(--mdst-transition),
+    border-color var(--mdst-transition);
+}
+
+:where(.mdst-ui) input[type="file"]:hover::file-selector-button {
+  background: var(--mdst-button-hover-bg);
+  color: var(--mdst-button-hover-color);
+  border-color: var(--mdst-button-hover-border);
+}
+
+:where(.mdst-ui) input[type="file"]:disabled::file-selector-button {
+  cursor: not-allowed;
+}
+
+:where(.mdst-ui) input[type="file"]:disabled:hover::file-selector-button {
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  border-color: var(--mdst-color-border);
+}
+
+/* Classless variant modifiers on bare file inputs */
+
+:where(.mdst-ui) input[type="file"].mdst-file-input--inverted::file-selector-button,
+.mdst-file-input.mdst-file-input--inverted .mdst-file-input__field::file-selector-button {
+  background: var(--mdst-color-fg);
+  color: var(--mdst-color-bg);
+}
+
+:where(.mdst-ui) input[type="file"].mdst-file-input--inverted:hover::file-selector-button,
+.mdst-file-input.mdst-file-input--inverted .mdst-file-input__field:hover::file-selector-button {
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+}
+
+:where(.mdst-ui) input[type="file"].mdst-file-input--borderless,
+.mdst-file-input.mdst-file-input--borderless .mdst-file-input__field {
+  border-color: transparent;
+  padding: 0;
+}
+
+:where(.mdst-ui) input[type="file"].mdst-file-input--borderless:focus-visible,
+.mdst-file-input.mdst-file-input--borderless .mdst-file-input__field:focus-visible {
+  border-color: var(--mdst-color-focus);
+}
+
+/* Class-based: wrapper + field pattern */
+
 .mdst-file-input {
   display: block;
   width: 100%;
@@ -43,31 +129,6 @@
       background: var(--mdst-color-bg);
       color: var(--mdst-color-fg);
       border-color: var(--mdst-color-border);
-    }
-  }
-
-  /* Inverted variant — filled button */
-
-  &.mdst-file-input--inverted .mdst-file-input__field {
-    &::file-selector-button {
-      background: var(--mdst-color-fg);
-      color: var(--mdst-color-bg);
-    }
-
-    &:hover::file-selector-button {
-      background: var(--mdst-color-bg);
-      color: var(--mdst-color-fg);
-    }
-  }
-
-  /* Borderless variant — no outer border, just the button */
-
-  &.mdst-file-input--borderless .mdst-file-input__field {
-    border-color: transparent;
-    padding: 0;
-
-    &:focus-visible {
-      border-color: var(--mdst-color-focus);
     }
   }
 }
