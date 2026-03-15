@@ -4,7 +4,6 @@
   border: var(--mdst-border-width) solid var(--mdst-color-border);
   border-radius: var(--mdst-radius);
   background: var(--mdst-color-bg);
-  overflow: hidden;
 
   & .mdst-card-header {
     padding: var(--mdst-space-md);
