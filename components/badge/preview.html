@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Badge</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="badge.css" />
+    <style>
+      .badge-icon-wrapper {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5em;
+        height: 2.5em;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-radius: var(--mdst-radius);
+        font-size: var(--mdst-text-lg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-badge</span>
+            </td>
+            <td>
+              <span class="mdst-badge">3</span>
+              <span class="mdst-badge">12</span>
+              <span class="mdst-badge">99+</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--solid</span>
+            </td>
+            <td>
+              <span class="mdst-badge mdst-badge--solid">3</span>
+              <span class="mdst-badge mdst-badge--solid">12</span>
+              <span class="mdst-badge mdst-badge--solid">99+</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--subtle</span>
+            </td>
+            <td>
+              <span class="mdst-badge mdst-badge--subtle">3</span>
+              <span class="mdst-badge mdst-badge--subtle">12</span>
+              <span class="mdst-badge mdst-badge--subtle">99+</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--dot</span>
+            </td>
+            <td>
+              <span class="mdst-badge mdst-badge--dot"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Status</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--error</span>
+            </td>
+            <td>
+              <span class="mdst-badge mdst-badge--error">5</span>
+              <span class="mdst-badge mdst-badge--error mdst-badge--solid">5</span>
+              <span class="mdst-badge mdst-badge--error mdst-badge--subtle">5</span>
+              <span class="mdst-badge mdst-badge--error mdst-badge--dot"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--success</span>
+            </td>
+            <td>
+              <span class="mdst-badge mdst-badge--success">5</span>
+              <span class="mdst-badge mdst-badge--success mdst-badge--solid">5</span>
+              <span class="mdst-badge mdst-badge--success mdst-badge--subtle">5</span>
+              <span class="mdst-badge mdst-badge--success mdst-badge--dot"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--warning</span>
+            </td>
+            <td>
+              <span class="mdst-badge mdst-badge--warning">5</span>
+              <span class="mdst-badge mdst-badge--warning mdst-badge--solid">5</span>
+              <span class="mdst-badge mdst-badge--warning mdst-badge--subtle">5</span>
+              <span class="mdst-badge mdst-badge--warning mdst-badge--dot"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--muted</span>
+            </td>
+            <td>
+              <span class="mdst-badge mdst-badge--muted">5</span>
+              <span class="mdst-badge mdst-badge--muted mdst-badge--solid">5</span>
+              <span class="mdst-badge mdst-badge--muted mdst-badge--subtle">5</span>
+              <span class="mdst-badge mdst-badge--muted mdst-badge--dot"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Sizes</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--sm</span>
+            </td>
+            <td>
+              <span class="mdst-badge mdst-badge--sm">3</span>
+              <span class="mdst-badge mdst-badge--solid mdst-badge--sm">12</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-badge</span>
+            </td>
+            <td>
+              <span class="mdst-badge">3</span>
+              <span class="mdst-badge mdst-badge--solid">12</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--lg</span>
+            </td>
+            <td>
+              <span class="mdst-badge mdst-badge--lg">3</span>
+              <span class="mdst-badge mdst-badge--solid mdst-badge--lg">12</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Positioning</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-badge</span>--top-right</span>
+            </td>
+            <td>
+              <div style="display: flex; align-items: center; gap: var(--mdst-space-lg)">
+                <div class="badge-icon-wrapper">
+                  &#9993;
+                  <span class="mdst-badge mdst-badge--solid mdst-badge--error mdst-badge--top-right">3</span>
+                </div>
+                <div class="badge-icon-wrapper">
+                  &#128276;
+                  <span class="mdst-badge mdst-badge--error mdst-badge--dot mdst-badge--top-right"></span>
+                </div>
+                <div style="position: relative; display: inline-flex">
+                  <button class="mdst-button">Inbox</button>
+                  <span class="mdst-badge mdst-badge--solid mdst-badge--error mdst-badge--sm mdst-badge--top-right">7</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Examples</div>
+      <div class="examples" style="gap: var(--mdst-space-md)">
+        <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); flex-wrap: wrap">
+          <span class="mdst-badge mdst-badge--solid mdst-badge--error">3</span>
+          <span class="mdst-badge mdst-badge--solid mdst-badge--success">✓</span>
+          <span class="mdst-badge mdst-badge--subtle">New</span>
+          <span class="mdst-badge mdst-badge--muted mdst-badge--solid">0</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); flex-wrap: wrap">
+          <span style="display: inline-flex; align-items: center; gap: var(--mdst-space-xs)"
+            >Online <span class="mdst-badge mdst-badge--success mdst-badge--dot"></span
+          ></span>
+          <span style="display: inline-flex; align-items: center; gap: var(--mdst-space-xs)"
+            >Offline <span class="mdst-badge mdst-badge--muted mdst-badge--dot"></span
+          ></span>
+          <span style="display: inline-flex; align-items: center; gap: var(--mdst-space-xs)"
+            >Error <span class="mdst-badge mdst-badge--error mdst-badge--dot"></span
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Default badge --&gt;
+&lt;span class="mdst-badge"&gt;3&lt;/span&gt;
+
+&lt;!-- Variants --&gt;
+&lt;span class="mdst-badge mdst-badge--solid"&gt;12&lt;/span&gt;
+&lt;span class="mdst-badge mdst-badge--subtle"&gt;New&lt;/span&gt;
+&lt;span class="mdst-badge mdst-badge--dot"&gt;&lt;/span&gt;
+
+&lt;!-- Status colors --&gt;
+&lt;span class="mdst-badge mdst-badge--error mdst-badge--solid"&gt;5&lt;/span&gt;
+&lt;span class="mdst-badge mdst-badge--success"&gt;✓&lt;/span&gt;
+&lt;span class="mdst-badge mdst-badge--warning"&gt;!&lt;/span&gt;
+&lt;span class="mdst-badge mdst-badge--muted"&gt;0&lt;/span&gt;
+
+&lt;!-- Sizes --&gt;
+&lt;span class="mdst-badge mdst-badge--sm"&gt;3&lt;/span&gt;
+&lt;span class="mdst-badge mdst-badge--lg"&gt;12&lt;/span&gt;
+
+&lt;!-- Positioned on an element --&gt;
+&lt;div style="position: relative; display: inline-flex;"&gt;
+  &lt;button class="mdst-button"&gt;Inbox&lt;/button&gt;
+  &lt;span class="mdst-badge mdst-badge--solid mdst-badge--error mdst-badge--top-right"&gt;7&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Dot indicator --&gt;
+&lt;span class="mdst-badge mdst-badge--success mdst-badge--dot"&gt;&lt;/span&gt;</code></pre>
+    </div>
+  </body>
+</html>
