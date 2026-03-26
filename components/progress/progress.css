@@ -1,0 +1,77 @@
+/* Progress Bar */
+
+:where(.mdst-ui) progress,
+.mdst-progress {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  height: var(--mdst-space-sm);
+  border: none;
+  border-radius: var(--mdst-radius);
+  overflow: hidden;
+  background: var(--mdst-color-subtle);
+  color: var(--mdst-color-fg);
+
+  /* Webkit (Chrome, Safari, Edge) - bar background */
+
+  &::-webkit-progress-bar {
+    background: var(--mdst-color-subtle);
+    border-radius: var(--mdst-radius);
+  }
+
+  /* Webkit - value fill */
+
+  &::-webkit-progress-value {
+    background: var(--mdst-color-fg);
+    border-radius: var(--mdst-radius);
+    transition: width var(--mdst-transition);
+  }
+
+  /* Firefox - value fill */
+
+  &::-moz-progress-bar {
+    background: var(--mdst-color-fg);
+    border-radius: var(--mdst-radius);
+  }
+
+  /* Status: Error */
+
+  &.mdst-progress--error {
+    color: var(--mdst-color-error);
+
+    &::-webkit-progress-value {
+      background: var(--mdst-color-error);
+    }
+
+    &::-moz-progress-bar {
+      background: var(--mdst-color-error);
+    }
+  }
+
+  /* Status: Success */
+
+  &.mdst-progress--success {
+    color: var(--mdst-color-success);
+
+    &::-webkit-progress-value {
+      background: var(--mdst-color-success);
+    }
+
+    &::-moz-progress-bar {
+      background: var(--mdst-color-success);
+    }
+  }
+
+  /* Size: Small */
+
+  &.mdst-progress--sm {
+    height: var(--mdst-space-xs);
+  }
+
+  /* Size: Large */
+
+  &.mdst-progress--lg {
+    height: var(--mdst-space-md);
+  }
+}

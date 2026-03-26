@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Progress</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="progress.css" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Default</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-progress</span>
+            </td>
+            <td>
+              <progress class="mdst-progress" value="60" max="100">60%</progress>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-progress</span> (0%)
+            </td>
+            <td>
+              <progress class="mdst-progress" value="0" max="100">0%</progress>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-progress</span> (100%)
+            </td>
+            <td>
+              <progress class="mdst-progress" value="100" max="100">100%</progress>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-progress</span> (indeterminate)
+            </td>
+            <td>
+              <progress class="mdst-progress">Loading…</progress>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Status</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-progress</span>--success</span>
+            </td>
+            <td>
+              <progress class="mdst-progress mdst-progress--success" value="100" max="100">100%</progress>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-progress</span>--error</span>
+            </td>
+            <td>
+              <progress class="mdst-progress mdst-progress--error" value="35" max="100">35%</progress>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Sizes</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-progress</span>--sm</span>
+            </td>
+            <td>
+              <progress class="mdst-progress mdst-progress--sm" value="45" max="100">45%</progress>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-progress</span>
+            </td>
+            <td>
+              <progress class="mdst-progress" value="45" max="100">45%</progress>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-progress</span>--lg</span>
+            </td>
+            <td>
+              <progress class="mdst-progress mdst-progress--lg" value="45" max="100">45%</progress>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Examples</div>
+      <div class="examples" style="gap: var(--mdst-space-md)">
+        <div style="display: flex; flex-direction: column; gap: var(--mdst-space-sm)">
+          <div style="display: flex; justify-content: space-between; font-size: var(--mdst-text-sm)">
+            <span>Uploading…</span>
+            <span>72%</span>
+          </div>
+          <progress class="mdst-progress" value="72" max="100">72%</progress>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--mdst-space-sm)">
+          <div style="display: flex; justify-content: space-between; font-size: var(--mdst-text-sm)">
+            <span>Complete</span>
+            <span>100%</span>
+          </div>
+          <progress class="mdst-progress mdst-progress--success" value="100" max="100">100%</progress>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--mdst-space-sm)">
+          <div style="display: flex; justify-content: space-between; font-size: var(--mdst-text-sm)">
+            <span>Upload failed</span>
+            <span>35%</span>
+          </div>
+          <progress class="mdst-progress mdst-progress--error" value="35" max="100">35%</progress>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Default progress bar --&gt;
+&lt;progress class="mdst-progress" value="60" max="100"&gt;60%&lt;/progress&gt;
+
+&lt;!-- Indeterminate (no value attribute) --&gt;
+&lt;progress class="mdst-progress"&gt;Loading…&lt;/progress&gt;
+
+&lt;!-- Status variants --&gt;
+&lt;progress class="mdst-progress mdst-progress--success" value="100" max="100"&gt;100%&lt;/progress&gt;
+&lt;progress class="mdst-progress mdst-progress--error" value="35" max="100"&gt;35%&lt;/progress&gt;
+
+&lt;!-- Sizes --&gt;
+&lt;progress class="mdst-progress mdst-progress--sm" value="50" max="100"&gt;50%&lt;/progress&gt;
+&lt;progress class="mdst-progress mdst-progress--lg" value="50" max="100"&gt;50%&lt;/progress&gt;
+
+&lt;!-- Classless (inside .mdst-ui container) --&gt;
+&lt;div class="mdst-ui"&gt;
+  &lt;progress value="75" max="100"&gt;75%&lt;/progress&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </body>
+</html>
