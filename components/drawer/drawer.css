@@ -1,0 +1,159 @@
+/* Drawer */
+
+:where(.mdst-ui) dialog.mdst-drawer,
+.mdst-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  width: 20rem;
+  max-width: 100vw;
+  max-height: none;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-left: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: 0;
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  overflow: hidden;
+  flex-direction: column;
+
+  /* Closed state (exit animation target) */
+  transform: translateX(100%);
+  transition:
+    transform 200ms ease-out,
+    opacity 200ms ease-out,
+    overlay 200ms ease-out allow-discrete,
+    display 200ms ease-out allow-discrete;
+
+  &[open] {
+    display: flex;
+    transform: translateX(0);
+
+    @starting-style {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* Backdrop */
+
+:where(.mdst-ui) dialog.mdst-drawer::backdrop,
+.mdst-drawer::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition:
+    opacity 200ms ease-out,
+    overlay 200ms ease-out allow-discrete,
+    display 200ms ease-out allow-discrete;
+}
+
+:where(.mdst-ui) dialog.mdst-drawer[open]::backdrop,
+.mdst-drawer[open]::backdrop {
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+/* Position: left */
+
+:where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--left,
+.mdst-drawer.mdst-drawer--left {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: var(--mdst-border-width) solid var(--mdst-color-border);
+  transform: translateX(-100%);
+
+  &[open] {
+    transform: translateX(0);
+
+    @starting-style {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+/* Sizes */
+
+:where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--sm,
+.mdst-drawer.mdst-drawer--sm {
+  width: 16rem;
+}
+
+:where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--lg,
+.mdst-drawer.mdst-drawer--lg {
+  width: 28rem;
+}
+
+:where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--full,
+.mdst-drawer.mdst-drawer--full {
+  width: 100%;
+  border-left: none;
+  border-right: none;
+}
+
+/* Header */
+
+:where(.mdst-ui) dialog.mdst-drawer .mdst-drawer-header,
+.mdst-drawer .mdst-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mdst-space-md);
+  padding: var(--mdst-space-md);
+  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+  flex-shrink: 0;
+}
+
+/* Body */
+
+:where(.mdst-ui) dialog.mdst-drawer .mdst-drawer-body,
+.mdst-drawer .mdst-drawer-body {
+  padding: var(--mdst-space-md);
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Footer */
+
+:where(.mdst-ui) dialog.mdst-drawer .mdst-drawer-footer,
+.mdst-drawer .mdst-drawer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--mdst-space-sm);
+  padding: var(--mdst-space-md);
+  border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+  flex-shrink: 0;
+}
+
+/* Close button */
+
+:where(.mdst-ui) dialog.mdst-drawer .mdst-drawer-close,
+.mdst-drawer .mdst-drawer-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mdst-space-xs);
+  background: transparent;
+  border: none;
+  border-radius: var(--mdst-radius);
+  cursor: pointer;
+  color: var(--mdst-color-muted);
+  transition: color var(--mdst-transition);
+
+  &:hover {
+    color: var(--mdst-color-fg);
+  }
+
+  &:focus-visible {
+    outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+    outline-offset: var(--mdst-border-width);
+  }
+}

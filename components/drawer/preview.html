@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drawer</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="drawer.css" />
+    <style>
+      .demo-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-sm);
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Structure</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-drawer</span></td>
+            <td>Applied to a <code class="mdst-code">&lt;dialog&gt;</code> element to style it as a side panel</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>-header</span>
+            </td>
+            <td>Header section with title and close button</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>-close</span>
+            </td>
+            <td>Close button in header</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>-body</span>
+            </td>
+            <td>Scrollable main content area</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>-footer</span>
+            </td>
+            <td>Footer with action buttons</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Positions</div>
+      <div class="demo-row">
+        <button class="mdst-button" commandfor="drawer-right" command="show-modal">Open right (default)</button>
+        <button class="mdst-button" commandfor="drawer-left" command="show-modal">Open left</button>
+      </div>
+
+      <!-- Right drawer (default) -->
+      <dialog id="drawer-right" class="mdst-drawer">
+        <div class="mdst-drawer-header">
+          <span style="font-weight: 600">Right Drawer</span>
+          <button class="mdst-drawer-close" commandfor="drawer-right" command="close">&#10005;</button>
+        </div>
+        <div class="mdst-drawer-body">
+          <p style="margin: 0">
+            This drawer slides in from the right. It uses a native <code class="mdst-code">&lt;dialog&gt;</code> element — you get backdrop,
+            focus trapping, Escape to close, and accessibility for free. No JavaScript required.
+          </p>
+        </div>
+        <div class="mdst-drawer-footer">
+          <button class="mdst-button" commandfor="drawer-right" command="close">Close</button>
+        </div>
+      </dialog>
+
+      <!-- Left drawer -->
+      <dialog id="drawer-left" class="mdst-drawer mdst-drawer--left">
+        <div class="mdst-drawer-header">
+          <span style="font-weight: 600">Left Drawer</span>
+          <button class="mdst-drawer-close" commandfor="drawer-left" command="close">&#10005;</button>
+        </div>
+        <div class="mdst-drawer-body">
+          <p style="margin: 0">This drawer opens from the left via <code class="mdst-code">.mdst-drawer--left</code>.</p>
+        </div>
+      </dialog>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Sizes</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Width</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>--sm</span>
+            </td>
+            <td>16rem</td>
+          </tr>
+          <tr>
+            <td><span class="class-name">.mdst-drawer</span></td>
+            <td>20rem (default)</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>--lg</span>
+            </td>
+            <td>28rem</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>--full</span>
+            </td>
+            <td>100%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="demo-row" style="margin-top: var(--mdst-space-sm)">
+        <button class="mdst-button" commandfor="drawer-sm" command="show-modal">Small</button>
+        <button class="mdst-button" commandfor="drawer-lg" command="show-modal">Large</button>
+        <button class="mdst-button" commandfor="drawer-full" command="show-modal">Full</button>
+      </div>
+
+      <dialog id="drawer-sm" class="mdst-drawer mdst-drawer--sm">
+        <div class="mdst-drawer-header">
+          <span style="font-weight: 600">Small</span>
+          <button class="mdst-drawer-close" commandfor="drawer-sm" command="close">&#10005;</button>
+        </div>
+        <div class="mdst-drawer-body">
+          <p style="margin: 0">16rem wide.</p>
+        </div>
+      </dialog>
+
+      <dialog id="drawer-lg" class="mdst-drawer mdst-drawer--lg">
+        <div class="mdst-drawer-header">
+          <span style="font-weight: 600">Large</span>
+          <button class="mdst-drawer-close" commandfor="drawer-lg" command="close">&#10005;</button>
+        </div>
+        <div class="mdst-drawer-body">
+          <p style="margin: 0">28rem wide — room for more content.</p>
+        </div>
+      </dialog>
+
+      <dialog id="drawer-full" class="mdst-drawer mdst-drawer--full">
+        <div class="mdst-drawer-header">
+          <span style="font-weight: 600">Full Width</span>
+          <button class="mdst-drawer-close" commandfor="drawer-full" command="close">&#10005;</button>
+        </div>
+        <div class="mdst-drawer-body">
+          <p style="margin: 0">Takes up the full viewport width.</p>
+        </div>
+      </dialog>
+    </div>
+
+    <div class="section">
+      <div class="section-header">With Footer</div>
+      <div class="demo-row">
+        <button class="mdst-button" commandfor="drawer-footer" command="show-modal">Open drawer with footer</button>
+      </div>
+
+      <dialog id="drawer-footer" class="mdst-drawer">
+        <div class="mdst-drawer-header">
+          <span style="font-weight: 600">Edit Profile</span>
+          <button class="mdst-drawer-close" commandfor="drawer-footer" command="close">&#10005;</button>
+        </div>
+        <div class="mdst-drawer-body">
+          <p style="margin: 0">Form content would go here. The body scrolls independently if content overflows.</p>
+        </div>
+        <div class="mdst-drawer-footer">
+          <button class="mdst-button mdst-button--ghost" commandfor="drawer-footer" command="close">Cancel</button>
+          <button class="mdst-button mdst-button--inverted" commandfor="drawer-footer" command="close">Save</button>
+        </div>
+      </dialog>
+    </div>
+
+    <div class="section">
+      <div class="section-header">What you get for free</div>
+      <div class="examples">
+        <p style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted); line-height: 1.5">
+          The drawer uses a native <code class="mdst-code">&lt;dialog&gt;</code> element with
+          <code class="mdst-code">command="show-modal"</code> and <code class="mdst-code">command="close"</code> — no JavaScript at all. You
+          get backdrop via <code class="mdst-code">::backdrop</code>, focus trapping, <code class="mdst-code">Escape</code> to close, scroll
+          lock on the page behind, and proper accessibility (<code class="mdst-code">role="dialog"</code>,
+          <code class="mdst-code">aria-modal</code>) for free.
+        </p>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Trigger button --&gt;
+&lt;button commandfor="my-drawer" command="show-modal"&gt;Open Drawer&lt;/button&gt;
+
+&lt;!-- Right drawer (default) --&gt;
+&lt;dialog id="my-drawer" class="mdst-drawer"&gt;
+  &lt;div class="mdst-drawer-header"&gt;
+    &lt;span&gt;Drawer Title&lt;/span&gt;
+    &lt;button class="mdst-drawer-close" commandfor="my-drawer" command="close"&gt;&amp;#10005;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="mdst-drawer-body"&gt;
+    &lt;p&gt;Content goes here.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="mdst-drawer-footer"&gt;
+    &lt;button commandfor="my-drawer" command="close"&gt;Cancel&lt;/button&gt;
+    &lt;button commandfor="my-drawer" command="close"&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;
+
+&lt;!-- Left position --&gt;
+&lt;dialog class="mdst-drawer mdst-drawer--left"&gt;...&lt;/dialog&gt;
+
+&lt;!-- Sizes --&gt;
+&lt;dialog class="mdst-drawer mdst-drawer--sm"&gt;...&lt;/dialog&gt;
+&lt;dialog class="mdst-drawer mdst-drawer--lg"&gt;...&lt;/dialog&gt;
+&lt;dialog class="mdst-drawer mdst-drawer--full"&gt;...&lt;/dialog&gt;</code></pre>
+    </div>
+  </body>
+</html>
