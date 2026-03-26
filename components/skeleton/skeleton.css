@@ -1,0 +1,46 @@
+/* Skeleton */
+
+@keyframes mdst-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.mdst-skeleton {
+  display: block;
+  height: 1em;
+  width: 100%;
+  border-radius: var(--mdst-radius);
+  background: linear-gradient(
+    90deg,
+    var(--mdst-color-subtle) 25%,
+    color-mix(in srgb, var(--mdst-color-subtle) 50%, var(--mdst-color-bg) 50%) 50%,
+    var(--mdst-color-subtle) 75%
+  );
+  background-size: 200% 100%;
+  animation: mdst-shimmer 1.5s ease-in-out infinite;
+
+  /* Text line placeholder */
+
+  &.mdst-skeleton--text {
+    height: 1em;
+    width: 100%;
+  }
+
+  /* Heading placeholder */
+
+  &.mdst-skeleton--heading {
+    height: 1.5em;
+  }
+
+  /* Circle shape — set size via inline style or custom class */
+
+  &.mdst-skeleton--circle {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+  }
+}

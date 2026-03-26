@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skeleton</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="skeleton.css" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-skeleton</span>
+            </td>
+            <td>
+              <span class="mdst-skeleton" style="width: 100%"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-skeleton</span>--text</span>
+            </td>
+            <td>
+              <div class="mdst-skeleton mdst-skeleton--text" style="width: 80%"></div>
+              <div class="mdst-skeleton mdst-skeleton--text" style="width: 100%; margin-top: 0.5rem"></div>
+              <div class="mdst-skeleton mdst-skeleton--text" style="width: 60%; margin-top: 0.5rem"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-skeleton</span>--heading</span>
+            </td>
+            <td>
+              <div class="mdst-skeleton mdst-skeleton--heading" style="width: 50%"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-skeleton</span>--circle</span>
+            </td>
+            <td>
+              <span class="mdst-skeleton mdst-skeleton--circle"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Custom sizes</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Style</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">width: 25%</span>
+            </td>
+            <td>
+              <div class="mdst-skeleton" style="width: 25%"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">width: 50%</span>
+            </td>
+            <td>
+              <div class="mdst-skeleton" style="width: 50%"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">width: 75%</span>
+            </td>
+            <td>
+              <div class="mdst-skeleton" style="width: 75%"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">width: 100%</span>
+            </td>
+            <td>
+              <div class="mdst-skeleton" style="width: 100%"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">height: 6rem</span>
+            </td>
+            <td>
+              <div class="mdst-skeleton" style="width: 100%; height: 6rem"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Examples</div>
+      <div class="examples" style="gap: var(--mdst-space-md)">
+        <!-- Card skeleton -->
+        <div
+          style="
+            border: var(--mdst-border-width) solid var(--mdst-color-border);
+            border-radius: var(--mdst-radius);
+            padding: var(--mdst-space-md);
+            max-width: 20rem;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); margin-bottom: var(--mdst-space-md)">
+            <span class="mdst-skeleton mdst-skeleton--circle" style="width: 2.5rem; height: 2.5rem"></span>
+            <div style="flex: 1">
+              <div class="mdst-skeleton mdst-skeleton--text" style="width: 60%"></div>
+              <div class="mdst-skeleton mdst-skeleton--text" style="width: 40%; margin-top: 0.375rem"></div>
+            </div>
+          </div>
+          <div class="mdst-skeleton" style="width: 100%; height: 8rem; margin-bottom: var(--mdst-space-sm)"></div>
+          <div class="mdst-skeleton mdst-skeleton--text" style="width: 100%"></div>
+          <div class="mdst-skeleton mdst-skeleton--text" style="width: 85%; margin-top: 0.375rem"></div>
+          <div class="mdst-skeleton mdst-skeleton--text" style="width: 70%; margin-top: 0.375rem"></div>
+        </div>
+
+        <!-- List skeleton -->
+        <div style="max-width: 20rem; display: flex; flex-direction: column; gap: var(--mdst-space-sm)">
+          <div style="display: flex; align-items: center; gap: var(--mdst-space-sm)">
+            <span class="mdst-skeleton mdst-skeleton--circle" style="width: 2rem; height: 2rem"></span>
+            <div style="flex: 1">
+              <div class="mdst-skeleton mdst-skeleton--text" style="width: 70%"></div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--mdst-space-sm)">
+            <span class="mdst-skeleton mdst-skeleton--circle" style="width: 2rem; height: 2rem"></span>
+            <div style="flex: 1">
+              <div class="mdst-skeleton mdst-skeleton--text" style="width: 55%"></div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--mdst-space-sm)">
+            <span class="mdst-skeleton mdst-skeleton--circle" style="width: 2rem; height: 2rem"></span>
+            <div style="flex: 1">
+              <div class="mdst-skeleton mdst-skeleton--text" style="width: 80%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Basic skeleton --&gt;
+&lt;div class="mdst-skeleton" style="width: 100%"&gt;&lt;/div&gt;
+
+&lt;!-- Text lines --&gt;
+&lt;div class="mdst-skeleton mdst-skeleton--text" style="width: 80%"&gt;&lt;/div&gt;
+&lt;div class="mdst-skeleton mdst-skeleton--text" style="width: 100%"&gt;&lt;/div&gt;
+&lt;div class="mdst-skeleton mdst-skeleton--text" style="width: 60%"&gt;&lt;/div&gt;
+
+&lt;!-- Heading --&gt;
+&lt;div class="mdst-skeleton mdst-skeleton--heading" style="width: 50%"&gt;&lt;/div&gt;
+
+&lt;!-- Circle --&gt;
+&lt;span class="mdst-skeleton mdst-skeleton--circle"&gt;&lt;/span&gt;
+
+&lt;!-- Custom size via inline style --&gt;
+&lt;div class="mdst-skeleton" style="width: 100%; height: 8rem"&gt;&lt;/div&gt;
+
+&lt;!-- Card skeleton composition --&gt;
+&lt;div style="display: flex; align-items: center; gap: 0.5rem"&gt;
+  &lt;span class="mdst-skeleton mdst-skeleton--circle" style="width: 2.5rem; height: 2.5rem"&gt;&lt;/span&gt;
+  &lt;div style="flex: 1"&gt;
+    &lt;div class="mdst-skeleton mdst-skeleton--text" style="width: 60%"&gt;&lt;/div&gt;
+    &lt;div class="mdst-skeleton mdst-skeleton--text" style="width: 40%"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </body>
+</html>
