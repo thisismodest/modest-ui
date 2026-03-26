@@ -1,0 +1,70 @@
+/* Avatar */
+
+.mdst-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  font-family: var(--mdst-font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  background: var(--mdst-color-subtle);
+  color: var(--mdst-color-fg);
+  vertical-align: middle;
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+  /* Images */
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Sizes */
+
+  &.mdst-avatar--sm {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+  }
+
+  &.mdst-avatar--lg {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.25rem;
+  }
+
+  &.mdst-avatar--xl {
+    width: 5rem;
+    height: 5rem;
+    font-size: 1.75rem;
+  }
+
+  /* Square variant */
+
+  &.mdst-avatar--square {
+    border-radius: var(--mdst-radius);
+  }
+}
+
+/* Avatar group */
+
+.mdst-avatar-group {
+  display: inline-flex;
+  align-items: center;
+
+  & > .mdst-avatar {
+    margin-left: -0.5rem;
+    border: 2px solid var(--mdst-color-bg);
+  }
+
+  & > .mdst-avatar:first-child {
+    margin-left: 0;
+  }
+}
