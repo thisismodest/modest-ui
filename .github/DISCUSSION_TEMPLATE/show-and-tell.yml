@@ -1,0 +1,14 @@
+title: "[Show & Tell]: "
+labels: ["show-and-tell"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Built something with modest-ui? Share it here! We'd love to see what you've made.
+  - type: textarea
+    id: project
+    attributes:
+      label: What did you build?
+      description: Share a link, screenshot, or description of your project.
+    validations:
+      required: true

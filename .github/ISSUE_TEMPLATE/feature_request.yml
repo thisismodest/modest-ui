@@ -1,0 +1,27 @@
+name: Feature Request
+description: Suggest a new component or improvement
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Describe what you'd like to see.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What would you like modest-ui to add or change?
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: What problem does this solve? Where would you use it?
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples
+      description: Any mockups, code snippets, or links to similar implementations?
