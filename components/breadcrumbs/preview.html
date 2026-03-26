@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Breadcrumbs</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="breadcrumbs.css" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-breadcrumbs</span>
+            </td>
+            <td>
+              <nav class="mdst-breadcrumbs" aria-label="Breadcrumb">
+                <ol>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Products</a></li>
+                  <li><span aria-current="page">Widget</span></li>
+                </ol>
+              </nav>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-breadcrumbs</span>--compact</span>
+            </td>
+            <td>
+              <nav class="mdst-breadcrumbs mdst-breadcrumbs--compact" aria-label="Breadcrumb">
+                <ol>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Products</a></li>
+                  <li><span aria-current="page">Widget</span></li>
+                </ol>
+              </nav>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-breadcrumbs</span>--arrow</span>
+            </td>
+            <td>
+              <nav class="mdst-breadcrumbs mdst-breadcrumbs--arrow" aria-label="Breadcrumb">
+                <ol>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Products</a></li>
+                  <li><span aria-current="page">Widget</span></li>
+                </ol>
+              </nav>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Current Page</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">aria-current="page"</span>
+            </td>
+            <td>
+              <nav class="mdst-breadcrumbs" aria-label="Breadcrumb">
+                <ol>
+                  <li><a href="#">Dashboard</a></li>
+                  <li><a href="#">Settings</a></li>
+                  <li><a href="#">Account</a></li>
+                  <li><span aria-current="page">Profile</span></li>
+                </ol>
+              </nav>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Examples</div>
+      <div class="examples" style="gap: var(--mdst-space-lg)">
+        <nav class="mdst-breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="#">Home</a></li>
+            <li><span aria-current="page">About</span></li>
+          </ol>
+        </nav>
+        <nav class="mdst-breadcrumbs mdst-breadcrumbs--arrow" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="#">Store</a></li>
+            <li><a href="#">Electronics</a></li>
+            <li><a href="#">Phones</a></li>
+            <li><span aria-current="page">iPhone 15</span></li>
+          </ol>
+        </nav>
+        <nav class="mdst-breadcrumbs mdst-breadcrumbs--compact" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="#">Admin</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Roles</a></li>
+            <li><span aria-current="page">Editor</span></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Class-based breadcrumbs --&gt;
+&lt;nav class="mdst-breadcrumbs" aria-label="Breadcrumb"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Products&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span aria-current="page"&gt;Widget&lt;/span&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;
+
+&lt;!-- Arrow separator --&gt;
+&lt;nav class="mdst-breadcrumbs mdst-breadcrumbs--arrow" aria-label="Breadcrumb"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span aria-current="page"&gt;Page&lt;/span&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;
+
+&lt;!-- Compact --&gt;
+&lt;nav class="mdst-breadcrumbs mdst-breadcrumbs--compact" aria-label="Breadcrumb"&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span aria-current="page"&gt;Page&lt;/span&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+    </div>
+  </body>
+</html>

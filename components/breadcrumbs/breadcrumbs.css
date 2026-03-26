@@ -1,0 +1,66 @@
+/* Breadcrumbs */
+
+.mdst-breadcrumbs {
+  & ol {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--mdst-space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--mdst-text-sm);
+    font-family: var(--mdst-font-sans);
+  }
+
+  & li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-xs);
+    color: var(--mdst-color-fg);
+  }
+
+  & li + li::before {
+    content: "/";
+    color: var(--mdst-color-muted);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  & a {
+    color: var(--mdst-color-muted);
+    text-decoration: none;
+    transition: color var(--mdst-transition);
+    margin: 0;
+
+    &:hover {
+      color: var(--mdst-color-fg);
+    }
+  }
+
+  & [aria-current="page"] {
+    color: var(--mdst-color-fg);
+    font-weight: 500;
+  }
+
+  /* Compact */
+
+  &.mdst-breadcrumbs--compact {
+    & ol {
+      gap: calc(var(--mdst-space-xs) * 0.5);
+      font-size: var(--mdst-text-xs);
+    }
+
+    & li {
+      gap: calc(var(--mdst-space-xs) * 0.5);
+    }
+  }
+
+  /* Arrow separator */
+
+  &.mdst-breadcrumbs--arrow {
+    & li + li::before {
+      content: "\203A";
+    }
+  }
+}
