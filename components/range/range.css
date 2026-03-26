@@ -6,7 +6,7 @@
   appearance: none;
   width: 100%;
   height: var(--mdst-space-1);
-  background: var(--mdst-color-border);
+  background: var(--mdst-color-fg);
   border-radius: var(--mdst-space-1);
   box-shadow: none;
   cursor: pointer;
@@ -45,7 +45,7 @@
   height: var(--mdst-space-4);
   box-sizing: border-box;
   background: var(--mdst-color-bg);
-  border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-border);
+  border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
   border-radius: 50%;
   box-shadow: none;
   cursor: pointer;
@@ -61,7 +61,7 @@
   height: var(--mdst-space-4);
   box-sizing: border-box;
   background: var(--mdst-color-bg);
-  border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-border);
+  border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
   border-radius: 50%;
   cursor: pointer;
   transition: background var(--mdst-transition);
