@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stepper</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="stepper.css" />
+    <style>
+      .examples {
+        gap: var(--mdst-space-lg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Data Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">data-state="completed"</span>
+            </td>
+            <td>
+              <div class="mdst-stepper">
+                <div class="mdst-stepper-step" data-state="completed">
+                  <div class="mdst-stepper-indicator">&#10003;</div>
+                  <div class="mdst-stepper-label">Completed</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">2</div>
+                  <div class="mdst-stepper-label">Next</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">data-state="active"</span>
+            </td>
+            <td>
+              <div class="mdst-stepper">
+                <div class="mdst-stepper-step" data-state="active">
+                  <div class="mdst-stepper-indicator">1</div>
+                  <div class="mdst-stepper-label">Active</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">2</div>
+                  <div class="mdst-stepper-label">Next</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">data-state="upcoming"</span>
+            </td>
+            <td>
+              <div class="mdst-stepper">
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">1</div>
+                  <div class="mdst-stepper-label">Upcoming</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">2</div>
+                  <div class="mdst-stepper-label">Upcoming</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">data-state="error"</span>
+            </td>
+            <td>
+              <div class="mdst-stepper">
+                <div class="mdst-stepper-step" data-state="completed">
+                  <div class="mdst-stepper-indicator">&#10003;</div>
+                  <div class="mdst-stepper-label">Done</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="error">
+                  <div class="mdst-stepper-indicator">2</div>
+                  <div class="mdst-stepper-label">Error</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-stepper</span>
+            </td>
+            <td>
+              <div class="mdst-stepper">
+                <div class="mdst-stepper-step" data-state="completed">
+                  <div class="mdst-stepper-indicator">&#10003;</div>
+                  <div class="mdst-stepper-label">Account</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="active">
+                  <div class="mdst-stepper-indicator">2</div>
+                  <div class="mdst-stepper-label">Profile</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">3</div>
+                  <div class="mdst-stepper-label">Review</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">4</div>
+                  <div class="mdst-stepper-label">Confirm</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-stepper</span>--vertical</span>
+            </td>
+            <td>
+              <div class="mdst-stepper mdst-stepper--vertical">
+                <div class="mdst-stepper-step" data-state="completed">
+                  <div class="mdst-stepper-indicator">&#10003;</div>
+                  <div class="mdst-stepper-label">Account</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="active">
+                  <div class="mdst-stepper-indicator">2</div>
+                  <div class="mdst-stepper-label">Profile</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">3</div>
+                  <div class="mdst-stepper-label">Review</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">4</div>
+                  <div class="mdst-stepper-label">Confirm</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-stepper</span>--compact</span>
+            </td>
+            <td>
+              <div class="mdst-stepper mdst-stepper--compact">
+                <div class="mdst-stepper-step" data-state="completed">
+                  <div class="mdst-stepper-indicator">&#10003;</div>
+                  <div class="mdst-stepper-label">Account</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="active">
+                  <div class="mdst-stepper-indicator">2</div>
+                  <div class="mdst-stepper-label">Profile</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">3</div>
+                  <div class="mdst-stepper-label">Review</div>
+                </div>
+                <div class="mdst-stepper-step" data-state="upcoming">
+                  <div class="mdst-stepper-indicator">4</div>
+                  <div class="mdst-stepper-label">Confirm</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Examples</div>
+      <div class="examples">
+        <div>
+          <p style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-sm)">
+            Checkout flow — step 2 active
+          </p>
+          <div class="mdst-stepper">
+            <div class="mdst-stepper-step" data-state="completed">
+              <div class="mdst-stepper-indicator">&#10003;</div>
+              <div class="mdst-stepper-label">Cart</div>
+            </div>
+            <div class="mdst-stepper-step" data-state="active">
+              <div class="mdst-stepper-indicator">2</div>
+              <div class="mdst-stepper-label">Shipping</div>
+            </div>
+            <div class="mdst-stepper-step" data-state="upcoming">
+              <div class="mdst-stepper-indicator">3</div>
+              <div class="mdst-stepper-label">Payment</div>
+            </div>
+            <div class="mdst-stepper-step" data-state="upcoming">
+              <div class="mdst-stepper-indicator">4</div>
+              <div class="mdst-stepper-label">Done</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-sm)">Error on step 2</p>
+          <div class="mdst-stepper">
+            <div class="mdst-stepper-step" data-state="completed">
+              <div class="mdst-stepper-indicator">&#10003;</div>
+              <div class="mdst-stepper-label">Cart</div>
+            </div>
+            <div class="mdst-stepper-step" data-state="error">
+              <div class="mdst-stepper-indicator">!</div>
+              <div class="mdst-stepper-label">Shipping</div>
+            </div>
+            <div class="mdst-stepper-step" data-state="upcoming">
+              <div class="mdst-stepper-indicator">3</div>
+              <div class="mdst-stepper-label">Payment</div>
+            </div>
+            <div class="mdst-stepper-step" data-state="upcoming">
+              <div class="mdst-stepper-indicator">4</div>
+              <div class="mdst-stepper-label">Done</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-sm)">
+            Vertical — step 3 active
+          </p>
+          <div class="mdst-stepper mdst-stepper--vertical">
+            <div class="mdst-stepper-step" data-state="completed">
+              <div class="mdst-stepper-indicator">&#10003;</div>
+              <div class="mdst-stepper-label">Select plan</div>
+            </div>
+            <div class="mdst-stepper-step" data-state="completed">
+              <div class="mdst-stepper-indicator">&#10003;</div>
+              <div class="mdst-stepper-label">Create account</div>
+            </div>
+            <div class="mdst-stepper-step" data-state="active">
+              <div class="mdst-stepper-indicator">3</div>
+              <div class="mdst-stepper-label">Enter payment</div>
+            </div>
+            <div class="mdst-stepper-step" data-state="upcoming">
+              <div class="mdst-stepper-indicator">4</div>
+              <div class="mdst-stepper-label">Confirmation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--mdst-space-xl); padding-top: var(--mdst-space-lg); border-top: 2px dashed var(--mdst-color-border)">
+      <div class="section-header" style="margin-bottom: 0">Interactive Demo</div>
+      <p style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-md)">
+        This demo uses vanilla JS to toggle <code class="mdst-code">data-state</code> attributes. The JavaScript below is
+        <strong>not</strong> part of modest-ui &mdash; it&rsquo;s here to show how the CSS responds to state changes. Bring whatever JS you
+        want.
+      </p>
+
+      <div
+        style="
+          padding: var(--mdst-space-md);
+          border: var(--mdst-border-width) solid var(--mdst-color-border);
+          border-radius: var(--mdst-radius);
+        "
+      >
+        <div id="demo-stepper" class="mdst-stepper" style="margin-bottom: var(--mdst-space-lg)">
+          <div class="mdst-stepper-step" data-state="active">
+            <div class="mdst-stepper-indicator">1</div>
+            <div class="mdst-stepper-label">Account</div>
+          </div>
+          <div class="mdst-stepper-step" data-state="upcoming">
+            <div class="mdst-stepper-indicator">2</div>
+            <div class="mdst-stepper-label">Profile</div>
+          </div>
+          <div class="mdst-stepper-step" data-state="upcoming">
+            <div class="mdst-stepper-indicator">3</div>
+            <div class="mdst-stepper-label">Review</div>
+          </div>
+          <div class="mdst-stepper-step" data-state="upcoming">
+            <div class="mdst-stepper-indicator">4</div>
+            <div class="mdst-stepper-label">Confirm</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: var(--mdst-space-sm); justify-content: center">
+          <button id="demo-back" class="mdst-button mdst-button--sm" disabled>Back</button>
+          <button id="demo-next" class="mdst-button mdst-button--sm">Next</button>
+          <button id="demo-reset" class="mdst-button mdst-button--sm mdst-button--ghost">Reset</button>
+        </div>
+      </div>
+
+      <details class="mdst-details mdst-details--borderless" style="margin-top: var(--mdst-space-md)">
+        <summary>Demo source</summary>
+        <pre
+          class="mdst-pre"
+          style="margin-top: var(--mdst-space-sm)"
+        ><code>const steps = document.querySelectorAll("#demo-stepper .mdst-stepper-step");
+let current = 0;
+
+function update() {
+  steps.forEach((step, i) => {
+    if (i < current) {
+      step.dataset.state = "completed";
+      step.querySelector(".mdst-stepper-indicator").textContent = "\u2713";
+    } else if (i === current) {
+      step.dataset.state = "active";
+      step.querySelector(".mdst-stepper-indicator").textContent = String(i + 1);
+    } else {
+      step.dataset.state = "upcoming";
+      step.querySelector(".mdst-stepper-indicator").textContent = String(i + 1);
+    }
+  });
+  backBtn.disabled = current === 0;
+  nextBtn.disabled = current >= steps.length;
+}
+
+nextBtn.addEventListener("click", () => { if (current < steps.length) { current++; update(); } });
+backBtn.addEventListener("click", () => { if (current > 0) { current--; update(); } });
+resetBtn.addEventListener("click", () => { current = 0; update(); });</code></pre>
+      </details>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Data Attribute Contract</div>
+      <pre class="mdst-pre"><code>&lt;!-- Set data-state on each .mdst-stepper-step --&gt;
+
+data-state="completed"  → Step is done (filled indicator, solid connector)
+data-state="active"     → Current step (bold indicator and label)
+data-state="upcoming"   → Not yet reached (muted indicator and label)
+data-state="error"      → Step has an error (error-colored indicator and label)
+
+&lt;!-- Your JS updates these attributes as the user progresses --&gt;
+step.dataset.state = "completed";
+step.dataset.state = "active";
+step.dataset.state = "error";</code></pre>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Horizontal stepper --&gt;
+&lt;div class="mdst-stepper"&gt;
+  &lt;div class="mdst-stepper-step" data-state="completed"&gt;
+    &lt;div class="mdst-stepper-indicator"&gt;&amp;#10003;&lt;/div&gt;
+    &lt;div class="mdst-stepper-label"&gt;Account&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="mdst-stepper-step" data-state="active"&gt;
+    &lt;div class="mdst-stepper-indicator"&gt;2&lt;/div&gt;
+    &lt;div class="mdst-stepper-label"&gt;Profile&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="mdst-stepper-step" data-state="upcoming"&gt;
+    &lt;div class="mdst-stepper-indicator"&gt;3&lt;/div&gt;
+    &lt;div class="mdst-stepper-label"&gt;Review&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Vertical variant --&gt;
+&lt;div class="mdst-stepper mdst-stepper--vertical"&gt;
+  &lt;div class="mdst-stepper-step" data-state="completed"&gt;
+    &lt;div class="mdst-stepper-indicator"&gt;&amp;#10003;&lt;/div&gt;
+    &lt;div class="mdst-stepper-label"&gt;Step 1&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="mdst-stepper-step" data-state="active"&gt;
+    &lt;div class="mdst-stepper-indicator"&gt;2&lt;/div&gt;
+    &lt;div class="mdst-stepper-label"&gt;Step 2&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Compact variant --&gt;
+&lt;div class="mdst-stepper mdst-stepper--compact"&gt;
+  ...
+&lt;/div&gt;
+
+&lt;!-- Error state --&gt;
+&lt;div class="mdst-stepper-step" data-state="error"&gt;
+  &lt;div class="mdst-stepper-indicator"&gt;!&lt;/div&gt;
+  &lt;div class="mdst-stepper-label"&gt;Failed&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <script>
+      // Interactive demo — NOT part of modest-ui
+      const steps = document.querySelectorAll("#demo-stepper .mdst-stepper-step");
+      const backBtn = document.getElementById("demo-back");
+      const nextBtn = document.getElementById("demo-next");
+      const resetBtn = document.getElementById("demo-reset");
+      let current = 0;
+
+      function update() {
+        steps.forEach((step, i) => {
+          if (i < current) {
+            step.dataset.state = "completed";
+            step.querySelector(".mdst-stepper-indicator").textContent = "\u2713";
+          } else if (i === current) {
+            step.dataset.state = "active";
+            step.querySelector(".mdst-stepper-indicator").textContent = String(i + 1);
+          } else {
+            step.dataset.state = "upcoming";
+            step.querySelector(".mdst-stepper-indicator").textContent = String(i + 1);
+          }
+        });
+        backBtn.disabled = current === 0;
+        nextBtn.disabled = current >= steps.length;
+      }
+
+      nextBtn.addEventListener("click", () => {
+        if (current < steps.length) {
+          current++;
+          update();
+        }
+      });
+      backBtn.addEventListener("click", () => {
+        if (current > 0) {
+          current--;
+          update();
+        }
+      });
+      resetBtn.addEventListener("click", () => {
+        current = 0;
+        update();
+      });
+    </script>
+  </body>
+</html>

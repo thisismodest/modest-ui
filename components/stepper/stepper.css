@@ -1,0 +1,192 @@
+/* Stepper / Wizard */
+
+.mdst-stepper {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  font-family: var(--mdst-font-sans);
+
+  /* Step */
+
+  & .mdst-stepper-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    text-align: center;
+
+    /* Connector line between steps */
+
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 1rem;
+      left: 50%;
+      right: -50%;
+      height: var(--mdst-border-width);
+      background: var(--mdst-color-border);
+    }
+
+    /* Completed connector */
+
+    &[data-state="completed"]:not(:last-child)::after {
+      background: var(--mdst-color-fg);
+    }
+
+    /* States */
+
+    &[data-state="completed"] {
+      & .mdst-stepper-indicator {
+        background: var(--mdst-color-fg);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-fg);
+      }
+
+      & .mdst-stepper-label {
+        color: var(--mdst-color-fg);
+      }
+    }
+
+    &[data-state="active"] {
+      & .mdst-stepper-indicator {
+        border-color: var(--mdst-color-fg);
+        font-weight: 700;
+      }
+
+      & .mdst-stepper-label {
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+      }
+    }
+
+    &[data-state="upcoming"] {
+      & .mdst-stepper-indicator {
+        border-color: var(--mdst-color-border);
+        color: var(--mdst-color-muted);
+      }
+
+      & .mdst-stepper-label {
+        color: var(--mdst-color-muted);
+      }
+    }
+
+    &[data-state="error"] {
+      & .mdst-stepper-indicator {
+        border-color: var(--mdst-color-error);
+        color: var(--mdst-color-error);
+      }
+
+      & .mdst-stepper-label {
+        color: var(--mdst-color-error);
+      }
+    }
+  }
+
+  /* Indicator (circle) */
+
+  & .mdst-stepper-indicator {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    font-size: var(--mdst-text-sm);
+    font-weight: 600;
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    position: relative;
+    z-index: 1;
+    transition:
+      background var(--mdst-transition),
+      color var(--mdst-transition),
+      border-color var(--mdst-transition);
+  }
+
+  /* Label */
+
+  & .mdst-stepper-label {
+    margin-top: var(--mdst-space-xs);
+    font-size: var(--mdst-text-sm);
+    color: var(--mdst-color-fg);
+    padding: 0 var(--mdst-space-xs);
+    transition: color var(--mdst-transition);
+  }
+
+  /* Vertical variant */
+
+  &.mdst-stepper--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+
+    & .mdst-stepper-step {
+      flex-direction: row;
+      align-items: flex-start;
+      flex: none;
+      width: 100%;
+      text-align: left;
+
+      /* Vertical connector */
+
+      &:not(:last-child)::after {
+        top: 2rem;
+        left: 1rem;
+        right: auto;
+        width: var(--mdst-border-width);
+        height: calc(100% - 2rem + var(--mdst-space-md));
+        transform: translateX(-50%);
+      }
+
+      &:not(:last-child) {
+        padding-bottom: var(--mdst-space-md);
+      }
+    }
+
+    & .mdst-stepper-label {
+      margin-top: 0;
+      margin-left: var(--mdst-space-sm);
+      padding: 0;
+      line-height: 2rem;
+    }
+  }
+
+  /* Compact variant */
+
+  &.mdst-stepper--compact {
+    & .mdst-stepper-indicator {
+      width: 1.5rem;
+      height: 1.5rem;
+      font-size: var(--mdst-text-xs);
+    }
+
+    & .mdst-stepper-label {
+      font-size: var(--mdst-text-xs);
+    }
+
+    & .mdst-stepper-step:not(:last-child)::after {
+      top: 0.75rem;
+      left: 50%;
+      right: -50%;
+    }
+
+    /* Compact + vertical */
+
+    &.mdst-stepper--vertical {
+      & .mdst-stepper-step:not(:last-child)::after {
+        top: 1.5rem;
+        left: 0.75rem;
+        height: calc(100% - 1.5rem + var(--mdst-space-sm));
+      }
+
+      & .mdst-stepper-label {
+        line-height: 1.5rem;
+      }
+
+      & .mdst-stepper-step:not(:last-child) {
+        padding-bottom: var(--mdst-space-sm);
+      }
+    }
+  }
+}
