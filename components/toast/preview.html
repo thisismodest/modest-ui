@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toast</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="../details/details.css" />
+    <link rel="stylesheet" href="toast.css" />
+    <style>
+      /* Preview overrides: show toast-group inline instead of fixed */
+      .preview-toast-group {
+        position: static;
+        z-index: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Structure</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-toast-group</span>
+            </td>
+            <td>Fixed container for stacking multiple toasts</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-toast</span>
+            </td>
+            <td>Individual toast notification, use with <code class="mdst-code">&lt;output&gt;</code> for accessibility</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-toast</span>-close</span>
+            </td>
+            <td>Dismiss button inside a toast</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Data Attribute</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">data-state="visible"</span>
+            </td>
+            <td>Toast is shown (opacity 1, visible)</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">data-state="hidden"</span>
+            </td>
+            <td>Toast is hidden (opacity 0, visibility hidden)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <div class="mdst-toast-group preview-toast-group">
+        <output class="mdst-toast" data-state="visible">
+          Default toast — no variant
+          <button class="mdst-toast-close" aria-label="Dismiss">✕</button>
+        </output>
+
+        <output class="mdst-toast" data-state="visible" data-variant="info">
+          <span class="class-name">info</span> — something noteworthy happened.
+          <button class="mdst-toast-close" aria-label="Dismiss">✕</button>
+        </output>
+
+        <output class="mdst-toast" data-state="visible" data-variant="success">
+          <span class="class-name">success</span> — your changes have been saved.
+          <button class="mdst-toast-close" aria-label="Dismiss">✕</button>
+        </output>
+
+        <output class="mdst-toast" data-state="visible" data-variant="error">
+          <span class="class-name">error</span> — something went wrong.
+          <button class="mdst-toast-close" aria-label="Dismiss">✕</button>
+        </output>
+
+        <output class="mdst-toast" data-state="visible" data-variant="warning">
+          <span class="class-name">warning</span> — please review before continuing.
+          <button class="mdst-toast-close" aria-label="Dismiss">✕</button>
+        </output>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--mdst-space-xl); padding-top: var(--mdst-space-lg); border-top: 2px dashed var(--mdst-color-border)">
+      <div class="section-header" style="margin-bottom: 0">Interactive Demo</div>
+      <p style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-md)">
+        This demo uses vanilla JS to toggle <code class="mdst-code">data-state</code> attributes. The JavaScript below is
+        <strong>not</strong> part of modest-ui &mdash; it&rsquo;s here to show how the CSS responds to state changes. Bring whatever JS you
+        want.
+      </p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: var(--mdst-space-sm)">
+        <button class="mdst-button mdst-button--sm" data-demo-variant="">Default</button>
+        <button class="mdst-button mdst-button--sm" data-demo-variant="info">Info</button>
+        <button class="mdst-button mdst-button--sm" data-demo-variant="success">Success</button>
+        <button class="mdst-button mdst-button--sm" data-demo-variant="error">Error</button>
+        <button class="mdst-button mdst-button--sm" data-demo-variant="warning">Warning</button>
+      </div>
+
+      <div id="demo-toast-group" class="mdst-toast-group"></div>
+
+      <details class="mdst-details mdst-details--borderless" style="margin-top: var(--mdst-space-md)">
+        <summary>Demo source</summary>
+        <pre class="mdst-pre" style="margin-top: var(--mdst-space-sm)"><code>const group = document.querySelector("#demo-toast-group");
+const messages = {
+  "":        "Something happened.",
+  info:      "Here\u2019s something you should know.",
+  success:   "Your changes have been saved.",
+  error:     "Something went wrong.",
+  warning:   "Please review before continuing.",
+};
+
+function showToast(variant) {
+  const toast = document.createElement("output");
+  toast.className = "mdst-toast";
+  toast.setAttribute("data-state", "visible");
+  if (variant) toast.setAttribute("data-variant", variant);
+  toast.textContent = messages[variant] + " ";
+
+  const close = document.createElement("button");
+  close.className = "mdst-toast-close";
+  close.setAttribute("aria-label", "Dismiss");
+  close.textContent = "\u2715";
+  close.addEventListener("click", () => dismiss(toast));
+  toast.appendChild(close);
+
+  group.appendChild(toast);
+  setTimeout(() => dismiss(toast), 3000);
+}
+
+function dismiss(toast) {
+  toast.setAttribute("data-state", "hidden");
+  toast.addEventListener("transitionend", () => toast.remove(), { once: true });
+}</code></pre>
+      </details>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Toast group (fixed container) --&gt;
+&lt;div class="mdst-toast-group"&gt;
+
+  &lt;!-- A visible success toast --&gt;
+  &lt;output class="mdst-toast" data-state="visible" data-variant="success"&gt;
+    Your changes have been saved.
+    &lt;button class="mdst-toast-close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
+  &lt;/output&gt;
+
+  &lt;!-- A hidden toast (waiting to be shown) --&gt;
+  &lt;output class="mdst-toast" data-state="hidden" data-variant="error"&gt;
+    Something went wrong.
+    &lt;button class="mdst-toast-close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
+  &lt;/output&gt;
+
+&lt;/div&gt;
+
+&lt;!-- Example JS --&gt;
+&lt;script&gt;
+  function showToast(el) {
+    el.setAttribute("data-state", "visible");
+  }
+  function hideToast(el) {
+    el.setAttribute("data-state", "hidden");
+  }
+&lt;/script&gt;</code></pre>
+    </div>
+    <script>
+      // Interactive demo — NOT part of modest-ui
+      const demoGroup = document.querySelector("#demo-toast-group");
+      const demoMessages = {
+        "": "Something happened.",
+        info: "Here\u2019s something you should know.",
+        success: "Your changes have been saved.",
+        error: "Something went wrong.",
+        warning: "Please review before continuing.",
+      };
+
+      function showDemoToast(variant) {
+        const toast = document.createElement("output");
+        toast.className = "mdst-toast";
+        toast.setAttribute("data-state", "visible");
+        if (variant) toast.setAttribute("data-variant", variant);
+        toast.textContent = demoMessages[variant] + " ";
+
+        const close = document.createElement("button");
+        close.className = "mdst-toast-close";
+        close.setAttribute("aria-label", "Dismiss");
+        close.textContent = "\u2715";
+        close.addEventListener("click", () => dismissDemoToast(toast));
+        toast.appendChild(close);
+
+        demoGroup.appendChild(toast);
+        setTimeout(() => dismissDemoToast(toast), 3000);
+      }
+
+      function dismissDemoToast(toast) {
+        if (toast.getAttribute("data-state") === "hidden") return;
+        toast.setAttribute("data-state", "hidden");
+        toast.addEventListener("transitionend", () => toast.remove(), { once: true });
+      }
+
+      document.querySelectorAll("[data-demo-variant]").forEach((btn) => {
+        btn.addEventListener("click", () => showDemoToast(btn.dataset.demoVariant));
+      });
+    </script>
+  </body>
+</html>
