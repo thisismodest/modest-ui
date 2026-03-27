@@ -1,10 +1,12 @@
 # modest-ui
 
-**The problem**: Every CSS framework wants to own your markup. They ship hundreds of utility classes, impose specific HTML structures, or require JavaScript runtimes. When you just want styled HTML that looks good and gets out of your way, you're left writing everything from scratch.
+A minimal, themeable CSS component library. Black and white by default. Write plain HTML, get styled and interactive components.
 
-**The thesis**: modest-ui styles native HTML elements automatically. Add one class to `<body>`, and buttons, inputs, tables, and details elements are styled instantly — no classes needed. When you need variants, add a modifier class. When you want a theme, override a few CSS custom properties. No JavaScript. No build step. No opinions on layout.
+modest-ui built on the idea that the web can now do more than we give it credit for. Heavy UI libraries solved real problems, but we forget how much browsers had quietly caught up.
+HTML and CSS natively gives us a lot (accessibility, device-native interactions, better performance). Build with the grain of the web and a lot comes for free.
 
-A minimal, themeable CSS component library. Black and white by default. Write plain HTML, get styled components.
+Use it when you don’t need the overhead. Reach for something else when you do.
+modest-ui styles native HTML elements automatically. Add one class to `<body>`, and buttons, inputs, tables, and details elements are styled instantly (no classes needed). When you need variants, add a modifier class. When you want a theme, override a few CSS custom properties.
 
 ---
 
