@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="section">
-      <div class="section-header">Basic</div>
+      <div class="section-header">Positions</div>
       <table class="mdst-table mdst-table--stack mdst-table--fixed">
         <thead>
           <tr>
@@ -29,7 +29,31 @@
               <span class="class-name">.mdst-tooltip</span>
             </td>
             <td>
-              <button id="btn-tooltip" class="mdst-button" popovertarget="tooltip-demo">Click for Tooltip</button>
+              <button id="btn-bottom" class="mdst-button" popovertarget="tip-bottom">Bottom (default)</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tooltip</span>--top</span>
+            </td>
+            <td>
+              <button id="btn-top" class="mdst-button" popovertarget="tip-top">Top</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tooltip</span>--left</span>
+            </td>
+            <td>
+              <button id="btn-left" class="mdst-button" popovertarget="tip-left">Left</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tooltip</span>--right</span>
+            </td>
+            <td>
+              <button id="btn-right" class="mdst-button" popovertarget="tip-right">Right</button>
             </td>
           </tr>
         </tbody>
@@ -58,24 +82,49 @@
             </td>
             <td>Anchors tooltip to a trigger element</td>
           </tr>
+          <tr>
+            <td>
+              <span class="class-name">popovertarget="id"</span>
+            </td>
+            <td>On the trigger — toggles the tooltip on click</td>
+          </tr>
         </tbody>
       </table>
     </div>
 
     <div class="code-section">
       <div class="code-section-header">Usage</div>
-      <pre class="mdst-pre"><code>&lt;!-- Trigger button --&gt;
+      <pre class="mdst-pre"><code>&lt;!-- Bottom (default) --&gt;
 &lt;button id="my-trigger" popovertarget="my-tooltip"&gt;
   Hover or click me
 &lt;/button&gt;
-
-&lt;!-- Tooltip --&gt;
 &lt;div id="my-tooltip" class="mdst-tooltip" popover anchor="my-trigger"&gt;
   Helpful tooltip text
+&lt;/div&gt;
+
+&lt;!-- Top --&gt;
+&lt;button id="top-trigger" popovertarget="top-tip"&gt;Top&lt;/button&gt;
+&lt;div id="top-tip" class="mdst-tooltip mdst-tooltip--top" popover anchor="top-trigger"&gt;
+  Above the trigger
+&lt;/div&gt;
+
+&lt;!-- Left --&gt;
+&lt;button id="left-trigger" popovertarget="left-tip"&gt;Left&lt;/button&gt;
+&lt;div id="left-tip" class="mdst-tooltip mdst-tooltip--left" popover anchor="left-trigger"&gt;
+  Left of the trigger
+&lt;/div&gt;
+
+&lt;!-- Right --&gt;
+&lt;button id="right-trigger" popovertarget="right-tip"&gt;Right&lt;/button&gt;
+&lt;div id="right-tip" class="mdst-tooltip mdst-tooltip--right" popover anchor="right-trigger"&gt;
+  Right of the trigger
 &lt;/div&gt;</code></pre>
     </div>
 
-    <!-- Tooltip element -->
-    <div id="tooltip-demo" class="mdst-tooltip" popover anchor="btn-tooltip">This is a helpful tooltip</div>
+    <!-- Tooltip elements -->
+    <div id="tip-bottom" class="mdst-tooltip" popover anchor="btn-bottom">Default — below the trigger</div>
+    <div id="tip-top" class="mdst-tooltip mdst-tooltip--top" popover anchor="btn-top">Positioned above</div>
+    <div id="tip-left" class="mdst-tooltip mdst-tooltip--left" popover anchor="btn-left">Positioned left</div>
+    <div id="tip-right" class="mdst-tooltip mdst-tooltip--right" popover anchor="btn-right">Positioned right</div>
   </body>
 </html>

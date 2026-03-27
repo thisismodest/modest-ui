@@ -102,6 +102,28 @@
     </div>
 
     <div class="section">
+      <div class="section-header">Exclusive Open (Accordion)</div>
+      <div class="examples">
+        <p style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">
+          Give multiple details elements the same <code class="mdst-code">name</code> attribute and the browser ensures only one is open at
+          a time. No JavaScript needed.
+        </p>
+        <details class="mdst-details" name="faq" open>
+          <summary>What is modest-ui?</summary>
+          <p>A minimal, themeable CSS component library with no JavaScript.</p>
+        </details>
+        <details class="mdst-details" name="faq">
+          <summary>How do I install it?</summary>
+          <p>Add the stylesheet via CDN or npm and put <code class="mdst-code">.mdst-ui</code> on the body.</p>
+        </details>
+        <details class="mdst-details" name="faq">
+          <summary>Can I theme it?</summary>
+          <p>Override CSS custom properties to create your own theme.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="section">
       <div class="section-header">Examples</div>
       <div class="examples">
         <details class="mdst-details mdst-details--section" open>
@@ -137,6 +159,20 @@
 &lt;details class="mdst-details mdst-details--section"&gt;
   &lt;summary&gt;Section Title&lt;/summary&gt;
   &lt;p&gt;Content goes here.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;!-- Exclusive open — only one open at a time --&gt;
+&lt;details class="mdst-details" name="faq" open&gt;
+  &lt;summary&gt;Question 1&lt;/summary&gt;
+  &lt;p&gt;Answer 1&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class="mdst-details" name="faq"&gt;
+  &lt;summary&gt;Question 2&lt;/summary&gt;
+  &lt;p&gt;Answer 2&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class="mdst-details" name="faq"&gt;
+  &lt;summary&gt;Question 3&lt;/summary&gt;
+  &lt;p&gt;Answer 3&lt;/p&gt;
 &lt;/details&gt;</code></pre>
     </div>
   </body>

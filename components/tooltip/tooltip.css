@@ -19,4 +19,24 @@
   &:popover-open {
     opacity: 1;
   }
+
+  /* Position modifiers (default is bottom) */
+
+  &.mdst-tooltip--top {
+    position-area: top;
+    margin-top: 0;
+    margin-bottom: var(--mdst-space-xs);
+  }
+
+  &.mdst-tooltip--left {
+    position-area: left;
+    margin-top: 0;
+    margin-right: var(--mdst-space-xs);
+  }
+
+  &.mdst-tooltip--right {
+    position-area: right;
+    margin-top: 0;
+    margin-left: var(--mdst-space-xs);
+  }
 }

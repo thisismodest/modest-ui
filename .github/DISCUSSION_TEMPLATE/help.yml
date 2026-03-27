@@ -1,0 +1,19 @@
+title: "[Help]: "
+labels: ["help"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Need help using modest-ui? Ask your question here.
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What are you trying to do, and where are you stuck?
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: "Browser, OS, modest-ui version, and any relevant setup details."

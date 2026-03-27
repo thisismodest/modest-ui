@@ -76,6 +76,7 @@ Override these CSS custom properties on `:root` to theme the entire library.
 | --mdst-color-surface | #f5f5f5  |
 | --mdst-color-focus   | #000     |
 | --mdst-color-error   | #dc2626  |
+| --mdst-color-warning | #f59e0b  |
 | --mdst-color-success | #16a34a  |
 
 ### Button hover
@@ -144,6 +145,137 @@ Override these CSS custom properties on `:root` to theme the entire library.
 ---
 
 ## Components
+
+---
+
+### Avatar `.mdst-avatar`
+
+Circular or square avatar containers for user images and initials. Supports multiple sizes and grouping with overlap.
+
+Classes:
+- `.mdst-avatar`
+- `.mdst-avatar-group`
+- `.mdst-avatar--lg`
+- `.mdst-avatar--sm`
+- `.mdst-avatar--square`
+- `.mdst-avatar--xl`
+
+```html
+<!-- Avatar with image -->
+<span class="mdst-avatar">
+  <img src="avatar.jpg" alt="User" />
+</span>
+
+<!-- Avatar with initials -->
+<span class="mdst-avatar">AB</span>
+
+<!-- Sizes -->
+<span class="mdst-avatar mdst-avatar--sm">AB</span>
+<span class="mdst-avatar mdst-avatar--lg">AB</span>
+<span class="mdst-avatar mdst-avatar--xl">AB</span>
+
+<!-- Square variant -->
+<span class="mdst-avatar mdst-avatar--square">
+  <img src="avatar.jpg" alt="User" />
+</span>
+
+<!-- Avatar group -->
+<div class="mdst-avatar-group">
+  <span class="mdst-avatar">
+    <img src="user1.jpg" alt="User 1" />
+  </span>
+  <span class="mdst-avatar">
+    <img src="user2.jpg" alt="User 2" />
+  </span>
+  <span class="mdst-avatar">+3</span>
+</div>
+```
+
+---
+
+### Badge `.mdst-badge`
+
+Small count and notification indicators. Supports solid, subtle, and dot variants with optional absolute positioning for overlays.
+
+Classes:
+- `.mdst-badge`
+- `.mdst-badge--dot`
+- `.mdst-badge--error`
+- `.mdst-badge--lg`
+- `.mdst-badge--muted`
+- `.mdst-badge--sm`
+- `.mdst-badge--solid`
+- `.mdst-badge--subtle`
+- `.mdst-badge--success`
+- `.mdst-badge--top-right`
+- `.mdst-badge--warning`
+
+```html
+<!-- Default badge -->
+<span class="mdst-badge">3</span>
+
+<!-- Variants -->
+<span class="mdst-badge mdst-badge--solid">12</span>
+<span class="mdst-badge mdst-badge--subtle">New</span>
+<span class="mdst-badge mdst-badge--dot"></span>
+
+<!-- Status colors -->
+<span class="mdst-badge mdst-badge--error mdst-badge--solid">5</span>
+<span class="mdst-badge mdst-badge--success">✓</span>
+<span class="mdst-badge mdst-badge--warning">!</span>
+<span class="mdst-badge mdst-badge--muted">0</span>
+
+<!-- Sizes -->
+<span class="mdst-badge mdst-badge--sm">3</span>
+<span class="mdst-badge mdst-badge--lg">12</span>
+
+<!-- Positioned on an element -->
+<div style="position: relative; display: inline-flex;">
+  <button class="mdst-button">Inbox</button>
+  <span class="mdst-badge mdst-badge--solid mdst-badge--error mdst-badge--top-right">7</span>
+</div>
+
+<!-- Dot indicator -->
+<span class="mdst-badge mdst-badge--success mdst-badge--dot"></span>
+```
+
+---
+
+### Breadcrumbs `.mdst-breadcrumbs`
+
+Navigation breadcrumb trail with separator support. Works classless via aria-label or with explicit class.
+
+Classes:
+- `.mdst-breadcrumbs`
+- `.mdst-breadcrumbs--arrow`
+- `.mdst-breadcrumbs--compact`
+
+```html
+<!-- Class-based breadcrumbs -->
+<nav class="mdst-breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><span aria-current="page">Widget</span></li>
+  </ol>
+</nav>
+
+<!-- Arrow separator -->
+<nav class="mdst-breadcrumbs mdst-breadcrumbs--arrow" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><span aria-current="page">Page</span></li>
+  </ol>
+</nav>
+
+<!-- Compact -->
+<nav class="mdst-breadcrumbs mdst-breadcrumbs--compact" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><span aria-current="page">Page</span></li>
+  </ol>
+</nav>
+```
 
 ---
 
@@ -318,6 +450,20 @@ Classes:
   <summary>Section Title</summary>
   <p>Content goes here.</p>
 </details>
+
+<!-- Exclusive open — only one open at a time -->
+<details class="mdst-details" name="faq" open>
+  <summary>Question 1</summary>
+  <p>Answer 1</p>
+</details>
+<details class="mdst-details" name="faq">
+  <summary>Question 2</summary>
+  <p>Answer 2</p>
+</details>
+<details class="mdst-details" name="faq">
+  <summary>Question 3</summary>
+  <p>Answer 3</p>
+</details>
 ```
 
 ---
@@ -353,6 +499,51 @@ Classes:
 </dialog>
 
 <button commandfor="my-dialog" command="show-modal">Open Dialog</button>
+```
+
+---
+
+### Drawer `.mdst-drawer`
+
+Side panel built on native <dialog>. Backdrop, focus trapping, Escape to close, and accessibility for free.
+
+Classes:
+- `.mdst-drawer`
+- `.mdst-drawer-body`
+- `.mdst-drawer-close`
+- `.mdst-drawer-footer`
+- `.mdst-drawer-header`
+- `.mdst-drawer--full`
+- `.mdst-drawer--left`
+- `.mdst-drawer--lg`
+- `.mdst-drawer--sm`
+
+```html
+<!-- Trigger button -->
+<button commandfor="my-drawer" command="show-modal">Open Drawer</button>
+
+<!-- Right drawer (default) -->
+<dialog id="my-drawer" class="mdst-drawer">
+  <div class="mdst-drawer-header">
+    <span>Drawer Title</span>
+    <button class="mdst-drawer-close" commandfor="my-drawer" command="close">&#10005;</button>
+  </div>
+  <div class="mdst-drawer-body">
+    <p>Content goes here.</p>
+  </div>
+  <div class="mdst-drawer-footer">
+    <button commandfor="my-drawer" command="close">Cancel</button>
+    <button commandfor="my-drawer" command="close">Save</button>
+  </div>
+</dialog>
+
+<!-- Left position -->
+<dialog class="mdst-drawer mdst-drawer--left">...</dialog>
+
+<!-- Sizes -->
+<dialog class="mdst-drawer mdst-drawer--sm">...</dialog>
+<dialog class="mdst-drawer mdst-drawer--lg">...</dialog>
+<dialog class="mdst-drawer mdst-drawer--full">...</dialog>
 ```
 
 ---
@@ -602,6 +793,40 @@ Classes:
 
 ---
 
+### Progress `.mdst-progress`
+
+Progress bar component styling the native <progress> element with size and status variants.
+
+Classes:
+- `.mdst-progress`
+- `.mdst-progress--error`
+- `.mdst-progress--lg`
+- `.mdst-progress--sm`
+- `.mdst-progress--success`
+
+```html
+<!-- Default progress bar -->
+<progress class="mdst-progress" value="60" max="100">60%</progress>
+
+<!-- Indeterminate (no value attribute) -->
+<progress class="mdst-progress">Loading…</progress>
+
+<!-- Status variants -->
+<progress class="mdst-progress mdst-progress--success" value="100" max="100">100%</progress>
+<progress class="mdst-progress mdst-progress--error" value="35" max="100">35%</progress>
+
+<!-- Sizes -->
+<progress class="mdst-progress mdst-progress--sm" value="50" max="100">50%</progress>
+<progress class="mdst-progress mdst-progress--lg" value="50" max="100">50%</progress>
+
+<!-- Classless (inside .mdst-ui container) -->
+<div class="mdst-ui">
+  <progress value="75" max="100">75%</progress>
+</div>
+```
+
+---
+
 ### Radio `.mdst-radio`
 
 Radio button component with label support and group layout.
@@ -673,6 +898,106 @@ Classes:
 
 ---
 
+### Skeleton `.mdst-skeleton`
+
+Placeholder loading shapes with an animated shimmer effect. Supports text, heading, and circle variants for building loading states.
+
+Classes:
+- `.mdst-skeleton`
+- `.mdst-skeleton--circle`
+- `.mdst-skeleton--heading`
+- `.mdst-skeleton--text`
+
+```html
+<!-- Basic skeleton -->
+<div class="mdst-skeleton" style="width: 100%"></div>
+
+<!-- Text lines -->
+<div class="mdst-skeleton mdst-skeleton--text" style="width: 80%"></div>
+<div class="mdst-skeleton mdst-skeleton--text" style="width: 100%"></div>
+<div class="mdst-skeleton mdst-skeleton--text" style="width: 60%"></div>
+
+<!-- Heading -->
+<div class="mdst-skeleton mdst-skeleton--heading" style="width: 50%"></div>
+
+<!-- Circle -->
+<span class="mdst-skeleton mdst-skeleton--circle"></span>
+
+<!-- Custom size via inline style -->
+<div class="mdst-skeleton" style="width: 100%; height: 8rem"></div>
+
+<!-- Card skeleton composition -->
+<div style="display: flex; align-items: center; gap: 0.5rem">
+  <span class="mdst-skeleton mdst-skeleton--circle" style="width: 2.5rem; height: 2.5rem"></span>
+  <div style="flex: 1">
+    <div class="mdst-skeleton mdst-skeleton--text" style="width: 60%"></div>
+    <div class="mdst-skeleton mdst-skeleton--text" style="width: 40%"></div>
+  </div>
+</div>
+```
+
+---
+
+### Spinner `.mdst-spinner`
+
+Animated loading spinner using CSS borders and rotation. Inherits color from context with size variants.
+
+Classes:
+- `.mdst-spinner`
+- `.mdst-spinner--lg`
+- `.mdst-spinner--sm`
+
+```html
+<!-- Default spinner -->
+<span class="mdst-spinner" role="status" aria-label="Loading"></span>
+
+<!-- Sizes -->
+<span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Loading"></span>
+<span class="mdst-spinner mdst-spinner--lg" role="status" aria-label="Loading"></span>
+
+<!-- Inherits currentColor from parent -->
+<div style="color: var(--mdst-color-error)">
+  <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Error"></span>
+  Something went wrong
+</div>
+
+<!-- Inside a button -->
+<button class="mdst-button" disabled>
+  <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Submitting"></span>
+  Submitting
+</button>
+```
+
+---
+
+### Stepper `.mdst-stepper`
+
+Multi-step progress indicator driven by data-state attributes for completed, active, upcoming, and error states.
+
+Classes:
+- `.mdst-stepper`
+- `.mdst-stepper-indicator`
+- `.mdst-stepper-label`
+- `.mdst-stepper-step`
+- `.mdst-stepper--compact`
+- `.mdst-stepper--vertical`
+
+```html
+<!-- Set data-state on each .mdst-stepper-step -->
+
+data-state="completed"  → Step is done (filled indicator, solid connector)
+data-state="active"     → Current step (bold indicator and label)
+data-state="upcoming"   → Not yet reached (muted indicator and label)
+data-state="error"      → Step has an error (error-colored indicator and label)
+
+<!-- Your JS updates these attributes as the user progresses -->
+step.dataset.state = "completed";
+step.dataset.state = "active";
+step.dataset.state = "error";
+```
+
+---
+
 ### Table `.mdst-table`
 
 Table component with bordered, striped, compact, equal, and stacked variants.
@@ -713,6 +1038,35 @@ Classes:
 
 <!-- Combined variants -->
 <table class="mdst-table mdst-table--bordered mdst-table--striped">...</table>
+```
+
+---
+
+### Tabs `.mdst-tabs`
+
+Data-attribute-driven tabbed interface with pills, vertical, and compact variants.
+
+Classes:
+- `.mdst-tabs`
+- `.mdst-tabs-list`
+- `.mdst-tabs-panel`
+- `.mdst-tabs--compact`
+- `.mdst-tabs--pills`
+- `.mdst-tabs--vertical`
+
+```html
+<!-- On .mdst-tab (tab buttons) -->
+data-state="active"          Tab is selected
+data-state="inactive"        Tab is not selected
+data-disabled                Tab cannot be selected (boolean attribute)
+data-disabled="true"         Same as above (explicit value)
+
+<!-- On .mdst-tabs-panel (content panels) -->
+data-state="active"          Panel is visible
+data-state="inactive"        Panel is hidden (display: none)
+
+<!-- Your JS toggles these attributes to switch tabs.
+     modest-ui provides all the visual states. -->
 ```
 
 ---
@@ -769,22 +1123,81 @@ Classes:
 
 ---
 
+### Toast `.mdst-toast`
+
+Notification toast messages with semantic variants, driven by data attributes for visibility and variant state.
+
+Classes:
+- `.mdst-toast`
+- `.mdst-toast-close`
+- `.mdst-toast-group`
+
+```html
+<!-- Toast group (fixed container) -->
+<div class="mdst-toast-group">
+
+  <!-- A visible success toast -->
+  <output class="mdst-toast" data-state="visible" data-variant="success">
+    Your changes have been saved.
+    <button class="mdst-toast-close" aria-label="Dismiss">✕</button>
+  </output>
+
+  <!-- A hidden toast (waiting to be shown) -->
+  <output class="mdst-toast" data-state="hidden" data-variant="error">
+    Something went wrong.
+    <button class="mdst-toast-close" aria-label="Dismiss">✕</button>
+  </output>
+
+</div>
+
+<!-- Example JS -->
+<script>
+  function showToast(el) {
+    el.setAttribute("data-state", "visible");
+  }
+  function hideToast(el) {
+    el.setAttribute("data-state", "hidden");
+  }
+</script>
+```
+
+---
+
 ### Tooltip `.mdst-tooltip`
 
 Tooltip component using the native Popover API and CSS anchor positioning.
 
 Classes:
 - `.mdst-tooltip`
+- `.mdst-tooltip--left`
+- `.mdst-tooltip--right`
+- `.mdst-tooltip--top`
 
 ```html
-<!-- Trigger button -->
+<!-- Bottom (default) -->
 <button id="my-trigger" popovertarget="my-tooltip">
   Hover or click me
 </button>
-
-<!-- Tooltip -->
 <div id="my-tooltip" class="mdst-tooltip" popover anchor="my-trigger">
   Helpful tooltip text
+</div>
+
+<!-- Top -->
+<button id="top-trigger" popovertarget="top-tip">Top</button>
+<div id="top-tip" class="mdst-tooltip mdst-tooltip--top" popover anchor="top-trigger">
+  Above the trigger
+</div>
+
+<!-- Left -->
+<button id="left-trigger" popovertarget="left-tip">Left</button>
+<div id="left-tip" class="mdst-tooltip mdst-tooltip--left" popover anchor="left-trigger">
+  Left of the trigger
+</div>
+
+<!-- Right -->
+<button id="right-trigger" popovertarget="right-tip">Right</button>
+<div id="right-tip" class="mdst-tooltip mdst-tooltip--right" popover anchor="right-trigger">
+  Right of the trigger
 </div>
 ```
 
@@ -805,6 +1218,7 @@ Classes:
 - `.mdst-h5`
 - `.mdst-h6`
 - `.mdst-hr`
+- `.mdst-kbd`
 - `.mdst-li`
 - `.mdst-mark`
 - `.mdst-ol`
@@ -833,9 +1247,14 @@ Classes:
 <strong class="mdst-strong">Bold</strong>
 <em class="mdst-em">Italic</em>
 <mark class="mdst-mark">Highlight</mark>
+<kbd class="mdst-kbd">Ctrl</kbd> + <kbd class="mdst-kbd">K</kbd>
 
 <!-- Blockquote -->
 <blockquote class="mdst-blockquote">Quote</blockquote>
+
+<!-- Horizontal rule -->
+<hr class="mdst-hr" />
+<hr class="mdst-hr mdst-hr--flush" />
 
 <!-- Lists -->
 <ul class="mdst-ul">
@@ -885,6 +1304,7 @@ Classes:
   --mdst-color-surface: #f5f5f5;
   --mdst-color-focus: #000;
   --mdst-color-error: #dc2626;
+  --mdst-color-warning: #f59e0b;
   --mdst-color-success: #16a34a;
   --mdst-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
@@ -913,6 +1333,9 @@ Classes:
 
 ## Quick Class Reference
 
+Avatar:         .mdst-avatar  +  -group  |  --lg  --sm  --square  --xl
+Badge:          .mdst-badge  |  --dot  --error  --lg  --muted  --sm  --solid  --subtle  --success  --top-right  --warning
+Breadcrumbs:    .mdst-breadcrumbs  |  --arrow  --compact
 Button:         .mdst-button  |  --ghost  --inverted  --lg  --sm
 Card:           .mdst-card  +  -body  -footer  -header  |  --borderless  --compact  --flush  --interactive  --borderless  --borderless
 Checkbox:       .mdst-checkbox  +  -label  |  --toggle  --toggle-rounded
@@ -920,6 +1343,7 @@ Code:           .mdst-code
 Color Picker:   .mdst-color-picker  +  __input  __text  |  --square
 Details:        .mdst-details  |  --borderless  --compact  --section
 Dialog:         .mdst-dialog  +  -body  -close  -footer  -header  -title  |  --full  --lg  --sm
+Drawer:         .mdst-drawer  +  -body  -close  -footer  -header  |  --full  --left  --lg  --sm
 Dropdown:       .mdst-dropdown  |  --ghost  --inline  --lg  --sm
 File:           .mdst-file-input  +  __field  |  --borderless  --inverted
 Text:           .mdst-input
@@ -927,10 +1351,16 @@ OTP:            .mdst-otp-input  +  -digit  -separator  |  --error  --success
 Password:       .mdst-password-input  +  __field  __toggle
 Popover:        .mdst-popover  |  --anchored  --lg  --sm
 Pre:            .mdst-pre  |  --borderless  --compact  --scroll
+Progress:       .mdst-progress  |  --error  --lg  --sm  --success
 Radio:          .mdst-radio  +  -card  -card-group  -group  -label  |  --horizontal
 Range:          .mdst-range
+Skeleton:       .mdst-skeleton  |  --circle  --heading  --text
+Spinner:        .mdst-spinner  |  --lg  --sm
+Stepper:        .mdst-stepper  +  -indicator  -label  -step  |  --compact  --vertical
 Table:          .mdst-table  +  -wrap  |  --bordered  --compact  --fixed  --stack  --striped
+Tabs:           .mdst-tabs  +  -list  -panel  |  --compact  --pills  --vertical
 Tag:            .mdst-tag  +  -dismiss  |  --error  --ghost  --interactive  --lg  --muted  --pill  --sm  --solid  --subtle  --success
-Tooltip:        .mdst-tooltip
-Typography:     .mdst-a  .mdst-blockquote  .mdst-em  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-small  .mdst-strong  .mdst-ui  .mdst-ul  |  --flush  --lg  --muted  --sm  --unstyled
+Toast:          .mdst-toast  +  -close  -group
+Tooltip:        .mdst-tooltip  |  --left  --right  --top
+Typography:     .mdst-a  .mdst-blockquote  .mdst-em  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-kbd  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-small  .mdst-strong  .mdst-ui  .mdst-ul  |  --flush  --lg  --muted  --sm  --unstyled
 Utilities:      .mdst-mono  .mdst-muted  .mdst-sr-only  .mdst-truncate

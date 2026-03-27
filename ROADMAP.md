@@ -1,40 +1,10 @@
 # Roadmap
 
-Components and patterns identified as gaps when integrating modest-ui into a real application.
-
-The goal is to cover enough of the common UI surface that a consuming app can delete the majority of its bespoke CSS and rely on the library instead. Every addition should stay true to the project philosophy: native HTML first, CSS-only, no opinions on layout, and fully themeable via tokens.
+Future components, enhancements, and project goals for modest-ui.
 
 ---
 
 ## New Components
-
-### Toast / Notification
-
-Small, dismissible messages that appear temporarily (success, error, warning, info).
-
-- Native HTML: `<output>` element for accessibility
-- Variants: `--success`, `--error`, `--warning`, `--info` (left-border accent color)
-- Position utility classes or leave to consumer
-- Close button styling
-- CSS animations for enter/exit (`slideIn`, `slideOut`)
-
-```html
-<output class="mdst-toast mdst-toast--success">
-  <span>File saved successfully.</span>
-  <button class="mdst-toast-close">✕</button>
-</output>
-```
-
-### Kbd (Keyboard Shortcut)
-
-Styled `<kbd>` element for displaying keyboard shortcuts and hotkeys.
-
-- Consistent padding, border, background
-- Composes well inline with text
-
-```html
-<p>Press <kbd class="mdst-kbd">Ctrl</kbd> + <kbd class="mdst-kbd">K</kbd> to search</p>
-```
 
 ### Status Dot / Indicator
 
@@ -62,7 +32,7 @@ Dedicated textarea styling (currently `textarea.mdst-input` exists but is minima
 <textarea class="mdst-textarea mdst-textarea--ghost" rows="1"></textarea>
 ```
 
-### Avatar / Icon Button
+### Icon Button
 
 A square or circular button designed for icon-only use (no text label).
 
@@ -77,40 +47,13 @@ A square or circular button designed for icon-only use (no text label).
 <button class="mdst-icon-button mdst-icon-button--circle mdst-icon-button--sm">🎤</button>
 ```
 
-### Progress Bar
-
-A simple horizontal bar showing progress or capacity.
-
-- Styles the native `<progress>` element via cross-browser pseudo-elements
-- Semantic color thresholds via classes: `--low`, `--medium`, `--high`, `--critical`
-
-```html
-<progress class="mdst-progress" value="65" max="100">65%</progress>
-<progress class="mdst-progress mdst-progress--critical" value="92" max="100">92%</progress>
-```
-
-### Divider
-
-A styled horizontal rule, optionally with centered text.
-
-- Uses native `<hr>` for plain dividers
-- Text variant uses a wrapper with `::before`/`::after` line pseudo-elements
-
-```html
-<hr class="mdst-divider" />
-
-<div class="mdst-divider mdst-divider--text">
-  <span>or</span>
-</div>
-```
-
 ---
 
 ## Enhancements to Existing Components
 
 ### Button
 
-- **Icon-with-text layout**: The current button handles text and `gap` but doesn't account for common icon + label patterns. Ensure `.mdst-button svg` or `.mdst-button img` get sensible default sizing (e.g. `1em`).
+- **Icon-with-text layout**: Ensure `.mdst-button svg` or `.mdst-button img` get sensible default sizing (e.g. `1em`).
 - **Danger variant**: `--danger` for destructive actions (red on hover).
 
 ### Details
@@ -153,3 +96,11 @@ Small utility classes that reduce the need for bespoke CSS in consuming apps. Th
 | Utility     | Class          | Purpose                                                       |
 | ----------- | -------------- | ------------------------------------------------------------- |
 | Flex center | `.mdst-center` | `display: flex; align-items: center; justify-content: center` |
+
+---
+
+## Community & Project
+
+- [ ] **GitHub Discussions** — Enable Discussions for questions, ideas, and "show & tell" from the community
+- [ ] **GitHub Sponsors** — Set up sponsorship for anyone who wants to support ongoing development
+- [ ] **dev.to / Hacker News article** — Write an introduction post explaining the philosophy and announce the project

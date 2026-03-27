@@ -123,6 +123,19 @@
   padding: 0.1em 0.2em;
 }
 
+/* Keyboard */
+
+:where(.mdst-ui) kbd,
+.mdst-kbd {
+  font-family: var(--mdst-font-mono);
+  font-size: 0.875em;
+  padding: 0.125em 0.375em;
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-subtle);
+  white-space: nowrap;
+}
+
 /* Blockquote */
 
 :where(.mdst-ui) blockquote,

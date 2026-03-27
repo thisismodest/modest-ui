@@ -69,12 +69,12 @@
   /* Error state */
 
   &.mdst-otp-input--error .mdst-otp-input-digit {
-    border-color: var(--mdst-color-error, #c00);
+    border-color: var(--mdst-color-error);
   }
 
   /* Success state */
 
   &.mdst-otp-input--success .mdst-otp-input-digit {
-    border-color: var(--mdst-color-success, #0a0);
+    border-color: var(--mdst-color-success);
   }
 }

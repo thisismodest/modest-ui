@@ -97,7 +97,24 @@ Components that don't map to a single native element (they use generic tags like
 - Password Input (`.mdst-password-input`)
 - OTP Input (`.mdst-otp-input`)
 - Color Picker (`.mdst-color-picker`)
+- Badge (`.mdst-badge`)
+- Breadcrumbs (`.mdst-breadcrumbs`)
+- Avatar (`.mdst-avatar`)
+- Spinner (`.mdst-spinner`)
+- Skeleton (`.mdst-skeleton`)
 - Utilities (`.mdst-sr-only`, `.mdst-truncate`, etc.)
+
+### What uses data attributes for state
+
+Some components need state changes — tabs that switch, steps that advance, toasts that appear. Instead of shipping JavaScript, modest-ui styles every possible state via data attributes. You bring whatever JS you want (a framework, vanilla event listeners, Alpine.js) and toggle `data-state`, `data-variant`, etc. We handle the CSS, you handle the behavior.
+
+| Component | Data Attributes                                                            |
+| --------- | -------------------------------------------------------------------------- |
+| Tabs      | `data-state="active/inactive"`, `data-disabled`                            |
+| Toast     | `data-state="visible/hidden"`, `data-variant="success/error/warning/info"` |
+| Stepper   | `data-state="completed/active/upcoming/error"`                             |
+
+Data attribute components are still class-only (they use `.mdst-*` classes for structure). The data attributes control **runtime state**, not base styling.
 
 ### Adding classless defaults for a new component
 
