@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spinner</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="spinner.css" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Sizes</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-spinner</span>--sm</span>
+            </td>
+            <td>
+              <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Loading"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-spinner</span>
+            </td>
+            <td>
+              <span class="mdst-spinner" role="status" aria-label="Loading"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-spinner</span>--lg</span>
+            </td>
+            <td>
+              <span class="mdst-spinner mdst-spinner--lg" role="status" aria-label="Loading"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Color</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Context</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Inherits <code class="mdst-code">currentColor</code></td>
+            <td>
+              <span class="mdst-spinner" role="status" aria-label="Loading"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>Error parent</td>
+            <td>
+              <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); color: var(--mdst-color-error)">
+                <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Error"></span>
+                <span>Something went wrong</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Success parent</td>
+            <td>
+              <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); color: var(--mdst-color-success)">
+                <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Saving"></span>
+                <span>Saving changes&hellip;</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Muted parent</td>
+            <td>
+              <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); color: var(--mdst-color-muted)">
+                <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Loading"></span>
+                <span>Loading&hellip;</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Examples</div>
+      <div class="examples" style="gap: var(--mdst-space-md)">
+        <div style="display: flex; align-items: center; gap: var(--mdst-space-sm)">
+          <button class="mdst-button" disabled>
+            <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Submitting"></span>
+            Submitting
+          </button>
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--mdst-space-xl);
+            border: var(--mdst-border-width) solid var(--mdst-color-border);
+            border-radius: var(--mdst-radius);
+          "
+        >
+          <span class="mdst-spinner mdst-spinner--lg" role="status" aria-label="Loading content"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Accessibility</div>
+      <div class="examples">
+        <p style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted); line-height: 1.5">
+          Always add <code class="mdst-code">role="status"</code> and <code class="mdst-code">aria-label="Loading"</code> to spinner
+          elements so screen readers can announce the loading state. Adjust the <code class="mdst-code">aria-label</code> value to describe
+          the specific action, e.g. <code class="mdst-code">"Submitting form"</code> or <code class="mdst-code">"Loading content"</code>.
+        </p>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Default spinner --&gt;
+&lt;span class="mdst-spinner" role="status" aria-label="Loading"&gt;&lt;/span&gt;
+
+&lt;!-- Sizes --&gt;
+&lt;span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Loading"&gt;&lt;/span&gt;
+&lt;span class="mdst-spinner mdst-spinner--lg" role="status" aria-label="Loading"&gt;&lt;/span&gt;
+
+&lt;!-- Inherits currentColor from parent --&gt;
+&lt;div style="color: var(--mdst-color-error)"&gt;
+  &lt;span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Error"&gt;&lt;/span&gt;
+  Something went wrong
+&lt;/div&gt;
+
+&lt;!-- Inside a button --&gt;
+&lt;button class="mdst-button" disabled&gt;
+  &lt;span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Submitting"&gt;&lt;/span&gt;
+  Submitting
+&lt;/button&gt;</code></pre>
+    </div>
+  </body>
+</html>

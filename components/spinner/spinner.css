@@ -1,0 +1,33 @@
+/* Spinner */
+
+@keyframes mdst-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mdst-spinner {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: mdst-spin 0.6s linear infinite;
+  vertical-align: middle;
+  flex-shrink: 0;
+
+  /* Sizes */
+
+  &.mdst-spinner--sm {
+    width: 0.875em;
+    height: 0.875em;
+    border-width: 1.5px;
+  }
+
+  &.mdst-spinner--lg {
+    width: 2em;
+    height: 2em;
+    border-width: 3px;
+  }
+}
