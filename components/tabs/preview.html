@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabs</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="../details/details.css" />
+    <link rel="stylesheet" href="tabs.css" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Data Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">data-state="active"</span>
+            </td>
+            <td>
+              <div class="mdst-tabs">
+                <div class="mdst-tabs-list" role="tablist">
+                  <button class="mdst-tab" role="tab" data-state="active">Active</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Inactive</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Inactive</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">data-disabled</span>
+            </td>
+            <td>
+              <div class="mdst-tabs">
+                <div class="mdst-tabs-list" role="tablist">
+                  <button class="mdst-tab" role="tab" data-state="active">Active</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Normal</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive" data-disabled="true">Disabled</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-tabs</span>
+            </td>
+            <td>
+              <div class="mdst-tabs">
+                <div class="mdst-tabs-list" role="tablist">
+                  <button class="mdst-tab" role="tab" data-state="active">Overview</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Settings</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Billing</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tabs</span>--pills</span>
+            </td>
+            <td>
+              <div class="mdst-tabs mdst-tabs--pills">
+                <div class="mdst-tabs-list" role="tablist">
+                  <button class="mdst-tab" role="tab" data-state="active">Overview</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Settings</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Billing</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tabs</span>--compact</span>
+            </td>
+            <td>
+              <div class="mdst-tabs mdst-tabs--compact">
+                <div class="mdst-tabs-list" role="tablist">
+                  <button class="mdst-tab" role="tab" data-state="active">Overview</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Settings</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Billing</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tabs</span>--vertical</span>
+            </td>
+            <td>
+              <div class="mdst-tabs mdst-tabs--vertical">
+                <div class="mdst-tabs-list" role="tablist">
+                  <button class="mdst-tab" role="tab" data-state="active">Overview</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Settings</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Billing</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tabs</span>--pills</span>
+              <span class="class-name"><span class="dim">.mdst-tabs</span>--compact</span>
+            </td>
+            <td>
+              <div class="mdst-tabs mdst-tabs--pills mdst-tabs--compact">
+                <div class="mdst-tabs-list" role="tablist">
+                  <button class="mdst-tab" role="tab" data-state="active">All</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Published</button>
+                  <button class="mdst-tab" role="tab" data-state="inactive">Drafts</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: var(--mdst-space-xl); padding-top: var(--mdst-space-lg); border-top: 2px dashed var(--mdst-color-border)">
+      <div class="section-header" style="margin-bottom: 0">Interactive Demo</div>
+      <p style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-md)">
+        This demo uses vanilla JS to toggle <code class="mdst-code">data-state</code> attributes. The JavaScript below is
+        <strong>not</strong> part of modest-ui &mdash; it&rsquo;s here to show how the CSS responds to state changes. Bring whatever JS you
+        want.
+      </p>
+
+      <div
+        style="
+          padding: var(--mdst-space-md);
+          border: var(--mdst-border-width) solid var(--mdst-color-border);
+          border-radius: var(--mdst-radius);
+        "
+      >
+        <div id="demo-tabs" class="mdst-tabs">
+          <div class="mdst-tabs-list" role="tablist">
+            <button class="mdst-tab" role="tab" data-state="active">Overview</button>
+            <button class="mdst-tab" role="tab" data-state="inactive">Features</button>
+            <button class="mdst-tab" role="tab" data-state="inactive">Pricing</button>
+          </div>
+          <div class="mdst-tabs-panel" role="tabpanel" data-state="active">
+            <p>This is the overview panel. Click the tabs above to switch content.</p>
+          </div>
+          <div class="mdst-tabs-panel" role="tabpanel" data-state="inactive">
+            <p>Here are the features. Notice how the active underline and panel switch together.</p>
+          </div>
+          <div class="mdst-tabs-panel" role="tabpanel" data-state="inactive">
+            <p>Pricing information goes here. The JS is just toggling data attributes.</p>
+          </div>
+        </div>
+      </div>
+
+      <details class="mdst-details mdst-details--borderless" style="margin-top: var(--mdst-space-md)">
+        <summary>Demo source</summary>
+        <pre class="mdst-pre" style="margin-top: var(--mdst-space-sm)"><code>const tabs = document.querySelector("#demo-tabs");
+const buttons = tabs.querySelectorAll(".mdst-tab");
+const panels = tabs.querySelectorAll(".mdst-tabs-panel");
+
+buttons.forEach((btn, i) => {
+  btn.addEventListener("click", () => {
+    if (btn.hasAttribute("data-disabled")) return;
+    buttons.forEach(b => b.dataset.state = "inactive");
+    panels.forEach(p => p.dataset.state = "inactive");
+    btn.dataset.state = "active";
+    panels[i].dataset.state = "active";
+  });
+});</code></pre>
+      </details>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Data Attribute Contract</div>
+      <pre class="mdst-pre"><code>&lt;!-- On .mdst-tab (tab buttons) --&gt;
+data-state="active"          Tab is selected
+data-state="inactive"        Tab is not selected
+data-disabled                Tab cannot be selected (boolean attribute)
+data-disabled="true"         Same as above (explicit value)
+
+&lt;!-- On .mdst-tabs-panel (content panels) --&gt;
+data-state="active"          Panel is visible
+data-state="inactive"        Panel is hidden (display: none)
+
+&lt;!-- Your JS toggles these attributes to switch tabs.
+     modest-ui provides all the visual states. --&gt;</code></pre>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;div class="mdst-tabs"&gt;
+  &lt;div class="mdst-tabs-list" role="tablist"&gt;
+    &lt;button class="mdst-tab" role="tab" data-state="active"&gt;Tab 1&lt;/button&gt;
+    &lt;button class="mdst-tab" role="tab" data-state="inactive"&gt;Tab 2&lt;/button&gt;
+    &lt;button class="mdst-tab" role="tab" data-state="inactive" data-disabled&gt;Disabled&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="mdst-tabs-panel" role="tabpanel" data-state="active"&gt;
+    &lt;p&gt;Tab 1 content&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="mdst-tabs-panel" role="tabpanel" data-state="inactive"&gt;
+    &lt;p&gt;Tab 2 content&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Pills variant --&gt;
+&lt;div class="mdst-tabs mdst-tabs--pills"&gt;...&lt;/div&gt;
+
+&lt;!-- Vertical variant --&gt;
+&lt;div class="mdst-tabs mdst-tabs--vertical"&gt;...&lt;/div&gt;
+
+&lt;!-- Compact variant --&gt;
+&lt;div class="mdst-tabs mdst-tabs--compact"&gt;...&lt;/div&gt;</code></pre>
+    </div>
+    <script>
+      // Interactive demo — NOT part of modest-ui
+      const demoTabs = document.querySelector("#demo-tabs");
+      const demoButtons = demoTabs.querySelectorAll(".mdst-tab");
+      const demoPanels = demoTabs.querySelectorAll(".mdst-tabs-panel");
+
+      demoButtons.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+          if (btn.hasAttribute("data-disabled")) return;
+          demoButtons.forEach((b) => (b.dataset.state = "inactive"));
+          demoPanels.forEach((p) => (p.dataset.state = "inactive"));
+          btn.dataset.state = "active";
+          demoPanels[i].dataset.state = "active";
+        });
+      });
+    </script>
+  </body>
+</html>
