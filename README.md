@@ -1,6 +1,6 @@
 # modest-ui
 
-A minimal, themeable CSS component library. Black and white by default. Write plain HTML, get styled and interactive components.
+A minimal, themeable CSS component library. Black and white by default.
 
 modest-ui built on the idea that the web can now do more than we give it credit for. Heavy UI libraries solved real problems, but we forget how much browsers had quietly caught up.
 HTML and CSS natively gives us a lot (accessibility, device-native interactions, better performance). Build with the grain of the web and a lot comes for free.
