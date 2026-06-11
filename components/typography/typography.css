@@ -1,5 +1,14 @@
 /* Typography */
 
+/* Reading face — set once on the container so every element inside .mdst-ui
+   inherits it (td, li, summary included, with nothing left to fall back to
+   browser defaults). Zero specificity: any user rule on the container wins.
+   Components opt into --mdst-font-ui or --mdst-font-mono explicitly. */
+:where(.mdst-ui) {
+  font-family: var(--mdst-font-text);
+  line-height: var(--mdst-line-height);
+}
+
 :where(.mdst-ui) h1,
 :where(.mdst-ui) h2,
 :where(.mdst-ui) h3,
@@ -12,7 +21,6 @@
 .mdst-h4,
 .mdst-h5,
 .mdst-h6 {
-  font-family: var(--mdst-font-sans);
   font-weight: 600;
   line-height: 1.25;
   color: var(--mdst-color-fg);
@@ -52,7 +60,6 @@
 
 :where(.mdst-ui) p,
 .mdst-p {
-  font-family: var(--mdst-font-sans);
   font-size: var(--mdst-text-base);
   line-height: var(--mdst-line-height);
   color: var(--mdst-color-fg);

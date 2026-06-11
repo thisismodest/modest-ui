@@ -94,6 +94,8 @@ Override these CSS custom properties on `:root` to theme the entire library.
 | --mdst-font-sans   | system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif |
 | --mdst-font-mono   | ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace       |
 | --mdst-line-height | 1.5                                                                          |
+| --mdst-font-text   | var(--mdst-font-sans)                                                        |
+| --mdst-font-ui     | var(--mdst-font-sans)                                                        |
 
 ### Font sizes
 

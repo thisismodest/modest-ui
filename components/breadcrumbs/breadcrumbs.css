@@ -10,7 +10,7 @@
     margin: 0;
     padding: 0;
     font-size: var(--mdst-text-sm);
-    font-family: var(--mdst-font-sans);
+    font-family: var(--mdst-font-ui);
   }
 
   & li {

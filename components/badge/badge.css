@@ -7,7 +7,7 @@
   min-width: 1.6em;
   padding: 0.25em 0.375em;
   font-size: var(--mdst-text-xs);
-  font-family: var(--mdst-font-sans);
+  font-family: var(--mdst-font-ui);
   line-height: 1;
   border-radius: 9999px;
   border: var(--mdst-border-width) solid var(--mdst-color-border);

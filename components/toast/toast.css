@@ -9,7 +9,7 @@
   border-radius: var(--mdst-radius);
   background: var(--mdst-color-bg);
   color: var(--mdst-color-fg);
-  font-family: var(--mdst-font-sans);
+  font-family: var(--mdst-font-ui);
   font-size: var(--mdst-text-sm);
   line-height: var(--mdst-line-height);
   transition:

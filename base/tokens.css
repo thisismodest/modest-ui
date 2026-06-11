@@ -21,6 +21,13 @@
   --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   --mdst-line-height: 1.5;
 
+  /* Semantic font roles — text is the reading face (prose inherits it from
+     the .mdst-ui container); ui is the interface face (components and form
+     controls). Override --mdst-font-text to retheme prose without touching
+     components. */
+  --mdst-font-text: var(--mdst-font-sans);
+  --mdst-font-ui: var(--mdst-font-sans);
+
   /* Font sizes */
   --mdst-text-xs: 0.75rem;
   --mdst-text-sm: 0.875rem;

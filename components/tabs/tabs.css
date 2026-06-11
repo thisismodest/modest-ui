@@ -29,7 +29,7 @@
     border: none;
     background: none;
     cursor: pointer;
-    font-family: inherit;
+    font-family: var(--mdst-font-ui);
     font-size: inherit;
     line-height: var(--mdst-line-height);
     color: var(--mdst-color-muted);

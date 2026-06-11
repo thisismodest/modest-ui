@@ -29,6 +29,13 @@
   --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   --mdst-line-height: 1.5;
 
+  /* Semantic font roles — text is the reading face (prose inherits it from
+     the .mdst-ui container); ui is the interface face (components and form
+     controls). Override --mdst-font-text to retheme prose without touching
+     components. */
+  --mdst-font-text: var(--mdst-font-sans);
+  --mdst-font-ui: var(--mdst-font-sans);
+
   /* Font sizes */
   --mdst-text-xs: 0.75rem;
   --mdst-text-sm: 0.875rem;
@@ -78,7 +85,7 @@
 }
 
 body {
-  line-height: 1.5;
+  line-height: var(--mdst-line-height, 1.5);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -123,7 +130,7 @@ h6 {
   height: 2.5rem;
   border-radius: 50%;
   overflow: hidden;
-  font-family: var(--mdst-font-sans);
+  font-family: var(--mdst-font-ui);
   font-weight: 600;
   font-size: 1rem;
   line-height: 1;
@@ -193,7 +200,7 @@ h6 {
   min-width: 1.6em;
   padding: 0.25em 0.375em;
   font-size: var(--mdst-text-xs);
-  font-family: var(--mdst-font-sans);
+  font-family: var(--mdst-font-ui);
   line-height: 1;
   border-radius: 9999px;
   border: var(--mdst-border-width) solid var(--mdst-color-border);
@@ -351,7 +358,7 @@ h6 {
     margin: 0;
     padding: 0;
     font-size: var(--mdst-text-sm);
-    font-family: var(--mdst-font-sans);
+    font-family: var(--mdst-font-ui);
   }
 
   & li {
@@ -418,7 +425,7 @@ h6 {
   justify-content: center;
   gap: var(--mdst-space-xs);
   padding: var(--mdst-space-sm) var(--mdst-space-md);
-  font-family: inherit;
+  font-family: var(--mdst-font-ui);
   font-size: inherit;
   line-height: var(--mdst-line-height);
   color: var(--mdst-color-fg);
@@ -1262,7 +1269,7 @@ h6 {
   margin: 0;
   padding: var(--mdst-space-sm);
   padding-right: calc(var(--mdst-space-sm) + 1.2em);
-  font-family: inherit;
+  font-family: var(--mdst-font-ui);
   font-size: inherit;
   line-height: var(--mdst-line-height);
   color: var(--mdst-color-fg);
@@ -1362,7 +1369,7 @@ h6 {
   color: var(--mdst-color-muted);
   cursor: pointer;
   padding: var(--mdst-space-sm);
-  font-family: inherit;
+  font-family: var(--mdst-font-ui);
   font-size: inherit;
   line-height: var(--mdst-line-height);
   background-color: var(--mdst-color-bg);
@@ -1383,7 +1390,7 @@ h6 {
   gap: var(--mdst-space-xs);
   padding: var(--mdst-space-xs) var(--mdst-space-md);
   margin-right: var(--mdst-space-md);
-  font-family: inherit;
+  font-family: var(--mdst-font-ui);
   font-size: inherit;
   line-height: var(--mdst-line-height);
   color: var(--mdst-color-fg);
@@ -1455,7 +1462,7 @@ h6 {
       gap: var(--mdst-space-xs);
       padding: var(--mdst-space-xs) var(--mdst-space-md);
       margin-right: var(--mdst-space-md);
-      font-family: inherit;
+      font-family: var(--mdst-font-ui);
       font-size: inherit;
       line-height: var(--mdst-line-height);
       color: var(--mdst-color-fg);
@@ -1509,7 +1516,7 @@ h6 {
   width: 100%;
   margin: 0;
   padding: var(--mdst-space-sm);
-  font-family: inherit;
+  font-family: var(--mdst-font-ui);
   font-size: inherit;
   line-height: var(--mdst-line-height);
   color: var(--mdst-color-fg);
@@ -2233,7 +2240,7 @@ h6 {
   display: flex;
   align-items: flex-start;
   width: 100%;
-  font-family: var(--mdst-font-sans);
+  font-family: var(--mdst-font-ui);
 
   /* Step */
 
@@ -2591,7 +2598,7 @@ h6 {
     border: none;
     background: none;
     cursor: pointer;
-    font-family: inherit;
+    font-family: var(--mdst-font-ui);
     font-size: inherit;
     line-height: var(--mdst-line-height);
     color: var(--mdst-color-muted);
@@ -2861,7 +2868,7 @@ h6 {
   border-radius: var(--mdst-radius);
   background: var(--mdst-color-bg);
   color: var(--mdst-color-fg);
-  font-family: var(--mdst-font-sans);
+  font-family: var(--mdst-font-ui);
   font-size: var(--mdst-text-sm);
   line-height: var(--mdst-line-height);
   transition:
@@ -2987,6 +2994,15 @@ h6 {
 
 /* Typography */
 
+/* Reading face — set once on the container so every element inside .mdst-ui
+   inherits it (td, li, summary included, with nothing left to fall back to
+   browser defaults). Zero specificity: any user rule on the container wins.
+   Components opt into --mdst-font-ui or --mdst-font-mono explicitly. */
+:where(.mdst-ui) {
+  font-family: var(--mdst-font-text);
+  line-height: var(--mdst-line-height);
+}
+
 :where(.mdst-ui) h1,
 :where(.mdst-ui) h2,
 :where(.mdst-ui) h3,
@@ -2999,7 +3015,6 @@ h6 {
 .mdst-h4,
 .mdst-h5,
 .mdst-h6 {
-  font-family: var(--mdst-font-sans);
   font-weight: 600;
   line-height: 1.25;
   color: var(--mdst-color-fg);
@@ -3039,7 +3054,6 @@ h6 {
 
 :where(.mdst-ui) p,
 .mdst-p {
-  font-family: var(--mdst-font-sans);
   font-size: var(--mdst-text-base);
   line-height: var(--mdst-line-height);
   color: var(--mdst-color-fg);

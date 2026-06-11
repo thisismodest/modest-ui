@@ -145,6 +145,23 @@ Override CSS custom properties to create your own theme:
 
 Use the [Theme Playground](https://modest-ui.com/theme/) to experiment with different themes.
 
+### Font roles
+
+Typography flows through three semantic tokens: `--mdst-font-text` (the
+reading face — prose, tables, lists inherit it from the `.mdst-ui`
+container), `--mdst-font-ui` (the interface face — buttons, inputs, badges),
+and `--mdst-font-mono` (code). Both text and ui default to the
+`--mdst-font-sans` stack.
+
+Retheme prose without touching components — serif blog, sans buttons,
+one token:
+
+```css
+:root {
+  --mdst-font-text: Charter, Georgia, serif;
+}
+```
+
 ---
 
 ## Data Attribute Components

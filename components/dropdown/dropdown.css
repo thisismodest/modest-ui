@@ -9,7 +9,7 @@
   margin: 0;
   padding: var(--mdst-space-sm);
   padding-right: calc(var(--mdst-space-sm) + 1.2em);
-  font-family: inherit;
+  font-family: var(--mdst-font-ui);
   font-size: inherit;
   line-height: var(--mdst-line-height);
   color: var(--mdst-color-fg);
