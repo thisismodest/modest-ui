@@ -3081,12 +3081,6 @@ h6 {
   color: var(--mdst-color-fg);
   text-decoration: underline;
   text-underline-offset: 0.15em;
-  transition: opacity var(--mdst-transition);
-}
-
-:where(.mdst-ui) a:hover,
-.mdst-a:hover {
-  opacity: 0.6;
 }
 
 :where(.mdst-ui) a:focus-visible,
