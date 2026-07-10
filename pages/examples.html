@@ -55,6 +55,10 @@
         justify-content: center;
         overflow: hidden;
         position: relative;
+        /* Match the card's rounded top corners (inset by the border width) so
+           the full-bleed preview doesn't poke past the card's radius. */
+        border-start-start-radius: calc(var(--mdst-radius) - var(--mdst-border-width));
+        border-start-end-radius: calc(var(--mdst-radius) - var(--mdst-border-width));
       }
 
       .example-card-preview svg {

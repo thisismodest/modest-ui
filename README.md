@@ -37,7 +37,7 @@ Add the stylesheet and put `.mdst-ui` on the body. That's it.
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@1.0.1/dist/modest-ui.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@1.0.2/dist/modest-ui.min.css" />
   </head>
   <body class="mdst-ui">
     <h1>Hello world</h1>
@@ -92,7 +92,7 @@ Unlike classless frameworks that style every element on the page globally, modes
 ### CDN (recommended)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@1.0.1/dist/modest-ui.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@1.0.2/dist/modest-ui.min.css" />
 ```
 
 Use `@1` instead of a pinned version to always get the latest 1.x release.
@@ -269,13 +269,25 @@ available a few moments after the publish job finishes.
 
 ## Browser Support
 
-modest-ui targets modern evergreen browsers (Chrome, Edge, Firefox, Safari). It
-uses current CSS features including nesting, `:where()`, `color-mix()`, and
-`clamp()`. A few components layer on progressive enhancements that degrade
-gracefully where unsupported:
+modest-ui targets modern evergreen browsers (Chrome, Edge, Firefox, Safari) and
+uses current CSS such as nesting, `:where()`, and `color-mix()` — all Baseline
+across those engines. On current versions every classless default and component
+renders consistently.
 
-- `field-sizing: content` — auto-growing textareas (falls back to fixed height).
-- `::details-content` — animated disclosure (falls back to instant open/close).
+A few components use very recently-Baseline CSS and degrade gracefully on
+browsers that predate it:
+
+- **`tooltip`** and **`popover --anchored`** anchor to their trigger via CSS
+  anchor positioning (`position-area`), Baseline only since Chrome 129 /
+  Firefox 147 / Safari 26. On older browsers the anchoring is guarded behind
+  `@supports`, so they fall back to a centered popover — usable, just not
+  anchored.
+- **`details`** styles its open content via the `::details-content`
+  pseudo-element (Baseline Chrome 131 / Firefox 143 / Safari 18.4). On browsers
+  older than that the disclosure still opens and closes — it just shows the
+  content without the added padding and divider.
+- **`drawer`** slide-in uses `@starting-style` and `transition-behavior:
+allow-discrete`; without them it simply appears instead of sliding.
 
 There is no IE11 support. If you need it, this isn't the library for you.
 

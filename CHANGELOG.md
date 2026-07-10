@@ -9,6 +9,18 @@ The public API is the set of CSS custom properties (`--mdst-*`) and class names
 `llms.txt`. Renaming or removing a documented token or class is a breaking
 change; adding new ones is a minor change.
 
+## [1.0.2] - 2026-07-10
+
+### Changed
+
+- `tooltip` / `popover`: anchor positioning (`position-area`) is now guarded
+  behind `@supports`, so browsers older than the Baseline (Chrome 129 /
+  Firefox 147 / Safari 26) fall back to a centered popover instead of
+  mispositioning.
+- Examples grid: card preview media now matches the card's rounded top corners
+  instead of overflowing them.
+- README browser-support notes updated to match.
+
 ## [1.0.1] - 2026-07-10
 
 ### Added

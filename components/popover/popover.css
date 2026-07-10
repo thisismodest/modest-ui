@@ -19,14 +19,19 @@
     opacity: 1;
   }
 
-  /* Anchored positioning - use with anchor="" HTML attribute */
+  /* Anchored positioning - use with anchor="" HTML attribute.
+     Guarded so browsers without CSS anchor positioning (Baseline Chrome 129 /
+     Firefox 147 / Safari 26) keep the centered default above instead of
+     mispositioning. */
 
-  &.mdst-popover--anchored {
-    position: absolute;
-    inset: unset;
-    margin: 0;
-    position-area: bottom;
-    margin-top: var(--mdst-space-xs);
+  @supports (position-area: bottom) {
+    &.mdst-popover--anchored {
+      position: absolute;
+      inset: unset;
+      margin: 0;
+      position-area: bottom;
+      margin-top: var(--mdst-space-xs);
+    }
   }
 
   /* Variants */

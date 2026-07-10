@@ -1,6 +1,6 @@
 {
   "name": "mdst-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Minimal, themeable CSS component library (modest-ui). Classless defaults plus an opt-in class API, scoped to .mdst-ui.",
   "author": "Marcus Michaels",
   "license": "MIT",
