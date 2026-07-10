@@ -52,7 +52,7 @@ async function getComponents() {
       slug,
       title: config.title,
       className: config.className,
-      group: config.group || null,
+      group: config.group || null
     });
   }
 
@@ -62,7 +62,7 @@ async function getComponents() {
 function generateLinks(components) {
   return renderComponentLinks(components, {
     href: (c) => `#${c.slug}`,
-    linkAttrs: (c) => ` data-component="${c.slug}"`,
+    linkAttrs: (c) => ` data-component="${c.slug}"`
   });
 }
 
@@ -151,7 +151,7 @@ async function updateIndexHtml(components) {
 
 async function updateReadmeCdnUrl() {
   let readme = await readFile(README_PATH, "utf-8");
-  readme = readme.replace(/modest-ui@v[^/]+/g, `modest-ui@v${siteConfig.version}`);
+  readme = readme.replace(/mdst-ui@[0-9]+\.[0-9]+\.[0-9]+/g, `mdst-ui@${siteConfig.version}`);
   await writeFile(README_PATH, readme);
 }
 

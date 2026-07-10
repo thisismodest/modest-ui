@@ -1,28 +1,54 @@
 {
-  "name": "modest-ui",
-  "version": "0.2.2",
-  "description": "Minimal, themeable CSS component library",
+  "name": "mdst-ui",
+  "version": "1.0.0",
+  "description": "Minimal, themeable CSS component library (modest-ui). Classless defaults plus an opt-in class API, scoped to .mdst-ui.",
   "author": "Marcus Michaels",
   "license": "MIT",
   "type": "module",
   "main": "index.css",
   "style": "index.css",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": "./index.css",
+    "./index.css": "./index.css",
+    "./dist/*": "./dist/*",
+    "./base/*": "./base/*",
+    "./components/*": "./components/*",
+    "./package.json": "./package.json"
+  },
   "files": [
-    "base",
-    "components",
+    "base/tokens.css",
+    "base/reset.css",
+    "components/**/*.css",
     "index.css",
     "dist"
   ],
+  "homepage": "https://modest-ui.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thisismodest/modest-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thisismodest/modest-ui/issues"
+  },
   "scripts": {
     "dev": "node scripts/build-site.js && python3 -m http.server 8000 -d site",
-    "build": "node scripts/generate-preview.js && node scripts/build-bundle.js && node scripts/build-llms.js && node scripts/build-site.js"
+    "build": "node scripts/generate-preview.js && node scripts/build-bundle.js && node scripts/build-llms.js && node scripts/build-site.js",
+    "prepublishOnly": "node scripts/build-bundle.js"
   },
   "keywords": [
     "css",
     "components",
     "ui",
     "minimal",
-    "modest"
+    "modest",
+    "modest-ui",
+    "mdst-ui",
+    "classless",
+    "themeable",
+    "design-tokens"
   ],
   "devDependencies": {
     "lightningcss": "^1.31.1"

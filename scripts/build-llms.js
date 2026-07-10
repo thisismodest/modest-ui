@@ -365,14 +365,14 @@ CDN:
   <link rel="stylesheet" href="${siteConfig.cdnUrl}" />
 
 npm:
-  npm install github:thisismodest/modest-ui
+  npm install mdst-ui
 
 Import (bundled):
-  @import "modest-ui/dist/modest-ui.css";
+  @import "mdst-ui/dist/modest-ui.css";
 
 Cherry-pick:
-  @import "modest-ui/base/tokens.css";
-  @import "modest-ui/components/button/button.css";
+  @import "mdst-ui/base/tokens.css";
+  @import "mdst-ui/components/button/button.css";
 
 ## Naming Convention
 

@@ -2,7 +2,7 @@
 
 > A minimal, themeable CSS component library.
 
-- Version: 0.2.2
+- Version: 1.0.0
 - Docs: https://modest-ui.com
 - GitHub: https://github.com/thisismodest/modest-ui
 - License: MIT
@@ -10,17 +10,17 @@
 ## Installation
 
 CDN:
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.2.2/dist/modest-ui.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@1.0.0/dist/modest-ui.min.css" />
 
 npm:
-  npm install github:thisismodest/modest-ui
+  npm install mdst-ui
 
 Import (bundled):
-  @import "modest-ui/dist/modest-ui.css";
+  @import "mdst-ui/dist/modest-ui.css";
 
 Cherry-pick:
-  @import "modest-ui/base/tokens.css";
-  @import "modest-ui/components/button/button.css";
+  @import "mdst-ui/base/tokens.css";
+  @import "mdst-ui/components/button/button.css";
 
 ## Naming Convention
 

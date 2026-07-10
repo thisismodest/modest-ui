@@ -2,6 +2,8 @@
 
 A minimal, themeable CSS component library. Black and white by default.
 
+> On npm it's published as [`mdst-ui`](https://www.npmjs.com/package/mdst-ui) (matching the `.mdst-` class prefix). The project, docs, and repo are named **modest-ui**.
+
 modest-ui built on the idea that the web can now do more than we give it credit for. Heavy UI libraries solved real problems, but we forget how much browsers had quietly caught up.
 HTML and CSS natively gives us a lot (accessibility, device-native interactions, better performance). Build with the grain of the web and a lot comes for free.
 
@@ -35,7 +37,7 @@ Add the stylesheet and put `.mdst-ui` on the body. That's it.
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.2.2/dist/modest-ui.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@1.0.0/dist/modest-ui.min.css" />
   </head>
   <body class="mdst-ui">
     <h1>Hello world</h1>
@@ -90,30 +92,32 @@ Unlike classless frameworks that style every element on the page globally, modes
 ### CDN (recommended)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thisismodest/modest-ui@v0.2.2/dist/modest-ui.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@1.0.0/dist/modest-ui.min.css" />
 ```
+
+Use `@1` instead of a pinned version to always get the latest 1.x release.
 
 ### npm
 
 ```bash
-npm install github:thisismodest/modest-ui
+npm install mdst-ui
 ```
 
 Then import in CSS:
 
 ```css
-@import "modest-ui/dist/modest-ui.css";
+@import "mdst-ui/dist/modest-ui.css";
 ```
 
 ### Cherry-pick components
 
 ```css
 /* Always include tokens first */
-@import "modest-ui/base/tokens.css";
+@import "mdst-ui/base/tokens.css";
 
 /* Then pick what you need */
-@import "modest-ui/components/button/button.css";
-@import "modest-ui/components/input/input.css";
+@import "mdst-ui/components/button/button.css";
+@import "mdst-ui/components/input/input.css";
 ```
 
 ---
@@ -251,7 +255,28 @@ git tag vX.Y.Z
 git push origin vX.Y.Z
 ```
 
-The tag is what jsDelivr resolves against, so this step is required for the CDN to serve the new version.
+Pushing a `v*` tag does two things automatically:
+
+- **jsDelivr** resolves the tag for the `/gh/` CDN path.
+- The **Publish to npm** workflow (`.github/workflows/publish.yml`) builds the
+  bundle and runs `npm publish`, releasing the new version as `mdst-ui`. This
+  requires an `NPM_TOKEN` repo secret (an npm automation token with publish
+  rights).
+
+The `/npm/` CDN path (`cdn.jsdelivr.net/npm/mdst-ui@X.Y.Z/...`) becomes
+available a few moments after the publish job finishes.
+
+## Browser Support
+
+modest-ui targets modern evergreen browsers (Chrome, Edge, Firefox, Safari). It
+uses current CSS features including nesting, `:where()`, `color-mix()`, and
+`clamp()`. A few components layer on progressive enhancements that degrade
+gracefully where unsupported:
+
+- `field-sizing: content` — auto-growing textareas (falls back to fixed height).
+- `::details-content` — animated disclosure (falls back to instant open/close).
+
+There is no IE11 support. If you need it, this isn't the library for you.
 
 ## Contributing
 
