@@ -259,9 +259,10 @@ Pushing a `v*` tag does two things automatically:
 
 - **jsDelivr** resolves the tag for the `/gh/` CDN path.
 - The **Publish to npm** workflow (`.github/workflows/publish.yml`) builds the
-  bundle and runs `npm publish`, releasing the new version as `mdst-ui`. This
-  requires an `NPM_TOKEN` repo secret (an npm automation token with publish
-  rights).
+  bundle and runs `npm publish`, releasing the new version as `mdst-ui`. It
+  authenticates via npm **Trusted Publishing** (OIDC), so no token is stored in
+  the repo, and provenance is generated automatically. The GitHub repo/workflow
+  must be registered as a Trusted Publisher on the npm package settings page.
 
 The `/npm/` CDN path (`cdn.jsdelivr.net/npm/mdst-ui@X.Y.Z/...`) becomes
 available a few moments after the publish job finishes.
