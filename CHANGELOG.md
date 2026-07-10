@@ -9,6 +9,21 @@ The public API is the set of CSS custom properties (`--mdst-*`) and class names
 `llms.txt`. Renaming or removing a documented token or class is a breaking
 change; adding new ones is a minor change.
 
+## [1.0.1] - 2026-07-10
+
+### Added
+
+- `LICENSE` file (MIT) so the licence ships in the npm tarball and renders on
+  the npm and GitHub package pages.
+- npm logo in the docs sidebar footer, linking to the package on npm.
+
+### Changed
+
+- Publish workflow now uses npm **Trusted Publishing** (OIDC) — no stored
+  token; provenance is generated automatically.
+
+No stylesheet changes: the CSS in this release is identical to `1.0.0`.
+
 ## [1.0.0] - 2026-07-10
 
 First stable release, and the first published to npm.
