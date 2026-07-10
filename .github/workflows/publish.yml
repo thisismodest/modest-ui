@@ -22,9 +22,11 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
 
-      # Trusted Publishing (tokenless OIDC) requires a recent npm CLI.
+      # Trusted Publishing (tokenless OIDC) requires npm >= 11.5.1. We pin to the
+      # npm 11 line: npm@12.0.0's global install currently ships a broken
+      # provenance path (missing bundled 'sigstore').
       - name: Upgrade npm
-        run: npm install -g npm@latest
+        run: npm install -g npm@11
 
       - name: Install dependencies
         run: npm ci
