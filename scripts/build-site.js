@@ -71,7 +71,7 @@ async function getPages() {
     pages.push({
       slug,
       title: pageConfig.title || slug,
-      description: pageConfig.description || "",
+      description: pageConfig.description || ""
     });
   }
 
@@ -144,7 +144,7 @@ function buildSidebar(components, pages, activeSlug) {
 
   const componentLinks = renderComponentLinks(components, {
     href: (c) => `/${c.slug}/`,
-    activeSlug,
+    activeSlug
   });
 
   return `${pageLinks}\n            <hr class="sidebar-separator" />\n${componentLinks}`;
@@ -166,7 +166,8 @@ function render(template, slots) {
   html = replaceSlot(html, "<!-- DESCRIPTION -->", slots.description, true);
   html = replaceSlot(html, "<!-- CANONICAL -->", slots.canonical, true);
   html = replaceSlot(html, "<!-- VERSION -->", siteConfig.version, true);
-  html = replaceSlot(html, "<!-- DISPLAY_TITLE -->", slots.displayTitle);
+  html = replaceSlot(html, "<!-- HEADER_TITLE -->", slots.headerTitle);
+  html = replaceSlot(html, "<!-- LEAD -->", slots.lead || "");
   html = replaceSlot(html, "<!-- SIDEBAR -->", slots.sidebar);
   html = replaceSlot(html, "<!-- CONTENT -->", slots.content);
 
@@ -199,19 +200,20 @@ async function buildComponentPage(template, component, components, pages) {
   const { cleanBody, scripts } = extractScripts(bodyContent, component.slug, "component");
 
   const displayTitle = component.group ? `${component.group} / ${component.title}` : component.title;
-  const pageTitle = `${displayTitle} — ${siteConfig.name}`;
+  const pageTitle = `${component.title} | ${siteConfig.name}`;
   const canonicalPath = `/${component.slug}/`;
 
   const html = render(template, {
     title: pageTitle,
     description: component.description,
     canonical: `${siteConfig.url}${canonicalPath}`,
-    displayTitle,
+    headerTitle: `          <h1>${displayTitle}</h1>`,
+    lead: `          <p class="component-lead">${component.description}</p>`,
     className: component.className,
     sidebar: buildSidebar(components, pages, component.slug),
     content: cleanBody,
     headExtra: headStyles ? `    ${headStyles}` : "",
-    scripts,
+    scripts
   });
 
   const outputDir = join(SITE_DIR, component.slug);
@@ -227,19 +229,19 @@ async function buildStaticPage(template, page, components, pages) {
   const { cleanBody, scripts } = extractScripts(bodyContent, page.slug, "page");
 
   const isIntro = page.slug === "intro";
-  const pageTitle = isIntro ? `${siteConfig.name} — ${siteConfig.tagline}` : `${page.title} — ${siteConfig.name}`;
+  const pageTitle = isIntro ? `${siteConfig.name} | ${siteConfig.tagline}` : `${page.title} | ${siteConfig.name}`;
   const canonicalPath = isIntro ? "/" : `/${page.slug}/`;
 
   const html = render(template, {
     title: pageTitle,
     description: page.description,
     canonical: `${siteConfig.url}${canonicalPath}`,
-    displayTitle: page.title,
+    headerTitle: `          <span>${page.title}</span>`,
     className: null,
     sidebar: buildSidebar(components, pages, page.slug),
     content: cleanBody,
     headExtra: headStyles ? `    ${headStyles}` : "",
-    scripts,
+    scripts
   });
 
   if (isIntro) {
@@ -331,10 +333,10 @@ async function main() {
     const allEntries = [
       ...pages.map((p) => ({
         slug: p.slug,
-        path: p.slug === "intro" ? "/" : `/${p.slug}/`,
+        path: p.slug === "intro" ? "/" : `/${p.slug}/`
       })),
       ...components.map((c) => ({ slug: c.slug, path: `/${c.slug}/` })),
-      ...exampleEntries,
+      ...exampleEntries
     ];
 
     await writeFile(join(SITE_DIR, "sitemap.xml"), generateSitemap(allEntries));

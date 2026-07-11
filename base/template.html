@@ -270,6 +270,14 @@
         background: var(--mdst-color-subtle);
       }
 
+      .main-header h1 {
+        margin: 0;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        letter-spacing: inherit;
+      }
+
       .theme-switcher {
         display: flex;
         align-items: center;
@@ -302,6 +310,14 @@
         flex: 1;
         overflow-y: auto;
         padding: var(--mdst-space-md);
+      }
+
+      .component-lead {
+        max-width: 65ch;
+        margin: 0 0 var(--mdst-space-lg);
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-base);
+        line-height: var(--mdst-line-height);
       }
 
       .sidebar-footer {
@@ -486,10 +502,11 @@
       <div class="sidebar-overlay" id="sidebar-overlay"></div>
       <main class="main">
         <header class="main-header">
-          <span><!-- DISPLAY_TITLE --></span>
+          <!-- HEADER_TITLE -->
           <!-- CLASS_NAME -->
         </header>
         <div class="main-content">
+          <!-- LEAD -->
           <!-- CONTENT -->
         </div>
       </main>
