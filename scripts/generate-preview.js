@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { readdir, readFile, writeFile } from "fs/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { readdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import siteConfig from "../site.config.js";
 import { buildSidebarItems, renderComponentLinks } from "./sidebar.js";
 

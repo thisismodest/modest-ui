@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { readFile, writeFile, mkdir } from "fs/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { transform } from "lightningcss";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -83,7 +83,7 @@ async function buildBundle() {
     const { code } = transform({
       filename: "modest-ui.css",
       code: Buffer.from(finalContent),
-      minify: true,
+      minify: true
     });
 
     await writeFile(BUNDLE_MIN_OUTPUT, code);

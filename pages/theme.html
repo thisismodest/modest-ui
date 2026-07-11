@@ -159,8 +159,8 @@
           --mdst-radius: 0;
           --mdst-border-width: 1;
         }</pre>
-      <button class="mdst-button mdst-button--sm" id="copy-btn">Copy CSS</button>
-      <button class="mdst-button mdst-button--sm mdst-button--ghost" id="reset-btn">Reset</button>
+      <button type="button" class="mdst-button mdst-button--sm" id="copy-btn">Copy CSS</button>
+      <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost" id="reset-btn">Reset</button>
     </div>
 
     <details class="mdst-details mdst-details--section" open>
@@ -289,10 +289,10 @@
       <div class="preview-section">
         <h3>Components</h3>
         <div class="preview-row">
-          <button class="mdst-button">Default</button>
-          <button class="mdst-button mdst-button--inverted">Inverted</button>
-          <button class="mdst-button mdst-button--ghost">Ghost</button>
-          <button class="mdst-button" disabled>Disabled</button>
+          <button type="button" class="mdst-button">Default</button>
+          <button type="button" class="mdst-button mdst-button--inverted">Inverted</button>
+          <button type="button" class="mdst-button mdst-button--ghost">Ghost</button>
+          <button type="button" class="mdst-button" disabled>Disabled</button>
         </div>
         <div class="preview-row">
           <input type="text" class="mdst-input" placeholder="Text input" style="max-width: 200px" />
@@ -339,7 +339,9 @@
           <span class="mdst-tag mdst-tag--success mdst-tag--pill">Active</span>
           <span class="mdst-tag mdst-tag--error mdst-tag--solid mdst-tag--pill">Outage</span>
           <span class="mdst-tag mdst-tag--muted mdst-tag--sm">Meta</span>
-          <span class="mdst-tag mdst-tag--subtle">Dismiss <button class="mdst-tag-dismiss" aria-label="Remove">&times;</button></span>
+          <span class="mdst-tag mdst-tag--subtle"
+            >Dismiss <button type="button" class="mdst-tag-dismiss" aria-label="Remove">&times;</button></span
+          >
         </div>
         <div class="preview-row" style="align-items: flex-start">
           <div class="mdst-card" style="max-width: 220px; flex: 1">
@@ -348,8 +350,8 @@
               <p style="margin: 0; font-size: var(--mdst-text-sm)">Body content with header and footer.</p>
             </div>
             <div class="mdst-card-footer" style="display: flex; gap: var(--mdst-space-sm)">
-              <button class="mdst-button mdst-button--inverted mdst-button--sm">Action</button>
-              <button class="mdst-button mdst-button--ghost mdst-button--sm">Cancel</button>
+              <button type="button" class="mdst-button mdst-button--inverted mdst-button--sm">Action</button>
+              <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Cancel</button>
             </div>
           </div>
           <div class="mdst-card mdst-card--interactive" style="max-width: 220px; flex: 1">

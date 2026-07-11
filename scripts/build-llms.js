@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { readdir, readFile, writeFile } from "fs/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { readdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import siteConfig from "../site.config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -113,13 +113,12 @@ function extractClasses(css, slug, className) {
   const classes = new Set();
   // Match .mdst-something including __ BEM sub-elements
   const re = /\.(mdst[\w-]+)/g;
-  let m;
 
   // Wildcard components (className ".mdst-*") like typography and utilities
   // own every class in their CSS file — no prefix filtering needed.
   const isWildcard = className === ".mdst-*";
 
-  while ((m = re.exec(css)) !== null) {
+  for (const m of css.matchAll(re)) {
     const cls = m[1];
 
     if (!isWildcard) {

@@ -656,8 +656,8 @@
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <div class="header-right">
-        <button class="mdst-button mdst-button--ghost mdst-button--sm">Docs</button>
-        <button class="mdst-button mdst-button--ghost mdst-button--sm">Dashboard</button>
+        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Docs</button>
+        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Dashboard</button>
         <div class="header-avatar">JD</div>
       </div>
     </header>
@@ -666,12 +666,12 @@
     <div class="settings-layout">
       <!-- Sidebar nav -->
       <nav class="settings-nav">
-        <button class="settings-nav-link settings-nav-link--active" onclick="showSection('profile')">Profile</button>
-        <button class="settings-nav-link" onclick="showSection('account')">Account</button>
-        <button class="settings-nav-link" onclick="showSection('appearance')">Appearance</button>
-        <button class="settings-nav-link" onclick="showSection('notifications')">Notifications</button>
-        <button class="settings-nav-link" onclick="showSection('sessions')">Sessions</button>
-        <button class="settings-nav-link settings-nav-link--danger" onclick="showSection('danger')">Danger Zone</button>
+        <button type="button" class="settings-nav-link settings-nav-link--active" onclick="showSection('profile')">Profile</button>
+        <button type="button" class="settings-nav-link" onclick="showSection('account')">Account</button>
+        <button type="button" class="settings-nav-link" onclick="showSection('appearance')">Appearance</button>
+        <button type="button" class="settings-nav-link" onclick="showSection('notifications')">Notifications</button>
+        <button type="button" class="settings-nav-link" onclick="showSection('sessions')">Sessions</button>
+        <button type="button" class="settings-nav-link settings-nav-link--danger" onclick="showSection('danger')">Danger Zone</button>
       </nav>
 
       <!-- Content -->
@@ -758,8 +758,8 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button class="mdst-button mdst-button--ghost" onclick="showToast('Changes discarded')">Cancel</button>
-              <button class="mdst-button mdst-button--inverted" onclick="showToast('Profile saved')">Save Changes</button>
+              <button type="button" class="mdst-button mdst-button--ghost" onclick="showToast('Changes discarded')">Cancel</button>
+              <button type="button" class="mdst-button mdst-button--inverted" onclick="showToast('Profile saved')">Save Changes</button>
             </div>
           </div>
         </div>
@@ -820,7 +820,9 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button class="mdst-button mdst-button--inverted" onclick="showToast('Password updated')">Update Password</button>
+              <button type="button" class="mdst-button mdst-button--inverted" onclick="showToast('Password updated')">
+                Update Password
+              </button>
             </div>
           </div>
 
@@ -845,7 +847,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 <span class="mdst-tag mdst-tag--muted mdst-tag--sm">Not enabled</span>
               </div>
               <div class="mdst-card-footer">
-                <button class="mdst-button mdst-button--sm">Enable 2FA</button>
+                <button type="button" class="mdst-button mdst-button--sm">Enable 2FA</button>
               </div>
             </div>
           </div>
@@ -866,7 +868,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     <div class="connected-detail">jane@example.com</div>
                   </div>
                 </div>
-                <button class="mdst-button mdst-button--ghost mdst-button--sm">Disconnect</button>
+                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Disconnect</button>
               </div>
               <div class="connected-item">
                 <div class="connected-info">
@@ -876,7 +878,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     <div class="connected-detail">@janedoe</div>
                   </div>
                 </div>
-                <button class="mdst-button mdst-button--ghost mdst-button--sm">Disconnect</button>
+                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Disconnect</button>
               </div>
               <div class="connected-item">
                 <div class="connected-info">
@@ -886,7 +888,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     <div class="connected-detail" style="color: var(--mdst-color-muted)">Not connected</div>
                   </div>
                 </div>
-                <button class="mdst-button mdst-button--sm">Connect</button>
+                <button type="button" class="mdst-button mdst-button--sm">Connect</button>
               </div>
             </div>
           </div>
@@ -973,8 +975,10 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button class="mdst-button mdst-button--ghost" onclick="showToast('Reset to defaults')">Reset to Defaults</button>
-              <button class="mdst-button mdst-button--inverted" onclick="showToast('Appearance saved')">Save Changes</button>
+              <button type="button" class="mdst-button mdst-button--ghost" onclick="showToast('Reset to defaults')">
+                Reset to Defaults
+              </button>
+              <button type="button" class="mdst-button mdst-button--inverted" onclick="showToast('Appearance saved')">Save Changes</button>
             </div>
           </div>
         </div>
@@ -1121,7 +1125,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button class="mdst-button mdst-button--inverted" onclick="showToast('Notification preferences saved')">
+              <button type="button" class="mdst-button mdst-button--inverted" onclick="showToast('Notification preferences saved')">
                 Save Preferences
               </button>
             </div>
@@ -1153,26 +1157,26 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <p class="session-device">Safari on iPhone</p>
                   <p class="session-detail">London, UK · IP 82.132.40.2 · Last active 2 hours ago</p>
                 </div>
-                <button class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
+                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
               </div>
               <div class="session-item">
                 <div class="session-info">
                   <p class="session-device">Firefox on Windows</p>
                   <p class="session-detail">Manchester, UK · IP 81.98.12.42 · Last active 3 days ago</p>
                 </div>
-                <button class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
+                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
               </div>
               <div class="session-item">
                 <div class="session-info">
                   <p class="session-device">Relay CLI</p>
                   <p class="session-detail">API token · Created Dec 1, 2024 · Last used 5 hours ago</p>
                 </div>
-                <button class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
+                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
               </div>
             </div>
 
             <div class="form-actions form-actions--left" style="margin-top: var(--mdst-space-md)">
-              <button class="mdst-button mdst-button--sm" onclick="showToast('All other sessions revoked')">
+              <button type="button" class="mdst-button mdst-button--sm" onclick="showToast('All other sessions revoked')">
                 Revoke All Other Sessions
               </button>
             </div>
@@ -1195,7 +1199,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <h4>Export account data</h4>
                   <p>Download a copy of all your data including projects, settings, and activity history.</p>
                 </div>
-                <button class="mdst-button mdst-button--sm" onclick="showToast(`Export started, you'll receive an email when ready`)">
+                <button
+                  type="button"
+                  class="mdst-button mdst-button--sm"
+                  onclick="showToast(`Export started, you'll receive an email when ready`)"
+                >
                   Export Data
                 </button>
               </div>
@@ -1204,21 +1212,25 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <h4>Transfer ownership</h4>
                   <p>Transfer all your projects and data to another account. You'll retain read-only access.</p>
                 </div>
-                <button class="danger-btn" onclick="document.getElementById('transfer-dialog').showModal()">Transfer</button>
+                <button type="button" class="danger-btn" onclick="document.getElementById('transfer-dialog').showModal()">Transfer</button>
               </div>
               <div class="danger-item">
                 <div class="danger-item-info">
                   <h4>Deactivate account</h4>
                   <p>Temporarily disable your account. Your data will be preserved and you can reactivate at any time.</p>
                 </div>
-                <button class="danger-btn" onclick="document.getElementById('deactivate-dialog').showModal()">Deactivate</button>
+                <button type="button" class="danger-btn" onclick="document.getElementById('deactivate-dialog').showModal()">
+                  Deactivate
+                </button>
               </div>
               <div class="danger-item">
                 <div class="danger-item-info">
                   <h4>Delete account</h4>
                   <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
                 </div>
-                <button class="danger-btn" onclick="document.getElementById('delete-dialog').showModal()">Delete Account</button>
+                <button type="button" class="danger-btn" onclick="document.getElementById('delete-dialog').showModal()">
+                  Delete Account
+                </button>
               </div>
             </div>
           </div>
@@ -1230,7 +1242,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     <dialog class="mdst-dialog" id="transfer-dialog">
       <div class="dialog-header">
         <h2>Transfer ownership</h2>
-        <button class="dialog-close" onclick="document.getElementById('transfer-dialog').close()">✕</button>
+        <button type="button" class="dialog-close" onclick="document.getElementById('transfer-dialog').close()">✕</button>
       </div>
       <div class="dialog-body">
         <p>Enter the email address of the account you want to transfer ownership to. They must have an existing Relay account.</p>
@@ -1244,8 +1256,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('transfer-dialog').close()">Cancel</button>
+        <button type="button" class="mdst-button mdst-button--ghost" onclick="document.getElementById('transfer-dialog').close()">
+          Cancel
+        </button>
         <button
+          type="button"
           class="danger-btn"
           onclick="
             document.getElementById('transfer-dialog').close();
@@ -1261,7 +1276,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     <dialog class="mdst-dialog" id="deactivate-dialog">
       <div class="dialog-header">
         <h2>Deactivate account</h2>
-        <button class="dialog-close" onclick="document.getElementById('deactivate-dialog').close()">✕</button>
+        <button type="button" class="dialog-close" onclick="document.getElementById('deactivate-dialog').close()">✕</button>
       </div>
       <div class="dialog-body">
         <p>Deactivating your account will:</p>
@@ -1291,8 +1306,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('deactivate-dialog').close()">Cancel</button>
+        <button type="button" class="mdst-button mdst-button--ghost" onclick="document.getElementById('deactivate-dialog').close()">
+          Cancel
+        </button>
         <button
+          type="button"
           class="danger-btn"
           onclick="
             document.getElementById('deactivate-dialog').close();
@@ -1308,7 +1326,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     <dialog class="mdst-dialog" id="delete-dialog">
       <div class="dialog-header">
         <h2>Delete account</h2>
-        <button class="dialog-close" onclick="document.getElementById('delete-dialog').close()">✕</button>
+        <button type="button" class="dialog-close" onclick="document.getElementById('delete-dialog').close()">✕</button>
       </div>
       <div class="dialog-body">
         <p><strong>This action is permanent and cannot be undone.</strong></p>
@@ -1336,8 +1354,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('delete-dialog').close()">Cancel</button>
+        <button type="button" class="mdst-button mdst-button--ghost" onclick="document.getElementById('delete-dialog').close()">
+          Cancel
+        </button>
         <button
+          type="button"
           class="danger-btn"
           onclick="
             document.getElementById('delete-dialog').close();

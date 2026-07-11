@@ -1268,7 +1268,7 @@ Classes:
 
 ### Utilities `.mdst-*`
 
-Small utility classes for common layout and text patterns — screen-reader-only, truncation, centering, and more.
+Small utility classes for common layout and text patterns: screen-reader-only, truncation, centering, and more.
 
 Classes:
 - `.mdst-mono`

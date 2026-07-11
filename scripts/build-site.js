@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { readdir, readFile, writeFile, mkdir, cp } from "fs/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { cp, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import siteConfig from "../site.config.js";
 import { renderComponentLinks } from "./sidebar.js";
 
@@ -98,22 +98,14 @@ function extractBody(html) {
 function extractHeadStyles(html) {
   const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
   if (!headMatch) return "";
-  const styles = [];
   const re = /<style[^>]*>[\s\S]*?<\/style>/gi;
-  let m;
-  while ((m = re.exec(headMatch[1])) !== null) {
-    styles.push(m[0]);
-  }
+  const styles = Array.from(headMatch[1].matchAll(re), (m) => m[0]);
   return styles.join("\n");
 }
 
 function extractScripts(bodyContent, slug, type) {
-  const scripts = [];
   const re = /<script[^>]*>[\s\S]*?<\/script>/gi;
-  let m;
-  while ((m = re.exec(bodyContent)) !== null) {
-    scripts.push(m[0]);
-  }
+  const scripts = Array.from(bodyContent.matchAll(re), (m) => m[0]);
 
   const cleanBody = bodyContent.replace(re, "").trim();
 
@@ -168,6 +160,8 @@ function render(template, slots) {
   html = replaceSlot(html, "<!-- VERSION -->", siteConfig.version, true);
   html = replaceSlot(html, "<!-- HEADER_TITLE -->", slots.headerTitle);
   html = replaceSlot(html, "<!-- LEAD -->", slots.lead || "");
+  html = replaceSlot(html, "<!-- OG_IMAGE -->", `${siteConfig.url}/og-image.png`, true);
+  html = replaceSlot(html, "<!-- JSONLD -->", slots.jsonLd || "");
   html = replaceSlot(html, "<!-- SIDEBAR -->", slots.sidebar);
   html = replaceSlot(html, "<!-- CONTENT -->", slots.content);
 
@@ -188,6 +182,24 @@ function render(template, slots) {
   return html;
 }
 
+/**
+ * Build a BreadcrumbList JSON-LD <script> block from an ordered list of
+ * crumbs. Crumbs without a `url` (e.g. a component group with no page of its
+ * own) are emitted as name-only list items.
+ */
+function breadcrumbJsonLd(crumbs) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, i) => {
+      const item = { "@type": "ListItem", position: i + 1, name: crumb.name };
+      if (crumb.url) item.item = crumb.url;
+      return item;
+    })
+  };
+  return `    <script type="application/ld+json">${JSON.stringify(data)}</script>`;
+}
+
 // ---------------------------------------------------------------------------
 // Page builders
 // ---------------------------------------------------------------------------
@@ -202,13 +214,23 @@ async function buildComponentPage(template, component, components, pages) {
   const displayTitle = component.group ? `${component.group} / ${component.title}` : component.title;
   const pageTitle = `${component.title} | ${siteConfig.name}`;
   const canonicalPath = `/${component.slug}/`;
+  const canonical = `${siteConfig.url}${canonicalPath}`;
+
+  // Breadcrumb: Home > Component. The group (e.g. "Input") is intentionally
+  // omitted because it has no page of its own, and a URL-less intermediate
+  // crumb is invalid per Google's BreadcrumbList guidelines.
+  const crumbs = [
+    { name: "Home", url: `${siteConfig.url}/` },
+    { name: component.title, url: canonical }
+  ];
 
   const html = render(template, {
     title: pageTitle,
     description: component.description,
-    canonical: `${siteConfig.url}${canonicalPath}`,
+    canonical,
     headerTitle: `          <h1>${displayTitle}</h1>`,
     lead: `          <p class="component-lead">${component.description}</p>`,
+    jsonLd: breadcrumbJsonLd(crumbs),
     className: component.className,
     sidebar: buildSidebar(components, pages, component.slug),
     content: cleanBody,
@@ -231,12 +253,22 @@ async function buildStaticPage(template, page, components, pages) {
   const isIntro = page.slug === "intro";
   const pageTitle = isIntro ? `${siteConfig.name} | ${siteConfig.tagline}` : `${page.title} | ${siteConfig.name}`;
   const canonicalPath = isIntro ? "/" : `/${page.slug}/`;
+  const canonical = `${siteConfig.url}${canonicalPath}`;
+
+  // Homepage is the breadcrumb root, so it gets no BreadcrumbList of its own.
+  const jsonLd = isIntro
+    ? ""
+    : breadcrumbJsonLd([
+        { name: "Home", url: `${siteConfig.url}/` },
+        { name: page.title, url: canonical }
+      ]);
 
   const html = render(template, {
     title: pageTitle,
     description: page.description,
-    canonical: `${siteConfig.url}${canonicalPath}`,
+    canonical,
     headerTitle: `          <span>${page.title}</span>`,
+    jsonLd,
     className: null,
     sidebar: buildSidebar(components, pages, page.slug),
     content: cleanBody,
@@ -277,7 +309,7 @@ function generateRobotsTxt() {
 // ---------------------------------------------------------------------------
 
 async function copyStaticAssets() {
-  const assets = ["favicon.svg", "index.css", "base", "components", "dist", "llms.txt", "examples"];
+  const assets = ["favicon.svg", "og-image.png", "index.css", "base", "components", "dist", "llms.txt", "examples"];
 
   for (const asset of assets) {
     try {

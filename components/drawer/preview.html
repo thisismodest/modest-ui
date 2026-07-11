@@ -67,15 +67,15 @@
     <div class="section">
       <div class="section-header">Positions</div>
       <div class="demo-row">
-        <button class="mdst-button" commandfor="drawer-right" command="show-modal">Open right (default)</button>
-        <button class="mdst-button" commandfor="drawer-left" command="show-modal">Open left</button>
+        <button type="button" class="mdst-button" commandfor="drawer-right" command="show-modal">Open right (default)</button>
+        <button type="button" class="mdst-button" commandfor="drawer-left" command="show-modal">Open left</button>
       </div>
 
       <!-- Right drawer (default) -->
       <dialog id="drawer-right" class="mdst-drawer">
         <div class="mdst-drawer-header">
           <span style="font-weight: 600">Right Drawer</span>
-          <button class="mdst-drawer-close" commandfor="drawer-right" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer-close" commandfor="drawer-right" command="close">&#10005;</button>
         </div>
         <div class="mdst-drawer-body">
           <p style="margin: 0">
@@ -84,7 +84,7 @@
           </p>
         </div>
         <div class="mdst-drawer-footer">
-          <button class="mdst-button" commandfor="drawer-right" command="close">Close</button>
+          <button type="button" class="mdst-button" commandfor="drawer-right" command="close">Close</button>
         </div>
       </dialog>
 
@@ -92,7 +92,7 @@
       <dialog id="drawer-left" class="mdst-drawer mdst-drawer--left">
         <div class="mdst-drawer-header">
           <span style="font-weight: 600">Left Drawer</span>
-          <button class="mdst-drawer-close" commandfor="drawer-left" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer-close" commandfor="drawer-left" command="close">&#10005;</button>
         </div>
         <div class="mdst-drawer-body">
           <p style="margin: 0">This drawer opens from the left via <code class="mdst-code">.mdst-drawer--left</code>.</p>
@@ -136,15 +136,15 @@
       </table>
 
       <div class="demo-row" style="margin-top: var(--mdst-space-sm)">
-        <button class="mdst-button" commandfor="drawer-sm" command="show-modal">Small</button>
-        <button class="mdst-button" commandfor="drawer-lg" command="show-modal">Large</button>
-        <button class="mdst-button" commandfor="drawer-full" command="show-modal">Full</button>
+        <button type="button" class="mdst-button" commandfor="drawer-sm" command="show-modal">Small</button>
+        <button type="button" class="mdst-button" commandfor="drawer-lg" command="show-modal">Large</button>
+        <button type="button" class="mdst-button" commandfor="drawer-full" command="show-modal">Full</button>
       </div>
 
       <dialog id="drawer-sm" class="mdst-drawer mdst-drawer--sm">
         <div class="mdst-drawer-header">
           <span style="font-weight: 600">Small</span>
-          <button class="mdst-drawer-close" commandfor="drawer-sm" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer-close" commandfor="drawer-sm" command="close">&#10005;</button>
         </div>
         <div class="mdst-drawer-body">
           <p style="margin: 0">16rem wide.</p>
@@ -154,7 +154,7 @@
       <dialog id="drawer-lg" class="mdst-drawer mdst-drawer--lg">
         <div class="mdst-drawer-header">
           <span style="font-weight: 600">Large</span>
-          <button class="mdst-drawer-close" commandfor="drawer-lg" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer-close" commandfor="drawer-lg" command="close">&#10005;</button>
         </div>
         <div class="mdst-drawer-body">
           <p style="margin: 0">28rem wide, with room for more content.</p>
@@ -164,7 +164,7 @@
       <dialog id="drawer-full" class="mdst-drawer mdst-drawer--full">
         <div class="mdst-drawer-header">
           <span style="font-weight: 600">Full Width</span>
-          <button class="mdst-drawer-close" commandfor="drawer-full" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer-close" commandfor="drawer-full" command="close">&#10005;</button>
         </div>
         <div class="mdst-drawer-body">
           <p style="margin: 0">Takes up the full viewport width.</p>
@@ -175,20 +175,20 @@
     <div class="section">
       <div class="section-header">With Footer</div>
       <div class="demo-row">
-        <button class="mdst-button" commandfor="drawer-footer" command="show-modal">Open drawer with footer</button>
+        <button type="button" class="mdst-button" commandfor="drawer-footer" command="show-modal">Open drawer with footer</button>
       </div>
 
       <dialog id="drawer-footer" class="mdst-drawer">
         <div class="mdst-drawer-header">
           <span style="font-weight: 600">Edit Profile</span>
-          <button class="mdst-drawer-close" commandfor="drawer-footer" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer-close" commandfor="drawer-footer" command="close">&#10005;</button>
         </div>
         <div class="mdst-drawer-body">
           <p style="margin: 0">Form content would go here. The body scrolls independently if content overflows.</p>
         </div>
         <div class="mdst-drawer-footer">
-          <button class="mdst-button mdst-button--ghost" commandfor="drawer-footer" command="close">Cancel</button>
-          <button class="mdst-button mdst-button--inverted" commandfor="drawer-footer" command="close">Save</button>
+          <button type="button" class="mdst-button mdst-button--ghost" commandfor="drawer-footer" command="close">Cancel</button>
+          <button type="button" class="mdst-button mdst-button--inverted" commandfor="drawer-footer" command="close">Save</button>
         </div>
       </dialog>
     </div>
