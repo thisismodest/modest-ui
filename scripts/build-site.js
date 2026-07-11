@@ -95,6 +95,15 @@ function extractBody(html) {
   return match ? match[1] : "";
 }
 
+/**
+ * Escape HTML-special characters so author-written strings (e.g. a component
+ * description containing "<dialog>") are rendered as text rather than parsed
+ * as markup, whether injected into element content or an attribute value.
+ */
+function escapeHtml(str) {
+  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
 function extractHeadStyles(html) {
   const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
   if (!headMatch) return "";
@@ -215,6 +224,7 @@ async function buildComponentPage(template, component, components, pages) {
   const pageTitle = `${component.title} | ${siteConfig.name}`;
   const canonicalPath = `/${component.slug}/`;
   const canonical = `${siteConfig.url}${canonicalPath}`;
+  const description = escapeHtml(component.description);
 
   // Breadcrumb: Home > Component. The group (e.g. "Input") is intentionally
   // omitted because it has no page of its own, and a URL-less intermediate
@@ -226,10 +236,10 @@ async function buildComponentPage(template, component, components, pages) {
 
   const html = render(template, {
     title: pageTitle,
-    description: component.description,
+    description,
     canonical,
     headerTitle: `          <h1>${displayTitle}</h1>`,
-    lead: `          <p class="component-lead">${component.description}</p>`,
+    lead: `          <p class="component-lead">${description}</p>`,
     jsonLd: breadcrumbJsonLd(crumbs),
     className: component.className,
     sidebar: buildSidebar(components, pages, component.slug),
@@ -265,7 +275,7 @@ async function buildStaticPage(template, page, components, pages) {
 
   const html = render(template, {
     title: pageTitle,
-    description: page.description,
+    description: escapeHtml(page.description),
     canonical,
     headerTitle: `          <span>${page.title}</span>`,
     jsonLd,
