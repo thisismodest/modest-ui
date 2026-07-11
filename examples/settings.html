@@ -3,25 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings — modest-ui Example</title>
+    <title>Settings | modest-ui Example</title>
     <meta
       name="description"
-      content="An application settings page built with modest-ui — featuring profile editing, notification preferences, session management, and a danger zone."
+      content="An application settings page built with modest-ui, featuring profile editing, notification preferences, session management, and a danger zone."
     />
     <link rel="canonical" href="https://modest-ui.com/examples/settings.html" />
-    <meta property="og:title" content="Settings — modest-ui Example" />
+    <meta property="og:title" content="Settings | modest-ui Example" />
     <meta
       property="og:description"
-      content="An application settings page built with modest-ui — featuring profile editing, notification preferences, session management, and a danger zone."
+      content="An application settings page built with modest-ui, featuring profile editing, notification preferences, session management, and a danger zone."
     />
     <meta property="og:url" content="https://modest-ui.com/examples/settings.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="modest-ui" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Settings — modest-ui Example" />
+    <meta name="twitter:title" content="Settings | modest-ui Example" />
     <meta
       name="twitter:description"
-      content="An application settings page built with modest-ui — featuring profile editing, notification preferences, session management, and a danger zone."
+      content="An application settings page built with modest-ui, featuring profile editing, notification preferences, session management, and a danger zone."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="../dist/modest-ui.css" />
@@ -728,8 +728,7 @@
             <div class="form-group">
               <label for="bio">Bio</label>
               <textarea id="bio" class="mdst-input" rows="3" placeholder="Tell us a little about yourself...">
-Staff engineer. Building reliable systems and occasionally writing about it.</textarea
-              >
+Staff engineer. Building reliable systems and occasionally writing about it.</textarea>
               <p class="form-hint">Brief description shown on your profile. Max 160 characters.</p>
             </div>
 
@@ -1196,7 +1195,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <h4>Export account data</h4>
                   <p>Download a copy of all your data including projects, settings, and activity history.</p>
                 </div>
-                <button class="mdst-button mdst-button--sm" onclick="showToast(`Export started — you'll receive an email when ready`)">
+                <button class="mdst-button mdst-button--sm" onclick="showToast(`Export started, you'll receive an email when ready`)">
                   Export Data
                 </button>
               </div>
@@ -1246,7 +1245,13 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
       </div>
       <div class="dialog-footer">
         <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('transfer-dialog').close()">Cancel</button>
-        <button class="danger-btn" onclick="document.getElementById('transfer-dialog').close(); showToast('Transfer request sent')">
+        <button
+          class="danger-btn"
+          onclick="
+            document.getElementById('transfer-dialog').close();
+            showToast('Transfer request sent');
+          "
+        >
           Transfer Ownership
         </button>
       </div>
@@ -1287,7 +1292,13 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
       </div>
       <div class="dialog-footer">
         <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('deactivate-dialog').close()">Cancel</button>
-        <button class="danger-btn" onclick="document.getElementById('deactivate-dialog').close(); showToast('Account deactivated')">
+        <button
+          class="danger-btn"
+          onclick="
+            document.getElementById('deactivate-dialog').close();
+            showToast('Account deactivated');
+          "
+        >
           Deactivate Account
         </button>
       </div>
@@ -1326,7 +1337,13 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
       </div>
       <div class="dialog-footer">
         <button class="mdst-button mdst-button--ghost" onclick="document.getElementById('delete-dialog').close()">Cancel</button>
-        <button class="danger-btn" onclick="document.getElementById('delete-dialog').close(); showToast('Account deleted')">
+        <button
+          class="danger-btn"
+          onclick="
+            document.getElementById('delete-dialog').close();
+            showToast('Account deleted');
+          "
+        >
           Permanently Delete
         </button>
       </div>

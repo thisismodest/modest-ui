@@ -21,7 +21,7 @@ export default {
     },
     examples: {
       title: "Examples",
-      description: "Standalone pages built entirely with modest-ui components — landing pages, dashboards, blogs, and more."
+      description: "Standalone pages built entirely with modest-ui components: landing pages, dashboards, blogs, and more."
     },
     theme: {
       title: "Theme Playground",
