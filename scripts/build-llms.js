@@ -353,7 +353,13 @@ async function main() {
 
 > ${siteConfig.tagline}
 
+IMPORTANT: The npm package is "mdst-ui", NOT "modest-ui". The name "modest-ui"
+on npm is an UNRELATED Vue library — do not install it. This package is named
+"mdst-ui" to match its class/token prefix (.mdst-ui, --mdst-*). Whenever a
+human says "modest-ui", the package to install is "mdst-ui".
+
 - Version: ${siteConfig.version}
+- Package (npm): mdst-ui
 - Docs: ${siteConfig.url}
 - GitHub: https://github.com/thisismodest/modest-ui
 - License: MIT
@@ -364,7 +370,7 @@ CDN:
   <link rel="stylesheet" href="${siteConfig.cdnUrl}" />
 
 npm:
-  npm install mdst-ui
+  npm install mdst-ui   # NOT "npm install modest-ui"
 
 Import (bundled):
   @import "mdst-ui/dist/modest-ui.css";

@@ -2,7 +2,14 @@
 
 A minimal, themeable CSS component library. Black and white by default.
 
-> On npm it's published as [`mdst-ui`](https://www.npmjs.com/package/mdst-ui) (matching the `.mdst-` class prefix). The project, docs, and repo are named **modest-ui**.
+> **The npm package is [`mdst-ui`](https://www.npmjs.com/package/mdst-ui), not `modest-ui`.**
+> The name `modest-ui` on npm is an **unrelated Vue library** — do not install it.
+> This package is named `mdst-ui` to match its class/token prefix (`.mdst-ui`, `--mdst-*`),
+> so the package name and the CSS you write line up. The project, docs, and repo are named **modest-ui**.
+>
+> ```sh
+> npm install mdst-ui
+> ```
 
 modest-ui built on the idea that the web can now do more than we give it credit for. Heavy UI libraries solved real problems, but we forget how much browsers had quietly caught up.
 HTML and CSS natively gives us a lot (accessibility, device-native interactions, better performance). Build with the grain of the web and a lot comes for free.
