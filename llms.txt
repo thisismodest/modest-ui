@@ -1269,6 +1269,42 @@ Classes:
 
 ---
 
+### Toolbar `.mdst-toolbar`
+
+A wrapping row of controls with groups, attached (segmented) groups, separators, and a spacer to push actions to the end. Toggle buttons use aria-pressed.
+
+Classes:
+- `.mdst-toolbar`
+- `.mdst-toolbar-group`
+- `.mdst-toolbar-separator`
+- `.mdst-toolbar-spacer`
+- `.mdst-toolbar--bordered`
+- `.mdst-toolbar-group--attached`
+
+```html
+<!-- Filters on the left, actions pushed to the right -->
+<div class="mdst-toolbar">
+  <input type="search" class="mdst-input" placeholder="Search…" aria-label="Search" />
+  <div class="mdst-toolbar-spacer"></div>
+  <div class="mdst-toolbar-group">
+    <button class="mdst-button">Export</button>
+    <button class="mdst-button mdst-button--inverted">Add</button>
+  </div>
+</div>
+
+<!-- Attached toggle group with a separator -->
+<div class="mdst-toolbar mdst-toolbar--bordered" role="toolbar" aria-label="Formatting">
+  <div class="mdst-toolbar-group mdst-toolbar-group--attached">
+    <button class="mdst-button mdst-button--sm" aria-pressed="true">B</button>
+    <button class="mdst-button mdst-button--sm" aria-pressed="false">I</button>
+  </div>
+  <hr class="mdst-toolbar-separator" />
+  <button class="mdst-button mdst-button--sm mdst-button--ghost">Undo</button>
+</div>
+```
+
+---
+
 ### Tooltip `.mdst-tooltip`
 
 Tooltip component using the native Popover API and CSS anchor positioning.
@@ -1469,6 +1505,7 @@ Table:          .mdst-table  +  -wrap  |  --bordered  --compact  --fixed  --stac
 Tabs:           .mdst-tabs  +  -list  -panel  |  --compact  --pills  --vertical
 Tag:            .mdst-tag  +  -dismiss  |  --error  --ghost  --interactive  --lg  --muted  --pill  --sm  --solid  --subtle  --success
 Toast:          .mdst-toast  +  -close  -group
+Toolbar:        .mdst-toolbar  +  -group  -separator  -spacer  |  --bordered  --attached
 Tooltip:        .mdst-tooltip  |  --left  --right  --top
 Typography:     .mdst-a  .mdst-blockquote  .mdst-em  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-kbd  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-small  .mdst-strong  .mdst-ui  .mdst-ul  |  --flush  --lg  --muted  --sm  --unstyled
 Utilities:      .mdst-mono  .mdst-muted  .mdst-sr-only  .mdst-truncate

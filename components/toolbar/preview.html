@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toolbar</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="../input/input.css" />
+    <link rel="stylesheet" href="../dropdown/dropdown.css" />
+    <link rel="stylesheet" href="../details/details.css" />
+    <link rel="stylesheet" href="toolbar.css" />
+    <style>
+      .preview-editor {
+        min-height: 6rem;
+        margin-top: var(--mdst-space-sm);
+        padding: var(--mdst-space-md);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        font-size: var(--mdst-text-sm);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Structure</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-toolbar</span>
+            </td>
+            <td>Wrapping row of controls. Form controls inside size to their content</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-toolbar</span>-group</span>
+            </td>
+            <td>Keeps related controls together with a tighter gap</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-toolbar</span>-spacer</span>
+            </td>
+            <td>Empty element that pushes everything after it to the far end</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-toolbar</span>-separator</span>
+            </td>
+            <td>Vertical rule between groups. Use on <code class="mdst-code">&lt;hr&gt;</code> or an element with <code class="mdst-code">role="separator"</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Modifiers &amp; States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class / Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-toolbar-group</span>--attached</span>
+            </td>
+            <td>
+              <div class="mdst-toolbar">
+                <div class="mdst-toolbar-group mdst-toolbar-group--attached">
+                  <button type="button" class="mdst-button mdst-button--sm">Day</button>
+                  <button type="button" class="mdst-button mdst-button--sm">Week</button>
+                  <button type="button" class="mdst-button mdst-button--sm">Month</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">aria-pressed="true"</span>
+            </td>
+            <td>
+              <div class="mdst-toolbar">
+                <div class="mdst-toolbar-group mdst-toolbar-group--attached">
+                  <button type="button" class="mdst-button mdst-button--sm" aria-pressed="true">List</button>
+                  <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false">Grid</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-toolbar</span>--bordered</span>
+            </td>
+            <td>
+              <div class="mdst-toolbar mdst-toolbar--bordered">
+                <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost">Undo</button>
+                <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost">Redo</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Table Toolbar</div>
+      <div class="mdst-toolbar">
+        <input type="search" class="mdst-input" placeholder="Search customers…" aria-label="Search customers" />
+        <select class="mdst-dropdown" aria-label="Status">
+          <option>All statuses</option>
+          <option>Active</option>
+          <option>Churned</option>
+        </select>
+        <div class="mdst-toolbar-spacer"></div>
+        <div class="mdst-toolbar-group">
+          <button type="button" class="mdst-button">Export</button>
+          <button type="button" class="mdst-button mdst-button--inverted">Add customer</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--mdst-space-xl); padding-top: var(--mdst-space-lg); border-top: 2px dashed var(--mdst-color-border)">
+      <div class="section-header" style="margin-bottom: 0">Interactive Demo: Formatting Toolbar</div>
+      <p style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-md)">
+        <code class="mdst-code">role="toolbar"</code> tells assistive tech to expect arrow-key navigation, so the JavaScript below toggles
+        <code class="mdst-code">aria-pressed</code> and adds a roving <code class="mdst-code">tabindex</code>: Tab enters the toolbar once,
+        arrows move between controls. It is <strong>not</strong> part of modest-ui. If you don&rsquo;t add arrow-key handling, leave
+        <code class="mdst-code">role="toolbar"</code> off and use a plain container.
+      </p>
+
+      <div class="mdst-toolbar mdst-toolbar--bordered" role="toolbar" aria-label="Text formatting" id="demo-toolbar">
+        <div class="mdst-toolbar-group mdst-toolbar-group--attached">
+          <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false" data-style="fontWeight:bold">
+            <strong>B</strong>
+          </button>
+          <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false" data-style="fontStyle:italic">
+            <em>I</em>
+          </button>
+          <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false" data-style="textDecoration:underline">
+            <span style="text-decoration: underline">U</span>
+          </button>
+        </div>
+        <hr class="mdst-toolbar-separator" />
+        <div class="mdst-toolbar-group mdst-toolbar-group--attached">
+          <button type="button" class="mdst-button mdst-button--sm" aria-pressed="true" data-align="left">Left</button>
+          <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false" data-align="center">Center</button>
+          <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false" data-align="right">Right</button>
+        </div>
+        <div class="mdst-toolbar-spacer"></div>
+        <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost" id="demo-reset">Reset</button>
+      </div>
+
+      <div class="preview-editor" id="demo-editor">The quick brown fox jumps over the lazy dog.</div>
+
+      <details class="mdst-details mdst-details--borderless" style="margin-top: var(--mdst-space-md)">
+        <summary>Demo source</summary>
+        <pre class="mdst-pre" style="margin-top: var(--mdst-space-sm)"><code>const toolbar = document.querySelector("#toolbar");
+const items = [...toolbar.querySelectorAll("button")];
+
+// Roving tabindex: only one control is in the tab order at a time
+items.forEach((item, i) =&gt; (item.tabIndex = i === 0 ? 0 : -1));
+
+toolbar.addEventListener("keydown", (event) =&gt; {
+  const keys = { ArrowRight: 1, ArrowLeft: -1, Home: "first", End: "last" };
+  if (!(event.key in keys)) return;
+  event.preventDefault();
+
+  const current = items.indexOf(document.activeElement);
+  const step = keys[event.key];
+  const next =
+    step === "first" ? 0 :
+    step === "last" ? items.length - 1 :
+    (current + step + items.length) % items.length;
+
+  items[current].tabIndex = -1;
+  items[next].tabIndex = 0;
+  items[next].focus();
+});
+
+// Independent toggles (bold, italic, underline)
+toolbar.querySelectorAll("[data-style]").forEach((button) =&gt; {
+  button.addEventListener("click", () =&gt; {
+    const pressed = button.getAttribute("aria-pressed") === "true";
+    button.setAttribute("aria-pressed", String(!pressed));
+  });
+});
+
+// Exclusive toggles (alignment): exactly one is pressed
+const alignButtons = toolbar.querySelectorAll("[data-align]");
+alignButtons.forEach((button) =&gt; {
+  button.addEventListener("click", () =&gt; {
+    alignButtons.forEach((b) =&gt; b.setAttribute("aria-pressed", String(b === button)));
+  });
+});</code></pre>
+      </details>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Filters on the left, actions pushed to the right --&gt;
+&lt;div class="mdst-toolbar"&gt;
+  &lt;input type="search" class="mdst-input" placeholder="Search…" aria-label="Search" /&gt;
+  &lt;div class="mdst-toolbar-spacer"&gt;&lt;/div&gt;
+  &lt;div class="mdst-toolbar-group"&gt;
+    &lt;button class="mdst-button"&gt;Export&lt;/button&gt;
+    &lt;button class="mdst-button mdst-button--inverted"&gt;Add&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Attached toggle group with a separator --&gt;
+&lt;div class="mdst-toolbar mdst-toolbar--bordered" role="toolbar" aria-label="Formatting"&gt;
+  &lt;div class="mdst-toolbar-group mdst-toolbar-group--attached"&gt;
+    &lt;button class="mdst-button mdst-button--sm" aria-pressed="true"&gt;B&lt;/button&gt;
+    &lt;button class="mdst-button mdst-button--sm" aria-pressed="false"&gt;I&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;hr class="mdst-toolbar-separator" /&gt;
+  &lt;button class="mdst-button mdst-button--sm mdst-button--ghost"&gt;Undo&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <script>
+      // Interactive demo — NOT part of modest-ui
+      const demoToolbar = document.querySelector("#demo-toolbar");
+      const demoEditor = document.querySelector("#demo-editor");
+      const demoItems = [...demoToolbar.querySelectorAll("button")];
+
+      demoItems.forEach((item, i) => (item.tabIndex = i === 0 ? 0 : -1));
+
+      demoToolbar.addEventListener("keydown", (event) => {
+        const keys = { ArrowRight: 1, ArrowLeft: -1, Home: "first", End: "last" };
+        if (!(event.key in keys)) return;
+        event.preventDefault();
+
+        const current = demoItems.indexOf(document.activeElement);
+        const step = keys[event.key];
+        const next = step === "first" ? 0 : step === "last" ? demoItems.length - 1 : (current + step + demoItems.length) % demoItems.length;
+
+        demoItems[current].tabIndex = -1;
+        demoItems[next].tabIndex = 0;
+        demoItems[next].focus();
+      });
+
+      // Roving focus should follow clicks too
+      demoItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          demoItems.forEach((other) => (other.tabIndex = other === item ? 0 : -1));
+        });
+      });
+
+      function renderEditor() {
+        demoEditor.removeAttribute("style");
+        demoToolbar.querySelectorAll('[data-style][aria-pressed="true"]').forEach((button) => {
+          const [prop, value] = button.dataset.style.split(":");
+          demoEditor.style[prop] = value;
+        });
+        const align = demoToolbar.querySelector('[data-align][aria-pressed="true"]');
+        demoEditor.style.textAlign = align ? align.dataset.align : "";
+      }
+
+      demoToolbar.querySelectorAll("[data-style]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const pressed = button.getAttribute("aria-pressed") === "true";
+          button.setAttribute("aria-pressed", String(!pressed));
+          renderEditor();
+        });
+      });
+
+      const demoAlign = demoToolbar.querySelectorAll("[data-align]");
+      demoAlign.forEach((button) => {
+        button.addEventListener("click", () => {
+          demoAlign.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+          renderEditor();
+        });
+      });
+
+      document.querySelector("#demo-reset").addEventListener("click", () => {
+        demoToolbar.querySelectorAll("[data-style]").forEach((b) => b.setAttribute("aria-pressed", "false"));
+        demoAlign.forEach((b, i) => b.setAttribute("aria-pressed", String(i === 0)));
+        renderEditor();
+      });
+    </script>
+  </body>
+</html>

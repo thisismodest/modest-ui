@@ -27,6 +27,10 @@ change; adding new ones is a minor change.
   with `--sm` / `--lg` sizes and a `--mdst-meter-height` property. The fill
   colour follows `low` / `high` / `optimum`: foreground when optimum, warning
   when sub-optimum, error when least optimum.
+- `toolbar`: a wrapping row of controls (`.mdst-toolbar`, `-group`, `-spacer`,
+  `-separator`) with `--bordered` and attached (segmented) groups via
+  `.mdst-toolbar-group--attached`. Toggle buttons show their on state from
+  `aria-pressed="true"`, and form controls inside size to their content.
 
 ## [1.0.2] - 2026-07-10
 

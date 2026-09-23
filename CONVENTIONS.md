@@ -94,6 +94,7 @@ Components that don't map to a single native element (they use generic tags like
 
 - Card (`.mdst-card`)
 - Tag (`.mdst-tag`)
+- Toolbar (`.mdst-toolbar`)
 - Tooltip (`.mdst-tooltip`)
 - Popover (`.mdst-popover`)
 - Password Input (`.mdst-password-input`)

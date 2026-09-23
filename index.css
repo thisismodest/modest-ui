@@ -37,6 +37,7 @@
 @import "./components/tabs/tabs.css";
 @import "./components/tag/tag.css";
 @import "./components/toast/toast.css";
+@import "./components/toolbar/toolbar.css";
 @import "./components/tooltip/tooltip.css";
 @import "./components/typography/typography.css";
 @import "./components/utilities/utilities.css";
