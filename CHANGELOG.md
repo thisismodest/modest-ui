@@ -9,7 +9,7 @@ The public API is the set of CSS custom properties (`--mdst-*`) and class names
 `llms.txt`. Renaming or removing a documented token or class is a breaking
 change; adding new ones is a minor change.
 
-## [Unreleased]
+## [1.1.0] - 2026-09-23
 
 ### Added
 
@@ -34,6 +34,23 @@ change; adding new ones is a minor change.
 - `typography`: classless and class styles for more inline tags: `abbr[title]`,
   `del`, `ins`, `s`, `cite`, `samp`, `var`, `sub` and `sup` (`.mdst-abbr`,
   `.mdst-del`, etc.). `sub` / `sup` no longer stretch the line height.
+
+### Changed
+
+- `typography`: inside `.mdst-ui`, bare `abbr[title]`, `del`, `ins`, `s`,
+  `cite`, `samp`, `var`, `sub` and `sup` now pick up these styles by default
+  (previously browser defaults). No classes or tokens were renamed or removed.
+
+## [1.0.3] - 2026-07-17
+
+### Changed
+
+- Docs site: component pages use an `h1` title and a meta description; SEO
+  pass with Open Graph image and JSON-LD; descriptions are HTML-escaped.
+- Docs, README and `llms.txt` state explicitly that the npm package is
+  `mdst-ui` (not the unrelated `modest-ui` package).
+
+No stylesheet changes: the CSS in this release is identical to `1.0.2`.
 
 ## [1.0.2] - 2026-07-10
 
