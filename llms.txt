@@ -730,6 +730,40 @@ Classes:
 
 ---
 
+### Meter `.mdst-meter`
+
+Styles the native <meter> element for scalar values like storage, scores, or password strength. Fill colour follows the low, high, and optimum attributes.
+
+Classes:
+- `.mdst-meter`
+- `.mdst-meter--lg`
+- `.mdst-meter--sm`
+
+```html
+<!-- Default meter (0–1) -->
+<meter class="mdst-meter" value="0.6">60%</meter>
+
+<!-- Custom range -->
+<meter class="mdst-meter" min="0" max="256" value="92">92 of 256 GB</meter>
+
+<!-- Higher is better: colour shifts to warning / error as the value drops -->
+<meter class="mdst-meter" low="0.3" high="0.7" optimum="1" value="0.5">Fair</meter>
+
+<!-- Lower is better: colour shifts as usage climbs -->
+<meter class="mdst-meter" max="256" low="160" high="224" optimum="0" value="212">212 GB</meter>
+
+<!-- Sizes -->
+<meter class="mdst-meter mdst-meter--sm" value="0.5">50%</meter>
+<meter class="mdst-meter mdst-meter--lg" value="0.5">50%</meter>
+
+<!-- Classless (inside .mdst-ui container) -->
+<div class="mdst-ui">
+  <meter value="0.75">75%</meter>
+</div>
+```
+
+---
+
 ### OTP `.mdst-otp-input`
 
 One-time password input with auto-advance, paste support, and validation states.
@@ -1420,6 +1454,7 @@ Drawer:         .mdst-drawer  +  -body  -close  -footer  -header  |  --full  --l
 Dropdown:       .mdst-dropdown  |  --ghost  --inline  --lg  --sm
 File:           .mdst-file-input  +  __field  |  --borderless  --inverted
 Text:           .mdst-input
+Meter:          .mdst-meter  |  --lg  --sm
 OTP:            .mdst-otp-input  +  -digit  -separator  |  --error  --success
 Password:       .mdst-password-input  +  __field  __toggle
 Popover:        .mdst-popover  |  --anchored  --lg  --sm

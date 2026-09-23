@@ -85,6 +85,8 @@ Components that map 1:1 to a native HTML element:
 | Code       | `code`                                                                                     |
 | Pre        | `pre`                                                                                      |
 | Typography | `h1`–`h6`, `p`, `a`, `strong`, `em`, `small`, `mark`, `blockquote`, `hr`, `ul`, `ol`, `li` |
+| Progress   | `progress` |
+| Meter      | `meter` |
 
 ### What stays class-only
 

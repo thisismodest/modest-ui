@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meter</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../input/input.css" />
+    <link rel="stylesheet" href="../details/details.css" />
+    <link rel="stylesheet" href="meter.css" />
+    <style>
+      .preview-meter-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--mdst-space-xs);
+        font-size: var(--mdst-text-sm);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Default</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-meter</span>
+            </td>
+            <td>
+              <meter class="mdst-meter" value="0.6">60%</meter>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-meter</span> (min / max)
+            </td>
+            <td>
+              <meter class="mdst-meter" min="0" max="256" value="92">92 of 256 GB</meter>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Ranges</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Attributes</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">optimum</span>
+            </td>
+            <td>
+              <meter class="mdst-meter" low="0.3" high="0.7" optimum="1" value="0.85">Good</meter>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">sub-optimum</span>
+            </td>
+            <td>
+              <meter class="mdst-meter" low="0.3" high="0.7" optimum="1" value="0.5">Fair</meter>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">least optimum</span>
+            </td>
+            <td>
+              <meter class="mdst-meter" low="0.3" high="0.7" optimum="1" value="0.15">Poor</meter>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="footnote">
+        No classes needed for colour: the browser compares <code class="mdst-code">value</code> against
+        <code class="mdst-code">low</code>, <code class="mdst-code">high</code> and <code class="mdst-code">optimum</code>. Put
+        <code class="mdst-code">optimum</code> at the top for &ldquo;higher is better&rdquo; (scores, strength) or at the bottom for
+        &ldquo;lower is better&rdquo; (disk usage, errors). A meter without those attributes always uses the foreground colour.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Sizes</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-meter</span>--sm</span>
+            </td>
+            <td>
+              <meter class="mdst-meter mdst-meter--sm" value="0.45">45%</meter>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-meter</span>
+            </td>
+            <td>
+              <meter class="mdst-meter" value="0.45">45%</meter>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-meter</span>--lg</span>
+            </td>
+            <td>
+              <meter class="mdst-meter mdst-meter--lg" value="0.45">45%</meter>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">--mdst-meter-height</span>
+            </td>
+            <td>Custom height. Defaults to <code class="mdst-code">var(--mdst-space-sm)</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Examples</div>
+      <div class="examples" style="gap: var(--mdst-space-md)">
+        <div>
+          <div class="preview-meter-label">
+            <span>Storage</span>
+            <span>212 of 256 GB</span>
+          </div>
+          <meter class="mdst-meter" min="0" max="256" low="160" high="224" optimum="0" value="212">212 of 256 GB</meter>
+        </div>
+        <div>
+          <div class="preview-meter-label">
+            <span>Match score</span>
+            <span>92%</span>
+          </div>
+          <meter class="mdst-meter" low="0.4" high="0.75" optimum="1" value="0.92">92%</meter>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--mdst-space-xl); padding-top: var(--mdst-space-lg); border-top: 2px dashed var(--mdst-color-border)">
+      <div class="section-header" style="margin-bottom: 0">Interactive Demo: Password Strength</div>
+      <p style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-md)">
+        This demo uses vanilla JS to set the meter&rsquo;s <code class="mdst-code">value</code>. The JavaScript below is
+        <strong>not</strong> part of modest-ui, and the scoring is deliberately naive. Use a real strength library in production.
+      </p>
+
+      <div style="max-width: 24rem">
+        <input type="password" class="mdst-input" id="demo-password" placeholder="Type a password" autocomplete="new-password" />
+        <meter
+          class="mdst-meter mdst-meter--sm"
+          id="demo-strength"
+          min="0"
+          max="4"
+          low="2"
+          high="3"
+          optimum="4"
+          value="0"
+          style="margin-top: var(--mdst-space-sm)"
+        ></meter>
+        <div class="preview-meter-label" style="margin-top: var(--mdst-space-xs); color: var(--mdst-color-muted)">
+          <span id="demo-strength-label">Too short</span>
+        </div>
+      </div>
+
+      <details class="mdst-details mdst-details--borderless" style="margin-top: var(--mdst-space-md)">
+        <summary>Demo source</summary>
+        <pre class="mdst-pre" style="margin-top: var(--mdst-space-sm)"><code>&lt;input type="password" id="password" /&gt;
+&lt;meter id="strength" min="0" max="4" low="2" high="3" optimum="4" value="0"&gt;&lt;/meter&gt;
+&lt;span id="strength-label"&gt;Too short&lt;/span&gt;
+
+&lt;script&gt;
+  const input = document.querySelector("#password");
+  const meter = document.querySelector("#strength");
+  const label = document.querySelector("#strength-label");
+  const labels = ["Too short", "Weak", "Fair", "Good", "Strong"];
+
+  input.addEventListener("input", () =&gt; {
+    const pw = input.value;
+    let score = 0;
+    if (pw.length &gt;= 8) score++;
+    if (pw.length &gt;= 12) score++;
+    if (/[a-z]/.test(pw) &amp;&amp; /[A-Z]/.test(pw)) score++;
+    if (/\d/.test(pw) &amp;&amp; /[^a-zA-Z0-9]/.test(pw)) score++;
+
+    meter.value = score;
+    label.textContent = labels[score];
+  });
+&lt;/script&gt;</code></pre>
+      </details>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- Default meter (0–1) --&gt;
+&lt;meter class="mdst-meter" value="0.6"&gt;60%&lt;/meter&gt;
+
+&lt;!-- Custom range --&gt;
+&lt;meter class="mdst-meter" min="0" max="256" value="92"&gt;92 of 256 GB&lt;/meter&gt;
+
+&lt;!-- Higher is better: colour shifts to warning / error as the value drops --&gt;
+&lt;meter class="mdst-meter" low="0.3" high="0.7" optimum="1" value="0.5"&gt;Fair&lt;/meter&gt;
+
+&lt;!-- Lower is better: colour shifts as usage climbs --&gt;
+&lt;meter class="mdst-meter" max="256" low="160" high="224" optimum="0" value="212"&gt;212 GB&lt;/meter&gt;
+
+&lt;!-- Sizes --&gt;
+&lt;meter class="mdst-meter mdst-meter--sm" value="0.5"&gt;50%&lt;/meter&gt;
+&lt;meter class="mdst-meter mdst-meter--lg" value="0.5"&gt;50%&lt;/meter&gt;
+
+&lt;!-- Classless (inside .mdst-ui container) --&gt;
+&lt;div class="mdst-ui"&gt;
+  &lt;meter value="0.75"&gt;75%&lt;/meter&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <script>
+      // Interactive demo — NOT part of modest-ui
+      const demoInput = document.querySelector("#demo-password");
+      const demoMeter = document.querySelector("#demo-strength");
+      const demoLabel = document.querySelector("#demo-strength-label");
+      const demoLabels = ["Too short", "Weak", "Fair", "Good", "Strong"];
+
+      demoInput.addEventListener("input", () => {
+        const pw = demoInput.value;
+        let score = 0;
+        if (pw.length >= 8) score++;
+        if (pw.length >= 12) score++;
+        if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
+        if (/\d/.test(pw) && /[^a-zA-Z0-9]/.test(pw)) score++;
+
+        demoMeter.value = score;
+        demoLabel.textContent = demoLabels[score];
+      });
+    </script>
+  </body>
+</html>

@@ -1825,6 +1825,88 @@ h6 {
   resize: vertical;
 }
 
+/* Meter */
+
+/* The browser picks the fill colour from low / high / optimum:
+   optimum → foreground, sub-optimum → warning, least optimum → error.
+   A meter without those attributes always reads as optimum. */
+
+:where(.mdst-ui) meter,
+.mdst-meter {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  height: var(--mdst-meter-height, var(--mdst-space-sm));
+  border: none;
+  border-radius: var(--mdst-radius);
+  overflow: hidden;
+  background: var(--mdst-color-subtle);
+
+  /* Webkit (Chrome, Safari, Edge) - track */
+
+  /* WebKit won't resolve percentage heights inside a meter, so the bar and
+     fill take the same explicit length as the meter itself */
+
+  &::-webkit-meter-bar {
+    box-sizing: border-box;
+    height: var(--mdst-meter-height, var(--mdst-space-sm));
+    padding: 0;
+    border: none;
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-subtle);
+  }
+
+  /* Webkit - fills */
+
+  &::-webkit-meter-optimum-value,
+  &::-webkit-meter-suboptimum-value,
+  &::-webkit-meter-even-less-good-value {
+    height: var(--mdst-meter-height, var(--mdst-space-sm));
+    border-radius: var(--mdst-radius);
+    transition: width var(--mdst-transition);
+  }
+
+  &::-webkit-meter-optimum-value {
+    background: var(--mdst-color-fg);
+  }
+
+  &::-webkit-meter-suboptimum-value {
+    background: var(--mdst-color-warning);
+  }
+
+  &::-webkit-meter-even-less-good-value {
+    background: var(--mdst-color-error);
+  }
+
+  /* Firefox - fills */
+
+  &::-moz-meter-bar {
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-fg);
+  }
+
+  &:-moz-meter-sub-optimum::-moz-meter-bar {
+    background: var(--mdst-color-warning);
+  }
+
+  &:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+    background: var(--mdst-color-error);
+  }
+
+  /* Size: Small */
+
+  &.mdst-meter--sm {
+    --mdst-meter-height: var(--mdst-space-xs);
+  }
+
+  /* Size: Large */
+
+  &.mdst-meter--lg {
+    --mdst-meter-height: var(--mdst-space-md);
+  }
+}
+
 /*
  * OTP Input
  *

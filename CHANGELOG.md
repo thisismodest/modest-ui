@@ -23,6 +23,10 @@ change; adding new ones is a minor change.
   `--mdst-banner-width`. `--borderless` removes the border, and
   `--border-top` / `-bottom` / `-start` / `-end` keep only the listed edges
   (combinable), so pinned banners don't double up with their section's border.
+- `meter`: styles the native `<meter>` element, classless and as `.mdst-meter`,
+  with `--sm` / `--lg` sizes and a `--mdst-meter-height` property. The fill
+  colour follows `low` / `high` / `optimum`: foreground when optimum, warning
+  when sub-optimum, error when least optimum.
 
 ## [1.0.2] - 2026-07-10
 

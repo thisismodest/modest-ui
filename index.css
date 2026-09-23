@@ -21,6 +21,7 @@
 @import "./components/dropdown/dropdown.css";
 @import "./components/file-input/file-input.css";
 @import "./components/input/input.css";
+@import "./components/meter/meter.css";
 @import "./components/otp-input/otp-input.css";
 @import "./components/password-input/password-input.css";
 @import "./components/popover/popover.css";
