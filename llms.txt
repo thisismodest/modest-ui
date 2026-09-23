@@ -249,6 +249,70 @@ Classes:
 
 ---
 
+### Banner `.mdst-banner`
+
+Full-width message strip for cookie consent, alerts, and announcements. Sits in the page flow, sticks to the top or bottom of a section, or fixes to the viewport. Visibility and variant are driven by data attributes.
+
+Classes:
+- `.mdst-banner`
+- `.mdst-banner-actions`
+- `.mdst-banner-close`
+- `.mdst-banner-content`
+- `.mdst-banner--border-bottom`
+- `.mdst-banner--border-end`
+- `.mdst-banner--border-start`
+- `.mdst-banner--border-top`
+- `.mdst-banner--borderless`
+- `.mdst-banner--bottom`
+- `.mdst-banner--end`
+- `.mdst-banner--fixed`
+- `.mdst-banner--sm`
+- `.mdst-banner--start`
+- `.mdst-banner--top`
+
+```html
+<!-- In the flow of the page -->
+<div class="mdst-banner" data-variant="info" role="region" aria-label="Announcement">
+  <div class="mdst-banner-content">Scheduled maintenance on Sunday.</div>
+  <button class="mdst-banner-close" aria-label="Dismiss">✕</button>
+</div>
+
+<!-- Sticky to the top of a scrolling section -->
+<section style="overflow-y: auto">
+  <div class="mdst-banner mdst-banner--top mdst-banner--border-bottom">...</div>
+  ...
+</section>
+
+<!-- Fixed to the bottom of the viewport (cookie consent) -->
+<div class="mdst-banner mdst-banner--fixed mdst-banner--bottom"
+     data-state="visible" role="region" aria-label="Cookie consent">
+  <div class="mdst-banner-content">We use analytics cookies.</div>
+  <div class="mdst-banner-actions">
+    <button class="mdst-button mdst-button--sm">Reject</button>
+    <button class="mdst-button mdst-button--sm mdst-button--inverted">Accept</button>
+  </div>
+</div>
+
+<!-- Compact card fixed to the bottom-right corner -->
+<div class="mdst-banner mdst-banner--sm mdst-banner--fixed mdst-banner--bottom mdst-banner--end"
+     data-state="visible" role="region" aria-label="Cookie consent">...</div>
+
+<!-- Edge-to-edge fixed banner -->
+<div class="mdst-banner mdst-banner--fixed mdst-banner--top" style="--mdst-banner-offset: 0">...</div>
+
+<!-- Example JS -->
+<script>
+  function showBanner(el) {
+    el.setAttribute("data-state", "visible");
+  }
+  function hideBanner(el) {
+    el.setAttribute("data-state", "hidden");
+  }
+</script>
+```
+
+---
+
 ### Breadcrumbs `.mdst-breadcrumbs`
 
 Navigation breadcrumb trail with separator support. Works classless via aria-label or with explicit class.
@@ -1343,6 +1407,7 @@ Classes:
 
 Avatar:         .mdst-avatar  +  -group  |  --lg  --sm  --square  --xl
 Badge:          .mdst-badge  |  --dot  --error  --lg  --muted  --sm  --solid  --subtle  --success  --top-right  --warning
+Banner:         .mdst-banner  +  -actions  -close  -content  |  --border-bottom  --border-end  --border-start  --border-top  --borderless  --bottom  --end  --fixed  --sm  --start  --top
 Breadcrumbs:    .mdst-breadcrumbs  |  --arrow  --compact
 Button:         .mdst-button  |  --ghost  --inverted  --lg  --sm
 Card:           .mdst-card  +  -body  -footer  -header  |  --borderless  --compact  --flush  --interactive  --borderless  --borderless

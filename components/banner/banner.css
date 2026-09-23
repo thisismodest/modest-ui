@@ -1,0 +1,236 @@
+/* Banner */
+
+.mdst-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mdst-space-sm) var(--mdst-space-md);
+  padding: var(--mdst-space-md);
+  border: var(--mdst-border-width) solid var(--mdst-color-border);
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-bg);
+  color: var(--mdst-color-fg);
+  font-family: var(--mdst-font-ui);
+  font-size: var(--mdst-text-sm);
+  line-height: var(--mdst-line-height);
+  transition:
+    opacity 150ms ease-out,
+    translate 150ms ease-out,
+    display 150ms ease-out allow-discrete;
+
+  /* Content (grows to fill, pushes actions to the end) */
+
+  & .mdst-banner-content {
+    flex: 1 1 16rem;
+    min-width: 0;
+
+    & > * + * {
+      margin-top: var(--mdst-space-xs);
+    }
+  }
+
+  /* Actions (buttons, links) */
+
+  & .mdst-banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+  }
+
+  /* Close button */
+
+  & .mdst-banner-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+
+    /* One text line tall, so the icon centres on the first line of content */
+    height: calc(1em * var(--mdst-line-height));
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.6;
+    font-size: 1em;
+    line-height: 1;
+    transition: opacity var(--mdst-transition-fast);
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
+      outline-offset: var(--mdst-border-width);
+    }
+  }
+
+  /* State: visible */
+
+  &[data-state="visible"] {
+    display: flex;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  /* State: hidden (removed from layout once the fade completes) */
+
+  &[data-state="hidden"] {
+    display: none;
+    opacity: 0;
+  }
+
+  /* Sizes */
+
+  &.mdst-banner--sm {
+    gap: var(--mdst-space-xs) var(--mdst-space-md);
+    padding: var(--mdst-space-sm) var(--mdst-space-md);
+    font-size: var(--mdst-text-xs);
+
+    & .mdst-banner-actions {
+      gap: var(--mdst-space-xs);
+    }
+  }
+
+  /* Borders: remove all, or keep only the listed edges (combinable).
+     Declared before variants so a variant's accent edge still shows. */
+
+  &:is(
+      .mdst-banner--borderless,
+      .mdst-banner--border-top,
+      .mdst-banner--border-bottom,
+      .mdst-banner--border-start,
+      .mdst-banner--border-end
+    ) {
+    border: none;
+  }
+
+  &.mdst-banner--border-top {
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  &.mdst-banner--border-bottom {
+    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  &.mdst-banner--border-start {
+    border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  &.mdst-banner--border-end {
+    border-inline-end: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  /* Variant: success */
+
+  &[data-variant="success"] {
+    border-left: 3px solid var(--mdst-color-success);
+  }
+
+  /* Variant: error */
+
+  &[data-variant="error"] {
+    border-left: 3px solid var(--mdst-color-error);
+  }
+
+  /* Variant: warning */
+
+  &[data-variant="warning"] {
+    border-left: 3px solid var(--mdst-color-warning);
+  }
+
+  /* Variant: info */
+
+  &[data-variant="info"] {
+    border-left: 3px solid var(--mdst-color-fg);
+  }
+
+  /* Position: sticky to the top/bottom edge of its scrolling section.
+     Place --top as the section's first child and --bottom as its last. */
+
+  &.mdst-banner--top,
+  &.mdst-banner--bottom {
+    position: sticky;
+    z-index: 1;
+  }
+
+  &.mdst-banner--top {
+    top: var(--mdst-banner-offset, 0);
+  }
+
+  &.mdst-banner--bottom {
+    bottom: var(--mdst-banner-offset, 0);
+  }
+
+  /* Position: fixed to the viewport (combine with --top or --bottom) */
+
+  &.mdst-banner--fixed {
+    position: fixed;
+    left: var(--mdst-banner-offset, var(--mdst-space-md));
+    right: var(--mdst-banner-offset, var(--mdst-space-md));
+    z-index: 1000;
+
+    /* Corner: a compact card at the start/end edge instead of full width */
+
+    &.mdst-banner--start,
+    &.mdst-banner--end {
+      max-width: var(--mdst-banner-width, 28rem);
+    }
+
+    &.mdst-banner--start {
+      right: auto;
+    }
+
+    &.mdst-banner--end {
+      left: auto;
+    }
+
+    &.mdst-banner--top {
+      top: var(--mdst-banner-offset, var(--mdst-space-md));
+
+      &[data-state="hidden"] {
+        translate: 0 -0.5rem;
+      }
+
+      &[data-state="visible"] {
+        @starting-style {
+          translate: 0 -0.5rem;
+        }
+      }
+    }
+
+    &.mdst-banner--bottom {
+      bottom: var(--mdst-banner-offset, var(--mdst-space-md));
+
+      &[data-state="hidden"] {
+        translate: 0 0.5rem;
+      }
+
+      &[data-state="visible"] {
+        @starting-style {
+          translate: 0 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+/* Corner banners go full width on narrow screens */
+
+@media (max-width: 30rem) {
+  .mdst-banner.mdst-banner--fixed {
+    &.mdst-banner--start,
+    &.mdst-banner--end {
+      left: var(--mdst-banner-offset, var(--mdst-space-md));
+      right: var(--mdst-banner-offset, var(--mdst-space-md));
+      max-width: none;
+    }
+  }
+}

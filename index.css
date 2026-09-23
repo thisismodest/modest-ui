@@ -8,6 +8,7 @@
 
 @import "./components/avatar/avatar.css";
 @import "./components/badge/badge.css";
+@import "./components/banner/banner.css";
 @import "./components/breadcrumbs/breadcrumbs.css";
 @import "./components/button/button.css";
 @import "./components/card/card.css";

@@ -9,6 +9,21 @@ The public API is the set of CSS custom properties (`--mdst-*`) and class names
 `llms.txt`. Renaming or removing a documented token or class is a breaking
 change; adding new ones is a minor change.
 
+## [Unreleased]
+
+### Added
+
+- `banner`: full-width message strip for cookie consent, alerts, and
+  announcements (`.mdst-banner`, `-content`, `-actions`, `-close`). Sits in the
+  page flow by default; `--top` / `--bottom` stick it to the edge of a
+  scrolling section, and `--fixed` pins it to the viewport — full width, or as
+  a compact corner card with `--start` / `--end`. `--sm` gives a compact size.
+  Visibility and variant use `data-state` and `data-variant`, matching Toast.
+  Edge offset is configurable with `--mdst-banner-offset`, corner width with
+  `--mdst-banner-width`. `--borderless` removes the border, and
+  `--border-top` / `-bottom` / `-start` / `-end` keep only the listed edges
+  (combinable), so pinned banners don't double up with their section's border.
+
 ## [1.0.2] - 2026-07-10
 
 ### Changed

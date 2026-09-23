@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banner</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="../details/details.css" />
+    <link rel="stylesheet" href="banner.css" />
+    <style>
+      .preview-stack {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mdst-space-sm);
+      }
+
+      /* A scrolling "section" to show sticky positioning */
+      .preview-scroll {
+        height: 16rem;
+        overflow-y: auto;
+        border: var(--mdst-border-width) dotted color-mix(in srgb, var(--mdst-color-border) 30%, transparent);
+      }
+
+      .preview-scroll-body {
+        padding: var(--mdst-space-md);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+
+        & > * + * {
+          margin-top: var(--mdst-space-sm);
+        }
+      }
+
+      .preview-log {
+        min-height: 6rem;
+        margin-top: var(--mdst-space-sm);
+      }
+
+      /* Leave room so the fixed demo banner never covers the usage block */
+      body {
+        padding-bottom: 10rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Structure</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-banner</span>
+            </td>
+            <td>
+              Banner container. Use <code class="mdst-code">role="region"</code> with an <code class="mdst-code">aria-label</code> for
+              persistent banners (cookies), or <code class="mdst-code">role="status"</code> / <code class="mdst-code">role="alert"</code>
+              for messages that appear at runtime
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>-content</span>
+            </td>
+            <td>Message text. Grows to fill the row and pushes actions to the end</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>-actions</span>
+            </td>
+            <td>Group of buttons or links. Wraps below the content on narrow screens</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>-close</span>
+            </td>
+            <td>Dismiss button</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Data Attribute</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">data-state="visible"</span>
+            </td>
+            <td>Banner is shown and fades in</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">data-state="hidden"</span>
+            </td>
+            <td>Banner fades out and is removed from layout (<code class="mdst-code">display: none</code>)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Variants</div>
+      <div class="preview-stack">
+        <div class="mdst-banner" role="region" aria-label="Announcement">
+          <div class="mdst-banner-content">Default banner, no variant.</div>
+          <button type="button" class="mdst-banner-close" aria-label="Dismiss">✕</button>
+        </div>
+
+        <div class="mdst-banner" data-variant="info" role="region" aria-label="Information">
+          <div class="mdst-banner-content"><span class="class-name">info</span>: scheduled maintenance on Sunday at 02:00 UTC.</div>
+          <button type="button" class="mdst-banner-close" aria-label="Dismiss">✕</button>
+        </div>
+
+        <div class="mdst-banner" data-variant="success" role="region" aria-label="Success">
+          <div class="mdst-banner-content"><span class="class-name">success</span>: your account has been verified.</div>
+          <button type="button" class="mdst-banner-close" aria-label="Dismiss">✕</button>
+        </div>
+
+        <div class="mdst-banner" data-variant="warning" role="region" aria-label="Warning">
+          <div class="mdst-banner-content"><span class="class-name">warning</span>: your trial ends in 3 days.</div>
+          <div class="mdst-banner-actions">
+            <button type="button" class="mdst-button mdst-button--sm">Upgrade</button>
+          </div>
+        </div>
+
+        <div class="mdst-banner" data-variant="error" role="region" aria-label="Error">
+          <div class="mdst-banner-content"><span class="class-name">error</span>: we couldn&rsquo;t process your last payment.</div>
+          <div class="mdst-banner-actions">
+            <button type="button" class="mdst-button mdst-button--sm">Update card</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">With Actions</div>
+      <div class="mdst-banner" role="region" aria-label="Cookie consent">
+        <div class="mdst-banner-content">
+          <strong>We use cookies</strong>
+          <p>We use analytics cookies to understand how the site is used. You can accept or reject them.</p>
+        </div>
+        <div class="mdst-banner-actions">
+          <button type="button" class="mdst-button mdst-button--sm">Reject</button>
+          <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted">Accept</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Sizes</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-banner</span></td>
+            <td>
+              <div class="mdst-banner">
+                <div class="mdst-banner-content">Default size.</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>--sm</span>
+            </td>
+            <td>
+              <div class="mdst-banner mdst-banner--sm">
+                <div class="mdst-banner-content">Compact padding and smaller text.</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Borders</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>--borderless</span>
+            </td>
+            <td>
+              <div class="mdst-banner mdst-banner--borderless" style="background: var(--mdst-color-subtle)">
+                <div class="mdst-banner-content">No border.</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>--border-top</span>
+            </td>
+            <td>
+              <div class="mdst-banner mdst-banner--border-top">
+                <div class="mdst-banner-content">Top edge only.</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>--border-bottom</span>
+            </td>
+            <td>
+              <div class="mdst-banner mdst-banner--border-bottom">
+                <div class="mdst-banner-content">Bottom edge only.</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>--border-start</span><br />
+              <span class="class-name"><span class="dim">.mdst-banner</span>--border-end</span>
+            </td>
+            <td>
+              <div class="mdst-banner mdst-banner--border-start mdst-banner--border-end">
+                <div class="mdst-banner-content">Start and end edges. Edge classes combine.</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="footnote">
+        Any border class removes the other edges. A <code class="mdst-code">data-variant</code> accent edge is always kept.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Positions</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">.mdst-banner</span></td>
+            <td>In the flow of the page (default)</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>--top</span><br />
+              <span class="class-name"><span class="dim">.mdst-banner</span>--bottom</span>
+            </td>
+            <td>
+              Sticks to the top or bottom edge of its section while it scrolls. Place <code class="mdst-code">--top</code> as the
+              section&rsquo;s first child and <code class="mdst-code">--bottom</code> as its last
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>--fixed</span>
+            </td>
+            <td>Fixed to the viewport. Combine with <code class="mdst-code">--top</code> or <code class="mdst-code">--bottom</code></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-banner</span>--start</span><br />
+              <span class="class-name"><span class="dim">.mdst-banner</span>--end</span>
+            </td>
+            <td>
+              With <code class="mdst-code">--fixed</code>: a compact card in the start or end corner instead of full width. Goes full
+              width below <code class="mdst-code">30rem</code>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">--mdst-banner-offset</span>
+            </td>
+            <td>
+              Distance from the edge. Defaults to <code class="mdst-code">0</code> for sticky and
+              <code class="mdst-code">var(--mdst-space-md)</code> for fixed. Set to <code class="mdst-code">0</code> for an edge-to-edge
+              fixed banner
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">--mdst-banner-width</span>
+            </td>
+            <td>Maximum width of a corner banner. Defaults to <code class="mdst-code">28rem</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Sticky in a Section</div>
+      <div class="preview-scroll">
+        <div class="mdst-banner mdst-banner--top mdst-banner--border-bottom" data-variant="info" role="region" aria-label="Section notice">
+          <div class="mdst-banner-content"><span class="class-name">--top</span> stays pinned while this section scrolls.</div>
+        </div>
+        <div class="preview-scroll-body">
+          <p>Scroll this section. The banners stay attached to its top and bottom edges but never leave it.</p>
+          <p>Sticky banners take up space in the layout, so they never overlap the first or last line of content.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="mdst-banner mdst-banner--bottom mdst-banner--border-top" role="region" aria-label="Section actions">
+          <div class="mdst-banner-content"><span class="class-name">--bottom</span> stays pinned to the bottom edge.</div>
+          <div class="mdst-banner-actions">
+            <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--mdst-space-xl); padding-top: var(--mdst-space-lg); border-top: 2px dashed var(--mdst-color-border)">
+      <div class="section-header" style="margin-bottom: 0">Interactive Demo: Cookie Consent</div>
+      <p style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); margin-bottom: var(--mdst-space-md)">
+        A fixed corner cookie banner (<code class="mdst-code">--fixed --bottom --end --sm</code>) wired to Google Analytics
+        <a href="https://developers.google.com/tag-platform/security/guides/consent" target="_blank" rel="noopener">Consent Mode</a>. The
+        JavaScript below is <strong>not</strong> part of modest-ui &mdash; it&rsquo;s an example of the logic you&rsquo;d add where you use
+        the banner. The CSS only responds to <code class="mdst-code">data-state</code>. This demo doesn&rsquo;t load Google Analytics; the
+        calls it would send are logged below instead.
+      </p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: var(--mdst-space-sm)">
+        <button type="button" class="mdst-button mdst-button--sm" id="demo-cookie-reset">Reset consent</button>
+      </div>
+
+      <pre class="mdst-pre preview-log"><code id="demo-cookie-log"></code></pre>
+
+      <details class="mdst-details mdst-details--borderless" style="margin-top: var(--mdst-space-md)">
+        <summary>Demo source</summary>
+        <pre class="mdst-pre" style="margin-top: var(--mdst-space-sm)"><code>&lt;!-- 1. In &lt;head&gt;, before the GA tag: deny everything by default --&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+  });
+&lt;/script&gt;
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"&gt;&lt;/script&gt;
+&lt;script&gt;
+  gtag("js", new Date());
+  gtag("config", "G-XXXXXXXXXX");
+&lt;/script&gt;
+
+&lt;!-- 2. The banner, hidden until we know there's no stored choice --&gt;
+&lt;div class="mdst-banner mdst-banner--sm mdst-banner--fixed mdst-banner--bottom mdst-banner--end"
+     id="cookie-banner" data-state="hidden"
+     role="region" aria-label="Cookie consent"&gt;
+  &lt;p class="mdst-banner-content"&gt;
+    We use Google Analytics cookies to see how the site is used.
+    &lt;a href="/privacy/"&gt;Privacy&lt;/a&gt;
+  &lt;/p&gt;
+  &lt;div class="mdst-banner-actions"&gt;
+    &lt;button class="mdst-button mdst-button--sm mdst-button--inverted" data-consent="granted"&gt;Accept&lt;/button&gt;
+    &lt;button class="mdst-button mdst-button--sm mdst-button--ghost" data-consent="denied"&gt;Decline&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 3. Show the banner, store the choice, update GA --&gt;
+&lt;script&gt;
+  const STORAGE_KEY = "cookie-consent";
+  const banner = document.querySelector("#cookie-banner");
+
+  function readConsent() {
+    try { return localStorage.getItem(STORAGE_KEY); } catch { return null; }
+  }
+
+  function applyConsent(value) {
+    gtag("consent", "update", {
+      ad_storage: value,
+      ad_user_data: value,
+      ad_personalization: value,
+      analytics_storage: value,
+    });
+  }
+
+  function choose(value) {
+    try { localStorage.setItem(STORAGE_KEY, value); } catch {}
+    applyConsent(value);
+    banner.setAttribute("data-state", "hidden");
+  }
+
+  banner.querySelectorAll("[data-consent]").forEach((btn) =&gt; {
+    btn.addEventListener("click", () =&gt; choose(btn.dataset.consent));
+  });
+
+  const stored = readConsent();
+  if (stored) {
+    applyConsent(stored);
+  } else {
+    banner.setAttribute("data-state", "visible");
+  }
+&lt;/script&gt;</code></pre>
+      </details>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- In the flow of the page --&gt;
+&lt;div class="mdst-banner" data-variant="info" role="region" aria-label="Announcement"&gt;
+  &lt;div class="mdst-banner-content"&gt;Scheduled maintenance on Sunday.&lt;/div&gt;
+  &lt;button class="mdst-banner-close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Sticky to the top of a scrolling section --&gt;
+&lt;section style="overflow-y: auto"&gt;
+  &lt;div class="mdst-banner mdst-banner--top mdst-banner--border-bottom"&gt;...&lt;/div&gt;
+  ...
+&lt;/section&gt;
+
+&lt;!-- Fixed to the bottom of the viewport (cookie consent) --&gt;
+&lt;div class="mdst-banner mdst-banner--fixed mdst-banner--bottom"
+     data-state="visible" role="region" aria-label="Cookie consent"&gt;
+  &lt;div class="mdst-banner-content"&gt;We use analytics cookies.&lt;/div&gt;
+  &lt;div class="mdst-banner-actions"&gt;
+    &lt;button class="mdst-button mdst-button--sm"&gt;Reject&lt;/button&gt;
+    &lt;button class="mdst-button mdst-button--sm mdst-button--inverted"&gt;Accept&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Compact card fixed to the bottom-right corner --&gt;
+&lt;div class="mdst-banner mdst-banner--sm mdst-banner--fixed mdst-banner--bottom mdst-banner--end"
+     data-state="visible" role="region" aria-label="Cookie consent"&gt;...&lt;/div&gt;
+
+&lt;!-- Edge-to-edge fixed banner --&gt;
+&lt;div class="mdst-banner mdst-banner--fixed mdst-banner--top" style="--mdst-banner-offset: 0"&gt;...&lt;/div&gt;
+
+&lt;!-- Example JS --&gt;
+&lt;script&gt;
+  function showBanner(el) {
+    el.setAttribute("data-state", "visible");
+  }
+  function hideBanner(el) {
+    el.setAttribute("data-state", "hidden");
+  }
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <!-- Interactive demo banner -->
+    <div
+      class="mdst-banner mdst-banner--sm mdst-banner--fixed mdst-banner--bottom mdst-banner--end"
+      id="demo-cookie-banner"
+      data-state="hidden"
+      role="region"
+      aria-label="Cookie consent"
+    >
+      <p class="mdst-banner-content">
+        We use Google Analytics cookies to see how the site is used.
+        <a href="#" style="color: inherit">Privacy</a>
+      </p>
+      <div class="mdst-banner-actions">
+        <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted" data-consent="granted">Accept</button>
+        <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost" data-consent="denied">Decline</button>
+      </div>
+    </div>
+
+    <script>
+      // Interactive demo — NOT part of modest-ui
+      const demoLog = document.querySelector("#demo-cookie-log");
+
+      // Stand-in for gtag.js: queue calls on dataLayer as the real snippet does,
+      // and log them so you can see what would be sent to Google Analytics.
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+        const [command, action, params] = arguments;
+        demoLog.textContent += `gtag("${command}", "${action}", ${JSON.stringify(params)})\n`;
+      }
+
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied"
+      });
+
+      const STORAGE_KEY = "mdst-demo-cookie-consent";
+      const demoBanner = document.querySelector("#demo-cookie-banner");
+
+      function readConsent() {
+        try {
+          return localStorage.getItem(STORAGE_KEY);
+        } catch {
+          return null;
+        }
+      }
+
+      function applyConsent(value) {
+        gtag("consent", "update", {
+          ad_storage: value,
+          ad_user_data: value,
+          ad_personalization: value,
+          analytics_storage: value
+        });
+      }
+
+      function choose(value) {
+        try {
+          localStorage.setItem(STORAGE_KEY, value);
+        } catch {}
+        applyConsent(value);
+        demoBanner.setAttribute("data-state", "hidden");
+      }
+
+      demoBanner.querySelectorAll("[data-consent]").forEach((btn) => {
+        btn.addEventListener("click", () => choose(btn.dataset.consent));
+      });
+
+      document.querySelector("#demo-cookie-reset").addEventListener("click", () => {
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch {}
+        demoLog.textContent += "// consent cleared\n";
+        demoBanner.setAttribute("data-state", "visible");
+      });
+
+      const stored = readConsent();
+      if (stored) {
+        demoLog.textContent += `// restored "${stored}" from localStorage\n`;
+        applyConsent(stored);
+      } else {
+        demoBanner.setAttribute("data-state", "visible");
+      }
+
+      // Dismiss buttons on the static examples above
+      document.querySelectorAll(".section .mdst-banner-close").forEach((btn) => {
+        btn.addEventListener("click", () => btn.closest(".mdst-banner").setAttribute("data-state", "hidden"));
+      });
+    </script>
+  </body>
+</html>

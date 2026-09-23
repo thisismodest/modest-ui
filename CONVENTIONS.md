@@ -98,6 +98,7 @@ Components that don't map to a single native element (they use generic tags like
 - OTP Input (`.mdst-otp-input`)
 - Color Picker (`.mdst-color-picker`)
 - Badge (`.mdst-badge`)
+- Banner (`.mdst-banner`)
 - Breadcrumbs (`.mdst-breadcrumbs`)
 - Avatar (`.mdst-avatar`)
 - Spinner (`.mdst-spinner`)
@@ -111,6 +112,7 @@ Some components need state changes — tabs that switch, steps that advance, toa
 | Component | Data Attributes                                                            |
 | --------- | -------------------------------------------------------------------------- |
 | Tabs      | `data-state="active/inactive"`, `data-disabled`                            |
+| Banner    | `data-state="visible/hidden"`, `data-variant="success/error/warning/info"` |
 | Toast     | `data-state="visible/hidden"`, `data-variant="success/error/warning/info"` |
 | Stepper   | `data-state="completed/active/upcoming/error"`                             |
 
