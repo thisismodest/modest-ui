@@ -137,6 +137,85 @@
   white-space: nowrap;
 }
 
+/* Abbreviation — only when it carries an expansion */
+
+:where(.mdst-ui) abbr[title],
+.mdst-abbr {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.15em;
+  cursor: help;
+}
+
+/* Edits — deleted and inserted text */
+
+:where(.mdst-ui) del,
+.mdst-del {
+  text-decoration: line-through;
+  background-color: color-mix(in srgb, var(--mdst-color-error) 12%, transparent);
+}
+
+:where(.mdst-ui) ins,
+.mdst-ins {
+  text-decoration: none;
+  background-color: color-mix(in srgb, var(--mdst-color-success) 12%, transparent);
+}
+
+/* Strikethrough — no longer accurate, but not an edit */
+
+:where(.mdst-ui) s,
+.mdst-s {
+  text-decoration: line-through;
+  color: var(--mdst-color-muted);
+}
+
+/* Citation */
+
+:where(.mdst-ui) cite,
+.mdst-cite {
+  font-style: italic;
+  color: var(--mdst-color-muted);
+}
+
+/* Sample output and variables */
+
+:where(.mdst-ui) samp,
+.mdst-samp {
+  font-family: var(--mdst-font-mono);
+  font-size: 0.875em;
+  padding: 0.125em 0.375em;
+  border-radius: var(--mdst-radius);
+  background: var(--mdst-color-subtle);
+}
+
+:where(.mdst-ui) var,
+.mdst-var {
+  font-family: var(--mdst-font-mono);
+  font-size: 0.875em;
+  font-style: italic;
+}
+
+/* Subscript / Superscript — don't stretch the line height */
+
+:where(.mdst-ui) sub,
+:where(.mdst-ui) sup,
+.mdst-sub,
+.mdst-sup {
+  position: relative;
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+:where(.mdst-ui) sub,
+.mdst-sub {
+  bottom: -0.25em;
+}
+
+:where(.mdst-ui) sup,
+.mdst-sup {
+  top: -0.5em;
+}
+
 /* Blockquote */
 
 :where(.mdst-ui) blockquote,

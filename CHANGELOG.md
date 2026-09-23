@@ -31,6 +31,9 @@ change; adding new ones is a minor change.
   `-separator`) with `--bordered` and attached (segmented) groups via
   `.mdst-toolbar-group--attached`. Toggle buttons show their on state from
   `aria-pressed="true"`, and form controls inside size to their content.
+- `typography`: classless and class styles for more inline tags: `abbr[title]`,
+  `del`, `ins`, `s`, `cite`, `samp`, `var`, `sub` and `sup` (`.mdst-abbr`,
+  `.mdst-del`, etc.). `sub` / `sup` no longer stretch the line height.
 
 ## [1.0.2] - 2026-07-10
 

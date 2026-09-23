@@ -1351,7 +1351,10 @@ Typography utilities for headings, body text, small text, and font styles.
 
 Classes:
 - `.mdst-a`
+- `.mdst-abbr`
 - `.mdst-blockquote`
+- `.mdst-cite`
+- `.mdst-del`
 - `.mdst-em`
 - `.mdst-h1`
 - `.mdst-h2`
@@ -1360,15 +1363,21 @@ Classes:
 - `.mdst-h5`
 - `.mdst-h6`
 - `.mdst-hr`
+- `.mdst-ins`
 - `.mdst-kbd`
 - `.mdst-li`
 - `.mdst-mark`
 - `.mdst-ol`
 - `.mdst-p`
+- `.mdst-s`
+- `.mdst-samp`
 - `.mdst-small`
 - `.mdst-strong`
+- `.mdst-sub`
+- `.mdst-sup`
 - `.mdst-ui`
 - `.mdst-ul`
+- `.mdst-var`
 - `.mdst-hr--flush`
 - `.mdst-p--lg`
 - `.mdst-p--muted`
@@ -1390,6 +1399,12 @@ Classes:
 <em class="mdst-em">Italic</em>
 <mark class="mdst-mark">Highlight</mark>
 <kbd class="mdst-kbd">Ctrl</kbd> + <kbd class="mdst-kbd">K</kbd>
+<abbr title="Cascading Style Sheets">CSS</abbr>
+<del>Removed</del> <ins>Added</ins>
+<s>£40</s> £32
+<cite>The Elements of Style</cite>
+<samp>File saved.</samp> <var>w</var>
+H<sub>2</sub>O  mc<sup>2</sup>
 
 <!-- Blockquote -->
 <blockquote class="mdst-blockquote">Quote</blockquote>
@@ -1507,5 +1522,5 @@ Tag:            .mdst-tag  +  -dismiss  |  --error  --ghost  --interactive  --lg
 Toast:          .mdst-toast  +  -close  -group
 Toolbar:        .mdst-toolbar  +  -group  -separator  -spacer  |  --bordered  --attached
 Tooltip:        .mdst-tooltip  |  --left  --right  --top
-Typography:     .mdst-a  .mdst-blockquote  .mdst-em  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-kbd  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-small  .mdst-strong  .mdst-ui  .mdst-ul  |  --flush  --lg  --muted  --sm  --unstyled
+Typography:     .mdst-a  .mdst-abbr  .mdst-blockquote  .mdst-cite  .mdst-del  .mdst-em  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-ins  .mdst-kbd  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-s  .mdst-samp  .mdst-small  .mdst-strong  .mdst-sub  .mdst-sup  .mdst-ui  .mdst-ul  .mdst-var  |  --flush  --lg  --muted  --sm  --unstyled
 Utilities:      .mdst-mono  .mdst-muted  .mdst-sr-only  .mdst-truncate

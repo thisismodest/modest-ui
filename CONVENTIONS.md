@@ -84,7 +84,7 @@ Components that map 1:1 to a native HTML element:
 | Table      | `table`, `th`, `td`                                                                        |
 | Code       | `code`                                                                                     |
 | Pre        | `pre`                                                                                      |
-| Typography | `h1`–`h6`, `p`, `a`, `strong`, `em`, `small`, `mark`, `blockquote`, `hr`, `ul`, `ol`, `li` |
+| Typography | `h1`–`h6`, `p`, `a`, `strong`, `em`, `small`, `mark`, `kbd`, `abbr[title]`, `del`, `ins`, `s`, `cite`, `samp`, `var`, `sub`, `sup`, `blockquote`, `hr`, `ul`, `ol`, `li` |
 | Progress   | `progress` |
 | Meter      | `meter` |
 
