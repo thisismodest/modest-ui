@@ -77,12 +77,19 @@
       background var(--mdst-transition),
       border-color var(--mdst-transition);
 
+    /* The thumb slides towards the end edge; --_dir flips it in RTL */
+    --_dir: 1;
+
+    &:dir(rtl) {
+      --_dir: -1;
+    }
+
     &::before {
       content: "";
       position: absolute;
       height: 0.875rem;
       width: 0.875rem;
-      left: 2px;
+      inset-inline-start: 2px;
       top: 50%;
       transform: translateY(-50%);
       background: var(--mdst-color-muted);
@@ -101,7 +108,7 @@
       border-color: var(--mdst-color-fg);
 
       &::before {
-        transform: translateY(-50%) translateX(1rem);
+        transform: translateY(-50%) translateX(calc(1rem * var(--_dir)));
         background: var(--mdst-color-bg);
       }
     }

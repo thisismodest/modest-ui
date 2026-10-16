@@ -79,6 +79,23 @@ Every library CSS file wraps its rules in a layer: `@layer mdst-ui.base { … }`
 
 This means anything outside a layer, including all of a user's own CSS, beats the library, and the reset can never beat a component. When you add a component file, wrap it the same way.
 
+### Write for both text directions
+
+Use logical properties so components mirror in right-to-left pages: `margin-inline-start` not `margin-left`, `inset-inline-end` not `right`, `border-inline-start`, `padding-inline-end`, `text-align: start`. Name direction modifiers `--start` and `--end`, never `--left` and `--right`.
+
+Where there's no logical form (sideways `translate`, `background-position`), use a private variable flipped with `:dir(rtl)`:
+
+```css
+.mdst-drawer {
+  --_dir: 1;
+  transform: translateX(calc(100% * var(--_dir)));
+
+  &:dir(rtl) {
+    --_dir: -1;
+  }
+}
+```
+
 ### Size with border-box
 
 Most projects have a `*, *::before, *::after { box-sizing: border-box }` reset, and because it's outside a layer it beats ours. So never rely on `content-box`: declare `box-sizing: border-box` and include the border in fixed sizes, e.g. `width: calc(0.875rem + 2 * var(--mdst-border-width))`. A component then measures the same with or without the user's reset.

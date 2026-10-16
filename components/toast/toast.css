@@ -34,25 +34,25 @@
     /* Variant: success */
 
     &.mdst-toast--success {
-      border-left: 3px solid var(--mdst-color-success);
+      border-inline-start: 3px solid var(--mdst-color-success);
     }
 
     /* Variant: error */
 
     &.mdst-toast--danger {
-      border-left: 3px solid var(--mdst-color-danger);
+      border-inline-start: 3px solid var(--mdst-color-danger);
     }
 
     /* Variant: warning */
 
     &.mdst-toast--warning {
-      border-left: 3px solid var(--mdst-color-warning);
+      border-inline-start: 3px solid var(--mdst-color-warning);
     }
 
     /* Variant: info */
 
     &.mdst-toast--info {
-      border-left: 3px solid var(--mdst-color-info, var(--mdst-color-fg));
+      border-inline-start: 3px solid var(--mdst-color-info, var(--mdst-color-fg));
     }
   }
 
@@ -64,7 +64,7 @@
     justify-content: center;
     padding: 0;
     margin: 0;
-    margin-left: auto;
+    margin-inline-start: auto;
     /* Square, so the focus ring is a neat square */
     width: 1.5em;
     aspect-ratio: 1;
@@ -94,7 +94,7 @@
   .mdst-toast-group {
     position: fixed;
     bottom: var(--mdst-space-md);
-    right: var(--mdst-space-md);
+    inset-inline-end: var(--mdst-space-md);
     display: flex;
     flex-direction: column;
     gap: var(--mdst-space-sm);

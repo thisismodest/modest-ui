@@ -37,16 +37,17 @@
         margin-bottom: var(--mdst-space-xs);
       }
 
-      &.mdst-tooltip--left {
-        position-area: left;
+      /* Start and end follow the text direction (left and right in LTR) */
+      &.mdst-tooltip--start {
+        position-area: inline-start;
         margin: 0;
-        margin-right: var(--mdst-space-xs);
+        margin-inline-end: var(--mdst-space-xs);
       }
 
-      &.mdst-tooltip--right {
-        position-area: right;
+      &.mdst-tooltip--end {
+        position-area: inline-end;
         margin: 0;
-        margin-left: var(--mdst-space-xs);
+        margin-inline-start: var(--mdst-space-xs);
       }
     }
   }

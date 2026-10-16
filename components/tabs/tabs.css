@@ -122,19 +122,19 @@
       & .mdst-tabs__list {
         flex-direction: column;
         border-bottom: none;
-        border-right: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-inline-end: var(--mdst-border-width) solid var(--mdst-color-border);
         min-width: 10rem;
       }
 
       & .mdst-tabs__tab {
         border-bottom: none;
         margin-bottom: 0;
-        border-right: 2px solid transparent;
-        margin-right: calc(-1 * var(--mdst-border-width));
-        text-align: left;
+        border-inline-end: 2px solid transparent;
+        margin-inline-end: calc(-1 * var(--mdst-border-width));
+        text-align: start;
 
         &[data-state="active"] {
-          border-right-color: var(--mdst-color-fg);
+          border-inline-end-color: var(--mdst-color-fg);
           border-bottom-color: transparent;
         }
       }

@@ -2,6 +2,13 @@
   /* Stepper / Wizard */
 
   .mdst-stepper {
+    /* --_dir flips sideways nudges in RTL */
+    --_dir: 1;
+
+    &:dir(rtl) {
+      --_dir: -1;
+    }
+
     display: flex;
     align-items: flex-start;
     width: 100%;
@@ -23,8 +30,8 @@
         content: "";
         position: absolute;
         top: 1rem;
-        left: 50%;
-        right: -50%;
+        inset-inline-start: 50%;
+        inset-inline-end: -50%;
         height: var(--mdst-border-width);
         background: var(--mdst-color-border);
       }
@@ -127,17 +134,17 @@
         align-items: flex-start;
         flex: none;
         width: 100%;
-        text-align: left;
+        text-align: start;
 
         /* Vertical connector */
 
         &:not(:last-child)::after {
           top: 2rem;
-          left: 1rem;
-          right: auto;
+          inset-inline-start: 1rem;
+          inset-inline-end: auto;
           width: var(--mdst-border-width);
           height: calc(100% - 2rem + var(--mdst-space-md));
-          transform: translateX(-50%);
+          transform: translateX(calc(-50% * var(--_dir, 1)));
         }
 
         &:not(:last-child) {
@@ -147,7 +154,7 @@
 
       & .mdst-stepper__label {
         margin-top: 0;
-        margin-left: var(--mdst-space-sm);
+        margin-inline-start: var(--mdst-space-sm);
         padding: 0;
         line-height: 2rem;
       }
@@ -168,8 +175,8 @@
 
       & .mdst-stepper__step:not(:last-child)::after {
         top: 0.75rem;
-        left: 50%;
-        right: -50%;
+        inset-inline-start: 50%;
+        inset-inline-end: -50%;
       }
 
       /* Compact + vertical */
@@ -177,7 +184,7 @@
       &.mdst-stepper--vertical {
         & .mdst-stepper__step:not(:last-child)::after {
           top: 1.5rem;
-          left: 0.75rem;
+          inset-inline-start: 0.75rem;
           height: calc(100% - 1.5rem + var(--mdst-space-sm));
         }
 

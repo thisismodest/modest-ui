@@ -61,12 +61,12 @@
     align-items: center;
 
     & > .mdst-avatar {
-      margin-left: -0.5rem;
+      margin-inline-start: -0.5rem;
       border: 2px solid var(--mdst-color-bg);
     }
 
     & > .mdst-avatar:first-child {
-      margin-left: 0;
+      margin-inline-start: 0;
     }
   }
 }

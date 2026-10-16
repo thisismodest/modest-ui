@@ -166,11 +166,18 @@
 
     /* Positioning */
 
-    &.mdst-badge--top-right {
+    /* Corner badge at the top end; --_dir flips the nudge in RTL */
+    &.mdst-badge--top-end {
+      --_dir: 1;
+
+      &:dir(rtl) {
+        --_dir: -1;
+      }
+
       position: absolute;
       top: 0;
-      right: 0;
-      transform: translate(50%, -50%);
+      inset-inline-end: 0;
+      transform: translate(calc(50% * var(--_dir)), -50%);
       z-index: 1;
     }
   }

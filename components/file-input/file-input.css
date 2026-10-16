@@ -35,7 +35,7 @@
     justify-content: center;
     gap: var(--mdst-space-xs);
     padding: var(--mdst-space-xs) var(--mdst-space-md);
-    margin-right: var(--mdst-space-md);
+    margin-inline-end: var(--mdst-space-md);
     font-family: var(--mdst-font-ui);
     font-size: inherit;
     line-height: var(--mdst-line-height);
@@ -100,7 +100,7 @@
         justify-content: center;
         gap: var(--mdst-space-xs);
         padding: var(--mdst-space-xs) var(--mdst-space-md);
-        margin-right: var(--mdst-space-md);
+        margin-inline-end: var(--mdst-space-md);
         font-family: var(--mdst-font-ui);
         font-size: inherit;
         line-height: var(--mdst-line-height);

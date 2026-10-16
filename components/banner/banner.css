@@ -135,25 +135,25 @@
     /* Variant: success */
 
     &.mdst-banner--success {
-      border-left: 3px solid var(--mdst-color-success);
+      border-inline-start: 3px solid var(--mdst-color-success);
     }
 
     /* Variant: error */
 
     &.mdst-banner--danger {
-      border-left: 3px solid var(--mdst-color-danger);
+      border-inline-start: 3px solid var(--mdst-color-danger);
     }
 
     /* Variant: warning */
 
     &.mdst-banner--warning {
-      border-left: 3px solid var(--mdst-color-warning);
+      border-inline-start: 3px solid var(--mdst-color-warning);
     }
 
     /* Variant: info */
 
     &.mdst-banner--info {
-      border-left: 3px solid var(--mdst-color-info, var(--mdst-color-fg));
+      border-inline-start: 3px solid var(--mdst-color-info, var(--mdst-color-fg));
     }
 
     /* Position: sticky to the top/bottom edge of its scrolling section.
@@ -179,8 +179,8 @@
 
     &.mdst-banner--fixed {
       position: fixed;
-      left: var(--mdst-banner-offset, var(--mdst-space-md));
-      right: var(--mdst-banner-offset, var(--mdst-space-md));
+      inset-inline-start: var(--mdst-banner-offset, var(--mdst-space-md));
+      inset-inline-end: var(--mdst-banner-offset, var(--mdst-space-md));
       z-index: 1000;
 
       /* Corner: a compact card at the start/end edge instead of full width */
@@ -191,11 +191,11 @@
       }
 
       &.mdst-banner--start {
-        right: auto;
+        inset-inline-end: auto;
       }
 
       &.mdst-banner--end {
-        left: auto;
+        inset-inline-start: auto;
       }
 
       &.mdst-banner--top {
@@ -234,8 +234,8 @@
     .mdst-banner.mdst-banner--fixed {
       &.mdst-banner--start,
       &.mdst-banner--end {
-        left: var(--mdst-banner-offset, var(--mdst-space-md));
-        right: var(--mdst-banner-offset, var(--mdst-space-md));
+        inset-inline-start: var(--mdst-banner-offset, var(--mdst-space-md));
+        inset-inline-end: var(--mdst-banner-offset, var(--mdst-space-md));
         max-width: none;
       }
     }

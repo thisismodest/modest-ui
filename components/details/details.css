@@ -62,6 +62,13 @@
     transform: rotate(90deg);
   }
 
+  /* The chevron points towards the end edge, so mirror it in RTL. scale
+     combines with the open-state rotation, which still points down. */
+  :where(.mdst-ui) details > summary:where(:dir(rtl))::before,
+  .mdst-details > summary:dir(rtl)::before {
+    scale: -1 1;
+  }
+
   /* Content area - only style when open */
 
   :where(.mdst-ui) details:where([open])::details-content,
@@ -80,7 +87,7 @@
   :where(.mdst-ui) details.mdst-details--borderless:where([open])::details-content,
   .mdst-details.mdst-details--borderless[open]::details-content {
     border-top: none;
-    padding-left: calc(1em + var(--mdst-space-sm));
+    padding-inline-start: calc(1em + var(--mdst-space-sm));
   }
 
   :where(.mdst-ui) details.mdst-details--sm > summary,
@@ -113,7 +120,7 @@
   :where(.mdst-ui) details.mdst-details--section > summary::before,
   .mdst-details.mdst-details--section > summary::before {
     order: 1;
-    margin-left: auto;
+    margin-inline-start: auto;
     width: 1.25em;
     height: 1.25em;
   }

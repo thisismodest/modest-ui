@@ -42,7 +42,7 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-tooltip</span>--left</span>
+              <span class="class-name"><span class="dim">.mdst-tooltip</span>--start</span>
             </td>
             <td>
               <button type="button" id="btn-left" class="mdst-button" popovertarget="tip-left">Left</button>
@@ -50,7 +50,7 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-tooltip</span>--right</span>
+              <span class="class-name"><span class="dim">.mdst-tooltip</span>--end</span>
             </td>
             <td>
               <button type="button" id="btn-right" class="mdst-button" popovertarget="tip-right">Right</button>
@@ -110,13 +110,13 @@
 
 &lt;!-- Left --&gt;
 &lt;button id="left-trigger" popovertarget="left-tip"&gt;Left&lt;/button&gt;
-&lt;div id="left-tip" class="mdst-tooltip mdst-tooltip--left" popover anchor="left-trigger"&gt;
+&lt;div id="left-tip" class="mdst-tooltip mdst-tooltip--start" popover anchor="left-trigger"&gt;
   Left of the trigger
 &lt;/div&gt;
 
 &lt;!-- Right --&gt;
 &lt;button id="right-trigger" popovertarget="right-tip"&gt;Right&lt;/button&gt;
-&lt;div id="right-tip" class="mdst-tooltip mdst-tooltip--right" popover anchor="right-trigger"&gt;
+&lt;div id="right-tip" class="mdst-tooltip mdst-tooltip--end" popover anchor="right-trigger"&gt;
   Right of the trigger
 &lt;/div&gt;</code></pre>
     </div>
@@ -124,7 +124,7 @@
     <!-- Tooltip elements -->
     <div id="tip-bottom" class="mdst-tooltip" popover anchor="btn-bottom">Default: below the trigger</div>
     <div id="tip-top" class="mdst-tooltip mdst-tooltip--top" popover anchor="btn-top">Positioned above</div>
-    <div id="tip-left" class="mdst-tooltip mdst-tooltip--left" popover anchor="btn-left">Positioned left</div>
-    <div id="tip-right" class="mdst-tooltip mdst-tooltip--right" popover anchor="btn-right">Positioned right</div>
+    <div id="tip-left" class="mdst-tooltip mdst-tooltip--start" popover anchor="btn-left">Positioned left</div>
+    <div id="tip-right" class="mdst-tooltip mdst-tooltip--end" popover anchor="btn-right">Positioned right</div>
   </body>
 </html>

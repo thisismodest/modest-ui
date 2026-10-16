@@ -15,7 +15,7 @@
 
   :where(.mdst-ui) th,
   .mdst-table th {
-    text-align: left;
+    text-align: start;
     font-size: var(--mdst-text-xs);
     font-weight: 600;
     text-transform: uppercase;
@@ -27,7 +27,7 @@
 
   :where(.mdst-ui) th:where(:last-child),
   .mdst-table th:last-child {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   :where(.mdst-ui) td,
@@ -43,7 +43,7 @@
 
   :where(.mdst-ui) td:where(:last-child),
   .mdst-table td:last-child {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   :where(.mdst-ui) tbody tr:where(:last-child) td,
@@ -78,7 +78,7 @@
 
   :where(.mdst-ui) table.mdst-table--sm th:where(:last-child),
   .mdst-table.mdst-table--sm th:last-child {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   :where(.mdst-ui) table.mdst-table--sm td,
@@ -88,19 +88,19 @@
 
   :where(.mdst-ui) table.mdst-table--sm td:where(:last-child),
   .mdst-table.mdst-table--sm td:last-child {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   /* Striped rows have a visible edge, so inset the first and last cells */
 
   :where(.mdst-ui) table.mdst-table--striped :is(th, td):first-child,
   .mdst-table.mdst-table--striped :is(th, td):first-child {
-    padding-left: var(--mdst-space-sm);
+    padding-inline-start: var(--mdst-space-sm);
   }
 
   :where(.mdst-ui) table.mdst-table--striped :where(:is(th, td):last-child),
   .mdst-table.mdst-table--striped :is(th, td):last-child {
-    padding-right: var(--mdst-space-sm);
+    padding-inline-end: var(--mdst-space-sm);
   }
 
   /* Fixed/Equal column widths */

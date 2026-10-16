@@ -238,8 +238,8 @@
   :where(.mdst-ui) blockquote,
   .mdst-blockquote {
     margin-inline: 0;
-    padding-left: var(--mdst-space-md);
-    border-left: var(--mdst-space-1) solid var(--mdst-color-border);
+    padding-inline-start: var(--mdst-space-md);
+    border-inline-start: var(--mdst-space-1) solid var(--mdst-color-border);
     font-style: italic;
     color: var(--mdst-color-muted);
   }
@@ -264,7 +264,7 @@
   :where(.mdst-ui) ol,
   .mdst-ul,
   .mdst-ol {
-    padding-left: var(--mdst-space-lg);
+    padding-inline-start: var(--mdst-space-lg);
     line-height: var(--mdst-line-height);
   }
 
@@ -293,6 +293,6 @@
   :where(.mdst-ui) ul.mdst-ul--unstyled,
   .mdst-ul--unstyled {
     list-style: none;
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 }

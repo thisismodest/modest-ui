@@ -40,6 +40,9 @@ the same modifier name in every component.
 | `data-variant="success\|error\|warning\|info"` (banner, toast) | `.mdst-banner--success`, `--danger`, `--warning`, `--info` (same for toast) |
 | `.mdst-checkbox--toggle`, `.mdst-checkbox--toggle-rounded` | `.mdst-toggle`, `.mdst-toggle--pill` |
 | `--mdst-color-error` | `--mdst-color-danger` |
+| `.mdst-tooltip--left`, `.mdst-tooltip--right` | `.mdst-tooltip--start`, `.mdst-tooltip--end` |
+| `.mdst-drawer--left` | `.mdst-drawer--start` |
+| `.mdst-badge--top-right` | `.mdst-badge--top-end` |
 
 Data attributes are now only for runtime state (`data-state`). Unchanged
 blocks with hyphenated names (`.mdst-toast-group`, `.mdst-avatar-group`,
@@ -61,6 +64,13 @@ elements, so they keep their names.
   whatever its specificity or load order. Each file layers itself, so this
   applies to the bundle, `index.css`, and cherry-picked files alike. Blanket
   resets in your CSS also win; put them in a layer before `mdst-ui` if needed.
+- **Right-to-left support.** Components use logical properties (`margin-inline-start`,
+  `inset-inline-end`, `text-align: start`, and so on), so they mirror in
+  `dir="rtl"` pages: accent edges, the drawer, fixed banners, the toast stack,
+  dropdown arrows, the password toggle, lists, tables, vertical tabs, the
+  stepper, the toggle thumb, and the details chevron. Left-to-right pages look
+  exactly as before. Direction modifiers are renamed to start/end (see the
+  rename table), and the dropdown arrow is now a single symmetrical shape.
 - **Reset is scoped to `.mdst-ui`.** It used to restyle the whole page
   (`* { margin: 0 }`, block images, `body` line-height). Now it only applies
   inside `.mdst-ui`, and the `.mdst-ui` element itself keeps its own margin.
