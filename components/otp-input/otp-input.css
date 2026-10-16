@@ -4,19 +4,19 @@
    *
    * Usage:
    * <div class="mdst-otp-input">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
    * </div>
    *
    * With separator:
    * <div class="mdst-otp-input">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
    *   <span class="mdst-otp-input__separator"></span>
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
    * </div>
    */
 
@@ -25,7 +25,7 @@
     gap: var(--mdst-space-sm);
     align-items: center;
 
-    & .mdst-otp-input__digit {
+    & > input {
       width: 1.5em;
       height: 2em;
       padding: 0;
@@ -74,13 +74,13 @@
 
     /* Error state */
 
-    &.mdst-otp-input--danger .mdst-otp-input__digit {
+    &.mdst-otp-input--danger > input {
       border-color: var(--mdst-color-danger);
     }
 
     /* Success state */
 
-    &.mdst-otp-input--success .mdst-otp-input__digit {
+    &.mdst-otp-input--success > input {
       border-color: var(--mdst-color-success);
     }
   }

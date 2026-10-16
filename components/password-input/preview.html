@@ -32,18 +32,16 @@
           <tr>
             <td>
               <span class="class-name">.mdst-password-input</span><br />
-              <span class="class-name"><span class="dim">.mdst-input</span> <span class="dim">.mdst-password-input</span>__field</span
-              ><br />
-              <span class="class-name"><span class="dim">.mdst-password-input</span>__toggle</span>
+              <span class="class-name"><span class="dim">.mdst-input</span></span>
             </td>
             <td>
               <div class="mdst-password-input">
                 <input
                   type="password"
                   autocomplete="current-password"
-                  class="mdst-input mdst-password-input__field"
+                  class="mdst-input"
                   placeholder="Enter password" aria-label="Password input example" />
-                <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+                <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" />
               </div>
             </td>
           </tr>
@@ -70,9 +68,9 @@
                 <input
                   type="password"
                   autocomplete="current-password"
-                  class="mdst-input mdst-password-input__field"
+                  class="mdst-input"
                   placeholder="Placeholder text" aria-label="Password input example" />
-                <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+                <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" />
               </div>
             </td>
           </tr>
@@ -85,12 +83,11 @@
                 <input
                   type="password"
                   autocomplete="current-password"
-                  class="mdst-input mdst-password-input__field"
+                  class="mdst-input"
                   placeholder="Disabled"
                   disabled aria-label="Password input example" />
                 <input
                   type="checkbox"
-                  class="mdst-password-input__toggle"
                   name="password-toggle"
                   aria-label="Toggle password visibility"
                   disabled
@@ -106,16 +103,16 @@
       <div class="section-header">Multiple Instances</div>
       <div class="examples">
         <div class="mdst-password-input" style="max-width: 16rem">
-          <input type="password" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Current password" aria-label="Password input example" />
-          <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+          <input type="password" autocomplete="current-password" class="mdst-input" placeholder="Current password" aria-label="Password input example" />
+          <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" />
         </div>
         <div class="mdst-password-input" style="max-width: 16rem">
-          <input type="password" autocomplete="new-password" class="mdst-input mdst-password-input__field" placeholder="New password" aria-label="Password input example" />
-          <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+          <input type="password" autocomplete="new-password" class="mdst-input" placeholder="New password" aria-label="Password input example" />
+          <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" />
         </div>
         <div class="mdst-password-input" style="max-width: 16rem">
-          <input type="password" autocomplete="new-password" class="mdst-input mdst-password-input__field" placeholder="Confirm password" aria-label="Password input example" />
-          <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+          <input type="password" autocomplete="new-password" class="mdst-input" placeholder="Confirm password" aria-label="Password input example" />
+          <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" />
         </div>
       </div>
     </div>
@@ -131,32 +128,32 @@
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- Basic password input --&gt;
 &lt;div class="mdst-password-input"&gt;
-  &lt;input type="password" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Enter password" /&gt;
-  &lt;input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" /&gt;
+  &lt;input type="password" autocomplete="current-password" class="mdst-input" placeholder="Enter password" /&gt;
+  &lt;input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" /&gt;
 &lt;/div&gt;
 
 &lt;!-- Disabled --&gt;
 &lt;div class="mdst-password-input"&gt;
-  &lt;input type="password" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Disabled" disabled /&gt;
-  &lt;input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" disabled /&gt;
+  &lt;input type="password" autocomplete="current-password" class="mdst-input" placeholder="Disabled" disabled /&gt;
+  &lt;input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" disabled /&gt;
 &lt;/div&gt;
 
 &lt;!-- Multiple instances (no IDs needed) --&gt;
 &lt;div class="mdst-password-input"&gt;
-  &lt;input type="password" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Current password" /&gt;
-  &lt;input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" /&gt;
+  &lt;input type="password" autocomplete="current-password" class="mdst-input" placeholder="Current password" /&gt;
+  &lt;input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" /&gt;
 &lt;/div&gt;
 
 &lt;div class="mdst-password-input"&gt;
-  &lt;input type="password" autocomplete="new-password" class="mdst-input mdst-password-input__field" placeholder="New password" /&gt;
-  &lt;input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" /&gt;
+  &lt;input type="password" autocomplete="new-password" class="mdst-input" placeholder="New password" /&gt;
+  &lt;input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" /&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
   // Example: show or hide the text when the eye toggle changes
-  document.querySelectorAll(".mdst-password-input__toggle").forEach((toggle) =&gt; {
+  document.querySelectorAll(".mdst-password-input > input[type=checkbox]").forEach((toggle) =&gt; {
     toggle.addEventListener("change", () =&gt; {
-      const field = toggle.parentElement.querySelector(".mdst-password-input__field");
+      const field = toggle.parentElement.querySelector("input:not([type=checkbox])");
       field.type = toggle.checked ? "text" : "password";
     });
   });
@@ -165,9 +162,9 @@
     <script>
       // Show or hide the password by switching the field's type when the eye
       // toggle changes. Example code, not part of modest-ui (which is CSS only).
-      document.querySelectorAll(".mdst-password-input__toggle").forEach((toggle) => {
+      document.querySelectorAll(".mdst-password-input > input[type=checkbox]").forEach((toggle) => {
         toggle.addEventListener("change", () => {
-          const field = toggle.parentElement.querySelector(".mdst-password-input__field");
+          const field = toggle.parentElement.querySelector("input:not([type=checkbox])");
           field.type = toggle.checked ? "text" : "password";
         });
       });

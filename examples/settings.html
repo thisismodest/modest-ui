@@ -730,9 +730,7 @@
             <div class="avatar-section">
               <div class="avatar-preview">JD</div>
               <div class="avatar-actions">
-                <div class="mdst-file-input mdst-file-input--borderless">
-                  <input type="file" class="mdst-input mdst-file-input__field" accept=".jpg,.jpeg,.png,.gif" />
-                </div>
+                <input type="file" class="mdst-file-input mdst-file-input--borderless" accept=".jpg,.jpeg,.png,.gif" />
                 <p>JPG, PNG, or GIF. Max 2MB. Recommended 256×256px.</p>
               </div>
             </div>
@@ -817,10 +815,10 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   type="password"
                   autocomplete="current-password"
                   id="current-password"
-                  class="mdst-input mdst-password-input__field"
+                  class="mdst-input"
                   placeholder="••••••••"
                 />
-                <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                <input type="checkbox" aria-label="Toggle password visibility" />
               </div>
             </div>
 
@@ -832,10 +830,10 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     type="password"
                     autocomplete="new-password"
                     id="new-password"
-                    class="mdst-input mdst-password-input__field"
+                    class="mdst-input"
                     placeholder="••••••••"
                   />
-                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                  <input type="checkbox" aria-label="Toggle password visibility" />
                 </div>
                 <p class="form-hint">Must be at least 8 characters with a mix of letters, numbers, and symbols.</p>
               </div>
@@ -846,10 +844,10 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     type="password"
                     autocomplete="new-password"
                     id="confirm-password"
-                    class="mdst-input mdst-password-input__field"
+                    class="mdst-input"
                     placeholder="••••••••"
                   />
-                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                  <input type="checkbox" aria-label="Toggle password visibility" />
                 </div>
               </div>
             </div>
@@ -1470,9 +1468,9 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     <script>
       // Show or hide the password by switching the field's type when the eye
       // toggle changes. Example code, not part of modest-ui (which is CSS only).
-      document.querySelectorAll(".mdst-password-input__toggle").forEach((toggle) => {
+      document.querySelectorAll(".mdst-password-input > input[type=checkbox]").forEach((toggle) => {
         toggle.addEventListener("change", () => {
-          const field = toggle.parentElement.querySelector(".mdst-password-input__field");
+          const field = toggle.parentElement.querySelector("input:not([type=checkbox])");
           field.type = toggle.checked ? "text" : "password";
         });
       });

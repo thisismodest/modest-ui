@@ -604,6 +604,22 @@
       .home-instant * {
         transition: none !important;
       }
+
+      /* Colour swatch with its hex value beside it */
+      .color-field {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .color-hex {
+        width: 6rem;
+        height: var(--mdst-space-8);
+        padding-block: 0;
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        text-transform: uppercase;
+      }
     </style>
   </head>
   <body>
@@ -698,8 +714,8 @@
                 <div class="home-field">
                   <span>Password</span>
                   <div class="mdst-password-input">
-                    <input type="password" class="mdst-input mdst-password-input__field" placeholder="••••••••" autocomplete="off" aria-label="Password" />
-                    <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                    <input type="password" class="mdst-input" placeholder="••••••••" autocomplete="off" aria-label="Password" />
+                    <input type="checkbox" aria-label="Toggle password visibility" />
                   </div>
                 </div>
                 <label class="mdst-checkbox-label">
@@ -1046,9 +1062,9 @@
                 </label>
                 <div class="home-field">
                   <span>Ink colour</span>
-                  <div class="mdst-color-picker">
-                    <input type="color" class="mdst-color-picker__input" value="#4338ca" data-token="--mdst-color-fg" aria-label="Ink colour" />
-                    <input type="text" class="mdst-color-picker__text" value="#4338ca" aria-label="Ink colour hex" readonly />
+                  <div class="color-field">
+                    <input type="color" class="mdst-color-picker" value="#4338ca" data-token="--mdst-color-fg" aria-label="Ink colour" />
+                    <input type="text" class="mdst-input color-hex" value="#4338ca" aria-label="Ink colour hex" readonly />
                   </div>
                 </div>
                 <div class="home-row">
@@ -1466,9 +1482,9 @@ import "mdst-ui";</pre>
 
         // Show or hide the password by switching the field's type when the eye
         // toggle changes. Example code, not part of modest-ui (which is CSS only).
-        document.querySelectorAll(".mdst-password-input__toggle").forEach((toggle) => {
+        document.querySelectorAll(".mdst-password-input > input[type=checkbox]").forEach((toggle) => {
           toggle.addEventListener("change", () => {
-            const field = toggle.parentElement.querySelector(".mdst-password-input__field");
+            const field = toggle.parentElement.querySelector("input:not([type=checkbox])");
             field.type = toggle.checked ? "text" : "password";
           });
         });
@@ -1499,7 +1515,7 @@ import "mdst-ui";</pre>
         var tokenDemo = document.getElementById("token-demo");
         var tokenCode = document.getElementById("token-code");
         var tokenInputs = tokenDemo.querySelectorAll("[data-token]");
-        var hexField = tokenDemo.querySelector(".mdst-color-picker__text");
+        var hexField = tokenDemo.querySelector(".color-hex");
 
         function renderTokens() {
           var lines = [];

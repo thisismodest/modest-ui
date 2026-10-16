@@ -26,6 +26,7 @@ export function buildSidebarItems(components) {
   }
 
   for (const [groupName, children] of grouped) {
+    children.sort((a, b) => a.title.localeCompare(b.title));
     items.push({ type: "group", groupName, children, sortKey: groupName.toLowerCase() });
   }
 

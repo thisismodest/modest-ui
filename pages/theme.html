@@ -71,6 +71,22 @@
         color: var(--mdst-color-muted);
       }
 
+      /* Colour swatch with its hex value beside it */
+      .color-field {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .color-hex {
+        width: 6rem;
+        height: var(--mdst-space-8);
+        padding-block: 0;
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-sm);
+        text-transform: uppercase;
+      }
+
       .control-row {
         display: flex;
         gap: var(--mdst-space-sm);
@@ -192,65 +208,65 @@
       <div class="controls controls--grid">
         <div class="control-group">
           <label>Foreground <code>--mdst-color-fg</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-fg" value="#000000" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-fg" value="#000000" />
+          <div class="color-field">
+            <input type="color" class="mdst-color-picker" data-var="--mdst-color-fg" value="#000000" />
+            <input type="text" class="mdst-input color-hex" data-var="--mdst-color-fg" value="#000000" />
           </div>
         </div>
 
         <div class="control-group">
           <label>Background <code>--mdst-color-bg</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-bg" value="#ffffff" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-bg" value="#ffffff" />
+          <div class="color-field">
+            <input type="color" class="mdst-color-picker" data-var="--mdst-color-bg" value="#ffffff" />
+            <input type="text" class="mdst-input color-hex" data-var="--mdst-color-bg" value="#ffffff" />
           </div>
         </div>
 
         <div class="control-group">
           <label>Border <code>--mdst-color-border</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-border" value="#000000" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-border" value="#000000" />
+          <div class="color-field">
+            <input type="color" class="mdst-color-picker" data-var="--mdst-color-border" value="#000000" />
+            <input type="text" class="mdst-input color-hex" data-var="--mdst-color-border" value="#000000" />
           </div>
         </div>
 
         <div class="control-group">
           <label>Muted <code>--mdst-color-muted</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-muted" value="#666666" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-muted" value="#666666" />
+          <div class="color-field">
+            <input type="color" class="mdst-color-picker" data-var="--mdst-color-muted" value="#666666" />
+            <input type="text" class="mdst-input color-hex" data-var="--mdst-color-muted" value="#666666" />
           </div>
         </div>
 
         <div class="control-group">
           <label>Subtle <code>--mdst-color-subtle</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-subtle" value="#f5f5f5" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-subtle" value="#f5f5f5" />
+          <div class="color-field">
+            <input type="color" class="mdst-color-picker" data-var="--mdst-color-subtle" value="#f5f5f5" />
+            <input type="text" class="mdst-input color-hex" data-var="--mdst-color-subtle" value="#f5f5f5" />
           </div>
         </div>
 
         <div class="control-group">
           <label>Focus <code>--mdst-color-focus</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-focus" value="#000000" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-focus" value="#000000" />
+          <div class="color-field">
+            <input type="color" class="mdst-color-picker" data-var="--mdst-color-focus" value="#000000" />
+            <input type="text" class="mdst-input color-hex" data-var="--mdst-color-focus" value="#000000" />
           </div>
         </div>
 
         <div class="control-group">
           <label>Danger <code>--mdst-color-danger</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-danger" value="#dc2626" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-danger" value="#dc2626" />
+          <div class="color-field">
+            <input type="color" class="mdst-color-picker" data-var="--mdst-color-danger" value="#dc2626" />
+            <input type="text" class="mdst-input color-hex" data-var="--mdst-color-danger" value="#dc2626" />
           </div>
         </div>
 
         <div class="control-group">
           <label>Success <code>--mdst-color-success</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-success" value="#15803d" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-success" value="#15803d" />
+          <div class="color-field">
+            <input type="color" class="mdst-color-picker" data-var="--mdst-color-success" value="#15803d" />
+            <input type="text" class="mdst-input color-hex" data-var="--mdst-color-success" value="#15803d" />
           </div>
         </div>
       </div>
@@ -299,8 +315,8 @@
         <div class="preview-row">
           <input type="text" class="mdst-input" placeholder="Text input" style="max-width: 200px" />
           <div class="mdst-password-input" style="max-width: 200px">
-            <input type="password" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Password" />
-            <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+            <input type="password" autocomplete="current-password" class="mdst-input" placeholder="Password" />
+            <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" />
           </div>
           <select class="mdst-dropdown" style="max-width: 150px">
             <option value="">Dropdown</option>
@@ -310,9 +326,7 @@
           <input type="range" class="mdst-range" value="50" style="max-width: 150px" />
         </div>
         <div class="preview-row">
-          <div class="mdst-file-input" style="max-width: 250px">
-            <input type="file" class="mdst-input mdst-file-input__field" />
-          </div>
+          <input type="file" class="mdst-file-input" style="max-width: 250px" />
         </div>
         <div class="preview-row">
           <label class="mdst-checkbox-label">
@@ -377,19 +391,19 @@
         <h3 style="margin-top: var(--mdst-space-md); margin-bottom: var(--mdst-space-sm)">States</h3>
         <div class="preview-row">
           <div class="mdst-otp-input mdst-otp-input--danger">
-            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="1" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="2" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="3" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="4" readonly />
+            <input type="text" maxlength="1" value="1" readonly />
+            <input type="text" maxlength="1" value="2" readonly />
+            <input type="text" maxlength="1" value="3" readonly />
+            <input type="text" maxlength="1" value="4" readonly />
           </div>
           <span style="font-size: var(--mdst-text-sm); color: var(--mdst-color-danger)">Error state</span>
         </div>
         <div class="preview-row">
           <div class="mdst-otp-input mdst-otp-input--success">
-            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="1" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="2" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="3" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="4" readonly />
+            <input type="text" maxlength="1" value="1" readonly />
+            <input type="text" maxlength="1" value="2" readonly />
+            <input type="text" maxlength="1" value="3" readonly />
+            <input type="text" maxlength="1" value="4" readonly />
           </div>
           <span style="font-size: var(--mdst-text-sm); color: var(--mdst-color-success)">Success state</span>
         </div>
@@ -512,9 +526,9 @@
             wrap.className = "control-group";
             const label = `<label>${control.label} <code>${control.var}</code></label>`;
             if (control.type === "color") {
-              wrap.innerHTML = `${label}<div class="mdst-color-picker">
-                <input type="color" class="mdst-color-picker__input" data-tune="${control.var}" value="${control.default}" />
-                <input type="text" class="mdst-color-picker__text" data-tune="${control.var}" value="${control.default.toUpperCase()}" /></div>`;
+              wrap.innerHTML = `${label}<div class="color-field">
+                <input type="color" class="mdst-color-picker" data-tune="${control.var}" value="${control.default}" />
+                <input type="text" class="mdst-input color-hex" data-tune="${control.var}" value="${control.default.toUpperCase()}" /></div>`;
             } else if (control.type === "select") {
               const options = control.options.map(([text, value]) => `<option value="${value.replace(/"/g, "&quot;")}">${text}</option>`).join("");
               wrap.innerHTML = `${label}<select class="mdst-dropdown" data-tune="${control.var}">${options}</select>`;
@@ -658,21 +672,21 @@
       }
 
       // Color picker handlers
-      document.querySelectorAll(".mdst-color-picker__input[data-var]").forEach((input) => {
+      document.querySelectorAll(".mdst-color-picker[data-var]").forEach((input) => {
         input.addEventListener("input", (e) => {
           const varName = e.target.dataset.var;
           const value = e.target.value;
           updateCSSVar(varName, value);
 
           // Sync text input
-          const textInput = document.querySelector(`.mdst-color-picker__text[data-var="${varName}"]`);
+          const textInput = document.querySelector(`.color-hex[data-var="${varName}"]`);
           if (textInput) {
             textInput.value = value.toUpperCase();
           }
         });
       });
 
-      document.querySelectorAll(".mdst-color-picker__text[data-var]").forEach((input) => {
+      document.querySelectorAll(".color-hex[data-var]").forEach((input) => {
         input.addEventListener("input", (e) => {
           let value = e.target.value;
           if (value && !value.startsWith("#")) {
@@ -684,7 +698,7 @@
             updateCSSVar(varName, value);
 
             // Sync color input
-            const colorInput = document.querySelector(`.mdst-color-picker__input[data-var="${varName}"]`);
+            const colorInput = document.querySelector(`.mdst-color-picker[data-var="${varName}"]`);
             if (colorInput) {
               colorInput.value = value;
             }
@@ -742,9 +756,9 @@
 
       // Show or hide the password by switching the field's type when the eye
       // toggle changes. Example code, not part of modest-ui (which is CSS only).
-      document.querySelectorAll(".mdst-password-input__toggle").forEach((toggle) => {
+      document.querySelectorAll(".mdst-password-input > input[type=checkbox]").forEach((toggle) => {
         toggle.addEventListener("change", () => {
-          const field = toggle.parentElement.querySelector(".mdst-password-input__field");
+          const field = toggle.parentElement.querySelector("input:not([type=checkbox])");
           field.type = toggle.checked ? "text" : "password";
         });
       });

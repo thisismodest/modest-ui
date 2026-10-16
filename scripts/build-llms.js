@@ -212,6 +212,11 @@ behaviour you own (switching tabs, showing a toast, revealing a password).
    \`aria-selected\`, \`aria-disabled\`). Never use data attributes for colour or size.
 5. Theme with \`--mdst-*\` tokens. Don't restyle components to change colours.
 6. Put your own layout CSS outside any cascade layer; it always wins.
+7. Form controls take one class on the \`<input>\` itself, by type:
+   \`.mdst-input\` (text, email, number, date…), \`.mdst-file-input\`,
+   \`.mdst-color-picker\`, \`.mdst-checkbox\`, \`.mdst-toggle\`, \`.mdst-radio\`,
+   \`.mdst-range\`. Only password and OTP have a wrapper, and their inputs
+   inside it take no element class.
 
 ## Naming
 
@@ -230,14 +235,14 @@ Shared modifier vocabulary:
 
 Styled automatically inside \`.mdst-ui\`: button, input (text, email, etc.),
 textarea, select, input[type="checkbox"], input[type="radio"],
-input[type="range"], input[type="file"], form, fieldset, legend, label,
+input[type="range"], input[type="file"], input[type="color"], form, fieldset, legend, label,
 details, dialog, table, progress, meter, code, pre, h1–h6, p, a, strong, em,
 small, mark, kbd, abbr[title], del, ins, s, cite, samp, var, sub, sup,
 blockquote, hr, ul, ol, li.
 
-Class-only components: avatar, badge, banner, breadcrumbs, card, color-picker,
-drawer, otp-input, password-input, popover, skeleton, spinner, stepper, tabs,
-tag, toast, toggle (.mdst-toggle), toolbar, tooltip, utilities.
+Class-only components: avatar, badge, banner, breadcrumbs, card, drawer,
+otp-input, password-input, popover, skeleton, spinner, stepper, tabs, tag,
+toast, toggle (.mdst-toggle), toolbar, tooltip, utilities.
 
 ## Behaviour to know
 

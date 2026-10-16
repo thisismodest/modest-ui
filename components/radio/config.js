@@ -1,6 +1,6 @@
 export default {
   title: "Radio",
   className: ".mdst-radio",
-  description:
-    "Radio button component with label support and group layout.",
+  group: "Input",
+  description: "Radio button with label support, group layout, and selectable cards.",
 };

@@ -172,7 +172,6 @@ Components that don't map to a single native element (they use generic tags like
 - Popover (`.mdst-popover`)
 - Password Input (`.mdst-password-input`)
 - OTP Input (`.mdst-otp-input`)
-- Color Picker (`.mdst-color-picker`)
 - Badge (`.mdst-badge`)
 - Banner (`.mdst-banner`)
 - Breadcrumbs (`.mdst-breadcrumbs`)

@@ -537,7 +537,7 @@
           grid-template-columns: 1fr;
         }
 
-        .otp-group .mdst-otp-input__digit {
+        .otp-group > input {
           width: 2.5rem;
           height: 2.5rem;
         }
@@ -639,10 +639,10 @@
                     type="password"
                     autocomplete="current-password"
                     id="login-password"
-                    class="mdst-input mdst-password-input__field"
+                    class="mdst-input"
                     placeholder="••••••••"
                   />
-                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                  <input type="checkbox" aria-label="Toggle password visibility" />
                 </div>
               </div>
 
@@ -730,11 +730,11 @@
                     type="password"
                     autocomplete="new-password"
                     id="signup-password"
-                    class="mdst-input mdst-password-input__field"
+                    class="mdst-input"
                     placeholder="Create a strong password"
                     oninput="updatePasswordStrength(this.value)"
                   />
-                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                  <input type="checkbox" aria-label="Toggle password visibility" />
                 </div>
                 <div class="password-strength">
                   <div class="password-strength-bar" id="strength-1"></div>
@@ -789,13 +789,13 @@
 
             <form class="auth-form" onsubmit="return false;" style="align-items: center">
               <div class="mdst-otp-input otp-group">
-                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
-                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
-                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
                 <span class="mdst-otp-input__separator"></span>
-                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
-                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
-                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
               </div>
 
               <button type="button" class="mdst-button mdst-button--solid" style="width: 100%" onclick="showView('login')">
@@ -871,10 +871,10 @@
                     type="password"
                     autocomplete="new-password"
                     id="reset-password"
-                    class="mdst-input mdst-password-input__field"
+                    class="mdst-input"
                     placeholder="••••••••"
                   />
-                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                  <input type="checkbox" aria-label="Toggle password visibility" />
                 </div>
                 <span class="form-hint">Must be at least 8 characters</span>
               </div>
@@ -886,10 +886,10 @@
                     type="password"
                     autocomplete="new-password"
                     id="reset-confirm"
-                    class="mdst-input mdst-password-input__field"
+                    class="mdst-input"
                     placeholder="••••••••"
                   />
-                  <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
+                  <input type="checkbox" aria-label="Toggle password visibility" />
                 </div>
               </div>
 
@@ -975,7 +975,7 @@
       }
 
       // OTP auto-advance
-      document.querySelectorAll(".otp-group .mdst-otp-input__digit").forEach(function (input, index, inputs) {
+      document.querySelectorAll(".otp-group > input").forEach(function (input, index, inputs) {
         input.addEventListener("input", function () {
           if (this.value.length === 1 && index < inputs.length - 1) {
             inputs[index + 1].focus();
@@ -997,9 +997,9 @@
     <script>
       // Show or hide the password by switching the field's type when the eye
       // toggle changes. Example code, not part of modest-ui (which is CSS only).
-      document.querySelectorAll(".mdst-password-input__toggle").forEach((toggle) => {
+      document.querySelectorAll(".mdst-password-input > input[type=checkbox]").forEach((toggle) => {
         toggle.addEventListener("change", () => {
-          const field = toggle.parentElement.querySelector(".mdst-password-input__field");
+          const field = toggle.parentElement.querySelector("input:not([type=checkbox])");
           field.type = toggle.checked ? "text" : "password";
         });
       });

@@ -1,95 +1,60 @@
 @layer mdst-ui.components {
-  /* Color Picker */
+  /* Color Picker
+     Classless (a bare input[type="color"] inside .mdst-ui) and class-based
+     (.mdst-color-picker on the input) share every rule. To show the hex value
+     next to it, pair it with a .mdst-input. */
 
+  :where(.mdst-ui) input:where([type="color"]),
   .mdst-color-picker {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--mdst-space-sm);
+    -webkit-appearance: none;
+    appearance: none;
+    display: inline-block;
+    width: var(--mdst-space-8);
+    height: var(--mdst-space-8);
+    padding: 0;
+    vertical-align: middle;
+    background: none;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--_radius, 50%);
+    cursor: pointer;
+    transition: border-color var(--mdst-transition);
+  }
 
-    & .mdst-color-picker__input {
-      -webkit-appearance: none;
-      appearance: none;
-      width: var(--mdst-space-8);
-      height: var(--mdst-space-8);
-      padding: 0;
-      background: none;
-      border: var(--mdst-border-width) solid var(--mdst-color-border);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: border-color var(--mdst-transition);
+  :where(.mdst-ui) input:where([type="color"]:focus-visible),
+  .mdst-color-picker:focus-visible {
+    outline-offset: 0;
+  }
 
-      &:disabled {
-        opacity: var(--mdst-disabled-opacity);
-        cursor: not-allowed;
-      }
+  :where(.mdst-ui) input:where([type="color"]:disabled),
+  .mdst-color-picker:disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
 
-      /* Webkit (Chrome, Safari, Edge) */
+  /* Webkit (Chrome, Safari, Edge) */
 
-      &::-webkit-color-swatch-wrapper {
-        padding: 0;
-      }
+  :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch-wrapper,
+  .mdst-color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
 
-      &::-webkit-color-swatch {
-        border: none;
-        border-radius: 50%;
-      }
+  :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch,
+  .mdst-color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: var(--_radius, 50%);
+  }
 
-      /* Firefox */
+  /* Firefox */
 
-      &::-moz-color-swatch {
-        border: none;
-        border-radius: 50%;
-      }
-    }
+  :where(.mdst-ui) input:where([type="color"])::-moz-color-swatch,
+  .mdst-color-picker::-moz-color-swatch {
+    border: none;
+    border-radius: var(--_radius, 50%);
+  }
 
-    /* Text input variant */
+  /* Square variant: follows the theme's radius */
 
-    & .mdst-color-picker__text {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 5rem;
-      height: var(--mdst-space-8);
-      padding: 0 var(--mdst-space-sm);
-      font-family: var(--mdst-font-mono);
-      font-size: var(--mdst-text-sm);
-      text-transform: uppercase;
-      color: var(--mdst-color-fg);
-      background: var(--mdst-color-bg);
-      border: var(--mdst-border-width) solid var(--mdst-color-border);
-      border-radius: var(--mdst-radius);
-      transition: border-color var(--mdst-transition);
-
-      &::placeholder {
-        color: var(--mdst-color-muted);
-        text-transform: none;
-      }
-
-      &:focus {
-        border-color: var(--mdst-color-focus);
-      }
-
-      &:focus-visible {
-        outline-offset: 0;
-      }
-
-      &:disabled {
-        opacity: var(--mdst-disabled-opacity);
-        cursor: not-allowed;
-      }
-    }
-
-    /* Square variant */
-
-    &.mdst-color-picker--square .mdst-color-picker__input {
-      border-radius: var(--mdst-radius);
-
-      &::-webkit-color-swatch {
-        border-radius: var(--mdst-radius);
-      }
-
-      &::-moz-color-swatch {
-        border-radius: var(--mdst-radius);
-      }
-    }
+  .mdst-color-picker--square {
+    --_radius: var(--mdst-radius);
   }
 }

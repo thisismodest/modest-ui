@@ -44,6 +44,11 @@ behaviour you own (switching tabs, showing a toast, revealing a password).
    `aria-selected`, `aria-disabled`). Never use data attributes for colour or size.
 5. Theme with `--mdst-*` tokens. Don't restyle components to change colours.
 6. Put your own layout CSS outside any cascade layer; it always wins.
+7. Form controls take one class on the `<input>` itself, by type:
+   `.mdst-input` (text, email, number, date…), `.mdst-file-input`,
+   `.mdst-color-picker`, `.mdst-checkbox`, `.mdst-toggle`, `.mdst-radio`,
+   `.mdst-range`. Only password and OTP have a wrapper, and their inputs
+   inside it take no element class.
 
 ## Naming
 
@@ -62,14 +67,14 @@ Shared modifier vocabulary:
 
 Styled automatically inside `.mdst-ui`: button, input (text, email, etc.),
 textarea, select, input[type="checkbox"], input[type="radio"],
-input[type="range"], input[type="file"], form, fieldset, legend, label,
+input[type="range"], input[type="file"], input[type="color"], form, fieldset, legend, label,
 details, dialog, table, progress, meter, code, pre, h1–h6, p, a, strong, em,
 small, mark, kbd, abbr[title], del, ins, s, cite, samp, var, sub, sup,
 blockquote, hr, ul, ol, li.
 
-Class-only components: avatar, badge, banner, breadcrumbs, card, color-picker,
-drawer, otp-input, password-input, popover, skeleton, spinner, stepper, tabs,
-tag, toast, toggle (.mdst-toggle), toolbar, tooltip, utilities.
+Class-only components: avatar, badge, banner, breadcrumbs, card, drawer,
+otp-input, password-input, popover, skeleton, spinner, stepper, tabs, tag,
+toast, toggle (.mdst-toggle), toolbar, tooltip, utilities.
 
 ## Behaviour to know
 
@@ -532,7 +537,7 @@ Classes:
 
 ### Checkbox `.mdst-checkbox`
 
-Checkbox component with label support, checked, and disabled states.
+Checkbox and toggle switch, with label support, checked, and disabled states.
 
 Classes:
 - `.mdst-checkbox`
@@ -579,32 +584,24 @@ Classes:
 
 ---
 
-### Color Picker `.mdst-color-picker`
+### Color `.mdst-color-picker`
 
-Native color picker input styled to match the design system.
+Native colour input drawn as a round or square swatch.
 
 Classes:
 - `.mdst-color-picker`
-- `.mdst-color-picker__input`
-- `.mdst-color-picker__text`
 - `.mdst-color-picker--square`
 
 ```html
-<!-- Color input only -->
-<div class="mdst-color-picker">
-  <input type="color" class="mdst-color-picker__input" value="#000000" />
-</div>
+<input type="color" class="mdst-color-picker" value="#000000" />
 
-<!-- With text input -->
-<div class="mdst-color-picker">
-  <input type="color" class="mdst-color-picker__input" value="#4A3F1F" />
-  <input type="text" class="mdst-color-picker__text" value="#4A3F1F" />
-</div>
+<!-- Square, following --mdst-radius -->
+<input type="color" class="mdst-color-picker mdst-color-picker--square" value="#F4E3C1" />
 
-<!-- Square variant -->
-<div class="mdst-color-picker mdst-color-picker--square">
-  <input type="color" class="mdst-color-picker__input" value="#F4E3C1" />
-  <input type="text" class="mdst-color-picker__text" value="#F4E3C1" />
+<!-- With the hex value beside it -->
+<div style="display: flex; gap: 0.5rem; align-items: center">
+  <input type="color" class="mdst-color-picker" value="#4A3F1F" />
+  <input type="text" class="mdst-input" value="#4A3F1F" style="width: 7rem" />
 </div>
 ```
 
@@ -785,40 +782,27 @@ Styled native file input with drag-and-drop support. No JavaScript required.
 
 Classes:
 - `.mdst-file-input`
-- `.mdst-file-input__field`
 - `.mdst-file-input--borderless`
 - `.mdst-file-input--solid`
 
 ```html
 <!-- Basic file input -->
-<div class="mdst-file-input">
-  <input type="file" class="mdst-input mdst-file-input__field" />
-</div>
+<input type="file" class="mdst-file-input" />
 
 <!-- Borderless -->
-<div class="mdst-file-input mdst-file-input--borderless">
-  <input type="file" class="mdst-input mdst-file-input__field" />
-</div>
+<input type="file" class="mdst-file-input mdst-file-input--borderless" />
 
 <!-- Solid button -->
-<div class="mdst-file-input mdst-file-input--solid">
-  <input type="file" class="mdst-input mdst-file-input__field" />
-</div>
+<input type="file" class="mdst-file-input mdst-file-input--solid" />
 
 <!-- Disabled -->
-<div class="mdst-file-input">
-  <input type="file" class="mdst-input mdst-file-input__field" disabled />
-</div>
+<input type="file" class="mdst-file-input" disabled />
 
 <!-- Accept only images -->
-<div class="mdst-file-input">
-  <input type="file" class="mdst-input mdst-file-input__field" accept="image/*,.png,.jpg,.jpeg,.gif,.webp" />
-</div>
+<input type="file" class="mdst-file-input" accept="image/*,.png,.jpg,.jpeg,.gif,.webp" />
 
 <!-- Multiple files -->
-<div class="mdst-file-input">
-  <input type="file" class="mdst-input mdst-file-input__field" multiple />
-</div>
+<input type="file" class="mdst-file-input" multiple />
 ```
 
 ---
@@ -859,7 +843,7 @@ form { --mdst-flow-space: 0.75rem; }
 
 ### Text `.mdst-input`
 
-Text input and textarea, styled classless or with .mdst-input, with focus and invalid states.
+Text, email, number, search, date, and time inputs, plus textarea. Styled classless or with .mdst-input, with focus and invalid states.
 
 Classes:
 - `.mdst-input`
@@ -868,8 +852,12 @@ Classes:
 <!-- Text input -->
 <input type="text" class="mdst-input" placeholder="Enter text" />
 
-<!-- Email input -->
+<!-- Any text-like type: email, number, search, date, time, and so on -->
 <input type="email" class="mdst-input" placeholder="you@example.com" />
+<input type="date" class="mdst-input" />
+
+<!-- Invalid -->
+<input type="email" class="mdst-input" aria-invalid="true" />
 
 <!-- Textarea -->
 <textarea class="mdst-input" placeholder="Write something..."></textarea>
@@ -920,7 +908,6 @@ One-time password digits with danger and success states. Auto-advance and paste 
 
 Classes:
 - `.mdst-otp-input`
-- `.mdst-otp-input__digit`
 - `.mdst-otp-input__separator`
 - `.mdst-otp-input--danger`
 - `.mdst-otp-input--success`
@@ -928,19 +915,19 @@ Classes:
 ```html
 <!-- 4-digit code -->
 <div class="mdst-otp-input">
-  <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric" />
-  <input type="text" maxlength="1" class="mdst-otp-input__digit" />
-  <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric" />
-  <input type="text" maxlength="1" class="mdst-otp-input__digit" />
+  <input type="text" maxlength="1" inputmode="numeric" />
+  <input type="text" maxlength="1" />
+  <input type="text" maxlength="1" inputmode="numeric" />
+  <input type="text" maxlength="1" />
 </div>
 
 <!-- With separator -->
 <div class="mdst-otp-input">
-  <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric" />
-  <input type="text" maxlength="1" class="mdst-otp-input__digit" />
+  <input type="text" maxlength="1" inputmode="numeric" />
+  <input type="text" maxlength="1" />
   <span class="mdst-otp-input__separator"></span>
-  <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric" />
-  <input type="text" maxlength="1" class="mdst-otp-input__digit" />
+  <input type="text" maxlength="1" inputmode="numeric" />
+  <input type="text" maxlength="1" />
 </div>
 
 <!-- Error state -->
@@ -958,38 +945,36 @@ Password field with an eye toggle. The field is a real type="password"; showing 
 
 Classes:
 - `.mdst-password-input`
-- `.mdst-password-input__field`
-- `.mdst-password-input__toggle`
 
 ```html
 <!-- Basic password input -->
 <div class="mdst-password-input">
-  <input type="password" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Enter password" />
-  <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+  <input type="password" autocomplete="current-password" class="mdst-input" placeholder="Enter password" />
+  <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" />
 </div>
 
 <!-- Disabled -->
 <div class="mdst-password-input">
-  <input type="password" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Disabled" disabled />
-  <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" disabled />
+  <input type="password" autocomplete="current-password" class="mdst-input" placeholder="Disabled" disabled />
+  <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" disabled />
 </div>
 
 <!-- Multiple instances (no IDs needed) -->
 <div class="mdst-password-input">
-  <input type="password" autocomplete="current-password" class="mdst-input mdst-password-input__field" placeholder="Current password" />
-  <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+  <input type="password" autocomplete="current-password" class="mdst-input" placeholder="Current password" />
+  <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" />
 </div>
 
 <div class="mdst-password-input">
-  <input type="password" autocomplete="new-password" class="mdst-input mdst-password-input__field" placeholder="New password" />
-  <input type="checkbox" class="mdst-password-input__toggle" name="password-toggle" aria-label="Toggle password visibility" />
+  <input type="password" autocomplete="new-password" class="mdst-input" placeholder="New password" />
+  <input type="checkbox" name="password-toggle" aria-label="Toggle password visibility" />
 </div>
 
 <script>
   // Example: show or hide the text when the eye toggle changes
-  document.querySelectorAll(".mdst-password-input__toggle").forEach((toggle) => {
+  document.querySelectorAll(".mdst-password-input > input[type=checkbox]").forEach((toggle) => {
     toggle.addEventListener("change", () => {
-      const field = toggle.parentElement.querySelector(".mdst-password-input__field");
+      const field = toggle.parentElement.querySelector("input:not([type=checkbox])");
       field.type = toggle.checked ? "text" : "password";
     });
   });
@@ -1095,7 +1080,7 @@ Classes:
 
 ### Radio `.mdst-radio`
 
-Radio button component with label support and group layout.
+Radio button with label support, group layout, and selectable cards.
 
 Classes:
 - `.mdst-radio`
@@ -1146,7 +1131,7 @@ Classes:
 
 ### Range `.mdst-range`
 
-Range slider input styled to match the design system.
+Range slider styled to match the rest of the library.
 
 Classes:
 - `.mdst-range`
@@ -1653,17 +1638,17 @@ Button:         .mdst-button  | --borderless  --danger  --lg  --sm  --solid
 Card:           .mdst-card  + __body  __footer  __header  | --borderless  --flush  --interactive  --sm  --borderless  --borderless
 Checkbox:       .mdst-checkbox  .mdst-checkbox-label  .mdst-toggle  | --pill
 Code:           .mdst-code
-Color Picker:   .mdst-color-picker  + __input  __text  | --square
+Color:          .mdst-color-picker  | --square
 Details:        .mdst-details  | --borderless  --section  --sm
 Dialog:         .mdst-dialog  + __body  __close  __footer  __header  __title  | --full  --lg  --sm
 Drawer:         .mdst-drawer  + __body  __close  __footer  __header  | --full  --lg  --sm  --start
 Dropdown:       .mdst-dropdown  | --borderless  --inline  --lg  --sm
-File:           .mdst-file-input  + __field  | --borderless  --solid
+File:           .mdst-file-input  | --borderless  --solid
 Form:           .mdst-fieldset  .mdst-form  .mdst-legend
 Text:           .mdst-input
 Meter:          .mdst-meter  | --lg  --sm
-OTP:            .mdst-otp-input  + __digit  __separator  | --danger  --success
-Password:       .mdst-password-input  + __field  __toggle
+OTP:            .mdst-otp-input  + __separator  | --danger  --success
+Password:       .mdst-password-input
 Popover:        .mdst-popover  | --anchored  --lg  --sm
 Pre:            .mdst-pre  | --borderless  --scroll  --sm
 Progress:       .mdst-progress  | --danger  --lg  --sm  --success

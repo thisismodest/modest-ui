@@ -1172,98 +1172,63 @@
 }
 
 @layer mdst-ui.components {
-  /* Color Picker */
+  /* Color Picker
+     Classless (a bare input[type="color"] inside .mdst-ui) and class-based
+     (.mdst-color-picker on the input) share every rule. To show the hex value
+     next to it, pair it with a .mdst-input. */
 
+  :where(.mdst-ui) input:where([type="color"]),
   .mdst-color-picker {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--mdst-space-sm);
+    -webkit-appearance: none;
+    appearance: none;
+    display: inline-block;
+    width: var(--mdst-space-8);
+    height: var(--mdst-space-8);
+    padding: 0;
+    vertical-align: middle;
+    background: none;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--_radius, 50%);
+    cursor: pointer;
+    transition: border-color var(--mdst-transition);
+  }
 
-    & .mdst-color-picker__input {
-      -webkit-appearance: none;
-      appearance: none;
-      width: var(--mdst-space-8);
-      height: var(--mdst-space-8);
-      padding: 0;
-      background: none;
-      border: var(--mdst-border-width) solid var(--mdst-color-border);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: border-color var(--mdst-transition);
+  :where(.mdst-ui) input:where([type="color"]:focus-visible),
+  .mdst-color-picker:focus-visible {
+    outline-offset: 0;
+  }
 
-      &:disabled {
-        opacity: var(--mdst-disabled-opacity);
-        cursor: not-allowed;
-      }
+  :where(.mdst-ui) input:where([type="color"]:disabled),
+  .mdst-color-picker:disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
 
-      /* Webkit (Chrome, Safari, Edge) */
+  /* Webkit (Chrome, Safari, Edge) */
 
-      &::-webkit-color-swatch-wrapper {
-        padding: 0;
-      }
+  :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch-wrapper,
+  .mdst-color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
 
-      &::-webkit-color-swatch {
-        border: none;
-        border-radius: 50%;
-      }
+  :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch,
+  .mdst-color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: var(--_radius, 50%);
+  }
 
-      /* Firefox */
+  /* Firefox */
 
-      &::-moz-color-swatch {
-        border: none;
-        border-radius: 50%;
-      }
-    }
+  :where(.mdst-ui) input:where([type="color"])::-moz-color-swatch,
+  .mdst-color-picker::-moz-color-swatch {
+    border: none;
+    border-radius: var(--_radius, 50%);
+  }
 
-    /* Text input variant */
+  /* Square variant: follows the theme's radius */
 
-    & .mdst-color-picker__text {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 5rem;
-      height: var(--mdst-space-8);
-      padding: 0 var(--mdst-space-sm);
-      font-family: var(--mdst-font-mono);
-      font-size: var(--mdst-text-sm);
-      text-transform: uppercase;
-      color: var(--mdst-color-fg);
-      background: var(--mdst-color-bg);
-      border: var(--mdst-border-width) solid var(--mdst-color-border);
-      border-radius: var(--mdst-radius);
-      transition: border-color var(--mdst-transition);
-
-      &::placeholder {
-        color: var(--mdst-color-muted);
-        text-transform: none;
-      }
-
-      &:focus {
-        border-color: var(--mdst-color-focus);
-      }
-
-      &:focus-visible {
-        outline-offset: 0;
-      }
-
-      &:disabled {
-        opacity: var(--mdst-disabled-opacity);
-        cursor: not-allowed;
-      }
-    }
-
-    /* Square variant */
-
-    &.mdst-color-picker--square .mdst-color-picker__input {
-      border-radius: var(--mdst-radius);
-
-      &::-webkit-color-swatch {
-        border-radius: var(--mdst-radius);
-      }
-
-      &::-moz-color-swatch {
-        border-radius: var(--mdst-radius);
-      }
-    }
+  .mdst-color-picker--square {
+    --_radius: var(--mdst-radius);
   }
 }
 
@@ -1811,7 +1776,7 @@
   /* File Input
 
      Classless (a bare input[type="file"] inside .mdst-ui) and class-based
-     (.mdst-file-input__field inside a .mdst-file-input wrapper) share every
+     (.mdst-file-input inside a .mdst-file-input wrapper) share every
      rule, so both look the same. */
 
   .mdst-file-input {
@@ -1820,7 +1785,7 @@
   }
 
   :where(.mdst-ui) input:where([type="file"]),
-  .mdst-file-input__field {
+  .mdst-file-input {
     display: block;
     width: 100%;
     color: var(--mdst-color-muted);
@@ -1836,17 +1801,17 @@
   }
 
   :where(.mdst-ui) input:where([type="file"]:focus),
-  .mdst-file-input__field:focus {
+  .mdst-file-input:focus {
     border-color: var(--mdst-color-focus);
   }
 
   :where(.mdst-ui) input:where([type="file"]:focus-visible),
-  .mdst-file-input__field:focus-visible {
+  .mdst-file-input:focus-visible {
     outline-offset: 0;
   }
 
   :where(.mdst-ui) input:where([type="file"]:disabled),
-  .mdst-file-input__field:disabled {
+  .mdst-file-input:disabled {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
@@ -1855,7 +1820,7 @@
      and the same variables */
 
   :where(.mdst-ui) input:where([type="file"])::file-selector-button,
-  .mdst-file-input__field::file-selector-button {
+  .mdst-file-input::file-selector-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1879,34 +1844,31 @@
   }
 
   :where(.mdst-ui) input:where([type="file"]:hover)::file-selector-button,
-  .mdst-file-input__field:hover::file-selector-button {
+  .mdst-file-input:hover::file-selector-button {
     --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
   }
 
   :where(.mdst-ui) input:where([type="file"]:disabled)::file-selector-button,
-  .mdst-file-input__field:disabled::file-selector-button {
+  .mdst-file-input:disabled::file-selector-button {
     --_hover: none;
     cursor: not-allowed;
   }
 
-  /* Variants: on the bare input, or on the wrapper */
+  /* Variants: on the input, with or without .mdst-file-input */
 
-  :where(.mdst-ui) input.mdst-file-input--solid:where([type="file"])::file-selector-button,
-  .mdst-file-input--solid .mdst-file-input__field::file-selector-button {
+  .mdst-file-input--solid::file-selector-button {
     --_bg: var(--mdst-color-fg);
     --_fg: var(--mdst-color-bg);
     border-color: var(--mdst-color-fg);
   }
 
-  :where(.mdst-ui) input.mdst-file-input--borderless:where([type="file"]),
-  .mdst-file-input--borderless .mdst-file-input__field {
+  .mdst-file-input--borderless,
+  .mdst-file-input--borderless:focus {
     border-color: transparent;
-    padding: 0;
   }
 
-  :where(.mdst-ui) input.mdst-file-input--borderless:where([type="file"]:focus),
-  .mdst-file-input--borderless .mdst-file-input__field:focus {
-    border-color: transparent;
+  .mdst-file-input--borderless {
+    padding: 0;
   }
 }
 
@@ -2068,6 +2030,22 @@
     cursor: not-allowed;
   }
 
+  /* Date and time fields: Chrome pads its inner edit box, which makes them
+     taller than the other inputs */
+
+  :where(.mdst-ui) input::-webkit-datetime-edit,
+  :where(.mdst-ui) input::-webkit-datetime-edit-fields-wrapper,
+  .mdst-input::-webkit-datetime-edit,
+  .mdst-input::-webkit-datetime-edit-fields-wrapper {
+    padding-block: 0;
+  }
+
+  :where(.mdst-ui) input::-webkit-calendar-picker-indicator,
+  .mdst-input::-webkit-calendar-picker-indicator {
+    margin-block: 0;
+    padding-block: 0;
+  }
+
   /* Textarea variant */
 
   :where(.mdst-ui) textarea,
@@ -2195,19 +2173,19 @@
    *
    * Usage:
    * <div class="mdst-otp-input">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
    * </div>
    *
    * With separator:
    * <div class="mdst-otp-input">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
    *   <span class="mdst-otp-input__separator"></span>
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
-   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
    * </div>
    */
 
@@ -2216,7 +2194,7 @@
     gap: var(--mdst-space-sm);
     align-items: center;
 
-    & .mdst-otp-input__digit {
+    & > input {
       width: 1.5em;
       height: 2em;
       padding: 0;
@@ -2265,20 +2243,24 @@
 
     /* Error state */
 
-    &.mdst-otp-input--danger .mdst-otp-input__digit {
+    &.mdst-otp-input--danger > input {
       border-color: var(--mdst-color-danger);
     }
 
     /* Success state */
 
-    &.mdst-otp-input--success .mdst-otp-input__digit {
+    &.mdst-otp-input--success > input {
       border-color: var(--mdst-color-success);
     }
   }
 }
 
 @layer mdst-ui.components {
-  /* Password Input */
+  /* Password Input
+     A wrapper around the field (a .mdst-input, or a bare input inside
+     .mdst-ui) and a checkbox that draws the eye toggle. The field is picked
+     out as "not the checkbox", so it keeps its padding after your JS switches
+     it to type="text". */
 
   .mdst-password-input {
     display: flex;
@@ -2286,19 +2268,19 @@
     width: 100%;
     cursor: text;
 
-    &:has(.mdst-password-input__field:disabled) .mdst-password-input__toggle {
+    &:has(> input:not([type="checkbox"]):disabled) > input[type="checkbox"] {
       opacity: var(--mdst-disabled-opacity);
       cursor: not-allowed;
       pointer-events: none;
     }
 
-    & .mdst-password-input__field {
+    & > input:not([type="checkbox"]) {
       padding-inline-end: calc(var(--mdst-space-md) + 1.5em + var(--mdst-space-sm));
     }
 
     /* Toggle — the checkbox itself, styled as the eye icon */
 
-    & .mdst-password-input__toggle {
+    & > input[type="checkbox"] {
       /* It's a checkbox underneath, so drop the classless checkbox tick */
       &::after {
         content: none;
@@ -2358,7 +2340,7 @@
   /* Windows High Contrast (forced colours) removes fills, so the parts that
      show state are redrawn in the user's system colours. */
   @media (forced-colors: active) {
-    .mdst-password-input .mdst-password-input__toggle::before {
+    .mdst-password-input > input[type="checkbox"]::before {
       forced-color-adjust: none;
       background-color: CanvasText;
     }

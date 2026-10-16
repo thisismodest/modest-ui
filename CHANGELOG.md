@@ -32,7 +32,12 @@ the same modifier name in every component.
 | `.mdst-stepper-step`, `-indicator`, `-label` | `.mdst-stepper__step`, `__indicator`, `__label` |
 | `.mdst-toolbar-group`, `-separator`, `-spacer` | `.mdst-toolbar__group`, `__separator`, `__spacer` |
 | `.mdst-toolbar-group--attached` | `.mdst-toolbar__group--attached` |
-| `.mdst-otp-input-digit`, `-separator` | `.mdst-otp-input__digit`, `__separator` |
+| `.mdst-otp-input-digit` | a plain `<input>` inside `.mdst-otp-input` |
+| `.mdst-otp-input-separator` | `.mdst-otp-input__separator` |
+| `.mdst-password-input__field`, `__toggle` | a `.mdst-input` and a plain checkbox inside `.mdst-password-input` |
+| `<div class="mdst-file-input">` around `.mdst-file-input__field` | `.mdst-file-input` on the `<input type="file">` itself (variants too) |
+| `<div class="mdst-color-picker">` around `.mdst-color-picker__input` | `.mdst-color-picker` on the `<input type="color">` itself (`--square` too) |
+| `.mdst-color-picker__text` | removed: put a `.mdst-input` next to the swatch |
 | `--ghost` (button, dropdown, tag) | `--borderless` |
 | `--inverted` (button, file input) | `--solid` |
 | `--compact` (card, details, pre, table, tabs, stepper, breadcrumbs) | `--sm` |
@@ -43,6 +48,10 @@ the same modifier name in every component.
 | `.mdst-tooltip--left`, `.mdst-tooltip--right` | `.mdst-tooltip--start`, `.mdst-tooltip--end` |
 | `.mdst-drawer--left` | `.mdst-drawer--start` |
 | `.mdst-badge--top-right` | `.mdst-badge--top-end` |
+
+Each input type takes one class on the `<input>` itself: `.mdst-input`,
+`.mdst-file-input`, `.mdst-color-picker`, `.mdst-checkbox`, `.mdst-radio`, and
+`.mdst-range`. Wrappers are only kept where they do layout (password, OTP).
 
 Data attributes are now only for runtime state (`data-state`). Unchanged
 blocks with hyphenated names (`.mdst-toast-group`, `.mdst-avatar-group`,
@@ -162,6 +171,12 @@ elements, so they keep their names.
 
 ### Added
 
+- A bare `<input type="color">` inside `.mdst-ui` is styled as a swatch, like
+  the other input types. Date and time inputs match the height of the other
+  fields.
+- Docs: checkbox, colour, file, OTP, password, radio, range, and text are
+  grouped under Input in the sidebar, and the Text page shows email, number,
+  search, date, and time fields.
 - `package.json` has `unpkg` and `jsdelivr` fields, so the bare CDN URL
   (`cdn.jsdelivr.net/npm/mdst-ui@2`) serves the minified bundle instead of
   `index.css` and its 37 imports.

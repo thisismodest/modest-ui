@@ -29,10 +29,10 @@
 export function createOTPInput(container, options = {}) {
   const { onComplete = () => {}, onChange = () => {} } = options;
 
-  const inputs = Array.from(container.querySelectorAll(".mdst-otp-input__digit"));
+  const inputs = Array.from(container.querySelectorAll(":scope > input"));
 
   if (inputs.length === 0) {
-    console.warn("createOTPInput: No .mdst-otp-input__digit elements found");
+    console.warn("createOTPInput: no inputs found in the container");
     return null;
   }
 

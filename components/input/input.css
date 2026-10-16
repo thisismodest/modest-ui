@@ -109,6 +109,22 @@
     cursor: not-allowed;
   }
 
+  /* Date and time fields: Chrome pads its inner edit box, which makes them
+     taller than the other inputs */
+
+  :where(.mdst-ui) input::-webkit-datetime-edit,
+  :where(.mdst-ui) input::-webkit-datetime-edit-fields-wrapper,
+  .mdst-input::-webkit-datetime-edit,
+  .mdst-input::-webkit-datetime-edit-fields-wrapper {
+    padding-block: 0;
+  }
+
+  :where(.mdst-ui) input::-webkit-calendar-picker-indicator,
+  .mdst-input::-webkit-calendar-picker-indicator {
+    margin-block: 0;
+    padding-block: 0;
+  }
+
   /* Textarea variant */
 
   :where(.mdst-ui) textarea,

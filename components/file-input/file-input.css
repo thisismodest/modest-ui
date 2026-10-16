@@ -2,7 +2,7 @@
   /* File Input
 
      Classless (a bare input[type="file"] inside .mdst-ui) and class-based
-     (.mdst-file-input__field inside a .mdst-file-input wrapper) share every
+     (.mdst-file-input inside a .mdst-file-input wrapper) share every
      rule, so both look the same. */
 
   .mdst-file-input {
@@ -11,7 +11,7 @@
   }
 
   :where(.mdst-ui) input:where([type="file"]),
-  .mdst-file-input__field {
+  .mdst-file-input {
     display: block;
     width: 100%;
     color: var(--mdst-color-muted);
@@ -27,17 +27,17 @@
   }
 
   :where(.mdst-ui) input:where([type="file"]:focus),
-  .mdst-file-input__field:focus {
+  .mdst-file-input:focus {
     border-color: var(--mdst-color-focus);
   }
 
   :where(.mdst-ui) input:where([type="file"]:focus-visible),
-  .mdst-file-input__field:focus-visible {
+  .mdst-file-input:focus-visible {
     outline-offset: 0;
   }
 
   :where(.mdst-ui) input:where([type="file"]:disabled),
-  .mdst-file-input__field:disabled {
+  .mdst-file-input:disabled {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
@@ -46,7 +46,7 @@
      and the same variables */
 
   :where(.mdst-ui) input:where([type="file"])::file-selector-button,
-  .mdst-file-input__field::file-selector-button {
+  .mdst-file-input::file-selector-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -70,33 +70,30 @@
   }
 
   :where(.mdst-ui) input:where([type="file"]:hover)::file-selector-button,
-  .mdst-file-input__field:hover::file-selector-button {
+  .mdst-file-input:hover::file-selector-button {
     --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
   }
 
   :where(.mdst-ui) input:where([type="file"]:disabled)::file-selector-button,
-  .mdst-file-input__field:disabled::file-selector-button {
+  .mdst-file-input:disabled::file-selector-button {
     --_hover: none;
     cursor: not-allowed;
   }
 
-  /* Variants: on the bare input, or on the wrapper */
+  /* Variants: on the input, with or without .mdst-file-input */
 
-  :where(.mdst-ui) input.mdst-file-input--solid:where([type="file"])::file-selector-button,
-  .mdst-file-input--solid .mdst-file-input__field::file-selector-button {
+  .mdst-file-input--solid::file-selector-button {
     --_bg: var(--mdst-color-fg);
     --_fg: var(--mdst-color-bg);
     border-color: var(--mdst-color-fg);
   }
 
-  :where(.mdst-ui) input.mdst-file-input--borderless:where([type="file"]),
-  .mdst-file-input--borderless .mdst-file-input__field {
+  .mdst-file-input--borderless,
+  .mdst-file-input--borderless:focus {
     border-color: transparent;
-    padding: 0;
   }
 
-  :where(.mdst-ui) input.mdst-file-input--borderless:where([type="file"]:focus),
-  .mdst-file-input--borderless .mdst-file-input__field:focus {
-    border-color: transparent;
+  .mdst-file-input--borderless {
+    padding: 0;
   }
 }

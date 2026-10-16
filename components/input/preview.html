@@ -38,6 +38,42 @@
             </td>
           </tr>
           <tr>
+            <td><span class="class-name">type="email"</span></td>
+            <td>
+              <input type="email" class="mdst-input" placeholder="you@example.com" aria-label="Email input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="number"</span></td>
+            <td>
+              <input type="number" class="mdst-input" value="42" aria-label="Number input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="search"</span></td>
+            <td>
+              <input type="search" class="mdst-input" placeholder="Search" aria-label="Search input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="date"</span></td>
+            <td>
+              <input type="date" class="mdst-input" aria-label="Date input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="time"</span></td>
+            <td>
+              <input type="time" class="mdst-input" aria-label="Time input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="datetime-local"</span></td>
+            <td>
+              <input type="datetime-local" class="mdst-input" aria-label="Datetime local input example" />
+            </td>
+          </tr>
+          <tr>
             <td><span class="class-name">.mdst-input</span> on <span class="class-name">&lt;textarea&gt;</span></td>
             <td>
               <textarea class="mdst-input" placeholder="Textarea" aria-label="Input example"></textarea>
@@ -67,6 +103,14 @@
           </tr>
           <tr>
             <td>
+              <span class="class-name">aria-invalid="true"</span>
+            </td>
+            <td>
+              <input type="email" class="mdst-input" value="not-an-email" aria-invalid="true" aria-label="Input example" />
+            </td>
+          </tr>
+          <tr>
+            <td>
               <span class="class-name">disabled</span>
             </td>
             <td>
@@ -82,8 +126,12 @@
       <pre class="mdst-pre"><code>&lt;!-- Text input --&gt;
 &lt;input type="text" class="mdst-input" placeholder="Enter text" /&gt;
 
-&lt;!-- Email input --&gt;
+&lt;!-- Any text-like type: email, number, search, date, time, and so on --&gt;
 &lt;input type="email" class="mdst-input" placeholder="you@example.com" /&gt;
+&lt;input type="date" class="mdst-input" /&gt;
+
+&lt;!-- Invalid --&gt;
+&lt;input type="email" class="mdst-input" aria-invalid="true" /&gt;
 
 &lt;!-- Textarea --&gt;
 &lt;textarea class="mdst-input" placeholder="Write something..."&gt;&lt;/textarea&gt;
