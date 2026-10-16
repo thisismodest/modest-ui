@@ -1,0 +1,46 @@
+@layer mdst-ui.components {
+  /* Form
+
+     A light structure layer so plain forms read well: fields stack with a
+     small gap under their label and the flow gap between fields, and
+     fieldsets get a border and a legend.
+
+     Everything here has zero specificity, so any rule you write wins. Spacing
+     follows --mdst-flow-space (between fields) and --mdst-space-xs (label to
+     field). */
+
+  /* Fieldset */
+
+  :where(.mdst-ui) fieldset,
+  .mdst-fieldset {
+    min-inline-size: 0;
+    padding: var(--mdst-space-md);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+  }
+
+  :where(.mdst-ui) legend,
+  .mdst-legend {
+    padding-inline: var(--mdst-space-xs);
+    font-weight: 600;
+  }
+
+  /* Stacking: fields get the flow gap from typography's flow rule. Here,
+     labels sit on their own line with a small gap to the field below, and a
+     <small> hint or error sits close to its field. These use a single element
+     in the selector so they beat the zero-specificity flow gap, while any
+     class you write still wins. */
+
+  :where(.mdst-ui :is(form, fieldset):not([class]), .mdst-form, .mdst-fieldset) > label:where(:not(:has(input, select, textarea))) {
+    display: block;
+  }
+
+  :where(.mdst-ui :is(form, fieldset):not([class]), .mdst-form, .mdst-fieldset) > label:where(:not(:has(input, select, textarea))) + * {
+    margin-block-start: var(--mdst-space-xs);
+  }
+
+  :where(.mdst-ui :is(form, fieldset):not([class]), .mdst-form, .mdst-fieldset) > :where(input, select, textarea) + small {
+    display: block;
+    margin-block-start: var(--mdst-space-xs);
+  }
+}
