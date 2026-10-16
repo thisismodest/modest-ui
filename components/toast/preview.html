@@ -46,7 +46,7 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-toast</span>-close</span>
+              <span class="class-name"><span class="dim">.mdst-toast</span>__close</span>
             </td>
             <td>Dismiss button inside a toast</td>
           </tr>
@@ -85,27 +85,27 @@
       <div class="mdst-toast-group preview-toast-group">
         <output class="mdst-toast" data-state="visible">
           Default toast, no variant
-          <button type="button" class="mdst-toast-close" aria-label="Dismiss">✕</button>
+          <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
 
-        <output class="mdst-toast" data-state="visible" data-variant="info">
+        <output class="mdst-toast mdst-toast--info" data-state="visible">
           <span class="class-name">info</span>: something noteworthy happened.
-          <button type="button" class="mdst-toast-close" aria-label="Dismiss">✕</button>
+          <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
 
-        <output class="mdst-toast" data-state="visible" data-variant="success">
+        <output class="mdst-toast mdst-toast--success" data-state="visible">
           <span class="class-name">success</span>: your changes have been saved.
-          <button type="button" class="mdst-toast-close" aria-label="Dismiss">✕</button>
+          <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
 
-        <output class="mdst-toast" data-state="visible" data-variant="error">
-          <span class="class-name">error</span>: something went wrong.
-          <button type="button" class="mdst-toast-close" aria-label="Dismiss">✕</button>
+        <output class="mdst-toast mdst-toast--danger" data-state="visible">
+          <span class="class-name">danger</span>: something went wrong.
+          <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
 
-        <output class="mdst-toast" data-state="visible" data-variant="warning">
+        <output class="mdst-toast mdst-toast--warning" data-state="visible">
           <span class="class-name">warning</span>: please review before continuing.
-          <button type="button" class="mdst-toast-close" aria-label="Dismiss">✕</button>
+          <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
       </div>
     </div>
@@ -122,7 +122,7 @@
         <button type="button" class="mdst-button mdst-button--sm" data-demo-variant="">Default</button>
         <button type="button" class="mdst-button mdst-button--sm" data-demo-variant="info">Info</button>
         <button type="button" class="mdst-button mdst-button--sm" data-demo-variant="success">Success</button>
-        <button type="button" class="mdst-button mdst-button--sm" data-demo-variant="error">Error</button>
+        <button type="button" class="mdst-button mdst-button--sm" data-demo-variant="danger">Danger</button>
         <button type="button" class="mdst-button mdst-button--sm" data-demo-variant="warning">Warning</button>
       </div>
 
@@ -135,7 +135,7 @@ const messages = {
   "":        "Something happened.",
   info:      "Here\u2019s something you should know.",
   success:   "Your changes have been saved.",
-  error:     "Something went wrong.",
+  danger:    "Something went wrong.",
   warning:   "Please review before continuing.",
 };
 
@@ -143,11 +143,11 @@ function showToast(variant) {
   const toast = document.createElement("output");
   toast.className = "mdst-toast";
   toast.setAttribute("data-state", "visible");
-  if (variant) toast.setAttribute("data-variant", variant);
+  if (variant) toast.classList.add("mdst-toast--" + variant);
   toast.textContent = messages[variant] + " ";
 
   const close = document.createElement("button");
-  close.className = "mdst-toast-close";
+  close.className = "mdst-toast__close";
   close.setAttribute("aria-label", "Dismiss");
   close.textContent = "\u2715";
   close.addEventListener("click", () => dismiss(toast));
@@ -170,15 +170,15 @@ function dismiss(toast) {
 &lt;div class="mdst-toast-group"&gt;
 
   &lt;!-- A visible success toast --&gt;
-  &lt;output class="mdst-toast" data-state="visible" data-variant="success"&gt;
+  &lt;output class="mdst-toast mdst-toast--success" data-state="visible"&gt;
     Your changes have been saved.
-    &lt;button class="mdst-toast-close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
+    &lt;button class="mdst-toast__close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
   &lt;/output&gt;
 
   &lt;!-- A hidden toast (waiting to be shown) --&gt;
-  &lt;output class="mdst-toast" data-state="hidden" data-variant="error"&gt;
+  &lt;output class="mdst-toast mdst-toast--danger" data-state="hidden"&gt;
     Something went wrong.
-    &lt;button class="mdst-toast-close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
+    &lt;button class="mdst-toast__close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
   &lt;/output&gt;
 
 &lt;/div&gt;
@@ -200,7 +200,7 @@ function dismiss(toast) {
         "": "Something happened.",
         info: "Here\u2019s something you should know.",
         success: "Your changes have been saved.",
-        error: "Something went wrong.",
+        danger: "Something went wrong.",
         warning: "Please review before continuing."
       };
 
@@ -208,11 +208,11 @@ function dismiss(toast) {
         const toast = document.createElement("output");
         toast.className = "mdst-toast";
         toast.setAttribute("data-state", "visible");
-        if (variant) toast.setAttribute("data-variant", variant);
-        toast.textContent = demoMessages[variant] + " ";
+        if (variant) toast.classList.add(`mdst-toast--${variant}`);
+        toast.textContent = `${demoMessages[variant]} `;
 
         const close = document.createElement("button");
-        close.className = "mdst-toast-close";
+        close.className = "mdst-toast__close";
         close.setAttribute("aria-label", "Dismiss");
         close.textContent = "\u2715";
         close.addEventListener("click", () => dismissDemoToast(toast));

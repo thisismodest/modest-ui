@@ -1,6 +1,6 @@
 export default {
-  title: "Color Picker",
-  className: ".mdst-color-picker",
-  description:
-    "Native color picker input styled to match the design system.",
+  title: "Color",
+  className: ".mdst-input",
+  group: "Input",
+  description: "Native colour input drawn as a round or square swatch.",
 };

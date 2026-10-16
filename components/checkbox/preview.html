@@ -25,12 +25,12 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name">.mdst-checkbox-label</span><br />
-              <span class="class-name">.mdst-checkbox</span>
+              <span class="class-name">&lt;label&gt;</span><br />
+              <span class="class-name">.mdst-input</span>
             </td>
             <td>
-              <label class="mdst-checkbox-label">
-                <input type="checkbox" class="mdst-checkbox" />
+              <label>
+                <input type="checkbox" class="mdst-input" />
                 Unchecked
               </label>
             </td>
@@ -38,8 +38,8 @@
           <tr>
             <td><span class="class-name">checked</span></td>
             <td>
-              <label class="mdst-checkbox-label">
-                <input type="checkbox" class="mdst-checkbox" checked />
+              <label>
+                <input type="checkbox" class="mdst-input" checked />
                 Checked
               </label>
             </td>
@@ -47,8 +47,8 @@
           <tr>
             <td><span class="class-name">disabled</span></td>
             <td>
-              <label class="mdst-checkbox-label">
-                <input type="checkbox" class="mdst-checkbox" disabled />
+              <label>
+                <input type="checkbox" class="mdst-input" disabled />
                 Disabled
               </label>
             </td>
@@ -56,8 +56,8 @@
           <tr>
             <td><span class="class-name">checked</span> <span class="class-name">disabled</span></td>
             <td>
-              <label class="mdst-checkbox-label">
-                <input type="checkbox" class="mdst-checkbox" checked disabled />
+              <label>
+                <input type="checkbox" class="mdst-input" checked disabled />
                 Checked & Disabled
               </label>
             </td>
@@ -77,16 +77,16 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="class-name">.mdst-checkbox</span></td>
-            <td><input type="checkbox" class="mdst-checkbox" /></td>
+            <td><span class="class-name">.mdst-input</span></td>
+            <td><input type="checkbox" class="mdst-input" aria-label="Checkbox example" /></td>
           </tr>
           <tr>
             <td><span class="class-name">checked</span></td>
-            <td><input type="checkbox" class="mdst-checkbox" checked /></td>
+            <td><input type="checkbox" class="mdst-input" checked aria-label="Checkbox example" /></td>
           </tr>
           <tr>
             <td><span class="class-name">disabled</span></td>
-            <td><input type="checkbox" class="mdst-checkbox" disabled /></td>
+            <td><input type="checkbox" class="mdst-input" disabled aria-label="Checkbox example" /></td>
           </tr>
         </tbody>
       </table>
@@ -104,74 +104,79 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-checkbox</span>--toggle</span>
+              <span class="class-name">.mdst-input</span><br />
+              <span class="class-name">role="switch"</span>
             </td>
             <td>
-              <input type="checkbox" class="mdst-checkbox--toggle" />
+              <input role="switch" type="checkbox" class="mdst-input" aria-label="Toggle example" />
             </td>
           </tr>
           <tr>
             <td><span class="class-name">checked</span></td>
             <td>
-              <input type="checkbox" class="mdst-checkbox--toggle" checked />
+              <input role="switch" type="checkbox" class="mdst-input" checked aria-label="Toggle example" />
             </td>
           </tr>
           <tr>
             <td><span class="class-name">disabled</span></td>
             <td>
-              <input type="checkbox" class="mdst-checkbox--toggle" disabled />
+              <input role="switch" type="checkbox" class="mdst-input" disabled aria-label="Toggle example" />
             </td>
           </tr>
           <tr>
             <td><span class="class-name">checked</span> <span class="class-name">disabled</span></td>
             <td>
-              <input type="checkbox" class="mdst-checkbox--toggle" checked disabled />
+              <input role="switch" type="checkbox" class="mdst-input" checked disabled aria-label="Toggle example" />
             </td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-checkbox--toggle</span>-rounded</span>
+              <span class="class-name"><span class="dim">.mdst-input</span>--pill</span>
             </td>
             <td>
-              <input type="checkbox" class="mdst-checkbox--toggle mdst-checkbox--toggle-rounded" />
+              <input role="switch" type="checkbox" class="mdst-input mdst-input--pill" aria-label="Toggle example" />
             </td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-checkbox--toggle-rounded</span></span>
+              <span class="class-name"><span class="dim">.mdst-input--pill</span></span>
               <span class="class-name">checked</span>
             </td>
             <td>
-              <input type="checkbox" class="mdst-checkbox--toggle mdst-checkbox--toggle-rounded" checked />
+              <input role="switch" type="checkbox" class="mdst-input mdst-input--pill" checked aria-label="Toggle example" />
             </td>
           </tr>
         </tbody>
       </table>
     </div>
 
+    <p class="footnote">
+      <strong>The class is optional inside <code class="mdst-code">.mdst-ui</code>.</strong> A bare <code class="mdst-code">&lt;input type="checkbox"&gt;</code> there gets the same styles. Variants still need their modifier (<code class="mdst-code">.mdst-input--pill</code>), which works without <code class="mdst-code">.mdst-input</code>. A toggle is a bare checkbox with <code class="mdst-code">role=&quot;switch&quot;</code>.
+    </p>
+
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- With label (recommended) --&gt;
-&lt;label class="mdst-checkbox-label"&gt;
-  &lt;input type="checkbox" class="mdst-checkbox" /&gt;
+&lt;label&gt;
+  &lt;input type="checkbox" class="mdst-input" /&gt;
   Label text
 &lt;/label&gt;
 
 &lt;!-- Standalone --&gt;
-&lt;input type="checkbox" class="mdst-checkbox" /&gt;
+&lt;input type="checkbox" class="mdst-input" /&gt;
 
 &lt;!-- States --&gt;
-&lt;input type="checkbox" class="mdst-checkbox" checked /&gt;
-&lt;input type="checkbox" class="mdst-checkbox" disabled /&gt;
+&lt;input type="checkbox" class="mdst-input" checked /&gt;
+&lt;input type="checkbox" class="mdst-input" disabled /&gt;
 
 &lt;!-- Toggle --&gt;
-&lt;input type="checkbox" class="mdst-checkbox--toggle" /&gt;
-&lt;input type="checkbox" class="mdst-checkbox--toggle" checked /&gt;
-&lt;input type="checkbox" class="mdst-checkbox--toggle" disabled /&gt;
+&lt;input type="checkbox" class="mdst-input" role="switch" /&gt;
+&lt;input type="checkbox" class="mdst-input" role="switch" checked /&gt;
+&lt;input type="checkbox" class="mdst-input" role="switch" disabled /&gt;
 
 &lt;!-- Toggle rounded --&gt;
-&lt;input type="checkbox" class="mdst-checkbox--toggle mdst-checkbox--toggle-rounded" /&gt;
-&lt;input type="checkbox" class="mdst-checkbox--toggle mdst-checkbox--toggle-rounded" checked /&gt;
+&lt;input type="checkbox" class="mdst-input mdst-input--pill" role="switch" /&gt;
+&lt;input type="checkbox" class="mdst-input mdst-input--pill" role="switch" checked /&gt;</code></pre>
     </div>
   </body>
 </html>

@@ -44,19 +44,19 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-toolbar</span>-group</span>
+              <span class="class-name"><span class="dim">.mdst-toolbar</span>__group</span>
             </td>
             <td>Keeps related controls together with a tighter gap</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-toolbar</span>-spacer</span>
+              <span class="class-name"><span class="dim">.mdst-toolbar</span>__spacer</span>
             </td>
             <td>Empty element that pushes everything after it to the far end</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-toolbar</span>-separator</span>
+              <span class="class-name"><span class="dim">.mdst-toolbar</span>__separator</span>
             </td>
             <td>Vertical rule between groups. Use on <code class="mdst-code">&lt;hr&gt;</code> or an element with <code class="mdst-code">role="separator"</code></td>
           </tr>
@@ -76,11 +76,11 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-toolbar-group</span>--attached</span>
+              <span class="class-name"><span class="dim">.mdst-toolbar__group</span>--attached</span>
             </td>
             <td>
               <div class="mdst-toolbar">
-                <div class="mdst-toolbar-group mdst-toolbar-group--attached">
+                <div class="mdst-toolbar__group mdst-toolbar__group--attached">
                   <button type="button" class="mdst-button mdst-button--sm">Day</button>
                   <button type="button" class="mdst-button mdst-button--sm">Week</button>
                   <button type="button" class="mdst-button mdst-button--sm">Month</button>
@@ -94,7 +94,7 @@
             </td>
             <td>
               <div class="mdst-toolbar">
-                <div class="mdst-toolbar-group mdst-toolbar-group--attached">
+                <div class="mdst-toolbar__group mdst-toolbar__group--attached">
                   <button type="button" class="mdst-button mdst-button--sm" aria-pressed="true">List</button>
                   <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false">Grid</button>
                 </div>
@@ -107,8 +107,8 @@
             </td>
             <td>
               <div class="mdst-toolbar mdst-toolbar--bordered">
-                <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost">Undo</button>
-                <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost">Redo</button>
+                <button type="button" class="mdst-button mdst-button--sm mdst-button--borderless">Undo</button>
+                <button type="button" class="mdst-button mdst-button--sm mdst-button--borderless">Redo</button>
               </div>
             </td>
           </tr>
@@ -125,10 +125,10 @@
           <option>Active</option>
           <option>Churned</option>
         </select>
-        <div class="mdst-toolbar-spacer"></div>
-        <div class="mdst-toolbar-group">
+        <div class="mdst-toolbar__spacer"></div>
+        <div class="mdst-toolbar__group">
           <button type="button" class="mdst-button">Export</button>
-          <button type="button" class="mdst-button mdst-button--inverted">Add customer</button>
+          <button type="button" class="mdst-button mdst-button--solid">Add customer</button>
         </div>
       </div>
     </div>
@@ -143,7 +143,7 @@
       </p>
 
       <div class="mdst-toolbar mdst-toolbar--bordered" role="toolbar" aria-label="Text formatting" id="demo-toolbar">
-        <div class="mdst-toolbar-group mdst-toolbar-group--attached">
+        <div class="mdst-toolbar__group mdst-toolbar__group--attached">
           <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false" data-style="fontWeight:bold">
             <strong>B</strong>
           </button>
@@ -154,14 +154,14 @@
             <span style="text-decoration: underline">U</span>
           </button>
         </div>
-        <hr class="mdst-toolbar-separator" />
-        <div class="mdst-toolbar-group mdst-toolbar-group--attached">
+        <hr class="mdst-toolbar__separator" />
+        <div class="mdst-toolbar__group mdst-toolbar__group--attached">
           <button type="button" class="mdst-button mdst-button--sm" aria-pressed="true" data-align="left">Left</button>
           <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false" data-align="center">Center</button>
           <button type="button" class="mdst-button mdst-button--sm" aria-pressed="false" data-align="right">Right</button>
         </div>
-        <div class="mdst-toolbar-spacer"></div>
-        <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost" id="demo-reset">Reset</button>
+        <div class="mdst-toolbar__spacer"></div>
+        <button type="button" class="mdst-button mdst-button--sm mdst-button--borderless" id="demo-reset">Reset</button>
       </div>
 
       <div class="preview-editor" id="demo-editor">The quick brown fox jumps over the lazy dog.</div>
@@ -214,21 +214,21 @@ alignButtons.forEach((button) =&gt; {
       <pre class="mdst-pre"><code>&lt;!-- Filters on the left, actions pushed to the right --&gt;
 &lt;div class="mdst-toolbar"&gt;
   &lt;input type="search" class="mdst-input" placeholder="Search…" aria-label="Search" /&gt;
-  &lt;div class="mdst-toolbar-spacer"&gt;&lt;/div&gt;
-  &lt;div class="mdst-toolbar-group"&gt;
+  &lt;div class="mdst-toolbar__spacer"&gt;&lt;/div&gt;
+  &lt;div class="mdst-toolbar__group"&gt;
     &lt;button class="mdst-button"&gt;Export&lt;/button&gt;
-    &lt;button class="mdst-button mdst-button--inverted"&gt;Add&lt;/button&gt;
+    &lt;button class="mdst-button mdst-button--solid"&gt;Add&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;!-- Attached toggle group with a separator --&gt;
 &lt;div class="mdst-toolbar mdst-toolbar--bordered" role="toolbar" aria-label="Formatting"&gt;
-  &lt;div class="mdst-toolbar-group mdst-toolbar-group--attached"&gt;
+  &lt;div class="mdst-toolbar__group mdst-toolbar__group--attached"&gt;
     &lt;button class="mdst-button mdst-button--sm" aria-pressed="true"&gt;B&lt;/button&gt;
     &lt;button class="mdst-button mdst-button--sm" aria-pressed="false"&gt;I&lt;/button&gt;
   &lt;/div&gt;
-  &lt;hr class="mdst-toolbar-separator" /&gt;
-  &lt;button class="mdst-button mdst-button--sm mdst-button--ghost"&gt;Undo&lt;/button&gt;
+  &lt;hr class="mdst-toolbar__separator" /&gt;
+  &lt;button class="mdst-button mdst-button--sm mdst-button--borderless"&gt;Undo&lt;/button&gt;
 &lt;/div&gt;</code></pre>
     </div>
 
@@ -238,7 +238,11 @@ alignButtons.forEach((button) =&gt; {
       const demoEditor = document.querySelector("#demo-editor");
       const demoItems = [...demoToolbar.querySelectorAll("button")];
 
-      demoItems.forEach((item, i) => (item.tabIndex = i === 0 ? 0 : -1));
+      demoItems.forEach((item, i) => {
+
+        item.tabIndex = i === 0 ? 0 : -1;
+
+      });
 
       demoToolbar.addEventListener("keydown", (event) => {
         const keys = { ArrowRight: 1, ArrowLeft: -1, Home: "first", End: "last" };
@@ -257,7 +261,9 @@ alignButtons.forEach((button) =&gt; {
       // Roving focus should follow clicks too
       demoItems.forEach((item) => {
         item.addEventListener("click", () => {
-          demoItems.forEach((other) => (other.tabIndex = other === item ? 0 : -1));
+          demoItems.forEach((other) => {
+            other.tabIndex = other === item ? 0 : -1;
+          });
         });
       });
 
@@ -282,14 +288,20 @@ alignButtons.forEach((button) =&gt; {
       const demoAlign = demoToolbar.querySelectorAll("[data-align]");
       demoAlign.forEach((button) => {
         button.addEventListener("click", () => {
-          demoAlign.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+          demoAlign.forEach((b) => {
+            b.setAttribute("aria-pressed", String(b === button));
+          });
           renderEditor();
         });
       });
 
       document.querySelector("#demo-reset").addEventListener("click", () => {
-        demoToolbar.querySelectorAll("[data-style]").forEach((b) => b.setAttribute("aria-pressed", "false"));
-        demoAlign.forEach((b, i) => b.setAttribute("aria-pressed", String(i === 0)));
+        demoToolbar.querySelectorAll("[data-style]").forEach((b) => {
+          b.setAttribute("aria-pressed", "false");
+        });
+        demoAlign.forEach((b, i) => {
+          b.setAttribute("aria-pressed", String(i === 0));
+        });
         renderEditor();
       });
     </script>

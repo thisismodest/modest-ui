@@ -1,132 +1,136 @@
-/* Radio */
+@layer mdst-ui.components {
+  /* Radio */
 
-:where(.mdst-ui) input[type="radio"],
-.mdst-radio {
-  -webkit-appearance: none;
-  appearance: none;
-  flex-shrink: 0;
-  width: 0.875rem;
-  height: 0.875rem;
-  margin: 0;
-  background: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  box-sizing: content-box;
-  border-radius: 50%;
-  cursor: pointer;
-  position: relative;
-}
-
-:where(.mdst-ui) input[type="radio"]:checked::after,
-.mdst-radio:checked::after {
-  content: "";
-  position: absolute;
-  inset: 3px;
-  background: var(--mdst-color-fg);
-  border-radius: 50%;
-}
-
-:where(.mdst-ui) input[type="radio"]:hover,
-.mdst-radio:hover {
-  border-color: var(--mdst-color-muted);
-}
-
-:where(.mdst-ui) input[type="radio"]:focus-visible,
-.mdst-radio:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
-
-:where(.mdst-ui) input[type="radio"]:disabled,
-.mdst-radio:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) input[type="radio"]:disabled:hover,
-.mdst-radio:disabled:hover {
-  border-color: var(--mdst-color-border);
-}
-
-/* Radio with label wrapper */
-
-:where(.mdst-ui) label:has(> input[type="radio"]),
-.mdst-radio-label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  cursor: pointer;
-  user-select: none;
-}
-
-:where(.mdst-ui) label:has(> input[type="radio"]:disabled),
-.mdst-radio-label:has(.mdst-radio:disabled) {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Radio group */
-
-.mdst-radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--mdst-space-sm);
-
-  &.mdst-radio-group--horizontal {
-    flex-direction: row;
-    gap: var(--mdst-space-md);
+  :where(.mdst-ui) input:where([type="radio"]),
+  .mdst-input:where([type="radio"]) {
+    -webkit-appearance: none;
+    appearance: none;
+    flex-shrink: 0;
+    width: calc(0.875rem + 2 * var(--mdst-border-width));
+    height: calc(0.875rem + 2 * var(--mdst-border-width));
+    background: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    /* Border included in the size, so a user's border-box reset changes nothing */
+    box-sizing: border-box;
+    /* --mdst-border-width is in em, so match the surrounding text */
+    font-size: inherit;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
   }
-}
 
-/* Radio card — content-rich selectable cards */
-
-.mdst-radio-card {
-  display: block;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  padding: var(--mdst-space-md);
-  cursor: pointer;
-  text-align: center;
-  user-select: none;
-  border-radius: var(--mdst-radius);
-  overflow: hidden;
-
-  /* Visually hide the native radio input while keeping it keyboard-accessible */
-  & .mdst-radio {
+  :where(.mdst-ui) input:where([type="radio"]:checked)::after,
+  .mdst-input:where([type="radio"]:checked)::after {
+    content: "";
     position: absolute;
-    opacity: 0;
-    pointer-events: none;
+    inset: 3px;
+    background: var(--mdst-color-fg);
+    border-radius: 50%;
   }
 
-  &:hover {
-    background: var(--mdst-color-subtle);
-  }
-
-  &:has(.mdst-radio:checked) {
-    border-color: var(--mdst-color-fg);
-    outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-fg);
-    outline-offset: calc(-1 * var(--mdst-border-width));
-  }
-
-  &:has(.mdst-radio:focus-visible) {
-    outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-focus);
-    outline-offset: calc(-1 * var(--mdst-border-width));
-  }
-
-  &:has(.mdst-radio:disabled) {
-    opacity: 0.5;
+  :where(.mdst-ui) input:where([type="radio"]:disabled),
+  .mdst-input:where([type="radio"]:disabled) {
+    opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
+  }
 
-    &:hover {
-      background: transparent;
+  /* A label wrapping a radio */
+
+  :where(.mdst-ui) label:where(:has(> input[type="radio"])),
+  label:where(:has(> .mdst-input[type="radio"])) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)),
+  label:where(:has(> .mdst-input[type="radio"]:disabled)) {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* The label already fades, so the radio inside doesn't fade twice */
+  :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)) > input,
+  label:where(:has(> .mdst-input[type="radio"]:disabled)) > .mdst-input {
+    opacity: 1;
+  }
+
+  /* Radio group */
+
+  .mdst-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mdst-space-sm);
+
+    &.mdst-radio-group--horizontal {
+      flex-direction: row;
+      gap: var(--mdst-space-md);
     }
   }
-}
 
-/* Radio card group — grid layout for cards */
+  /* Radio card — content-rich selectable cards */
 
-.mdst-radio-card-group {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--mdst-space-sm);
+  .mdst-radio-card {
+    display: block;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    padding: var(--mdst-space-md);
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    border-radius: var(--mdst-radius);
+    overflow: hidden;
+
+    /* Visually hide the native radio input while keeping it keyboard-accessible */
+    & input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background: var(--mdst-color-subtle);
+    }
+
+    &:has(input[type="radio"]:checked) {
+      border-color: var(--mdst-color-fg);
+      outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-fg);
+      outline-offset: calc(-1 * var(--mdst-border-width));
+    }
+
+    &:has(input[type="radio"]:focus-visible) {
+      outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+      outline-offset: var(--mdst-focus-offset);
+    }
+
+    &:has(input[type="radio"]:disabled) {
+      opacity: var(--mdst-disabled-opacity);
+      cursor: not-allowed;
+
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+
+  /* Radio card group — grid layout for cards */
+
+  .mdst-radio-card-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mdst-space-sm);
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) input:where([type="radio"]:checked)::after,
+    .mdst-input:where([type="radio"]:checked)::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+  }
 }

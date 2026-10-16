@@ -1,139 +1,165 @@
-/* Checkbox */
+@layer mdst-ui.components {
+  /* Checkbox
+     A checkbox with role="switch" is drawn as a toggle (below) instead. */
 
-:where(.mdst-ui) input[type="checkbox"],
-.mdst-checkbox {
-  -webkit-appearance: none;
-  appearance: none;
-  box-sizing: content-box;
-  flex-shrink: 0;
-  width: 0.875rem;
-  height: 0.875rem;
-  margin: 0;
-  background: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: 0;
-  cursor: pointer;
-  position: relative;
-  transition: border-color var(--mdst-transition);
-}
+  :where(.mdst-ui) input:where([type="checkbox"]:not([role="switch"])),
+  .mdst-input:where([type="checkbox"]:not([role="switch"])) {
+    -webkit-appearance: none;
+    appearance: none;
+    /* Border included in the size, so a user's border-box reset changes nothing */
+    box-sizing: border-box;
+    /* --mdst-border-width is in em, so match the surrounding text even
+       outside .mdst-ui, where inputs default to a smaller font */
+    font-size: inherit;
+    flex-shrink: 0;
+    width: calc(0.875rem + 2 * var(--mdst-border-width));
+    height: calc(0.875rem + 2 * var(--mdst-border-width));
+    background: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    transition: border-color var(--mdst-transition);
+  }
 
-:where(.mdst-ui) input[type="checkbox"]:checked::after,
-.mdst-checkbox:checked::after {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  background: var(--mdst-color-fg);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:hover,
-.mdst-checkbox:hover {
-  border-color: var(--mdst-color-muted);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:focus-visible,
-.mdst-checkbox:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:disabled,
-.mdst-checkbox:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) input[type="checkbox"]:disabled:hover,
-.mdst-checkbox:disabled:hover {
-  border-color: var(--mdst-color-border);
-}
-
-/* Checkbox with label wrapper */
-
-:where(.mdst-ui) label:has(> input[type="checkbox"]),
-.mdst-checkbox-label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  cursor: pointer;
-  user-select: none;
-}
-
-:where(.mdst-ui) label:has(> input[type="checkbox"]:disabled),
-.mdst-checkbox-label:has(.mdst-checkbox:disabled) {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Toggle variant */
-
-.mdst-checkbox--toggle {
-  -webkit-appearance: none;
-  appearance: none;
-  box-sizing: content-box;
-  flex-shrink: 0;
-  width: 2.125rem;
-  height: 1.125rem;
-  margin: 0;
-  background: var(--mdst-color-subtle);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: 0;
-  cursor: pointer;
-  position: relative;
-  transition:
-    background var(--mdst-transition),
-    border-color var(--mdst-transition);
-
-  &::before {
+  :where(.mdst-ui) input:where([type="checkbox"]:not([role="switch"]):checked)::after,
+  .mdst-input:where([type="checkbox"]:not([role="switch"]):checked)::after {
     content: "";
     position: absolute;
-    height: 0.875rem;
-    width: 0.875rem;
-    left: 2px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--mdst-color-muted);
-    transition:
-      transform var(--mdst-transition),
-      background var(--mdst-transition);
+    inset: 2px;
+    background: var(--mdst-color-fg);
   }
 
-  &:checked {
-    background: var(--mdst-color-fg);
-    border-color: var(--mdst-color-fg);
+  :where(.mdst-ui) input:where([type="checkbox"]:disabled),
+  .mdst-input:where([type="checkbox"]:disabled) {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* A label wrapping a checkbox or toggle */
+
+  :where(.mdst-ui) label:where(:has(> input[type="checkbox"])),
+  label:where(:has(> .mdst-input[type="checkbox"])) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)),
+  label:where(:has(> .mdst-input[type="checkbox"]:disabled)) {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* The label already fades, so the control inside doesn't fade twice */
+  :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)) > input,
+  label:where(:has(> .mdst-input[type="checkbox"]:disabled)) > .mdst-input {
+    opacity: 1;
+  }
+
+  /* Toggle: a checkbox with role="switch", which is also what makes screen
+     readers announce it as a switch */
+
+  :where(.mdst-ui) input:where([type="checkbox"][role="switch"]),
+  .mdst-input:where([type="checkbox"][role="switch"]) {
+    -webkit-appearance: none;
+    appearance: none;
+    /* Border included in the size, so a user's border-box reset changes nothing */
+    box-sizing: border-box;
+    /* --mdst-border-width is in em, so match the surrounding text even
+       outside .mdst-ui, where inputs default to a smaller font */
+    font-size: inherit;
+    flex-shrink: 0;
+    width: calc(2.125rem + 2 * var(--mdst-border-width));
+    height: calc(1.125rem + 2 * var(--mdst-border-width));
+    background: var(--mdst-color-subtle);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    transition:
+      background var(--mdst-transition),
+      border-color var(--mdst-transition);
+
+    /* The thumb slides towards the end edge; --_dir flips it in RTL */
+    --_dir: 1;
+
+    &:dir(rtl) {
+      --_dir: -1;
+    }
 
     &::before {
-      transform: translateY(-50%) translateX(1rem);
-      background: var(--mdst-color-bg);
+      content: "";
+      position: absolute;
+      height: 0.875rem;
+      width: 0.875rem;
+      inset-inline-start: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--mdst-color-muted);
+      transition:
+        transform var(--mdst-transition),
+        background var(--mdst-transition);
     }
-  }
 
-  &:hover {
-    border-color: var(--mdst-color-muted);
-  }
+    &:checked {
+      background: var(--mdst-color-fg);
+      border-color: var(--mdst-color-fg);
 
-  &:focus-visible {
-    outline: 2px solid var(--mdst-color-focus);
-    outline-offset: 2px;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-
-    &:hover {
-      border-color: var(--mdst-color-border);
+      &::before {
+        transform: translateY(-50%) translateX(calc(1rem * var(--_dir)));
+        background: var(--mdst-color-bg);
+      }
     }
+
+    &:disabled {
+      opacity: var(--mdst-disabled-opacity);
+      cursor: not-allowed;
+    }
+
   }
 
-  /* Toggle rounded variant */
+  /* Pill variant */
 
-  &.mdst-checkbox--toggle-rounded {
+  .mdst-input--pill:where([type="checkbox"][role="switch"]) {
     border-radius: 9999px;
 
     &::before {
       border-radius: 50%;
+    }
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) input:where([type="checkbox"]:not([role="switch"]):checked)::after,
+    .mdst-input:where([type="checkbox"]:not([role="switch"]):checked)::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+
+    :where(.mdst-ui) input:where([type="checkbox"][role="switch"]),
+    .mdst-input:where([type="checkbox"][role="switch"]) {
+      forced-color-adjust: none;
+      background: Canvas;
+      border-color: CanvasText;
+
+      &::before {
+        background: CanvasText;
+      }
+
+      &:checked {
+        background: Highlight;
+        border-color: Highlight;
+
+        &::before {
+          background: HighlightText;
+        }
+      }
     }
   }
 }

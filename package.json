@@ -1,12 +1,14 @@
 {
   "name": "mdst-ui",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Minimal, themeable CSS component library (modest-ui). Classless defaults plus an opt-in class API, scoped to .mdst-ui.",
   "author": "Marcus Michaels",
   "license": "MIT",
   "type": "module",
   "main": "index.css",
   "style": "index.css",
+  "unpkg": "dist/modest-ui.min.css",
+  "jsdelivr": "dist/modest-ui.min.css",
   "sideEffects": [
     "*.css"
   ],
@@ -34,9 +36,9 @@
     "url": "https://github.com/thisismodest/modest-ui/issues"
   },
   "scripts": {
-    "dev": "node scripts/build-site.js && python3 -m http.server 8000 -d site",
-    "build": "node scripts/generate-preview.js && node scripts/build-bundle.js && node scripts/build-llms.js && node scripts/build-site.js",
-    "prepublishOnly": "node scripts/build-bundle.js"
+    "dev": "npm run build && python3 -m http.server 8000 -d site",
+    "build": "node scripts/build-bundle.js && node scripts/build-llms.js && node scripts/build-site.js",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "css",

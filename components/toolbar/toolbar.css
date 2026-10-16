@@ -1,93 +1,89 @@
-/* Toolbar */
+@layer mdst-ui.components {
+  /* Toolbar */
 
-.mdst-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-  font-family: var(--mdst-font-ui);
-  font-size: var(--mdst-text-sm);
-
-  /* Group of related controls */
-
-  & .mdst-toolbar-group {
+  .mdst-toolbar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--mdst-space-xs);
+    gap: var(--mdst-space-sm);
+    font-family: var(--mdst-font-ui);
+    font-size: var(--mdst-text-sm);
 
-    /* Attached: controls share borders and read as one segmented unit */
+    /* Group of related controls */
 
-    &.mdst-toolbar-group--attached {
-      flex-wrap: nowrap;
-      gap: 0;
+    & .mdst-toolbar__group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--mdst-space-xs);
 
-      & > * + * {
-        margin-inline-start: calc(var(--mdst-border-width) * -1);
-      }
+      /* Attached: controls share borders and read as one segmented unit */
 
-      & > :not(:first-child, :last-child) {
-        border-radius: 0;
-      }
+      &.mdst-toolbar__group--attached {
+        flex-wrap: nowrap;
+        gap: 0;
 
-      & > :first-child:not(:last-child) {
-        border-start-end-radius: 0;
-        border-end-end-radius: 0;
-      }
+        & > * + * {
+          margin-inline-start: calc(var(--mdst-border-width) * -1);
+        }
 
-      & > :last-child:not(:first-child) {
-        border-start-start-radius: 0;
-        border-end-start-radius: 0;
-      }
+        & > :not(:first-child, :last-child) {
+          border-radius: 0;
+        }
 
-      /* Lift the hovered / focused control so its full border shows */
-      & > :hover,
-      & > :focus-visible {
-        position: relative;
-        z-index: 1;
+        & > :first-child:not(:last-child) {
+          border-start-end-radius: 0;
+          border-end-end-radius: 0;
+        }
+
+        & > :last-child:not(:first-child) {
+          border-start-start-radius: 0;
+          border-end-start-radius: 0;
+        }
+
+        /* Lift the hovered / focused control so its full border shows */
+        & > :hover,
+        & > :focus-visible {
+          position: relative;
+          z-index: 1;
+        }
       }
     }
-  }
 
-  /* Spacer: pushes everything after it to the far end */
+    /* Spacer: pushes everything after it to the far end */
 
-  & .mdst-toolbar-spacer {
-    flex: 1 1 0;
-  }
+    & .mdst-toolbar__spacer {
+      flex: 1 1 0;
+    }
 
-  /* Separator: vertical rule between groups (use <hr> or role="separator") */
+    /* Separator: vertical rule between groups (use <hr> or role="separator") */
 
-  & .mdst-toolbar-separator {
-    align-self: stretch;
-    width: 0;
-    height: auto;
-    min-height: 1.5em;
-    margin: 0;
-    border: none;
-    border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
-  }
+    & .mdst-toolbar__separator {
+      align-self: stretch;
+      width: 0;
+      height: auto;
+      min-height: 1.5em;
+      margin: 0;
+      border: none;
+      border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
+    }
 
-  /* Form controls size to their content instead of filling the row */
+    /* Form controls size to their content instead of filling the row */
 
-  & :is(input:not([type="checkbox"], [type="radio"]), select) {
-    width: auto;
-    min-width: 0;
-  }
+    /* :where() keeps this at the toolbar's own strength, so components with
+       their own sizing (OTP digits, colour picker) keep it */
+    & :where(input:not([type="checkbox"], [type="radio"]), select) {
+      width: auto;
+      min-width: 0;
+    }
 
-  /* Toggle buttons: aria-pressed="true" reads as on */
+    /* Variants */
 
-  & [aria-pressed="true"] {
-    background: var(--mdst-color-fg);
-    color: var(--mdst-color-bg);
-    border-color: var(--mdst-color-fg);
-  }
-
-  /* Variants */
-
-  &.mdst-toolbar--bordered {
-    padding: var(--mdst-space-sm);
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: var(--mdst-radius);
-    background: var(--mdst-color-bg);
+    &.mdst-toolbar--bordered {
+      padding: var(--mdst-space-sm);
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      border-radius: var(--mdst-radius);
+      background: var(--mdst-color-bg);
+    }
   }
 }

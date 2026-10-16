@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../input/input.css" />
+    <link rel="stylesheet" href="../dropdown/dropdown.css" />
+    <link rel="stylesheet" href="../checkbox/checkbox.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="form.css" />
+    <style>
+      .preview-form {
+        max-width: 28rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Plain HTML</div>
+      <p class="footnote">
+        No classes. Fields stack under their labels, and invalid fields turn the error colour, either with
+        <code class="mdst-code">aria-invalid="true"</code> or after the user interacts with a field that fails the browser's validation.
+      </p>
+      <div class="mdst-ui preview-form">
+        <form onsubmit="return false">
+          <fieldset>
+            <legend>Account</legend>
+            <label for="form-email">Email</label>
+            <input id="form-email" type="email" placeholder="you@example.com" required />
+            <label for="form-plan">Plan</label>
+            <select id="form-plan">
+              <option>Free</option>
+              <option>Pro</option>
+            </select>
+            <label for="form-code">Invite code</label>
+            <input id="form-code" value="ABC" aria-invalid="true" aria-describedby="form-code-error" />
+            <small id="form-code-error">Codes are 6 characters.</small>
+          </fieldset>
+          <label for="form-message">Message</label>
+          <textarea id="form-message" rows="3"></textarea>
+          <label><input type="checkbox" /> Send me updates</label>
+          <div>
+            <button type="submit" class="mdst-button--solid">Save</button>
+            <button type="reset">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Spacing</div>
+      <p class="footnote">
+        The gap between fields follows <code class="mdst-code">--mdst-flow-space</code> (the same token that spaces headings and paragraphs).
+        Set it to <code class="mdst-code">0</code> to turn it off. Every rule has zero specificity, so your own margins always win.
+      </p>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;body class="mdst-ui"&gt;
+  &lt;form&gt;
+    &lt;fieldset&gt;
+      &lt;legend&gt;Account&lt;/legend&gt;
+      &lt;label for="email"&gt;Email&lt;/label&gt;
+      &lt;input id="email" type="email" required&gt;
+    &lt;/fieldset&gt;
+    &lt;button&gt;Save&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+
+&lt;!-- Outside .mdst-ui, use the classes --&gt;
+&lt;form class="mdst-form"&gt;…&lt;/form&gt;
+&lt;fieldset class="mdst-fieldset"&gt;&lt;legend class="mdst-legend"&gt;…&lt;/legend&gt;&lt;/fieldset&gt;
+
+&lt;!-- Mark a field invalid --&gt;
+&lt;input aria-invalid="true" aria-describedby="email-error"&gt;
+
+/* Tighter or looser forms */
+form { --mdst-flow-space: 0.75rem; }</code></pre>
+    </div>
+  </body>
+</html>

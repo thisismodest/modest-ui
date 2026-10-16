@@ -1,8 +1,10 @@
 /**
  * Shared sidebar utilities for grouping and rendering component links.
  *
- * Used by both generate-preview.js (SPA index.html) and build-site.js (static site).
+ * Used by build-site.js.
  */
+
+const escapeHtml = (str) => String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 /**
  * Group and sort components into a mixed list of ungrouped links and grouped submenus.
@@ -26,6 +28,7 @@ export function buildSidebarItems(components) {
   }
 
   for (const [groupName, children] of grouped) {
+    children.sort((a, b) => a.title.localeCompare(b.title));
     items.push({ type: "group", groupName, children, sortKey: groupName.toLowerCase() });
   }
 
@@ -55,16 +58,15 @@ export function renderComponentLinks(components, options = {}) {
       const c = item.component;
       const active = c.slug === activeSlug ? " active" : "";
       const extra = linkAttrs(c);
-      lines.push(`${indent}<a href="${href(c)}" class="sidebar-link${active}"${extra}>${c.title}</a>`);
+      lines.push(`${indent}<a href="${href(c)}" class="sidebar-link${active}"${extra}>${escapeHtml(c.title)}</a>`);
     } else {
-      const hasActiveChild = activeSlug && item.children.some((c) => c.slug === activeSlug);
-      const openAttr = hasActiveChild ? " open" : "";
-      lines.push(`${indent}<details class="sidebar-group"${openAttr}>`);
-      lines.push(`${indent}  <summary class="sidebar-group-title">${item.groupName}</summary>`);
+      // Open by default so the grouped pages are as easy to find as the rest
+      lines.push(`${indent}<details class="sidebar-group" open>`);
+      lines.push(`${indent}  <summary class="sidebar-group-title">${escapeHtml(item.groupName)}</summary>`);
       for (const c of item.children) {
         const active = c.slug === activeSlug ? " active" : "";
         const extra = linkAttrs(c);
-        lines.push(`${indent}  <a href="${href(c)}" class="sidebar-link sidebar-link--grouped${active}"${extra}>${c.title}</a>`);
+        lines.push(`${indent}  <a href="${href(c)}" class="sidebar-link sidebar-link--grouped${active}"${extra}>${escapeHtml(c.title)}</a>`);
       }
       lines.push(`${indent}</details>`);
     }

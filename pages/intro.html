@@ -8,503 +8,1393 @@
     <link rel="stylesheet" href="../base/reset.css" />
     <link rel="stylesheet" href="../index.css" />
     <style>
-      body {
-        font-family: var(--mdst-font-sans);
-        padding: var(--mdst-space-md);
-        line-height: var(--mdst-line-height);
+      /* Homepage. Everything is scoped under .home and laid out with container
+         queries, so it responds to the space beside the sidebar rather than
+         the viewport. */
+
+      .home {
+        container-type: inline-size;
+        max-width: 72rem;
+        color: var(--mdst-color-fg);
       }
 
-      .intro-section {
-        margin-bottom: var(--mdst-space-xl);
-        max-width: 40rem;
-      }
-
-      h1 {
-        font-size: var(--mdst-text-xl);
-        font-weight: 600;
-        margin-bottom: var(--mdst-space-sm);
-      }
-
-      .tagline {
-        color: var(--mdst-color-muted);
-        margin-bottom: var(--mdst-space-xl);
-      }
-
-      h2 {
-        font-size: var(--mdst-text-lg);
-        font-weight: 600;
-        margin-top: var(--mdst-space-xl);
-        margin-bottom: var(--mdst-space-sm);
-      }
-
-      h3 {
-        font-size: var(--mdst-text-base);
-        font-weight: 600;
-        margin-bottom: var(--mdst-space-sm);
-      }
-
-      p {
-        color: var(--mdst-color-muted);
-        margin-bottom: var(--mdst-space-md);
-      }
-
-      code {
-        font-family: var(--mdst-font-mono);
-        font-size: var(--mdst-text-sm);
-        background: var(--mdst-color-subtle);
-        padding: 0.1em 0.3em;
-      }
-
-      pre {
-        font-family: var(--mdst-font-mono);
-        font-size: var(--mdst-text-sm);
-        background: var(--mdst-color-subtle);
-        padding: var(--mdst-space-md);
-        overflow-x: auto;
-        margin-bottom: var(--mdst-space-md);
-      }
-
-      /* Code + live demo panels */
-
-      .demo-block {
-        border: var(--mdst-border-width) solid var(--mdst-color-border);
-        margin-bottom: var(--mdst-space-lg);
-      }
-
-      .demo-block-label {
-        font-size: var(--mdst-text-sm);
-        font-weight: 600;
-        padding: var(--mdst-space-xs) var(--mdst-space-md);
-        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-      }
-
-      .demo-block pre {
+      .home-section {
         margin: 0;
-        border: none;
-        border-radius: 0;
-        background: none;
-        font-size: var(--mdst-text-xs);
-        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        padding-block: 3rem;
+        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
       }
 
-      .demo-block-result {
-        padding: var(--mdst-space-md);
-        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+      .home-section:first-child {
+        border-top: none;
+        padding-top: var(--mdst-space-md);
+      }
+
+      .home-title {
+        font-size: var(--mdst-text-xl);
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .home-intro {
+        color: var(--mdst-color-muted);
+        max-width: 40rem;
+        margin: 0 0 var(--mdst-space-lg);
+      }
+
+      .home-row {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
         gap: var(--mdst-space-sm);
       }
 
-      .demo-block-result-label {
-        font-size: var(--mdst-text-xs);
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+      /* ── Hero ─────────────────────────────────────────── */
+
+      .home-hero {
+        display: grid;
+        gap: var(--mdst-space-xl);
+        align-items: center;
+      }
+
+      /* Let the columns shrink below their content's natural width */
+      .home-hero > * {
+        min-width: 0;
+      }
+
+      .home-hero h1 {
+        font-size: clamp(2rem, 7cqi, 3.5rem);
+        line-height: 1.05;
+        letter-spacing: -0.035em;
+        margin: var(--mdst-space-md) 0;
+        max-width: 16ch;
+      }
+
+      .home-hero-lead {
+        font-size: var(--mdst-text-lg);
         color: var(--mdst-color-muted);
-        margin-bottom: var(--mdst-space-xs);
+        max-width: 34rem;
+        margin: 0 0 var(--mdst-space-lg);
       }
 
-      .demo-block-result input[type="text"] {
-        max-width: 20rem;
+      .home-install {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: var(--mdst-space-sm);
+        margin-bottom: var(--mdst-space-md);
       }
 
-      .demo-row {
+      /* Match the toggle to the command box height */
+      .home-install .mdst-toolbar {
+        font-size: inherit;
+      }
+
+      /* Command box + Copy button, joined like an attached segment */
+      .home-install-cmd {
+        flex: 1 1 16rem;
+        display: flex;
+        align-items: stretch;
+        min-width: 0;
+      }
+
+      /* Long commands (the CDN link) scroll inside the box rather than
+         widening the page */
+      .home-install-cmd code {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-right: none;
+        border-radius: var(--mdst-radius) 0 0 var(--mdst-radius);
+        background: var(--mdst-color-subtle);
+        font-family: var(--mdst-font-mono);
+        font-size: inherit;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: thin;
+      }
+
+      .home-install-cmd button {
+        flex-shrink: 0;
+        border-radius: 0 var(--mdst-radius) var(--mdst-radius) 0;
+      }
+
+      .home-meta {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: var(--mdst-space-md) 0 0;
+      }
+
+      /* Theme-cycling showcase card */
+
+      .home-specimen {
+        display: grid;
+        gap: var(--mdst-space-sm);
+      }
+
+      .home-specimen-card {
+        background: var(--mdst-color-bg);
+        color: var(--mdst-color-fg);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-radius: var(--mdst-radius);
+        padding: var(--mdst-space-lg);
+        display: grid;
+        gap: var(--mdst-space-md);
+      }
+
+      .home-specimen-head {
         display: flex;
         align-items: center;
         gap: var(--mdst-space-sm);
-        flex-wrap: wrap;
       }
 
-      /* Pill tag */
-
-      .pill {
-        display: inline-block;
-        font-size: var(--mdst-text-xs);
-        font-weight: 600;
-        padding: 0.15em 0.5em;
-        border: var(--mdst-border-width) solid var(--mdst-color-border);
-        vertical-align: middle;
-        margin-left: 0.25em;
+      .home-specimen-head div {
+        flex: 1;
+        min-width: 0;
       }
 
-      /* How it works */
-
-      .how-it-works {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--mdst-space-md);
-        margin-top: var(--mdst-space-md);
-        margin-bottom: var(--mdst-space-md);
+      .home-specimen-head strong {
+        display: block;
       }
 
-      .how-it-works-step {
-        padding: var(--mdst-space-md);
-        border: var(--mdst-border-width) solid var(--mdst-color-border);
+      .home-specimen-head small {
+        color: var(--mdst-color-muted);
       }
 
-      .how-it-works-step h3 {
-        margin-bottom: var(--mdst-space-xs);
-      }
-
-      .how-it-works-step p {
-        font-size: var(--mdst-text-sm);
-        margin: 0;
-      }
-
-      .step-number {
-        font-family: var(--mdst-font-mono);
+      .home-specimen-caption {
         font-size: var(--mdst-text-sm);
         color: var(--mdst-color-muted);
-        margin-bottom: var(--mdst-space-xs);
+        display: flex;
+        justify-content: space-between;
+        gap: var(--mdst-space-sm);
       }
 
-      @media (max-width: 600px) {
-        .how-it-works {
-          grid-template-columns: 1fr;
+      @container (min-width: 52rem) {
+        .home-hero {
+          grid-template-columns: 1.25fr 1fr;
         }
       }
 
-      /* Example page styles */
-      .example-container {
-        border: var(--mdst-border-width) solid var(--mdst-color-border);
-        margin-top: var(--mdst-space-lg);
+      /* ── Bento ────────────────────────────────────────── */
+
+      .home-themes {
+        margin-bottom: var(--mdst-space-md);
       }
 
-      .example-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: var(--mdst-space-sm) var(--mdst-space-md);
-        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      /* The theme chips restyle only this stage */
+      .home-stage {
+        padding: var(--mdst-space-md);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-radius: var(--mdst-radius);
+        background: var(--mdst-color-bg);
+        color: var(--mdst-color-fg);
+      }
+
+      .home-bento {
+        display: grid;
+        gap: var(--mdst-space-md);
+        grid-template-columns: 1fr;
+        grid-auto-flow: dense;
+        align-items: start;
+      }
+
+      .home-bento > .mdst-card {
+        min-width: 0;
+        height: 100%;
+      }
+
+      .home-bento h3 {
+        font-size: var(--mdst-text-base);
+        margin: 0;
+      }
+
+      .home-stack {
+        display: grid;
         gap: var(--mdst-space-sm);
       }
 
-      .example-logo {
-        font-weight: 600;
+      .home-field {
+        display: grid;
+        gap: var(--mdst-space-xs);
         font-size: var(--mdst-text-sm);
       }
 
-      .example-nav {
+      .home-split {
         display: flex;
+        align-items: center;
+        justify-content: space-between;
         gap: var(--mdst-space-sm);
       }
 
-      .example-body {
+      .home-setting {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: var(--mdst-text-sm);
+      }
+
+      .home-bento .mdst-card--flush :is(th, td):first-child {
+        padding-left: var(--mdst-space-md);
+      }
+
+      .home-bento .mdst-card--flush :is(th, td):last-child {
+        padding-right: var(--mdst-space-md);
+      }
+
+      .home-person {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        white-space: nowrap;
+      }
+
+      .home-price {
+        font-size: 2.25rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+
+      .home-price small {
+        font-size: var(--mdst-text-sm);
+        font-weight: 400;
+        color: var(--mdst-color-muted);
+      }
+
+      .home-checks {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: var(--mdst-space-xs);
+        font-size: var(--mdst-text-sm);
+      }
+
+      .home-checks li::before {
+        content: "✓ ";
+        font-weight: 700;
+      }
+
+      .home-muted {
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-sm);
+        margin: 0;
+      }
+
+      @container (min-width: 34rem) {
+        .home-bento {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .home-bento .home-wide {
+          grid-column: span 2;
+        }
+      }
+
+      @container (min-width: 60rem) {
+        .home-bento {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .home-bento .home-tall {
+          grid-row: span 2;
+        }
+      }
+
+      /* ── Code + result ────────────────────────────────── */
+
+      .home-demo {
+        display: grid;
+        gap: var(--mdst-space-md);
+        padding-top: var(--mdst-space-sm);
+      }
+
+      .home-demo pre {
+        font-size: var(--mdst-text-xs);
+        margin: 0;
+      }
+
+      .home-result {
+        border: var(--mdst-border-width) dashed var(--mdst-color-border);
+        border-radius: var(--mdst-radius);
         padding: var(--mdst-space-lg);
+        display: grid;
+        gap: var(--mdst-space-md);
+        align-content: start;
+        background: var(--mdst-color-bg);
+        color: var(--mdst-color-fg);
       }
 
-      .example-hero {
-        text-align: center;
-        padding: var(--mdst-space-xl) 0;
+      .home-result-label {
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
 
-      .example-hero h2 {
-        margin-top: 0;
-        font-size: var(--mdst-text-xl);
+      .home-demo-note {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0;
       }
 
-      .example-hero p {
-        max-width: 400px;
-        margin: 0 auto var(--mdst-space-md);
+      @container (min-width: 46rem) {
+        .home-demo {
+          grid-template-columns: 1fr 1fr;
+        }
       }
 
-      .example-hero-buttons {
+      /* ── Builder ──────────────────────────────────────── */
+
+      .home-builder {
+        display: grid;
+        gap: var(--mdst-space-lg);
+        align-items: start;
+      }
+
+      .home-builder-controls h3 {
+        font-size: var(--mdst-text-sm);
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .home-builder-controls {
+        display: grid;
+        gap: var(--mdst-space-lg);
+      }
+
+      .home-blocks {
         display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-xs);
+      }
+
+      .home-order {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: var(--mdst-space-xs);
+        counter-reset: block;
+      }
+
+      .home-order li {
+        counter-increment: block;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         gap: var(--mdst-space-sm);
+        padding: var(--mdst-space-xs) var(--mdst-space-xs) var(--mdst-space-xs) var(--mdst-space-sm);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-radius: var(--mdst-radius);
+        font-size: var(--mdst-text-sm);
+      }
+
+      .home-order li::before {
+        content: counter(block, decimal-leading-zero);
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      .home-order li span {
+        flex: 1;
+      }
+
+      .home-order-empty {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .home-browser {
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-radius: var(--mdst-radius);
+        overflow: hidden;
+        min-width: 0;
+      }
+
+      .home-browser-bar {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        padding: var(--mdst-space-sm) var(--mdst-space-md);
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        background: var(--mdst-color-subtle);
+        font-family: var(--mdst-font-mono);
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
+      .home-browser-bar i {
+        width: 0.6rem;
+        height: 0.6rem;
+        border-radius: 50%;
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+      }
+
+      .home-browser-bar span {
+        margin-left: var(--mdst-space-sm);
+      }
+
+      .home-canvas {
+        position: relative;
+        height: 26rem;
+        overflow-y: auto;
+        background: var(--mdst-color-bg);
+      }
+
+      /* Narrow: preview first, so adding a block shows the change on screen */
+      .home-browser {
+        order: -1;
+      }
+
+      @container (min-width: 56rem) {
+        .home-builder {
+          grid-template-columns: 17rem 1fr;
+        }
+        .home-browser {
+          order: 0;
+        }
+        .home-canvas {
+          height: 40rem;
+        }
+      }
+
+      /* ── AI ───────────────────────────────────────────── */
+
+      .home-grid {
+        display: grid;
+        gap: var(--mdst-space-md);
+        grid-template-columns: 1fr;
+      }
+
+      .home-grid h3 {
+        font-size: var(--mdst-text-base);
+        margin: 0 0 var(--mdst-space-xs);
+      }
+
+      .home-grid p {
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+        margin: 0;
+      }
+
+      .home-prompt {
+        margin-top: var(--mdst-space-lg);
+      }
+
+      .home-prompt pre {
+        font-size: var(--mdst-text-xs);
+        margin: 0;
+      }
+
+      @container (min-width: 36rem) {
+        .home-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @container (min-width: 60rem) {
+        .home-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* ── Examples ─────────────────────────────────────── */
+
+      .home-example {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .home-wire {
+        height: 6rem;
+        padding: var(--mdst-space-sm);
+        display: grid;
+        gap: 0.3rem;
+        align-content: start;
+        border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+        background: var(--mdst-color-subtle);
+      }
+
+      .home-wire i {
+        display: block;
+        height: 0.4rem;
+        background: var(--mdst-color-border);
+        opacity: 0.25;
+        border-radius: var(--mdst-radius);
+      }
+
+      .home-wire .w-head {
+        height: 0.7rem;
+        opacity: 0.6;
+      }
+
+      .home-wire .w-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.3rem;
+        height: auto;
+        background: none;
+        opacity: 1;
+      }
+
+      .home-wire .w-row i {
+        height: 1.6rem;
+      }
+
+      .home-wire .w-side {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 0.3rem;
+        height: 4.6rem;
+        background: none;
+        opacity: 1;
+      }
+
+      .home-wire .w-side i {
+        height: auto;
+      }
+
+      .home-wire .w-narrow {
+        width: 55%;
+        margin-inline: auto;
+      }
+
+      /* ── Install + deep dive ──────────────────────────── */
+
+      .home-install-tabs pre {
+        font-size: var(--mdst-text-xs);
+        margin: 0;
+      }
+
+      .home-install-tabs pre + pre {
+        margin-top: var(--mdst-space-sm);
+      }
+
+      .home-deep {
+        display: grid;
+        gap: var(--mdst-space-sm);
+      }
+
+      .home-deep p {
+        color: var(--mdst-color-muted);
+        font-size: var(--mdst-text-sm);
+        margin: 0 0 var(--mdst-space-sm);
+      }
+
+      .home-cta {
+        text-align: center;
+        padding: var(--mdst-space-xl) var(--mdst-space-lg);
+        border: var(--mdst-border-width) solid var(--mdst-color-border);
+        border-radius: var(--mdst-radius);
+        background: var(--mdst-color-subtle);
+      }
+
+      .home-cta .home-row {
         justify-content: center;
       }
 
-      .example-form {
-        max-width: 300px;
-        margin: 3rem auto 0;
-        padding: var(--mdst-space-md);
-        border: var(--mdst-border-width) solid var(--mdst-color-border);
+      .home-cta .home-intro {
+        margin-inline: auto;
       }
 
-      .example-form h3 {
-        margin-bottom: var(--mdst-space-md);
+      /* Theme switches apply instantly: every element fading at once grates */
+      .home-instant,
+      .home-instant * {
+        /* biome-ignore lint/complexity/noImportantStyles: has to beat every component's own transition */
+        transition: none !important;
       }
 
-      .example-form-group {
-        margin-bottom: var(--mdst-space-sm);
-      }
-
-      .example-form-group label {
-        display: block;
-        font-size: var(--mdst-text-sm);
-        margin-bottom: var(--mdst-space-xs);
-      }
-
-      .example-form-footer {
+      /* Colour swatch with its hex value beside it */
+      .color-field {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        margin-top: var(--mdst-space-md);
+        gap: var(--mdst-space-sm);
       }
 
-      .example-features {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--mdst-space-md);
-        margin-top: var(--mdst-space-lg);
-        padding-top: var(--mdst-space-lg);
-        border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-      }
-
-      .example-feature h4 {
+      .color-hex {
+        width: 6rem;
+        height: var(--mdst-space-8);
+        padding-block: 0;
+        font-family: var(--mdst-font-mono);
         font-size: var(--mdst-text-sm);
-        font-weight: 600;
-        margin-bottom: var(--mdst-space-xs);
-      }
-
-      .example-feature p {
-        font-size: var(--mdst-text-sm);
-        margin: 0;
-      }
-
-      @media (max-width: 480px) {
-        .example-body {
-          padding: var(--mdst-space-md);
-        }
-
-        .example-hero-buttons {
-          flex-direction: column;
-        }
-
-        .example-hero-buttons .mdst-button {
-          width: 100%;
-        }
-
-        .example-form {
-          margin-top: var(--mdst-space-md);
-        }
-
-        .example-form-footer {
-          flex-direction: column;
-          gap: var(--mdst-space-sm);
-        }
-
-        .example-form-footer .mdst-button {
-          width: 100%;
-        }
-
-        .example-features {
-          grid-template-columns: 1fr;
-        }
+        text-transform: uppercase;
       }
     </style>
   </head>
   <body>
-    <div class="intro-section">
-      <h1>modest-ui</h1>
-      <p class="tagline">
-        A minimal, themeable CSS component library. Write plain HTML and get styled components automatically, or use classes when you need
-        more control.
-      </p>
-
-      <h2>Just write HTML</h2>
-      <p>
-        Add <code>.mdst-ui</code> to your <code>&lt;body&gt;</code> and every native element (buttons, inputs, tables, details) is styled
-        out of the box. No classes needed.
-      </p>
-
-      <div class="demo-block">
-        <div class="demo-block-label">Your HTML</div>
-        <pre>
-&lt;body class="mdst-ui"&gt;
-
-  &lt;h1&gt;Welcome&lt;/h1&gt;
-  &lt;p&gt;This is styled automatically.&lt;/p&gt;
-
-  &lt;button&gt;Save&lt;/button&gt;
-  &lt;input type="text" placeholder="Your name" /&gt;
-
-&lt;/body&gt;</pre>
-        <div class="demo-block-result mdst-ui">
-          <div class="demo-block-result-label">Result</div>
-          <button>Save</button>
-          <input type="text" placeholder="Your name" />
-        </div>
-      </div>
-
-      <p>
-        No classes. No JavaScript. Every element picks up your theme tokens and gets hover states, focus rings, and transitions for free.
-      </p>
-
-      <h2>Add classes when you need variants</h2>
-      <p>
-        The classless defaults cover the base appearance. When you need a variant (ghost, inverted, compact, small), add a modifier class.
-        It overrides the default automatically.
-      </p>
-
-      <div class="demo-block">
-        <div class="demo-block-label">Classless <span class="pill">default</span></div>
-        <pre><span style="opacity: 0.35">&lt;!-- Just works --&gt;</span>
-&lt;button&gt;Save&lt;/button&gt;
-&lt;button&gt;Cancel&lt;/button&gt;</pre>
-        <div class="demo-block-result mdst-ui">
-          <div class="demo-block-result-label">Result</div>
-          <div class="demo-row">
-            <button type="button">Save</button>
-            <button type="button">Cancel</button>
+    <div class="home mdst-ui">
+      <!-- ── Hero ─────────────────────────────────────────────── -->
+      <section class="home-section home-hero" aria-labelledby="home-heading">
+        <div>
+          <div class="home-row">
+            <span class="mdst-tag mdst-tag--pill">Open source · MIT</span>
+            <span class="mdst-tag mdst-tag--pill mdst-tag--borderless">v<!-- VERSION --></span>
           </div>
-        </div>
-      </div>
+          <h1 id="home-heading">A minimal, themeable CSS component library.</h1>
+          <p class="home-hero-lead">Write plain HTML and get styled components automatically, or use classes when you need more control.</p>
 
-      <div class="demo-block">
-        <div class="demo-block-label">With variants <span class="pill">opt-in</span></div>
-        <pre><span style="opacity: 0.35">&lt;!-- Add classes for control --&gt;</span>
-&lt;button class="mdst-button--inverted"&gt;Save&lt;/button&gt;
-&lt;button class="mdst-button--ghost"&gt;Cancel&lt;/button&gt;</pre>
-        <div class="demo-block-result mdst-ui">
-          <div class="demo-block-result-label">Result</div>
-          <div class="demo-row">
-            <button type="button" class="mdst-button--inverted">Save</button>
-            <button type="button" class="mdst-button--ghost">Cancel</button>
-          </div>
-        </div>
-      </div>
-
-      <p>
-        You can also use the full class-based API directly: <code>.mdst-button</code>, <code>.mdst-input</code>, <code>.mdst-table</code>.
-        All the explicit classes still work exactly as before. Classes always win over the classless defaults, so there's never a
-        specificity conflict.
-      </p>
-
-      <h2>How it works</h2>
-
-      <div class="how-it-works">
-        <div class="how-it-works-step">
-          <div class="step-number">01</div>
-          <h3>Classless layer</h3>
-          <p>
-            Bare elements inside <code>.mdst-ui</code> are styled using <code>:where()</code>, which keeps specificity at zero. Every native
-            <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;table&gt;</code>, etc. gets a styled baseline for free.
-          </p>
-        </div>
-        <div class="how-it-works-step">
-          <div class="step-number">02</div>
-          <h3>Class layer</h3>
-          <p>
-            Component classes like <code>.mdst-button</code> and <code>.mdst-input</code>
-            have normal specificity, so they always override the classless defaults when applied. Use them when you want explicit control.
-          </p>
-        </div>
-        <div class="how-it-works-step">
-          <div class="step-number">03</div>
-          <h3>Variant classes</h3>
-          <p>
-            Modifiers like <code>.mdst-button--ghost</code> work directly on bare elements inside <code>.mdst-ui</code>. No need to pair
-            them with the base class.
-          </p>
-        </div>
-      </div>
-
-      <h2>Scoped and safe</h2>
-      <p>
-        Unlike classless frameworks that style every element on the page globally, modest-ui is scoped to <code>.mdst-ui</code>. Third-party
-        widgets, embedded content, and anything outside the scope are unaffected. And because the classless layer uses
-        <code>:where()</code> selectors, your own styles and any class-based overrides always take priority, with zero specificity battles.
-      </p>
-
-      <h2>Example</h2>
-      <p>Here's what a page built with modest-ui looks like. See more full-page <a href="/examples/">examples</a>.</p>
-
-      <div class="example-container">
-        <header class="example-header">
-          <div class="example-logo">LOGO</div>
-          <nav class="example-nav">
-            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Features</button>
-            <button type="button" class="mdst-button mdst-button--sm">Sign In</button>
-          </nav>
-        </header>
-
-        <div class="example-body">
-          <div class="example-hero">
-            <h2>Build something great</h2>
-            <p>A platform for creators who value simplicity. No clutter, no distractions, just the tools you need.</p>
-            <div class="example-hero-buttons">
-              <button type="button" class="mdst-button mdst-button--inverted">Get Started</button>
-              <button type="button" class="mdst-button">Learn More</button>
+          <div class="home-install">
+            <!-- biome-ignore lint/a11y/useSemanticElements: a group of toggle buttons, not form fields -->
+            <div class="mdst-toolbar" role="group" aria-label="Install method">
+              <div class="mdst-toolbar__group mdst-toolbar__group--attached">
+                <button type="button" class="mdst-button" aria-pressed="true" data-install="npm">npm</button>
+                <button type="button" class="mdst-button" aria-pressed="false" data-install="cdn">CDN</button>
+              </div>
             </div>
+            <div class="home-install-cmd">
+              <code id="install-cmd">npm install mdst-ui</code>
+              <button type="button" class="mdst-button" data-copy-from="install-cmd">Copy</button>
+            </div>
+          </div>
 
-            <div class="example-form">
-              <h3>Create an account</h3>
-              <div class="example-form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" class="mdst-input" placeholder="you@example.com" />
+          <div class="home-row">
+            <a href="#builder" class="mdst-button mdst-button--solid">Build a page</a>
+            <a href="https://github.com/thisismodest/modest-ui" class="mdst-button">Star on GitHub</a>
+            <a href="/llms.txt">or read the llms.txt</a>
+          </div>
+
+          <p class="home-meta">
+            ~<!-- CSS_SIZE -->
+            gzipped · No JavaScript required · Works with any framework, or none
+          </p>
+        </div>
+
+        <figure class="home-specimen" aria-label="One component shown in different themes">
+          <div class="home-specimen-card" id="specimen">
+            <div class="home-specimen-head">
+              <span class="mdst-avatar">JD</span>
+              <div>
+                <strong>Jamie Doe</strong>
+                <small>Product designer</small>
               </div>
-              <div class="example-form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="mdst-input" placeholder="••••••••" />
+              <span class="mdst-tag mdst-tag--success">Active</span>
+            </div>
+            <div class="home-field">
+              <div class="home-split"><span>Onboarding</span><span>3 of 4</span></div>
+              <progress class="mdst-progress" value="75" max="100">75%</progress>
+            </div>
+            <label class="home-setting">
+              Weekly summary
+              <input type="checkbox" role="switch" class="mdst-input" checked />
+            </label>
+            <div class="home-row">
+              <button type="button" class="mdst-button mdst-button--solid mdst-button--sm">Message</button>
+              <button type="button" class="mdst-button mdst-button--sm">View profile</button>
+            </div>
+          </div>
+          <figcaption class="home-specimen-caption">
+            <span>Same HTML, different tokens</span>
+            <span>Theme: <strong id="specimen-name">Default</strong></span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ── Bento ────────────────────────────────────────────── -->
+      <section class="home-section" aria-labelledby="looks-heading">
+        <h2 class="home-title" id="looks-heading">Try a theme</h2>
+        <p class="home-intro">These are stock components, and each theme only changes a handful of CSS variables.</p>
+
+        <!-- biome-ignore lint/a11y/useSemanticElements: a group of toggle buttons, not form fields -->
+        <div class="mdst-toolbar home-themes" role="group" aria-label="Theme">
+          <div class="mdst-toolbar__group" id="theme-chips"></div>
+          <div class="mdst-toolbar__spacer"></div>
+          <a href="/theme/" class="mdst-button mdst-button--sm mdst-button--borderless">Make your own →</a>
+        </div>
+
+        <div class="home-stage" id="theme-stage">
+          <div class="home-bento">
+            <!-- Sign in -->
+            <div class="mdst-card home-tall">
+              <div class="mdst-card__header">
+                <h3>Welcome back</h3>
               </div>
-              <div class="example-form-footer">
-                <label class="mdst-checkbox-label">
-                  <input type="checkbox" class="mdst-checkbox" />
-                  Remember me
+              <form class="mdst-card__body home-stack" onsubmit="return false;">
+                <label class="home-field">
+                  Email
+                  <input type="email" class="mdst-input" placeholder="you@example.com" autocomplete="off" />
                 </label>
-                <button type="button" class="mdst-button mdst-button--inverted mdst-button--sm">Sign Up</button>
+                <div class="home-field">
+                  <span>Password</span>
+                  <div class="mdst-password-input">
+                    <input type="password" class="mdst-input" placeholder="••••••••" autocomplete="off" aria-label="Password" />
+                    <input type="checkbox" aria-label="Toggle password visibility" />
+                  </div>
+                </div>
+                <label>
+                  <input type="checkbox" class="mdst-input" checked />
+                  Keep me signed in
+                </label>
+                <button type="submit" class="mdst-button mdst-button--solid">Sign in</button>
+                <p class="home-muted">No account? <a href="#builder" class="mdst-a">Create one</a></p>
+                <hr class="mdst-hr" />
+                <p class="home-muted">Press <kbd class="mdst-kbd">⌘</kbd> <kbd class="mdst-kbd">K</kbd> to search</p>
+              </form>
+            </div>
+
+            <!-- Team table -->
+            <div class="mdst-card mdst-card--flush home-wide">
+              <div class="mdst-card__header">
+                <div class="mdst-toolbar">
+                  <h3>Team</h3>
+                  <span class="mdst-badge mdst-badge--subtle">4</span>
+                  <div class="mdst-toolbar__spacer"></div>
+                  <button type="button" class="mdst-button mdst-button--sm mdst-button--solid">Invite</button>
+                </div>
+              </div>
+              <div class="mdst-card__body">
+                <div class="mdst-table-wrap">
+                  <table class="mdst-table mdst-table--sm">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="home-person"><span class="mdst-avatar mdst-avatar--sm">AK</span> Ada King</span>
+                        </td>
+                        <td>Owner</td>
+                        <td><span class="mdst-tag mdst-tag--sm mdst-tag--success">Online</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="home-person"><span class="mdst-avatar mdst-avatar--sm">LT</span> Linus T.</span>
+                        </td>
+                        <td>Engineer</td>
+                        <td><span class="mdst-tag mdst-tag--sm mdst-tag--muted">Away</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="home-person"><span class="mdst-avatar mdst-avatar--sm">GH</span> Grace H.</span>
+                        </td>
+                        <td>Engineer</td>
+                        <td><span class="mdst-tag mdst-tag--sm mdst-tag--success">Online</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="home-person"><span class="mdst-avatar mdst-avatar--sm">MH</span> Margaret H.</span>
+                        </td>
+                        <td>Design</td>
+                        <td><span class="mdst-tag mdst-tag--sm mdst-tag--danger">Locked</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="mdst-card">
+              <div class="mdst-card__header">
+                <h3>Notifications</h3>
+              </div>
+              <div class="mdst-card__body home-stack">
+                <label class="home-setting">
+                  Product updates
+                  <input type="checkbox" role="switch" class="mdst-input" checked />
+                </label>
+                <label class="home-setting">
+                  Mentions
+                  <input type="checkbox" role="switch" class="mdst-input" checked />
+                </label>
+                <label class="home-setting">
+                  Marketing
+                  <input type="checkbox" role="switch" class="mdst-input" />
+                </label>
+                <label class="home-field">
+                  Digest frequency
+                  <select class="mdst-dropdown mdst-dropdown--sm">
+                    <option>Daily</option>
+                    <option selected>Weekly</option>
+                    <option>Never</option>
+                  </select>
+                </label>
+                <label class="home-field">
+                  Volume
+                  <input type="range" class="mdst-input" min="0" max="100" value="60" />
+                </label>
+              </div>
+            </div>
+
+            <!-- Pricing -->
+            <div class="mdst-card">
+              <div class="mdst-card__header">
+                <div class="home-split">
+                  <h3>Pro</h3>
+                  <span class="mdst-badge mdst-badge--solid">Popular</span>
+                </div>
+              </div>
+              <div class="mdst-card__body home-stack">
+                <div class="home-price">£12 <small>/ month</small></div>
+                <ul class="home-checks">
+                  <li>Unlimited projects</li>
+                  <li>Custom domains</li>
+                  <li>Priority support</li>
+                </ul>
+              </div>
+              <div class="mdst-card__footer">
+                <button type="button" class="mdst-button mdst-button--solid" style="width: 100%">Upgrade</button>
+              </div>
+            </div>
+
+            <!-- Deploy -->
+            <div class="mdst-card home-wide">
+              <div class="mdst-card__header">
+                <div class="home-split">
+                  <h3>Deploying <code>main</code></h3>
+                  <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Deploying"></span>
+                </div>
+              </div>
+              <div class="mdst-card__body home-stack">
+                <div class="mdst-stepper mdst-stepper--sm">
+                  <div class="mdst-stepper__step" data-state="completed">
+                    <div class="mdst-stepper__indicator">✓</div>
+                    <div class="mdst-stepper__label">Build</div>
+                  </div>
+                  <div class="mdst-stepper__step" data-state="completed">
+                    <div class="mdst-stepper__indicator">✓</div>
+                    <div class="mdst-stepper__label">Test</div>
+                  </div>
+                  <div class="mdst-stepper__step" data-state="active">
+                    <div class="mdst-stepper__indicator">3</div>
+                    <div class="mdst-stepper__label">Deploy</div>
+                  </div>
+                  <div class="mdst-stepper__step" data-state="upcoming">
+                    <div class="mdst-stepper__indicator">4</div>
+                    <div class="mdst-stepper__label">Live</div>
+                  </div>
+                </div>
+                <progress class="mdst-progress" value="68" max="100">68%</progress>
+                <div class="home-field">
+                  <div class="home-split"><span>Storage</span><span class="home-muted">212 of 256 GB</span></div>
+                  <meter class="mdst-meter" max="256" low="160" high="224" optimum="0" value="212">212 GB</meter>
+                </div>
+              </div>
+            </div>
+
+            <!-- Feedback -->
+            <div class="mdst-card">
+              <div class="mdst-card__header">
+                <h3>Feedback</h3>
+              </div>
+              <div class="mdst-card__body home-stack">
+                <output class="mdst-toast mdst-toast--success" data-state="visible">
+                  Changes saved.
+                  <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
+                </output>
+                <output class="mdst-toast mdst-toast--danger" data-state="visible">
+                  Payment failed.
+                  <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
+                </output>
+                <div class="home-row">
+                  <span class="mdst-tag mdst-tag--subtle">design</span>
+                  <span class="mdst-tag mdst-tag--subtle">v2</span>
+                  <span class="mdst-tag">
+                    urgent
+                    <button type="button" class="mdst-tag__dismiss" aria-label="Remove">&times;</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Write HTML ───────────────────────────────────────── -->
+      <section class="home-section" aria-labelledby="html-heading">
+        <h2 class="home-title" id="html-heading">It’s mostly HTML</h2>
+        <p class="home-intro">Write normal HTML, and add a class when you want a variant.</p>
+
+        <div class="mdst-tabs mdst-tabs--pills" data-home-tabs>
+          <div class="mdst-tabs__list" role="tablist" aria-label="How modest-ui works">
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="active"
+              aria-selected="true"
+              aria-controls="layer-1"
+              id="layer-1-tab"
+            >
+              1 · Plain HTML
+            </button>
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="layer-2"
+              id="layer-2-tab"
+            >
+              2 · Variants
+            </button>
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="layer-3"
+              id="layer-3-tab"
+            >
+              3 · State
+            </button>
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="layer-4"
+              id="layer-4-tab"
+            >
+              4 · Make it yours
+            </button>
+          </div>
+
+          <div class="mdst-tabs__panel" role="tabpanel" id="layer-1" aria-labelledby="layer-1-tab" data-state="active">
+            <div class="home-demo">
+              <pre><code>&lt;body class="mdst-ui"&gt;
+  &lt;form&gt;
+    &lt;label for="name"&gt;Name&lt;/label&gt;
+    &lt;input id="name" placeholder="Ada"&gt;
+
+    &lt;select&gt;
+      &lt;option&gt;Designer&lt;/option&gt;
+      &lt;option&gt;Engineer&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;label&gt;
+      &lt;input type="checkbox"&gt; Subscribe
+    &lt;/label&gt;
+
+    &lt;button&gt;Save&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;</code></pre>
+              <div class="home-result">
+                <span class="home-result-label">Result · zero classes</span>
+                <form class="home-stack" onsubmit="return false;">
+                  <label for="demo-name">Name</label>
+                  <input id="demo-name" placeholder="Ada" autocomplete="off" />
+                  <select aria-label="Role">
+                    <option>Designer</option>
+                    <option>Engineer</option>
+                  </select>
+                  <label><input type="checkbox" /> Subscribe</label>
+                  <button type="button">Save</button>
+                </form>
               </div>
             </div>
           </div>
 
-          <div class="example-features">
-            <div class="example-feature">
-              <h4>Minimal</h4>
-              <p>No unnecessary styles. Just the essentials to get you started.</p>
+          <div class="mdst-tabs__panel" role="tabpanel" id="layer-2" aria-labelledby="layer-2-tab" data-state="inactive">
+            <div class="home-demo">
+              <pre><code>&lt;button class="mdst-button--solid"&gt;
+  Publish
+&lt;/button&gt;
+&lt;button class="mdst-button--borderless"&gt;
+  Cancel
+&lt;/button&gt;
+
+&lt;span class="mdst-tag mdst-tag--success"&gt;
+  Live
+&lt;/span&gt;
+
+&lt;table class="mdst-table--striped"&gt;
+  …
+&lt;/table&gt;</code></pre>
+              <div class="home-result">
+                <span class="home-result-label">Result · modifiers on bare elements</span>
+                <div class="home-row">
+                  <button type="button" class="mdst-button--solid">Publish</button>
+                  <button type="button" class="mdst-button--borderless">Cancel</button>
+                  <span class="mdst-tag mdst-tag--success">Live</span>
+                </div>
+                <table class="mdst-table--striped mdst-table--sm">
+                  <thead>
+                    <tr>
+                      <th>Plan</th>
+                      <th>Seats</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Starter</td>
+                      <td>3</td>
+                    </tr>
+                    <tr>
+                      <td>Pro</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td>Team</td>
+                      <td>50</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="example-feature">
-              <h4>Themeable</h4>
-              <p>Customise everything with CSS variables. Make it yours.</p>
+          </div>
+
+          <div class="mdst-tabs__panel" role="tabpanel" id="layer-3" aria-labelledby="layer-3-tab" data-state="inactive">
+            <div class="home-demo">
+              <pre><code>&lt;div class="mdst-stepper"&gt;
+  &lt;div class="mdst-stepper__step"
+       data-state="completed"&gt;…&lt;/div&gt;
+  &lt;div class="mdst-stepper__step"
+       data-state="active"&gt;…&lt;/div&gt;
+  &lt;div class="mdst-stepper__step"
+       data-state="upcoming"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // Bring any JS (or none).
+  // We style every state.
+  step.dataset.state = "completed";
+&lt;/script&gt;</code></pre>
+              <div class="home-result">
+                <span class="home-result-label">Result · try it</span>
+                <div class="mdst-stepper" id="demo-stepper">
+                  <div class="mdst-stepper__step" data-state="completed">
+                    <div class="mdst-stepper__indicator">1</div>
+                    <div class="mdst-stepper__label">Account</div>
+                  </div>
+                  <div class="mdst-stepper__step" data-state="active">
+                    <div class="mdst-stepper__indicator">2</div>
+                    <div class="mdst-stepper__label">Team</div>
+                  </div>
+                  <div class="mdst-stepper__step" data-state="upcoming">
+                    <div class="mdst-stepper__indicator">3</div>
+                    <div class="mdst-stepper__label">Launch</div>
+                  </div>
+                </div>
+                <div class="home-row">
+                  <button type="button" class="mdst-button--sm" id="demo-back">Back</button>
+                  <button type="button" class="mdst-button--sm mdst-button--solid" id="demo-next">Next step</button>
+                </div>
+                <p class="home-demo-note">The buttons only flip <code>data-state</code>. All the visual states come from the CSS.</p>
+              </div>
             </div>
-            <div class="example-feature">
-              <h4>Native</h4>
-              <p>Built on native HTML elements. No JavaScript required.</p>
+          </div>
+
+          <div class="mdst-tabs__panel" role="tabpanel" id="layer-4" aria-labelledby="layer-4-tab" data-state="inactive">
+            <div class="home-demo">
+              <pre><code id="token-code"></code></pre>
+              <div class="home-result" id="token-demo">
+                <span class="home-result-label">Result · drag to retheme</span>
+                <label class="home-field">
+                  Radius
+                  <input type="range" min="0" max="24" value="12" data-token="--mdst-radius" data-unit="px" />
+                </label>
+                <label class="home-field">
+                  Border width
+                  <input type="range" min="1" max="4" value="2" data-token="--mdst-border-width" data-unit="px" />
+                </label>
+                <div class="home-field">
+                  <span>Ink colour</span>
+                  <div class="color-field">
+                    <input type="color" class="mdst-input" value="#4338ca" data-token="--mdst-color-fg" aria-label="Ink colour" />
+                    <input type="text" class="mdst-input color-hex" value="#4338ca" aria-label="Ink colour hex" readonly />
+                  </div>
+                </div>
+                <div class="home-row">
+                  <button type="button" class="mdst-button--solid">Primary</button>
+                  <button type="button">Secondary</button>
+                  <span class="mdst-tag mdst-tag--pill">Tag</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <h2>Installation</h2>
-      <p>Via CDN:</p>
-      <pre>&lt;link rel="stylesheet" href="<!-- CDN_URL -->" /&gt;</pre>
+      <!-- ── Builder ──────────────────────────────────────────── -->
+      <section class="home-section" id="builder" aria-labelledby="builder-heading">
+        <h2 class="home-title" id="builder-heading">Make a page</h2>
+        <p class="home-intro">Add some blocks, pick a theme, and copy the HTML.</p>
 
-      <p>Or with a package manager:</p>
-      <pre>npm install mdst-ui</pre>
+        <div class="home-builder">
+          <div class="home-builder-controls">
+            <div>
+              <h3>Add a block</h3>
+              <div class="home-blocks" id="builder-palette"></div>
+            </div>
+            <div>
+              <h3>Your page</h3>
+              <ol class="home-order" id="builder-order" aria-live="polite"></ol>
+            </div>
+            <div class="home-stack">
+              <label class="home-field">
+                Theme
+                <select class="mdst-dropdown" id="builder-theme"></select>
+              </label>
+              <button type="button" class="mdst-button mdst-button--solid" id="builder-copy">Copy HTML</button>
+              <div class="home-row">
+                <button type="button" class="mdst-button mdst-button--sm" id="builder-open">Open in new tab</button>
+                <button type="button" class="mdst-button mdst-button--sm mdst-button--borderless" id="builder-reset">Reset</button>
+              </div>
+            </div>
+          </div>
 
-      <p>Then import in CSS:</p>
-      <pre>@import "mdst-ui/dist/modest-ui.css";</pre>
+          <div class="home-browser">
+            <div class="home-browser-bar" aria-hidden="true">
+              <i></i><i></i><i></i>
+              <span>your-next-project.com</span>
+            </div>
+            <!-- biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region needs tabindex so keyboard users can scroll it -->
+            <section class="home-canvas mdst-ui" id="builder-canvas" tabindex="0" aria-label="Page preview"></section>
+          </div>
+        </div>
+      </section>
 
-      <p>Or cherry-pick components:</p>
-      <pre>
-/* Always include tokens first */
-@import "mdst-ui/base/tokens.css";
+      <!-- ── AI ───────────────────────────────────────────────── -->
+      <section class="home-section" aria-labelledby="ai-heading">
+        <h2 class="home-title" id="ai-heading">Using it with AI</h2>
+        <p class="home-intro">If an AI is writing your front end, give it something small and predictable to build on.</p>
 
-/* Then pick what you need */
-@import "mdst-ui/components/button/button.css";
-@import "mdst-ui/components/input/input.css";</pre>
+        <div class="home-grid">
+          <div class="mdst-card">
+            <div class="mdst-card__body">
+              <h3>Native HTML, nothing to invent</h3>
+              <p>No bespoke component API to hallucinate. Models already write good semantic HTML, and modest-ui styles it.</p>
+            </div>
+          </div>
+          <div class="mdst-card">
+            <div class="mdst-card__body">
+              <h3>The whole library in one file</h3>
+              <p>
+                <a href="/llms.txt" class="mdst-a">llms.txt</a> lists every class, token, and pattern. Drop it into context and your agent
+                knows the system.
+              </p>
+            </div>
+          </div>
+          <div class="mdst-card">
+            <div class="mdst-card__body">
+              <h3>Customise with tokens, not rewrites</h3>
+              <p>Brand changes are a handful of <code>--mdst-*</code> variables, so new screens keep matching instead of drifting.</p>
+            </div>
+          </div>
+          <div class="mdst-card">
+            <div class="mdst-card__body">
+              <h3>Your CSS always wins</h3>
+              <p>Everything sits in a cascade layer, so any CSS you or your agent add on top wins. No <code>!important</code> wars.</p>
+            </div>
+          </div>
+          <div class="mdst-card">
+            <div class="mdst-card__body">
+              <h3>Scoped to <code>.mdst-ui</code></h3>
+              <p>Adopt it one screen at a time. Third-party widgets and legacy pages outside the scope stay untouched.</p>
+            </div>
+          </div>
+          <div class="mdst-card">
+            <div class="mdst-card__body">
+              <h3>Open source, no lock-in</h3>
+              <p>MIT licensed, plain CSS, no build step, and no runtime. Install from npm, use the CDN, or vendor the files.</p>
+            </div>
+          </div>
+        </div>
 
-      <h2>Quick start</h2>
-      <p>Add the stylesheet and put <code>.mdst-ui</code> on the body. That's it.</p>
-      <pre>
-&lt;!doctype html&gt;
+        <div class="mdst-card home-prompt">
+          <div class="mdst-card__header">
+            <div class="home-split">
+              <strong>Starter prompt</strong>
+              <button type="button" class="mdst-button mdst-button--sm" data-copy-from="ai-prompt">Copy</button>
+            </div>
+          </div>
+          <div class="mdst-card__body">
+            <pre class="mdst-pre--borderless" id="ai-prompt">Use modest-ui (npm: mdst-ui) as the CSS foundation for this project.
+
+- Load it: &lt;link rel="stylesheet" href="<!-- CDN_URL -->"&gt;
+  or: npm install mdst-ui, then @import "mdst-ui/dist/modest-ui.css";
+- Put class="mdst-ui" on &lt;body&gt; and write semantic, native HTML first.
+- Only add .mdst-* modifier classes for variants (e.g. .mdst-button--borderless).
+- Drive runtime state with data-state; use modifier classes for variants.
+- Theme by overriding --mdst-* tokens in :root. Don't restyle components.
+- Put custom layout CSS in your own layer on top.
+- Reference: https://modest-ui.com/llms.txt</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Examples ─────────────────────────────────────────── -->
+      <section class="home-section" aria-labelledby="examples-heading">
+        <h2 class="home-title" id="examples-heading">Example pages</h2>
+        <p class="home-intro">Complete pages built with modest-ui and a little layout CSS.</p>
+
+        <div class="home-grid">
+          <a href="/examples/landing.html" class="mdst-card mdst-card--interactive home-example">
+            <div class="home-wire" aria-hidden="true">
+              <i class="w-head"></i><i class="w-narrow"></i><i class="w-narrow"></i><span class="w-row"><i></i><i></i><i></i></span>
+            </div>
+            <div class="mdst-card__body">
+              <h3>Landing page</h3>
+              <p>Hero, feature grid, testimonials, and a call to action.</p>
+            </div>
+          </a>
+          <a href="/examples/dashboard.html" class="mdst-card mdst-card--interactive home-example">
+            <div class="home-wire" aria-hidden="true">
+              <span class="w-side"><i></i><i></i></span>
+            </div>
+            <div class="mdst-card__body">
+              <h3>Dashboard</h3>
+              <p>Stat cards, a data table, and action controls.</p>
+            </div>
+          </a>
+          <a href="/examples/pricing.html" class="mdst-card mdst-card--interactive home-example">
+            <div class="home-wire" aria-hidden="true">
+              <i class="w-head w-narrow"></i
+              ><span class="w-row"><i style="height: 3.5rem"></i><i style="height: 3.5rem"></i><i style="height: 3.5rem"></i></span>
+            </div>
+            <div class="mdst-card__body">
+              <h3>Pricing</h3>
+              <p>Plan comparison, billing toggle, and FAQ.</p>
+            </div>
+          </a>
+          <a href="/examples/auth.html" class="mdst-card mdst-card--interactive home-example">
+            <div class="home-wire" aria-hidden="true">
+              <i class="w-head w-narrow"></i><i class="w-narrow" style="height: 1rem"></i><i class="w-narrow" style="height: 1rem"></i
+              ><i class="w-narrow" style="height: 1rem; opacity: 0.6"></i>
+            </div>
+            <div class="mdst-card__body">
+              <h3>Authentication</h3>
+              <p>Login, registration, and password reset forms.</p>
+            </div>
+          </a>
+          <a href="/examples/blog.html" class="mdst-card mdst-card--interactive home-example">
+            <div class="home-wire" aria-hidden="true">
+              <i class="w-head"></i><i></i><i></i><i style="width: 70%"></i><i class="w-head" style="margin-top: 0.4rem"></i><i></i>
+            </div>
+            <div class="mdst-card__body">
+              <h3>Blog</h3>
+              <p>Article list, tags, and a full reading view.</p>
+            </div>
+          </a>
+          <a href="/examples/settings.html" class="mdst-card mdst-card--interactive home-example">
+            <div class="home-wire" aria-hidden="true">
+              <span class="w-side"><i></i><i style="opacity: 0.12"></i></span>
+            </div>
+            <div class="mdst-card__body">
+              <h3>Settings</h3>
+              <p>Profile editing, notification preferences, and a danger zone.</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ── Install ──────────────────────────────────────────── -->
+      <section class="home-section" aria-labelledby="install-heading">
+        <h2 class="home-title" id="install-heading">Install</h2>
+        <p class="home-intro">Add the stylesheet, put <code>.mdst-ui</code> on the body, and write HTML.</p>
+
+        <div class="mdst-tabs home-install-tabs" data-home-tabs>
+          <div class="mdst-tabs__list" role="tablist" aria-label="Install method">
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="active"
+              aria-selected="true"
+              aria-controls="inst-npm"
+              id="inst-npm-tab"
+            >
+              npm
+            </button>
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="inst-cdn"
+              id="inst-cdn-tab"
+            >
+              CDN
+            </button>
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="inst-pick"
+              id="inst-pick-tab"
+            >
+              Cherry-pick
+            </button>
+          </div>
+          <div class="mdst-tabs__panel" role="tabpanel" id="inst-npm" aria-labelledby="inst-npm-tab" data-state="active">
+            <pre>npm install mdst-ui</pre>
+            <pre>
+/* in your CSS */
+@import "mdst-ui/dist/modest-ui.css";
+
+/* or in your JS bundler */
+import "mdst-ui";</pre>
+          </div>
+          <div class="mdst-tabs__panel" role="tabpanel" id="inst-cdn" aria-labelledby="inst-cdn-tab" data-state="inactive">
+            <pre>&lt;!doctype html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
   &lt;link rel="stylesheet" href="<!-- CDN_URL -->" /&gt;
 &lt;/head&gt;
 &lt;body class="mdst-ui"&gt;
-
   &lt;h1&gt;Hello world&lt;/h1&gt;
-  &lt;p&gt;This paragraph is styled automatically.&lt;/p&gt;
   &lt;button&gt;Click me&lt;/button&gt;
-  &lt;input type="text" placeholder="Type here" /&gt;
-
 &lt;/body&gt;
 &lt;/html&gt;</pre>
+          </div>
+          <div class="mdst-tabs__panel" role="tabpanel" id="inst-pick" aria-labelledby="inst-pick-tab" data-state="inactive">
+            <pre>
+/* Always include tokens first */
+@import "mdst-ui/base/tokens.css";
 
-      <h2>Theming</h2>
-      <p>Override CSS custom properties to make it yours:</p>
-      <pre>
+/* Then only what you need */
+@import "mdst-ui/components/button/button.css";
+@import "mdst-ui/components/input/input.css";</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Under the hood ───────────────────────────────────── -->
+      <section class="home-section" aria-labelledby="hood-heading">
+        <h2 class="home-title" id="hood-heading">How it works</h2>
+        <div class="home-deep">
+          <details class="mdst-details mdst-details--section">
+            <summary>Classless, classes, and your CSS on top</summary>
+            <p>
+              <strong>Classless.</strong> Bare elements inside <code>.mdst-ui</code> get a styled baseline for free: every native
+              <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, and <code>&lt;table&gt;</code>.
+            </p>
+            <p>
+              <strong>Classes.</strong> Component classes like <code>.mdst-button</code> always override the classless defaults, and
+              modifiers like <code>.mdst-button--borderless</code> work directly on bare elements.
+            </p>
+            <p>
+              <strong>Your CSS.</strong> All of modest-ui sits in the <code>mdst-ui</code> cascade layer, so anything you write outside a
+              layer wins, whatever its specificity or load order.
+            </p>
+          </details>
+          <details class="mdst-details mdst-details--section">
+            <summary>Scoped and safe</summary>
+            <p>
+              Unlike classless frameworks that style every element on the page globally, modest-ui is scoped to <code>.mdst-ui</code>.
+              Third-party widgets, embedded content, and anything outside the scope are unaffected. And because it all sits in a cascade
+              layer, your own styles always take priority.
+            </p>
+          </details>
+          <details class="mdst-details mdst-details--section">
+            <summary>Theming with tokens</summary>
+            <p>
+              Override CSS custom properties to make it yours. Try the <a href="/theme/" class="mdst-a">Theme Playground</a> to generate
+              them.
+            </p>
+            <pre>
 :root {
   --mdst-color-fg: #000;
   --mdst-color-bg: #fff;
@@ -514,8 +1404,609 @@
   --mdst-color-focus: #000;
   --mdst-radius: 0;
 }</pre>
+          </details>
+        </div>
+      </section>
 
-      <p>Try the <a href="#theme">Theme Playground</a> to experiment, or browse the components in the sidebar to see every option.</p>
+      <!-- ── Closing ──────────────────────────────────────────── -->
+      <section class="home-section">
+        <div class="home-cta">
+          <h2 class="home-title">Open source</h2>
+          <p class="home-intro">MIT licensed, so use it, fork it, or send a pull request.</p>
+          <div class="home-row">
+            <a href="https://github.com/thisismodest/modest-ui" class="mdst-button mdst-button--solid">View on GitHub</a>
+            <a href="https://www.npmjs.com/package/mdst-ui" class="mdst-button">npm package</a>
+            <a href="https://github.com/thisismodest/modest-ui/blob/main/CONTRIBUTING.md" class="mdst-button mdst-button--borderless"
+              >Contribute</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <div class="mdst-toast-group" aria-live="polite">
+        <output class="mdst-toast mdst-toast--success" data-state="hidden" id="home-toast">Copied to clipboard</output>
+      </div>
     </div>
+
+    <script>
+      (() => {
+        var theme = window.mdstTheme;
+        var CDN = "<!-- CDN_URL -->";
+
+        // ── Helpers ─────────────────────────────────────────
+
+        var toast = document.getElementById("home-toast");
+        var toastTimer;
+        function notify(message) {
+          toast.textContent = message;
+          toast.setAttribute("data-state", "visible");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => {
+            toast.setAttribute("data-state", "hidden");
+          }, 1800);
+        }
+
+        function copy(text, message) {
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(text).then(() => {
+            notify(message || "Copied to clipboard");
+          });
+        }
+
+        document.querySelectorAll("[data-copy-from]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            copy(document.getElementById(btn.dataset.copyFrom).textContent);
+          });
+        });
+
+        // Tabs: modest-ui styles the states, this just flips data-state.
+        document.querySelectorAll("[data-home-tabs]").forEach((root) => {
+          var tabs = root.querySelectorAll(":scope > .mdst-tabs__list > .mdst-tabs__tab");
+          tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+              tabs.forEach((t) => {
+                var active = t === tab;
+                t.setAttribute("data-state", active ? "active" : "inactive");
+                t.setAttribute("aria-selected", active);
+                document.getElementById(t.getAttribute("aria-controls")).setAttribute("data-state", active ? "active" : "inactive");
+              });
+            });
+          });
+        });
+
+        // ── Hero install toggle ─────────────────────────────
+
+        var installCmd = document.getElementById("install-cmd");
+        var installText = {
+          npm: "npm install mdst-ui",
+          cdn: `<link rel="stylesheet" href="${CDN}" />`
+        };
+        document.querySelectorAll("[data-install]").forEach((btn, _, all) => {
+          btn.addEventListener("click", () => {
+            all.forEach((b) => {
+              b.setAttribute("aria-pressed", b === btn);
+            });
+            installCmd.textContent = installText[btn.dataset.install];
+          });
+        });
+
+        // ── Scoped themes ───────────────────────────────────
+        // The bento chips and the builder picker each restyle only their own
+        // area, by setting the preset's tokens on that element. The rest of
+        // the site keeps its theme.
+
+        var CHIPS = ["default", "dark", "rounded", "terminal", "brutalist", "swiss", "ink", "ember", "pastel", "midnight"];
+        var chipBox = document.getElementById("theme-chips");
+        var stage = document.getElementById("theme-stage");
+        var builderTheme = document.getElementById("builder-theme");
+
+        // Swap the tokens with transitions off. Reading offsetHeight makes the
+        // browser apply the new styles straight away, so the class can come
+        // off immediately and hover transitions keep working afterwards.
+        function applyScoped(el, name) {
+          el.classList.add("home-instant");
+          // Always set the preset's tokens, including Default, so the area
+          // shows the real default rather than the visitor's saved site theme
+          var vars = theme.buildCSSVars(theme.presets[name]);
+          for (var key in vars) el.style.setProperty(key, vars[key]);
+          el.offsetHeight;
+          el.classList.remove("home-instant");
+        }
+
+        if (theme) {
+          CHIPS.forEach((name) => {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.className = "mdst-button mdst-button--sm";
+            b.dataset.preset = name;
+            b.textContent = theme.presetLabels[name] || name;
+            b.setAttribute("aria-pressed", name === "default");
+            b.addEventListener("click", () => {
+              applyScoped(stage, name);
+              chipBox.querySelectorAll("button").forEach((other) => {
+                other.setAttribute("aria-pressed", other === b);
+              });
+            });
+            chipBox.appendChild(b);
+          });
+
+          theme.buildSelectOptions(builderTheme, false);
+          builderTheme.value = "default";
+          applyScoped(stage, "default");
+          builderTheme.addEventListener("change", () => {
+            applyScoped(canvas, builderTheme.value);
+          });
+        }
+
+        // ── Hero specimen: cycles themes on a single card ───
+
+        var specimen = document.getElementById("specimen");
+        var specimenName = document.getElementById("specimen-name");
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (theme && !reduceMotion) {
+          const cycle = ["swiss", "terminal", "rounded", "ink", "brutalist", "midnight", "pastel", "ember"];
+          let index = 0;
+          let paused = false;
+
+          specimen.addEventListener("mouseenter", () => {
+            paused = true;
+          });
+          specimen.addEventListener("mouseleave", () => {
+            paused = false;
+          });
+          specimen.addEventListener("focusin", () => {
+            paused = true;
+          });
+          specimen.addEventListener("focusout", () => {
+            paused = false;
+          });
+
+          setInterval(() => {
+            if (paused || document.hidden) return;
+            var name = cycle[index++ % cycle.length];
+            applyScoped(specimen, name);
+            specimenName.textContent = theme.presetLabels[name];
+          }, 2200);
+        }
+
+        // Show or hide the password by switching the field's type when the eye
+        // toggle changes. Example code, not part of modest-ui (which is CSS only).
+        document.querySelectorAll(".mdst-password-input > input[type=checkbox]").forEach((toggle) => {
+          toggle.addEventListener("change", () => {
+            const field = toggle.parentElement.querySelector("input:not([type=checkbox])");
+            field.type = toggle.checked ? "text" : "password";
+          });
+        });
+
+        // ── State demo ──────────────────────────────────────
+
+        var demoSteps = document.querySelectorAll("#demo-stepper .mdst-stepper__step");
+        var demoIndex = 1;
+        function renderSteps() {
+          demoSteps.forEach((step, i) => {
+            step.dataset.state = i < demoIndex ? "completed" : i === demoIndex ? "active" : "upcoming";
+          });
+          document.getElementById("demo-back").disabled = demoIndex === 0;
+          document.getElementById("demo-next").textContent = demoIndex >= demoSteps.length ? "Start over" : "Next step";
+        }
+        document.getElementById("demo-next").addEventListener("click", () => {
+          demoIndex = demoIndex >= demoSteps.length ? 0 : demoIndex + 1;
+          renderSteps();
+        });
+        document.getElementById("demo-back").addEventListener("click", () => {
+          demoIndex = Math.max(0, demoIndex - 1);
+          renderSteps();
+        });
+        renderSteps();
+
+        // ── Token demo ──────────────────────────────────────
+
+        var tokenDemo = document.getElementById("token-demo");
+        var tokenCode = document.getElementById("token-code");
+        var tokenInputs = tokenDemo.querySelectorAll("[data-token]");
+        var hexField = tokenDemo.querySelector(".color-hex");
+
+        function renderTokens() {
+          var lines = [];
+          tokenInputs.forEach((input) => {
+            var value = input.value + (input.dataset.unit || "");
+            tokenDemo.style.setProperty(input.dataset.token, value);
+            lines.push(`  ${input.dataset.token}: ${value};`);
+          });
+          tokenDemo.style.setProperty("--mdst-color-border", tokenDemo.style.getPropertyValue("--mdst-color-fg"));
+          tokenDemo.style.setProperty("--mdst-color-bg", "#fff");
+          tokenDemo.style.setProperty("--mdst-color-muted", "#666");
+          hexField.value = tokenDemo.querySelector('[type="color"]').value;
+          tokenCode.textContent =
+            "/* Same components.\n   Different tokens. */\n\n:root {\n" +
+            lines.join("\n") +
+            "\n  --mdst-color-border: var(--mdst-color-fg);\n}\n\n/* Everything inside .mdst-ui\n   follows along. */";
+        }
+        tokenInputs.forEach((input) => {
+          input.addEventListener("input", renderTokens);
+        });
+        renderTokens();
+
+        // ── Page builder ────────────────────────────────────
+
+        // The layout layer: modest-ui styles the components, this arranges
+        // them. It ships inside the exported page so it's yours to edit.
+        var LAYOUT_CSS = [
+          ".pg { container-type: inline-size; }",
+          ".pg h1, .pg h2, .pg h3, .pg p { margin: 0; }",
+          ".pg-nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.5rem; border-bottom: var(--mdst-border-width) solid var(--mdst-color-border); }",
+          ".pg-nav nav { display: flex; align-items: center; gap: 1rem; font-size: var(--mdst-text-sm); }",
+          ".pg-nav nav a { color: inherit; text-decoration: none; }",
+          ".pg-section { padding: 3.5rem 1.5rem; }",
+          ".pg-section + .pg-section { border-top: var(--mdst-border-width) solid var(--mdst-color-border); }",
+          ".pg-inner { max-width: 60rem; margin: 0 auto; display: grid; gap: 1.5rem; }",
+          ".pg-center { text-align: center; justify-items: center; max-width: 36rem; }",
+          ".pg-hero h1 { font-size: clamp(2rem, 7cqi, 3rem); letter-spacing: -0.03em; line-height: 1.1; }",
+          ".pg-lead { color: var(--mdst-color-muted); font-size: var(--mdst-text-lg); }",
+          ".pg-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }",
+          ".pg-grid { display: grid; gap: 1rem; }",
+          ".pg-grid .mdst-card__body { display: grid; gap: 0.5rem; }",
+          ".pg-muted { color: var(--mdst-color-muted); font-size: var(--mdst-text-sm); }",
+          ".pg-price { font-size: 2rem; font-weight: 700; }",
+          ".pg-form { display: grid; gap: 1rem; width: 100%; max-width: 26rem; margin: 0 auto; text-align: left; }",
+          ".pg-form label:not(:has(input[type=checkbox])) { display: grid; gap: 0.25rem; }",
+          ".pg-quote { display: grid; gap: 1rem; justify-items: center; text-align: center; }",
+          ".pg-quote blockquote { font-size: var(--mdst-text-lg); }",
+          ".pg-person { display: flex; align-items: center; gap: 0.5rem; text-align: left; }",
+          ".pg-faq { display: grid; gap: 0.5rem; width: 100%; text-align: left; }",
+          ".pg-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 1.5rem; border-top: var(--mdst-border-width) solid var(--mdst-color-border); color: var(--mdst-color-muted); font-size: var(--mdst-text-sm); }",
+          ".pg-footer nav { display: flex; gap: 1rem; }",
+          ".pg-footer a { color: inherit; }",
+          "@container (max-width: 30rem) { .pg-nav nav a { display: none; } }",
+          "@container (min-width: 40rem) { .pg-grid { grid-template-columns: repeat(3, 1fr); } }"
+        ].join("\n");
+
+        var style = document.createElement("style");
+        style.textContent = LAYOUT_CSS;
+        document.head.appendChild(style);
+
+        var BLOCKS = {
+          nav: {
+            label: "Navigation",
+            html: [
+              '<header class="pg-nav">',
+              "  <strong>Acme</strong>",
+              '  <nav aria-label="Main">',
+              '    <a href="#">Features</a>',
+              '    <a href="#">Pricing</a>',
+              '    <button class="mdst-button--solid mdst-button--sm">Sign up</button>',
+              "  </nav>",
+              "</header>"
+            ]
+          },
+          hero: {
+            label: "Hero",
+            html: [
+              '<section class="pg-section pg-hero">',
+              '  <div class="pg-inner pg-center">',
+              '    <span class="mdst-tag mdst-tag--pill">New · v2 is here</span>',
+              "    <h1>Ship the product, not the CSS</h1>",
+              '    <p class="pg-lead">Acme helps small teams plan, build, and launch without the busywork.</p>',
+              '    <div class="pg-actions">',
+              '      <button class="mdst-button--solid mdst-button--lg">Start free</button>',
+              '      <button class="mdst-button--lg">Book a demo</button>',
+              "    </div>",
+              "  </div>",
+              "</section>"
+            ]
+          },
+          features: {
+            label: "Features",
+            html: [
+              '<section class="pg-section">',
+              '  <div class="pg-inner">',
+              "    <h2>Everything you need</h2>",
+              '    <div class="pg-grid">',
+              '      <div class="mdst-card"><div class="mdst-card__body">',
+              "        <h3>Fast</h3>",
+              '        <p class="pg-muted">No build step, no runtime. Pages load instantly.</p>',
+              "      </div></div>",
+              '      <div class="mdst-card"><div class="mdst-card__body">',
+              "        <h3>Flexible</h3>",
+              '        <p class="pg-muted">Theme every pixel with a few CSS variables.</p>',
+              "      </div></div>",
+              '      <div class="mdst-card"><div class="mdst-card__body">',
+              "        <h3>Familiar</h3>",
+              '        <p class="pg-muted">It\'s just HTML. Your whole team already knows it.</p>',
+              "      </div></div>",
+              "    </div>",
+              "  </div>",
+              "</section>"
+            ]
+          },
+          pricing: {
+            label: "Pricing",
+            html: [
+              '<section class="pg-section">',
+              '  <div class="pg-inner">',
+              "    <h2>Simple pricing</h2>",
+              '    <div class="pg-grid">',
+              '      <div class="mdst-card"><div class="mdst-card__body">',
+              "        <h3>Starter</h3>",
+              '        <p class="pg-price">£0</p>',
+              '        <p class="pg-muted">For side projects.</p>',
+              "        <button>Get started</button>",
+              "      </div></div>",
+              '      <div class="mdst-card"><div class="mdst-card__body">',
+              '        <h3>Pro <span class="mdst-badge mdst-badge--solid">Popular</span></h3>',
+              '        <p class="pg-price">£12</p>',
+              '        <p class="pg-muted">For growing teams.</p>',
+              '        <button class="mdst-button--solid">Upgrade</button>',
+              "      </div></div>",
+              '      <div class="mdst-card"><div class="mdst-card__body">',
+              "        <h3>Enterprise</h3>",
+              '        <p class="pg-price">Let\'s talk</p>',
+              '        <p class="pg-muted">SSO, audit logs, SLAs.</p>',
+              "        <button>Contact sales</button>",
+              "      </div></div>",
+              "    </div>",
+              "  </div>",
+              "</section>"
+            ]
+          },
+          quote: {
+            label: "Testimonial",
+            html: [
+              '<section class="pg-section">',
+              '  <div class="pg-inner pg-center pg-quote">',
+              "    <blockquote>“We replaced three UI kits with one stylesheet. Our screens finally look consistent.”</blockquote>",
+              '    <div class="pg-person">',
+              '      <span class="mdst-avatar">SR</span>',
+              '      <div><strong>Sam Rivera</strong><br /><small class="pg-muted">CTO, Northwind</small></div>',
+              "    </div>",
+              "  </div>",
+              "</section>"
+            ]
+          },
+          table: {
+            label: "Table",
+            html: [
+              '<section class="pg-section">',
+              '  <div class="pg-inner">',
+              "    <h2>Recent orders</h2>",
+              '    <div class="mdst-table-wrap">',
+              '      <table class="mdst-table--striped">',
+              "        <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th>Total</th></tr></thead>",
+              "        <tbody>",
+              '          <tr><td>#1042</td><td>Ada King</td><td><span class="mdst-tag mdst-tag--success">Paid</span></td><td>£120</td></tr>',
+              '          <tr><td>#1041</td><td>Grace Hopper</td><td><span class="mdst-tag mdst-tag--muted">Pending</span></td><td>£48</td></tr>',
+              '          <tr><td>#1040</td><td>Alan Turing</td><td><span class="mdst-tag mdst-tag--danger">Refunded</span></td><td>£96</td></tr>',
+              "        </tbody>",
+              "      </table>",
+              "    </div>",
+              "  </div>",
+              "</section>"
+            ]
+          },
+          form: {
+            label: "Sign-up form",
+            html: [
+              '<section class="pg-section">',
+              '  <div class="pg-inner pg-center">',
+              "    <h2>Join the waitlist</h2>",
+              '    <p class="pg-muted">Be first in line when we open the doors.</p>',
+              '    <form class="pg-form">',
+              '      <label>Email <input type="email" placeholder="you@example.com" /></label>',
+              "      <label>I'm a",
+              "        <select><option>Designer</option><option>Engineer</option><option>Founder</option></select>",
+              "      </label>",
+              '      <label><input type="checkbox" /> Send me product updates</label>',
+              '      <button class="mdst-button--solid">Join waitlist</button>',
+              "    </form>",
+              "  </div>",
+              "</section>"
+            ]
+          },
+          faq: {
+            label: "FAQ",
+            html: [
+              '<section class="pg-section">',
+              '  <div class="pg-inner pg-center">',
+              "    <h2>Questions</h2>",
+              '    <div class="pg-faq">',
+              "      <details><summary>Is there a free plan?</summary><p>Yes. Starter is free forever.</p></details>",
+              "      <details><summary>Can I cancel any time?</summary><p>Of course, straight from your settings.</p></details>",
+              "      <details><summary>Do you offer discounts?</summary><p>Non-profits and students get 50% off.</p></details>",
+              "    </div>",
+              "  </div>",
+              "</section>"
+            ]
+          },
+          cta: {
+            label: "Announcement",
+            html: [
+              '<section class="pg-section">',
+              '  <div class="pg-inner">',
+              '    <div class="mdst-banner mdst-banner--info" role="region" aria-label="Announcement">',
+              '      <div class="mdst-banner__content">Acme 2.0 is live. Read what\'s new.</div>',
+              '      <div class="mdst-banner__actions"><button class="mdst-button--sm">Read more</button></div>',
+              "    </div>",
+              "  </div>",
+              "</section>"
+            ]
+          },
+          footer: {
+            label: "Footer",
+            html: [
+              '<footer class="pg-footer">',
+              "  <span>© 2026 Acme Ltd.</span>",
+              '  <nav aria-label="Footer">',
+              '    <a href="#">Privacy</a>',
+              '    <a href="#">Terms</a>',
+              '    <a href="#">Contact</a>',
+              "  </nav>",
+              "</footer>"
+            ]
+          }
+        };
+
+        var DEFAULT_PAGE = ["nav", "hero", "features", "footer"];
+        var palette = document.getElementById("builder-palette");
+        var order = document.getElementById("builder-order");
+        var canvas = document.getElementById("builder-canvas");
+        var page = DEFAULT_PAGE.slice();
+
+        Object.keys(BLOCKS).forEach((key) => {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "mdst-button mdst-button--sm";
+          b.textContent = `+ ${BLOCKS[key].label}`;
+          b.addEventListener("click", () => {
+            // Keep the footer last when adding new blocks
+            var footerAt = page.lastIndexOf("footer");
+            var at = key !== "footer" && footerAt === page.length - 1 ? footerAt : page.length;
+            page.splice(at, 0, key);
+            renderBuilder();
+            revealBlock(at);
+          });
+          palette.appendChild(b);
+        });
+
+        function controlButton(label, text, disabled, onClick) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "mdst-button mdst-button--sm mdst-button--borderless";
+          b.textContent = text;
+          b.setAttribute("aria-label", label);
+          b.disabled = disabled;
+          b.addEventListener("click", onClick);
+          return b;
+        }
+
+        function move(i, delta) {
+          var item = page.splice(i, 1)[0];
+          page.splice(i + delta, 0, item);
+          renderBuilder();
+        }
+
+        function pageBody() {
+          return page.map((key) => BLOCKS[key].html.join("\n")).join("\n\n");
+        }
+
+        function renderBuilder() {
+          order.innerHTML = "";
+          if (!page.length) {
+            const empty = document.createElement("p");
+            empty.className = "home-order-empty";
+            empty.textContent = "Empty page. Add a block above.";
+            order.appendChild(empty);
+          }
+          page.forEach((key, i) => {
+            var li = document.createElement("li");
+            var name = document.createElement("span");
+            name.textContent = BLOCKS[key].label;
+            var bar = document.createElement("div");
+            bar.className = "mdst-toolbar";
+            var group = document.createElement("div");
+            group.className = "mdst-toolbar__group mdst-toolbar__group--attached";
+            bar.appendChild(group);
+            group.appendChild(
+              controlButton(`Move ${BLOCKS[key].label} up`, "↑", i === 0, () => {
+                move(i, -1);
+              })
+            );
+            group.appendChild(
+              controlButton(`Move ${BLOCKS[key].label} down`, "↓", i === page.length - 1, () => {
+                move(i, 1);
+              })
+            );
+            group.appendChild(
+              controlButton(`Remove ${BLOCKS[key].label}`, "✕", false, () => {
+                page.splice(i, 1);
+                renderBuilder();
+              })
+            );
+            li.appendChild(name);
+            li.appendChild(bar);
+            order.appendChild(li);
+          });
+          canvas.innerHTML = `<div class="pg">${pageBody()}</div>`;
+        }
+
+        // Scroll the preview to a block so the change is visible
+        function revealBlock(i) {
+          var el = canvas.querySelector(".pg").children[i];
+          if (!el) return;
+          canvas.scrollTo({ top: el.offsetTop, behavior: reduceMotion ? "auto" : "smooth" });
+        }
+
+        function indent(text, spaces) {
+          var pad = new Array(spaces + 1).join(" ");
+          return text
+            .split("\n")
+            .map((line) => (line ? pad + line : line))
+            .join("\n");
+        }
+
+        // Copy HTML links the CDN; Open in new tab uses this site's own bundle,
+        // so the preview matches the page even before a release reaches npm
+        function exportHTML(stylesheet) {
+          var chosen = theme && builderTheme.value !== "default" ? theme.buildCSSVars(theme.presets[builderTheme.value]) : null;
+          var tokens = chosen
+            ? ":root {\n" +
+              Object.keys(chosen)
+                .map((k) => `  ${k}: ${chosen[k]};`)
+                .join("\n") +
+              "\n}"
+            : ":root {\n  /* Override any --mdst-* token here */\n}";
+
+          return [
+            "<!doctype html>",
+            '<html lang="en">',
+            "  <head>",
+            '    <meta charset="UTF-8" />',
+            '    <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
+            "    <title>My page</title>",
+            `    <link rel="stylesheet" href="${stylesheet}" />`,
+            "    <style>",
+            "      /* Theme: modest-ui tokens */",
+            indent(tokens, 6),
+            "",
+            "      /* Layout: your layer on top of modest-ui */",
+            indent(LAYOUT_CSS, 6),
+            "    </style>",
+            "  </head>",
+            '  <body class="mdst-ui">',
+            '    <div class="pg">',
+            indent(pageBody(), 6),
+            "    </div>",
+            "  </body>",
+            "</html>",
+            ""
+          ].join("\n");
+        }
+
+        document.getElementById("builder-copy").addEventListener("click", () => {
+          copy(exportHTML(CDN), "Page HTML copied");
+        });
+
+        document.getElementById("builder-open").addEventListener("click", () => {
+          var url = URL.createObjectURL(new Blob([exportHTML(`${location.origin}/dist/modest-ui.min.css`)], { type: "text/html" }));
+          window.open(url, "_blank");
+          setTimeout(() => {
+            URL.revokeObjectURL(url);
+          }, 60000);
+        });
+
+        document.getElementById("builder-reset").addEventListener("click", () => {
+          page = DEFAULT_PAGE.slice();
+          renderBuilder();
+        });
+
+        // Stop demo forms in the preview from navigating
+        canvas.addEventListener("submit", (e) => {
+          e.preventDefault();
+        });
+
+        renderBuilder();
+        if (theme) applyScoped(canvas, "default");
+      })();
+    </script>
   </body>
 </html>

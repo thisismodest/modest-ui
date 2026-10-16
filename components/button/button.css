@@ -1,102 +1,117 @@
-/* Button */
+@layer mdst-ui.components {
+  /* Button
 
-:where(.mdst-ui) button,
-:where(.mdst-ui) input[type="submit"],
-:where(.mdst-ui) input[type="reset"],
-:where(.mdst-ui) input[type="button"],
-.mdst-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--mdst-space-xs);
-  padding: var(--mdst-space-sm) var(--mdst-space-md);
-  font-family: var(--mdst-font-ui);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-  background: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  cursor: pointer;
-  transition:
-    background var(--mdst-transition),
-    color var(--mdst-transition),
-    border-color var(--mdst-transition);
-  -webkit-appearance: none;
-  appearance: none;
-}
+     Variants only set these public variables. Make your own the same way, on
+     a class, a container, or an inline style:
 
-:where(.mdst-ui) button:hover,
-:where(.mdst-ui) input[type="submit"]:hover,
-:where(.mdst-ui) input[type="reset"]:hover,
-:where(.mdst-ui) input[type="button"]:hover,
-.mdst-button:hover {
-  background: var(--mdst-button-hover-bg);
-  color: var(--mdst-button-hover-color);
-  border-color: var(--mdst-button-hover-border);
-}
+       --mdst-button-tone     text / fill colour   (default: --mdst-color-fg)
+       --mdst-button-bg       background           (default: --mdst-color-bg)
+       --mdst-button-fg       text colour          (default: the tone)
+       --mdst-button-border   border colour        (default: --mdst-color-border)
 
-:where(.mdst-ui) button:focus-visible,
-:where(.mdst-ui) input[type="submit"]:focus-visible,
-:where(.mdst-ui) input[type="reset"]:focus-visible,
-:where(.mdst-ui) input[type="button"]:focus-visible,
-.mdst-button:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
+     Hover draws --mdst-button-hover-shadow (a ring in the text colour by
+     default). Set it to none to turn hover off, or to any box-shadow.
 
-:where(.mdst-ui) button:disabled,
-:where(.mdst-ui) input[type="submit"]:disabled,
-:where(.mdst-ui) input[type="reset"]:disabled,
-:where(.mdst-ui) input[type="button"]:disabled,
-.mdst-button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
+     The hover rule only sets the private --_hover, never a property, so other
+     components that reuse a bare <button> (a close icon, a tab) can opt out
+     with a plain box-shadow: none. */
 
-:where(.mdst-ui) button:disabled:hover,
-:where(.mdst-ui) input[type="submit"]:disabled:hover,
-:where(.mdst-ui) input[type="reset"]:disabled:hover,
-:where(.mdst-ui) input[type="button"]:disabled:hover,
-.mdst-button:disabled:hover {
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  border-color: var(--mdst-color-border);
-}
+  :where(.mdst-ui) button,
+  :where(.mdst-ui) input:where([type="submit"]),
+  :where(.mdst-ui) input:where([type="reset"]),
+  :where(.mdst-ui) input:where([type="button"]),
+  .mdst-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mdst-space-xs);
+    padding: var(--mdst-space-sm) var(--mdst-space-md);
+    font-family: var(--mdst-font-ui);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    text-decoration: none;
+    color: var(--mdst-button-fg, var(--mdst-button-tone, var(--mdst-color-fg)));
+    background: var(--mdst-button-bg, var(--mdst-color-bg));
+    border: var(--mdst-border-width) solid var(--mdst-button-border, var(--mdst-color-border));
+    border-radius: var(--mdst-radius);
+    box-shadow: var(--_hover, none);
+    cursor: pointer;
+    transition:
+      background var(--mdst-transition),
+      color var(--mdst-transition),
+      border-color var(--mdst-transition),
+      box-shadow var(--mdst-transition);
+    -webkit-appearance: none;
+    appearance: none;
+  }
 
-/* Variants */
+  :where(.mdst-ui) button:where(:hover),
+  :where(.mdst-ui) input:where([type="submit"]:hover),
+  :where(.mdst-ui) input:where([type="reset"]:hover),
+  :where(.mdst-ui) input:where([type="button"]:hover),
+  .mdst-button:hover {
+    --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
+  }
 
-:where(.mdst-ui) button.mdst-button--ghost,
-.mdst-button.mdst-button--ghost {
-  border-color: transparent;
-}
+  /* aria-disabled covers links styled as buttons, which can't be disabled */
 
-:where(.mdst-ui) button.mdst-button--ghost:hover,
-.mdst-button.mdst-button--ghost:hover {
-  border-color: var(--mdst-button-hover-border);
-}
+  :where(.mdst-ui) button:disabled,
+  :where(.mdst-ui) input:where([type="submit"]:disabled),
+  :where(.mdst-ui) input:where([type="reset"]:disabled),
+  :where(.mdst-ui) input:where([type="button"]:disabled),
+  .mdst-button:disabled,
+  .mdst-button[aria-disabled="true"] {
+    --_hover: none;
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
 
-:where(.mdst-ui) button.mdst-button--inverted,
-.mdst-button.mdst-button--inverted {
-  background: var(--mdst-color-fg);
-  color: var(--mdst-color-bg);
-}
+  /* Variants: single classes that set variables, so they work on <button>,
+     <input>, and <a> alike and combine freely (e.g. danger + inverted). */
 
-:where(.mdst-ui) button.mdst-button--inverted:hover,
-.mdst-button.mdst-button--inverted:hover {
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-}
+  .mdst-button--danger {
+    --mdst-button-tone: var(--mdst-color-danger);
+    --mdst-button-border: var(--mdst-color-danger);
+  }
 
-/* Sizes */
+  .mdst-button--borderless {
+    --mdst-button-bg: transparent;
+    --mdst-button-border: transparent;
+  }
 
-:where(.mdst-ui) button.mdst-button--sm,
-.mdst-button.mdst-button--sm {
-  padding: var(--mdst-space-xs) var(--mdst-space-sm);
-  font-size: var(--mdst-text-sm);
-}
+  /* Inverted fills the button with its tone. Toggle buttons use the same
+     treatment when pressed. */
 
-:where(.mdst-ui) button.mdst-button--lg,
-.mdst-button.mdst-button--lg {
-  padding: var(--mdst-space-md) var(--mdst-space-lg);
+  .mdst-button--solid,
+  :where(.mdst-ui) :where([aria-pressed="true"]),
+  .mdst-button[aria-pressed="true"] {
+    --mdst-button-bg: var(--mdst-button-tone, var(--mdst-color-fg));
+    --mdst-button-fg: var(--mdst-color-bg);
+    --mdst-button-border: var(--mdst-button-tone, var(--mdst-color-fg));
+  }
+
+  /* Sizes (input-qualified so they also beat the classless input rule) */
+
+  :where(.mdst-ui) input.mdst-button--sm,
+  .mdst-button--sm {
+    padding: var(--mdst-space-xs) var(--mdst-space-sm);
+    font-size: var(--mdst-text-sm);
+  }
+
+  :where(.mdst-ui) input.mdst-button--lg,
+  .mdst-button--lg {
+    padding: var(--mdst-space-md) var(--mdst-space-lg);
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) [aria-pressed="true"],
+    .mdst-button[aria-pressed="true"] {
+      forced-color-adjust: none;
+      background: Highlight;
+      color: HighlightText;
+      border-color: Highlight;
+    }
+  }
 }

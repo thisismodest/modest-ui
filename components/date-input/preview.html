@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date and time</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../input/input.css" />
+    <link rel="stylesheet" href="date-input.css" />
+    <style>
+      .mdst-table input {
+        max-width: 16rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Types</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">type="date"</span></td>
+            <td>
+              <input type="date" class="mdst-input" aria-label="Date example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="time"</span></td>
+            <td>
+              <input type="time" class="mdst-input" aria-label="Time example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="datetime-local"</span></td>
+            <td>
+              <input type="datetime-local" class="mdst-input" aria-label="Date and time example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="month"</span></td>
+            <td>
+              <input type="month" class="mdst-input" aria-label="Month example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="week"</span></td>
+            <td>
+              <input type="week" class="mdst-input" aria-label="Week example" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">States</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">value</span></td>
+            <td>
+              <input type="date" class="mdst-input" value="2026-10-16" aria-label="Date example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">min</span> <span class="class-name">max</span></td>
+            <td>
+              <input type="date" class="mdst-input" min="2026-10-01" max="2026-10-31" aria-label="Date example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">aria-invalid="true"</span></td>
+            <td>
+              <input type="date" class="mdst-input" value="2026-10-16" aria-invalid="true" aria-label="Date example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">disabled</span></td>
+            <td>
+              <input type="time" class="mdst-input" value="09:30" disabled aria-label="Time example" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="footnote">
+      <strong>The class is optional inside <code class="mdst-code">.mdst-ui</code>.</strong> A bare <code class="mdst-code">&lt;input type="date"&gt;</code> there gets the same styles.
+      These are the browser's own pickers. modest-ui styles the field to match the other inputs; the calendar or clock that opens
+      is drawn by the browser and follows <code class="mdst-code">color-scheme</code>.
+    </p>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;input type="date" class="mdst-input" /&gt;
+&lt;input type="time" class="mdst-input" /&gt;
+&lt;input type="datetime-local" class="mdst-input" /&gt;
+&lt;input type="month" class="mdst-input" /&gt;
+&lt;input type="week" class="mdst-input" /&gt;
+
+&lt;!-- Limit the range --&gt;
+&lt;input type="date" class="mdst-input" min="2026-10-01" max="2026-10-31" /&gt;</code></pre>
+    </div>
+  </body>
+</html>

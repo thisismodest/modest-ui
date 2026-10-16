@@ -3,7 +3,9 @@
 import { cp, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { gzipSync } from "node:zlib";
 import siteConfig from "../site.config.js";
+import { getComponents } from "./components.js";
 import { renderComponentLinks } from "./sidebar.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -16,46 +18,6 @@ const TEMPLATE_PATH = join(ROOT, "base", "template.html");
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-/**
- * Load a component's config.js, returning null if it doesn't exist.
- */
-async function loadComponentConfig(slug) {
-  try {
-    const configPath = join(COMPONENTS_DIR, slug, "config.js");
-    const config = await import(configPath);
-    return config.default;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * Discover all components that have both a preview.html and a config.js.
- */
-async function getComponents() {
-  const entries = await readdir(COMPONENTS_DIR, { withFileTypes: true });
-  const components = [];
-
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-
-    const slug = entry.name;
-    const config = await loadComponentConfig(slug);
-    if (!config) continue;
-
-    // Ensure preview.html exists
-    try {
-      await readFile(join(COMPONENTS_DIR, slug, "preview.html"));
-    } catch {
-      continue;
-    }
-
-    components.push({ slug, ...config });
-  }
-
-  return components.sort((a, b) => a.slug.localeCompare(b.slug));
-}
 
 /**
  * Discover all pages in the pages/ directory.
@@ -157,7 +119,8 @@ function buildSidebar(components, pages, activeSlug) {
  */
 function replaceSlot(html, marker, value, all = false) {
   const re = new RegExp(`[ \\t]*${marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, all ? "g" : "");
-  return html.replace(re, value);
+  // A replacer function, so "$&" and similar in page content stay literal
+  return html.replace(re, () => value);
 }
 
 function render(template, slots) {
@@ -166,7 +129,6 @@ function render(template, slots) {
   html = replaceSlot(html, "<!-- TITLE -->", slots.title, true);
   html = replaceSlot(html, "<!-- DESCRIPTION -->", slots.description, true);
   html = replaceSlot(html, "<!-- CANONICAL -->", slots.canonical, true);
-  html = replaceSlot(html, "<!-- VERSION -->", siteConfig.version, true);
   html = replaceSlot(html, "<!-- HEADER_TITLE -->", slots.headerTitle);
   html = replaceSlot(html, "<!-- LEAD -->", slots.lead || "");
   html = replaceSlot(html, "<!-- OG_IMAGE -->", `${siteConfig.url}/og-image.png`, true);
@@ -175,7 +137,7 @@ function render(template, slots) {
   html = replaceSlot(html, "<!-- CONTENT -->", slots.content);
 
   // Class name badge (optional)
-  const classNameHtml = slots.className ? `          <span class="main-header-class">${slots.className}</span>` : "";
+  const classNameHtml = slots.className ? `          <span class="main-header-class">${escapeHtml(slots.className)}</span>` : "";
   html = replaceSlot(html, "<!-- CLASS_NAME -->", classNameHtml);
 
   // Extra <style> blocks from the source page's <head>
@@ -185,8 +147,10 @@ function render(template, slots) {
   const scriptsHtml = slots.scripts.length ? slots.scripts.map((s) => `    ${s}`).join("\n") : "";
   html = replaceSlot(html, "<!-- SCRIPTS -->", scriptsHtml);
 
-  // Replace CDN_URL last so it resolves inside injected content (e.g. intro page)
+  // Replace CDN_URL and VERSION last so they resolve inside injected content (e.g. intro page)
   html = replaceSlot(html, "<!-- CDN_URL -->", siteConfig.cdnUrl, true);
+  html = replaceSlot(html, "<!-- CSS_SIZE -->", cssSize, true);
+  html = replaceSlot(html, "<!-- VERSION -->", siteConfig.version, true);
 
   return html;
 }
@@ -238,7 +202,7 @@ async function buildComponentPage(template, component, components, pages) {
     title: pageTitle,
     description,
     canonical,
-    headerTitle: `          <h1>${displayTitle}</h1>`,
+    headerTitle: `          <h1>${escapeHtml(displayTitle)}</h1>`,
     lead: `          <p class="component-lead">${description}</p>`,
     jsonLd: breadcrumbJsonLd(crumbs),
     className: component.className,
@@ -334,6 +298,17 @@ async function copyStaticAssets() {
 // Main
 // ---------------------------------------------------------------------------
 
+/**
+ * Gzipped size of the minified bundle, e.g. "9 kB", so copy that quotes it
+ * can't go stale.
+ */
+async function getCssSize() {
+  const css = await readFile(join(ROOT, "dist", "modest-ui.min.css"));
+  return `${Math.round(gzipSync(css).length / 1024)} kB`;
+}
+
+let cssSize = "";
+
 async function main() {
   try {
     console.log("Building static site…\n");
@@ -341,6 +316,7 @@ async function main() {
     await mkdir(SITE_DIR, { recursive: true });
 
     const template = await readFile(TEMPLATE_PATH, "utf-8");
+    cssSize = await getCssSize();
     const components = await getComponents();
     const pages = await getPages();
 

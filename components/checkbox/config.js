@@ -1,6 +1,6 @@
 export default {
   title: "Checkbox",
-  className: ".mdst-checkbox",
-  description:
-    "Checkbox component with label support, checked, and disabled states.",
+  className: ".mdst-input",
+  group: "Input",
+  description: "Checkbox, and a toggle switch for checkboxes with role=\"switch\". Label support, checked, and disabled states.",
 };

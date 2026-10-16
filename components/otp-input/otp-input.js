@@ -1,5 +1,8 @@
 /**
- * OTP Input
+ * OTP Input: example behaviour for the docs page.
+ *
+ * modest-ui is CSS only and doesn't ship this file. Copy it into your project
+ * if you want the same behaviour.
  *
  * Features:
  * - Auto-advance to next input on typing
@@ -8,7 +11,7 @@
  * - Arrow key navigation
  *
  * Usage:
- *   import { createOTPInput } from 'modest-ui/components/otp-input/otp-input.js';
+ *   import { createOTPInput } from './otp-input.js';
  *
  *   const otp = createOTPInput(document.querySelector('.mdst-otp-input'), {
  *     onComplete: (code) => console.log('Code entered:', code),
@@ -26,10 +29,10 @@
 export function createOTPInput(container, options = {}) {
   const { onComplete = () => {}, onChange = () => {} } = options;
 
-  const inputs = Array.from(container.querySelectorAll(".mdst-otp-input-digit"));
+  const inputs = Array.from(container.querySelectorAll(":scope > input"));
 
   if (inputs.length === 0) {
-    console.warn("createOTPInput: No .mdst-otp-input-digit elements found");
+    console.warn("createOTPInput: no inputs found in the container");
     return null;
   }
 

@@ -34,13 +34,43 @@
               <span class="class-name">.mdst-input</span>
             </td>
             <td>
-              <input type="text" class="mdst-input" placeholder="Text input" />
+              <input type="text" class="mdst-input" placeholder="Text input" aria-label="Input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="email"</span></td>
+            <td>
+              <input type="email" class="mdst-input" placeholder="you@example.com" aria-label="Email input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="number"</span></td>
+            <td>
+              <input type="number" class="mdst-input" value="42" aria-label="Number input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="search"</span></td>
+            <td>
+              <input type="search" class="mdst-input" placeholder="Search" aria-label="Search input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="tel"</span></td>
+            <td>
+              <input type="tel" class="mdst-input" placeholder="+44 20 7946 0000" aria-label="Tel input example" />
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">type="url"</span></td>
+            <td>
+              <input type="url" class="mdst-input" placeholder="https://" aria-label="Url input example" />
             </td>
           </tr>
           <tr>
             <td><span class="class-name">.mdst-input</span> on <span class="class-name">&lt;textarea&gt;</span></td>
             <td>
-              <textarea class="mdst-input" placeholder="Textarea"></textarea>
+              <textarea class="mdst-input" placeholder="Textarea" aria-label="Input example"></textarea>
             </td>
           </tr>
         </tbody>
@@ -62,7 +92,15 @@
               <span class="class-name">placeholder</span>
             </td>
             <td>
-              <input type="text" class="mdst-input" placeholder="Placeholder text" />
+              <input type="text" class="mdst-input" placeholder="Placeholder text" aria-label="Input example" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">aria-invalid="true"</span>
+            </td>
+            <td>
+              <input type="email" class="mdst-input" value="not-an-email" aria-invalid="true" aria-label="Input example" />
             </td>
           </tr>
           <tr>
@@ -70,20 +108,27 @@
               <span class="class-name">disabled</span>
             </td>
             <td>
-              <input type="text" class="mdst-input" placeholder="Disabled" disabled />
+              <input type="text" class="mdst-input" placeholder="Disabled" disabled aria-label="Input example" />
             </td>
           </tr>
         </tbody>
       </table>
     </div>
 
+    <p class="footnote">
+      <strong>The class is optional inside <code class="mdst-code">.mdst-ui</code>.</strong> A bare <code class="mdst-code">&lt;input type="text"&gt;</code> there gets the same styles. Variants still need their modifier (<code class="mdst-code">.mdst-input--borderless</code>), which works without <code class="mdst-code">.mdst-input</code>.
+    </p>
+
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- Text input --&gt;
 &lt;input type="text" class="mdst-input" placeholder="Enter text" /&gt;
 
-&lt;!-- Email input --&gt;
+&lt;!-- Any text-like type: email, number, search, tel, url --&gt;
 &lt;input type="email" class="mdst-input" placeholder="you@example.com" /&gt;
+
+&lt;!-- Invalid --&gt;
+&lt;input type="email" class="mdst-input" aria-invalid="true" /&gt;
 
 &lt;!-- Textarea --&gt;
 &lt;textarea class="mdst-input" placeholder="Write something..."&gt;&lt;/textarea&gt;

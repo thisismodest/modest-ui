@@ -1,93 +1,135 @@
-/* Input */
+@layer mdst-ui.components {
+  /* Input
+     Text-like fields: text, email, number, search, tel, url, password, and
+     textarea. .mdst-input also styles checkbox, radio, range, file, and colour
+     inputs by their type; those rules live in their own components, and the
+     selectors here skip them. */
 
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  ),
-:where(.mdst-ui) textarea,
-.mdst-input {
-  -webkit-appearance: none;
-  appearance: none;
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: var(--mdst-space-sm);
-  font-family: var(--mdst-font-ui);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-  background-color: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  outline: none;
-  transition: border-color var(--mdst-transition);
-}
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    )),
+  :where(.mdst-ui) textarea,
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])) {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    padding: var(--mdst-space-sm);
+    font-family: var(--mdst-font-ui);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background-color: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    transition: border-color var(--mdst-transition);
+  }
 
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  )::placeholder,
-:where(.mdst-ui) textarea::placeholder,
-.mdst-input::placeholder {
-  color: var(--mdst-color-muted);
-  opacity: 1;
-}
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ))::placeholder,
+  :where(.mdst-ui) textarea::placeholder,
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"]))::placeholder {
+    color: var(--mdst-color-muted);
+    opacity: 1;
+  }
 
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  ):focus,
-:where(.mdst-ui) textarea:focus,
-.mdst-input:focus {
-  border-color: var(--mdst-color-focus);
-}
+  /* Borderless: the field keeps its padding, so it lines up with bordered
+     fields, but draws no border. Declared before invalid, so errors still
+     show. */
 
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  ):disabled,
-:where(.mdst-ui) textarea:disabled,
-.mdst-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+  .mdst-input--borderless:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])) {
+    border-color: transparent;
+  }
 
-/* Textarea variant */
+  /* Invalid: aria-invalid="true", or the browser's own validation once the
+     user has interacted (:user-invalid). Declared before focus, so a focused
+     field still shows the focus colour. */
 
-:where(.mdst-ui) textarea,
-.mdst-input:is(textarea) {
-  min-height: 6rem;
-  resize: vertical;
+  :where(.mdst-ui) :is(input, textarea):is([aria-invalid="true"], :user-invalid),
+  .mdst-input:is([aria-invalid="true"], :user-invalid) {
+    border-color: var(--mdst-color-danger);
+  }
+
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ):focus),
+  :where(.mdst-ui) textarea:where(:focus),
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])):focus {
+    border-color: var(--mdst-color-focus);
+  }
+
+  .mdst-input--borderless:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])):focus {
+    border-color: transparent;
+  }
+
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ):focus-visible),
+  :where(.mdst-ui) textarea:where(:focus-visible),
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])):focus-visible {
+    outline-offset: 0;
+  }
+
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ):disabled),
+  :where(.mdst-ui) textarea:where(:disabled),
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])):disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* Textarea variant */
+
+  :where(.mdst-ui) textarea,
+  .mdst-input:is(textarea) {
+    min-height: 6rem;
+    resize: vertical;
+  }
 }

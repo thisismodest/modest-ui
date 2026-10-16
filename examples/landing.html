@@ -27,10 +27,12 @@
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
       body {
-        font-family: var(--mdst-font-sans);
-        line-height: var(--mdst-line-height);
-        color: var(--mdst-color-fg);
-        background: var(--mdst-color-bg);
+        margin: 0;
+      }
+
+      /* Full-width bands sit flush, with no flow spacing between them */
+      body > * {
+        margin-block: 0;
       }
 
       /* Header */
@@ -171,12 +173,13 @@
         font-size: var(--mdst-text-lg);
       }
 
-      .mdst-card-body h3 {
+      .mdst-card__body h3 {
         font-weight: 600;
         margin: 0 0 var(--mdst-space-xs);
+        font-size: var(--mdst-text-lg);
       }
 
-      .mdst-card-body p {
+      .mdst-card__body p {
         font-size: var(--mdst-text-sm);
         color: var(--mdst-color-muted);
         margin: 0;
@@ -223,6 +226,7 @@
         display: flex;
         align-items: center;
         gap: var(--mdst-space-sm);
+        margin: 0;
       }
 
       .showcase-text li::before {
@@ -358,7 +362,7 @@
         margin: 0 auto;
       }
 
-      .cta-form .mdst-input {
+      .cta-form input {
         flex: 1;
       }
 
@@ -483,11 +487,11 @@
           flex-direction: column;
         }
 
-        .hero-actions .mdst-button {
+        .hero-actions button {
           width: 100%;
         }
 
-        .site-nav .mdst-button--ghost {
+        .site-nav .mdst-button--borderless {
           display: none;
         }
 
@@ -503,15 +507,15 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <!-- Header -->
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <nav class="site-nav">
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Features</button>
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Pricing</button>
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Docs</button>
-        <button type="button" class="mdst-button mdst-button--sm">Sign In</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Features</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Pricing</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Docs</button>
+        <button type="button" class="mdst-button--sm">Sign In</button>
       </nav>
     </header>
 
@@ -521,8 +525,8 @@
       <h1>Ship faster with less complexity</h1>
       <p>A developer platform that eliminates boilerplate, automates the boring parts, and lets you focus on what matters: your product.</p>
       <div class="hero-actions">
-        <button type="button" class="mdst-button mdst-button--inverted mdst-button--lg">Get Started Free</button>
-        <button type="button" class="mdst-button mdst-button--lg">View Documentation</button>
+        <button type="button" class="mdst-button--solid mdst-button--lg">Get Started Free</button>
+        <button type="button" class="mdst-button--lg">View Documentation</button>
       </div>
       <p class="hero-sub">No credit card required · Free for up to 3 projects</p>
     </section>
@@ -547,42 +551,42 @@
       </div>
       <div class="features-grid">
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">⚡</div>
             <h3>Instant Deploys</h3>
             <p>Push to git and your changes are live in seconds. Zero-config CI/CD built right in.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">🔒</div>
             <h3>Secure by Default</h3>
             <p>Automatic SSL, environment variable encryption, and SOC 2 compliance out of the box.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">📊</div>
             <h3>Built-in Analytics</h3>
             <p>Real-time performance metrics without third-party scripts slowing down your site.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">🌐</div>
             <h3>Edge Network</h3>
             <p>Served from 200+ edge locations worldwide. Your users get sub-50ms response times.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">🔌</div>
             <h3>Integrations</h3>
             <p>First-class support for databases, auth providers, and every major framework.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">👥</div>
             <h3>Team Collaboration</h3>
             <p>Preview deployments, branch environments, and granular role-based access for your team.</p>
@@ -603,18 +607,18 @@
             <li>Custom domains with instant SSL</li>
             <li>Rollback to any previous deploy</li>
           </ul>
-          <button type="button" class="mdst-button mdst-button--inverted">Start Building</button>
+          <button type="button" class="mdst-button--solid">Start Building</button>
         </div>
         <div class="showcase-preview">
           <h4>Create a new project</h4>
           <div class="form-row">
             <div class="form-group">
-              <label>Project Name</label>
-              <input type="text" class="mdst-input" placeholder="my-app" />
+              <label for="deploy-project-name">Project Name</label>
+              <input id="deploy-project-name" type="text" placeholder="my-app" />
             </div>
             <div class="form-group">
-              <label>Framework</label>
-              <select class="mdst-dropdown">
+              <label for="deploy-framework">Framework</label>
+              <select id="deploy-framework">
                 <option>Next.js</option>
                 <option>Remix</option>
                 <option>Astro</option>
@@ -623,23 +627,23 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Repository</label>
-            <input type="text" class="mdst-input" placeholder="github.com/you/my-app" />
+            <label for="deploy-repository">Repository</label>
+            <input id="deploy-repository" type="text" placeholder="github.com/you/my-app" />
           </div>
           <div class="form-group">
-            <label>Branch</label>
-            <select class="mdst-dropdown" style="width: 100%">
+            <label for="deploy-branch">Branch</label>
+            <select id="deploy-branch" style="width: 100%">
               <option>main</option>
               <option>develop</option>
               <option>staging</option>
             </select>
           </div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--mdst-space-md)">
-            <label class="mdst-checkbox-label">
-              <input type="checkbox" class="mdst-checkbox" checked />
+            <label>
+              <input type="checkbox" checked />
               Auto-deploy on push
             </label>
-            <button type="button" class="mdst-button mdst-button--inverted mdst-button--sm">Deploy</button>
+            <button type="button" class="mdst-button--solid mdst-button--sm">Deploy</button>
           </div>
         </div>
       </div>
@@ -653,13 +657,13 @@
       </div>
       <div class="testimonials-grid">
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <p class="testimonial-quote">
               "Finally a CSS library that gets out of the way. Just clean, native HTML with a few classes, exactly how it should be."
             </p>
             <div class="testimonial-author">
               <div class="testimonial-avatar">JF</div>
-              <div>
+              <div class="testimonial-person">
                 <div class="testimonial-name">Jamie Fontaine</div>
                 <div class="testimonial-role">Frontend Lead at Pebblework</div>
               </div>
@@ -667,14 +671,14 @@
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <p class="testimonial-quote">
               "Lightweight, themeable, and the components look great out of the box. Swapped our old UI kit in a day and haven't looked
               back."
             </p>
             <div class="testimonial-author">
               <div class="testimonial-avatar">TN</div>
-              <div>
+              <div class="testimonial-person">
                 <div class="testimonial-name">Tomás Nuñez</div>
                 <div class="testimonial-role">Engineering Manager at Glassbox</div>
               </div>
@@ -682,13 +686,13 @@
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <p class="testimonial-quote">
               "No JavaScript, no build step, just drop in a stylesheet and go. It's the simplest way to make something look polished fast."
             </p>
             <div class="testimonial-author">
               <div class="testimonial-avatar">RH</div>
-              <div>
+              <div class="testimonial-person">
                 <div class="testimonial-name">Ren Hayashi</div>
                 <div class="testimonial-role">Founder at Terracotta Labs</div>
               </div>
@@ -704,8 +708,8 @@
         <h2>Ready to get started?</h2>
         <p>Join thousands of developers shipping faster. Start free, upgrade when you're ready.</p>
         <div class="cta-form">
-          <input type="email" class="mdst-input" placeholder="you@company.com" />
-          <button type="button" class="mdst-button mdst-button--inverted">Get Started</button>
+          <input type="email" placeholder="you@company.com" />
+          <button type="button" class="mdst-button--solid">Get Started</button>
         </div>
         <p class="cta-note">Free forever for personal projects. No credit card required.</p>
       </div>
@@ -721,36 +725,36 @@
         <div class="footer-col">
           <h4>Product</h4>
           <ul>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Changelog</a></li>
-            <li><a href="#">Docs</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+            <li><a href="#docs">Docs</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
           <ul>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">DPA</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#terms">Terms</a></li>
+            <li><a href="#dpa">DPA</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 Example Blog. All rights reserved.</span>
         <div class="footer-links">
-          <a href="#">Twitter</a>
-          <a href="#">GitHub</a>
-          <a href="#">Discord</a>
+          <a href="https://x.com">Twitter</a>
+          <a href="https://github.com/thisismodest/modest-ui">GitHub</a>
+          <a href="https://discord.com">Discord</a>
         </div>
       </div>
     </footer>

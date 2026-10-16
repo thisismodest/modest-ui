@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../input/input.css" />
     <link rel="stylesheet" href="file-input.css" />
     <style>
-      .mdst-table .mdst-file-input {
+      .mdst-table .mdst-input {
         max-width: 20rem;
       }
     </style>
@@ -31,13 +31,10 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name">.mdst-file-input</span><br />
-              <span class="class-name"><span class="dim">.mdst-input</span> <span class="dim">.mdst-file-input</span>__field</span>
+              <span class="class-name">.mdst-input</span>
             </td>
             <td>
-              <div class="mdst-file-input">
-                <input type="file" class="mdst-input mdst-file-input__field" />
-              </div>
+              <input type="file" class="mdst-input" aria-label="File input example" />
             </td>
           </tr>
         </tbody>
@@ -56,22 +53,18 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-file-input</span>--borderless</span>
+              <span class="class-name"><span class="dim">.mdst-input</span>--borderless</span>
             </td>
             <td>
-              <div class="mdst-file-input mdst-file-input--borderless">
-                <input type="file" class="mdst-input mdst-file-input__field" />
-              </div>
+              <input type="file" class="mdst-input mdst-input--borderless" aria-label="File input example" />
             </td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-file-input</span>--inverted</span>
+              <span class="class-name"><span class="dim">.mdst-input</span>--solid</span>
             </td>
             <td>
-              <div class="mdst-file-input mdst-file-input--inverted">
-                <input type="file" class="mdst-input mdst-file-input__field" />
-              </div>
+              <input type="file" class="mdst-input mdst-input--solid" aria-label="File input example" />
             </td>
           </tr>
         </tbody>
@@ -93,9 +86,7 @@
               <span class="class-name">disabled</span>
             </td>
             <td>
-              <div class="mdst-file-input">
-                <input type="file" class="mdst-input mdst-file-input__field" disabled />
-              </div>
+              <input type="file" class="mdst-input" disabled aria-label="File input example" />
             </td>
           </tr>
           <tr>
@@ -103,9 +94,7 @@
               <span class="class-name">accept</span>
             </td>
             <td>
-              <div class="mdst-file-input">
-                <input type="file" class="mdst-input mdst-file-input__field" accept="image/*,.png,.jpg,.jpeg,.gif,.webp" />
-              </div>
+              <input type="file" class="mdst-input" accept="image/*,.png,.jpg,.jpeg,.gif,.webp" aria-label="File input example" />
             </td>
           </tr>
           <tr>
@@ -113,9 +102,7 @@
               <span class="class-name">multiple</span>
             </td>
             <td>
-              <div class="mdst-file-input">
-                <input type="file" class="mdst-input mdst-file-input__field" multiple />
-              </div>
+              <input type="file" class="mdst-input" multiple aria-label="File input example" />
             </td>
           </tr>
         </tbody>
@@ -123,6 +110,7 @@
     </div>
 
     <p class="footnote">
+      <strong>The class is optional inside <code class="mdst-code">.mdst-ui</code>.</strong> A bare <code class="mdst-code">&lt;input type="file"&gt;</code> there gets the same styles. Variants still need their modifier (<code class="mdst-code">.mdst-input--solid</code>), which works without <code class="mdst-code">.mdst-input</code>.
       <strong>Drag-and-drop included.</strong> The native <span class="class-name">&lt;input type="file"&gt;</span> supports dragging files
       onto it out of the box. The button is styled via <span class="class-name">::file-selector-button</span> and the filename updates
       automatically on selection.
@@ -131,34 +119,22 @@
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- Basic file input --&gt;
-&lt;div class="mdst-file-input"&gt;
-  &lt;input type="file" class="mdst-input mdst-file-input__field" /&gt;
-&lt;/div&gt;
+&lt;input type="file" class="mdst-input" /&gt;
 
 &lt;!-- Borderless --&gt;
-&lt;div class="mdst-file-input mdst-file-input--borderless"&gt;
-  &lt;input type="file" class="mdst-input mdst-file-input__field" /&gt;
-&lt;/div&gt;
+&lt;input type="file" class="mdst-input mdst-input--borderless" /&gt;
 
-&lt;!-- Inverted button --&gt;
-&lt;div class="mdst-file-input mdst-file-input--inverted"&gt;
-  &lt;input type="file" class="mdst-input mdst-file-input__field" /&gt;
-&lt;/div&gt;
+&lt;!-- Solid button --&gt;
+&lt;input type="file" class="mdst-input mdst-input--solid" /&gt;
 
 &lt;!-- Disabled --&gt;
-&lt;div class="mdst-file-input"&gt;
-  &lt;input type="file" class="mdst-input mdst-file-input__field" disabled /&gt;
-&lt;/div&gt;
+&lt;input type="file" class="mdst-input" disabled /&gt;
 
 &lt;!-- Accept only images --&gt;
-&lt;div class="mdst-file-input"&gt;
-  &lt;input type="file" class="mdst-input mdst-file-input__field" accept="image/*,.png,.jpg,.jpeg,.gif,.webp" /&gt;
-&lt;/div&gt;
+&lt;input type="file" class="mdst-input" accept="image/*,.png,.jpg,.jpeg,.gif,.webp" /&gt;
 
 &lt;!-- Multiple files --&gt;
-&lt;div class="mdst-file-input"&gt;
-  &lt;input type="file" class="mdst-input mdst-file-input__field" multiple /&gt;
-&lt;/div&gt;</code></pre>
+&lt;input type="file" class="mdst-input" multiple /&gt;</code></pre>
     </div>
   </body>
 </html>

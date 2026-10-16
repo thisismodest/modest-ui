@@ -27,10 +27,7 @@
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
       body {
-        font-family: var(--mdst-font-sans);
-        line-height: var(--mdst-line-height);
-        color: var(--mdst-color-fg);
-        background: var(--mdst-color-bg);
+        margin: 0;
       }
 
       /* Header */
@@ -284,6 +281,7 @@
         border: none;
         padding: 0;
         font-family: inherit;
+        box-shadow: none;
       }
 
       .article-back:hover {
@@ -410,6 +408,7 @@
       .article-author-info h4 {
         font-weight: 600;
         margin: 0 0 var(--mdst-space-xs);
+        font-size: var(--mdst-text-base);
       }
 
       .article-author-info p {
@@ -433,13 +432,13 @@
         gap: var(--mdst-space-md);
       }
 
-      .related-grid .mdst-card-body h4 {
+      .related-grid .mdst-card__body h4 {
         font-weight: 600;
         font-size: var(--mdst-text-base);
         margin: 0 0 var(--mdst-space-xs);
       }
 
-      .related-grid .mdst-card-body p {
+      .related-grid .mdst-card__body p {
         font-size: var(--mdst-text-sm);
         color: var(--mdst-color-muted);
         margin: 0 0 var(--mdst-space-sm);
@@ -462,6 +461,7 @@
       .newsletter h3 {
         font-weight: 600;
         margin: 0 0 var(--mdst-space-xs);
+        font-size: var(--mdst-text-lg);
       }
 
       .newsletter p {
@@ -477,7 +477,7 @@
         margin: 0 auto;
       }
 
-      .newsletter-form .mdst-input {
+      .newsletter-form input {
         flex: 1;
       }
 
@@ -538,7 +538,7 @@
           font-size: 1.5rem;
         }
 
-        .site-nav .mdst-button--ghost {
+        .site-nav .mdst-button--borderless {
           display: none;
         }
 
@@ -554,14 +554,14 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <!-- Header -->
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <nav class="site-nav">
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Archive</button>
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">About</button>
-        <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted">Subscribe</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Archive</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">About</button>
+        <button type="button" class="mdst-button--sm mdst-button--solid">Subscribe</button>
       </nav>
     </header>
 
@@ -787,9 +787,9 @@
 
       <!-- Pagination -->
       <div class="pagination">
-        <button type="button" class="mdst-button mdst-button--sm" disabled>← Newer</button>
+        <button type="button" class="mdst-button--sm" disabled>← Newer</button>
         <span class="pagination-info">Page 1 of 4</span>
-        <button type="button" class="mdst-button mdst-button--sm">Older →</button>
+        <button type="button" class="mdst-button--sm">Older →</button>
       </div>
     </div>
 
@@ -873,7 +873,7 @@
             you spend your tokens. The best rule I've found:
           </p>
 
-          <pre class="mdst-pre"><code class="mdst-code">if (technology.solves_core_problem && technology.has_strong_community) {
+          <pre><code>if (technology.solves_core_problem && technology.has_strong_community) {
   consider_adopting();
 } else {
   stick_with_boring();
@@ -911,8 +911,8 @@
         <div class="related-posts">
           <h3>Related Posts</h3>
           <div class="related-grid">
-            <div class="mdst-card mdst-card--interactive" onclick="window.scrollTo(0, 0)">
-              <div class="mdst-card-body">
+            <a href="#article-view" class="mdst-card mdst-card--interactive">
+              <div class="mdst-card__body">
                 <h4>Ship small, ship often</h4>
                 <p>A practical guide to incremental delivery that keeps momentum high and risk low.</p>
                 <div class="post-meta">
@@ -921,9 +921,9 @@
                   <span>Nov 28, 2024</span>
                 </div>
               </div>
-            </div>
-            <div class="mdst-card mdst-card--interactive" onclick="window.scrollTo(0, 0)">
-              <div class="mdst-card-body">
+            </a>
+            <a href="#article-view" class="mdst-card mdst-card--interactive">
+              <div class="mdst-card__body">
                 <h4>Why your CSS doesn't need a framework</h4>
                 <p>Modern CSS is more capable than you think. Here's what it can do natively.</p>
                 <div class="post-meta">
@@ -932,7 +932,7 @@
                   <span>Nov 20, 2024</span>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
 
@@ -941,8 +941,8 @@
           <h3>Stay in the loop</h3>
           <p>Get new posts delivered to your inbox. No spam, unsubscribe anytime.</p>
           <div class="newsletter-form">
-            <input type="email" class="mdst-input" placeholder="you@example.com" />
-            <button type="button" class="mdst-button mdst-button--inverted">Subscribe</button>
+            <input type="email" placeholder="you@example.com" />
+            <button type="button" class="mdst-button--solid">Subscribe</button>
           </div>
         </div>
       </div>
@@ -952,19 +952,21 @@
     <footer class="site-footer">
       <span>&copy; 2026 Example Blog. All rights reserved.</span>
       <div class="footer-links">
-        <a href="#">RSS</a>
-        <a href="#">Twitter</a>
-        <a href="#">GitHub</a>
+        <a href="#rss-xml">RSS</a>
+        <a href="https://x.com">Twitter</a>
+        <a href="https://github.com/thisismodest/modest-ui">GitHub</a>
       </div>
     </footer>
 
     <script>
+      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function showArticle() {
         document.getElementById("blog-list").style.display = "none";
         document.getElementById("article-view").style.display = "block";
         window.scrollTo(0, 0);
       }
 
+      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function showList() {
         document.getElementById("blog-list").style.display = "block";
         document.getElementById("article-view").style.display = "none";

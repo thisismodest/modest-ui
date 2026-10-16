@@ -27,10 +27,7 @@
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
       body {
-        font-family: var(--mdst-font-sans);
-        line-height: var(--mdst-line-height);
-        color: var(--mdst-color-fg);
-        background: var(--mdst-color-bg);
+        margin: 0;
       }
 
       /* Layout */
@@ -193,6 +190,7 @@
         align-items: center;
         gap: var(--mdst-space-xs);
         transition: background var(--mdst-transition);
+        box-shadow: none;
       }
 
       .notification-btn:hover {
@@ -202,7 +200,7 @@
       .notification-dot {
         width: 0.375rem;
         height: 0.375rem;
-        background: var(--mdst-color-error);
+        background: var(--mdst-color-danger);
         border-radius: 50%;
       }
 
@@ -270,7 +268,7 @@
       }
 
       .stat-change--down {
-        color: var(--mdst-color-error);
+        color: var(--mdst-color-danger);
       }
 
       /* Content grid */
@@ -310,7 +308,7 @@
         overflow-x: auto;
       }
 
-      .table-wrap .mdst-table td {
+      .table-wrap table td {
         white-space: nowrap;
       }
 
@@ -400,8 +398,8 @@
       }
 
       .activity-dot--error {
-        background: var(--mdst-color-error);
-        border-color: var(--mdst-color-error);
+        background: var(--mdst-color-danger);
+        border-color: var(--mdst-color-danger);
       }
 
       .activity-dot--muted {
@@ -444,6 +442,8 @@
         font-size: var(--mdst-text-sm);
         color: var(--mdst-color-fg);
         transition: background var(--mdst-transition);
+        box-shadow: none;
+        justify-content: flex-start;
       }
 
       .quick-action-btn:hover {
@@ -493,17 +493,18 @@
         cursor: pointer;
         color: var(--mdst-color-fg);
         font-size: var(--mdst-text-sm);
+        box-shadow: none;
       }
 
       /* Dialog */
-      .mdst-dialog {
+      dialog {
         border: var(--mdst-border-width) solid var(--mdst-color-border);
         padding: 0;
         max-width: 28rem;
         width: 90vw;
       }
 
-      .mdst-dialog::backdrop {
+      dialog::backdrop {
         background: rgba(0, 0, 0, 0.4);
       }
 
@@ -529,6 +530,7 @@
         font-size: var(--mdst-text-lg);
         padding: 0;
         line-height: 1;
+        box-shadow: none;
       }
 
       .dialog-close:hover {
@@ -635,15 +637,15 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <div class="dash-layout">
       <!-- Sidebar -->
       <aside class="dash-sidebar" id="sidebar">
         <strong>Dashboard</strong>
         <nav class="sidebar-nav">
           <div class="dash-sidebar-section">Overview</div>
-          <a href="#" class="dash-sidebar-link dash-sidebar-link--active">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#dashboard" class="dash-sidebar-link dash-sidebar-link--active">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -652,8 +654,8 @@
             </svg>
             Dashboard
           </a>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#analytics" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -664,8 +666,8 @@
           </a>
 
           <div class="dash-sidebar-section">Management</div>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#customers" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -674,8 +676,8 @@
             </svg>
             Customers
           </a>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#orders" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -684,8 +686,8 @@
             </svg>
             Orders
           </a>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#products" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -696,8 +698,8 @@
           </a>
 
           <div class="dash-sidebar-section">Settings</div>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#settings" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -726,11 +728,11 @@
         <header class="topbar">
           <button type="button" class="dash-mobile-menu-btn" id="mobile-menu-btn">☰ Menu</button>
           <div class="topbar-search">
-            <input type="text" class="mdst-input" placeholder="Search orders, customers, products..." />
+            <input type="text" placeholder="Search orders, customers, products..." />
           </div>
           <div class="topbar-actions">
             <button type="button" class="notification-btn">🔔 <span class="notification-dot"></span></button>
-            <select class="mdst-dropdown mdst-dropdown--sm mdst-dropdown--ghost">
+            <select class="mdst-dropdown--sm mdst-dropdown--borderless">
               <option>Last 30 days</option>
               <option>Last 7 days</option>
               <option>Last 90 days</option>
@@ -744,15 +746,15 @@
           <div class="content-header">
             <h1><a href="/examples/" style="text-decoration: none">← Examples</a></h1>
             <div class="content-header-actions">
-              <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost">Export</button>
-              <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted" id="new-order-btn">+ New Order</button>
+              <button type="button" class="mdst-button--sm mdst-button--borderless">Export</button>
+              <button type="button" class="mdst-button--sm mdst-button--solid" id="new-order-btn">+ New Order</button>
             </div>
           </div>
 
           <!-- Stat cards -->
           <div class="stats-grid">
-            <div class="mdst-card mdst-card--compact">
-              <div class="mdst-card-body">
+            <div class="mdst-card mdst-card--sm">
+              <div class="mdst-card__body">
                 <p class="stat-label">Total Revenue</p>
                 <p class="stat-value">$48,352</p>
                 <div class="stat-change stat-change--up">
@@ -761,8 +763,8 @@
                 </div>
               </div>
             </div>
-            <div class="mdst-card mdst-card--compact">
-              <div class="mdst-card-body">
+            <div class="mdst-card mdst-card--sm">
+              <div class="mdst-card__body">
                 <p class="stat-label">Orders</p>
                 <p class="stat-value">1,247</p>
                 <div class="stat-change stat-change--up">
@@ -771,8 +773,8 @@
                 </div>
               </div>
             </div>
-            <div class="mdst-card mdst-card--compact">
-              <div class="mdst-card-body">
+            <div class="mdst-card mdst-card--sm">
+              <div class="mdst-card__body">
                 <p class="stat-label">Customers</p>
                 <p class="stat-value">3,891</p>
                 <div class="stat-change stat-change--up">
@@ -781,8 +783,8 @@
                 </div>
               </div>
             </div>
-            <div class="mdst-card mdst-card--compact">
-              <div class="mdst-card-body">
+            <div class="mdst-card mdst-card--sm">
+              <div class="mdst-card__body">
                 <p class="stat-label">Refund Rate</p>
                 <p class="stat-value">2.4%</p>
                 <div class="stat-change stat-change--down">
@@ -798,15 +800,15 @@
             <!-- Table section -->
             <div class="table-section">
               <div class="mdst-card">
-                <div class="mdst-card-header" style="display: flex; justify-content: space-between; align-items: center">
+                <div class="mdst-card__header" style="display: flex; justify-content: space-between; align-items: center">
                   <span>Recent Orders</span>
                   <span style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); font-weight: 400">1,247 total</span>
                 </div>
-                <div class="mdst-card-body" style="padding: 0">
+                <div class="mdst-card__body" style="padding: 0">
                   <div class="table-toolbar" style="padding: var(--mdst-space-sm) var(--mdst-space-md) 0">
                     <div class="table-toolbar-left">
-                      <input type="text" class="mdst-input" placeholder="Search orders..." style="max-width: 14rem" />
-                      <select class="mdst-dropdown mdst-dropdown--sm">
+                      <input type="text" placeholder="Search orders..." style="max-width: 14rem" />
+                      <select class="mdst-dropdown--sm">
                         <option>All Status</option>
                         <option>Completed</option>
                         <option>Processing</option>
@@ -815,16 +817,17 @@
                       </select>
                     </div>
                     <div class="table-toolbar-right">
-                      <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">↓ Export</button>
+                      <button type="button" class="mdst-button--borderless mdst-button--sm">↓ Export</button>
                     </div>
                   </div>
                   <div class="table-wrap">
-                    <table class="mdst-table">
+                    <table>
                       <thead>
                         <tr>
                           <th style="padding-left: var(--mdst-space-md)">
-                            <label class="mdst-checkbox-label" style="margin: 0">
-                              <input type="checkbox" class="mdst-checkbox" id="select-all" />
+                            <label style="margin: 0">
+                              <input type="checkbox" id="select-all" />
+                              <span class="mdst-sr-only">Select all orders</span>
                             </label>
                           </th>
                           <th>Order</th>
@@ -838,7 +841,7 @@
                       <tbody>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-checkbox" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7291</span></td>
                           <td>
@@ -854,12 +857,12 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$284.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 15, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-checkbox" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7290</span></td>
                           <td>
@@ -875,12 +878,12 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$1,420.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 15, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-checkbox" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7289</span></td>
                           <td>
@@ -896,12 +899,12 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$89.50</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 14, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-checkbox" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7288</span></td>
                           <td>
@@ -913,16 +916,16 @@
                               </div>
                             </div>
                           </td>
-                          <td><span class="mdst-tag mdst-tag--error mdst-tag--subtle mdst-tag--sm">Cancelled</span></td>
+                          <td><span class="mdst-tag mdst-tag--danger mdst-tag--subtle mdst-tag--sm">Cancelled</span></td>
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$635.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 14, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-checkbox" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7287</span></td>
                           <td>
@@ -938,12 +941,12 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$192.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 13, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-checkbox" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7286</span></td>
                           <td>
@@ -959,19 +962,19 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$47.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 13, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <div class="mdst-card-footer">
+                <div class="mdst-card__footer">
                   <div class="table-pagination" style="width: 100%">
                     <span>Showing 1–6 of 1,247</span>
                     <div class="table-pagination-btns">
-                      <button type="button" class="mdst-button mdst-button--sm" disabled>← Prev</button>
-                      <button type="button" class="mdst-button mdst-button--sm">Next →</button>
+                      <button type="button" class="mdst-button--sm" disabled>← Prev</button>
+                      <button type="button" class="mdst-button--sm">Next →</button>
                     </div>
                   </div>
                 </div>
@@ -982,19 +985,19 @@
             <div class="right-col">
               <!-- Revenue chart placeholder -->
               <div class="mdst-card">
-                <div class="mdst-card-header">Revenue Overview</div>
-                <div class="mdst-card-body" style="padding: 0">
+                <div class="mdst-card__header">Revenue Overview</div>
+                <div class="mdst-card__body" style="padding: 0">
                   <div class="chart-placeholder">Chart goes here</div>
                 </div>
               </div>
 
               <!-- Activity feed -->
               <div class="mdst-card">
-                <div class="mdst-card-header" style="display: flex; justify-content: space-between; align-items: center">
+                <div class="mdst-card__header" style="display: flex; justify-content: space-between; align-items: center">
                   <span>Recent Activity</span>
-                  <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">View all</button>
+                  <button type="button" class="mdst-button--borderless mdst-button--sm">View all</button>
                 </div>
-                <div class="mdst-card-body">
+                <div class="mdst-card__body">
                   <div class="activity-list">
                     <div class="activity-item">
                       <div class="activity-dot activity-dot--success"></div>
@@ -1037,8 +1040,8 @@
 
               <!-- Quick actions -->
               <div class="mdst-card">
-                <div class="mdst-card-header">Quick Actions</div>
-                <div class="mdst-card-body">
+                <div class="mdst-card__header">Quick Actions</div>
+                <div class="mdst-card__body">
                   <div class="quick-actions">
                     <button type="button" class="quick-action-btn" onclick="document.getElementById('new-order-dialog').showModal()">
                       <span class="quick-action-icon">+</span>
@@ -1062,20 +1065,20 @@
     </div>
 
     <!-- New Order Dialog -->
-    <dialog class="mdst-dialog" id="new-order-dialog">
+    <dialog id="new-order-dialog">
       <div class="dialog-header">
         <h2>New Order</h2>
         <button type="button" class="dialog-close" onclick="document.getElementById('new-order-dialog').close()">✕</button>
       </div>
       <div class="dialog-body">
         <div class="form-group">
-          <label>Customer</label>
-          <input type="text" class="mdst-input" placeholder="Search customers..." />
+          <label for="order-customer">Customer</label>
+          <input id="order-customer" type="text" placeholder="Search customers..." />
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Product</label>
-            <select class="mdst-dropdown" style="width: 100%">
+            <label for="order-product">Product</label>
+            <select id="order-product" style="width: 100%">
               <option>Select product</option>
               <option>Ceramic Mug — White</option>
               <option>Ceramic Mug — Midnight</option>
@@ -1084,26 +1087,26 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Quantity</label>
-            <input type="number" class="mdst-input" value="1" min="1" />
+            <label for="order-quantity">Quantity</label>
+            <input id="order-quantity" type="number" value="1" min="1" />
           </div>
         </div>
         <div class="form-group">
-          <label>Notes</label>
-          <textarea class="mdst-input" rows="3" placeholder="Optional order notes..."></textarea>
+          <label for="order-notes">Notes</label>
+          <textarea id="order-notes" rows="3" placeholder="Optional order notes..."></textarea>
         </div>
         <div class="form-group">
-          <label class="mdst-checkbox-label">
-            <input type="checkbox" class="mdst-checkbox" />
+          <label>
+            <input type="checkbox" />
             Send confirmation email to customer
           </label>
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button mdst-button--ghost" onclick="document.getElementById('new-order-dialog').close()">
+        <button type="button" class="mdst-button--borderless" onclick="document.getElementById('new-order-dialog').close()">
           Cancel
         </button>
-        <button type="button" class="mdst-button mdst-button--inverted" onclick="document.getElementById('new-order-dialog').close()">
+        <button type="button" class="mdst-button--solid" onclick="document.getElementById('new-order-dialog').close()">
           Create Order
         </button>
       </div>
@@ -1115,18 +1118,18 @@
       const overlay = document.getElementById("sidebar-overlay");
       const menuBtn = document.getElementById("mobile-menu-btn");
 
-      menuBtn.addEventListener("click", function () {
+      menuBtn.addEventListener("click", () => {
         sidebar.classList.toggle("open");
         overlay.classList.toggle("open");
       });
 
-      overlay.addEventListener("click", function () {
+      overlay.addEventListener("click", () => {
         sidebar.classList.remove("open");
         overlay.classList.remove("open");
       });
 
       // New order dialog trigger
-      document.getElementById("new-order-btn").addEventListener("click", function () {
+      document.getElementById("new-order-btn").addEventListener("click", () => {
         document.getElementById("new-order-dialog").showModal();
       });
 
@@ -1137,7 +1140,7 @@
 
       // Select all checkboxes
       document.getElementById("select-all").addEventListener("change", function () {
-        const checkboxes = document.querySelectorAll("tbody .mdst-checkbox");
+        const checkboxes = document.querySelectorAll("tbody input[type=checkbox]");
         checkboxes.forEach(
           function (cb) {
             cb.checked = this.checked;

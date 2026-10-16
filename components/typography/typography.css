@@ -1,280 +1,306 @@
-/* Typography */
+@layer mdst-ui.components {
+  /* Typography */
 
-/* Reading face — set once on the container so every element inside .mdst-ui
-   inherits it (td, li, summary included, with nothing left to fall back to
-   browser defaults). Zero specificity: any user rule on the container wins.
-   Components opt into --mdst-font-ui or --mdst-font-mono explicitly. */
-:where(.mdst-ui) {
-  font-family: var(--mdst-font-text);
-  line-height: var(--mdst-line-height);
-}
+  /* Reading face and colours — set once on the container so every element
+     inside .mdst-ui inherits them (td, li, summary included, with nothing left
+     to fall back to browser defaults). Zero specificity: any user rule on the
+     container wins. Components opt into --mdst-font-ui or --mdst-font-mono
+     explicitly. */
+  :where(.mdst-ui) {
+    font-family: var(--mdst-font-text);
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background-color: var(--mdst-color-bg);
+  }
 
-:where(.mdst-ui) h1,
-:where(.mdst-ui) h2,
-:where(.mdst-ui) h3,
-:where(.mdst-ui) h4,
-:where(.mdst-ui) h5,
-:where(.mdst-ui) h6,
-.mdst-h1,
-.mdst-h2,
-.mdst-h3,
-.mdst-h4,
-.mdst-h5,
-.mdst-h6 {
-  font-weight: 600;
-  line-height: 1.25;
-  color: var(--mdst-color-fg);
-}
+  /* Flow — space between the children of plain containers, so plain HTML
+     reads as a page. Runs in the .mdst-ui root and in unclassed sectioning,
+     form, and wrapper elements. Give a container a class or an inline style
+     (usually because you lay it out with flex or grid) and its spacing is
+     yours. Zero specificity; tune or turn off with --mdst-flow-space. */
+  :where(
+      .mdst-ui,
+      .mdst-ui :is(main, article, section, header, footer, aside, div, form, fieldset, details, blockquote, dd):not([class], [style]),
+      .mdst-form,
+      .mdst-fieldset
+    )
+    /* Spacing goes above an element only when something visible comes
+       before it. Scripts, styles, hidden elements, inline links and spans
+       (a skip link), and a fieldset's legend don't count, so the first
+       thing you see never gets a top margin. */
+    > :where(:not(script, style, template, link, meta, noscript, a, span, br, [hidden], dialog, [popover], legend))
+    ~ :where(:not(dialog, [popover])) {
+    margin-block-start: var(--mdst-flow-space);
+  }
 
-:where(.mdst-ui) h1,
-.mdst-h1 {
-  font-size: 2.5rem;
-}
+  :where(.mdst-ui) h1,
+  :where(.mdst-ui) h2,
+  :where(.mdst-ui) h3,
+  :where(.mdst-ui) h4,
+  :where(.mdst-ui) h5,
+  :where(.mdst-ui) h6,
+  .mdst-h1,
+  .mdst-h2,
+  .mdst-h3,
+  .mdst-h4,
+  .mdst-h5,
+  .mdst-h6 {
+    font-weight: 600;
+    line-height: 1.25;
+  }
 
-:where(.mdst-ui) h2,
-.mdst-h2 {
-  font-size: 2rem;
-}
+  :where(.mdst-ui) h1,
+  .mdst-h1 {
+    font-size: 2.5rem;
+  }
 
-:where(.mdst-ui) h3,
-.mdst-h3 {
-  font-size: 1.5rem;
-}
+  :where(.mdst-ui) h2,
+  .mdst-h2 {
+    font-size: 2rem;
+  }
 
-:where(.mdst-ui) h4,
-.mdst-h4 {
-  font-size: 1.25rem;
-}
+  :where(.mdst-ui) h3,
+  .mdst-h3 {
+    font-size: 1.5rem;
+  }
 
-:where(.mdst-ui) h5,
-.mdst-h5 {
-  font-size: 1rem;
-}
+  :where(.mdst-ui) h4,
+  .mdst-h4 {
+    font-size: 1.25rem;
+  }
 
-:where(.mdst-ui) h6,
-.mdst-h6 {
-  font-size: 0.875rem;
-}
+  :where(.mdst-ui) h5,
+  .mdst-h5 {
+    font-size: 1rem;
+  }
 
-/* Paragraph */
+  :where(.mdst-ui) h6,
+  .mdst-h6 {
+    font-size: 0.875rem;
+  }
 
-:where(.mdst-ui) p,
-.mdst-p {
-  font-size: var(--mdst-text-base);
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-}
+  /* Paragraph — inherits size and colour, so text inside components that set
+     their own (a tooltip, a small banner, a coloured tag) keeps them */
 
-:where(.mdst-ui) p.mdst-p--sm,
-.mdst-p--sm {
-  font-size: var(--mdst-text-sm);
-}
+  :where(.mdst-ui) p,
+  .mdst-p {
+    line-height: var(--mdst-line-height);
+  }
 
-:where(.mdst-ui) p.mdst-p--lg,
-.mdst-p--lg {
-  font-size: var(--mdst-text-lg);
-}
+  :where(.mdst-ui) p.mdst-p--sm,
+  .mdst-p--sm {
+    font-size: var(--mdst-text-sm);
+  }
 
-:where(.mdst-ui) p.mdst-p--muted,
-.mdst-p--muted {
-  color: var(--mdst-color-muted);
-}
+  :where(.mdst-ui) p.mdst-p--lg,
+  .mdst-p--lg {
+    font-size: var(--mdst-text-lg);
+  }
 
-/* Links */
+  :where(.mdst-ui) p.mdst-p--muted,
+  .mdst-p--muted {
+    color: var(--mdst-color-muted);
+  }
 
-:where(.mdst-ui) a,
-.mdst-a {
-  color: var(--mdst-color-fg);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
-}
+  /* Links — inherit the text colour; the underline marks them */
 
-:where(.mdst-ui) a:focus-visible,
-.mdst-a:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
+  :where(.mdst-ui) a,
+  .mdst-a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
 
-/* Strong / Bold */
+  /* Strong / Bold */
 
-:where(.mdst-ui) strong,
-.mdst-strong {
-  font-weight: 600;
-}
+  :where(.mdst-ui) strong,
+  .mdst-strong {
+    font-weight: 600;
+  }
 
-/* Emphasis / Italic */
+  /* Emphasis / Italic */
 
-:where(.mdst-ui) em,
-.mdst-em {
-  font-style: italic;
-}
+  :where(.mdst-ui) em,
+  .mdst-em {
+    font-style: italic;
+  }
 
-/* Small */
+  /* Small */
 
-:where(.mdst-ui) small,
-.mdst-small {
-  font-size: var(--mdst-text-sm);
-}
+  :where(.mdst-ui) small,
+  .mdst-small {
+    font-size: var(--mdst-text-sm);
+  }
 
-/* Mark / Highlight */
+  /* Mark / Highlight */
 
-:where(.mdst-ui) mark,
-.mdst-mark {
-  background-color: var(--mdst-color-subtle);
-  padding: 0.1em 0.2em;
-}
+  :where(.mdst-ui) mark,
+  .mdst-mark {
+    background-color: var(--mdst-color-subtle);
+    padding: 0.1em 0.2em;
+  }
 
-/* Keyboard */
+  /* Keyboard */
 
-:where(.mdst-ui) kbd,
-.mdst-kbd {
-  font-family: var(--mdst-font-mono);
-  font-size: 0.875em;
-  padding: 0.125em 0.375em;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-subtle);
-  white-space: nowrap;
-}
+  :where(.mdst-ui) kbd,
+  .mdst-kbd {
+    font-family: var(--mdst-font-mono);
+    font-size: 0.875em;
+    padding: 0.125em 0.375em;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-subtle);
+    white-space: nowrap;
+  }
 
-/* Abbreviation — only when it carries an expansion */
+  /* Abbreviation — only when it carries an expansion */
 
-:where(.mdst-ui) abbr[title],
-.mdst-abbr {
-  text-decoration: underline dotted;
-  text-underline-offset: 0.15em;
-  cursor: help;
-}
+  :where(.mdst-ui) abbr:where([title]),
+  .mdst-abbr {
+    text-decoration: underline dotted;
+    text-underline-offset: 0.15em;
+    cursor: help;
+  }
 
-/* Edits — deleted and inserted text */
+  /* Edits — deleted and inserted text */
 
-:where(.mdst-ui) del,
-.mdst-del {
-  text-decoration: line-through;
-  background-color: color-mix(in srgb, var(--mdst-color-error) 12%, transparent);
-}
+  :where(.mdst-ui) del,
+  .mdst-del {
+    text-decoration: line-through;
+    background-color: color-mix(in srgb, var(--mdst-color-danger) 12%, transparent);
+  }
 
-:where(.mdst-ui) ins,
-.mdst-ins {
-  text-decoration: none;
-  background-color: color-mix(in srgb, var(--mdst-color-success) 12%, transparent);
-}
+  :where(.mdst-ui) ins,
+  .mdst-ins {
+    text-decoration: none;
+    background-color: color-mix(in srgb, var(--mdst-color-success) 12%, transparent);
+  }
 
-/* Strikethrough — no longer accurate, but not an edit */
+  /* Strikethrough — no longer accurate, but not an edit */
 
-:where(.mdst-ui) s,
-.mdst-s {
-  text-decoration: line-through;
-  color: var(--mdst-color-muted);
-}
+  :where(.mdst-ui) s,
+  .mdst-s {
+    text-decoration: line-through;
+    color: var(--mdst-color-muted);
+  }
 
-/* Citation */
+  /* Citation */
 
-:where(.mdst-ui) cite,
-.mdst-cite {
-  font-style: italic;
-  color: var(--mdst-color-muted);
-}
+  :where(.mdst-ui) cite,
+  .mdst-cite {
+    font-style: italic;
+    color: var(--mdst-color-muted);
+  }
 
-/* Sample output and variables */
+  /* Sample output and variables */
 
-:where(.mdst-ui) samp,
-.mdst-samp {
-  font-family: var(--mdst-font-mono);
-  font-size: 0.875em;
-  padding: 0.125em 0.375em;
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-subtle);
-}
+  :where(.mdst-ui) samp,
+  .mdst-samp {
+    font-family: var(--mdst-font-mono);
+    font-size: 0.875em;
+    padding: 0.125em 0.375em;
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-subtle);
+  }
 
-:where(.mdst-ui) var,
-.mdst-var {
-  font-family: var(--mdst-font-mono);
-  font-size: 0.875em;
-  font-style: italic;
-}
+  :where(.mdst-ui) var,
+  .mdst-var {
+    font-family: var(--mdst-font-mono);
+    font-size: 0.875em;
+    font-style: italic;
+  }
 
-/* Subscript / Superscript — don't stretch the line height */
+  /* Subscript / Superscript — don't stretch the line height */
 
-:where(.mdst-ui) sub,
-:where(.mdst-ui) sup,
-.mdst-sub,
-.mdst-sup {
-  position: relative;
-  font-size: 0.75em;
-  line-height: 0;
-  vertical-align: baseline;
-}
+  :where(.mdst-ui) sub,
+  :where(.mdst-ui) sup,
+  .mdst-sub,
+  .mdst-sup {
+    position: relative;
+    font-size: 0.75em;
+    line-height: 0;
+    vertical-align: baseline;
+  }
 
-:where(.mdst-ui) sub,
-.mdst-sub {
-  bottom: -0.25em;
-}
+  :where(.mdst-ui) sub,
+  .mdst-sub {
+    bottom: -0.25em;
+  }
 
-:where(.mdst-ui) sup,
-.mdst-sup {
-  top: -0.5em;
-}
+  :where(.mdst-ui) sup,
+  .mdst-sup {
+    top: -0.5em;
+  }
 
-/* Blockquote */
+  /* Blockquote */
 
-:where(.mdst-ui) blockquote,
-.mdst-blockquote {
-  margin: 0;
-  padding-left: var(--mdst-space-md);
-  border-left: var(--mdst-space-1) solid var(--mdst-color-border);
-  font-style: italic;
-  color: var(--mdst-color-muted);
-}
+  :where(.mdst-ui) blockquote,
+  .mdst-blockquote {
+    margin-inline: 0;
+    padding-inline-start: var(--mdst-space-md);
+    border-inline-start: var(--mdst-space-1) solid var(--mdst-color-border);
+    font-style: italic;
+    color: var(--mdst-color-muted);
+  }
 
-/* Horizontal Rule */
+  /* Horizontal Rule */
 
-:where(.mdst-ui) hr,
-.mdst-hr {
-  border: none;
-  border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-  margin: var(--mdst-space-lg) 0;
-}
+  :where(.mdst-ui) hr,
+  .mdst-hr {
+    border: none;
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+    margin: var(--mdst-space-lg) 0;
+  }
 
-:where(.mdst-ui) hr.mdst-hr--flush,
-.mdst-hr--flush {
-  margin: 0;
-}
+  :where(.mdst-ui) hr.mdst-hr--flush,
+  .mdst-hr--flush {
+    margin: 0;
+  }
 
-/* Lists */
+  /* Lists */
 
-:where(.mdst-ui) ul,
-:where(.mdst-ui) ol,
-.mdst-ul,
-.mdst-ol {
-  padding-left: var(--mdst-space-lg);
-  line-height: var(--mdst-line-height);
-}
+  :where(.mdst-ui) ul,
+  :where(.mdst-ui) ol,
+  .mdst-ul,
+  .mdst-ol {
+    padding-inline-start: var(--mdst-space-lg);
+    line-height: var(--mdst-line-height);
+  }
 
-:where(.mdst-ui) ul,
-.mdst-ul {
-  list-style-type: disc;
-}
+  :where(.mdst-ui) ul,
+  .mdst-ul {
+    list-style-type: disc;
+  }
 
-:where(.mdst-ui) ol,
-.mdst-ol {
-  list-style-type: decimal;
-}
+  :where(.mdst-ui) ol,
+  .mdst-ol {
+    list-style-type: decimal;
+  }
 
-:where(.mdst-ui) li,
-.mdst-li {
-  margin-bottom: var(--mdst-space-xs);
-}
+  :where(.mdst-ui) li,
+  .mdst-li {
+    margin-bottom: var(--mdst-space-xs);
+  }
 
-:where(.mdst-ui) li:last-child,
-.mdst-li:last-child {
-  margin-bottom: 0;
-}
+  :where(.mdst-ui) li:where(:last-child),
+  .mdst-li:last-child {
+    margin-bottom: 0;
+  }
 
-/* Unstyled list */
+  /* Unstyled list */
 
-:where(.mdst-ui) ul.mdst-ul--unstyled,
-.mdst-ul--unstyled {
-  list-style: none;
-  padding-left: 0;
+  :where(.mdst-ui) ul.mdst-ul--unstyled,
+  .mdst-ul--unstyled {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) ins,
+    .mdst-ins {
+      text-decoration: underline;
+    }
+  }
 }

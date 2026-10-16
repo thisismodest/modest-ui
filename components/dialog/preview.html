@@ -32,31 +32,31 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-dialog</span>-header</span>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>__header</span>
             </td>
             <td>Header section with title and close button</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-dialog</span>-title</span>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>__title</span>
             </td>
             <td>Dialog heading text</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-dialog</span>-close</span>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>__close</span>
             </td>
             <td>Close button in header</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-dialog</span>-body</span>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>__body</span>
             </td>
             <td>Main content area</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-dialog</span>-footer</span>
+              <span class="class-name"><span class="dim">.mdst-dialog</span>__footer</span>
             </td>
             <td>Footer with action buttons</td>
           </tr>
@@ -78,25 +78,25 @@
             <td>
               <span class="class-name">.mdst-dialog</span>
             </td>
-            <td><button class="mdst-button" commandfor="modal-dialog" command="show-modal">Default (32rem)</button></td>
+            <td><button type="button" class="mdst-button" commandfor="modal-dialog" command="show-modal">Default (32rem)</button></td>
           </tr>
           <tr>
             <td>
               <span class="class-name"><span class="dim">.mdst-dialog</span>--sm</span>
             </td>
-            <td><button class="mdst-button" commandfor="small-dialog" command="show-modal">Small (24rem)</button></td>
+            <td><button type="button" class="mdst-button" commandfor="small-dialog" command="show-modal">Small (24rem)</button></td>
           </tr>
           <tr>
             <td>
               <span class="class-name"><span class="dim">.mdst-dialog</span>--lg</span>
             </td>
-            <td><button class="mdst-button" commandfor="large-dialog" command="show-modal">Large (48rem)</button></td>
+            <td><button type="button" class="mdst-button" commandfor="large-dialog" command="show-modal">Large (48rem)</button></td>
           </tr>
           <tr>
             <td>
               <span class="class-name"><span class="dim">.mdst-dialog</span>--full</span>
             </td>
-            <td><button class="mdst-button" commandfor="full-dialog" command="show-modal">Full Width (90vw)</button></td>
+            <td><button type="button" class="mdst-button" commandfor="full-dialog" command="show-modal">Full Width (90vw)</button></td>
           </tr>
         </tbody>
       </table>
@@ -105,16 +105,16 @@
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;dialog id="my-dialog" class="mdst-dialog"&gt;
-  &lt;div class="mdst-dialog-header"&gt;
-    &lt;h2 class="mdst-dialog-title"&gt;Dialog Title&lt;/h2&gt;
-    &lt;button class="mdst-dialog-close" commandfor="my-dialog" command="close"&gt;✕&lt;/button&gt;
+  &lt;div class="mdst-dialog__header"&gt;
+    &lt;h2 class="mdst-dialog__title"&gt;Dialog Title&lt;/h2&gt;
+    &lt;button class="mdst-dialog__close" commandfor="my-dialog" command="close"&gt;✕&lt;/button&gt;
   &lt;/div&gt;
-  &lt;div class="mdst-dialog-body"&gt;
+  &lt;div class="mdst-dialog__body"&gt;
     &lt;p&gt;Dialog content goes here.&lt;/p&gt;
   &lt;/div&gt;
-  &lt;div class="mdst-dialog-footer"&gt;
-    &lt;button class="mdst-button mdst-button--ghost" commandfor="my-dialog" command="close"&gt;Cancel&lt;/button&gt;
-    &lt;button class="mdst-button mdst-button--inverted" commandfor="my-dialog" command="close"&gt;Confirm&lt;/button&gt;
+  &lt;div class="mdst-dialog__footer"&gt;
+    &lt;button class="mdst-button mdst-button--borderless" commandfor="my-dialog" command="close"&gt;Cancel&lt;/button&gt;
+    &lt;button class="mdst-button mdst-button--solid" commandfor="my-dialog" command="close"&gt;Confirm&lt;/button&gt;
   &lt;/div&gt;
 &lt;/dialog&gt;
 
@@ -123,61 +123,61 @@
 
     <!-- Modal Dialog -->
     <dialog id="modal-dialog" class="mdst-dialog">
-      <div class="mdst-dialog-header">
-        <h2 class="mdst-dialog-title">Modal Dialog</h2>
-        <button class="mdst-dialog-close" commandfor="modal-dialog" command="close">✕</button>
+      <div class="mdst-dialog__header">
+        <h2 class="mdst-dialog__title">Modal Dialog</h2>
+        <button type="button" class="mdst-dialog__close" commandfor="modal-dialog" command="close" aria-label="Close">✕</button>
       </div>
-      <div class="mdst-dialog-body">
+      <div class="mdst-dialog__body">
         <p>This is a modal dialog. It blocks interaction with the rest of the page.</p>
         <p>Click outside or press ESC to close.</p>
       </div>
-      <div class="mdst-dialog-footer">
-        <button class="mdst-button mdst-button--ghost" commandfor="modal-dialog" command="close">Cancel</button>
-        <button class="mdst-button mdst-button--inverted" commandfor="modal-dialog" command="close">Confirm</button>
+      <div class="mdst-dialog__footer">
+        <button type="button" class="mdst-button mdst-button--borderless" commandfor="modal-dialog" command="close">Cancel</button>
+        <button type="button" class="mdst-button mdst-button--solid" commandfor="modal-dialog" command="close">Confirm</button>
       </div>
     </dialog>
 
     <!-- Small Dialog -->
     <dialog id="small-dialog" class="mdst-dialog mdst-dialog--sm">
-      <div class="mdst-dialog-header">
-        <h2 class="mdst-dialog-title">Small Dialog</h2>
-        <button class="mdst-dialog-close" commandfor="small-dialog" command="close">✕</button>
+      <div class="mdst-dialog__header">
+        <h2 class="mdst-dialog__title">Small Dialog</h2>
+        <button type="button" class="mdst-dialog__close" commandfor="small-dialog" command="close" aria-label="Close">✕</button>
       </div>
-      <div class="mdst-dialog-body">
+      <div class="mdst-dialog__body">
         <p>A smaller dialog for simple messages.</p>
       </div>
-      <div class="mdst-dialog-footer">
-        <button class="mdst-button" commandfor="small-dialog" command="close">OK</button>
+      <div class="mdst-dialog__footer">
+        <button type="button" class="mdst-button" commandfor="small-dialog" command="close">OK</button>
       </div>
     </dialog>
 
     <!-- Large Dialog -->
     <dialog id="large-dialog" class="mdst-dialog mdst-dialog--lg">
-      <div class="mdst-dialog-header">
-        <h2 class="mdst-dialog-title">Large Dialog</h2>
-        <button class="mdst-dialog-close" commandfor="large-dialog" command="close">✕</button>
+      <div class="mdst-dialog__header">
+        <h2 class="mdst-dialog__title">Large Dialog</h2>
+        <button type="button" class="mdst-dialog__close" commandfor="large-dialog" command="close" aria-label="Close">✕</button>
       </div>
-      <div class="mdst-dialog-body">
+      <div class="mdst-dialog__body">
         <p>A larger dialog for more content.</p>
         <p>Perfect for forms or detailed information.</p>
       </div>
-      <div class="mdst-dialog-footer">
-        <button class="mdst-button mdst-button--ghost" commandfor="large-dialog" command="close">Cancel</button>
-        <button class="mdst-button mdst-button--inverted" commandfor="large-dialog" command="close">Save</button>
+      <div class="mdst-dialog__footer">
+        <button type="button" class="mdst-button mdst-button--borderless" commandfor="large-dialog" command="close">Cancel</button>
+        <button type="button" class="mdst-button mdst-button--solid" commandfor="large-dialog" command="close">Save</button>
       </div>
     </dialog>
 
     <!-- Full Width Dialog -->
     <dialog id="full-dialog" class="mdst-dialog mdst-dialog--full">
-      <div class="mdst-dialog-header">
-        <h2 class="mdst-dialog-title">Full Width Dialog</h2>
-        <button class="mdst-dialog-close" commandfor="full-dialog" command="close">✕</button>
+      <div class="mdst-dialog__header">
+        <h2 class="mdst-dialog__title">Full Width Dialog</h2>
+        <button type="button" class="mdst-dialog__close" commandfor="full-dialog" command="close" aria-label="Close">✕</button>
       </div>
-      <div class="mdst-dialog-body">
+      <div class="mdst-dialog__body">
         <p>A full-width dialog for maximum content space.</p>
       </div>
-      <div class="mdst-dialog-footer">
-        <button class="mdst-button" commandfor="full-dialog" command="close">Close</button>
+      <div class="mdst-dialog__footer">
+        <button type="button" class="mdst-button" commandfor="full-dialog" command="close">Close</button>
       </div>
     </dialog>
   </body>

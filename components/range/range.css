@@ -1,73 +1,88 @@
-/* Range Slider */
+@layer mdst-ui.components {
+  /* Range Slider */
 
-:where(.mdst-ui) input[type="range"],
-.mdst-range {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: var(--mdst-space-1);
-  background: var(--mdst-color-fg);
-  border-radius: var(--mdst-space-1);
-  box-shadow: none;
-  cursor: pointer;
-  outline: none;
-}
+  :where(.mdst-ui) input:where([type="range"]),
+  .mdst-input:where([type="range"]) {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: var(--mdst-space-1);
+    background: var(--mdst-color-fg);
+    border-radius: var(--mdst-space-1);
+    box-shadow: none;
+    cursor: pointer;
+  }
 
-:where(.mdst-ui) input[type="range"]:focus-visible,
-.mdst-range:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-space-1);
-}
+  :where(.mdst-ui) input:where([type="range"]:disabled),
+  .mdst-input:where([type="range"]:disabled) {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
 
-:where(.mdst-ui) input[type="range"]:disabled,
-.mdst-range:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+  :where(.mdst-ui) input:where([type="range"]:disabled)::-webkit-slider-thumb,
+  .mdst-input:where([type="range"]:disabled)::-webkit-slider-thumb {
+    cursor: not-allowed;
+  }
 
-:where(.mdst-ui) input[type="range"]:disabled::-webkit-slider-thumb,
-.mdst-range:disabled::-webkit-slider-thumb {
-  cursor: not-allowed;
-}
+  :where(.mdst-ui) input:where([type="range"]:disabled)::-moz-range-thumb,
+  .mdst-input:where([type="range"]:disabled)::-moz-range-thumb {
+    cursor: not-allowed;
+  }
 
-:where(.mdst-ui) input[type="range"]:disabled::-moz-range-thumb,
-.mdst-range:disabled::-moz-range-thumb {
-  cursor: not-allowed;
-}
+  /* Webkit (Chrome, Safari, Edge) */
 
-/* Webkit (Chrome, Safari, Edge) */
+  :where(.mdst-ui) input:where([type="range"])::-webkit-slider-thumb,
+  .mdst-input:where([type="range"])::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--mdst-space-4);
+    height: var(--mdst-space-4);
+    box-sizing: border-box;
+    background: var(--mdst-color-bg);
+    border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
+    border-radius: 50%;
+    box-shadow: none;
+    cursor: pointer;
+    transition: background var(--mdst-transition);
+  }
 
-:where(.mdst-ui) input[type="range"]::-webkit-slider-thumb,
-.mdst-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: var(--mdst-space-4);
-  height: var(--mdst-space-4);
-  box-sizing: border-box;
-  background: var(--mdst-color-bg);
-  border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
-  border-radius: 50%;
-  box-shadow: none;
-  cursor: pointer;
-  transition: background var(--mdst-transition);
-}
+  /* Firefox */
 
-/* Firefox */
+  :where(.mdst-ui) input:where([type="range"])::-moz-range-thumb,
+  .mdst-input:where([type="range"])::-moz-range-thumb {
+    appearance: none;
+    width: var(--mdst-space-4);
+    height: var(--mdst-space-4);
+    box-sizing: border-box;
+    background: var(--mdst-color-bg);
+    border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background var(--mdst-transition);
+  }
 
-:where(.mdst-ui) input[type="range"]::-moz-range-thumb,
-.mdst-range::-moz-range-thumb {
-  appearance: none;
-  width: var(--mdst-space-4);
-  height: var(--mdst-space-4);
-  box-sizing: border-box;
-  background: var(--mdst-color-bg);
-  border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background var(--mdst-transition);
-}
+  :where(.mdst-ui) input:where([type="range"])::-moz-range-track,
+  .mdst-input:where([type="range"])::-moz-range-track {
+    background: transparent;
+  }
 
-:where(.mdst-ui) input[type="range"]::-moz-range-track,
-.mdst-range::-moz-range-track {
-  background: transparent;
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) input:where([type="range"]),
+    .mdst-input:where([type="range"]) {
+      forced-color-adjust: none;
+      background: CanvasText;
+
+      &::-webkit-slider-thumb {
+        background: Canvas;
+        border-color: CanvasText;
+      }
+
+      &::-moz-range-thumb {
+        background: Canvas;
+        border-color: CanvasText;
+      }
+    }
+  }
 }

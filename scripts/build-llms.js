@@ -1,355 +1,177 @@
 #!/usr/bin/env node
 
-import { readdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-import siteConfig from "../site.config.js";
+// Generates llms.txt: a single-file reference an AI model (or a person) can
+// read to write correct modest-ui markup. Tokens come from base/tokens.css,
+// classes from each component's CSS, and examples from each preview.html.
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, "..");
-const COMPONENTS_DIR = join(ROOT, "components");
+import { readFile, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import siteConfig from "../site.config.js";
+import { COMPONENTS_DIR, ROOT, getComponents } from "./components.js";
+
 const TOKENS_PATH = join(ROOT, "base", "tokens.css");
 const OUTPUT_PATH = join(ROOT, "llms.txt");
-const SITE_OUTPUT_PATH = join(ROOT, "site", "llms.txt");
+const MAJOR = siteConfig.version.split(".")[0];
 
 // ---------------------------------------------------------------------------
-// Helpers
+// Tokens
 // ---------------------------------------------------------------------------
 
-async function loadComponentConfig(slug) {
-  try {
-    const configPath = join(COMPONENTS_DIR, slug, "config.js");
-    const config = await import(configPath);
-    return config.default;
-  } catch {
-    return null;
-  }
-}
-
-async function getComponents() {
-  const entries = await readdir(COMPONENTS_DIR, { withFileTypes: true });
-  const components = [];
-
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-
-    const slug = entry.name;
-    const config = await loadComponentConfig(slug);
-    if (!config) continue;
-
-    try {
-      await readFile(join(COMPONENTS_DIR, slug, "preview.html"));
-    } catch {
-      continue;
-    }
-
-    components.push({ slug, ...config });
-  }
-
-  return components.sort((a, b) => a.slug.localeCompare(b.slug));
-}
-
-// ---------------------------------------------------------------------------
-// Tokens parser
-// ---------------------------------------------------------------------------
-
+/**
+ * Read the tokens declared in the main :root block of tokens.css, grouped by
+ * the comment above them. The dark-mode and reduced-motion blocks that follow
+ * are described in the header instead of listed here.
+ */
 function parseTokens(css) {
+  const start = css.indexOf(":root {");
+  const body = css.slice(start + ":root {".length, css.indexOf("\n  }", start));
   const groups = [];
-  let currentGroup = null;
+  let current = null;
+  let inComment = false;
 
-  for (const line of css.split("\n")) {
-    const trimmed = line.trim();
+  for (const raw of body.split("\n")) {
+    const line = raw.trim();
 
-    // Section comment like /* Colors */
-    const sectionMatch = trimmed.match(/^\/\*\s*(.+?)\s*\*\/$/);
-    if (sectionMatch && !trimmed.includes(":")) {
-      currentGroup = { name: sectionMatch[1], tokens: [] };
-      groups.push(currentGroup);
+    if (inComment) {
+      if (line.includes("*/")) inComment = false;
       continue;
     }
 
-    // Token line like --mdst-color-fg: #000;
-    const tokenMatch = trimmed.match(/^(--mdst[\w-]+):\s*(.+?);$/);
-    if (tokenMatch && currentGroup) {
-      currentGroup.tokens.push({ name: tokenMatch[1], value: tokenMatch[2] });
+    if (line.startsWith("/*")) {
+      // Group name: the comment's first words, up to a colon or full stop
+      const text = line.replace(/^\/\*\s*/, "").replace(/\s*\*\/$/, "");
+      if (!text.startsWith("--")) {
+        current = { name: text.split(/[:.—]/)[0].trim(), tokens: [] };
+        groups.push(current);
+      }
+      if (!line.includes("*/")) inComment = true;
+      continue;
     }
+
+    const token = line.match(/^(--mdst[\w-]+):\s*(.+?);$/);
+    if (token && current) current.tokens.push({ name: token[1], value: token[2] });
   }
 
-  return groups;
+  return groups.filter((group) => group.tokens.length);
 }
 
 function formatTokens(groups) {
-  const lines = [];
-
-  lines.push("## Design Tokens");
-  lines.push("");
-  lines.push("Override these CSS custom properties on `:root` to theme the entire library.");
+  const lines = ["## Design Tokens", "", "Override these custom properties on `:root` (or any element) to theme modest-ui."];
 
   for (const group of groups) {
-    lines.push("");
-    lines.push(`### ${group.name}`);
-    lines.push("");
-
-    // Calculate column widths
-    const nameWidth = Math.max(8, ...group.tokens.map((t) => t.name.length));
-    const valueWidth = Math.max(8, ...group.tokens.map((t) => t.value.length));
-
+    const nameWidth = Math.max(5, ...group.tokens.map((t) => t.name.length));
+    const valueWidth = Math.max(5, ...group.tokens.map((t) => t.value.length));
+    lines.push("", `### ${group.name}`, "");
     lines.push(`| ${"Token".padEnd(nameWidth)} | ${"Value".padEnd(valueWidth)} |`);
     lines.push(`| ${"-".repeat(nameWidth)} | ${"-".repeat(valueWidth)} |`);
-
-    for (const token of group.tokens) {
-      lines.push(`| ${token.name.padEnd(nameWidth)} | ${token.value.padEnd(valueWidth)} |`);
-    }
+    for (const t of group.tokens) lines.push(`| ${t.name.padEnd(nameWidth)} | ${t.value.padEnd(valueWidth)} |`);
   }
+
+  lines.push(
+    "",
+    "### Optional tokens",
+    "",
+    "Not set by default; set them to change behaviour everywhere.",
+    "",
+    "| Token | Effect |",
+    "| --- | --- |",
+    "| `--mdst-focus-ring` | Replaces the keyboard focus ring, e.g. `3px dashed hotpink`, or `none` |",
+    "| `--mdst-color-info` | Colour for `--info` variants (defaults to the text colour) |",
+    "| `--mdst-button-hover-shadow` | Button hover (default: an inset ring in the text colour), or `none` |",
+    "",
+    "### Button variables",
+    "",
+    "Set on a button, a class, or a container to make your own variant:",
+    "",
+    "| Variable | Default |",
+    "| --- | --- |",
+    "| `--mdst-button-tone` | `--mdst-color-fg` (text, and the fill of solid buttons) |",
+    "| `--mdst-button-bg` | `--mdst-color-bg` |",
+    "| `--mdst-button-fg` | the tone |",
+    "| `--mdst-button-border` | `--mdst-color-border` |"
+  );
 
   return lines.join("\n");
 }
 
 // ---------------------------------------------------------------------------
-// CSS class extractor
+// Classes
 // ---------------------------------------------------------------------------
 
-function extractClasses(css, slug, className) {
+/**
+ * Every class a component's CSS defines, except ones that belong to another
+ * component (e.g. .mdst-code referenced inside pre.css). A class belongs to
+ * a component when its block is that component's className (.mdst-input and
+ * .mdst-input--pill in checkbox.css), or failing that to the longest matching
+ * slug, so .mdst-otp-input belongs to otp-input, not input. Classes with no
+ * matching slug (.mdst-fieldset in form.css) belong to the file that defines
+ * them.
+ */
+function extractClasses(css, slug, className, allSlugs) {
+  const owner = (cls) => {
+    const matches = allSlugs.filter((s) => cls === `mdst-${s}` || cls.startsWith(`mdst-${s}-`) || cls.startsWith(`mdst-${s}_`));
+    return matches.sort((a, b) => b.length - a.length)[0];
+  };
+  const block = (cls) => cls.split(/__|--/)[0];
   const classes = new Set();
-  // Match .mdst-something including __ BEM sub-elements
-  const re = /\.(mdst[\w-]+)/g;
-
-  // Wildcard components (className ".mdst-*") like typography and utilities
-  // own every class in their CSS file — no prefix filtering needed.
-  const isWildcard = className === ".mdst-*";
-
-  for (const m of css.matchAll(re)) {
-    const cls = m[1];
-
-    if (!isWildcard) {
-      // Only include classes that belong to this component. A class belongs to
-      // the component if it starts with "mdst-{slug}" (handling multi-word slugs
-      // like "otp-input" and "color-picker"). This filters out foreign classes
-      // that appear in nested selectors, e.g. `.mdst-table td > .mdst-pre`.
-      const prefix = `mdst-${slug}`;
-      if (!cls.startsWith(prefix)) continue;
-      // Guard against partial prefix matches: after the prefix there should be
-      // nothing, or a delimiter (-, _, uppercase via BEM).
-      const rest = cls.slice(prefix.length);
-      if (rest && !rest.startsWith("-") && !rest.startsWith("_")) continue;
+  for (const [, cls] of css.matchAll(/\.(mdst-[\w-]+)/g)) {
+    if (cls === "mdst-ui") continue;
+    if (`.${block(cls)}` !== className) {
+      const own = owner(cls);
+      if (own && own !== slug) continue;
     }
-
     classes.add(`.${cls}`);
   }
   return [...classes].sort();
 }
 
-/**
- * Group classes into base, elements, and modifiers for display.
- *
- * Uses the component's className (from config.js) to determine what counts
- * as the base class. Everything else is either an element (single-dash child
- * or __ sub-element of the base) or a modifier (-- variant).
- *
- *   .mdst-card            → base
- *   .mdst-card-header     → element
- *   .mdst-card__input     → element
- *   .mdst-card--compact   → modifier
- */
-function groupClasses(classes, baseClassName) {
-  const modifiers = [];
-  const elements = [];
-  const bases = [];
-
-  // Normalise: ".mdst-card" → "mdst-card", handle ".mdst-*" as null
-  const baseRoot = baseClassName && !baseClassName.includes("*") ? baseClassName.replace(/^\./, "") : null;
-
-  for (const cls of classes) {
-    const plain = cls.replace(/^\./, "");
-
-    if (plain.includes("--")) {
-      modifiers.push(cls);
-    } else if (baseRoot && plain !== baseRoot && plain.startsWith(baseRoot)) {
-      // It's a child/sub-element of the base (e.g. mdst-card-header, mdst-color-picker__input)
-      elements.push(cls);
-    } else {
-      bases.push(cls);
-    }
-  }
-
-  return { bases, elements, modifiers };
+function groupClasses(classes) {
+  const elements = classes.filter((c) => c.includes("__") && !c.includes("--"));
+  const modifiers = classes.filter((c) => c.includes("--"));
+  const blocks = classes.filter((c) => !elements.includes(c) && !modifiers.includes(c));
+  return { blocks, elements, modifiers };
 }
 
-// ---------------------------------------------------------------------------
-// Usage block extractor
-// ---------------------------------------------------------------------------
-
-function extractUsageBlock(html) {
-  // Find the code-section's <pre><code>...</code></pre> and decode HTML entities
+function extractUsage(html) {
   const match = html.match(/<div\s+class="code-section"[\s\S]*?<code>([\s\S]*?)<\/code>/i);
   if (!match) return null;
-
   return match[1]
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
-    .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&")
     .trim();
 }
 
-// ---------------------------------------------------------------------------
-// Component section builder
-// ---------------------------------------------------------------------------
-
 function formatComponent(component, classes, usage) {
-  const lines = [];
-  const { bases, elements, modifiers } = groupClasses(classes, component.className);
-
-  lines.push(`### ${component.title} \`${component.className}\``);
-  lines.push("");
-
-  if (component.description) {
-    lines.push(component.description);
-    lines.push("");
-  }
-
+  const { blocks, elements, modifiers } = groupClasses(classes);
+  const lines = [`### ${component.title} \`${component.className}\``, ""];
+  if (component.description) lines.push(component.description, "");
   lines.push("Classes:");
+  for (const cls of [...blocks, ...elements, ...modifiers]) lines.push(`- \`${cls}\``);
+  if (usage) lines.push("", "```html", usage, "```");
+  return lines.join("\n");
+}
 
-  for (const cls of bases) {
-    lines.push(`- \`${cls}\``);
+function formatQuickReference(data) {
+  const lines = ["## Quick Class Reference", ""];
+  for (const { component, classes } of data) {
+    const { blocks, elements, modifiers } = groupClasses(classes);
+    const parts = [blocks.join("  ")];
+    if (elements.length) parts.push(`+ ${elements.map((e) => e.slice(e.indexOf("__"))).join("  ")}`);
+    if (modifiers.length) parts.push(`| ${modifiers.map((m) => m.slice(m.indexOf("--"))).join("  ")}`);
+    lines.push(`${(`${component.title}:`).padEnd(16)}${parts.join("  ")}`);
   }
-  for (const cls of elements) {
-    lines.push(`- \`${cls}\``);
-  }
-  for (const cls of modifiers) {
-    // Show modifier with dimmed base: .mdst-button--solid
-    lines.push(`- \`${cls}\``);
-  }
-
-  if (usage) {
-    lines.push("");
-    lines.push("```html");
-    lines.push(usage);
-    lines.push("```");
-  }
-
   return lines.join("\n");
 }
 
 // ---------------------------------------------------------------------------
-// Quick reference builder
+// Header
 // ---------------------------------------------------------------------------
 
-function buildQuickReference(componentData) {
-  const lines = [];
-
-  lines.push("## Quick Class Reference");
-  lines.push("");
-
-  for (const { component, classes } of componentData) {
-    const { bases, elements, modifiers } = groupClasses(classes, component.className);
-
-    const basePart = bases.join("  ");
-
-    // Strip the base class prefix from element names for compact display
-    // e.g. .mdst-card-header → -header, .mdst-color-picker__input → __input
-    const baseRoot = component.className && !component.className.includes("*") ? component.className.replace(/^\./, "") : null;
-    const elementPart = elements.length
-      ? "  +  " +
-        elements
-          .map((e) => {
-            if (baseRoot) return e.replace(`.${baseRoot}`, "");
-            return e;
-          })
-          .join("  ")
-      : "";
-
-    const modPart = modifiers.length
-      ? "  |  " +
-        modifiers
-          .map((m) => {
-            const idx = m.indexOf("--");
-            return m.slice(idx);
-          })
-          .join("  ")
-      : "";
-
-    const label = (component.title + ":").padEnd(16);
-    lines.push(`${label}${basePart}${elementPart}${modPart}`);
-  }
-
-  return lines.join("\n");
-}
-
-// ---------------------------------------------------------------------------
-// Theming section
-// ---------------------------------------------------------------------------
-
-function buildThemingSection(tokenGroups) {
-  const lines = [];
-
-  lines.push("## Theming Example");
-  lines.push("");
-  lines.push("```css");
-  lines.push(":root {");
-
-  // Use the tokens we already parsed to build the example
-  for (const group of tokenGroups) {
-    for (const token of group.tokens) {
-      // Skip aliases (values that reference other vars)
-      if (token.value.startsWith("var(")) continue;
-      lines.push(`  ${token.name}: ${token.value};`);
-    }
-  }
-
-  lines.push("}");
-  lines.push("```");
-
-  return lines.join("\n");
-}
-
-// ---------------------------------------------------------------------------
-// Main
-// ---------------------------------------------------------------------------
-
-async function main() {
-  try {
-    console.log("Generating llms.txt…\n");
-
-    // 1. Parse tokens
-    const tokensCss = await readFile(TOKENS_PATH, "utf-8");
-    const tokenGroups = parseTokens(tokensCss);
-
-    // 2. Discover components
-    const components = await getComponents();
-
-    // 3. For each component, read CSS + preview.html
-    const componentData = [];
-
-    for (const component of components) {
-      const cssPath = join(COMPONENTS_DIR, component.slug, `${component.slug}.css`);
-      let css = "";
-      try {
-        css = await readFile(cssPath, "utf-8");
-      } catch {
-        // Some components might not have a CSS file with matching name
-      }
-
-      const classes = extractClasses(css, component.slug, component.className);
-
-      let usage = null;
-      try {
-        const previewHtml = await readFile(join(COMPONENTS_DIR, component.slug, "preview.html"), "utf-8");
-        usage = extractUsageBlock(previewHtml);
-      } catch {
-        // no preview
-      }
-
-      componentData.push({ component, classes, usage });
-      console.log(`  ✓ ${component.title} (${classes.length} classes)`);
-    }
-
-    // 4. Assemble the document
-    const sections = [];
-
-    // Header
-    sections.push(`# ${siteConfig.name}
+function header() {
+  return `# ${siteConfig.name}
 
 > ${siteConfig.tagline}
 
@@ -358,7 +180,7 @@ on npm is an UNRELATED Vue library — do not install it. This package is named
 "mdst-ui" to match its class/token prefix (.mdst-ui, --mdst-*). Whenever a
 human says "modest-ui", the package to install is "mdst-ui".
 
-- Version: ${siteConfig.version}
+- Version: ${siteConfig.version} (this file describes v${MAJOR}; class names differ from v1)
 - Package (npm): mdst-ui
 - Docs: ${siteConfig.url}
 - GitHub: https://github.com/thisismodest/modest-ui
@@ -366,8 +188,8 @@ human says "modest-ui", the package to install is "mdst-ui".
 
 ## Installation
 
-CDN:
-  <link rel="stylesheet" href="${siteConfig.cdnUrl}" />
+CDN (pin the major version so markup and CSS match):
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@${MAJOR}/dist/modest-ui.min.css" />
 
 npm:
   npm install mdst-ui   # NOT "npm install modest-ui"
@@ -375,80 +197,135 @@ npm:
 Import (bundled):
   @import "mdst-ui/dist/modest-ui.css";
 
-Cherry-pick:
+Cherry-pick (tokens first):
   @import "mdst-ui/base/tokens.css";
   @import "mdst-ui/components/button/button.css";
 
-## Naming Convention
+modest-ui is CSS only. JavaScript shown in the docs is example code for
+behaviour you own (switching tabs, showing a toast, revealing a password).
 
-All classes use the \`mdst-\` prefix with BEM-style naming:
-- Block: \`.mdst-component\`
-- Element: \`.mdst-component-element\`
-- Modifier: \`.mdst-component--variant\`
+## Rules for writing modest-ui markup
 
-## Classless Usage
+1. Put \`class="mdst-ui"\` on \`<body>\` (or a wrapper) and write semantic HTML.
+   Bare elements inside it are styled with no classes.
+2. Add a modifier class only for a variant: \`<button class="mdst-button--solid">\`.
+   Modifiers work on bare elements without the base class.
+3. Use the base class (\`.mdst-button\`, \`.mdst-input\`) outside \`.mdst-ui\`, or for
+   components that have no native element (card, tag, tabs, toast…).
+4. Drive runtime state with data attributes (\`data-state="active"\`, \`"visible"\`,
+   \`"completed"\`), and ARIA where it exists (\`aria-pressed\`, \`aria-invalid\`,
+   \`aria-selected\`, \`aria-disabled\`). Never use data attributes for colour or size.
+5. Theme with \`--mdst-*\` tokens. Don't restyle components to change colours.
+6. Put your own layout CSS outside any cascade layer; it always wins.
+7. Every \`<input>\` takes the same class, \`.mdst-input\`, and is styled by its
+   \`type\`: text, email, number, date, checkbox, radio, range, file, color.
+   A checkbox with \`role="switch"\` is drawn as a toggle. Labels need no
+   class. Only password and OTP have a wrapper (\`.mdst-password-input\`,
+   \`.mdst-otp-input\`), and the inputs inside take no element class.
 
-Add \`.mdst-ui\` to \`<body>\` and bare HTML elements are styled automatically — no classes needed.
+## Naming
 
-\`\`\`html
-<body class="mdst-ui">
-  <button>Styled button</button>
-  <input type="text" placeholder="Styled input" />
-  <select><option>Styled select</option></select>
-  <details><summary>Styled disclosure</summary><p>Content</p></details>
-  <table><tr><th>Styled</th><th>Table</th></tr></table>
-</body>
-\`\`\`
+BEM with the \`mdst-\` prefix:
+- Block: \`.mdst-card\`
+- Element: \`.mdst-card__header\`, \`.mdst-tabs__panel\`
+- Modifier: \`.mdst-card--sm\`, \`.mdst-card__header--borderless\`
 
-Classless selectors use \`:where(.mdst-ui)\` so specificity stays at zero — any class-based selector always wins.
+Shared modifier vocabulary:
+- Status: \`--success\`, \`--info\`, \`--warning\`, \`--danger\` (and \`--muted\`)
+- Fill and edge: \`--solid\`, \`--subtle\`, \`--borderless\`
+- Size: \`--sm\`, \`--lg\`
+- Direction: \`--start\`, \`--end\` (never left/right)
 
-Add variant modifiers directly to bare elements without the base class:
+## Classless elements
 
-\`\`\`html
-<button class="mdst-button--ghost">Ghost</button>
-<button class="mdst-button--inverted">Inverted</button>
-<table class="mdst-table--striped">...</table>
-<details class="mdst-details--compact">...</details>
-\`\`\`
+Styled automatically inside \`.mdst-ui\`: button, input (every type, as with
+\`.mdst-input\`), input[type="checkbox"][role="switch"] (a toggle), textarea,
+select, form, fieldset, legend, label, details, dialog, table, progress,
+meter, code, pre, h1–h6, p, a, strong, em, small, mark, kbd, abbr[title], del,
+ins, s, cite, samp, var, sub, sup, blockquote, hr, ul, ol, li.
 
-Elements that map to native tags: button, input (text/email/etc), textarea, select, input[type="checkbox"], input[type="radio"], input[type="range"], input[type="file"], details, dialog, table, code, pre, h1-h6, p, a, strong, em, small, mark, blockquote, hr, ul, ol, li.
+Class-only components: avatar, badge, banner, breadcrumbs, card, drawer,
+otp-input, password-input, popover, radio cards, skeleton, spinner, stepper,
+tabs, tag, toast, toolbar, tooltip, utilities.
 
-Elements that remain class-only (no native tag mapping): card, tag, tooltip, popover, password-input, otp-input, color-picker, utilities.`);
+## Behaviour to know
 
-    // Tokens
-    sections.push(formatTokens(tokenGroups));
-
-    // Components header
-    sections.push("## Components");
-
-    // Each component
-    for (const { component, classes, usage } of componentData) {
-      sections.push(formatComponent(component, classes, usage));
-    }
-
-    // Theming
-    sections.push(buildThemingSection(tokenGroups));
-
-    // Quick reference
-    sections.push(buildQuickReference(componentData));
-
-    const output = sections.join("\n\n---\n\n") + "\n";
-
-    // 5. Write to root
-    await writeFile(OUTPUT_PATH, output);
-    console.log(`\n✓ llms.txt written (${(output.length / 1024).toFixed(1)} KB)`);
-
-    // 6. Also write to site/ if it exists
-    try {
-      await writeFile(SITE_OUTPUT_PATH, output);
-      console.log(`✓ site/llms.txt written`);
-    } catch {
-      // site/ dir may not exist yet, that's fine
-    }
-  } catch (err) {
-    console.error("Error generating llms.txt:", err);
-    process.exit(1);
-  }
+- Cascade layer: everything is in \`@layer mdst-ui\`. Any CSS outside a layer
+  beats it. To order against other layers: \`@layer reset, mdst-ui, utilities;\`
+- Flow spacing: children of plain containers inside \`.mdst-ui\` (the root and
+  unclassed main, section, article, div, form, fieldset, …) are spaced by
+  \`--mdst-flow-space\`. Give a container a class or an inline style to lay it
+  out yourself.
+- Dark mode is opt-in: \`:root { color-scheme: light dark; }\` follows the
+  system, \`color-scheme: dark\` forces it. Without it pages stay light.
+- Focus: one keyboard ring for everything (\`--mdst-focus-ring\`,
+  \`--mdst-focus-offset\`).
+- Right-to-left: components use logical properties and mirror in \`dir="rtl"\`.
+- The reset only applies inside \`.mdst-ui\`.`;
 }
 
-main();
+function theming() {
+  return `## Theming Example
+
+\`\`\`css
+:root {
+  --mdst-color-fg: #1a1a1a;
+  --mdst-color-bg: #ffffff;
+  --mdst-color-border: #e5e5e5;
+  --mdst-color-focus: #2563eb;
+  --mdst-radius: 6px;
+  --mdst-font-text: Charter, Georgia, serif;
+}
+\`\`\`
+
+Setting colour tokens yourself replaces both the light and dark values. To keep
+dark mode, set them inside \`@media (prefers-color-scheme: dark)\` too, or use
+\`light-dark()\`:
+
+\`\`\`css
+:root {
+  color-scheme: light dark;
+  --mdst-color-fg: light-dark(#1a1a1a, #f5f5f5);
+  --mdst-color-bg: light-dark(#ffffff, #111111);
+}
+\`\`\``;
+}
+
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
+
+async function main() {
+  console.log("Generating llms.txt…\n");
+
+  const tokenGroups = parseTokens(await readFile(TOKENS_PATH, "utf-8"));
+  const components = await getComponents();
+  const slugs = components.map((c) => c.slug);
+  const data = [];
+
+  for (const component of components) {
+    const css = await readFile(join(COMPONENTS_DIR, component.slug, `${component.slug}.css`), "utf-8");
+    const preview = await readFile(join(COMPONENTS_DIR, component.slug, "preview.html"), "utf-8");
+    const classes = extractClasses(css, component.slug, component.className, slugs);
+    data.push({ component, classes, usage: extractUsage(preview) });
+    console.log(`  ✓ ${component.title} (${classes.length} classes)`);
+  }
+
+  const sections = [
+    header(),
+    formatTokens(tokenGroups),
+    "## Components",
+    ...data.map(({ component, classes, usage }) => formatComponent(component, classes, usage)),
+    theming(),
+    formatQuickReference(data)
+  ];
+
+  const output = `${sections.join("\n\n---\n\n")}\n`;
+  await writeFile(OUTPUT_PATH, output);
+  console.log(`\n✓ llms.txt written (${(output.length / 1024).toFixed(1)} KB)`);
+}
+
+main().catch((err) => {
+  console.error("Error generating llms.txt:", err.message);
+  process.exit(1);
+});

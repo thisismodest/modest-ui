@@ -1,96 +1,62 @@
-/* Color Picker */
+@layer mdst-ui.components {
+  /* Color Picker
+     Classless (a bare input[type="color"] inside .mdst-ui) and class-based
+     (.mdst-input on the input) share every rule. To show the hex value next
+     to it, put a text .mdst-input beside it. */
 
-.mdst-color-picker {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-
-  & .mdst-color-picker__input {
+  :where(.mdst-ui) input:where([type="color"]),
+  .mdst-input:where([type="color"]) {
     -webkit-appearance: none;
     appearance: none;
+    display: inline-block;
     width: var(--mdst-space-8);
     height: var(--mdst-space-8);
     padding: 0;
+    /* --mdst-border-width is in em, so match the surrounding text */
+    font-size: inherit;
+    vertical-align: middle;
     background: none;
     border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: 50%;
+    border-radius: var(--_radius, 50%);
     cursor: pointer;
-    outline: none;
     transition: border-color var(--mdst-transition);
-
-    &:focus-visible {
-      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-      outline-offset: var(--mdst-border-width);
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Webkit (Chrome, Safari, Edge) */
-
-    &::-webkit-color-swatch-wrapper {
-      padding: 0;
-    }
-
-    &::-webkit-color-swatch {
-      border: none;
-      border-radius: 50%;
-    }
-
-    /* Firefox */
-
-    &::-moz-color-swatch {
-      border: none;
-      border-radius: 50%;
-    }
   }
 
-  /* Text input variant */
-
-  & .mdst-color-picker__text {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 5rem;
-    height: var(--mdst-space-8);
-    padding: 0 var(--mdst-space-sm);
-    font-family: var(--mdst-font-mono);
-    font-size: var(--mdst-text-sm);
-    text-transform: uppercase;
-    color: var(--mdst-color-fg);
-    background: var(--mdst-color-bg);
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: var(--mdst-radius);
-    outline: none;
-    transition: border-color var(--mdst-transition);
-
-    &::placeholder {
-      color: var(--mdst-color-muted);
-      text-transform: none;
-    }
-
-    &:focus {
-      border-color: var(--mdst-color-focus);
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+  :where(.mdst-ui) input:where([type="color"]:focus-visible),
+  .mdst-input:where([type="color"]:focus-visible) {
+    outline-offset: 0;
   }
 
-  /* Square variant */
+  :where(.mdst-ui) input:where([type="color"]:disabled),
+  .mdst-input:where([type="color"]:disabled) {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
 
-  &.mdst-color-picker--square .mdst-color-picker__input {
-    border-radius: var(--mdst-radius);
+  /* Webkit (Chrome, Safari, Edge) */
 
-    &::-webkit-color-swatch {
-      border-radius: var(--mdst-radius);
-    }
+  :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch-wrapper,
+  .mdst-input:where([type="color"])::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
 
-    &::-moz-color-swatch {
-      border-radius: var(--mdst-radius);
-    }
+  :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch,
+  .mdst-input:where([type="color"])::-webkit-color-swatch {
+    border: none;
+    border-radius: var(--_radius, 50%);
+  }
+
+  /* Firefox */
+
+  :where(.mdst-ui) input:where([type="color"])::-moz-color-swatch,
+  .mdst-input:where([type="color"])::-moz-color-swatch {
+    border: none;
+    border-radius: var(--_radius, 50%);
+  }
+
+  /* Square variant: follows the theme's radius */
+
+  .mdst-input--square:where([type="color"]) {
+    --_radius: var(--mdst-radius);
   }
 }

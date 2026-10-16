@@ -25,12 +25,12 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name">.mdst-radio-label</span><br />
-              <span class="class-name">.mdst-radio</span>
+              <span class="class-name">&lt;label&gt;</span><br />
+              <span class="class-name">.mdst-input</span>
             </td>
             <td>
-              <label class="mdst-radio-label">
-                <input type="radio" name="demo1" class="mdst-radio" />
+              <label>
+                <input type="radio" name="demo1" class="mdst-input" />
                 Unselected
               </label>
             </td>
@@ -40,8 +40,8 @@
               <span class="class-name">checked</span>
             </td>
             <td>
-              <label class="mdst-radio-label">
-                <input type="radio" name="demo2" class="mdst-radio" checked />
+              <label>
+                <input type="radio" name="demo2" class="mdst-input" checked />
                 Selected
               </label>
             </td>
@@ -51,8 +51,8 @@
               <span class="class-name">disabled</span>
             </td>
             <td>
-              <label class="mdst-radio-label">
-                <input type="radio" name="demo3" class="mdst-radio" disabled />
+              <label>
+                <input type="radio" name="demo3" class="mdst-input" disabled />
                 Disabled
               </label>
             </td>
@@ -77,16 +77,16 @@
             </td>
             <td>
               <div class="mdst-radio-group">
-                <label class="mdst-radio-label">
-                  <input type="radio" name="vertical" class="mdst-radio" checked />
+                <label>
+                  <input type="radio" name="vertical" class="mdst-input" checked />
                   Option 1
                 </label>
-                <label class="mdst-radio-label">
-                  <input type="radio" name="vertical" class="mdst-radio" />
+                <label>
+                  <input type="radio" name="vertical" class="mdst-input" />
                   Option 2
                 </label>
-                <label class="mdst-radio-label">
-                  <input type="radio" name="vertical" class="mdst-radio" />
+                <label>
+                  <input type="radio" name="vertical" class="mdst-input" />
                   Option 3
                 </label>
               </div>
@@ -98,16 +98,16 @@
             </td>
             <td>
               <div class="mdst-radio-group mdst-radio-group--horizontal">
-                <label class="mdst-radio-label">
-                  <input type="radio" name="horizontal" class="mdst-radio" checked />
+                <label>
+                  <input type="radio" name="horizontal" class="mdst-input" checked />
                   Option 1
                 </label>
-                <label class="mdst-radio-label">
-                  <input type="radio" name="horizontal" class="mdst-radio" />
+                <label>
+                  <input type="radio" name="horizontal" class="mdst-input" />
                   Option 2
                 </label>
-                <label class="mdst-radio-label">
-                  <input type="radio" name="horizontal" class="mdst-radio" />
+                <label>
+                  <input type="radio" name="horizontal" class="mdst-input" />
                   Option 3
                 </label>
               </div>
@@ -129,10 +129,10 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name">.mdst-radio</span>
+              <span class="class-name">.mdst-input</span>
             </td>
             <td>
-              <input type="radio" name="standalone" class="mdst-radio" />
+              <input type="radio" name="standalone" class="mdst-input" aria-label="Radio example" />
             </td>
           </tr>
         </tbody>
@@ -157,15 +157,15 @@
             <td>
               <div class="mdst-radio-card-group">
                 <label class="mdst-radio-card">
-                  <input type="radio" name="card-demo" class="mdst-radio" checked />
+                  <input type="radio" name="card-demo" class="mdst-input" checked />
                   Option A
                 </label>
                 <label class="mdst-radio-card">
-                  <input type="radio" name="card-demo" class="mdst-radio" />
+                  <input type="radio" name="card-demo" class="mdst-input" />
                   Option B
                 </label>
                 <label class="mdst-radio-card">
-                  <input type="radio" name="card-demo" class="mdst-radio" />
+                  <input type="radio" name="card-demo" class="mdst-input" />
                   Option C
                 </label>
               </div>
@@ -178,11 +178,11 @@
             <td>
               <div class="mdst-radio-card-group">
                 <label class="mdst-radio-card">
-                  <input type="radio" name="card-disabled" class="mdst-radio" disabled checked />
+                  <input type="radio" name="card-disabled" class="mdst-input" disabled checked />
                   Option A
                 </label>
                 <label class="mdst-radio-card">
-                  <input type="radio" name="card-disabled" class="mdst-radio" disabled />
+                  <input type="radio" name="card-disabled" class="mdst-input" disabled />
                   Option B
                 </label>
               </div>
@@ -192,22 +192,26 @@
       </table>
     </div>
 
+    <p class="footnote">
+      <strong>The class is optional inside <code class="mdst-code">.mdst-ui</code>.</strong> A bare <code class="mdst-code">&lt;input type="radio"&gt;</code> there gets the same styles.
+    </p>
+
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- With label (recommended) --&gt;
-&lt;label class="mdst-radio-label"&gt;
-  &lt;input type="radio" name="group" class="mdst-radio" /&gt;
+&lt;label&gt;
+  &lt;input type="radio" name="group" class="mdst-input" /&gt;
   Label text
 &lt;/label&gt;
 
 &lt;!-- Radio group (vertical) --&gt;
 &lt;div class="mdst-radio-group"&gt;
-  &lt;label class="mdst-radio-label"&gt;
-    &lt;input type="radio" name="group" class="mdst-radio" checked /&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="group" class="mdst-input" checked /&gt;
     Option 1
   &lt;/label&gt;
-  &lt;label class="mdst-radio-label"&gt;
-    &lt;input type="radio" name="group" class="mdst-radio" /&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="group" class="mdst-input" /&gt;
     Option 2
   &lt;/label&gt;
 &lt;/div&gt;
@@ -220,11 +224,11 @@
 &lt;!-- Radio card --&gt;
 &lt;div class="mdst-radio-card-group"&gt;
   &lt;label class="mdst-radio-card"&gt;
-    &lt;input type="radio" name="group" class="mdst-radio" checked /&gt;
+    &lt;input type="radio" name="group" class="mdst-input" checked /&gt;
     Any content here
   &lt;/label&gt;
   &lt;label class="mdst-radio-card"&gt;
-    &lt;input type="radio" name="group" class="mdst-radio" /&gt;
+    &lt;input type="radio" name="group" class="mdst-input" /&gt;
     Any content here
   &lt;/label&gt;
 &lt;/div&gt;</code></pre>

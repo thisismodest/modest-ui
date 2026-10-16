@@ -71,7 +71,7 @@
           <tr>
             <td>Error parent</td>
             <td>
-              <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); color: var(--mdst-color-error)">
+              <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); color: var(--mdst-color-danger)">
                 <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Error"></span>
                 <span>Something went wrong</span>
               </div>
@@ -103,7 +103,7 @@
       <div class="section-header">Examples</div>
       <div class="examples" style="gap: var(--mdst-space-md)">
         <div style="display: flex; align-items: center; gap: var(--mdst-space-sm)">
-          <button class="mdst-button" disabled>
+          <button type="button" class="mdst-button" disabled>
             <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Submitting"></span>
             Submitting
           </button>
@@ -144,7 +144,7 @@
 &lt;span class="mdst-spinner mdst-spinner--lg" role="status" aria-label="Loading"&gt;&lt;/span&gt;
 
 &lt;!-- Inherits currentColor from parent --&gt;
-&lt;div style="color: var(--mdst-color-error)"&gt;
+&lt;div style="color: var(--mdst-color-danger)"&gt;
   &lt;span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Error"&gt;&lt;/span&gt;
   Something went wrong
 &lt;/div&gt;

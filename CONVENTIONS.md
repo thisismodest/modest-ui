@@ -13,12 +13,15 @@ Guidelines for contributing to modest-ui.
 ## Naming
 
 - **Prefix**: All classes use the `mdst-` prefix
-- **BEM-style naming**:
-  - Block: `.mdst-component`
-  - Element: `.mdst-component-element` (single dash, not double underscore)
-  - Modifier: `.mdst-component--variant`
-- **Child elements**: Use single dash for children (`.mdst-dialog-header`, `.mdst-dialog-body`)
-- **BEM `__` syntax**: Reserved for tightly coupled sub-elements (`.mdst-color-picker__input`)
+- **BEM naming**:
+  - Block: `.mdst-component` (a hyphenated block name is still one block, e.g. `.mdst-toast-group`, `.mdst-radio-card`)
+  - Element (a part inside a block): `.mdst-component__element`, e.g. `.mdst-dialog__header`, `.mdst-tabs__panel`
+  - Modifier: `.mdst-component--variant`, or `.mdst-component__element--variant` on an element
+- **Shared modifier vocabulary**, so the same idea has the same name everywhere:
+  - Status: `--success`, `--info`, `--warning`, `--danger` (plus `--muted` where it applies)
+  - Fill and edge: `--solid` (filled with the colour), `--subtle` (tinted), `--borderless` (no visible border)
+  - Size: `--sm`, `--lg` (and `--xl` where a component needs it)
+- **Data attributes are for runtime state** that JS toggles (`data-state`), never for fixed choices like status or size.
 
 ## Classless Defaults
 
@@ -30,7 +33,7 @@ There are three layers, in order of specificity:
 
 1. **Classless layer** — `:where(.mdst-ui) button { ... }` — specificity `(0, 0, 1)`. Styles bare elements for free.
 2. **Class layer** — `.mdst-button { ... }` — specificity `(0, 1, 0)`. Explicit opt-in, always overrides classless.
-3. **Variant modifiers** — work on both bare elements and class-based elements. On bare elements they're defined as `:where(.mdst-ui) button.mdst-button--ghost`, on class-based elements as `.mdst-button.mdst-button--ghost`.
+3. **Variant modifiers** — work on both bare elements and class-based elements. On bare elements they're defined as `:where(.mdst-ui) button.mdst-button--borderless`, on class-based elements as `.mdst-button.mdst-button--borderless`.
 
 ### Selector format
 
@@ -54,31 +57,104 @@ Use flat selectors (no nesting) for classless rules to keep them straightforward
   /* ... */
 }
 
-:where(.mdst-ui) button:hover,
-.mdst-button:hover {
-  background: var(--mdst-button-hover-bg);
+:where(.mdst-ui) button:focus-visible,
+.mdst-button:focus-visible {
+  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
 }
 
 /* Variants work on bare elements too */
-:where(.mdst-ui) button.mdst-button--ghost,
-.mdst-button.mdst-button--ghost {
-  border-color: transparent;
+:where(.mdst-ui) select.mdst-dropdown--sm,
+.mdst-dropdown.mdst-dropdown--sm {
+  font-size: var(--mdst-text-sm);
 }
 ```
+
+### Cascade layer
+
+Every library CSS file wraps its rules in a layer: `@layer mdst-ui.base { … }` for `base/tokens.css` and `base/reset.css`, and `@layer mdst-ui.components { … }` for everything in `components/`. The order is declared once at the top of `tokens.css` and `index.css`:
+
+```css
+@layer mdst-ui.base, mdst-ui.components;
+```
+
+This means anything outside a layer, including all of a user's own CSS, beats the library, and the reset can never beat a component. When you add a component file, wrap it the same way.
+
+### Write for both text directions
+
+Use logical properties so components mirror in right-to-left pages: `margin-inline-start` not `margin-left`, `inset-inline-end` not `right`, `border-inline-start`, `padding-inline-end`, `text-align: start`. Name direction modifiers `--start` and `--end`, never `--left` and `--right`.
+
+Where there's no logical form (sideways `translate`, `background-position`), use a private variable flipped with `:dir(rtl)`:
+
+```css
+.mdst-drawer {
+  --_dir: 1;
+  transform: translateX(calc(100% * var(--_dir)));
+
+  &:dir(rtl) {
+    --_dir: -1;
+  }
+}
+```
+
+### Size with border-box
+
+Most projects have a `*, *::before, *::after { box-sizing: border-box }` reset, and because it's outside a layer it beats ours. So never rely on `content-box`: declare `box-sizing: border-box` and include the border in fixed sizes, e.g. `width: calc(0.875rem + 2 * var(--mdst-border-width))`. A component then measures the same with or without the user's reset.
+
+### Classless selectors only count the element
+
+Inside a classless selector, only the element type may add specificity. Attribute selectors and pseudo-classes go inside `:where()`; pseudo-elements stay outside:
+
+```css
+/* Right — (0, 0, 1), so any class beats it */
+:where(.mdst-ui) input:where([type="checkbox"]:checked)::after { … }
+
+/* Wrong — (0, 2, 1), beats single classes like .mdst-input--pill */
+:where(.mdst-ui) input[type="checkbox"]:checked::after { … }
+```
+
+Components that need margins removed for class-only use (outside `.mdst-ui`) list their class in `base/reset.css` rather than setting `margin: 0` themselves. The reset is in the base layer, so flow spacing still applies.
+
+### Interactive states set variables, not properties
+
+A classless state such as `:where(.mdst-ui) button:hover` has specificity `(0, 1, 1)`, which beats a single component class like `.mdst-toast__close`. If the state set `background` directly, it would leak into every component that reuses a bare `<button>`.
+
+So state rules only change a private variable, and the base rule reads it. A component that reskins a bare `<button>` opts out with a plain property reset, which always beats the classless base rule:
+
+```css
+:where(.mdst-ui) button,
+.mdst-button {
+  box-shadow: var(--_hover, none);
+}
+
+:where(.mdst-ui) button:hover,
+.mdst-button:hover {
+  --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
+}
+
+/* A component's own button: */
+.mdst-toast__close {
+  box-shadow: none;
+}
+```
+
+Variants follow the same idea: they set the component's public variables (`--mdst-button-tone`, `--mdst-button-bg`, …) instead of properties, so a single class works on any element, combines with other variants, and users can write their own variant the same way.
 
 ### What gets classless defaults
 
 Components that map 1:1 to a native HTML element:
 
+Every `<input>` type shares one class, `.mdst-input`, and each component styles its own type with `.mdst-input:where([type="…"])`. The text field rule skips the types that have their own component, so no two rules compete.
+
 | Component  | Selector                                                                                   |
 | ---------- | ------------------------------------------------------------------------------------------ |
 | Button     | `button`, `input[type="submit"]`, `input[type="reset"]`, `input[type="button"]`            |
-| Input      | `input:not([type="checkbox"], [type="radio"], ...)`, `textarea`                            |
-| Checkbox   | `input[type="checkbox"]`                                                                   |
+| Text       | `input:not([type="checkbox"], [type="radio"], ...)`, `textarea`                            |
+| Checkbox   | `input[type="checkbox"]`, and `[role="switch"]` for the toggle                            |
 | Radio      | `input[type="radio"]`                                                                      |
-| Dropdown   | `select`                                                                                   |
-| File Input | `input[type="file"]`                                                                       |
 | Range      | `input[type="range"]`                                                                      |
+| File       | `input[type="file"]`                                                                       |
+| Color      | `input[type="color"]`                                                                      |
+| Dropdown   | `select`                                                                                   |
 | Details    | `details`                                                                                  |
 | Dialog     | `dialog`                                                                                   |
 | Table      | `table`, `th`, `td`                                                                        |
@@ -99,7 +175,6 @@ Components that don't map to a single native element (they use generic tags like
 - Popover (`.mdst-popover`)
 - Password Input (`.mdst-password-input`)
 - OTP Input (`.mdst-otp-input`)
-- Color Picker (`.mdst-color-picker`)
 - Badge (`.mdst-badge`)
 - Banner (`.mdst-banner`)
 - Breadcrumbs (`.mdst-breadcrumbs`)
@@ -110,14 +185,16 @@ Components that don't map to a single native element (they use generic tags like
 
 ### What uses data attributes for state
 
-Some components need state changes — tabs that switch, steps that advance, toasts that appear. Instead of shipping JavaScript, modest-ui styles every possible state via data attributes. You bring whatever JS you want (a framework, vanilla event listeners, Alpine.js) and toggle `data-state`, `data-variant`, etc. We handle the CSS, you handle the behavior.
+Some components need state changes — tabs that switch, steps that advance, toasts that appear. Instead of shipping JavaScript, modest-ui styles every possible state via data attributes. You bring whatever JS you want (a framework, vanilla event listeners, Alpine.js) and toggle `data-state` and friends. We handle the CSS, you handle the behavior.
 
-| Component | Data Attributes                                                            |
-| --------- | -------------------------------------------------------------------------- |
-| Tabs      | `data-state="active/inactive"`, `data-disabled`                            |
-| Banner    | `data-state="visible/hidden"`, `data-variant="success/error/warning/info"` |
-| Toast     | `data-state="visible/hidden"`, `data-variant="success/error/warning/info"` |
-| Stepper   | `data-state="completed/active/upcoming/error"`                             |
+Data attributes are for runtime state only. Fixed choices such as colour or size are modifier classes (`.mdst-toast--success`), the same as every other component.
+
+| Component | Data Attributes                                 |
+| --------- | ----------------------------------------------- |
+| Tabs      | `data-state="active/inactive"`, `data-disabled` |
+| Banner    | `data-state="visible/hidden"`                   |
+| Toast     | `data-state="visible/hidden"`                   |
+| Stepper   | `data-state="completed/active/upcoming/error"`  |
 
 Data attribute components are still class-only (they use `.mdst-*` classes for structure). The data attributes control **runtime state**, not base styling.
 
@@ -147,63 +224,44 @@ Each component lives in its own folder:
 components/
 └── my-component/
     ├── my-component.css    # Component styles (required)
-    ├── preview.html        # Documentation preview (required)
-    └── my-component.js     # Optional JavaScript
+    ├── config.js           # Title, class name, and description (required)
+    └── preview.html        # Documentation preview (required)
 ```
+
+modest-ui is CSS only. If a docs page needs JavaScript to demonstrate behaviour (switching tabs, revealing a password), keep it in `preview.html` and label it as example code.
 
 ## CSS Guidelines
 
 ### Tokens
 
-Always use design tokens from `base/tokens.css`:
+Always use design tokens from `base/tokens.css` rather than raw values. The full list, with defaults, is in that file and in `llms.txt`. The groups:
 
-```css
-/* Colors */
---mdst-color-fg
---mdst-color-bg
---mdst-color-border
---mdst-color-muted
---mdst-color-subtle
---mdst-color-focus
---mdst-color-error
---mdst-color-success
-
-/* Spacing */
---mdst-space-xs  /* 0.25rem */
---mdst-space-sm  /* 0.5rem */
---mdst-space-md  /* 1rem */
---mdst-space-lg  /* 1.5rem */
---mdst-space-xl  /* 2rem */
-
-/* Typography */
---mdst-font-sans
---mdst-font-mono
---mdst-text-xs
---mdst-text-sm
---mdst-text-base
---mdst-text-lg
-
-/* Other */
---mdst-radius
---mdst-border-width
---mdst-transition
-```
+- **Colour:** `--mdst-color-fg`, `-bg`, `-border`, `-muted`, `-subtle`, `-focus`, `-danger`, `-warning`, `-success` (and optional `--mdst-color-info`)
+- **Type:** `--mdst-font-text`, `--mdst-font-ui`, `--mdst-font-mono`, `--mdst-text-xs` to `--mdst-text-xl`, `--mdst-line-height`
+- **Space:** `--mdst-space-xs` to `--mdst-space-xl` (and the numeric scale they alias), `--mdst-flow-space`
+- **Shape:** `--mdst-radius`, `--mdst-border-width`
+- **Focus:** `--mdst-focus-offset` (and optional `--mdst-focus-ring`)
+- **Motion:** `--mdst-transition-fast`, `--mdst-transition`, `--mdst-transition-slow`
+- **Depth:** `--mdst-shadow-sm`, `--mdst-shadow`, `--mdst-backdrop`, `--mdst-z-overlay`
+- **State:** `--mdst-disabled-opacity`
 
 ### Native CSS Nesting
 
-All component CSS must use native CSS nesting. Each component should have a **single top-level selector** (the root block class), with everything else nested inside it:
+Two shapes, depending on whether the component has a classless form:
+
+- **Classless and class share rules** (button, input, checkbox, table…): flat, comma-separated selector lists, so every classless selector stays visible and greppable. `button.css` is the model.
+- **Class-only components** (card, tabs, toast…): native CSS nesting under a **single top-level selector**, the block class, with everything else nested inside it:
 
 - **Pseudo-classes** (`:hover`, `:focus-visible`, `:disabled`, `:checked`) nest with `&:pseudo`
 - **Pseudo-elements** (`::before`, `::after`, `::backdrop`) nest with `&::pseudo`
 - **Sub-states** (e.g. `:disabled:hover`, `:checked::before`) nest further inside their parent state block
-- **Child elements** (`-header`, `-body`, `__field`, `__input`) nest with `& .mdst-component-child`
+- **Elements** (`__header`, `__body`, `__field`) nest with `& .mdst-component__element`
 - **Modifier classes** (`--variant`, `--sm`) nest with `&.mdst-component--variant`
 - **Contextual selectors** (`:has()`) nest with `&:has()`
 
 Exceptions for separate top-level blocks:
 
-- **Wrapper/sibling elements** that are not DOM children of the root (e.g. `.mdst-checkbox-label` wraps the checkbox, `.mdst-radio-label` wraps the radio)
-- **Replacement elements** that go on a different element entirely (e.g. `.mdst-checkbox--toggle` replaces `.mdst-checkbox` on the input)
+- **Wrapper elements** that are not DOM children of the root (e.g. the `label` that wraps a checkbox, matched with `label:has(> .mdst-input[type="checkbox"])`)
 - **Unrelated element collections** (e.g. typography classes like `.mdst-h1`, `.mdst-p`, `.mdst-a`)
 - **`@media` blocks** remain at the top level with their component selector nested inside
 
@@ -234,10 +292,10 @@ Exceptions for separate top-level blocks:
     }
   }
 
-  /* Child elements */
+  /* Elements */
 
-  & .mdst-component-child {
-    /* Child styles */
+  & .mdst-component__element {
+    /* Element styles */
   }
 
   /* Variants */
@@ -355,26 +413,20 @@ End each preview with a usage section:
 
 ## Scripts
 
-- `npm run dev` - Start local server at http://localhost:8000
-- `npm run generate` - Scan components and update sidebar + classNames in index.html
-- `npm run build` - Bundle all CSS into dist/modest-ui.css
+- `npm run dev` - Build everything and serve the site at http://localhost:8000
+- `npm run build` - Build the bundle (`dist/`), `llms.txt`, and the docs site
 
 ## Adding a New Component
 
-1. Create the component folder with CSS and preview.html (see Component Structure above)
-2. Add the import to `index.css`
-3. Run `npm run generate` — this automatically updates:
-   - The sidebar links in `index.html`
-   - The `classNames` object used for displaying the class in the header
-
-### Class Name Convention
-
-By default, the generate script derives class names using `.mdst-{slug}` (e.g., `button` → `.mdst-button`).
-
-For components that don't follow this convention, add an override in `scripts/generate-preview.js`:
+1. Create the component folder with `<slug>.css`, `config.js`, and `preview.html` (see Component Structure above)
+2. Wrap the CSS in `@layer mdst-ui.components { … }` and add the import to `index.css`
+3. Run `npm run build`. The sidebar, the docs page header, and `llms.txt` all come from `config.js`:
 
 ```javascript
-const classOverrides = {
-  typography: ".mdst-*",
+export default {
+  title: "Stepper",
+  className: ".mdst-stepper", // shown in the docs header
+  description: "One sentence on what it is and its main variants.",
+  group: "Input" // optional: nests it under a sidebar group
 };
 ```

@@ -1,80 +1,87 @@
-/*
- * OTP Input
- *
- * Usage:
- * <div class="mdst-otp-input">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- * </div>
- *
- * With separator:
- * <div class="mdst-otp-input">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <span class="mdst-otp-input-separator"></span>
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- * </div>
- */
+@layer mdst-ui.components {
+  /*
+   * OTP Input
+   *
+   * Usage:
+   * <div class="mdst-otp-input">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   * </div>
+   *
+   * With separator:
+   * <div class="mdst-otp-input">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <span class="mdst-otp-input__separator"></span>
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   *   <input type="text" maxlength="1" inputmode="numeric">
+   * </div>
+   */
 
-.mdst-otp-input {
-  display: inline-flex;
-  gap: var(--mdst-space-sm);
-  align-items: center;
+  .mdst-otp-input {
+    display: inline-flex;
+    gap: var(--mdst-space-sm);
+    align-items: center;
 
-  & .mdst-otp-input-digit {
-    width: 1.5em;
-    height: 2em;
-    padding: 0;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: var(--mdst-radius);
-    background: var(--mdst-color-bg);
-    color: var(--mdst-color-fg);
-    font-family: var(--mdst-font-mono);
-    font-size: 1.25em;
-    text-align: center;
-    caret-color: var(--mdst-color-fg);
-    transition: border-color var(--mdst-transition);
+    & > input {
+      width: 1.5em;
+      height: 2em;
+      padding: 0;
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      border-radius: var(--mdst-radius);
+      background: var(--mdst-color-bg);
+      color: var(--mdst-color-fg);
+      font-family: var(--mdst-font-mono);
+      font-size: 1.25em;
+      text-align: center;
+      caret-color: var(--mdst-color-fg);
+      transition: border-color var(--mdst-transition);
 
-    &:focus {
-      outline: none;
-      border-color: var(--mdst-color-focus);
+      &:focus {
+        border-color: var(--mdst-color-focus);
+      }
+
+      &:focus-visible {
+        outline-offset: 0;
+      }
+
+      &::placeholder {
+        color: var(--mdst-color-muted);
+      }
+
+      &:disabled {
+        opacity: var(--mdst-disabled-opacity);
+        cursor: not-allowed;
+      }
+
+      /* Filled state: a digit with a placeholder that's no longer showing.
+         Needs a placeholder (e.g. placeholder="0"); without one the browser
+         can't tell empty from filled. */
+      &[placeholder]:not(:placeholder-shown) {
+        border-color: var(--mdst-color-fg);
+      }
     }
 
-    &::placeholder {
-      color: var(--mdst-color-muted);
+    /* Separator (e.g., dash between groups) */
+
+    & .mdst-otp-input__separator {
+      width: 0.5em;
+      height: 0.0625em;
+      background: var(--mdst-color-border);
     }
 
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    /* Error state */
+
+    &.mdst-otp-input--danger > input {
+      border-color: var(--mdst-color-danger);
     }
 
-    /* Filled state - when digit has a value */
-    &:not(:placeholder-shown) {
-      border-color: var(--mdst-color-fg);
+    /* Success state */
+
+    &.mdst-otp-input--success > input {
+      border-color: var(--mdst-color-success);
     }
-  }
-
-  /* Separator (e.g., dash between groups) */
-
-  & .mdst-otp-input-separator {
-    width: 0.5em;
-    height: 0.0625em;
-    background: var(--mdst-color-border);
-  }
-
-  /* Error state */
-
-  &.mdst-otp-input--error .mdst-otp-input-digit {
-    border-color: var(--mdst-color-error);
-  }
-
-  /* Success state */
-
-  &.mdst-otp-input--success .mdst-otp-input-digit {
-    border-color: var(--mdst-color-success);
   }
 }
