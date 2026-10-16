@@ -1399,13 +1399,10 @@ import "mdst-ui";</pre>
         // off immediately and hover transitions keep working afterwards.
         function applyScoped(el, name) {
           el.classList.add("home-instant");
-          Object.keys(theme.presets.default).forEach(function (key) {
-            el.style.removeProperty(key);
-          });
-          if (name !== "default") {
-            var vars = theme.buildCSSVars(theme.presets[name]);
-            for (var key in vars) el.style.setProperty(key, vars[key]);
-          }
+          // Always set the preset's tokens, including Default, so the area
+          // shows the real default rather than the visitor's saved site theme
+          var vars = theme.buildCSSVars(theme.presets[name]);
+          for (var key in vars) el.style.setProperty(key, vars[key]);
           el.offsetHeight;
           el.classList.remove("home-instant");
         }
@@ -1429,6 +1426,7 @@ import "mdst-ui";</pre>
 
           theme.buildSelectOptions(builderTheme, false);
           builderTheme.value = "default";
+          applyScoped(stage, "default");
           builderTheme.addEventListener("change", function () {
             applyScoped(canvas, builderTheme.value);
           });
@@ -1708,10 +1706,14 @@ import "mdst-ui";</pre>
           cta: {
             label: "Announcement",
             html: [
-              '<div class="mdst-banner mdst-banner--info" role="region" aria-label="Announcement">',
-              '  <div class="mdst-banner__content">Acme 2.0 is live. Read what\'s new.</div>',
-              '  <div class="mdst-banner__actions"><button class="mdst-button--sm">Read more</button></div>',
-              "</div>"
+              '<section class="pg-section">',
+              '  <div class="pg-inner">',
+              '    <div class="mdst-banner mdst-banner--info" role="region" aria-label="Announcement">',
+              '      <div class="mdst-banner__content">Acme 2.0 is live. Read what\'s new.</div>',
+              '      <div class="mdst-banner__actions"><button class="mdst-button--sm">Read more</button></div>',
+              "    </div>",
+              "  </div>",
+              "</section>"
             ]
           },
           footer: {
@@ -1894,6 +1896,7 @@ import "mdst-ui";</pre>
         });
 
         renderBuilder();
+        if (theme) applyScoped(canvas, "default");
       })();
     </script>
   </body>
