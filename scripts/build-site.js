@@ -52,9 +52,13 @@ async function getPages() {
 // HTML extraction
 // ---------------------------------------------------------------------------
 
+// The body runs to the last </body>, so a "</body>" inside a script string
+// (the homepage builder writes out whole pages) doesn't cut it short.
 function extractBody(html) {
-  const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-  return match ? match[1] : "";
+  const open = html.match(/<body[^>]*>/i);
+  const end = html.toLowerCase().lastIndexOf("</body>");
+  if (!open || end < open.index) return "";
+  return html.slice(open.index + open[0].length, end);
 }
 
 /**
