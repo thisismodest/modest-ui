@@ -1544,7 +1544,7 @@ import "mdst-ui";</pre>
           ".pg-muted { color: var(--mdst-color-muted); font-size: var(--mdst-text-sm); }",
           ".pg-price { font-size: 2rem; font-weight: 700; }",
           ".pg-form { display: grid; gap: 1rem; width: 100%; max-width: 26rem; margin: 0 auto; text-align: left; }",
-          ".pg-form label { display: grid; gap: 0.25rem; }",
+          ".pg-form label:not(:has(input[type=checkbox])) { display: grid; gap: 0.25rem; }",
           ".pg-quote { display: grid; gap: 1rem; justify-items: center; text-align: center; }",
           ".pg-quote blockquote { font-size: var(--mdst-text-lg); }",
           ".pg-person { display: flex; align-items: center; gap: 0.5rem; text-align: left; }",
@@ -1844,7 +1844,9 @@ import "mdst-ui";</pre>
             .join("\n");
         }
 
-        function exportHTML() {
+        // Copy HTML links the CDN; Open in new tab uses this site's own bundle,
+        // so the preview matches the page even before a release reaches npm
+        function exportHTML(stylesheet) {
           var chosen = theme && builderTheme.value !== "default" ? theme.buildCSSVars(theme.presets[builderTheme.value]) : null;
           var tokens = chosen
             ? ":root {\n" +
@@ -1863,7 +1865,7 @@ import "mdst-ui";</pre>
             '    <meta charset="UTF-8" />',
             '    <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
             "    <title>My page</title>",
-            '    <link rel="stylesheet" href="' + CDN + '" />',
+            '    <link rel="stylesheet" href="' + stylesheet + '" />',
             "    <style>",
             "      /* Theme: modest-ui tokens */",
             indent(tokens, 6),
@@ -1883,11 +1885,11 @@ import "mdst-ui";</pre>
         }
 
         document.getElementById("builder-copy").addEventListener("click", function () {
-          copy(exportHTML(), "Page HTML copied");
+          copy(exportHTML(CDN), "Page HTML copied");
         });
 
         document.getElementById("builder-open").addEventListener("click", function () {
-          var url = URL.createObjectURL(new Blob([exportHTML()], { type: "text/html" }));
+          var url = URL.createObjectURL(new Blob([exportHTML(location.origin + "/dist/modest-ui.min.css")], { type: "text/html" }));
           window.open(url, "_blank");
           setTimeout(function () {
             URL.revokeObjectURL(url);
