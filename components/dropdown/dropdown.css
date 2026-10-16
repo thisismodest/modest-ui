@@ -109,4 +109,12 @@
       border-color: CanvasText;
     }
   }
+
+  /* Multi-selects and list boxes show as an open list, so they get no
+     dropdown arrow. Last in the file so it also wins in forced colours. */
+  :where(.mdst-ui) select:where([multiple], [size]:not([size="1"])),
+  .mdst-dropdown:is([multiple], [size]:not([size="1"])) {
+    background-image: none;
+    padding-inline-end: var(--mdst-space-sm);
+  }
 }

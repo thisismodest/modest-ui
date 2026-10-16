@@ -51,6 +51,12 @@
     cursor: not-allowed;
   }
 
+  /* The label already fades, so the radio inside doesn't fade twice */
+  :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)) > input,
+  .mdst-radio-label:has(.mdst-radio:disabled) .mdst-radio {
+    opacity: 1;
+  }
+
   /* Radio group */
 
   .mdst-radio-group {

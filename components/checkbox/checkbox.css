@@ -51,6 +51,13 @@
     cursor: not-allowed;
   }
 
+  /* The label already fades, so the control inside doesn't fade twice */
+  :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)) > input,
+  label:has(> .mdst-toggle:disabled) > .mdst-toggle,
+  .mdst-checkbox-label:has(.mdst-checkbox:disabled) .mdst-checkbox {
+    opacity: 1;
+  }
+
   /* Toggle variant */
 
   :where(.mdst-ui) input.mdst-toggle:where([type="checkbox"]),

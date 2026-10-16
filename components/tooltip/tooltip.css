@@ -17,10 +17,6 @@
        block below pins it to the trigger where anchor positioning is available. */
     margin: auto;
 
-    &:popover-open {
-      opacity: 1;
-    }
-
     /* Anchor positioning links the tooltip to its invoking trigger.
        Baseline Chrome 129 / Firefox 147 / Safari 26; older browsers keep the
        centered fallback above. */

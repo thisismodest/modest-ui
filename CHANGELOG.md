@@ -118,6 +118,19 @@ elements, so they keep their names.
 - `checkbox`, `toggle`, `radio`: sized with `border-box` and the border
   included, so a project-wide `box-sizing: border-box` reset no longer
   shrinks them or pushes the toggle's thumb over its border.
+- Disabled checkboxes and radios inside a label fade once, not twice (the
+  label and the control both faded, leaving 25%).
+- `file-input`: the class-based field now looks the same as the classless
+  one (it had no border or padding), disabled file inputs fade like other
+  controls, and the CSS shares one set of rules for both.
+- `otp-input`: the filled style only applies to digits with a placeholder.
+  Without one, every empty digit looked filled.
+- `dropdown`: multi-selects and list boxes no longer show a dropdown arrow.
+- `breadcrumbs`: items no longer pick up list-item margins.
+- Removed rules that did nothing (popover and tooltip open opacity, dialog
+  close hover resets, a repeated badge size, a repeated dialog height) and
+  obsolete `pre` properties. `.mdst-sr-only` uses `clip-path` instead of the
+  deprecated `clip`.
 - `card`: `--borderless` no longer forces header and footer dividers back, so
   `__header--borderless` and `__footer--borderless` work on borderless cards.
   Removed two rules that did nothing.

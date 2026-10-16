@@ -61,8 +61,6 @@
 
   :where(.mdst-ui) dialog .mdst-dialog__close:where(:hover),
   .mdst-dialog .mdst-dialog__close:hover {
-    background: transparent;
-    border: none;
     color: var(--mdst-color-fg);
   }
 
@@ -101,6 +99,5 @@
   :where(.mdst-ui) dialog.mdst-dialog--full,
   .mdst-dialog.mdst-dialog--full {
     max-width: 90vw;
-    max-height: 90vh;
   }
 }

@@ -16,10 +16,6 @@
     width: fit-content;
     height: fit-content;
 
-    &:popover-open {
-      opacity: 1;
-    }
-
     /* Anchored positioning - use with anchor="" HTML attribute.
        Guarded so browsers without CSS anchor positioning (Baseline Chrome 129 /
        Firefox 147 / Safari 26) keep the centered default above instead of

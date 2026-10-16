@@ -1,9 +1,17 @@
 @layer mdst-ui.components {
-  /* File Input */
+  /* File Input
 
-  /* Classless: bare input[type="file"] inside .mdst-ui */
+     Classless (a bare input[type="file"] inside .mdst-ui) and class-based
+     (.mdst-file-input__field inside a .mdst-file-input wrapper) share every
+     rule, so both look the same. */
 
-  :where(.mdst-ui) input:where([type="file"]) {
+  .mdst-file-input {
+    display: block;
+    width: 100%;
+  }
+
+  :where(.mdst-ui) input:where([type="file"]),
+  .mdst-file-input__field {
     display: block;
     width: 100%;
     color: var(--mdst-color-muted);
@@ -18,16 +26,27 @@
     transition: border-color var(--mdst-transition);
   }
 
-  :where(.mdst-ui) input:where([type="file"]:focus) {
+  :where(.mdst-ui) input:where([type="file"]:focus),
+  .mdst-file-input__field:focus {
     border-color: var(--mdst-color-focus);
   }
 
   :where(.mdst-ui) input:where([type="file"]:focus-visible),
-  .mdst-file-input .mdst-file-input__field:focus-visible {
+  .mdst-file-input__field:focus-visible {
     outline-offset: 0;
   }
 
-  :where(.mdst-ui) input:where([type="file"])::file-selector-button {
+  :where(.mdst-ui) input:where([type="file"]:disabled),
+  .mdst-file-input__field:disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* The "Choose file" button follows the button component: same hover ring
+     and the same variables */
+
+  :where(.mdst-ui) input:where([type="file"])::file-selector-button,
+  .mdst-file-input__field::file-selector-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -50,82 +69,34 @@
       box-shadow var(--mdst-transition);
   }
 
-  :where(.mdst-ui) input:where([type="file"]:hover)::file-selector-button {
+  :where(.mdst-ui) input:where([type="file"]:hover)::file-selector-button,
+  .mdst-file-input__field:hover::file-selector-button {
     --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
   }
 
-  :where(.mdst-ui) input:where([type="file"]:disabled)::file-selector-button {
+  :where(.mdst-ui) input:where([type="file"]:disabled)::file-selector-button,
+  .mdst-file-input__field:disabled::file-selector-button {
+    --_hover: none;
     cursor: not-allowed;
   }
 
-  :where(.mdst-ui) input:where([type="file"]:disabled:hover)::file-selector-button {
-    --_hover: none;
-  }
-
-  /* Classless variant modifiers on bare file inputs */
+  /* Variants: on the bare input, or on the wrapper */
 
   :where(.mdst-ui) input.mdst-file-input--solid:where([type="file"])::file-selector-button,
-  .mdst-file-input.mdst-file-input--solid .mdst-file-input__field::file-selector-button {
+  .mdst-file-input--solid .mdst-file-input__field::file-selector-button {
     --_bg: var(--mdst-color-fg);
     --_fg: var(--mdst-color-bg);
     border-color: var(--mdst-color-fg);
   }
 
   :where(.mdst-ui) input.mdst-file-input--borderless:where([type="file"]),
-  .mdst-file-input.mdst-file-input--borderless .mdst-file-input__field {
+  .mdst-file-input--borderless .mdst-file-input__field {
     border-color: transparent;
     padding: 0;
   }
 
-  :where(.mdst-ui) input.mdst-file-input--borderless:where([type="file"]:focus-visible),
-  .mdst-file-input.mdst-file-input--borderless .mdst-file-input__field:focus-visible {
-    border-color: var(--mdst-color-focus);
-  }
-
-  /* Class-based: wrapper + field pattern */
-
-  .mdst-file-input {
-    display: block;
-    width: 100%;
-
-    & .mdst-file-input__field {
-      color: var(--mdst-color-muted);
-      cursor: pointer;
-
-      &::file-selector-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: var(--mdst-space-xs);
-        padding: var(--mdst-space-xs) var(--mdst-space-md);
-        margin-inline-end: var(--mdst-space-md);
-        font-family: var(--mdst-font-ui);
-        font-size: inherit;
-        line-height: var(--mdst-line-height);
-        color: var(--_fg, var(--mdst-color-fg));
-        background: var(--_bg, var(--mdst-color-bg));
-        box-shadow: var(--_hover, none);
-        border: var(--mdst-border-width) solid var(--mdst-color-border);
-        border-radius: var(--mdst-radius);
-        cursor: pointer;
-        transition:
-          background var(--mdst-transition),
-          color var(--mdst-transition),
-          border-color var(--mdst-transition),
-          box-shadow var(--mdst-transition);
-      }
-
-      &:hover::file-selector-button {
-        --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
-      }
-
-      &:disabled::file-selector-button {
-        cursor: not-allowed;
-      }
-
-      &:disabled:hover::file-selector-button {
-        --_hover: none;
-      }
-    }
+  :where(.mdst-ui) input.mdst-file-input--borderless:where([type="file"]:focus),
+  .mdst-file-input--borderless .mdst-file-input__field:focus {
+    border-color: transparent;
   }
 }

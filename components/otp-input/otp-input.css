@@ -56,8 +56,10 @@
         cursor: not-allowed;
       }
 
-      /* Filled state - when digit has a value */
-      &:not(:placeholder-shown) {
+      /* Filled state: a digit with a placeholder that's no longer showing.
+         Needs a placeholder (e.g. placeholder="0"); without one the browser
+         can't tell empty from filled. */
+      &[placeholder]:not(:placeholder-shown) {
         border-color: var(--mdst-color-fg);
       }
     }

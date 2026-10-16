@@ -4,14 +4,10 @@
   :where(.mdst-ui) pre,
   .mdst-pre {
     display: block;
-    width: 100%;
-    max-width: 100%;
     padding: var(--mdst-space-md);
     overflow-x: hidden;
     overflow-y: auto;
     overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
     white-space: pre-wrap;
     font-family: var(--mdst-font-mono);
     font-size: var(--mdst-text-sm);
@@ -21,7 +17,6 @@
     border: var(--mdst-border-width) solid var(--mdst-color-border);
     border-radius: var(--mdst-radius);
     tab-size: 2;
-    -moz-tab-size: 2;
   }
 
   /* Nested code inside pre — reset styles */
