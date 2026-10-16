@@ -86,6 +86,16 @@
     --mdst-disabled-opacity: 0.5;
   }
 
+  /* Reduced motion: transitions finish instantly. Spinners and skeletons
+     keep animating, since their motion is what shows something is loading. */
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --mdst-transition-fast: 0s;
+      --mdst-transition: 0s;
+      --mdst-transition-slow: 0s;
+    }
+  }
+
   /* Dark mode is opt-in, using the standard color-scheme property:
 
        :root { color-scheme: light dark; }   follow the visitor's system

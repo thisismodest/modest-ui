@@ -658,7 +658,7 @@
             </div>
             <label class="mdst-checkbox-label home-setting">
               Weekly summary
-              <input type="checkbox" class="mdst-toggle" checked />
+              <input type="checkbox" role="switch" class="mdst-toggle" checked />
             </label>
             <div class="home-row">
               <button type="button" class="mdst-button mdst-button--solid mdst-button--sm">Message</button>
@@ -698,7 +698,7 @@
                 <div class="home-field">
                   <span>Password</span>
                   <div class="mdst-password-input">
-                    <input type="text" class="mdst-input mdst-password-input__field" placeholder="••••••••" autocomplete="off" aria-label="Password" />
+                    <input type="password" class="mdst-input mdst-password-input__field" placeholder="••••••••" autocomplete="off" aria-label="Password" />
                     <input type="checkbox" class="mdst-password-input__toggle" aria-label="Toggle password visibility" />
                   </div>
                 </div>
@@ -776,15 +776,15 @@
               <div class="mdst-card__body home-stack">
                 <label class="mdst-checkbox-label home-setting">
                   Product updates
-                  <input type="checkbox" class="mdst-toggle" checked />
+                  <input type="checkbox" role="switch" class="mdst-toggle" checked />
                 </label>
                 <label class="mdst-checkbox-label home-setting">
                   Mentions
-                  <input type="checkbox" class="mdst-toggle" checked />
+                  <input type="checkbox" role="switch" class="mdst-toggle" checked />
                 </label>
                 <label class="mdst-checkbox-label home-setting">
                   Marketing
-                  <input type="checkbox" class="mdst-toggle" />
+                  <input type="checkbox" role="switch" class="mdst-toggle" />
                 </label>
                 <label class="home-field">
                   Digest frequency
@@ -1463,6 +1463,15 @@ import "mdst-ui";</pre>
             specimenName.textContent = theme.presetLabels[name];
           }, 2200);
         }
+
+        // Show or hide the password by switching the field's type when the eye
+        // toggle changes. Example code, not part of modest-ui (which is CSS only).
+        document.querySelectorAll(".mdst-password-input__toggle").forEach((toggle) => {
+          toggle.addEventListener("change", () => {
+            const field = toggle.parentElement.querySelector(".mdst-password-input__field");
+            field.type = toggle.checked ? "text" : "password";
+          });
+        });
 
         // ── State demo ──────────────────────────────────────
 

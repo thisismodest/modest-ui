@@ -289,4 +289,13 @@
     list-style: none;
     padding-inline-start: 0;
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) ins,
+    .mdst-ins {
+      text-decoration: underline;
+    }
+  }
 }

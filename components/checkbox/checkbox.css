@@ -122,4 +122,34 @@
       }
     }
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) input:where([type="checkbox"]:checked)::after,
+    .mdst-checkbox:checked::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+
+    :where(.mdst-ui) input.mdst-toggle:where([type="checkbox"]),
+    .mdst-toggle {
+      forced-color-adjust: none;
+      background: Canvas;
+      border-color: CanvasText;
+
+      &::before {
+        background: CanvasText;
+      }
+
+      &:checked {
+        background: Highlight;
+        border-color: Highlight;
+
+        &::before {
+          background: HighlightText;
+        }
+      }
+    }
+  }
 }

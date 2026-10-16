@@ -102,4 +102,16 @@
   .mdst-button--lg {
     padding: var(--mdst-space-md) var(--mdst-space-lg);
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) [aria-pressed="true"],
+    .mdst-button[aria-pressed="true"] {
+      forced-color-adjust: none;
+      background: Highlight;
+      color: HighlightText;
+      border-color: Highlight;
+    }
+  }
 }

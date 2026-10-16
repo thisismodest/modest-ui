@@ -45,4 +45,12 @@
       border-radius: 50%;
     }
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    .mdst-skeleton {
+      outline: 1px solid GrayText;
+    }
+  }
 }

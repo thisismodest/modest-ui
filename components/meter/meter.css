@@ -80,4 +80,32 @@
       --mdst-meter-height: var(--mdst-space-md);
     }
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) meter,
+    .mdst-meter,
+    .mdst-meter[class*="--"] {
+      forced-color-adjust: none;
+      background: Canvas;
+      outline: 1px solid CanvasText;
+
+      &::-webkit-meter-bar {
+        background: Canvas;
+      }
+
+      &::-webkit-meter-optimum-value,
+      &::-webkit-meter-suboptimum-value,
+      &::-webkit-meter-even-less-good-value {
+        background: Highlight;
+      }
+
+      /* Separate rule: a browser drops a whole selector list if one
+         vendor pseudo-element in it is unknown */
+      &::-moz-meter-bar {
+        background: Highlight;
+      }
+    }
+  }
 }

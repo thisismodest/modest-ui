@@ -66,6 +66,24 @@ elements, so they keep their names.
   whatever its specificity or load order. Each file layers itself, so this
   applies to the bundle, `index.css`, and cherry-picked files alike. Blanket
   resets in your CSS also win; put them in a layer before `mdst-ui` if needed.
+- **Windows High Contrast (forced colours):** checkbox ticks, radio dots,
+  toggles, progress and meter fills, the range track, the dropdown arrow, the
+  password and details icons, pressed buttons, active pill tabs, stepper
+  connectors and completed steps, the spinner, skeletons, and inserted text
+  are redrawn in system colours, so their state stays visible. Focus rings
+  use the system highlight colour.
+- **Reduced motion:** with `prefers-reduced-motion: reduce`, all transition
+  tokens become `0s`. Spinners and skeletons keep animating.
+- **Touch targets:** banner, toast, dialog, and drawer close buttons and the
+  tag dismiss button get a tap area of at least 24px, without changing how
+  they look.
+- **Breaking:** `password-input` is built on a real `type="password"` field.
+  It used `type="text"` masked with `-webkit-text-security`, which screen
+  readers read aloud and password managers ignored. Showing the text now
+  takes a few lines of your own JavaScript (example in the docs).
+- Docs examples have accessible markup: toggles use `role="switch"`, tabs
+  carry `aria-selected`, close buttons are labelled, OTP digits use
+  `autocomplete="one-time-code"`, and every demo control has a label.
 - **Darker default status colours** for readable text: success is now
   `#15803d` (was `#16a34a`, 3.3:1 on white) and warning `#b45309` (was
   `#f59e0b`, 2.2:1). Both now pass 4.5:1. Danger is unchanged.

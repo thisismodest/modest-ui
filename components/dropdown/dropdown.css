@@ -96,4 +96,17 @@
     display: inline-block;
     width: auto;
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) select,
+    .mdst-dropdown {
+      forced-color-adjust: none;
+      color: CanvasText;
+      background-color: Canvas;
+      background-image: conic-gradient(from -45deg at 50% 100%, CanvasText 90deg, transparent 0);
+      border-color: CanvasText;
+    }
+  }
 }

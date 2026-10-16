@@ -76,4 +76,28 @@
       height: var(--mdst-space-md);
     }
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) progress,
+    .mdst-progress,
+    .mdst-progress[class*="--"] {
+      forced-color-adjust: none;
+      background: Canvas;
+      outline: 1px solid CanvasText;
+
+      &::-webkit-progress-bar {
+        background: Canvas;
+      }
+
+      &::-webkit-progress-value {
+        background: Highlight;
+      }
+
+      &::-moz-progress-bar {
+        background: Highlight;
+      }
+    }
+  }
 }

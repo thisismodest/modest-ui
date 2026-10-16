@@ -52,6 +52,30 @@
     outline-offset: var(--mdst-focus-offset);
   }
 
+  @media (forced-colors: active) {
+    :where(.mdst-ui) :focus-visible,
+    :where([class*="mdst-"]):focus-visible {
+      outline-color: Highlight;
+    }
+  }
+
+  /* Small icon buttons keep their look but get at least a 24px tap area,
+     from an invisible box centred on the button. Centring is the same in
+     either text direction, so physical top/left are fine here. */
+  :where(.mdst-banner__close, .mdst-toast__close, .mdst-tag__dismiss, .mdst-dialog__close, .mdst-drawer__close) {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 24px);
+      height: max(100%, 24px);
+      translate: -50% -50%;
+    }
+  }
+
   /* Form controls and code blocks used by class (even outside .mdst-ui) drop
      the browser's default margins. This lives in the base layer, so flow
      spacing in the components layer still applies. */

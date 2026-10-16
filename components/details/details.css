@@ -135,4 +135,14 @@
     border-top: none;
     border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) details > summary::before,
+    .mdst-details > summary::before {
+      forced-color-adjust: none;
+      background-color: CanvasText;
+    }
+  }
 }

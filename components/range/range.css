@@ -65,4 +65,24 @@
   .mdst-range::-moz-range-track {
     background: transparent;
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) input:where([type="range"]),
+    .mdst-range {
+      forced-color-adjust: none;
+      background: CanvasText;
+
+      &::-webkit-slider-thumb {
+        background: Canvas;
+        border-color: CanvasText;
+      }
+
+      &::-moz-range-thumb {
+        background: Canvas;
+        border-color: CanvasText;
+      }
+    }
+  }
 }

@@ -804,7 +804,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
               <label for="current-password">Current password</label>
               <div class="mdst-password-input">
                 <input
-                  type="text"
+                  type="password"
                   autocomplete="current-password"
                   id="current-password"
                   class="mdst-input mdst-password-input__field"
@@ -819,7 +819,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 <label for="new-password">New password</label>
                 <div class="mdst-password-input">
                   <input
-                    type="text"
+                    type="password"
                     autocomplete="new-password"
                     id="new-password"
                     class="mdst-input mdst-password-input__field"
@@ -833,7 +833,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 <label for="confirm-password">Confirm new password</label>
                 <div class="mdst-password-input">
                   <input
-                    type="text"
+                    type="password"
                     autocomplete="new-password"
                     id="confirm-password"
                     class="mdst-input mdst-password-input__field"
@@ -1454,6 +1454,16 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
       document.querySelectorAll(".mdst-dialog").forEach(function (dialog) {
         dialog.addEventListener("click", function (e) {
           if (e.target === this) this.close();
+        });
+      });
+    </script>
+    <script>
+      // Show or hide the password by switching the field's type when the eye
+      // toggle changes. Example code, not part of modest-ui (which is CSS only).
+      document.querySelectorAll(".mdst-password-input__toggle").forEach((toggle) => {
+        toggle.addEventListener("change", () => {
+          const field = toggle.parentElement.querySelector(".mdst-password-input__field");
+          field.type = toggle.checked ? "text" : "password";
         });
       });
     </script>

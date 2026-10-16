@@ -198,4 +198,20 @@
       }
     }
   }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    .mdst-stepper .mdst-stepper__step:not(:last-child)::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+
+    .mdst-stepper .mdst-stepper__step[data-state="completed"] .mdst-stepper__indicator {
+      forced-color-adjust: none;
+      background: Highlight;
+      color: HighlightText;
+      border-color: Highlight;
+    }
+  }
 }
