@@ -204,9 +204,12 @@
         height: 100%;
       }
 
-      .home-bento h3 {
+      /* Card titles in the demo cards. They're props, not part of the page
+         outline, so they aren't headings. */
+      .home-card-title {
         font-size: var(--mdst-text-base);
-        margin: 0;
+        font-weight: 600;
+        line-height: 1.25;
       }
 
       .home-stack {
@@ -708,7 +711,7 @@
             <!-- Sign in -->
             <div class="mdst-card home-tall">
               <div class="mdst-card__header">
-                <h3>Welcome back</h3>
+                <p class="home-card-title">Welcome back</p>
               </div>
               <form class="mdst-card__body home-stack" onsubmit="return false;">
                 <label class="home-field">
@@ -737,7 +740,7 @@
             <div class="mdst-card mdst-card--flush home-wide">
               <div class="mdst-card__header">
                 <div class="mdst-toolbar">
-                  <h3>Team</h3>
+                  <p class="home-card-title">Team</p>
                   <span class="mdst-badge mdst-badge--subtle">4</span>
                   <div class="mdst-toolbar__spacer"></div>
                   <button type="button" class="mdst-button mdst-button--sm mdst-button--solid">Invite</button>
@@ -791,7 +794,7 @@
             <!-- Notifications -->
             <div class="mdst-card">
               <div class="mdst-card__header">
-                <h3>Notifications</h3>
+                <p class="home-card-title">Notifications</p>
               </div>
               <div class="mdst-card__body home-stack">
                 <label class="home-setting">
@@ -825,7 +828,7 @@
             <div class="mdst-card">
               <div class="mdst-card__header">
                 <div class="home-split">
-                  <h3>Pro</h3>
+                  <p class="home-card-title">Pro</p>
                   <span class="mdst-badge mdst-badge--solid">Popular</span>
                 </div>
               </div>
@@ -846,7 +849,7 @@
             <div class="mdst-card home-wide">
               <div class="mdst-card__header">
                 <div class="home-split">
-                  <h3>Deploying <code>main</code></h3>
+                  <p class="home-card-title">Deploying <code>main</code></p>
                   <span class="mdst-spinner mdst-spinner--sm" role="status" aria-label="Deploying"></span>
                 </div>
               </div>
@@ -880,7 +883,7 @@
             <!-- Feedback -->
             <div class="mdst-card">
               <div class="mdst-card__header">
-                <h3>Feedback</h3>
+                <p class="home-card-title">Feedback</p>
               </div>
               <div class="mdst-card__body home-stack">
                 <output class="mdst-toast mdst-toast--success" data-state="visible">

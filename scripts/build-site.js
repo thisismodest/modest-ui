@@ -10,6 +10,7 @@ import { renderComponentLinks } from "./sidebar.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
+const pkg = JSON.parse(await readFile(join(ROOT, "package.json"), "utf-8"));
 const COMPONENTS_DIR = join(ROOT, "components");
 const PAGES_DIR = join(ROOT, "pages");
 const SITE_DIR = join(ROOT, "site");
@@ -174,7 +175,32 @@ function breadcrumbJsonLd(crumbs) {
       return item;
     })
   };
-  return `    <script type="application/ld+json">${JSON.stringify(data)}</script>`;
+  return ldScript(data);
+}
+
+/**
+ * Structured data for the homepage: the library itself, from package.json.
+ */
+function softwareJsonLd(description) {
+  return ldScript({
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: siteConfig.name,
+    alternateName: pkg.name,
+    description,
+    url: `${siteConfig.url}/`,
+    codeRepository: pkg.repository.url.replace(/^git\+/, "").replace(/\.git$/, ""),
+    programmingLanguage: "CSS",
+    license: `https://opensource.org/licenses/${pkg.license}`,
+    version: siteConfig.version,
+    author: { "@type": "Person", name: pkg.author }
+  });
+}
+
+// "<" is escaped so no string in the data can close the script tag early
+function ldScript(data) {
+  const json = JSON.stringify(data).replace(/</g, "\\u003c");
+  return `    <script type="application/ld+json">${json}</script>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -233,9 +259,9 @@ async function buildStaticPage(template, page, components, pages) {
   const canonicalPath = isIntro ? "/" : `/${page.slug}/`;
   const canonical = `${siteConfig.url}${canonicalPath}`;
 
-  // Homepage is the breadcrumb root, so it gets no BreadcrumbList of its own.
+  // The homepage describes the library; other pages get a breadcrumb trail
   const jsonLd = isIntro
-    ? ""
+    ? softwareJsonLd(page.description)
     : breadcrumbJsonLd([
         { name: "Home", url: `${siteConfig.url}/` },
         { name: page.title, url: canonical }

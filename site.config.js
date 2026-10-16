@@ -19,7 +19,8 @@ export default {
   pages: {
     intro: {
       title: "Introduction",
-      description: "A minimal, themeable CSS component library. Black and white by default, easy to customise."
+      description:
+        "A minimal, themeable CSS component library. Plain HTML gets styled, accessible components, with opt-in dark mode and no JavaScript. Theme it with CSS variables."
     },
     examples: {
       title: "Examples",
