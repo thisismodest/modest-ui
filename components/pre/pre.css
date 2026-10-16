@@ -24,12 +24,6 @@
     -moz-tab-size: 2;
   }
 
-  :where(.mdst-ui) pre:where(:focus-visible),
-  .mdst-pre:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-    outline-offset: var(--mdst-focus-offset);
-  }
-
   /* Nested code inside pre — reset styles */
 
   :where(.mdst-ui) pre code,

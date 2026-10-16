@@ -166,7 +166,7 @@ Override CSS custom properties to create your own theme:
   --mdst-color-subtle: #f5f5f5;
   --mdst-color-focus: #000;
   --mdst-color-danger: #dc2626;
-  --mdst-color-success: #16a34a;
+  --mdst-color-success: #15803d;
   --mdst-radius: 0;
   --mdst-border-width: 0.0625em;
 }

@@ -51,6 +51,8 @@ elements, so they keep their names.
 
 ### Removed
 
+- **Breaking:** `--mdst-color-surface`, which duplicated `--mdst-color-subtle`.
+  Use `--mdst-color-subtle`.
 - **Breaking:** `--mdst-button-hover-bg`, `--mdst-button-hover-color`, and
   `--mdst-button-hover-border`, replaced by a single
   `--mdst-button-hover-shadow` (see below). They are also gone from the theme
@@ -64,6 +66,13 @@ elements, so they keep their names.
   whatever its specificity or load order. Each file layers itself, so this
   applies to the bundle, `index.css`, and cherry-picked files alike. Blanket
   resets in your CSS also win; put them in a layer before `mdst-ui` if needed.
+- **Darker default status colours** for readable text: success is now
+  `#15803d` (was `#16a34a`, 3.3:1 on white) and warning `#b45309` (was
+  `#f59e0b`, 2.2:1). Both now pass 4.5:1. Danger is unchanged.
+- **The focus ring is defined once,** in the base layer, for anything
+  focusable inside `.mdst-ui` and every modest-ui component. Components only
+  change its offset where needed. This also gives your own focusable
+  elements inside `.mdst-ui` the same ring.
 - **Right-to-left support.** Components use logical properties (`margin-inline-start`,
   `inset-inline-end`, `text-align: start`, and so on), so they mirror in
   `dir="rtl"` pages: accent edges, the drawer, fixed banners, the toast stack,
@@ -122,6 +131,12 @@ elements, so they keep their names.
 
 ### Added
 
+- Tokens for values that were hard-coded: `--mdst-shadow-sm` and
+  `--mdst-shadow` (tooltip, popover, interactive card), `--mdst-backdrop`
+  (dialog and drawer, which used different opacities), `--mdst-z-overlay`
+  (fixed banners and toasts), `--mdst-transition-slow` (drawer, banner, and
+  toast, which used fixed 150 and 200ms), and `--mdst-disabled-opacity`
+  (buttons used 0.4, everything else 0.5).
 - Theme Playground: fine-tuning controls for the variables outside the
   presets: warning and surface colours, reading and interface fonts, line
   height, flow space, focus ring and offset, button hover, and transition

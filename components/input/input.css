@@ -27,7 +27,6 @@
     background-color: var(--mdst-color-bg);
     border: var(--mdst-border-width) solid var(--mdst-color-border);
     border-radius: var(--mdst-radius);
-    outline: none;
     transition: border-color var(--mdst-transition);
   }
 
@@ -89,7 +88,6 @@
     ):focus-visible),
   :where(.mdst-ui) textarea:where(:focus-visible),
   .mdst-input:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
     outline-offset: 0;
   }
 
@@ -107,7 +105,7 @@
     ):disabled),
   :where(.mdst-ui) textarea:where(:disabled),
   .mdst-input:disabled {
-    opacity: 0.5;
+    opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 

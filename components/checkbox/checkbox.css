@@ -26,15 +26,9 @@
     background: var(--mdst-color-fg);
   }
 
-  :where(.mdst-ui) input:where([type="checkbox"]:focus-visible),
-  .mdst-checkbox:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-    outline-offset: var(--mdst-focus-offset);
-  }
-
   :where(.mdst-ui) input:where([type="checkbox"]:disabled),
   .mdst-checkbox:disabled {
-    opacity: 0.5;
+    opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
@@ -53,7 +47,7 @@
 
   :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)),
   .mdst-checkbox-label:has(.mdst-checkbox:disabled) {
-    opacity: 0.5;
+    opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
@@ -113,13 +107,8 @@
       }
     }
 
-    &:focus-visible {
-      outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-      outline-offset: var(--mdst-focus-offset);
-    }
-
     &:disabled {
-      opacity: 0.5;
+      opacity: var(--mdst-disabled-opacity);
       cursor: not-allowed;
     }
 

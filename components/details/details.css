@@ -53,7 +53,6 @@
 
   :where(.mdst-ui) details > summary:where(:focus-visible),
   .mdst-details > summary:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
     outline-offset: -2px;
   }
 

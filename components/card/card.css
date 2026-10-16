@@ -48,13 +48,9 @@
 
       &:hover {
         border-color: var(--mdst-color-fg);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--mdst-shadow);
       }
 
-      &:focus-visible {
-        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-        outline-offset: var(--mdst-focus-offset);
-      }
     }
 
     /* Padding variants */

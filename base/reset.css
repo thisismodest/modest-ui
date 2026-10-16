@@ -43,6 +43,15 @@
     box-sizing: border-box;
   }
 
+  /* One keyboard focus ring for everything inside .mdst-ui and every
+     modest-ui component. Components only override the offset where they
+     need to (fields draw it flush, tabs draw it inside). */
+  :where(.mdst-ui) :focus-visible,
+  :where([class*="mdst-"]):focus-visible {
+    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+    outline-offset: var(--mdst-focus-offset);
+  }
+
   /* Form controls and code blocks used by class (even outside .mdst-ui) drop
      the browser's default margins. This lives in the base layer, so flow
      spacing in the components layer still applies. */

@@ -14,8 +14,8 @@
     font-size: var(--mdst-text-sm);
     line-height: var(--mdst-line-height);
     transition:
-      opacity 150ms ease-out,
-      visibility 150ms;
+      opacity var(--mdst-transition-slow),
+      visibility var(--mdst-transition-slow);
 
     /* State: visible */
 
@@ -31,28 +31,26 @@
       visibility: hidden;
     }
 
-    /* Variant: success */
+    /* Status: one accent edge at the start, coloured by the variant */
+
+    &:is(.mdst-toast--success, .mdst-toast--danger, .mdst-toast--warning, .mdst-toast--info) {
+      border-inline-start: 3px solid var(--_accent);
+    }
 
     &.mdst-toast--success {
-      border-inline-start: 3px solid var(--mdst-color-success);
+      --_accent: var(--mdst-color-success);
     }
-
-    /* Variant: error */
 
     &.mdst-toast--danger {
-      border-inline-start: 3px solid var(--mdst-color-danger);
+      --_accent: var(--mdst-color-danger);
     }
-
-    /* Variant: warning */
 
     &.mdst-toast--warning {
-      border-inline-start: 3px solid var(--mdst-color-warning);
+      --_accent: var(--mdst-color-warning);
     }
 
-    /* Variant: info */
-
     &.mdst-toast--info {
-      border-inline-start: 3px solid var(--mdst-color-info, var(--mdst-color-fg));
+      --_accent: var(--mdst-color-info, var(--mdst-color-fg));
     }
   }
 
@@ -84,8 +82,6 @@
 
     &:focus-visible {
       opacity: 1;
-      outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-      outline-offset: var(--mdst-focus-offset);
     }
   }
 
@@ -98,6 +94,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--mdst-space-sm);
-    z-index: 2000;
+    z-index: calc(var(--mdst-z-overlay) + 1);
   }
 }

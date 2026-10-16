@@ -21,7 +21,7 @@
 
   :where(.mdst-ui) dialog::backdrop,
   .mdst-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--mdst-backdrop);
   }
 
   /* Dialog Header */
@@ -64,12 +64,6 @@
     background: transparent;
     border: none;
     color: var(--mdst-color-fg);
-  }
-
-  :where(.mdst-ui) dialog .mdst-dialog__close:where(:focus-visible),
-  .mdst-dialog .mdst-dialog__close:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-    outline-offset: var(--mdst-focus-offset);
   }
 
   /* Dialog Body */

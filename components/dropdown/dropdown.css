@@ -29,7 +29,6 @@
     }
     border: var(--mdst-border-width) solid var(--mdst-color-border);
     border-radius: var(--mdst-radius);
-    outline: none;
     cursor: pointer;
     transition: border-color var(--mdst-transition);
   }
@@ -46,13 +45,12 @@
 
   :where(.mdst-ui) select:where(:focus-visible),
   .mdst-dropdown:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
     outline-offset: 0;
   }
 
   :where(.mdst-ui) select:where(:disabled),
   .mdst-dropdown:disabled {
-    opacity: 0.5;
+    opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 

@@ -7,7 +7,7 @@
     border-radius: var(--mdst-radius);
     background: var(--mdst-color-bg);
     color: var(--mdst-color-fg);
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    box-shadow: var(--mdst-shadow-sm);
 
     /* Default: centered on page */
     margin: auto;

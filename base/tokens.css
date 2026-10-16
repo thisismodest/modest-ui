@@ -10,11 +10,10 @@
     --mdst-color-border: #000;
     --mdst-color-muted: #666;
     --mdst-color-subtle: #f5f5f5;
-    --mdst-color-surface: #f5f5f5;
     --mdst-color-focus: #000;
     --mdst-color-danger: #dc2626;
-    --mdst-color-warning: #f59e0b;
-    --mdst-color-success: #16a34a;
+    --mdst-color-warning: #b45309;
+    --mdst-color-success: #15803d;
     /* --mdst-color-info is optional: info variants use the text colour unless
        you set it, e.g. --mdst-color-info: #2563eb; */
 
@@ -71,9 +70,20 @@
     --mdst-radius: 0;
     --mdst-border-width: 0.0625em;
 
-    /* Transitions */
+    /* Transitions: fast for small state changes, slow for things that
+       enter and leave (drawer, banner, toast) */
     --mdst-transition-fast: 50ms ease-out;
     --mdst-transition: 100ms ease-out;
+    --mdst-transition-slow: 200ms ease-out;
+
+    /* Depth */
+    --mdst-shadow-sm: 0 0.125rem 0.375rem rgb(0 0 0 / 0.15);
+    --mdst-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 0.2);
+    --mdst-backdrop: rgb(0 0 0 / 0.4);
+    --mdst-z-overlay: 1000;
+
+    /* State */
+    --mdst-disabled-opacity: 0.5;
   }
 
   /* Dark mode is opt-in, using the standard color-scheme property:
@@ -91,11 +101,10 @@
       --mdst-color-border: light-dark(#000, #fff);
       --mdst-color-muted: light-dark(#666, #999);
       --mdst-color-subtle: light-dark(#f5f5f5, #2a2a2a);
-      --mdst-color-surface: light-dark(#f5f5f5, #2a2a2a);
       --mdst-color-focus: light-dark(#000, #fff);
       --mdst-color-danger: light-dark(#dc2626, #f87171);
-      --mdst-color-warning: light-dark(#f59e0b, #fbbf24);
-      --mdst-color-success: light-dark(#16a34a, #4ade80);
+      --mdst-color-warning: light-dark(#b45309, #fbbf24);
+      --mdst-color-success: light-dark(#15803d, #4ade80);
     }
   }
 }

@@ -172,8 +172,6 @@
 
       &:focus-visible {
         opacity: 1;
-        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-        outline-offset: var(--mdst-focus-offset);
       }
     }
   }

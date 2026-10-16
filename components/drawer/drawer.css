@@ -32,10 +32,10 @@
     /* Closed state (exit animation target) */
     transform: translateX(calc(100% * var(--_dir)));
     transition:
-      transform 200ms ease-out,
-      opacity 200ms ease-out,
-      overlay 200ms ease-out allow-discrete,
-      display 200ms ease-out allow-discrete;
+      transform var(--mdst-transition-slow),
+      opacity var(--mdst-transition-slow),
+      overlay var(--mdst-transition-slow) allow-discrete,
+      display var(--mdst-transition-slow) allow-discrete;
 
     &[open] {
       display: flex;
@@ -51,12 +51,12 @@
 
   :where(.mdst-ui) dialog.mdst-drawer::backdrop,
   .mdst-drawer::backdrop {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--mdst-backdrop);
     opacity: 0;
     transition:
-      opacity 200ms ease-out,
-      overlay 200ms ease-out allow-discrete,
-      display 200ms ease-out allow-discrete;
+      opacity var(--mdst-transition-slow),
+      overlay var(--mdst-transition-slow) allow-discrete,
+      display var(--mdst-transition-slow) allow-discrete;
   }
 
   :where(.mdst-ui) dialog.mdst-drawer:where([open])::backdrop,
@@ -161,9 +161,5 @@
       color: var(--mdst-color-fg);
     }
 
-    &:focus-visible {
-      outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-      outline-offset: var(--mdst-focus-offset);
-    }
   }
 }

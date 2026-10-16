@@ -53,15 +53,6 @@
     --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
   }
 
-  :where(.mdst-ui) button:where(:focus-visible),
-  :where(.mdst-ui) input:where([type="submit"]:focus-visible),
-  :where(.mdst-ui) input:where([type="reset"]:focus-visible),
-  :where(.mdst-ui) input:where([type="button"]:focus-visible),
-  .mdst-button:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-    outline-offset: var(--mdst-focus-offset);
-  }
-
   /* aria-disabled covers links styled as buttons, which can't be disabled */
 
   :where(.mdst-ui) button:disabled,
@@ -71,7 +62,7 @@
   .mdst-button:disabled,
   .mdst-button[aria-disabled="true"] {
     --_hover: none;
-    opacity: 0.4;
+    opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 

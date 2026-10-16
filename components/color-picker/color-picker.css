@@ -16,16 +16,10 @@
       border: var(--mdst-border-width) solid var(--mdst-color-border);
       border-radius: 50%;
       cursor: pointer;
-      outline: none;
       transition: border-color var(--mdst-transition);
 
-      &:focus-visible {
-        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-        outline-offset: var(--mdst-focus-offset);
-      }
-
       &:disabled {
-        opacity: 0.5;
+        opacity: var(--mdst-disabled-opacity);
         cursor: not-allowed;
       }
 
@@ -63,7 +57,6 @@
       background: var(--mdst-color-bg);
       border: var(--mdst-border-width) solid var(--mdst-color-border);
       border-radius: var(--mdst-radius);
-      outline: none;
       transition: border-color var(--mdst-transition);
 
       &::placeholder {
@@ -76,12 +69,11 @@
       }
 
       &:focus-visible {
-        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
         outline-offset: 0;
       }
 
       &:disabled {
-        opacity: 0.5;
+        opacity: var(--mdst-disabled-opacity);
         cursor: not-allowed;
       }
     }

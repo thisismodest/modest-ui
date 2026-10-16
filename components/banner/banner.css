@@ -15,9 +15,9 @@
     font-size: var(--mdst-text-sm);
     line-height: var(--mdst-line-height);
     transition:
-      opacity 150ms ease-out,
-      translate 150ms ease-out,
-      display 150ms ease-out allow-discrete;
+      opacity var(--mdst-transition-slow),
+      translate var(--mdst-transition-slow),
+      display var(--mdst-transition-slow) allow-discrete;
 
     /* Content (grows to fill, pushes actions to the end) */
 
@@ -67,10 +67,6 @@
         opacity: 1;
       }
 
-      &:focus-visible {
-        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-        outline-offset: var(--mdst-focus-offset);
-      }
     }
 
     /* State: visible */
@@ -132,28 +128,26 @@
       border-inline-end: var(--mdst-border-width) solid var(--mdst-color-border);
     }
 
-    /* Variant: success */
+    /* Status: one accent edge at the start, coloured by the variant */
+
+    &:is(.mdst-banner--success, .mdst-banner--danger, .mdst-banner--warning, .mdst-banner--info) {
+      border-inline-start: 3px solid var(--_accent);
+    }
 
     &.mdst-banner--success {
-      border-inline-start: 3px solid var(--mdst-color-success);
+      --_accent: var(--mdst-color-success);
     }
-
-    /* Variant: error */
 
     &.mdst-banner--danger {
-      border-inline-start: 3px solid var(--mdst-color-danger);
+      --_accent: var(--mdst-color-danger);
     }
-
-    /* Variant: warning */
 
     &.mdst-banner--warning {
-      border-inline-start: 3px solid var(--mdst-color-warning);
+      --_accent: var(--mdst-color-warning);
     }
 
-    /* Variant: info */
-
     &.mdst-banner--info {
-      border-inline-start: 3px solid var(--mdst-color-info, var(--mdst-color-fg));
+      --_accent: var(--mdst-color-info, var(--mdst-color-fg));
     }
 
     /* Position: sticky to the top/bottom edge of its scrolling section.
@@ -181,7 +175,7 @@
       position: fixed;
       inset-inline-start: var(--mdst-banner-offset, var(--mdst-space-md));
       inset-inline-end: var(--mdst-banner-offset, var(--mdst-space-md));
-      z-index: 1000;
+      z-index: var(--mdst-z-overlay);
 
       /* Corner: a compact card at the start/end edge instead of full width */
 

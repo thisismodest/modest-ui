@@ -11,18 +11,11 @@
     border-radius: var(--mdst-space-1);
     box-shadow: none;
     cursor: pointer;
-    outline: none;
-  }
-
-  :where(.mdst-ui) input:where([type="range"]:focus-visible),
-  .mdst-range:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-    outline-offset: var(--mdst-focus-offset);
   }
 
   :where(.mdst-ui) input:where([type="range"]:disabled),
   .mdst-range:disabled {
-    opacity: 0.5;
+    opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 

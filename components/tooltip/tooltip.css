@@ -8,7 +8,7 @@
     background: var(--mdst-color-fg);
     color: var(--mdst-color-bg);
     font-size: var(--mdst-text-sm);
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+    box-shadow: var(--mdst-shadow-sm);
     max-width: 16rem;
     text-align: center;
 

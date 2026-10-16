@@ -48,7 +48,6 @@
 
       /* Inside: the scrolling tab list would clip an outer ring */
       &:focus-visible {
-        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
         outline-offset: -2px;
       }
 
@@ -65,7 +64,7 @@
 
       &[data-disabled],
       &[data-disabled="true"] {
-        opacity: 0.5;
+        opacity: var(--mdst-disabled-opacity);
         cursor: not-allowed;
 
         &:hover {
@@ -108,7 +107,7 @@
         }
 
         &:hover:not([data-state="active"]):not([data-disabled]) {
-          background: var(--mdst-color-surface);
+          background: var(--mdst-color-subtle);
           color: var(--mdst-color-fg);
         }
       }

@@ -106,12 +106,6 @@
     text-underline-offset: 0.15em;
   }
 
-  :where(.mdst-ui) a:where(:focus-visible),
-  .mdst-a:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-    outline-offset: var(--mdst-focus-offset);
-  }
-
   /* Strong / Bold */
 
   :where(.mdst-ui) strong,

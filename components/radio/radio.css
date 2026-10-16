@@ -26,15 +26,9 @@
     border-radius: 50%;
   }
 
-  :where(.mdst-ui) input:where([type="radio"]:focus-visible),
-  .mdst-radio:focus-visible {
-    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
-    outline-offset: var(--mdst-focus-offset);
-  }
-
   :where(.mdst-ui) input:where([type="radio"]:disabled),
   .mdst-radio:disabled {
-    opacity: 0.5;
+    opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
@@ -53,7 +47,7 @@
 
   :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)),
   .mdst-radio-label:has(.mdst-radio:disabled) {
-    opacity: 0.5;
+    opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
@@ -105,7 +99,7 @@
     }
 
     &:has(.mdst-radio:disabled) {
-      opacity: 0.5;
+      opacity: var(--mdst-disabled-opacity);
       cursor: not-allowed;
 
       &:hover {
