@@ -2,5 +2,5 @@ export default {
   title: "Text",
   className: ".mdst-input",
   group: "Input",
-  description: "Text input component with ghost variant, sizes, and error states.",
+  description: "Text input and textarea, styled classless or with .mdst-input, with focus and invalid states.",
 };

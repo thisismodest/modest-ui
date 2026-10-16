@@ -29,15 +29,33 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-button</span>--inverted</span>
+              <span class="class-name"><span class="dim">.mdst-button</span>--solid</span>
             </td>
-            <td><button type="button" class="mdst-button mdst-button--inverted">Inverted</button></td>
+            <td><button type="button" class="mdst-button mdst-button--solid">Solid</button></td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-button</span>--ghost</span>
+              <span class="class-name"><span class="dim">.mdst-button</span>--borderless</span>
             </td>
-            <td><button type="button" class="mdst-button mdst-button--ghost">Ghost</button></td>
+            <td><button type="button" class="mdst-button mdst-button--borderless">Borderless</button></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-button</span>--danger</span>
+            </td>
+            <td>
+              <button type="button" class="mdst-button mdst-button--danger">Delete</button>
+              <button type="button" class="mdst-button mdst-button--danger mdst-button--solid">Delete</button>
+              <button type="button" class="mdst-button mdst-button--danger mdst-button--borderless">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">Side by side</span></td>
+            <td>
+              <button type="button" class="mdst-button mdst-button--solid">Save</button>
+              <button type="button" class="mdst-button">Cancel</button>
+              <button type="button" class="mdst-button mdst-button--borderless">Skip</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -89,9 +107,96 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-button</span>--inverted</span> <span class="class-name">disabled</span>
+              <span class="class-name"><span class="dim">.mdst-button</span>--solid</span> <span class="class-name">disabled</span>
             </td>
-            <td><button type="button" class="mdst-button mdst-button--inverted" disabled>Disabled Inverted</button></td>
+            <td><button type="button" class="mdst-button mdst-button--solid" disabled>Disabled Solid</button></td>
+          </tr>
+          <tr>
+            <td><span class="class-name">aria-pressed</span></td>
+            <td>
+              <button type="button" class="mdst-button" aria-pressed="true">On</button>
+              <button type="button" class="mdst-button" aria-pressed="false">Off</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">&lt;a&gt;</span> <span class="class-name">aria-disabled</span>
+            </td>
+            <td>
+              <a href="#" class="mdst-button">Link</a>
+              <a class="mdst-button" aria-disabled="true">Disabled link</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Custom variants</div>
+      <p class="footnote">Variants only set variables: make your own on a class, a container, or an inline style.</p>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">--mdst-button-tone</span></td>
+            <td>
+              <button type="button" class="mdst-button" style="--mdst-button-tone: #4338ca">Brand</button>
+              <button type="button" class="mdst-button mdst-button--solid" style="--mdst-button-tone: #4338ca">Brand</button>
+              <button type="button" class="mdst-button mdst-button--solid" style="--mdst-button-tone: var(--mdst-color-success)">Success</button>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">--mdst-button-bg</span> <span class="class-name">--mdst-button-border</span></td>
+            <td>
+              <button type="button" class="mdst-button" style="--mdst-button-bg: var(--mdst-color-subtle); --mdst-button-border: transparent">
+                Soft
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">Hover</div>
+      <p class="footnote">
+        Hover draws a ring in the button's text colour, so it suits every variant and theme. Change it with
+        <code class="mdst-code">--mdst-button-hover-shadow</code>: any box-shadow, or <code class="mdst-code">none</code> to switch it off.
+      </p>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Value</th>
+            <th>Example (hover)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="class-name">default</span></td>
+            <td>
+              <button type="button" class="mdst-button mdst-button--solid">Save</button>
+              <button type="button" class="mdst-button">Cancel</button>
+              <button type="button" class="mdst-button mdst-button--borderless">Skip</button>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">none</span></td>
+            <td>
+              <button type="button" class="mdst-button mdst-button--solid" style="--mdst-button-hover-shadow: none">Save</button>
+              <button type="button" class="mdst-button" style="--mdst-button-hover-shadow: none">Cancel</button>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">3px 3px 0 currentColor</span></td>
+            <td>
+              <button type="button" class="mdst-button" style="--mdst-button-hover-shadow: 3px 3px 0 currentColor">Lift</button>
+              <button type="button" class="mdst-button mdst-button--danger" style="--mdst-button-hover-shadow: 3px 3px 0 currentColor">Lift</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -100,10 +205,29 @@
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;button class="mdst-button"&gt;Default&lt;/button&gt;
-&lt;button class="mdst-button mdst-button--inverted"&gt;Inverted&lt;/button&gt;
-&lt;button class="mdst-button mdst-button--ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="mdst-button mdst-button--solid"&gt;Inverted&lt;/button&gt;
+&lt;button class="mdst-button mdst-button--borderless"&gt;Ghost&lt;/button&gt;
 &lt;button class="mdst-button mdst-button--sm"&gt;Small&lt;/button&gt;
-&lt;button class="mdst-button mdst-button--lg"&gt;Large&lt;/button&gt;</code></pre>
+&lt;button class="mdst-button mdst-button--lg"&gt;Large&lt;/button&gt;
+
+&lt;!-- Danger is a colour: combine it with any variant --&gt;
+&lt;button class="mdst-button mdst-button--danger mdst-button--solid"&gt;Delete&lt;/button&gt;
+
+&lt;!-- Toggle buttons --&gt;
+&lt;button class="mdst-button" aria-pressed="true"&gt;Bold&lt;/button&gt;
+
+&lt;!-- Links can't be disabled, so use aria-disabled --&gt;
+&lt;a class="mdst-button" aria-disabled="true"&gt;Unavailable&lt;/a&gt;
+
+/* Hover: any box-shadow, or none */
+:root { --mdst-button-hover-shadow: none; }
+
+/* Prefer an underline? Add your own rule */
+.mdst-ui button:hover { text-decoration: underline; }
+
+&lt;!-- Your own variant: set the variables --&gt;
+.btn-brand { --mdst-button-tone: #4338ca; }
+&lt;button class="mdst-button mdst-button--solid btn-brand"&gt;Brand&lt;/button&gt;</code></pre>
     </div>
   </body>
 </html>

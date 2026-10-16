@@ -50,10 +50,10 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-tag</span>--ghost</span>
+              <span class="class-name"><span class="dim">.mdst-tag</span>--borderless</span>
             </td>
             <td>
-              <span class="mdst-tag mdst-tag--ghost">Ghost</span>
+              <span class="mdst-tag mdst-tag--borderless">Borderless</span>
             </td>
           </tr>
           <tr>
@@ -82,12 +82,12 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-tag</span>--error</span>
+              <span class="class-name"><span class="dim">.mdst-tag</span>--danger</span>
             </td>
             <td>
-              <span class="mdst-tag mdst-tag--error">Error</span>
-              <span class="mdst-tag mdst-tag--error mdst-tag--solid">Solid</span>
-              <span class="mdst-tag mdst-tag--error mdst-tag--subtle">Subtle</span>
+              <span class="mdst-tag mdst-tag--danger">Danger</span>
+              <span class="mdst-tag mdst-tag--danger mdst-tag--solid">Solid</span>
+              <span class="mdst-tag mdst-tag--danger mdst-tag--subtle">Subtle</span>
             </td>
           </tr>
           <tr>
@@ -98,6 +98,26 @@
               <span class="mdst-tag mdst-tag--success">Success</span>
               <span class="mdst-tag mdst-tag--success mdst-tag--solid">Solid</span>
               <span class="mdst-tag mdst-tag--success mdst-tag--subtle">Subtle</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tag</span>--warning</span>
+            </td>
+            <td>
+              <span class="mdst-tag mdst-tag--warning">Warning</span>
+              <span class="mdst-tag mdst-tag--warning mdst-tag--solid">Solid</span>
+              <span class="mdst-tag mdst-tag--warning mdst-tag--subtle">Subtle</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tag</span>--info</span>
+            </td>
+            <td>
+              <span class="mdst-tag mdst-tag--info">Info</span>
+              <span class="mdst-tag mdst-tag--info mdst-tag--solid">Solid</span>
+              <span class="mdst-tag mdst-tag--info mdst-tag--subtle">Subtle</span>
             </td>
           </tr>
           <tr>
@@ -164,12 +184,12 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-tag</span>-dismiss</span>
+              <span class="class-name"><span class="dim">.mdst-tag</span>__dismiss</span>
             </td>
             <td>
-              <span class="mdst-tag">Tag <button class="mdst-tag-dismiss" aria-label="Remove">&times;</button></span>
-              <span class="mdst-tag mdst-tag--subtle">Subtle <button class="mdst-tag-dismiss" aria-label="Remove">&times;</button></span>
-              <span class="mdst-tag mdst-tag--success mdst-tag--pill">Active <button class="mdst-tag-dismiss" aria-label="Remove">&times;</button></span>
+              <span class="mdst-tag">Tag <button class="mdst-tag__dismiss" aria-label="Remove">&times;</button></span>
+              <span class="mdst-tag mdst-tag--subtle">Subtle <button class="mdst-tag__dismiss" aria-label="Remove">&times;</button></span>
+              <span class="mdst-tag mdst-tag--success mdst-tag--pill">Active <button class="mdst-tag__dismiss" aria-label="Remove">&times;</button></span>
             </td>
           </tr>
         </tbody>
@@ -188,13 +208,13 @@
         </div>
         <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); flex-wrap: wrap">
           <span class="mdst-tag mdst-tag--success mdst-tag--solid mdst-tag--pill mdst-tag--sm">Operational</span>
-          <span class="mdst-tag mdst-tag--error mdst-tag--solid mdst-tag--pill mdst-tag--sm">Outage</span>
+          <span class="mdst-tag mdst-tag--danger mdst-tag--solid mdst-tag--pill mdst-tag--sm">Outage</span>
           <span class="mdst-tag mdst-tag--muted mdst-tag--solid mdst-tag--pill mdst-tag--sm">Maintenance</span>
         </div>
         <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); flex-wrap: wrap">
-          <span class="mdst-tag mdst-tag--subtle">React <button class="mdst-tag-dismiss" aria-label="Remove React">&times;</button></span>
-          <span class="mdst-tag mdst-tag--subtle">Vue <button class="mdst-tag-dismiss" aria-label="Remove Vue">&times;</button></span>
-          <span class="mdst-tag mdst-tag--subtle">Svelte <button class="mdst-tag-dismiss" aria-label="Remove Svelte">&times;</button></span>
+          <span class="mdst-tag mdst-tag--subtle">React <button class="mdst-tag__dismiss" aria-label="Remove React">&times;</button></span>
+          <span class="mdst-tag mdst-tag--subtle">Vue <button class="mdst-tag__dismiss" aria-label="Remove Vue">&times;</button></span>
+          <span class="mdst-tag mdst-tag--subtle">Svelte <button class="mdst-tag__dismiss" aria-label="Remove Svelte">&times;</button></span>
         </div>
       </div>
     </div>
@@ -207,19 +227,19 @@
 &lt;!-- Variants --&gt;
 &lt;span class="mdst-tag mdst-tag--solid"&gt;Solid&lt;/span&gt;
 &lt;span class="mdst-tag mdst-tag--subtle"&gt;Subtle&lt;/span&gt;
-&lt;span class="mdst-tag mdst-tag--ghost"&gt;Ghost&lt;/span&gt;
+&lt;span class="mdst-tag mdst-tag--borderless"&gt;Ghost&lt;/span&gt;
 
 &lt;!-- Pill shape --&gt;
 &lt;span class="mdst-tag mdst-tag--pill"&gt;Pill&lt;/span&gt;
 
 &lt;!-- Status colors --&gt;
 &lt;span class="mdst-tag mdst-tag--success"&gt;Active&lt;/span&gt;
-&lt;span class="mdst-tag mdst-tag--error"&gt;Failed&lt;/span&gt;
+&lt;span class="mdst-tag mdst-tag--danger"&gt;Failed&lt;/span&gt;
 &lt;span class="mdst-tag mdst-tag--muted"&gt;Archived&lt;/span&gt;
 
 &lt;!-- Status + variant combos --&gt;
 &lt;span class="mdst-tag mdst-tag--success mdst-tag--solid"&gt;Online&lt;/span&gt;
-&lt;span class="mdst-tag mdst-tag--error mdst-tag--subtle"&gt;Offline&lt;/span&gt;
+&lt;span class="mdst-tag mdst-tag--danger mdst-tag--subtle"&gt;Offline&lt;/span&gt;
 
 &lt;!-- Sizes --&gt;
 &lt;span class="mdst-tag mdst-tag--sm"&gt;Small&lt;/span&gt;
@@ -228,7 +248,7 @@
 &lt;!-- Dismissible --&gt;
 &lt;span class="mdst-tag"&gt;
   Label
-  &lt;button class="mdst-tag-dismiss" aria-label="Remove"&gt;&amp;times;&lt;/button&gt;
+  &lt;button class="mdst-tag__dismiss" aria-label="Remove"&gt;&amp;times;&lt;/button&gt;
 &lt;/span&gt;</code></pre>
     </div>
   </body>

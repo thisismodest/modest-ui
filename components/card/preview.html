@@ -36,7 +36,7 @@
             </td>
             <td>
               <div class="mdst-card">
-                <div class="mdst-card-body">
+                <div class="mdst-card__body">
                   <p class="mdst-p" style="margin: 0">A simple card with body content only.</p>
                 </div>
               </div>
@@ -44,17 +44,17 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-card</span>-header</span><br />
-              <span class="class-name"><span class="dim">.mdst-card</span>-body</span><br />
-              <span class="class-name"><span class="dim">.mdst-card</span>-footer</span>
+              <span class="class-name"><span class="dim">.mdst-card</span>__header</span><br />
+              <span class="class-name"><span class="dim">.mdst-card</span>__body</span><br />
+              <span class="class-name"><span class="dim">.mdst-card</span>__footer</span>
             </td>
             <td>
               <div class="mdst-card">
-                <div class="mdst-card-header">Card Title</div>
-                <div class="mdst-card-body">
+                <div class="mdst-card__header">Card Title</div>
+                <div class="mdst-card__body">
                   <p class="mdst-p" style="margin: 0">Card body content goes here. Use this for any grouped information.</p>
                 </div>
-                <div class="mdst-card-footer">
+                <div class="mdst-card__footer">
                   <button type="button" class="mdst-button mdst-button--sm">Action</button>
                 </div>
               </div>
@@ -80,8 +80,8 @@
             </td>
             <td>
               <div class="mdst-card mdst-card--borderless">
-                <div class="mdst-card-header">Borderless</div>
-                <div class="mdst-card-body">
+                <div class="mdst-card__header">Borderless</div>
+                <div class="mdst-card__body">
                   <p class="mdst-p" style="margin: 0">No outer border. Inner dividers remain.</p>
                 </div>
               </div>
@@ -93,7 +93,7 @@
             </td>
             <td>
               <div class="mdst-card mdst-card--interactive">
-                <div class="mdst-card-body">
+                <div class="mdst-card__body">
                   <p class="mdst-p" style="margin: 0">Hover over this card to see the interactive state.</p>
                 </div>
               </div>
@@ -101,12 +101,12 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-card</span>--compact</span>
+              <span class="class-name"><span class="dim">.mdst-card</span>--sm</span>
             </td>
             <td>
-              <div class="mdst-card mdst-card--compact">
-                <div class="mdst-card-header">Compact</div>
-                <div class="mdst-card-body">
+              <div class="mdst-card mdst-card--sm">
+                <div class="mdst-card__header">Small</div>
+                <div class="mdst-card__body">
                   <p class="mdst-p" style="margin: 0">Smaller padding for tighter layouts.</p>
                 </div>
               </div>
@@ -118,8 +118,8 @@
             </td>
             <td>
               <div class="mdst-card mdst-card--flush">
-                <div class="mdst-card-header">Flush body</div>
-                <div class="mdst-card-body">
+                <div class="mdst-card__header">Flush body</div>
+                <div class="mdst-card__body">
                   <p style="margin: 0; padding: var(--mdst-space-sm); background: var(--mdst-color-subtle); font-size: var(--mdst-text-sm)">
                     Body has no padding, ideal for embedding tables or images edge-to-edge.
                   </p>
@@ -129,12 +129,12 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-card-header</span>--borderless</span>
+              <span class="class-name"><span class="dim">.mdst-card__header</span>--borderless</span>
             </td>
             <td>
               <div class="mdst-card">
-                <div class="mdst-card-header mdst-card-header--borderless">Borderless Header</div>
-                <div class="mdst-card-body">
+                <div class="mdst-card__header mdst-card__header--borderless">Borderless Header</div>
+                <div class="mdst-card__body">
                   <p class="mdst-p" style="margin: 0">Header without a bottom border, useful for pricing cards or hero sections.</p>
                 </div>
               </div>
@@ -142,14 +142,14 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-card-footer</span>--borderless</span>
+              <span class="class-name"><span class="dim">.mdst-card__footer</span>--borderless</span>
             </td>
             <td>
               <div class="mdst-card">
-                <div class="mdst-card-body">
+                <div class="mdst-card__body">
                   <p class="mdst-p" style="margin: 0">Footer without a top border, useful for tags or metadata.</p>
                 </div>
-                <div class="mdst-card-footer mdst-card-footer--borderless" style="display: flex; gap: var(--mdst-space-xs)">
+                <div class="mdst-card__footer mdst-card__footer--borderless" style="display: flex; gap: var(--mdst-space-xs)">
                   <span style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted)">No divider above</span>
                 </div>
               </div>
@@ -163,21 +163,21 @@
       <div class="section-header">Examples</div>
       <div class="examples" style="gap: var(--mdst-space-md)">
         <div class="mdst-card" style="max-width: 20rem">
-          <div class="mdst-card-header">Notifications</div>
-          <div class="mdst-card-body">
+          <div class="mdst-card__header">Notifications</div>
+          <div class="mdst-card__body">
             <p class="mdst-p mdst-p--sm" style="margin: 0 0 var(--mdst-space-sm) 0">
               You have 3 unread messages. Review them before they expire.
             </p>
             <p class="mdst-p mdst-p--sm mdst-p--muted" style="margin: 0">Last updated 5 minutes ago</p>
           </div>
-          <div class="mdst-card-footer" style="display: flex; gap: var(--mdst-space-sm)">
-            <button type="button" class="mdst-button mdst-button--inverted mdst-button--sm">View All</button>
-            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Dismiss</button>
+          <div class="mdst-card__footer" style="display: flex; gap: var(--mdst-space-sm)">
+            <button type="button" class="mdst-button mdst-button--solid mdst-button--sm">View All</button>
+            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Dismiss</button>
           </div>
         </div>
 
-        <div class="mdst-card mdst-card--compact" style="max-width: 20rem">
-          <div class="mdst-card-body">
+        <div class="mdst-card mdst-card--sm" style="max-width: 20rem">
+          <div class="mdst-card__body">
             <p class="mdst-p mdst-p--sm mdst-p--muted" style="margin: 0 0 var(--mdst-space-xs) 0">Status</p>
             <p class="mdst-p" style="margin: 0; font-weight: 600">All systems operational</p>
           </div>
@@ -189,46 +189,46 @@
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- Basic card --&gt;
 &lt;div class="mdst-card"&gt;
-  &lt;div class="mdst-card-body"&gt;Content&lt;/div&gt;
+  &lt;div class="mdst-card__body"&gt;Content&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;!-- With header, body, and footer --&gt;
 &lt;div class="mdst-card"&gt;
-  &lt;div class="mdst-card-header"&gt;Title&lt;/div&gt;
-  &lt;div class="mdst-card-body"&gt;Content goes here.&lt;/div&gt;
-  &lt;div class="mdst-card-footer"&gt;
+  &lt;div class="mdst-card__header"&gt;Title&lt;/div&gt;
+  &lt;div class="mdst-card__body"&gt;Content goes here.&lt;/div&gt;
+  &lt;div class="mdst-card__footer"&gt;
     &lt;button class="mdst-button mdst-button--sm"&gt;Action&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;!-- Interactive (hover state) --&gt;
 &lt;div class="mdst-card mdst-card--interactive"&gt;
-  &lt;div class="mdst-card-body"&gt;Clickable card&lt;/div&gt;
+  &lt;div class="mdst-card__body"&gt;Clickable card&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;!-- Compact padding --&gt;
-&lt;div class="mdst-card mdst-card--compact"&gt;
-  &lt;div class="mdst-card-body"&gt;Tight content&lt;/div&gt;
+&lt;div class="mdst-card mdst-card--sm"&gt;
+  &lt;div class="mdst-card__body"&gt;Tight content&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;!-- Flush body (no body padding, for tables/images) --&gt;
 &lt;div class="mdst-card mdst-card--flush"&gt;
-  &lt;div class="mdst-card-header"&gt;Table card&lt;/div&gt;
-  &lt;div class="mdst-card-body"&gt;
+  &lt;div class="mdst-card__header"&gt;Table card&lt;/div&gt;
+  &lt;div class="mdst-card__body"&gt;
     &lt;table class="mdst-table"&gt;...&lt;/table&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;!-- Borderless header (no bottom border) --&gt;
 &lt;div class="mdst-card"&gt;
-  &lt;div class="mdst-card-header mdst-card-header--borderless"&gt;Title&lt;/div&gt;
-  &lt;div class="mdst-card-body"&gt;Content&lt;/div&gt;
+  &lt;div class="mdst-card__header mdst-card__header--borderless"&gt;Title&lt;/div&gt;
+  &lt;div class="mdst-card__body"&gt;Content&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;!-- Borderless footer (no top border) --&gt;
 &lt;div class="mdst-card"&gt;
-  &lt;div class="mdst-card-body"&gt;Content&lt;/div&gt;
-  &lt;div class="mdst-card-footer mdst-card-footer--borderless"&gt;
+  &lt;div class="mdst-card__body"&gt;Content&lt;/div&gt;
+  &lt;div class="mdst-card__footer mdst-card__footer--borderless"&gt;
     Tags or metadata here
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>

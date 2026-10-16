@@ -38,25 +38,25 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-drawer</span>-header</span>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>__header</span>
             </td>
             <td>Header section with title and close button</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-drawer</span>-close</span>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>__close</span>
             </td>
             <td>Close button in header</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-drawer</span>-body</span>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>__body</span>
             </td>
             <td>Scrollable main content area</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-drawer</span>-footer</span>
+              <span class="class-name"><span class="dim">.mdst-drawer</span>__footer</span>
             </td>
             <td>Footer with action buttons</td>
           </tr>
@@ -73,28 +73,28 @@
 
       <!-- Right drawer (default) -->
       <dialog id="drawer-right" class="mdst-drawer">
-        <div class="mdst-drawer-header">
+        <div class="mdst-drawer__header">
           <span style="font-weight: 600">Right Drawer</span>
-          <button type="button" class="mdst-drawer-close" commandfor="drawer-right" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer__close" commandfor="drawer-right" command="close">&#10005;</button>
         </div>
-        <div class="mdst-drawer-body">
+        <div class="mdst-drawer__body">
           <p style="margin: 0">
             This drawer slides in from the right. It uses a native <code class="mdst-code">&lt;dialog&gt;</code> element, so you get
             backdrop, focus trapping, Escape to close, and accessibility for free. No JavaScript required.
           </p>
         </div>
-        <div class="mdst-drawer-footer">
+        <div class="mdst-drawer__footer">
           <button type="button" class="mdst-button" commandfor="drawer-right" command="close">Close</button>
         </div>
       </dialog>
 
       <!-- Left drawer -->
       <dialog id="drawer-left" class="mdst-drawer mdst-drawer--left">
-        <div class="mdst-drawer-header">
+        <div class="mdst-drawer__header">
           <span style="font-weight: 600">Left Drawer</span>
-          <button type="button" class="mdst-drawer-close" commandfor="drawer-left" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer__close" commandfor="drawer-left" command="close">&#10005;</button>
         </div>
-        <div class="mdst-drawer-body">
+        <div class="mdst-drawer__body">
           <p style="margin: 0">This drawer opens from the left via <code class="mdst-code">.mdst-drawer--left</code>.</p>
         </div>
       </dialog>
@@ -142,31 +142,31 @@
       </div>
 
       <dialog id="drawer-sm" class="mdst-drawer mdst-drawer--sm">
-        <div class="mdst-drawer-header">
+        <div class="mdst-drawer__header">
           <span style="font-weight: 600">Small</span>
-          <button type="button" class="mdst-drawer-close" commandfor="drawer-sm" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer__close" commandfor="drawer-sm" command="close">&#10005;</button>
         </div>
-        <div class="mdst-drawer-body">
+        <div class="mdst-drawer__body">
           <p style="margin: 0">16rem wide.</p>
         </div>
       </dialog>
 
       <dialog id="drawer-lg" class="mdst-drawer mdst-drawer--lg">
-        <div class="mdst-drawer-header">
+        <div class="mdst-drawer__header">
           <span style="font-weight: 600">Large</span>
-          <button type="button" class="mdst-drawer-close" commandfor="drawer-lg" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer__close" commandfor="drawer-lg" command="close">&#10005;</button>
         </div>
-        <div class="mdst-drawer-body">
+        <div class="mdst-drawer__body">
           <p style="margin: 0">28rem wide, with room for more content.</p>
         </div>
       </dialog>
 
       <dialog id="drawer-full" class="mdst-drawer mdst-drawer--full">
-        <div class="mdst-drawer-header">
+        <div class="mdst-drawer__header">
           <span style="font-weight: 600">Full Width</span>
-          <button type="button" class="mdst-drawer-close" commandfor="drawer-full" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer__close" commandfor="drawer-full" command="close">&#10005;</button>
         </div>
-        <div class="mdst-drawer-body">
+        <div class="mdst-drawer__body">
           <p style="margin: 0">Takes up the full viewport width.</p>
         </div>
       </dialog>
@@ -179,16 +179,16 @@
       </div>
 
       <dialog id="drawer-footer" class="mdst-drawer">
-        <div class="mdst-drawer-header">
+        <div class="mdst-drawer__header">
           <span style="font-weight: 600">Edit Profile</span>
-          <button type="button" class="mdst-drawer-close" commandfor="drawer-footer" command="close">&#10005;</button>
+          <button type="button" class="mdst-drawer__close" commandfor="drawer-footer" command="close">&#10005;</button>
         </div>
-        <div class="mdst-drawer-body">
+        <div class="mdst-drawer__body">
           <p style="margin: 0">Form content would go here. The body scrolls independently if content overflows.</p>
         </div>
-        <div class="mdst-drawer-footer">
-          <button type="button" class="mdst-button mdst-button--ghost" commandfor="drawer-footer" command="close">Cancel</button>
-          <button type="button" class="mdst-button mdst-button--inverted" commandfor="drawer-footer" command="close">Save</button>
+        <div class="mdst-drawer__footer">
+          <button type="button" class="mdst-button mdst-button--borderless" commandfor="drawer-footer" command="close">Cancel</button>
+          <button type="button" class="mdst-button mdst-button--solid" commandfor="drawer-footer" command="close">Save</button>
         </div>
       </dialog>
     </div>
@@ -213,14 +213,14 @@
 
 &lt;!-- Right drawer (default) --&gt;
 &lt;dialog id="my-drawer" class="mdst-drawer"&gt;
-  &lt;div class="mdst-drawer-header"&gt;
+  &lt;div class="mdst-drawer__header"&gt;
     &lt;span&gt;Drawer Title&lt;/span&gt;
-    &lt;button class="mdst-drawer-close" commandfor="my-drawer" command="close"&gt;&amp;#10005;&lt;/button&gt;
+    &lt;button class="mdst-drawer__close" commandfor="my-drawer" command="close"&gt;&amp;#10005;&lt;/button&gt;
   &lt;/div&gt;
-  &lt;div class="mdst-drawer-body"&gt;
+  &lt;div class="mdst-drawer__body"&gt;
     &lt;p&gt;Content goes here.&lt;/p&gt;
   &lt;/div&gt;
-  &lt;div class="mdst-drawer-footer"&gt;
+  &lt;div class="mdst-drawer__footer"&gt;
     &lt;button commandfor="my-drawer" command="close"&gt;Cancel&lt;/button&gt;
     &lt;button commandfor="my-drawer" command="close"&gt;Save&lt;/button&gt;
   &lt;/div&gt;

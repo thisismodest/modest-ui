@@ -71,19 +71,19 @@
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-banner</span>-content</span>
+              <span class="class-name"><span class="dim">.mdst-banner</span>__content</span>
             </td>
             <td>Message text. Grows to fill the row and pushes actions to the end</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-banner</span>-actions</span>
+              <span class="class-name"><span class="dim">.mdst-banner</span>__actions</span>
             </td>
             <td>Group of buttons or links. Wraps below the content on narrow screens</td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-banner</span>-close</span>
+              <span class="class-name"><span class="dim">.mdst-banner</span>__close</span>
             </td>
             <td>Dismiss button</td>
           </tr>
@@ -121,30 +121,30 @@
       <div class="section-header">Variants</div>
       <div class="preview-stack">
         <div class="mdst-banner" role="region" aria-label="Announcement">
-          <div class="mdst-banner-content">Default banner, no variant.</div>
-          <button type="button" class="mdst-banner-close" aria-label="Dismiss">✕</button>
+          <div class="mdst-banner__content">Default banner, no variant.</div>
+          <button type="button" class="mdst-banner__close" aria-label="Dismiss">✕</button>
         </div>
 
-        <div class="mdst-banner" data-variant="info" role="region" aria-label="Information">
-          <div class="mdst-banner-content"><span class="class-name">info</span>: scheduled maintenance on Sunday at 02:00 UTC.</div>
-          <button type="button" class="mdst-banner-close" aria-label="Dismiss">✕</button>
+        <div class="mdst-banner mdst-banner--info" role="region" aria-label="Information">
+          <div class="mdst-banner__content"><span class="class-name">info</span>: scheduled maintenance on Sunday at 02:00 UTC.</div>
+          <button type="button" class="mdst-banner__close" aria-label="Dismiss">✕</button>
         </div>
 
-        <div class="mdst-banner" data-variant="success" role="region" aria-label="Success">
-          <div class="mdst-banner-content"><span class="class-name">success</span>: your account has been verified.</div>
-          <button type="button" class="mdst-banner-close" aria-label="Dismiss">✕</button>
+        <div class="mdst-banner mdst-banner--success" role="region" aria-label="Success">
+          <div class="mdst-banner__content"><span class="class-name">success</span>: your account has been verified.</div>
+          <button type="button" class="mdst-banner__close" aria-label="Dismiss">✕</button>
         </div>
 
-        <div class="mdst-banner" data-variant="warning" role="region" aria-label="Warning">
-          <div class="mdst-banner-content"><span class="class-name">warning</span>: your trial ends in 3 days.</div>
-          <div class="mdst-banner-actions">
+        <div class="mdst-banner mdst-banner--warning" role="region" aria-label="Warning">
+          <div class="mdst-banner__content"><span class="class-name">warning</span>: your trial ends in 3 days.</div>
+          <div class="mdst-banner__actions">
             <button type="button" class="mdst-button mdst-button--sm">Upgrade</button>
           </div>
         </div>
 
-        <div class="mdst-banner" data-variant="error" role="region" aria-label="Error">
-          <div class="mdst-banner-content"><span class="class-name">error</span>: we couldn&rsquo;t process your last payment.</div>
-          <div class="mdst-banner-actions">
+        <div class="mdst-banner mdst-banner--danger" role="region" aria-label="Danger">
+          <div class="mdst-banner__content"><span class="class-name">danger</span>: we couldn&rsquo;t process your last payment.</div>
+          <div class="mdst-banner__actions">
             <button type="button" class="mdst-button mdst-button--sm">Update card</button>
           </div>
         </div>
@@ -154,13 +154,13 @@
     <div class="section">
       <div class="section-header">With Actions</div>
       <div class="mdst-banner" role="region" aria-label="Cookie consent">
-        <div class="mdst-banner-content">
+        <div class="mdst-banner__content">
           <strong>We use cookies</strong>
           <p>We use analytics cookies to understand how the site is used. You can accept or reject them.</p>
         </div>
-        <div class="mdst-banner-actions">
+        <div class="mdst-banner__actions">
           <button type="button" class="mdst-button mdst-button--sm">Reject</button>
-          <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted">Accept</button>
+          <button type="button" class="mdst-button mdst-button--sm mdst-button--solid">Accept</button>
         </div>
       </div>
     </div>
@@ -179,7 +179,7 @@
             <td><span class="class-name">.mdst-banner</span></td>
             <td>
               <div class="mdst-banner">
-                <div class="mdst-banner-content">Default size.</div>
+                <div class="mdst-banner__content">Default size.</div>
               </div>
             </td>
           </tr>
@@ -189,7 +189,7 @@
             </td>
             <td>
               <div class="mdst-banner mdst-banner--sm">
-                <div class="mdst-banner-content">Compact padding and smaller text.</div>
+                <div class="mdst-banner__content">Compact padding and smaller text.</div>
               </div>
             </td>
           </tr>
@@ -213,7 +213,7 @@
             </td>
             <td>
               <div class="mdst-banner mdst-banner--borderless" style="background: var(--mdst-color-subtle)">
-                <div class="mdst-banner-content">No border.</div>
+                <div class="mdst-banner__content">No border.</div>
               </div>
             </td>
           </tr>
@@ -223,7 +223,7 @@
             </td>
             <td>
               <div class="mdst-banner mdst-banner--border-top">
-                <div class="mdst-banner-content">Top edge only.</div>
+                <div class="mdst-banner__content">Top edge only.</div>
               </div>
             </td>
           </tr>
@@ -233,7 +233,7 @@
             </td>
             <td>
               <div class="mdst-banner mdst-banner--border-bottom">
-                <div class="mdst-banner-content">Bottom edge only.</div>
+                <div class="mdst-banner__content">Bottom edge only.</div>
               </div>
             </td>
           </tr>
@@ -244,14 +244,14 @@
             </td>
             <td>
               <div class="mdst-banner mdst-banner--border-start mdst-banner--border-end">
-                <div class="mdst-banner-content">Start and end edges. Edge classes combine.</div>
+                <div class="mdst-banner__content">Start and end edges. Edge classes combine.</div>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
       <p class="footnote">
-        Any border class removes the other edges. A <code class="mdst-code">data-variant</code> accent edge is always kept.
+        Any border class removes the other edges. A status accent edge (<code class="mdst-code">--success</code>, <code class="mdst-code">--danger</code>, and so on) is always kept.
       </p>
     </div>
 
@@ -318,8 +318,8 @@
     <div class="section">
       <div class="section-header">Sticky in a Section</div>
       <div class="preview-scroll">
-        <div class="mdst-banner mdst-banner--top mdst-banner--border-bottom" data-variant="info" role="region" aria-label="Section notice">
-          <div class="mdst-banner-content"><span class="class-name">--top</span> stays pinned while this section scrolls.</div>
+        <div class="mdst-banner mdst-banner--top mdst-banner--border-bottom mdst-banner--info" role="region" aria-label="Section notice">
+          <div class="mdst-banner__content"><span class="class-name">--top</span> stays pinned while this section scrolls.</div>
         </div>
         <div class="preview-scroll-body">
           <p>Scroll this section. The banners stay attached to its top and bottom edges but never leave it.</p>
@@ -332,9 +332,9 @@
           <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
         <div class="mdst-banner mdst-banner--bottom mdst-banner--border-top" role="region" aria-label="Section actions">
-          <div class="mdst-banner-content"><span class="class-name">--bottom</span> stays pinned to the bottom edge.</div>
-          <div class="mdst-banner-actions">
-            <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted">Continue</button>
+          <div class="mdst-banner__content"><span class="class-name">--bottom</span> stays pinned to the bottom edge.</div>
+          <div class="mdst-banner__actions">
+            <button type="button" class="mdst-button mdst-button--sm mdst-button--solid">Continue</button>
           </div>
         </div>
       </div>
@@ -380,13 +380,13 @@
 &lt;div class="mdst-banner mdst-banner--sm mdst-banner--fixed mdst-banner--bottom mdst-banner--end"
      id="cookie-banner" data-state="hidden"
      role="region" aria-label="Cookie consent"&gt;
-  &lt;p class="mdst-banner-content"&gt;
+  &lt;p class="mdst-banner__content"&gt;
     We use Google Analytics cookies to see how the site is used.
     &lt;a href="/privacy/"&gt;Privacy&lt;/a&gt;
   &lt;/p&gt;
-  &lt;div class="mdst-banner-actions"&gt;
-    &lt;button class="mdst-button mdst-button--sm mdst-button--inverted" data-consent="granted"&gt;Accept&lt;/button&gt;
-    &lt;button class="mdst-button mdst-button--sm mdst-button--ghost" data-consent="denied"&gt;Decline&lt;/button&gt;
+  &lt;div class="mdst-banner__actions"&gt;
+    &lt;button class="mdst-button mdst-button--sm mdst-button--solid" data-consent="granted"&gt;Accept&lt;/button&gt;
+    &lt;button class="mdst-button mdst-button--sm mdst-button--borderless" data-consent="denied"&gt;Decline&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -431,9 +431,9 @@
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- In the flow of the page --&gt;
-&lt;div class="mdst-banner" data-variant="info" role="region" aria-label="Announcement"&gt;
-  &lt;div class="mdst-banner-content"&gt;Scheduled maintenance on Sunday.&lt;/div&gt;
-  &lt;button class="mdst-banner-close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
+&lt;div class="mdst-banner mdst-banner--info" role="region" aria-label="Announcement"&gt;
+  &lt;div class="mdst-banner__content"&gt;Scheduled maintenance on Sunday.&lt;/div&gt;
+  &lt;button class="mdst-banner__close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
 &lt;/div&gt;
 
 &lt;!-- Sticky to the top of a scrolling section --&gt;
@@ -445,10 +445,10 @@
 &lt;!-- Fixed to the bottom of the viewport (cookie consent) --&gt;
 &lt;div class="mdst-banner mdst-banner--fixed mdst-banner--bottom"
      data-state="visible" role="region" aria-label="Cookie consent"&gt;
-  &lt;div class="mdst-banner-content"&gt;We use analytics cookies.&lt;/div&gt;
-  &lt;div class="mdst-banner-actions"&gt;
+  &lt;div class="mdst-banner__content"&gt;We use analytics cookies.&lt;/div&gt;
+  &lt;div class="mdst-banner__actions"&gt;
     &lt;button class="mdst-button mdst-button--sm"&gt;Reject&lt;/button&gt;
-    &lt;button class="mdst-button mdst-button--sm mdst-button--inverted"&gt;Accept&lt;/button&gt;
+    &lt;button class="mdst-button mdst-button--sm mdst-button--solid"&gt;Accept&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -478,13 +478,13 @@
       role="region"
       aria-label="Cookie consent"
     >
-      <p class="mdst-banner-content">
+      <p class="mdst-banner__content">
         We use Google Analytics cookies to see how the site is used.
         <a href="#" style="color: inherit">Privacy</a>
       </p>
-      <div class="mdst-banner-actions">
-        <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted" data-consent="granted">Accept</button>
-        <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost" data-consent="denied">Decline</button>
+      <div class="mdst-banner__actions">
+        <button type="button" class="mdst-button mdst-button--sm mdst-button--solid" data-consent="granted">Accept</button>
+        <button type="button" class="mdst-button mdst-button--sm mdst-button--borderless" data-consent="denied">Decline</button>
       </div>
     </div>
 
@@ -557,7 +557,7 @@
       }
 
       // Dismiss buttons on the static examples above
-      document.querySelectorAll(".section .mdst-banner-close").forEach((btn) => {
+      document.querySelectorAll(".section .mdst-banner__close").forEach((btn) => {
         btn.addEventListener("click", () => btn.closest(".mdst-banner").setAttribute("data-state", "hidden"));
       });
     </script>
