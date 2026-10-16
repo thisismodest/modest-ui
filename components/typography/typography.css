@@ -24,7 +24,12 @@
       .mdst-form,
       .mdst-fieldset
     )
-    > :where(:not(:first-child, legend + *, dialog, [popover])) {
+    /* Spacing goes above an element only when something visible comes
+       before it. Scripts, styles, hidden elements, inline links and spans
+       (a skip link), and a fieldset's legend don't count, so the first
+       thing you see never gets a top margin. */
+    > :where(:not(script, style, template, link, meta, noscript, a, span, br, [hidden], dialog, [popover], legend))
+    ~ :where(:not(dialog, [popover])) {
     margin-block-start: var(--mdst-flow-space);
   }
 
