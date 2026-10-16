@@ -135,8 +135,6 @@ elements, so they keep their names.
 - Checkboxes, radios, toggles, and colour swatches used by class outside
   `.mdst-ui` are the same size as inside it. Their border width is in `em`,
   and they were picking up the browser's smaller input font.
-- `tag`, `badge`: text is centred, with equal room above ascenders and below
-  descenders. `line-height: 1` made descenders crowd the bottom border.
 - Disabled checkboxes and radios inside a label fade once, not twice (the
   label and the control both faded, leaving 25%).
 - `file-input`: the class-based field now looks the same as the classless
