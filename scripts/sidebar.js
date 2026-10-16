@@ -57,9 +57,8 @@ export function renderComponentLinks(components, options = {}) {
       const extra = linkAttrs(c);
       lines.push(`${indent}<a href="${href(c)}" class="sidebar-link${active}"${extra}>${c.title}</a>`);
     } else {
-      const hasActiveChild = activeSlug && item.children.some((c) => c.slug === activeSlug);
-      const openAttr = hasActiveChild ? " open" : "";
-      lines.push(`${indent}<details class="sidebar-group"${openAttr}>`);
+      // Open by default so the grouped pages are as easy to find as the rest
+      lines.push(`${indent}<details class="sidebar-group" open>`);
       lines.push(`${indent}  <summary class="sidebar-group-title">${item.groupName}</summary>`);
       for (const c of item.children) {
         const active = c.slug === activeSlug ? " active" : "";
