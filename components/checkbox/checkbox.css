@@ -5,10 +5,11 @@
   .mdst-checkbox {
     -webkit-appearance: none;
     appearance: none;
-    box-sizing: content-box;
+    /* Border included in the size, so a user's border-box reset changes nothing */
+    box-sizing: border-box;
     flex-shrink: 0;
-    width: 0.875rem;
-    height: 0.875rem;
+    width: calc(0.875rem + 2 * var(--mdst-border-width));
+    height: calc(0.875rem + 2 * var(--mdst-border-width));
     background: var(--mdst-color-bg);
     border: var(--mdst-border-width) solid var(--mdst-color-border);
     border-radius: 0;
@@ -62,10 +63,11 @@
   .mdst-toggle {
     -webkit-appearance: none;
     appearance: none;
-    box-sizing: content-box;
+    /* Border included in the size, so a user's border-box reset changes nothing */
+    box-sizing: border-box;
     flex-shrink: 0;
-    width: 2.125rem;
-    height: 1.125rem;
+    width: calc(2.125rem + 2 * var(--mdst-border-width));
+    height: calc(1.125rem + 2 * var(--mdst-border-width));
     background: var(--mdst-color-subtle);
     border: var(--mdst-border-width) solid var(--mdst-color-border);
     border-radius: 0;

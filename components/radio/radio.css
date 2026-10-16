@@ -6,11 +6,12 @@
     -webkit-appearance: none;
     appearance: none;
     flex-shrink: 0;
-    width: 0.875rem;
-    height: 0.875rem;
+    width: calc(0.875rem + 2 * var(--mdst-border-width));
+    height: calc(0.875rem + 2 * var(--mdst-border-width));
     background: var(--mdst-color-bg);
     border: var(--mdst-border-width) solid var(--mdst-color-border);
-    box-sizing: content-box;
+    /* Border included in the size, so a user's border-box reset changes nothing */
+    box-sizing: border-box;
     border-radius: 50%;
     cursor: pointer;
     position: relative;

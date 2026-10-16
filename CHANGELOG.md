@@ -78,6 +78,9 @@ elements, so they keep their names.
 - `input`, `dropdown`, `checkbox`, `radio`, `pre`: the `margin: 0` that blocked
   flow spacing moved into the base-layer reset. Text inputs now get the same
   label gap as selects and textareas.
+- `checkbox`, `toggle`, `radio`: sized with `border-box` and the border
+  included, so a project-wide `box-sizing: border-box` reset no longer
+  shrinks them or pushes the toggle's thumb over its border.
 - `card`: `--borderless` no longer forces header and footer dividers back, so
   `__header--borderless` and `__footer--borderless` work on borderless cards.
   Removed two rules that did nothing.

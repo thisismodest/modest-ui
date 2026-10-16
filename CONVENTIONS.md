@@ -79,6 +79,10 @@ Every library CSS file wraps its rules in a layer: `@layer mdst-ui.base { … }`
 
 This means anything outside a layer, including all of a user's own CSS, beats the library, and the reset can never beat a component. When you add a component file, wrap it the same way.
 
+### Size with border-box
+
+Most projects have a `*, *::before, *::after { box-sizing: border-box }` reset, and because it's outside a layer it beats ours. So never rely on `content-box`: declare `box-sizing: border-box` and include the border in fixed sizes, e.g. `width: calc(0.875rem + 2 * var(--mdst-border-width))`. A component then measures the same with or without the user's reset.
+
 ### Classless selectors only count the element
 
 Inside a classless selector, only the element type may add specificity. Attribute selectors and pseudo-classes go inside `:where()`; pseudo-elements stay outside:
