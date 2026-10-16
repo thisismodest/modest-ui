@@ -122,7 +122,6 @@
       .sidebar {
         width: 48px;
         flex-shrink: 0;
-        border-right: var(--mdst-space-px) solid var(--mdst-color-border);
         display: flex;
         flex-direction: column;
         gap: var(--mdst-space-md);
@@ -317,6 +316,41 @@
 
       .sidebar-link--grouped {
         padding-left: calc(var(--mdst-space-sm) + 0.75em + var(--mdst-space-xs));
+      }
+
+      /* The sidebar and its groups are <details>, so drop the library's
+         classless disclosure styling (border, chevron, padding, divider). */
+      .sidebar,
+      .sidebar-group {
+        border: none;
+        border-radius: 0;
+      }
+
+      .sidebar-group {
+        background: none;
+      }
+
+      .sidebar {
+        border-right: var(--mdst-space-px) solid var(--mdst-color-border);
+      }
+
+      .sidebar-title {
+        padding: 0;
+        color: inherit;
+      }
+
+      .sidebar-group-title {
+        font-weight: inherit;
+      }
+
+      .sidebar-title::before {
+        content: none;
+      }
+
+      .sidebar::details-content,
+      .sidebar-group::details-content {
+        padding: 0;
+        border: none;
       }
 
       .sidebar-separator {
@@ -531,7 +565,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="layout">
       <details class="sidebar" id="sidebar">
