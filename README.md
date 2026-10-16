@@ -70,12 +70,12 @@ The classless defaults cover the base appearance. When you need a variant, add a
 <details>...</details>
 
 <!-- With variants — opt-in -->
-<button class="mdst-button--ghost">Cancel</button>
-<button class="mdst-button--inverted">Delete</button>
+<button class="mdst-button--borderless">Cancel</button>
+<button class="mdst-button--solid">Delete</button>
 <table class="mdst-table--striped">
   ...
 </table>
-<details class="mdst-details--compact">...</details>
+<details class="mdst-details--sm">...</details>
 ```
 
 You can also use the full class-based API directly — `.mdst-button`, `.mdst-input`, `.mdst-table` — all the explicit classes still work exactly as before. Classes always win over the classless defaults, so there's never a specificity conflict.
@@ -86,11 +86,27 @@ You can also use the full class-based API directly — `.mdst-button`, `.mdst-in
 
 **Class layer** — Component classes like `.mdst-button` and `.mdst-input` have normal specificity, so they always override the classless defaults when applied.
 
-**Variant classes** — Modifiers like `.mdst-button--ghost` work directly on bare elements inside `.mdst-ui`. No need to pair them with the base class.
+**Variant classes** — Modifiers like `.mdst-button--borderless` work directly on bare elements inside `.mdst-ui`. No need to pair them with the base class.
 
 ### Scoped and safe
 
 Unlike classless frameworks that style every element on the page globally, modest-ui is scoped to `.mdst-ui`. Third-party widgets, embedded content, and anything outside the scope are unaffected.
+
+### Your CSS always wins
+
+All of modest-ui lives in a [cascade layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) called `mdst-ui`. Any CSS you write outside a layer beats it, whatever the selector or load order, so a single class is enough to restyle anything:
+
+```css
+.my-button { border-radius: 999px; } /* wins over .mdst-button and its variants */
+```
+
+If you use layers yourself (Tailwind v4 does), set where modest-ui sits with one line:
+
+```css
+@layer reset, mdst-ui, utilities;
+```
+
+Every file layers itself, so this works the same for the bundle, `index.css`, or individual component files. One thing to know: blanket resets in your own CSS (for example `button { background: none }`) also win. Put them in a layer before `mdst-ui` if you want modest-ui to style over them.
 
 ---
 
@@ -117,6 +133,8 @@ Then import in CSS:
 ```
 
 ### Cherry-pick components
+
+Each file puts itself in the `mdst-ui` layer, so no `layer()` syntax is needed.
 
 ```css
 /* Always include tokens first */
@@ -147,7 +165,7 @@ Override CSS custom properties to create your own theme:
   --mdst-color-muted: #666;
   --mdst-color-subtle: #f5f5f5;
   --mdst-color-focus: #000;
-  --mdst-color-error: #dc2626;
+  --mdst-color-danger: #dc2626;
   --mdst-color-success: #16a34a;
   --mdst-radius: 0;
   --mdst-border-width: 0.0625em;
@@ -155,6 +173,33 @@ Override CSS custom properties to create your own theme:
 ```
 
 Use the [Theme Playground](https://modest-ui.com/theme/) to experiment with different themes.
+
+### Dark mode
+
+Dark mode is opt-in, so a site never changes colour on a visitor's machine
+unless you ask it to. It uses the standard `color-scheme` property:
+
+```css
+:root { color-scheme: light dark; } /* follow the visitor's system */
+:root { color-scheme: dark; }       /* always dark */
+```
+
+Leave it out and pages stay light everywhere. If you set the colour tokens
+yourself, your values are used in both modes.
+
+### Spacing
+
+Inside `.mdst-ui`, the children of plain containers (the root, and unclassed
+`main`, `section`, `article`, `div`, `form`, and so on) are spaced by one token.
+It's in `em`, so headings get more room than paragraphs. Give a container a
+class (for example to lay it out with grid) and its spacing is yours. Any
+margin you set wins.
+
+```css
+:root {
+  --mdst-flow-space: 1em; /* default; 0 turns it off */
+}
+```
 
 ### Font roles
 
@@ -177,18 +222,18 @@ one token:
 
 ## Data Attribute Components
 
-Some components need state changes — tabs that switch, steps that advance, toasts that appear. Instead of shipping JavaScript, modest-ui styles every possible state via data attributes. You bring whatever JS you want — a framework, vanilla event listeners, or Alpine.js — and toggle `data-state`, `data-variant`, etc. We handle the CSS, you handle the behavior.
+Some components need state changes — tabs that switch, steps that advance, toasts that appear. Instead of shipping JavaScript, modest-ui styles every possible state via data attributes. You bring whatever JS you want — a framework, vanilla event listeners, or Alpine.js — and toggle `data-state`. We handle the CSS, you handle the behavior.
 
 ```html
 <!-- Toggle a tab -->
-<button class="mdst-tab" data-state="active">Tab 1</button>
-<div class="mdst-tabs-panel" data-state="active">...</div>
+<button class="mdst-tabs__tab" data-state="active">Tab 1</button>
+<div class="mdst-tabs__panel" data-state="active">...</div>
 
 <!-- Show a toast -->
-<output class="mdst-toast" data-state="visible" data-variant="success">Saved.</output>
+<output class="mdst-toast mdst-toast--success" data-state="visible">Saved.</output>
 
 <!-- Advance a stepper -->
-<div class="mdst-stepper-step" data-state="completed">...</div>
+<div class="mdst-stepper__step" data-state="completed">...</div>
 ```
 
 This keeps modest-ui dependency-free while letting you use whatever interaction model fits your project.
