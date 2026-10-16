@@ -162,6 +162,14 @@ elements, so they keep their names.
 
 ### Added
 
+- `package.json` has `unpkg` and `jsdelivr` fields, so the bare CDN URL
+  (`cdn.jsdelivr.net/npm/mdst-ui@2`) serves the minified bundle instead of
+  `index.css` and its 37 imports.
+- `llms.txt` is rewritten for v2: rules for writing modest-ui markup, BEM
+  naming, the shared modifier vocabulary, the classless element list, the
+  cascade layer, dark mode, flow spacing, optional tokens, and button
+  variables. Components list every class they define (`.mdst-toggle`,
+  `.mdst-fieldset`, and `.mdst-legend` were missing).
 - Tokens for values that were hard-coded: `--mdst-shadow-sm` and
   `--mdst-shadow` (tooltip, popover, interactive card), `--mdst-backdrop`
   (dialog and drawer, which used different opacities), `--mdst-z-overlay`

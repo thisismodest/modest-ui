@@ -1,7 +1,7 @@
 /**
  * Shared sidebar utilities for grouping and rendering component links.
  *
- * Used by both generate-preview.js (SPA index.html) and build-site.js (static site).
+ * Used by build-site.js.
  */
 
 /**

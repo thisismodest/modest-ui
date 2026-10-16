@@ -5,422 +5,1584 @@
 
 /* modest-ui - Minimal CSS component library */
 
+/* Everything is in the mdst-ui cascade layer (each file wraps itself), so
+   any CSS of yours outside a layer always wins. To order it against your
+   own layers: @layer reset, mdst-ui, utilities; */
+@layer mdst-ui.base, mdst-ui.components;
+
 /* Base */
-:root {
-  /* Colors */
-  --mdst-color-fg: #000;
-  --mdst-color-bg: #fff;
-  --mdst-color-border: #000;
-  --mdst-color-muted: #666;
-  --mdst-color-subtle: #f5f5f5;
-  --mdst-color-surface: #f5f5f5;
-  --mdst-color-focus: #000;
-  --mdst-color-error: #dc2626;
-  --mdst-color-warning: #f59e0b;
-  --mdst-color-success: #16a34a;
+/* Layer order: base (tokens, reset) below components. Any CSS outside
+   a layer, such as your own, always wins over modest-ui. */
+@layer mdst-ui.base, mdst-ui.components;
 
-  /* Button hover */
-  --mdst-button-hover-bg: var(--mdst-color-fg);
-  --mdst-button-hover-color: var(--mdst-color-bg);
-  --mdst-button-hover-border: var(--mdst-color-fg);
+@layer mdst-ui.base {
+  :root {
+    /* Colors */
+    --mdst-color-fg: #000;
+    --mdst-color-bg: #fff;
+    --mdst-color-border: #000;
+    --mdst-color-muted: #666;
+    --mdst-color-subtle: #f5f5f5;
+    --mdst-color-focus: #000;
+    --mdst-color-danger: #dc2626;
+    --mdst-color-warning: #b45309;
+    --mdst-color-success: #15803d;
+    /* --mdst-color-info is optional: info variants use the text colour unless
+       you set it, e.g. --mdst-color-info: #2563eb; */
 
-  /* Typography */
-  --mdst-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
-  --mdst-line-height: 1.5;
+    /* Typography */
+    --mdst-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    --mdst-line-height: 1.5;
 
-  /* Semantic font roles — text is the reading face (prose inherits it from
-     the .mdst-ui container); ui is the interface face (components and form
-     controls). Override --mdst-font-text to retheme prose without touching
-     components. */
-  --mdst-font-text: var(--mdst-font-sans);
-  --mdst-font-ui: var(--mdst-font-sans);
+    /* Semantic font roles — text is the reading face (prose inherits it from
+       the .mdst-ui container); ui is the interface face (components and form
+       controls). Override --mdst-font-text to retheme prose without touching
+       components. */
+    --mdst-font-text: var(--mdst-font-sans);
+    --mdst-font-ui: var(--mdst-font-sans);
 
-  /* Font sizes */
-  --mdst-text-xs: 0.75rem;
-  --mdst-text-sm: 0.875rem;
-  --mdst-text-base: 1rem;
-  --mdst-text-lg: 1.125rem;
-  --mdst-text-xl: 1.25rem;
+    /* Font sizes */
+    --mdst-text-xs: 0.75rem;
+    --mdst-text-sm: 0.875rem;
+    --mdst-text-base: 1rem;
+    --mdst-text-lg: 1.125rem;
+    --mdst-text-xl: 1.25rem;
 
-  /* Spacing */
-  --mdst-space-px: 0.0625rem;
-  --mdst-space-1: 0.25rem;
-  --mdst-space-2: 0.5rem;
-  --mdst-space-3: 0.75rem;
-  --mdst-space-4: 1rem;
-  --mdst-space-5: 1.25rem;
-  --mdst-space-6: 1.5rem;
-  --mdst-space-8: 2rem;
+    /* Spacing */
+    --mdst-space-px: 0.0625rem;
+    --mdst-space-1: 0.25rem;
+    --mdst-space-2: 0.5rem;
+    --mdst-space-3: 0.75rem;
+    --mdst-space-4: 1rem;
+    --mdst-space-5: 1.25rem;
+    --mdst-space-6: 1.5rem;
+    --mdst-space-8: 2rem;
 
-  /* Semantic spacing aliases */
-  --mdst-space-xs: var(--mdst-space-1);
-  --mdst-space-sm: var(--mdst-space-2);
-  --mdst-space-md: var(--mdst-space-4);
-  --mdst-space-lg: var(--mdst-space-6);
-  --mdst-space-xl: var(--mdst-space-8);
+    /* Semantic spacing aliases */
+    --mdst-space-xs: var(--mdst-space-1);
+    --mdst-space-sm: var(--mdst-space-2);
+    --mdst-space-md: var(--mdst-space-4);
+    --mdst-space-lg: var(--mdst-space-6);
+    --mdst-space-xl: var(--mdst-space-8);
 
-  /* Border */
-  --mdst-radius: 0;
-  --mdst-border-width: 0.0625em;
+    /* Flow: space between block elements (headings, paragraphs, lists, tables,
+       form fields). In em, so it scales with each element's font size.
+       Set to 0 to turn it off. */
+    --mdst-flow-space: 1em;
 
-  /* Transitions */
-  --mdst-transition-fast: 50ms ease-out;
-  --mdst-transition: 100ms ease-out;
+    /* Focus: one keyboard focus ring for every component (:focus-visible).
+       By default it's 2px solid in --mdst-color-focus, drawn flush against
+       the component's edge (--mdst-focus-offset). Set --mdst-focus-ring
+       to replace it everywhere, e.g. 3px dashed hotpink, or none if you draw
+       your own:
+         --mdst-focus-ring: 2px solid var(--mdst-color-focus); */
+    --mdst-focus-offset: 0px;
+
+    /* Border */
+    --mdst-radius: 0;
+    --mdst-border-width: 0.0625em;
+
+    /* Transitions: fast for small state changes, slow for things that
+       enter and leave (drawer, banner, toast) */
+    --mdst-transition-fast: 50ms ease-out;
+    --mdst-transition: 100ms ease-out;
+    --mdst-transition-slow: 200ms ease-out;
+
+    /* Depth */
+    --mdst-shadow-sm: 0 0.125rem 0.375rem rgb(0 0 0 / 0.15);
+    --mdst-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 0.2);
+    --mdst-backdrop: rgb(0 0 0 / 0.4);
+    --mdst-z-overlay: 1000;
+
+    /* State */
+    --mdst-disabled-opacity: 0.5;
+  }
+
+  /* Reduced motion: transitions finish instantly. Spinners and skeletons
+     keep animating, since their motion is what shows something is loading. */
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --mdst-transition-fast: 0s;
+      --mdst-transition: 0s;
+      --mdst-transition-slow: 0s;
+    }
+  }
+
+  /* Dark mode is opt-in, using the standard color-scheme property:
+
+       :root { color-scheme: light dark; }   follow the visitor's system
+       :root { color-scheme: dark; }         always dark
+
+     Without it, pages stay light everywhere. Browsers without light-dark()
+     stay light. Setting the colour tokens yourself replaces both values. */
+
+  @supports (color: light-dark(#000, #fff)) {
+    :root {
+      --mdst-color-fg: light-dark(#000, #fff);
+      --mdst-color-bg: light-dark(#fff, #1a1a1a);
+      --mdst-color-border: light-dark(#000, #fff);
+      --mdst-color-muted: light-dark(#666, #999);
+      --mdst-color-subtle: light-dark(#f5f5f5, #2a2a2a);
+      --mdst-color-focus: light-dark(#000, #fff);
+      --mdst-color-danger: light-dark(#dc2626, #f87171);
+      --mdst-color-warning: light-dark(#b45309, #fbbf24);
+      --mdst-color-success: light-dark(#15803d, #4ade80);
+    }
+  }
 }
 
-/*
- * Minimal reset
- * Only the essentials — no opinions
- */
+@layer mdst-ui.base {
+  /*
+   * Minimal reset
+   * Scoped to .mdst-ui, so nothing outside it is touched. The .mdst-ui
+   * element itself keeps its own margin (e.g. <body>'s).
+   */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+  :where(.mdst-ui),
+  :where(.mdst-ui) *,
+  :where(.mdst-ui) *::before,
+  :where(.mdst-ui) *::after {
+    box-sizing: border-box;
+  }
 
-* {
-  margin: 0;
-}
+  :where(.mdst-ui) * {
+    margin: 0;
+  }
 
-body {
-  line-height: var(--mdst-line-height, 1.5);
-  -webkit-font-smoothing: antialiased;
-}
+  :where(.mdst-ui) {
+    -webkit-font-smoothing: antialiased;
+  }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
+  :where(.mdst-ui) :where(img, picture, video, canvas, svg) {
+    display: block;
+    max-width: 100%;
+  }
 
-a,
-input,
-button,
-textarea,
-select {
-  font: inherit;
-  color: inherit;
-}
+  :where(.mdst-ui) :where(a, input, button, textarea, select) {
+    font: inherit;
+    color: inherit;
+  }
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
+  :where(.mdst-ui) :where(p, h1, h2, h3, h4, h5, h6) {
+    overflow-wrap: break-word;
+  }
+
+  /* Class-only use outside .mdst-ui: components still size predictably
+     (inputs are width: 100% plus padding, for example) without touching
+     anything else on the page. */
+  [class*="mdst-"],
+  [class*="mdst-"]::before,
+  [class*="mdst-"]::after {
+    box-sizing: border-box;
+  }
+
+  /* One keyboard focus ring for everything inside .mdst-ui and every
+     modest-ui component. Components only override the offset where they
+     need to (fields draw it flush, tabs draw it inside). */
+  :where(.mdst-ui) :focus-visible,
+  :where([class*="mdst-"]):focus-visible {
+    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+    outline-offset: var(--mdst-focus-offset);
+  }
+
+  @media (forced-colors: active) {
+    :where(.mdst-ui) :focus-visible,
+    :where([class*="mdst-"]):focus-visible {
+      outline-color: Highlight;
+    }
+  }
+
+  /* Small icon buttons keep their look but get at least a 24px tap area,
+     from an invisible box centred on the button. Centring is the same in
+     either text direction, so physical top/left are fine here. */
+  :where(.mdst-banner__close, .mdst-toast__close, .mdst-tag__dismiss, .mdst-dialog__close, .mdst-drawer__close) {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 24px);
+      height: max(100%, 24px);
+      translate: -50% -50%;
+    }
+  }
+
+  /* Form controls and code blocks used by class (even outside .mdst-ui) drop
+     the browser's default margins. This lives in the base layer, so flow
+     spacing in the components layer still applies. */
+  .mdst-input,
+  .mdst-dropdown,
+  .mdst-checkbox,
+  .mdst-toggle,
+  .mdst-radio,
+  .mdst-pre {
+    margin: 0;
+  }
 }
 
 
 /* Components */
 
-/* Avatar */
+@layer mdst-ui.components {
+  /* Avatar */
 
-.mdst-avatar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  overflow: hidden;
-  font-family: var(--mdst-font-ui);
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1;
-  background: var(--mdst-color-subtle);
-  color: var(--mdst-color-fg);
-  vertical-align: middle;
-  flex-shrink: 0;
-  box-sizing: border-box;
-
-  /* Images */
-
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* Sizes */
-
-  &.mdst-avatar--sm {
-    width: 2rem;
-    height: 2rem;
-    font-size: 0.75rem;
-  }
-
-  &.mdst-avatar--lg {
-    width: 3.5rem;
-    height: 3.5rem;
-    font-size: 1.25rem;
-  }
-
-  &.mdst-avatar--xl {
-    width: 5rem;
-    height: 5rem;
-    font-size: 1.75rem;
-  }
-
-  /* Square variant */
-
-  &.mdst-avatar--square {
-    border-radius: var(--mdst-radius);
-  }
-}
-
-/* Avatar group */
-
-.mdst-avatar-group {
-  display: inline-flex;
-  align-items: center;
-
-  & > .mdst-avatar {
-    margin-left: -0.5rem;
-    border: 2px solid var(--mdst-color-bg);
-  }
-
-  & > .mdst-avatar:first-child {
-    margin-left: 0;
-  }
-}
-
-/* Badge */
-
-.mdst-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.6em;
-  padding: 0.25em 0.375em;
-  font-size: var(--mdst-text-xs);
-  font-family: var(--mdst-font-ui);
-  line-height: 1;
-  border-radius: 9999px;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  white-space: nowrap;
-  vertical-align: middle;
-  box-sizing: border-box;
-
-  /* Variants */
-
-  &.mdst-badge--solid {
-    background: var(--mdst-color-fg);
-    color: var(--mdst-color-bg);
-    border-color: var(--mdst-color-fg);
-  }
-
-  &.mdst-badge--subtle {
-    background: var(--mdst-color-subtle);
-    border-color: transparent;
-  }
-
-  &.mdst-badge--dot {
-    width: 0.6em;
-    height: 0.6em;
-    min-width: 0;
-    padding: 0;
-    font-size: var(--mdst-text-base);
-    background: var(--mdst-color-fg);
-    border-color: transparent;
+  .mdst-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
     overflow: hidden;
-    text-indent: -9999px;
-  }
+    font-family: var(--mdst-font-ui);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    background: var(--mdst-color-subtle);
+    color: var(--mdst-color-fg);
+    vertical-align: middle;
+    flex-shrink: 0;
+    box-sizing: border-box;
 
-  /* Status */
+    /* Images */
 
-  &.mdst-badge--error {
-    border-color: var(--mdst-color-error);
-    color: var(--mdst-color-error);
-
-    &.mdst-badge--solid {
-      background: var(--mdst-color-error);
-      color: var(--mdst-color-bg);
-      border-color: var(--mdst-color-error);
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    &.mdst-badge--subtle {
-      background: color-mix(in srgb, var(--mdst-color-error) 10%, transparent);
-      border-color: transparent;
-      color: var(--mdst-color-error);
+    /* Sizes */
+
+    &.mdst-avatar--sm {
+      width: 2rem;
+      height: 2rem;
+      font-size: 0.75rem;
     }
 
-    &.mdst-badge--dot {
-      background: var(--mdst-color-error);
-    }
-  }
-
-  &.mdst-badge--success {
-    border-color: var(--mdst-color-success);
-    color: var(--mdst-color-success);
-
-    &.mdst-badge--solid {
-      background: var(--mdst-color-success);
-      color: var(--mdst-color-bg);
-      border-color: var(--mdst-color-success);
+    &.mdst-avatar--lg {
+      width: 3.5rem;
+      height: 3.5rem;
+      font-size: 1.25rem;
     }
 
-    &.mdst-badge--subtle {
-      background: color-mix(in srgb, var(--mdst-color-success) 10%, transparent);
-      border-color: transparent;
-      color: var(--mdst-color-success);
+    &.mdst-avatar--xl {
+      width: 5rem;
+      height: 5rem;
+      font-size: 1.75rem;
     }
 
-    &.mdst-badge--dot {
-      background: var(--mdst-color-success);
+    /* Square variant */
+
+    &.mdst-avatar--square {
+      border-radius: var(--mdst-radius);
     }
   }
 
-  &.mdst-badge--warning {
-    border-color: var(--mdst-color-warning);
-    color: var(--mdst-color-warning);
+  /* Avatar group */
 
-    &.mdst-badge--solid {
-      background: var(--mdst-color-warning);
-      color: var(--mdst-color-bg);
-      border-color: var(--mdst-color-warning);
+  .mdst-avatar-group {
+    display: inline-flex;
+    align-items: center;
+
+    & > .mdst-avatar {
+      margin-inline-start: -0.5rem;
+      border: 2px solid var(--mdst-color-bg);
     }
 
-    &.mdst-badge--subtle {
-      background: color-mix(in srgb, var(--mdst-color-warning) 10%, transparent);
-      border-color: transparent;
-      color: var(--mdst-color-warning);
-    }
-
-    &.mdst-badge--dot {
-      background: var(--mdst-color-warning);
+    & > .mdst-avatar:first-child {
+      margin-inline-start: 0;
     }
   }
+}
 
-  &.mdst-badge--muted {
-    border-color: var(--mdst-color-muted);
-    color: var(--mdst-color-muted);
+@layer mdst-ui.components {
+  /* Badge */
+
+  .mdst-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.6em;
+    padding: 0.25em 0.375em;
+    font-size: var(--mdst-text-xs);
+    font-family: var(--mdst-font-ui);
+    line-height: 1;
+    border-radius: 9999px;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    white-space: nowrap;
+    vertical-align: middle;
+    box-sizing: border-box;
+
+    /* Variants */
 
     &.mdst-badge--solid {
-      background: var(--mdst-color-muted);
+      background: var(--mdst-color-fg);
       color: var(--mdst-color-bg);
-      border-color: var(--mdst-color-muted);
+      border-color: var(--mdst-color-fg);
     }
 
     &.mdst-badge--subtle {
       background: var(--mdst-color-subtle);
       border-color: transparent;
-      color: var(--mdst-color-muted);
     }
 
     &.mdst-badge--dot {
-      background: var(--mdst-color-muted);
+      width: 0.6em;
+      height: 0.6em;
+      min-width: 0;
+      padding: 0;
+      font-size: var(--mdst-text-base);
+      background: var(--mdst-color-fg);
+      border-color: transparent;
+      overflow: hidden;
+      text-indent: -9999px;
+    }
+
+    /* Status */
+
+    &.mdst-badge--danger {
+      border-color: var(--mdst-color-danger);
+      color: var(--mdst-color-danger);
+
+      &.mdst-badge--solid {
+        background: var(--mdst-color-danger);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-danger);
+      }
+
+      &.mdst-badge--subtle {
+        background: color-mix(in srgb, var(--mdst-color-danger) 10%, transparent);
+        border-color: transparent;
+        color: var(--mdst-color-danger);
+      }
+
+      &.mdst-badge--dot {
+        background: var(--mdst-color-danger);
+      }
+    }
+
+    &.mdst-badge--success {
+      border-color: var(--mdst-color-success);
+      color: var(--mdst-color-success);
+
+      &.mdst-badge--solid {
+        background: var(--mdst-color-success);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-success);
+      }
+
+      &.mdst-badge--subtle {
+        background: color-mix(in srgb, var(--mdst-color-success) 10%, transparent);
+        border-color: transparent;
+        color: var(--mdst-color-success);
+      }
+
+      &.mdst-badge--dot {
+        background: var(--mdst-color-success);
+      }
+    }
+
+    &.mdst-badge--warning {
+      border-color: var(--mdst-color-warning);
+      color: var(--mdst-color-warning);
+
+      &.mdst-badge--solid {
+        background: var(--mdst-color-warning);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-warning);
+      }
+
+      &.mdst-badge--subtle {
+        background: color-mix(in srgb, var(--mdst-color-warning) 10%, transparent);
+        border-color: transparent;
+        color: var(--mdst-color-warning);
+      }
+
+      &.mdst-badge--dot {
+        background: var(--mdst-color-warning);
+      }
+    }
+
+    &.mdst-badge--info {
+      border-color: var(--mdst-color-info, var(--mdst-color-fg));
+      color: var(--mdst-color-info, var(--mdst-color-fg));
+
+      &.mdst-badge--solid {
+        background: var(--mdst-color-info, var(--mdst-color-fg));
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-info, var(--mdst-color-fg));
+      }
+
+      &.mdst-badge--subtle {
+        background: color-mix(in srgb, var(--mdst-color-info, var(--mdst-color-fg)) 10%, transparent);
+        border-color: transparent;
+        color: var(--mdst-color-info, var(--mdst-color-fg));
+      }
+
+      &.mdst-badge--dot {
+        background: var(--mdst-color-info, var(--mdst-color-fg));
+      }
+    }
+
+    &.mdst-badge--muted {
+      border-color: var(--mdst-color-muted);
+      color: var(--mdst-color-muted);
+
+      &.mdst-badge--solid {
+        background: var(--mdst-color-muted);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-muted);
+      }
+
+      &.mdst-badge--subtle {
+        background: var(--mdst-color-subtle);
+        border-color: transparent;
+        color: var(--mdst-color-muted);
+      }
+
+      &.mdst-badge--dot {
+        background: var(--mdst-color-muted);
+      }
+    }
+
+    /* Sizes */
+
+    &.mdst-badge--sm {
+      font-size: 0.625rem;
+      min-width: 1.5em;
+      padding: 0.2em 0.3em;
+    }
+
+    &.mdst-badge--lg {
+      font-size: var(--mdst-text-sm);
+      padding: 0.3em 0.5em;
+    }
+
+    /* Positioning */
+
+    /* Corner badge at the top end; --_dir flips the nudge in RTL */
+    &.mdst-badge--top-end {
+      --_dir: 1;
+
+      &:dir(rtl) {
+        --_dir: -1;
+      }
+
+      position: absolute;
+      top: 0;
+      inset-inline-end: 0;
+      transform: translate(calc(50% * var(--_dir)), -50%);
+      z-index: 1;
     }
   }
 
-  /* Sizes */
-
-  &.mdst-badge--sm {
-    font-size: 0.625rem;
-    min-width: 1.5em;
-    padding: 0.2em 0.3em;
-  }
-
-  &.mdst-badge--lg {
-    font-size: var(--mdst-text-sm);
-    min-width: 1.6em;
-    padding: 0.3em 0.5em;
-  }
-
-  /* Positioning */
-
-  &.mdst-badge--top-right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(50%, -50%);
-    z-index: 1;
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    .mdst-badge.mdst-badge--dot {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
   }
 }
 
-/* Banner */
+@layer mdst-ui.components {
+  /* Banner */
 
-.mdst-banner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--mdst-space-sm) var(--mdst-space-md);
-  padding: var(--mdst-space-md);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  font-family: var(--mdst-font-ui);
-  font-size: var(--mdst-text-sm);
-  line-height: var(--mdst-line-height);
-  transition:
-    opacity 150ms ease-out,
-    translate 150ms ease-out,
-    display 150ms ease-out allow-discrete;
-
-  /* Content (grows to fill, pushes actions to the end) */
-
-  & .mdst-banner-content {
-    flex: 1 1 16rem;
-    min-width: 0;
-
-    & > * + * {
-      margin-top: var(--mdst-space-xs);
-    }
-  }
-
-  /* Actions (buttons, links) */
-
-  & .mdst-banner-actions {
+  .mdst-banner {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--mdst-space-sm);
+    gap: var(--mdst-space-sm) var(--mdst-space-md);
+    padding: var(--mdst-space-md);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    font-family: var(--mdst-font-ui);
+    font-size: var(--mdst-text-sm);
+    line-height: var(--mdst-line-height);
+    transition:
+      opacity var(--mdst-transition-slow),
+      translate var(--mdst-transition-slow),
+      display var(--mdst-transition-slow) allow-discrete;
+
+    /* Content (grows to fill, pushes actions to the end) */
+
+    & .mdst-banner__content {
+      flex: 1 1 16rem;
+      min-width: 0;
+
+      & > * + * {
+        margin-top: var(--mdst-space-xs);
+      }
+    }
+
+    /* Actions (buttons, links) */
+
+    & .mdst-banner__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--mdst-space-sm);
+    }
+
+    /* Close button */
+
+    & .mdst-banner__close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-start;
+
+      /* A square one text line tall, so the icon centres on the first line of
+         content and the focus ring is a neat square */
+      height: calc(1em * var(--mdst-line-height));
+      aspect-ratio: 1;
+      padding: 0;
+      margin: 0;
+      border: none;
+      background: none;
+      box-shadow: none;
+      color: inherit;
+      cursor: pointer;
+      opacity: 0.6;
+      font-size: 1em;
+      line-height: 1;
+      transition: opacity var(--mdst-transition-fast);
+
+      &:hover {
+        opacity: 1;
+      }
+
+    }
+
+    /* State: visible */
+
+    &[data-state="visible"] {
+      display: flex;
+      opacity: 1;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+
+    /* State: hidden (removed from layout once the fade completes) */
+
+    &[data-state="hidden"] {
+      display: none;
+      opacity: 0;
+    }
+
+    /* Sizes */
+
+    &.mdst-banner--sm {
+      gap: var(--mdst-space-xs) var(--mdst-space-md);
+      padding: var(--mdst-space-sm) var(--mdst-space-md);
+      font-size: var(--mdst-text-xs);
+
+      & .mdst-banner__actions {
+        gap: var(--mdst-space-xs);
+      }
+    }
+
+    /* Borders: remove all, or keep only the listed edges (combinable).
+       Declared before variants so a variant's accent edge still shows. */
+
+    &:is(
+        .mdst-banner--borderless,
+        .mdst-banner--border-top,
+        .mdst-banner--border-bottom,
+        .mdst-banner--border-start,
+        .mdst-banner--border-end
+      ) {
+      border: none;
+    }
+
+    &.mdst-banner--border-top {
+      border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+    }
+
+    &.mdst-banner--border-bottom {
+      border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+    }
+
+    &.mdst-banner--border-start {
+      border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
+    }
+
+    &.mdst-banner--border-end {
+      border-inline-end: var(--mdst-border-width) solid var(--mdst-color-border);
+    }
+
+    /* Status: one accent edge at the start, coloured by the variant */
+
+    &:is(.mdst-banner--success, .mdst-banner--danger, .mdst-banner--warning, .mdst-banner--info) {
+      border-inline-start: 3px solid var(--_accent);
+    }
+
+    &.mdst-banner--success {
+      --_accent: var(--mdst-color-success);
+    }
+
+    &.mdst-banner--danger {
+      --_accent: var(--mdst-color-danger);
+    }
+
+    &.mdst-banner--warning {
+      --_accent: var(--mdst-color-warning);
+    }
+
+    &.mdst-banner--info {
+      --_accent: var(--mdst-color-info, var(--mdst-color-fg));
+    }
+
+    /* Position: sticky to the top/bottom edge of its scrolling section.
+       Place --top as the section's first child and --bottom as its last. */
+
+    &.mdst-banner--top,
+    &.mdst-banner--bottom {
+      position: sticky;
+      z-index: 1;
+      /* Pinned banners hug their edge, so no flow spacing */
+      margin: 0;
+    }
+
+    &.mdst-banner--top {
+      top: var(--mdst-banner-offset, 0);
+    }
+
+    &.mdst-banner--bottom {
+      bottom: var(--mdst-banner-offset, 0);
+    }
+
+    /* Position: fixed to the viewport (combine with --top or --bottom) */
+
+    &.mdst-banner--fixed {
+      position: fixed;
+      inset-inline-start: var(--mdst-banner-offset, var(--mdst-space-md));
+      inset-inline-end: var(--mdst-banner-offset, var(--mdst-space-md));
+      z-index: var(--mdst-z-overlay);
+
+      /* Corner: a compact card at the start/end edge instead of full width */
+
+      &.mdst-banner--start,
+      &.mdst-banner--end {
+        max-width: var(--mdst-banner-width, 28rem);
+      }
+
+      &.mdst-banner--start {
+        inset-inline-end: auto;
+      }
+
+      &.mdst-banner--end {
+        inset-inline-start: auto;
+      }
+
+      &.mdst-banner--top {
+        top: var(--mdst-banner-offset, var(--mdst-space-md));
+
+        &[data-state="hidden"] {
+          translate: 0 -0.5rem;
+        }
+
+        &[data-state="visible"] {
+          @starting-style {
+            translate: 0 -0.5rem;
+          }
+        }
+      }
+
+      &.mdst-banner--bottom {
+        bottom: var(--mdst-banner-offset, var(--mdst-space-md));
+
+        &[data-state="hidden"] {
+          translate: 0 0.5rem;
+        }
+
+        &[data-state="visible"] {
+          @starting-style {
+            translate: 0 0.5rem;
+          }
+        }
+      }
+    }
   }
 
-  /* Close button */
+  /* Corner banners go full width on narrow screens */
 
-  & .mdst-banner-close {
+  @media (max-width: 30rem) {
+    .mdst-banner.mdst-banner--fixed {
+      &.mdst-banner--start,
+      &.mdst-banner--end {
+        inset-inline-start: var(--mdst-banner-offset, var(--mdst-space-md));
+        inset-inline-end: var(--mdst-banner-offset, var(--mdst-space-md));
+        max-width: none;
+      }
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Breadcrumbs */
+
+  .mdst-breadcrumbs {
+    & ol {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--mdst-space-xs);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: var(--mdst-text-sm);
+      font-family: var(--mdst-font-ui);
+    }
+
+    & li {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--mdst-space-xs);
+      margin: 0;
+      color: var(--mdst-color-fg);
+    }
+
+    & li + li::before {
+      content: "/";
+      color: var(--mdst-color-muted);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    & a {
+      color: var(--mdst-color-muted);
+      text-decoration: none;
+      transition: color var(--mdst-transition);
+      margin: 0;
+
+      &:hover {
+        color: var(--mdst-color-fg);
+      }
+    }
+
+    & [aria-current="page"] {
+      color: var(--mdst-color-fg);
+      font-weight: 500;
+    }
+
+    /* Compact */
+
+    &.mdst-breadcrumbs--sm {
+      & ol {
+        gap: calc(var(--mdst-space-xs) * 0.5);
+        font-size: var(--mdst-text-xs);
+      }
+
+      & li {
+        gap: calc(var(--mdst-space-xs) * 0.5);
+      }
+    }
+
+    /* Arrow separator */
+
+    &.mdst-breadcrumbs--arrow {
+      & li + li::before {
+        content: "\203A";
+      }
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Button
+
+     Variants only set these public variables. Make your own the same way, on
+     a class, a container, or an inline style:
+
+       --mdst-button-tone     text / fill colour   (default: --mdst-color-fg)
+       --mdst-button-bg       background           (default: --mdst-color-bg)
+       --mdst-button-fg       text colour          (default: the tone)
+       --mdst-button-border   border colour        (default: --mdst-color-border)
+
+     Hover draws --mdst-button-hover-shadow (a ring in the text colour by
+     default). Set it to none to turn hover off, or to any box-shadow.
+
+     The hover rule only sets the private --_hover, never a property, so other
+     components that reuse a bare <button> (a close icon, a tab) can opt out
+     with a plain box-shadow: none. */
+
+  :where(.mdst-ui) button,
+  :where(.mdst-ui) input:where([type="submit"]),
+  :where(.mdst-ui) input:where([type="reset"]),
+  :where(.mdst-ui) input:where([type="button"]),
+  .mdst-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    align-self: flex-start;
-
-    /* One text line tall, so the icon centres on the first line of content */
-    height: calc(1em * var(--mdst-line-height));
-    padding: 0;
-    margin: 0;
-    border: none;
-    background: none;
-    color: inherit;
+    gap: var(--mdst-space-xs);
+    padding: var(--mdst-space-sm) var(--mdst-space-md);
+    font-family: var(--mdst-font-ui);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    text-decoration: none;
+    color: var(--mdst-button-fg, var(--mdst-button-tone, var(--mdst-color-fg)));
+    background: var(--mdst-button-bg, var(--mdst-color-bg));
+    border: var(--mdst-border-width) solid var(--mdst-button-border, var(--mdst-color-border));
+    border-radius: var(--mdst-radius);
+    box-shadow: var(--_hover, none);
     cursor: pointer;
-    opacity: 0.6;
-    font-size: 1em;
-    line-height: 1;
-    transition: opacity var(--mdst-transition-fast);
+    transition:
+      background var(--mdst-transition),
+      color var(--mdst-transition),
+      border-color var(--mdst-transition),
+      box-shadow var(--mdst-transition);
+    -webkit-appearance: none;
+    appearance: none;
+  }
 
-    &:hover {
-      opacity: 1;
+  :where(.mdst-ui) button:where(:hover),
+  :where(.mdst-ui) input:where([type="submit"]:hover),
+  :where(.mdst-ui) input:where([type="reset"]:hover),
+  :where(.mdst-ui) input:where([type="button"]:hover),
+  .mdst-button:hover {
+    --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
+  }
+
+  /* aria-disabled covers links styled as buttons, which can't be disabled */
+
+  :where(.mdst-ui) button:disabled,
+  :where(.mdst-ui) input:where([type="submit"]:disabled),
+  :where(.mdst-ui) input:where([type="reset"]:disabled),
+  :where(.mdst-ui) input:where([type="button"]:disabled),
+  .mdst-button:disabled,
+  .mdst-button[aria-disabled="true"] {
+    --_hover: none;
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* Variants: single classes that set variables, so they work on <button>,
+     <input>, and <a> alike and combine freely (e.g. danger + inverted). */
+
+  .mdst-button--danger {
+    --mdst-button-tone: var(--mdst-color-danger);
+    --mdst-button-border: var(--mdst-color-danger);
+  }
+
+  .mdst-button--borderless {
+    --mdst-button-bg: transparent;
+    --mdst-button-border: transparent;
+  }
+
+  /* Inverted fills the button with its tone. Toggle buttons use the same
+     treatment when pressed. */
+
+  .mdst-button--solid,
+  :where(.mdst-ui) :where([aria-pressed="true"]),
+  .mdst-button[aria-pressed="true"] {
+    --mdst-button-bg: var(--mdst-button-tone, var(--mdst-color-fg));
+    --mdst-button-fg: var(--mdst-color-bg);
+    --mdst-button-border: var(--mdst-button-tone, var(--mdst-color-fg));
+  }
+
+  /* Sizes (input-qualified so they also beat the classless input rule) */
+
+  :where(.mdst-ui) input.mdst-button--sm,
+  .mdst-button--sm {
+    padding: var(--mdst-space-xs) var(--mdst-space-sm);
+    font-size: var(--mdst-text-sm);
+  }
+
+  :where(.mdst-ui) input.mdst-button--lg,
+  .mdst-button--lg {
+    padding: var(--mdst-space-md) var(--mdst-space-lg);
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) [aria-pressed="true"],
+    .mdst-button[aria-pressed="true"] {
+      forced-color-adjust: none;
+      background: Highlight;
+      color: HighlightText;
+      border-color: Highlight;
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Card */
+
+  .mdst-card {
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+
+    & .mdst-card__header {
+      padding: var(--mdst-space-md);
+      border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      font-weight: 600;
+
+      /* Borderless header — removes the bottom border from the header */
+      &.mdst-card__header--borderless {
+        border-bottom: none;
+      }
     }
 
-    &:focus-visible {
-      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-      outline-offset: var(--mdst-border-width);
+    & .mdst-card__body {
+      padding: var(--mdst-space-md);
+    }
+
+    & .mdst-card__footer {
+      margin-top: auto;
+      padding: var(--mdst-space-md);
+      border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+
+      /* Borderless footer — removes the top border from the footer */
+      &.mdst-card__footer--borderless {
+        border-top: none;
+      }
+    }
+
+    /* Variants */
+
+    /* Only the outer border goes; header and footer dividers stay unless they
+       are borderless too */
+    &.mdst-card--borderless {
+      border: none;
+    }
+
+    &.mdst-card--interactive {
+      transition:
+        box-shadow var(--mdst-transition),
+        border-color var(--mdst-transition);
+      cursor: pointer;
+
+      &:hover {
+        border-color: var(--mdst-color-fg);
+        box-shadow: var(--mdst-shadow);
+      }
+
+    }
+
+    /* Padding variants */
+
+    &.mdst-card--sm {
+      & > .mdst-card__header,
+      & > .mdst-card__body,
+      & > .mdst-card__footer {
+        padding: var(--mdst-space-sm);
+      }
+    }
+
+    /* Flush — no padding, for embedding raw content like tables or images */
+
+    &.mdst-card--flush {
+      & > .mdst-card__body {
+        padding: 0;
+      }
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Checkbox */
+
+  :where(.mdst-ui) input:where([type="checkbox"]),
+  .mdst-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    /* Border included in the size, so a user's border-box reset changes nothing */
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: calc(0.875rem + 2 * var(--mdst-border-width));
+    height: calc(0.875rem + 2 * var(--mdst-border-width));
+    background: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    transition: border-color var(--mdst-transition);
+  }
+
+  :where(.mdst-ui) input:where([type="checkbox"]:checked)::after,
+  .mdst-checkbox:checked::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background: var(--mdst-color-fg);
+  }
+
+  :where(.mdst-ui) input:where([type="checkbox"]:disabled),
+  .mdst-checkbox:disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* Checkbox with label wrapper */
+
+  :where(.mdst-ui) label:where(:has(> input[type="checkbox"])),
+  .mdst-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)),
+  .mdst-checkbox-label:has(.mdst-checkbox:disabled) {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* The label already fades, so the control inside doesn't fade twice */
+  :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)) > input,
+  label:has(> .mdst-toggle:disabled) > .mdst-toggle,
+  .mdst-checkbox-label:has(.mdst-checkbox:disabled) .mdst-checkbox {
+    opacity: 1;
+  }
+
+  /* Toggle variant */
+
+  :where(.mdst-ui) input.mdst-toggle:where([type="checkbox"]),
+  .mdst-toggle {
+    -webkit-appearance: none;
+    appearance: none;
+    /* Border included in the size, so a user's border-box reset changes nothing */
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: calc(2.125rem + 2 * var(--mdst-border-width));
+    height: calc(1.125rem + 2 * var(--mdst-border-width));
+    background: var(--mdst-color-subtle);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    transition:
+      background var(--mdst-transition),
+      border-color var(--mdst-transition);
+
+    /* The thumb slides towards the end edge; --_dir flips it in RTL */
+    --_dir: 1;
+
+    &:dir(rtl) {
+      --_dir: -1;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 0.875rem;
+      width: 0.875rem;
+      inset-inline-start: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--mdst-color-muted);
+      transition:
+        transform var(--mdst-transition),
+        background var(--mdst-transition);
+    }
+
+    /* Suppress the classless checkbox tick when used on a bare element */
+    &::after {
+      content: none;
+    }
+
+    &:checked {
+      background: var(--mdst-color-fg);
+      border-color: var(--mdst-color-fg);
+
+      &::before {
+        transform: translateY(-50%) translateX(calc(1rem * var(--_dir)));
+        background: var(--mdst-color-bg);
+      }
+    }
+
+    &:disabled {
+      opacity: var(--mdst-disabled-opacity);
+      cursor: not-allowed;
+    }
+
+    /* Toggle rounded variant */
+
+    &.mdst-toggle--pill {
+      border-radius: 9999px;
+
+      &::before {
+        border-radius: 50%;
+      }
     }
   }
 
-  /* State: visible */
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) input:where([type="checkbox"]:checked)::after,
+    .mdst-checkbox:checked::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
 
-  &[data-state="visible"] {
+    :where(.mdst-ui) input.mdst-toggle:where([type="checkbox"]),
+    .mdst-toggle {
+      forced-color-adjust: none;
+      background: Canvas;
+      border-color: CanvasText;
+
+      &::before {
+        background: CanvasText;
+      }
+
+      &:checked {
+        background: Highlight;
+        border-color: Highlight;
+
+        &::before {
+          background: HighlightText;
+        }
+      }
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Code - Inline code snippets */
+
+  :where(.mdst-ui) code,
+  .mdst-code {
+    font-family: var(--mdst-font-mono);
+    font-size: 0.875em;
+    background: var(--mdst-color-subtle);
+    border: 0.0625em solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    padding: 0.125em 0.375em;
+    word-break: break-word;
+  }
+}
+
+@layer mdst-ui.components {
+  /* Color Picker */
+
+  .mdst-color-picker {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+
+    & .mdst-color-picker__input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: var(--mdst-space-8);
+      height: var(--mdst-space-8);
+      padding: 0;
+      background: none;
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: border-color var(--mdst-transition);
+
+      &:disabled {
+        opacity: var(--mdst-disabled-opacity);
+        cursor: not-allowed;
+      }
+
+      /* Webkit (Chrome, Safari, Edge) */
+
+      &::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+
+      &::-webkit-color-swatch {
+        border: none;
+        border-radius: 50%;
+      }
+
+      /* Firefox */
+
+      &::-moz-color-swatch {
+        border: none;
+        border-radius: 50%;
+      }
+    }
+
+    /* Text input variant */
+
+    & .mdst-color-picker__text {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 5rem;
+      height: var(--mdst-space-8);
+      padding: 0 var(--mdst-space-sm);
+      font-family: var(--mdst-font-mono);
+      font-size: var(--mdst-text-sm);
+      text-transform: uppercase;
+      color: var(--mdst-color-fg);
+      background: var(--mdst-color-bg);
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      border-radius: var(--mdst-radius);
+      transition: border-color var(--mdst-transition);
+
+      &::placeholder {
+        color: var(--mdst-color-muted);
+        text-transform: none;
+      }
+
+      &:focus {
+        border-color: var(--mdst-color-focus);
+      }
+
+      &:focus-visible {
+        outline-offset: 0;
+      }
+
+      &:disabled {
+        opacity: var(--mdst-disabled-opacity);
+        cursor: not-allowed;
+      }
+    }
+
+    /* Square variant */
+
+    &.mdst-color-picker--square .mdst-color-picker__input {
+      border-radius: var(--mdst-radius);
+
+      &::-webkit-color-swatch {
+        border-radius: var(--mdst-radius);
+      }
+
+      &::-moz-color-swatch {
+        border-radius: var(--mdst-radius);
+      }
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Details (Toggle/Disclosure) */
+
+  :where(.mdst-ui) details,
+  .mdst-details {
+    position: relative;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+  }
+
+  :where(.mdst-ui) details > summary,
+  .mdst-details > summary {
     display: flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+    padding: var(--mdst-space-md);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    font-weight: 500;
+    transition: background var(--mdst-transition);
+  }
+
+  :where(.mdst-ui) details > summary::-webkit-details-marker,
+  .mdst-details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  :where(.mdst-ui) details > summary::before,
+  .mdst-details > summary::before {
+    content: "";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    transition: transform var(--mdst-transition);
+  }
+
+  :where(.mdst-ui) details > summary:where(:hover),
+  .mdst-details > summary:hover {
+    color: var(--mdst-color-muted);
+  }
+
+  :where(.mdst-ui) details > summary:where(:focus-visible),
+  .mdst-details > summary:focus-visible {
+    outline-offset: -2px;
+  }
+
+  :where(.mdst-ui) details:where([open]) > summary::before,
+  .mdst-details[open] > summary::before {
+    transform: rotate(90deg);
+  }
+
+  /* The chevron points towards the end edge, so mirror it in RTL. scale
+     combines with the open-state rotation, which still points down. */
+  :where(.mdst-ui) details > summary:where(:dir(rtl))::before,
+  .mdst-details > summary:dir(rtl)::before {
+    scale: -1 1;
+  }
+
+  /* Content area - only style when open */
+
+  :where(.mdst-ui) details:where([open])::details-content,
+  .mdst-details[open]::details-content {
+    padding: var(--mdst-space-md);
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  /* Variants */
+
+  :where(.mdst-ui) details.mdst-details--borderless,
+  .mdst-details.mdst-details--borderless {
+    border: none;
+  }
+
+  :where(.mdst-ui) details.mdst-details--borderless:where([open])::details-content,
+  .mdst-details.mdst-details--borderless[open]::details-content {
+    border-top: none;
+    padding-inline-start: calc(1em + var(--mdst-space-sm));
+  }
+
+  :where(.mdst-ui) details.mdst-details--sm > summary,
+  .mdst-details.mdst-details--sm > summary {
+    padding: var(--mdst-space-sm) var(--mdst-space-md);
+  }
+
+  :where(.mdst-ui) details.mdst-details--sm:where([open])::details-content,
+  .mdst-details.mdst-details--sm[open]::details-content {
+    padding: var(--mdst-space-sm) var(--mdst-space-md);
+  }
+
+  /* Section variant - collapsible header style */
+
+  :where(.mdst-ui) details.mdst-details--section,
+  .mdst-details.mdst-details--section {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  :where(.mdst-ui) details.mdst-details--section > summary,
+  .mdst-details.mdst-details--section > summary {
+    padding: var(--mdst-space-sm) 0;
+    font-size: var(--mdst-text-lg);
+    font-weight: 600;
+    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  :where(.mdst-ui) details.mdst-details--section > summary::before,
+  .mdst-details.mdst-details--section > summary::before {
+    order: 1;
+    margin-inline-start: auto;
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  :where(.mdst-ui) details.mdst-details--section:where([open]) > summary,
+  .mdst-details.mdst-details--section[open] > summary {
+    border-bottom-color: transparent;
+  }
+
+  :where(.mdst-ui) details.mdst-details--section:where([open])::details-content,
+  .mdst-details.mdst-details--section[open]::details-content {
+    padding: var(--mdst-space-sm) 0 var(--mdst-space-md);
+    border-top: none;
+    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) details > summary::before,
+    .mdst-details > summary::before {
+      forced-color-adjust: none;
+      background-color: CanvasText;
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Dialog */
+
+  :where(.mdst-ui) dialog,
+  .mdst-dialog {
+    padding: 0;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    max-width: min(90vw, 32rem);
+    max-height: 90vh;
+
+    /* Center the dialog */
+    margin: auto;
+    position: fixed;
+    inset: 0;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  :where(.mdst-ui) dialog::backdrop,
+  .mdst-dialog::backdrop {
+    background: var(--mdst-backdrop);
+  }
+
+  /* Dialog Header */
+
+  :where(.mdst-ui) dialog .mdst-dialog__header,
+  .mdst-dialog .mdst-dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--mdst-space-md);
+    padding: var(--mdst-space-md);
+    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  :where(.mdst-ui) dialog .mdst-dialog__title,
+  .mdst-dialog .mdst-dialog__title {
+    margin: 0;
+    font-size: var(--mdst-text-lg);
+    font-weight: 600;
+    line-height: var(--mdst-line-height);
+  }
+
+  :where(.mdst-ui) dialog .mdst-dialog__close,
+  .mdst-dialog .mdst-dialog__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--mdst-space-xs);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: var(--mdst-radius);
+    cursor: pointer;
+    color: var(--mdst-color-muted);
+    transition: color var(--mdst-transition);
+  }
+
+  :where(.mdst-ui) dialog .mdst-dialog__close:where(:hover),
+  .mdst-dialog .mdst-dialog__close:hover {
+    color: var(--mdst-color-fg);
+  }
+
+  /* Dialog Body */
+
+  :where(.mdst-ui) dialog .mdst-dialog__body,
+  .mdst-dialog .mdst-dialog__body {
+    padding: var(--mdst-space-md);
+    overflow-y: auto;
+  }
+
+  /* Dialog Footer */
+
+  :where(.mdst-ui) dialog .mdst-dialog__footer,
+  .mdst-dialog .mdst-dialog__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--mdst-space-sm);
+    padding: var(--mdst-space-md);
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  /* Variants */
+
+  :where(.mdst-ui) dialog.mdst-dialog--sm,
+  .mdst-dialog.mdst-dialog--sm {
+    max-width: min(90vw, 24rem);
+  }
+
+  :where(.mdst-ui) dialog.mdst-dialog--lg,
+  .mdst-dialog.mdst-dialog--lg {
+    max-width: min(90vw, 48rem);
+  }
+
+  :where(.mdst-ui) dialog.mdst-dialog--full,
+  .mdst-dialog.mdst-dialog--full {
+    max-width: 90vw;
+  }
+}
+
+@layer mdst-ui.components {
+  /* Drawer */
+
+  :where(.mdst-ui) dialog.mdst-drawer,
+  .mdst-drawer {
+    position: fixed;
+    top: 0;
+    inset-inline-end: 0;
+    bottom: 0;
+    inset-inline-start: auto;
+    width: 20rem;
+    max-width: 100vw;
+    max-height: none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: 0;
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    overflow: hidden;
+    flex-direction: column;
+
+    /* Slides in from the end edge; --_dir flips the direction in RTL */
+    --_dir: 1;
+
+    &:dir(rtl) {
+      --_dir: -1;
+    }
+
+    /* Closed state (exit animation target) */
+    transform: translateX(calc(100% * var(--_dir)));
+    transition:
+      transform var(--mdst-transition-slow),
+      opacity var(--mdst-transition-slow),
+      overlay var(--mdst-transition-slow) allow-discrete,
+      display var(--mdst-transition-slow) allow-discrete;
+
+    &[open] {
+      display: flex;
+      transform: translateX(0);
+
+      @starting-style {
+        transform: translateX(calc(100% * var(--_dir)));
+      }
+    }
+  }
+
+  /* Backdrop */
+
+  :where(.mdst-ui) dialog.mdst-drawer::backdrop,
+  .mdst-drawer::backdrop {
+    background: var(--mdst-backdrop);
+    opacity: 0;
+    transition:
+      opacity var(--mdst-transition-slow),
+      overlay var(--mdst-transition-slow) allow-discrete,
+      display var(--mdst-transition-slow) allow-discrete;
+  }
+
+  :where(.mdst-ui) dialog.mdst-drawer:where([open])::backdrop,
+  .mdst-drawer[open]::backdrop {
     opacity: 1;
 
     @starting-style {
@@ -428,2746 +1590,2112 @@ h6 {
     }
   }
 
-  /* State: hidden (removed from layout once the fade completes) */
+  /* Position: start (the left edge in left-to-right pages) */
 
-  &[data-state="hidden"] {
-    display: none;
-    opacity: 0;
+  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--start,
+  .mdst-drawer.mdst-drawer--start {
+    inset-inline-end: auto;
+    inset-inline-start: 0;
+    border-inline-start: none;
+    border-inline-end: var(--mdst-border-width) solid var(--mdst-color-border);
+    transform: translateX(calc(-100% * var(--_dir)));
+
+    &[open] {
+      transform: translateX(0);
+
+      @starting-style {
+        transform: translateX(calc(-100% * var(--_dir)));
+      }
+    }
   }
 
   /* Sizes */
 
-  &.mdst-banner--sm {
-    gap: var(--mdst-space-xs) var(--mdst-space-md);
-    padding: var(--mdst-space-sm) var(--mdst-space-md);
-    font-size: var(--mdst-text-xs);
-
-    & .mdst-banner-actions {
-      gap: var(--mdst-space-xs);
-    }
+  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--sm,
+  .mdst-drawer.mdst-drawer--sm {
+    width: 16rem;
   }
 
-  /* Borders: remove all, or keep only the listed edges (combinable).
-     Declared before variants so a variant's accent edge still shows. */
-
-  &:is(
-      .mdst-banner--borderless,
-      .mdst-banner--border-top,
-      .mdst-banner--border-bottom,
-      .mdst-banner--border-start,
-      .mdst-banner--border-end
-    ) {
-    border: none;
+  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--lg,
+  .mdst-drawer.mdst-drawer--lg {
+    width: 28rem;
   }
 
-  &.mdst-banner--border-top {
-    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--full,
+  .mdst-drawer.mdst-drawer--full {
+    width: 100%;
+    border-inline-start: none;
+    border-inline-end: none;
   }
 
-  &.mdst-banner--border-bottom {
-    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-  }
+  /* Header */
 
-  &.mdst-banner--border-start {
-    border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
-  }
-
-  &.mdst-banner--border-end {
-    border-inline-end: var(--mdst-border-width) solid var(--mdst-color-border);
-  }
-
-  /* Variant: success */
-
-  &[data-variant="success"] {
-    border-left: 3px solid var(--mdst-color-success);
-  }
-
-  /* Variant: error */
-
-  &[data-variant="error"] {
-    border-left: 3px solid var(--mdst-color-error);
-  }
-
-  /* Variant: warning */
-
-  &[data-variant="warning"] {
-    border-left: 3px solid var(--mdst-color-warning);
-  }
-
-  /* Variant: info */
-
-  &[data-variant="info"] {
-    border-left: 3px solid var(--mdst-color-fg);
-  }
-
-  /* Position: sticky to the top/bottom edge of its scrolling section.
-     Place --top as the section's first child and --bottom as its last. */
-
-  &.mdst-banner--top,
-  &.mdst-banner--bottom {
-    position: sticky;
-    z-index: 1;
-  }
-
-  &.mdst-banner--top {
-    top: var(--mdst-banner-offset, 0);
-  }
-
-  &.mdst-banner--bottom {
-    bottom: var(--mdst-banner-offset, 0);
-  }
-
-  /* Position: fixed to the viewport (combine with --top or --bottom) */
-
-  &.mdst-banner--fixed {
-    position: fixed;
-    left: var(--mdst-banner-offset, var(--mdst-space-md));
-    right: var(--mdst-banner-offset, var(--mdst-space-md));
-    z-index: 1000;
-
-    /* Corner: a compact card at the start/end edge instead of full width */
-
-    &.mdst-banner--start,
-    &.mdst-banner--end {
-      max-width: var(--mdst-banner-width, 28rem);
-    }
-
-    &.mdst-banner--start {
-      right: auto;
-    }
-
-    &.mdst-banner--end {
-      left: auto;
-    }
-
-    &.mdst-banner--top {
-      top: var(--mdst-banner-offset, var(--mdst-space-md));
-
-      &[data-state="hidden"] {
-        translate: 0 -0.5rem;
-      }
-
-      &[data-state="visible"] {
-        @starting-style {
-          translate: 0 -0.5rem;
-        }
-      }
-    }
-
-    &.mdst-banner--bottom {
-      bottom: var(--mdst-banner-offset, var(--mdst-space-md));
-
-      &[data-state="hidden"] {
-        translate: 0 0.5rem;
-      }
-
-      &[data-state="visible"] {
-        @starting-style {
-          translate: 0 0.5rem;
-        }
-      }
-    }
-  }
-}
-
-/* Corner banners go full width on narrow screens */
-
-@media (max-width: 30rem) {
-  .mdst-banner.mdst-banner--fixed {
-    &.mdst-banner--start,
-    &.mdst-banner--end {
-      left: var(--mdst-banner-offset, var(--mdst-space-md));
-      right: var(--mdst-banner-offset, var(--mdst-space-md));
-      max-width: none;
-    }
-  }
-}
-
-/* Breadcrumbs */
-
-.mdst-breadcrumbs {
-  & ol {
+  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__header,
+  .mdst-drawer .mdst-drawer__header {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: var(--mdst-space-xs);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-size: var(--mdst-text-sm);
-    font-family: var(--mdst-font-ui);
+    justify-content: space-between;
+    gap: var(--mdst-space-md);
+    padding: var(--mdst-space-md);
+    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+    flex-shrink: 0;
   }
 
-  & li {
+  /* Body */
+
+  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__body,
+  .mdst-drawer .mdst-drawer__body {
+    padding: var(--mdst-space-md);
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  /* Footer */
+
+  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__footer,
+  .mdst-drawer .mdst-drawer__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--mdst-space-sm);
+    padding: var(--mdst-space-md);
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+    flex-shrink: 0;
+  }
+
+  /* Close button */
+
+  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__close,
+  .mdst-drawer .mdst-drawer__close {
     display: inline-flex;
     align-items: center;
-    gap: var(--mdst-space-xs);
-    color: var(--mdst-color-fg);
-  }
-
-  & li + li::before {
-    content: "/";
+    justify-content: center;
+    padding: var(--mdst-space-xs);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: var(--mdst-radius);
+    cursor: pointer;
     color: var(--mdst-color-muted);
-    pointer-events: none;
-    user-select: none;
-  }
-
-  & a {
-    color: var(--mdst-color-muted);
-    text-decoration: none;
     transition: color var(--mdst-transition);
-    margin: 0;
 
     &:hover {
       color: var(--mdst-color-fg);
     }
-  }
 
-  & [aria-current="page"] {
+  }
+}
+
+@layer mdst-ui.components {
+  /* Dropdown (Native Select) */
+
+  :where(.mdst-ui) select,
+  .mdst-dropdown {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    padding: var(--mdst-space-sm);
+    padding-inline-end: calc(var(--mdst-space-sm) + 1.2em);
+    font-family: var(--mdst-font-ui);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
     color: var(--mdst-color-fg);
-    font-weight: 500;
+    background-color: var(--mdst-color-bg);
+    /* A single symmetrical down-pointing triangle, so it reads the same at
+       either edge */
+    background-image: conic-gradient(from -45deg at 50% 100%, var(--mdst-color-fg) 90deg, transparent 0);
+    background-size: 0.6rem 0.3rem;
+    background-position: var(--_side) var(--mdst-space-sm) center;
+    background-repeat: no-repeat;
+
+    /* The arrow sits at the end edge; flip it in RTL */
+    --_side: right;
+
+    &:dir(rtl) {
+      --_side: left;
+    }
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    cursor: pointer;
+    transition: border-color var(--mdst-transition);
   }
 
-  /* Compact */
-
-  &.mdst-breadcrumbs--compact {
-    & ol {
-      gap: calc(var(--mdst-space-xs) * 0.5);
-      font-size: var(--mdst-text-xs);
-    }
-
-    & li {
-      gap: calc(var(--mdst-space-xs) * 0.5);
-    }
+  :where(.mdst-ui) select:where(:is([aria-invalid="true"], :user-invalid)),
+  .mdst-dropdown:is([aria-invalid="true"], :user-invalid) {
+    border-color: var(--mdst-color-danger);
   }
 
-  /* Arrow separator */
-
-  &.mdst-breadcrumbs--arrow {
-    & li + li::before {
-      content: "\203A";
-    }
-  }
-}
-
-/* Button */
-
-:where(.mdst-ui) button,
-:where(.mdst-ui) input[type="submit"],
-:where(.mdst-ui) input[type="reset"],
-:where(.mdst-ui) input[type="button"],
-.mdst-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--mdst-space-xs);
-  padding: var(--mdst-space-sm) var(--mdst-space-md);
-  font-family: var(--mdst-font-ui);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-  background: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  cursor: pointer;
-  transition:
-    background var(--mdst-transition),
-    color var(--mdst-transition),
-    border-color var(--mdst-transition);
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-:where(.mdst-ui) button:hover,
-:where(.mdst-ui) input[type="submit"]:hover,
-:where(.mdst-ui) input[type="reset"]:hover,
-:where(.mdst-ui) input[type="button"]:hover,
-.mdst-button:hover {
-  background: var(--mdst-button-hover-bg);
-  color: var(--mdst-button-hover-color);
-  border-color: var(--mdst-button-hover-border);
-}
-
-:where(.mdst-ui) button:focus-visible,
-:where(.mdst-ui) input[type="submit"]:focus-visible,
-:where(.mdst-ui) input[type="reset"]:focus-visible,
-:where(.mdst-ui) input[type="button"]:focus-visible,
-.mdst-button:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
-
-:where(.mdst-ui) button:disabled,
-:where(.mdst-ui) input[type="submit"]:disabled,
-:where(.mdst-ui) input[type="reset"]:disabled,
-:where(.mdst-ui) input[type="button"]:disabled,
-.mdst-button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) button:disabled:hover,
-:where(.mdst-ui) input[type="submit"]:disabled:hover,
-:where(.mdst-ui) input[type="reset"]:disabled:hover,
-:where(.mdst-ui) input[type="button"]:disabled:hover,
-.mdst-button:disabled:hover {
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  border-color: var(--mdst-color-border);
-}
-
-/* Variants */
-
-:where(.mdst-ui) button.mdst-button--ghost,
-.mdst-button.mdst-button--ghost {
-  border-color: transparent;
-}
-
-:where(.mdst-ui) button.mdst-button--ghost:hover,
-.mdst-button.mdst-button--ghost:hover {
-  border-color: var(--mdst-button-hover-border);
-}
-
-:where(.mdst-ui) button.mdst-button--inverted,
-.mdst-button.mdst-button--inverted {
-  background: var(--mdst-color-fg);
-  color: var(--mdst-color-bg);
-}
-
-:where(.mdst-ui) button.mdst-button--inverted:hover,
-.mdst-button.mdst-button--inverted:hover {
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-}
-
-/* Sizes */
-
-:where(.mdst-ui) button.mdst-button--sm,
-.mdst-button.mdst-button--sm {
-  padding: var(--mdst-space-xs) var(--mdst-space-sm);
-  font-size: var(--mdst-text-sm);
-}
-
-:where(.mdst-ui) button.mdst-button--lg,
-.mdst-button.mdst-button--lg {
-  padding: var(--mdst-space-md) var(--mdst-space-lg);
-}
-
-/* Card */
-
-.mdst-card {
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
-
-  & .mdst-card-header {
-    padding: var(--mdst-space-md);
-    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-    font-weight: 600;
-
-    & + .mdst-card-body {
-      border-top: none;
-    }
-
-    /* Borderless header — removes the bottom border from the header */
-    &.mdst-card-header--borderless {
-      border-bottom: none;
-    }
+  :where(.mdst-ui) select:where(:focus),
+  .mdst-dropdown:focus {
+    border-color: var(--mdst-color-focus);
   }
 
-  & .mdst-card-body {
-    padding: var(--mdst-space-md);
-
-    & + .mdst-card-footer {
-      border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-    }
+  :where(.mdst-ui) select:where(:focus-visible),
+  .mdst-dropdown:focus-visible {
+    outline-offset: 0;
   }
 
-  & .mdst-card-footer {
-    margin-top: auto;
-    padding: var(--mdst-space-md);
-    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-
-    /* Borderless footer — removes the top border from the footer */
-    &.mdst-card-footer--borderless {
-      border-top: none;
-    }
+  :where(.mdst-ui) select:where(:disabled),
+  .mdst-dropdown:disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
   }
 
   /* Variants */
 
-  &.mdst-card--borderless {
-    border: none;
-
-    & > .mdst-card-header {
-      border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-    }
-
-    & > .mdst-card-footer {
-      border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-    }
+  :where(.mdst-ui) select.mdst-dropdown--borderless,
+  .mdst-dropdown.mdst-dropdown--borderless {
+    border-color: transparent;
+    background-color: transparent;
   }
 
-  &.mdst-card--interactive {
-    transition:
-      box-shadow var(--mdst-transition),
-      border-color var(--mdst-transition);
-    cursor: pointer;
-
-    &:hover {
-      border-color: var(--mdst-color-fg);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    &:focus-visible {
-      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-      outline-offset: var(--mdst-border-width);
-    }
+  :where(.mdst-ui) select.mdst-dropdown--borderless:where(:hover),
+  .mdst-dropdown.mdst-dropdown--borderless:hover {
+    border-color: var(--mdst-color-border);
   }
 
-  /* Padding variants */
-
-  &.mdst-card--compact {
-    & > .mdst-card-header,
-    & > .mdst-card-body,
-    & > .mdst-card-footer {
-      padding: var(--mdst-space-sm);
-    }
+  :where(.mdst-ui) select.mdst-dropdown--borderless:where(:focus),
+  .mdst-dropdown.mdst-dropdown--borderless:focus {
+    border-color: var(--mdst-color-focus);
   }
 
-  /* Flush — no padding, for embedding raw content like tables or images */
+  /* Sizes */
 
-  &.mdst-card--flush {
-    & > .mdst-card-body {
-      padding: 0;
-    }
-  }
-}
-
-/* Checkbox */
-
-:where(.mdst-ui) input[type="checkbox"],
-.mdst-checkbox {
-  -webkit-appearance: none;
-  appearance: none;
-  box-sizing: content-box;
-  flex-shrink: 0;
-  width: 0.875rem;
-  height: 0.875rem;
-  margin: 0;
-  background: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: 0;
-  cursor: pointer;
-  position: relative;
-  transition: border-color var(--mdst-transition);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:checked::after,
-.mdst-checkbox:checked::after {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  background: var(--mdst-color-fg);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:hover,
-.mdst-checkbox:hover {
-  border-color: var(--mdst-color-muted);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:focus-visible,
-.mdst-checkbox:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:disabled,
-.mdst-checkbox:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) input[type="checkbox"]:disabled:hover,
-.mdst-checkbox:disabled:hover {
-  border-color: var(--mdst-color-border);
-}
-
-/* Checkbox with label wrapper */
-
-:where(.mdst-ui) label:has(> input[type="checkbox"]),
-.mdst-checkbox-label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  cursor: pointer;
-  user-select: none;
-}
-
-:where(.mdst-ui) label:has(> input[type="checkbox"]:disabled),
-.mdst-checkbox-label:has(.mdst-checkbox:disabled) {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Toggle variant */
-
-.mdst-checkbox--toggle {
-  -webkit-appearance: none;
-  appearance: none;
-  box-sizing: content-box;
-  flex-shrink: 0;
-  width: 2.125rem;
-  height: 1.125rem;
-  margin: 0;
-  background: var(--mdst-color-subtle);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: 0;
-  cursor: pointer;
-  position: relative;
-  transition:
-    background var(--mdst-transition),
-    border-color var(--mdst-transition);
-
-  &::before {
-    content: "";
-    position: absolute;
-    height: 0.875rem;
-    width: 0.875rem;
-    left: 2px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--mdst-color-muted);
-    transition:
-      transform var(--mdst-transition),
-      background var(--mdst-transition);
-  }
-
-  &:checked {
-    background: var(--mdst-color-fg);
-    border-color: var(--mdst-color-fg);
-
-    &::before {
-      transform: translateY(-50%) translateX(1rem);
-      background: var(--mdst-color-bg);
-    }
-  }
-
-  &:hover {
-    border-color: var(--mdst-color-muted);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--mdst-color-focus);
-    outline-offset: 2px;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-
-    &:hover {
-      border-color: var(--mdst-color-border);
-    }
-  }
-
-  /* Toggle rounded variant */
-
-  &.mdst-checkbox--toggle-rounded {
-    border-radius: 9999px;
-
-    &::before {
-      border-radius: 50%;
-    }
-  }
-}
-
-/* Code - Inline code snippets */
-
-:where(.mdst-ui) code,
-.mdst-code {
-  font-family: var(--mdst-font-mono);
-  font-size: 0.875em;
-  background: var(--mdst-color-subtle);
-  border: 0.0625em solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  padding: 0.125em 0.375em;
-  word-break: break-word;
-}
-
-/* Color Picker */
-
-.mdst-color-picker {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-
-  & .mdst-color-picker__input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: var(--mdst-space-8);
-    height: var(--mdst-space-8);
-    padding: 0;
-    background: none;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: 50%;
-    cursor: pointer;
-    outline: none;
-    transition: border-color var(--mdst-transition);
-
-    &:focus-visible {
-      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-      outline-offset: var(--mdst-border-width);
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Webkit (Chrome, Safari, Edge) */
-
-    &::-webkit-color-swatch-wrapper {
-      padding: 0;
-    }
-
-    &::-webkit-color-swatch {
-      border: none;
-      border-radius: 50%;
-    }
-
-    /* Firefox */
-
-    &::-moz-color-swatch {
-      border: none;
-      border-radius: 50%;
-    }
-  }
-
-  /* Text input variant */
-
-  & .mdst-color-picker__text {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 5rem;
-    height: var(--mdst-space-8);
-    padding: 0 var(--mdst-space-sm);
-    font-family: var(--mdst-font-mono);
+  :where(.mdst-ui) select.mdst-dropdown--sm,
+  .mdst-dropdown.mdst-dropdown--sm {
+    padding: var(--mdst-space-xs) var(--mdst-space-sm);
+    padding-inline-end: calc(var(--mdst-space-sm) + 1.5em);
     font-size: var(--mdst-text-sm);
-    text-transform: uppercase;
-    color: var(--mdst-color-fg);
-    background: var(--mdst-color-bg);
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: var(--mdst-radius);
-    outline: none;
-    transition: border-color var(--mdst-transition);
+    background-position: var(--_side) var(--mdst-space-sm) center;
+  }
 
-    &::placeholder {
-      color: var(--mdst-color-muted);
-      text-transform: none;
-    }
+  :where(.mdst-ui) select.mdst-dropdown--lg,
+  .mdst-dropdown.mdst-dropdown--lg {
+    padding: var(--mdst-space-md) var(--mdst-space-md);
+    padding-inline-end: calc(var(--mdst-space-md) + 1.2em);
+    background-position: var(--_side) var(--mdst-space-md) center;
+  }
 
-    &:focus {
-      border-color: var(--mdst-color-focus);
-    }
+  /* Inline variant (auto-width) */
 
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+  :where(.mdst-ui) select.mdst-dropdown--inline,
+  .mdst-dropdown.mdst-dropdown--inline {
+    display: inline-block;
+    width: auto;
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) select,
+    .mdst-dropdown {
+      forced-color-adjust: none;
+      color: CanvasText;
+      background-color: Canvas;
+      background-image: conic-gradient(from -45deg at 50% 100%, CanvasText 90deg, transparent 0);
+      border-color: CanvasText;
     }
   }
 
-  /* Square variant */
-
-  &.mdst-color-picker--square .mdst-color-picker__input {
-    border-radius: var(--mdst-radius);
-
-    &::-webkit-color-swatch {
-      border-radius: var(--mdst-radius);
-    }
-
-    &::-moz-color-swatch {
-      border-radius: var(--mdst-radius);
-    }
-  }
-}
-
-/* Details (Toggle/Disclosure) */
-
-:where(.mdst-ui) details,
-.mdst-details {
-  position: relative;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
-}
-
-:where(.mdst-ui) details > summary,
-.mdst-details > summary {
-  display: flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-  padding: var(--mdst-space-md);
-  cursor: pointer;
-  user-select: none;
-  list-style: none;
-  font-weight: 500;
-  transition: background var(--mdst-transition);
-}
-
-:where(.mdst-ui) details > summary::-webkit-details-marker,
-.mdst-details > summary::-webkit-details-marker {
-  display: none;
-}
-
-:where(.mdst-ui) details > summary::before,
-.mdst-details > summary::before {
-  content: "";
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1em;
-  height: 1em;
-  flex-shrink: 0;
-  background-color: currentColor;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  transition: transform var(--mdst-transition);
-}
-
-:where(.mdst-ui) details > summary:hover,
-.mdst-details > summary:hover {
-  color: var(--mdst-color-muted);
-}
-
-:where(.mdst-ui) details > summary:focus-visible,
-.mdst-details > summary:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: calc(-1 * var(--mdst-border-width));
-}
-
-:where(.mdst-ui) details[open] > summary::before,
-.mdst-details[open] > summary::before {
-  transform: rotate(90deg);
-}
-
-/* Content area - only style when open */
-
-:where(.mdst-ui) details[open]::details-content,
-.mdst-details[open]::details-content {
-  padding: var(--mdst-space-md);
-  border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-}
-
-/* Variants */
-
-:where(.mdst-ui) details.mdst-details--borderless,
-.mdst-details.mdst-details--borderless {
-  border: none;
-}
-
-:where(.mdst-ui) details.mdst-details--borderless[open]::details-content,
-.mdst-details.mdst-details--borderless[open]::details-content {
-  border-top: none;
-  padding-left: calc(1em + var(--mdst-space-sm));
-}
-
-:where(.mdst-ui) details.mdst-details--compact > summary,
-.mdst-details.mdst-details--compact > summary {
-  padding: var(--mdst-space-sm) var(--mdst-space-md);
-}
-
-:where(.mdst-ui) details.mdst-details--compact[open]::details-content,
-.mdst-details.mdst-details--compact[open]::details-content {
-  padding: var(--mdst-space-sm) var(--mdst-space-md);
-}
-
-/* Section variant - collapsible header style */
-
-:where(.mdst-ui) details.mdst-details--section,
-.mdst-details.mdst-details--section {
-  border: none;
-  border-radius: 0;
-  background: transparent;
-}
-
-:where(.mdst-ui) details.mdst-details--section > summary,
-.mdst-details.mdst-details--section > summary {
-  padding: var(--mdst-space-sm) 0;
-  font-size: var(--mdst-text-lg);
-  font-weight: 600;
-  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-}
-
-:where(.mdst-ui) details.mdst-details--section > summary::before,
-.mdst-details.mdst-details--section > summary::before {
-  order: 1;
-  margin-left: auto;
-  width: 1.25em;
-  height: 1.25em;
-}
-
-:where(.mdst-ui) details.mdst-details--section[open] > summary,
-.mdst-details.mdst-details--section[open] > summary {
-  border-bottom-color: transparent;
-}
-
-:where(.mdst-ui) details.mdst-details--section[open]::details-content,
-.mdst-details.mdst-details--section[open]::details-content {
-  padding: var(--mdst-space-sm) 0 var(--mdst-space-md);
-  border-top: none;
-  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-}
-
-/* Dialog */
-
-:where(.mdst-ui) dialog,
-.mdst-dialog {
-  padding: 0;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  max-width: min(90vw, 32rem);
-  max-height: 90vh;
-
-  /* Center the dialog */
-  margin: auto;
-  position: fixed;
-  inset: 0;
-  width: fit-content;
-  height: fit-content;
-}
-
-:where(.mdst-ui) dialog::backdrop,
-.mdst-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-/* Dialog Header */
-
-:where(.mdst-ui) dialog .mdst-dialog-header,
-.mdst-dialog .mdst-dialog-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--mdst-space-md);
-  padding: var(--mdst-space-md);
-  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-}
-
-:where(.mdst-ui) dialog .mdst-dialog-title,
-.mdst-dialog .mdst-dialog-title {
-  margin: 0;
-  font-size: var(--mdst-text-lg);
-  font-weight: 600;
-  line-height: var(--mdst-line-height);
-}
-
-:where(.mdst-ui) dialog .mdst-dialog-close,
-.mdst-dialog .mdst-dialog-close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--mdst-space-xs);
-  background: transparent;
-  border: none;
-  border-radius: var(--mdst-radius);
-  cursor: pointer;
-  color: var(--mdst-color-muted);
-  transition: color var(--mdst-transition);
-}
-
-:where(.mdst-ui) dialog .mdst-dialog-close:hover,
-.mdst-dialog .mdst-dialog-close:hover {
-  background: transparent;
-  border: none;
-  color: var(--mdst-color-fg);
-}
-
-:where(.mdst-ui) dialog .mdst-dialog-close:focus-visible,
-.mdst-dialog .mdst-dialog-close:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
-
-/* Dialog Body */
-
-:where(.mdst-ui) dialog .mdst-dialog-body,
-.mdst-dialog .mdst-dialog-body {
-  padding: var(--mdst-space-md);
-  overflow-y: auto;
-}
-
-/* Dialog Footer */
-
-:where(.mdst-ui) dialog .mdst-dialog-footer,
-.mdst-dialog .mdst-dialog-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--mdst-space-sm);
-  padding: var(--mdst-space-md);
-  border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-}
-
-/* Variants */
-
-:where(.mdst-ui) dialog.mdst-dialog--sm,
-.mdst-dialog.mdst-dialog--sm {
-  max-width: min(90vw, 24rem);
-}
-
-:where(.mdst-ui) dialog.mdst-dialog--lg,
-.mdst-dialog.mdst-dialog--lg {
-  max-width: min(90vw, 48rem);
-}
-
-:where(.mdst-ui) dialog.mdst-dialog--full,
-.mdst-dialog.mdst-dialog--full {
-  max-width: 90vw;
-  max-height: 90vh;
-}
-
-/* Drawer */
-
-:where(.mdst-ui) dialog.mdst-drawer,
-.mdst-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: auto;
-  width: 20rem;
-  max-width: 100vw;
-  max-height: none;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-left: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: 0;
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  overflow: hidden;
-  flex-direction: column;
-
-  /* Closed state (exit animation target) */
-  transform: translateX(100%);
-  transition:
-    transform 200ms ease-out,
-    opacity 200ms ease-out,
-    overlay 200ms ease-out allow-discrete,
-    display 200ms ease-out allow-discrete;
-
-  &[open] {
-    display: flex;
-    transform: translateX(0);
-
-    @starting-style {
-      transform: translateX(100%);
-    }
+  /* Multi-selects and list boxes show as an open list, so they get no
+     dropdown arrow. Last in the file so it also wins in forced colours. */
+  :where(.mdst-ui) select:where([multiple], [size]:not([size="1"])),
+  .mdst-dropdown:is([multiple], [size]:not([size="1"])) {
+    background-image: none;
+    padding-inline-end: var(--mdst-space-sm);
   }
 }
 
-/* Backdrop */
+@layer mdst-ui.components {
+  /* File Input
 
-:where(.mdst-ui) dialog.mdst-drawer::backdrop,
-.mdst-drawer::backdrop {
-  background: rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transition:
-    opacity 200ms ease-out,
-    overlay 200ms ease-out allow-discrete,
-    display 200ms ease-out allow-discrete;
-}
+     Classless (a bare input[type="file"] inside .mdst-ui) and class-based
+     (.mdst-file-input__field inside a .mdst-file-input wrapper) share every
+     rule, so both look the same. */
 
-:where(.mdst-ui) dialog.mdst-drawer[open]::backdrop,
-.mdst-drawer[open]::backdrop {
-  opacity: 1;
-
-  @starting-style {
-    opacity: 0;
-  }
-}
-
-/* Position: left */
-
-:where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--left,
-.mdst-drawer.mdst-drawer--left {
-  right: auto;
-  left: 0;
-  border-left: none;
-  border-right: var(--mdst-border-width) solid var(--mdst-color-border);
-  transform: translateX(-100%);
-
-  &[open] {
-    transform: translateX(0);
-
-    @starting-style {
-      transform: translateX(-100%);
-    }
-  }
-}
-
-/* Sizes */
-
-:where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--sm,
-.mdst-drawer.mdst-drawer--sm {
-  width: 16rem;
-}
-
-:where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--lg,
-.mdst-drawer.mdst-drawer--lg {
-  width: 28rem;
-}
-
-:where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--full,
-.mdst-drawer.mdst-drawer--full {
-  width: 100%;
-  border-left: none;
-  border-right: none;
-}
-
-/* Header */
-
-:where(.mdst-ui) dialog.mdst-drawer .mdst-drawer-header,
-.mdst-drawer .mdst-drawer-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--mdst-space-md);
-  padding: var(--mdst-space-md);
-  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-  flex-shrink: 0;
-}
-
-/* Body */
-
-:where(.mdst-ui) dialog.mdst-drawer .mdst-drawer-body,
-.mdst-drawer .mdst-drawer-body {
-  padding: var(--mdst-space-md);
-  overflow-y: auto;
-  flex: 1;
-}
-
-/* Footer */
-
-:where(.mdst-ui) dialog.mdst-drawer .mdst-drawer-footer,
-.mdst-drawer .mdst-drawer-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--mdst-space-sm);
-  padding: var(--mdst-space-md);
-  border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-  flex-shrink: 0;
-}
-
-/* Close button */
-
-:where(.mdst-ui) dialog.mdst-drawer .mdst-drawer-close,
-.mdst-drawer .mdst-drawer-close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--mdst-space-xs);
-  background: transparent;
-  border: none;
-  border-radius: var(--mdst-radius);
-  cursor: pointer;
-  color: var(--mdst-color-muted);
-  transition: color var(--mdst-transition);
-
-  &:hover {
-    color: var(--mdst-color-fg);
+  .mdst-file-input {
+    display: block;
+    width: 100%;
   }
 
-  &:focus-visible {
-    outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-    outline-offset: var(--mdst-border-width);
-  }
-}
-
-/* Dropdown (Native Select) */
-
-:where(.mdst-ui) select,
-.mdst-dropdown {
-  -webkit-appearance: none;
-  appearance: none;
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: var(--mdst-space-sm);
-  padding-right: calc(var(--mdst-space-sm) + 1.2em);
-  font-family: var(--mdst-font-ui);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-  background-color: var(--mdst-color-bg);
-  background-image:
-    linear-gradient(to top right, transparent 50%, var(--mdst-color-fg) 50%),
-    linear-gradient(to top left, transparent 50%, var(--mdst-color-fg) 50%);
-  background-size:
-    0.3rem 0.3rem,
-    0.3rem 0.3rem;
-  background-position:
-    right calc(var(--mdst-space-sm) + 0.3rem) center,
-    right var(--mdst-space-sm) center;
-  background-repeat: no-repeat;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  outline: none;
-  cursor: pointer;
-  transition: border-color var(--mdst-transition);
-}
-
-:where(.mdst-ui) select:hover,
-.mdst-dropdown:hover {
-  border-color: var(--mdst-color-muted);
-}
-
-:where(.mdst-ui) select:focus,
-.mdst-dropdown:focus {
-  border-color: var(--mdst-color-focus);
-}
-
-:where(.mdst-ui) select:disabled,
-.mdst-dropdown:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) select:disabled:hover,
-.mdst-dropdown:disabled:hover {
-  border-color: var(--mdst-color-border);
-}
-
-/* Variants */
-
-:where(.mdst-ui) select.mdst-dropdown--ghost,
-.mdst-dropdown.mdst-dropdown--ghost {
-  border-color: transparent;
-  background-color: transparent;
-}
-
-:where(.mdst-ui) select.mdst-dropdown--ghost:hover,
-.mdst-dropdown.mdst-dropdown--ghost:hover {
-  border-color: var(--mdst-color-border);
-}
-
-:where(.mdst-ui) select.mdst-dropdown--ghost:focus,
-.mdst-dropdown.mdst-dropdown--ghost:focus {
-  border-color: var(--mdst-color-focus);
-}
-
-/* Sizes */
-
-:where(.mdst-ui) select.mdst-dropdown--sm,
-.mdst-dropdown.mdst-dropdown--sm {
-  padding: var(--mdst-space-xs) var(--mdst-space-sm);
-  padding-right: calc(var(--mdst-space-sm) + 1.5em);
-  font-size: var(--mdst-text-sm);
-  background-position:
-    right calc(var(--mdst-space-sm) + 0.3rem) center,
-    right var(--mdst-space-sm) center;
-}
-
-:where(.mdst-ui) select.mdst-dropdown--lg,
-.mdst-dropdown.mdst-dropdown--lg {
-  padding: var(--mdst-space-md) var(--mdst-space-md);
-  padding-right: calc(var(--mdst-space-md) + 1.2em);
-  background-position:
-    right calc(var(--mdst-space-md) + 0.3rem) center,
-    right var(--mdst-space-md) center;
-}
-
-/* Inline variant (auto-width) */
-
-:where(.mdst-ui) select.mdst-dropdown--inline,
-.mdst-dropdown.mdst-dropdown--inline {
-  display: inline-block;
-  width: auto;
-}
-
-/* File Input */
-
-/* Classless: bare input[type="file"] inside .mdst-ui */
-
-:where(.mdst-ui) input[type="file"] {
-  display: block;
-  width: 100%;
-  color: var(--mdst-color-muted);
-  cursor: pointer;
-  padding: var(--mdst-space-sm);
-  font-family: var(--mdst-font-ui);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  background-color: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  outline: none;
-  transition: border-color var(--mdst-transition);
-}
-
-:where(.mdst-ui) input[type="file"]:focus {
-  border-color: var(--mdst-color-focus);
-}
-
-:where(.mdst-ui) input[type="file"]::file-selector-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--mdst-space-xs);
-  padding: var(--mdst-space-xs) var(--mdst-space-md);
-  margin-right: var(--mdst-space-md);
-  font-family: var(--mdst-font-ui);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-  background: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  cursor: pointer;
-  transition:
-    background var(--mdst-transition),
-    color var(--mdst-transition),
-    border-color var(--mdst-transition);
-}
-
-:where(.mdst-ui) input[type="file"]:hover::file-selector-button {
-  background: var(--mdst-button-hover-bg);
-  color: var(--mdst-button-hover-color);
-  border-color: var(--mdst-button-hover-border);
-}
-
-:where(.mdst-ui) input[type="file"]:disabled::file-selector-button {
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) input[type="file"]:disabled:hover::file-selector-button {
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  border-color: var(--mdst-color-border);
-}
-
-/* Classless variant modifiers on bare file inputs */
-
-:where(.mdst-ui) input[type="file"].mdst-file-input--inverted::file-selector-button,
-.mdst-file-input.mdst-file-input--inverted .mdst-file-input__field::file-selector-button {
-  background: var(--mdst-color-fg);
-  color: var(--mdst-color-bg);
-}
-
-:where(.mdst-ui) input[type="file"].mdst-file-input--inverted:hover::file-selector-button,
-.mdst-file-input.mdst-file-input--inverted .mdst-file-input__field:hover::file-selector-button {
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-}
-
-:where(.mdst-ui) input[type="file"].mdst-file-input--borderless,
-.mdst-file-input.mdst-file-input--borderless .mdst-file-input__field {
-  border-color: transparent;
-  padding: 0;
-}
-
-:where(.mdst-ui) input[type="file"].mdst-file-input--borderless:focus-visible,
-.mdst-file-input.mdst-file-input--borderless .mdst-file-input__field:focus-visible {
-  border-color: var(--mdst-color-focus);
-}
-
-/* Class-based: wrapper + field pattern */
-
-.mdst-file-input {
-  display: block;
-  width: 100%;
-
-  & .mdst-file-input__field {
+  :where(.mdst-ui) input:where([type="file"]),
+  .mdst-file-input__field {
+    display: block;
+    width: 100%;
     color: var(--mdst-color-muted);
     cursor: pointer;
+    padding: var(--mdst-space-sm);
+    font-family: var(--mdst-font-ui);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    background-color: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    transition: border-color var(--mdst-transition);
+  }
 
-    &::file-selector-button {
+  :where(.mdst-ui) input:where([type="file"]:focus),
+  .mdst-file-input__field:focus {
+    border-color: var(--mdst-color-focus);
+  }
+
+  :where(.mdst-ui) input:where([type="file"]:focus-visible),
+  .mdst-file-input__field:focus-visible {
+    outline-offset: 0;
+  }
+
+  :where(.mdst-ui) input:where([type="file"]:disabled),
+  .mdst-file-input__field:disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* The "Choose file" button follows the button component: same hover ring
+     and the same variables */
+
+  :where(.mdst-ui) input:where([type="file"])::file-selector-button,
+  .mdst-file-input__field::file-selector-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mdst-space-xs);
+    padding: var(--mdst-space-xs) var(--mdst-space-md);
+    margin-inline-end: var(--mdst-space-md);
+    font-family: var(--mdst-font-ui);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    color: var(--_fg, var(--mdst-color-fg));
+    background: var(--_bg, var(--mdst-color-bg));
+    box-shadow: var(--_hover, none);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    cursor: pointer;
+    transition:
+      background var(--mdst-transition),
+      color var(--mdst-transition),
+      border-color var(--mdst-transition),
+      box-shadow var(--mdst-transition);
+  }
+
+  :where(.mdst-ui) input:where([type="file"]:hover)::file-selector-button,
+  .mdst-file-input__field:hover::file-selector-button {
+    --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
+  }
+
+  :where(.mdst-ui) input:where([type="file"]:disabled)::file-selector-button,
+  .mdst-file-input__field:disabled::file-selector-button {
+    --_hover: none;
+    cursor: not-allowed;
+  }
+
+  /* Variants: on the bare input, or on the wrapper */
+
+  :where(.mdst-ui) input.mdst-file-input--solid:where([type="file"])::file-selector-button,
+  .mdst-file-input--solid .mdst-file-input__field::file-selector-button {
+    --_bg: var(--mdst-color-fg);
+    --_fg: var(--mdst-color-bg);
+    border-color: var(--mdst-color-fg);
+  }
+
+  :where(.mdst-ui) input.mdst-file-input--borderless:where([type="file"]),
+  .mdst-file-input--borderless .mdst-file-input__field {
+    border-color: transparent;
+    padding: 0;
+  }
+
+  :where(.mdst-ui) input.mdst-file-input--borderless:where([type="file"]:focus),
+  .mdst-file-input--borderless .mdst-file-input__field:focus {
+    border-color: transparent;
+  }
+}
+
+@layer mdst-ui.components {
+  /* Form
+
+     A light structure layer so plain forms read well: fields stack with a
+     small gap under their label and the flow gap between fields, and
+     fieldsets get a border and a legend.
+
+     Everything here has zero specificity, so any rule you write wins. Spacing
+     follows --mdst-flow-space (between fields) and --mdst-space-xs (label to
+     field). */
+
+  /* Fieldset */
+
+  :where(.mdst-ui) fieldset,
+  .mdst-fieldset {
+    min-inline-size: 0;
+    padding: var(--mdst-space-md);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+  }
+
+  :where(.mdst-ui) legend,
+  .mdst-legend {
+    padding-inline: var(--mdst-space-xs);
+    font-weight: 600;
+  }
+
+  /* Stacking: fields get the flow gap from typography's flow rule. Here,
+     labels sit on their own line with a small gap to the field below, and a
+     <small> hint or error sits close to its field. These use a single element
+     in the selector so they beat the zero-specificity flow gap, while any
+     class you write still wins. */
+
+  :where(.mdst-ui :is(form, fieldset):not([class]), .mdst-form, .mdst-fieldset) > label:where(:not(:has(input, select, textarea))) {
+    display: block;
+  }
+
+  :where(.mdst-ui :is(form, fieldset):not([class]), .mdst-form, .mdst-fieldset) > label:where(:not(:has(input, select, textarea))) + * {
+    margin-block-start: var(--mdst-space-xs);
+  }
+
+  :where(.mdst-ui :is(form, fieldset):not([class]), .mdst-form, .mdst-fieldset) > :where(input, select, textarea) + small {
+    display: block;
+    margin-block-start: var(--mdst-space-xs);
+  }
+}
+
+@layer mdst-ui.components {
+  /* Input */
+
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    )),
+  :where(.mdst-ui) textarea,
+  .mdst-input {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    padding: var(--mdst-space-sm);
+    font-family: var(--mdst-font-ui);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background-color: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    transition: border-color var(--mdst-transition);
+  }
+
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ))::placeholder,
+  :where(.mdst-ui) textarea::placeholder,
+  .mdst-input::placeholder {
+    color: var(--mdst-color-muted);
+    opacity: 1;
+  }
+
+  /* Invalid: aria-invalid="true", or the browser's own validation once the
+     user has interacted (:user-invalid). Declared before focus, so a focused
+     field still shows the focus colour. */
+
+  :where(.mdst-ui) :is(input, textarea):is([aria-invalid="true"], :user-invalid),
+  .mdst-input:is([aria-invalid="true"], :user-invalid) {
+    border-color: var(--mdst-color-danger);
+  }
+
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ):focus),
+  :where(.mdst-ui) textarea:where(:focus),
+  .mdst-input:focus {
+    border-color: var(--mdst-color-focus);
+  }
+
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ):focus-visible),
+  :where(.mdst-ui) textarea:where(:focus-visible),
+  .mdst-input:focus-visible {
+    outline-offset: 0;
+  }
+
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ):disabled),
+  :where(.mdst-ui) textarea:where(:disabled),
+  .mdst-input:disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* Textarea variant */
+
+  :where(.mdst-ui) textarea,
+  .mdst-input:is(textarea) {
+    min-height: 6rem;
+    resize: vertical;
+  }
+}
+
+@layer mdst-ui.components {
+  /* Meter */
+
+  /* The browser picks the fill colour from low / high / optimum:
+     optimum → foreground, sub-optimum → warning, least optimum → error.
+     A meter without those attributes always reads as optimum. */
+
+  :where(.mdst-ui) meter,
+  .mdst-meter {
+    appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    height: var(--mdst-meter-height, var(--mdst-space-sm));
+    border: none;
+    border-radius: var(--mdst-radius);
+    overflow: hidden;
+    background: var(--mdst-color-subtle);
+
+    /* Webkit (Chrome, Safari, Edge) - track */
+
+    /* WebKit won't resolve percentage heights inside a meter, so the bar and
+       fill take the same explicit length as the meter itself */
+
+    &::-webkit-meter-bar {
+      box-sizing: border-box;
+      height: var(--mdst-meter-height, var(--mdst-space-sm));
+      padding: 0;
+      border: none;
+      border-radius: var(--mdst-radius);
+      background: var(--mdst-color-subtle);
+    }
+
+    /* Webkit - fills */
+
+    &::-webkit-meter-optimum-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-even-less-good-value {
+      height: var(--mdst-meter-height, var(--mdst-space-sm));
+      border-radius: var(--mdst-radius);
+      transition: width var(--mdst-transition);
+    }
+
+    &::-webkit-meter-optimum-value {
+      background: var(--mdst-color-fg);
+    }
+
+    &::-webkit-meter-suboptimum-value {
+      background: var(--mdst-color-warning);
+    }
+
+    &::-webkit-meter-even-less-good-value {
+      background: var(--mdst-color-danger);
+    }
+
+    /* Firefox - fills */
+
+    &::-moz-meter-bar {
+      border-radius: var(--mdst-radius);
+      background: var(--mdst-color-fg);
+    }
+
+    &:-moz-meter-sub-optimum::-moz-meter-bar {
+      background: var(--mdst-color-warning);
+    }
+
+    &:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+      background: var(--mdst-color-danger);
+    }
+
+    /* Size: Small */
+
+    &.mdst-meter--sm {
+      --mdst-meter-height: var(--mdst-space-xs);
+    }
+
+    /* Size: Large */
+
+    &.mdst-meter--lg {
+      --mdst-meter-height: var(--mdst-space-md);
+    }
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) meter,
+    .mdst-meter,
+    .mdst-meter[class*="--"] {
+      forced-color-adjust: none;
+      background: Canvas;
+      outline: 1px solid CanvasText;
+
+      &::-webkit-meter-bar {
+        background: Canvas;
+      }
+
+      &::-webkit-meter-optimum-value,
+      &::-webkit-meter-suboptimum-value,
+      &::-webkit-meter-even-less-good-value {
+        background: Highlight;
+      }
+
+      /* Separate rule: a browser drops a whole selector list if one
+         vendor pseudo-element in it is unknown */
+      &::-moz-meter-bar {
+        background: Highlight;
+      }
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /*
+   * OTP Input
+   *
+   * Usage:
+   * <div class="mdst-otp-input">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   * </div>
+   *
+   * With separator:
+   * <div class="mdst-otp-input">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <span class="mdst-otp-input__separator"></span>
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   * </div>
+   */
+
+  .mdst-otp-input {
+    display: inline-flex;
+    gap: var(--mdst-space-sm);
+    align-items: center;
+
+    & .mdst-otp-input__digit {
+      width: 1.5em;
+      height: 2em;
+      padding: 0;
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      border-radius: var(--mdst-radius);
+      background: var(--mdst-color-bg);
+      color: var(--mdst-color-fg);
+      font-family: var(--mdst-font-mono);
+      font-size: 1.25em;
+      text-align: center;
+      caret-color: var(--mdst-color-fg);
+      transition: border-color var(--mdst-transition);
+
+      &:focus {
+        border-color: var(--mdst-color-focus);
+      }
+
+      &:focus-visible {
+        outline-offset: 0;
+      }
+
+      &::placeholder {
+        color: var(--mdst-color-muted);
+      }
+
+      &:disabled {
+        opacity: var(--mdst-disabled-opacity);
+        cursor: not-allowed;
+      }
+
+      /* Filled state: a digit with a placeholder that's no longer showing.
+         Needs a placeholder (e.g. placeholder="0"); without one the browser
+         can't tell empty from filled. */
+      &[placeholder]:not(:placeholder-shown) {
+        border-color: var(--mdst-color-fg);
+      }
+    }
+
+    /* Separator (e.g., dash between groups) */
+
+    & .mdst-otp-input__separator {
+      width: 0.5em;
+      height: 0.0625em;
+      background: var(--mdst-color-border);
+    }
+
+    /* Error state */
+
+    &.mdst-otp-input--danger .mdst-otp-input__digit {
+      border-color: var(--mdst-color-danger);
+    }
+
+    /* Success state */
+
+    &.mdst-otp-input--success .mdst-otp-input__digit {
+      border-color: var(--mdst-color-success);
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Password Input */
+
+  .mdst-password-input {
+    display: flex;
+    position: relative;
+    width: 100%;
+    cursor: text;
+
+    &:has(.mdst-password-input__field:disabled) .mdst-password-input__toggle {
+      opacity: var(--mdst-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    & .mdst-password-input__field {
+      padding-inline-end: calc(var(--mdst-space-md) + 1.5em + var(--mdst-space-sm));
+    }
+
+    /* Toggle — the checkbox itself, styled as the eye icon */
+
+    & .mdst-password-input__toggle {
+      /* It's a checkbox underneath, so drop the classless checkbox tick */
+      &::after {
+        content: none;
+      }
+
+      -webkit-appearance: none;
+      appearance: none;
+      position: absolute;
+      inset-inline-end: var(--mdst-space-sm);
+      top: 50%;
+      transform: translateY(-50%);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: var(--mdst-space-xs);
-      padding: var(--mdst-space-xs) var(--mdst-space-md);
-      margin-right: var(--mdst-space-md);
-      font-family: var(--mdst-font-ui);
-      font-size: inherit;
-      line-height: var(--mdst-line-height);
-      color: var(--mdst-color-fg);
-      background: var(--mdst-color-bg);
-      border: var(--mdst-border-width) solid var(--mdst-color-border);
-      border-radius: var(--mdst-radius);
+      width: 1.5em;
+      height: 1.5em;
+      margin: 0;
+      padding: 0;
+      background: none;
+      border: none;
+      color: var(--mdst-color-muted);
       cursor: pointer;
+      transition: color var(--mdst-transition);
+
+      &:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      /* Toggle icon — eye-off by default (password is hidden) */
+
+      &::before {
+        content: "";
+        display: block;
+        width: 1em;
+        height: 1em;
+        background-color: currentColor;
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49'/%3E%3Cpath d='M14.084 14.158a3 3 0 0 1-4.242-4.242'/%3E%3Cpath d='M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143'/%3E%3Cpath d='m2 2 20 20'/%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49'/%3E%3Cpath d='M14.084 14.158a3 3 0 0 1-4.242-4.242'/%3E%3Cpath d='M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143'/%3E%3Cpath d='m2 2 20 20'/%3E%3C/svg%3E");
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+      }
+
+      /* Checked state: swap to the eye icon. Showing the text needs your JS
+         to switch the field to type="text" (see the docs for an example). */
+
+      &:checked::before {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+      }
+    }
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    .mdst-password-input .mdst-password-input__toggle::before {
+      forced-color-adjust: none;
+      background-color: CanvasText;
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Popover */
+
+  .mdst-popover {
+    padding: var(--mdst-space-md);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    box-shadow: var(--mdst-shadow-sm);
+
+    /* Default: centered on page */
+    margin: auto;
+    position: fixed;
+    inset: 0;
+    width: fit-content;
+    height: fit-content;
+
+    /* Anchored positioning - use with anchor="" HTML attribute.
+       Guarded so browsers without CSS anchor positioning (Baseline Chrome 129 /
+       Firefox 147 / Safari 26) keep the centered default above instead of
+       mispositioning. */
+
+    @supports (position-area: bottom) {
+      &.mdst-popover--anchored {
+        position: absolute;
+        inset: unset;
+        margin: 0;
+        position-area: bottom;
+        margin-top: var(--mdst-space-xs);
+      }
+    }
+
+    /* Variants */
+
+    &.mdst-popover--sm {
+      padding: var(--mdst-space-sm);
+      font-size: var(--mdst-text-sm);
+    }
+
+    &.mdst-popover--lg {
+      padding: var(--mdst-space-lg);
+      max-width: 24rem;
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Pre — block code/JSON display */
+
+  :where(.mdst-ui) pre,
+  .mdst-pre {
+    display: block;
+    padding: var(--mdst-space-md);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    font-family: var(--mdst-font-mono);
+    font-size: var(--mdst-text-sm);
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background-color: var(--mdst-color-subtle);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    tab-size: 2;
+  }
+
+  /* Nested code inside pre — reset styles */
+
+  :where(.mdst-ui) pre code,
+  :where(.mdst-ui) pre .mdst-code,
+  .mdst-pre code,
+  .mdst-pre .mdst-code {
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    font-size: inherit;
+    word-break: break-word;
+  }
+
+  /* Variants */
+
+  :where(.mdst-ui) pre.mdst-pre--borderless,
+  .mdst-pre.mdst-pre--borderless {
+    border: none;
+  }
+
+  :where(.mdst-ui) pre.mdst-pre--sm,
+  .mdst-pre.mdst-pre--sm {
+    padding: var(--mdst-space-sm);
+  }
+
+  /* Allow horizontal scroll if explicitly needed */
+
+  :where(.mdst-ui) pre.mdst-pre--scroll,
+  .mdst-pre.mdst-pre--scroll {
+    overflow-x: auto;
+    overflow-wrap: normal;
+    word-wrap: normal;
+    word-break: normal;
+    white-space: pre;
+  }
+}
+
+@layer mdst-ui.components {
+  /* Progress Bar */
+
+  :where(.mdst-ui) progress,
+  .mdst-progress {
+    appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    height: var(--mdst-space-sm);
+    border: none;
+    border-radius: var(--mdst-radius);
+    overflow: hidden;
+    background: var(--mdst-color-subtle);
+    color: var(--mdst-color-fg);
+
+    /* Webkit (Chrome, Safari, Edge) - bar background */
+
+    &::-webkit-progress-bar {
+      background: var(--mdst-color-subtle);
+      border-radius: var(--mdst-radius);
+    }
+
+    /* Webkit - value fill */
+
+    &::-webkit-progress-value {
+      background: var(--mdst-color-fg);
+      border-radius: var(--mdst-radius);
+      transition: width var(--mdst-transition);
+    }
+
+    /* Firefox - value fill */
+
+    &::-moz-progress-bar {
+      background: var(--mdst-color-fg);
+      border-radius: var(--mdst-radius);
+    }
+
+    /* Status: Error */
+
+    &.mdst-progress--danger {
+      color: var(--mdst-color-danger);
+
+      &::-webkit-progress-value {
+        background: var(--mdst-color-danger);
+      }
+
+      &::-moz-progress-bar {
+        background: var(--mdst-color-danger);
+      }
+    }
+
+    /* Status: Success */
+
+    &.mdst-progress--success {
+      color: var(--mdst-color-success);
+
+      &::-webkit-progress-value {
+        background: var(--mdst-color-success);
+      }
+
+      &::-moz-progress-bar {
+        background: var(--mdst-color-success);
+      }
+    }
+
+    /* Size: Small */
+
+    &.mdst-progress--sm {
+      height: var(--mdst-space-xs);
+    }
+
+    /* Size: Large */
+
+    &.mdst-progress--lg {
+      height: var(--mdst-space-md);
+    }
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) progress,
+    .mdst-progress,
+    .mdst-progress[class*="--"] {
+      forced-color-adjust: none;
+      background: Canvas;
+      outline: 1px solid CanvasText;
+
+      &::-webkit-progress-bar {
+        background: Canvas;
+      }
+
+      &::-webkit-progress-value {
+        background: Highlight;
+      }
+
+      &::-moz-progress-bar {
+        background: Highlight;
+      }
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Radio */
+
+  :where(.mdst-ui) input:where([type="radio"]),
+  .mdst-radio {
+    -webkit-appearance: none;
+    appearance: none;
+    flex-shrink: 0;
+    width: calc(0.875rem + 2 * var(--mdst-border-width));
+    height: calc(0.875rem + 2 * var(--mdst-border-width));
+    background: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    /* Border included in the size, so a user's border-box reset changes nothing */
+    box-sizing: border-box;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+  }
+
+  :where(.mdst-ui) input:where([type="radio"]:checked)::after,
+  .mdst-radio:checked::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background: var(--mdst-color-fg);
+    border-radius: 50%;
+  }
+
+  :where(.mdst-ui) input:where([type="radio"]:disabled),
+  .mdst-radio:disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* Radio with label wrapper */
+
+  :where(.mdst-ui) label:where(:has(> input[type="radio"])),
+  .mdst-radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)),
+  .mdst-radio-label:has(.mdst-radio:disabled) {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  /* The label already fades, so the radio inside doesn't fade twice */
+  :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)) > input,
+  .mdst-radio-label:has(.mdst-radio:disabled) .mdst-radio {
+    opacity: 1;
+  }
+
+  /* Radio group */
+
+  .mdst-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mdst-space-sm);
+
+    &.mdst-radio-group--horizontal {
+      flex-direction: row;
+      gap: var(--mdst-space-md);
+    }
+  }
+
+  /* Radio card — content-rich selectable cards */
+
+  .mdst-radio-card {
+    display: block;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    padding: var(--mdst-space-md);
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    border-radius: var(--mdst-radius);
+    overflow: hidden;
+
+    /* Visually hide the native radio input while keeping it keyboard-accessible */
+    & .mdst-radio {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background: var(--mdst-color-subtle);
+    }
+
+    &:has(.mdst-radio:checked) {
+      border-color: var(--mdst-color-fg);
+      outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-fg);
+      outline-offset: calc(-1 * var(--mdst-border-width));
+    }
+
+    &:has(.mdst-radio:focus-visible) {
+      outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+      outline-offset: var(--mdst-focus-offset);
+    }
+
+    &:has(.mdst-radio:disabled) {
+      opacity: var(--mdst-disabled-opacity);
+      cursor: not-allowed;
+
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+
+  /* Radio card group — grid layout for cards */
+
+  .mdst-radio-card-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mdst-space-sm);
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) input:where([type="radio"]:checked)::after,
+    .mdst-radio:checked::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Range Slider */
+
+  :where(.mdst-ui) input:where([type="range"]),
+  .mdst-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: var(--mdst-space-1);
+    background: var(--mdst-color-fg);
+    border-radius: var(--mdst-space-1);
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  :where(.mdst-ui) input:where([type="range"]:disabled),
+  .mdst-range:disabled {
+    opacity: var(--mdst-disabled-opacity);
+    cursor: not-allowed;
+  }
+
+  :where(.mdst-ui) input:where([type="range"]:disabled)::-webkit-slider-thumb,
+  .mdst-range:disabled::-webkit-slider-thumb {
+    cursor: not-allowed;
+  }
+
+  :where(.mdst-ui) input:where([type="range"]:disabled)::-moz-range-thumb,
+  .mdst-range:disabled::-moz-range-thumb {
+    cursor: not-allowed;
+  }
+
+  /* Webkit (Chrome, Safari, Edge) */
+
+  :where(.mdst-ui) input:where([type="range"])::-webkit-slider-thumb,
+  .mdst-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--mdst-space-4);
+    height: var(--mdst-space-4);
+    box-sizing: border-box;
+    background: var(--mdst-color-bg);
+    border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
+    border-radius: 50%;
+    box-shadow: none;
+    cursor: pointer;
+    transition: background var(--mdst-transition);
+  }
+
+  /* Firefox */
+
+  :where(.mdst-ui) input:where([type="range"])::-moz-range-thumb,
+  .mdst-range::-moz-range-thumb {
+    appearance: none;
+    width: var(--mdst-space-4);
+    height: var(--mdst-space-4);
+    box-sizing: border-box;
+    background: var(--mdst-color-bg);
+    border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background var(--mdst-transition);
+  }
+
+  :where(.mdst-ui) input:where([type="range"])::-moz-range-track,
+  .mdst-range::-moz-range-track {
+    background: transparent;
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) input:where([type="range"]),
+    .mdst-range {
+      forced-color-adjust: none;
+      background: CanvasText;
+
+      &::-webkit-slider-thumb {
+        background: Canvas;
+        border-color: CanvasText;
+      }
+
+      &::-moz-range-thumb {
+        background: Canvas;
+        border-color: CanvasText;
+      }
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Skeleton */
+
+  @keyframes mdst-shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  .mdst-skeleton {
+    display: block;
+    height: 1em;
+    width: 100%;
+    border-radius: var(--mdst-radius);
+    background: linear-gradient(
+      90deg,
+      var(--mdst-color-subtle) 25%,
+      color-mix(in srgb, var(--mdst-color-subtle) 50%, var(--mdst-color-bg) 50%) 50%,
+      var(--mdst-color-subtle) 75%
+    );
+    background-size: 200% 100%;
+    animation: mdst-shimmer 1.5s ease-in-out infinite;
+
+    /* Text line placeholder */
+
+    &.mdst-skeleton--text {
+      height: 1em;
+      width: 100%;
+    }
+
+    /* Heading placeholder */
+
+    &.mdst-skeleton--heading {
+      height: 1.5em;
+    }
+
+    /* Circle shape — set size via inline style or custom class */
+
+    &.mdst-skeleton--circle {
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+    }
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    .mdst-skeleton {
+      outline: 1px solid GrayText;
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Spinner */
+
+  @keyframes mdst-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .mdst-spinner {
+    display: inline-block;
+    width: 1.25em;
+    height: 1.25em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: mdst-spin 0.6s linear infinite;
+    vertical-align: middle;
+    flex-shrink: 0;
+
+    /* Sizes */
+
+    &.mdst-spinner--sm {
+      width: 0.875em;
+      height: 0.875em;
+      border-width: 1.5px;
+    }
+
+    &.mdst-spinner--lg {
+      width: 2em;
+      height: 2em;
+      border-width: 3px;
+    }
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    .mdst-spinner {
+      forced-color-adjust: none;
+      border-color: CanvasText;
+      border-right-color: transparent;
+    }
+  }
+}
+
+
+@layer mdst-ui.components {
+  /* Stepper / Wizard */
+
+  .mdst-stepper {
+    /* --_dir flips sideways nudges in RTL */
+    --_dir: 1;
+
+    &:dir(rtl) {
+      --_dir: -1;
+    }
+
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    font-family: var(--mdst-font-ui);
+
+    /* Step */
+
+    & .mdst-stepper__step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+      text-align: center;
+
+      /* Connector line between steps */
+
+      &:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 1rem;
+        inset-inline-start: 50%;
+        inset-inline-end: -50%;
+        height: var(--mdst-border-width);
+        background: var(--mdst-color-border);
+      }
+
+      /* Completed connector */
+
+      &[data-state="completed"]:not(:last-child)::after {
+        background: var(--mdst-color-fg);
+      }
+
+      /* States */
+
+      &[data-state="completed"] {
+        & .mdst-stepper__indicator {
+          background: var(--mdst-color-fg);
+          color: var(--mdst-color-bg);
+          border-color: var(--mdst-color-fg);
+        }
+
+        & .mdst-stepper__label {
+          color: var(--mdst-color-fg);
+        }
+      }
+
+      &[data-state="active"] {
+        & .mdst-stepper__indicator {
+          border-color: var(--mdst-color-fg);
+          font-weight: 700;
+        }
+
+        & .mdst-stepper__label {
+          font-weight: 600;
+          color: var(--mdst-color-fg);
+        }
+      }
+
+      &[data-state="upcoming"] {
+        & .mdst-stepper__indicator {
+          border-color: var(--mdst-color-border);
+          color: var(--mdst-color-muted);
+        }
+
+        & .mdst-stepper__label {
+          color: var(--mdst-color-muted);
+        }
+      }
+
+      &[data-state="error"] {
+        & .mdst-stepper__indicator {
+          border-color: var(--mdst-color-danger);
+          color: var(--mdst-color-danger);
+        }
+
+        & .mdst-stepper__label {
+          color: var(--mdst-color-danger);
+        }
+      }
+    }
+
+    /* Indicator (circle) */
+
+    & .mdst-stepper__indicator {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      font-size: var(--mdst-text-sm);
+      font-weight: 600;
+      background: var(--mdst-color-bg);
+      color: var(--mdst-color-fg);
+      position: relative;
+      z-index: 1;
       transition:
         background var(--mdst-transition),
         color var(--mdst-transition),
         border-color var(--mdst-transition);
     }
 
-    &:hover::file-selector-button {
-      background: var(--mdst-button-hover-bg);
-      color: var(--mdst-button-hover-color);
-      border-color: var(--mdst-button-hover-border);
-    }
+    /* Label */
 
-    &:disabled::file-selector-button {
-      cursor: not-allowed;
-    }
-
-    &:disabled:hover::file-selector-button {
-      background: var(--mdst-color-bg);
-      color: var(--mdst-color-fg);
-      border-color: var(--mdst-color-border);
-    }
-  }
-}
-
-/* Input */
-
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  ),
-:where(.mdst-ui) textarea,
-.mdst-input {
-  -webkit-appearance: none;
-  appearance: none;
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: var(--mdst-space-sm);
-  font-family: var(--mdst-font-ui);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-  background-color: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  outline: none;
-  transition: border-color var(--mdst-transition);
-}
-
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  )::placeholder,
-:where(.mdst-ui) textarea::placeholder,
-.mdst-input::placeholder {
-  color: var(--mdst-color-muted);
-  opacity: 1;
-}
-
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  ):focus,
-:where(.mdst-ui) textarea:focus,
-.mdst-input:focus {
-  border-color: var(--mdst-color-focus);
-}
-
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  ):disabled,
-:where(.mdst-ui) textarea:disabled,
-.mdst-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Textarea variant */
-
-:where(.mdst-ui) textarea,
-.mdst-input:is(textarea) {
-  min-height: 6rem;
-  resize: vertical;
-}
-
-/* Meter */
-
-/* The browser picks the fill colour from low / high / optimum:
-   optimum → foreground, sub-optimum → warning, least optimum → error.
-   A meter without those attributes always reads as optimum. */
-
-:where(.mdst-ui) meter,
-.mdst-meter {
-  appearance: none;
-  -webkit-appearance: none;
-  display: block;
-  width: 100%;
-  height: var(--mdst-meter-height, var(--mdst-space-sm));
-  border: none;
-  border-radius: var(--mdst-radius);
-  overflow: hidden;
-  background: var(--mdst-color-subtle);
-
-  /* Webkit (Chrome, Safari, Edge) - track */
-
-  /* WebKit won't resolve percentage heights inside a meter, so the bar and
-     fill take the same explicit length as the meter itself */
-
-  &::-webkit-meter-bar {
-    box-sizing: border-box;
-    height: var(--mdst-meter-height, var(--mdst-space-sm));
-    padding: 0;
-    border: none;
-    border-radius: var(--mdst-radius);
-    background: var(--mdst-color-subtle);
-  }
-
-  /* Webkit - fills */
-
-  &::-webkit-meter-optimum-value,
-  &::-webkit-meter-suboptimum-value,
-  &::-webkit-meter-even-less-good-value {
-    height: var(--mdst-meter-height, var(--mdst-space-sm));
-    border-radius: var(--mdst-radius);
-    transition: width var(--mdst-transition);
-  }
-
-  &::-webkit-meter-optimum-value {
-    background: var(--mdst-color-fg);
-  }
-
-  &::-webkit-meter-suboptimum-value {
-    background: var(--mdst-color-warning);
-  }
-
-  &::-webkit-meter-even-less-good-value {
-    background: var(--mdst-color-error);
-  }
-
-  /* Firefox - fills */
-
-  &::-moz-meter-bar {
-    border-radius: var(--mdst-radius);
-    background: var(--mdst-color-fg);
-  }
-
-  &:-moz-meter-sub-optimum::-moz-meter-bar {
-    background: var(--mdst-color-warning);
-  }
-
-  &:-moz-meter-sub-sub-optimum::-moz-meter-bar {
-    background: var(--mdst-color-error);
-  }
-
-  /* Size: Small */
-
-  &.mdst-meter--sm {
-    --mdst-meter-height: var(--mdst-space-xs);
-  }
-
-  /* Size: Large */
-
-  &.mdst-meter--lg {
-    --mdst-meter-height: var(--mdst-space-md);
-  }
-}
-
-/*
- * OTP Input
- *
- * Usage:
- * <div class="mdst-otp-input">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- * </div>
- *
- * With separator:
- * <div class="mdst-otp-input">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <span class="mdst-otp-input-separator"></span>
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- * </div>
- */
-
-.mdst-otp-input {
-  display: inline-flex;
-  gap: var(--mdst-space-sm);
-  align-items: center;
-
-  & .mdst-otp-input-digit {
-    width: 1.5em;
-    height: 2em;
-    padding: 0;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: var(--mdst-radius);
-    background: var(--mdst-color-bg);
-    color: var(--mdst-color-fg);
-    font-family: var(--mdst-font-mono);
-    font-size: 1.25em;
-    text-align: center;
-    caret-color: var(--mdst-color-fg);
-    transition: border-color var(--mdst-transition);
-
-    &:focus {
-      outline: none;
-      border-color: var(--mdst-color-focus);
-    }
-
-    &::placeholder {
-      color: var(--mdst-color-muted);
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Filled state - when digit has a value */
-    &:not(:placeholder-shown) {
-      border-color: var(--mdst-color-fg);
-    }
-  }
-
-  /* Separator (e.g., dash between groups) */
-
-  & .mdst-otp-input-separator {
-    width: 0.5em;
-    height: 0.0625em;
-    background: var(--mdst-color-border);
-  }
-
-  /* Error state */
-
-  &.mdst-otp-input--error .mdst-otp-input-digit {
-    border-color: var(--mdst-color-error);
-  }
-
-  /* Success state */
-
-  &.mdst-otp-input--success .mdst-otp-input-digit {
-    border-color: var(--mdst-color-success);
-  }
-}
-
-/* Password Input */
-
-.mdst-password-input {
-  display: flex;
-  position: relative;
-  width: 100%;
-  cursor: text;
-
-  &:has(.mdst-password-input__toggle:checked) .mdst-password-input__field {
-    -webkit-text-security: none;
-  }
-
-  &:has(.mdst-password-input__field:disabled) .mdst-password-input__toggle {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
-  & .mdst-password-input__field {
-    padding-right: calc(var(--mdst-space-md) + 1.5em + var(--mdst-space-sm));
-    -webkit-text-security: disc;
-
-    &::placeholder {
-      -webkit-text-security: none;
-    }
-  }
-
-  /* Toggle — the checkbox itself, styled as the eye icon */
-
-  & .mdst-password-input__toggle {
-    -webkit-appearance: none;
-    appearance: none;
-    position: absolute;
-    right: var(--mdst-space-sm);
-    top: 50%;
-    transform: translateY(-50%);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.5em;
-    height: 1.5em;
-    margin: 0;
-    padding: 0;
-    background: none;
-    border: none;
-    color: var(--mdst-color-muted);
-    cursor: pointer;
-    transition: color var(--mdst-transition);
-
-    &:hover {
-      color: var(--mdst-color-fg);
-    }
-
-    &:focus-visible {
-      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-      outline-offset: var(--mdst-border-width);
-    }
-
-    /* Toggle icon — eye-off by default (password is hidden) */
-
-    &::before {
-      content: "";
-      display: block;
-      width: 1em;
-      height: 1em;
-      background-color: currentColor;
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49'/%3E%3Cpath d='M14.084 14.158a3 3 0 0 1-4.242-4.242'/%3E%3Cpath d='M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143'/%3E%3Cpath d='m2 2 20 20'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49'/%3E%3Cpath d='M14.084 14.158a3 3 0 0 1-4.242-4.242'/%3E%3Cpath d='M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143'/%3E%3Cpath d='m2 2 20 20'/%3E%3C/svg%3E");
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      mask-position: center;
-      -webkit-mask-size: contain;
-      mask-size: contain;
-    }
-
-    /* Checked state — reveal password, swap to eye icon */
-
-    &:checked::before {
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
-    }
-  }
-}
-
-/* Popover */
-
-.mdst-popover {
-  padding: var(--mdst-space-md);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-
-  /* Default: centered on page */
-  margin: auto;
-  position: fixed;
-  inset: 0;
-  width: fit-content;
-  height: fit-content;
-
-  &:popover-open {
-    opacity: 1;
-  }
-
-  /* Anchored positioning - use with anchor="" HTML attribute.
-     Guarded so browsers without CSS anchor positioning (Baseline Chrome 129 /
-     Firefox 147 / Safari 26) keep the centered default above instead of
-     mispositioning. */
-
-  @supports (position-area: bottom) {
-    &.mdst-popover--anchored {
-      position: absolute;
-      inset: unset;
-      margin: 0;
-      position-area: bottom;
+    & .mdst-stepper__label {
       margin-top: var(--mdst-space-xs);
-    }
-  }
-
-  /* Variants */
-
-  &.mdst-popover--sm {
-    padding: var(--mdst-space-sm);
-    font-size: var(--mdst-text-sm);
-  }
-
-  &.mdst-popover--lg {
-    padding: var(--mdst-space-lg);
-    max-width: 24rem;
-  }
-}
-
-/* Pre — block code/JSON display */
-
-:where(.mdst-ui) pre,
-.mdst-pre {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  padding: var(--mdst-space-md);
-  margin: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  white-space: pre-wrap;
-  font-family: var(--mdst-font-mono);
-  font-size: var(--mdst-text-sm);
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-  background-color: var(--mdst-color-subtle);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  tab-size: 2;
-  -moz-tab-size: 2;
-}
-
-:where(.mdst-ui) pre:focus,
-.mdst-pre:focus {
-  outline: 0.125em solid var(--mdst-color-focus);
-  outline-offset: 0.125em;
-}
-
-/* Nested code inside pre — reset styles */
-
-:where(.mdst-ui) pre code,
-:where(.mdst-ui) pre .mdst-code,
-.mdst-pre code,
-.mdst-pre .mdst-code {
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  font-size: inherit;
-  word-break: break-word;
-}
-
-/* Variants */
-
-:where(.mdst-ui) pre.mdst-pre--borderless,
-.mdst-pre.mdst-pre--borderless {
-  border: none;
-}
-
-:where(.mdst-ui) pre.mdst-pre--compact,
-.mdst-pre.mdst-pre--compact {
-  padding: var(--mdst-space-sm);
-}
-
-/* Allow horizontal scroll if explicitly needed */
-
-:where(.mdst-ui) pre.mdst-pre--scroll,
-.mdst-pre.mdst-pre--scroll {
-  overflow-x: auto;
-  overflow-wrap: normal;
-  word-wrap: normal;
-  word-break: normal;
-  white-space: pre;
-}
-
-/* Progress Bar */
-
-:where(.mdst-ui) progress,
-.mdst-progress {
-  appearance: none;
-  -webkit-appearance: none;
-  display: block;
-  width: 100%;
-  height: var(--mdst-space-sm);
-  border: none;
-  border-radius: var(--mdst-radius);
-  overflow: hidden;
-  background: var(--mdst-color-subtle);
-  color: var(--mdst-color-fg);
-
-  /* Webkit (Chrome, Safari, Edge) - bar background */
-
-  &::-webkit-progress-bar {
-    background: var(--mdst-color-subtle);
-    border-radius: var(--mdst-radius);
-  }
-
-  /* Webkit - value fill */
-
-  &::-webkit-progress-value {
-    background: var(--mdst-color-fg);
-    border-radius: var(--mdst-radius);
-    transition: width var(--mdst-transition);
-  }
-
-  /* Firefox - value fill */
-
-  &::-moz-progress-bar {
-    background: var(--mdst-color-fg);
-    border-radius: var(--mdst-radius);
-  }
-
-  /* Status: Error */
-
-  &.mdst-progress--error {
-    color: var(--mdst-color-error);
-
-    &::-webkit-progress-value {
-      background: var(--mdst-color-error);
+      font-size: var(--mdst-text-sm);
+      color: var(--mdst-color-fg);
+      padding: 0 var(--mdst-space-xs);
+      transition: color var(--mdst-transition);
     }
 
-    &::-moz-progress-bar {
-      background: var(--mdst-color-error);
-    }
-  }
-
-  /* Status: Success */
-
-  &.mdst-progress--success {
-    color: var(--mdst-color-success);
-
-    &::-webkit-progress-value {
-      background: var(--mdst-color-success);
-    }
-
-    &::-moz-progress-bar {
-      background: var(--mdst-color-success);
-    }
-  }
-
-  /* Size: Small */
-
-  &.mdst-progress--sm {
-    height: var(--mdst-space-xs);
-  }
-
-  /* Size: Large */
-
-  &.mdst-progress--lg {
-    height: var(--mdst-space-md);
-  }
-}
-
-/* Radio */
-
-:where(.mdst-ui) input[type="radio"],
-.mdst-radio {
-  -webkit-appearance: none;
-  appearance: none;
-  flex-shrink: 0;
-  width: 0.875rem;
-  height: 0.875rem;
-  margin: 0;
-  background: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  box-sizing: content-box;
-  border-radius: 50%;
-  cursor: pointer;
-  position: relative;
-}
-
-:where(.mdst-ui) input[type="radio"]:checked::after,
-.mdst-radio:checked::after {
-  content: "";
-  position: absolute;
-  inset: 3px;
-  background: var(--mdst-color-fg);
-  border-radius: 50%;
-}
-
-:where(.mdst-ui) input[type="radio"]:hover,
-.mdst-radio:hover {
-  border-color: var(--mdst-color-muted);
-}
-
-:where(.mdst-ui) input[type="radio"]:focus-visible,
-.mdst-radio:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
-
-:where(.mdst-ui) input[type="radio"]:disabled,
-.mdst-radio:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) input[type="radio"]:disabled:hover,
-.mdst-radio:disabled:hover {
-  border-color: var(--mdst-color-border);
-}
-
-/* Radio with label wrapper */
-
-:where(.mdst-ui) label:has(> input[type="radio"]),
-.mdst-radio-label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  cursor: pointer;
-  user-select: none;
-}
-
-:where(.mdst-ui) label:has(> input[type="radio"]:disabled),
-.mdst-radio-label:has(.mdst-radio:disabled) {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Radio group */
-
-.mdst-radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--mdst-space-sm);
-
-  &.mdst-radio-group--horizontal {
-    flex-direction: row;
-    gap: var(--mdst-space-md);
-  }
-}
-
-/* Radio card — content-rich selectable cards */
-
-.mdst-radio-card {
-  display: block;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  padding: var(--mdst-space-md);
-  cursor: pointer;
-  text-align: center;
-  user-select: none;
-  border-radius: var(--mdst-radius);
-  overflow: hidden;
-
-  /* Visually hide the native radio input while keeping it keyboard-accessible */
-  & .mdst-radio {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  &:hover {
-    background: var(--mdst-color-subtle);
-  }
-
-  &:has(.mdst-radio:checked) {
-    border-color: var(--mdst-color-fg);
-    outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-fg);
-    outline-offset: calc(-1 * var(--mdst-border-width));
-  }
-
-  &:has(.mdst-radio:focus-visible) {
-    outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-focus);
-    outline-offset: calc(-1 * var(--mdst-border-width));
-  }
-
-  &:has(.mdst-radio:disabled) {
-    opacity: 0.5;
-    cursor: not-allowed;
-
-    &:hover {
-      background: transparent;
-    }
-  }
-}
-
-/* Radio card group — grid layout for cards */
-
-.mdst-radio-card-group {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--mdst-space-sm);
-}
-
-/* Range Slider */
-
-:where(.mdst-ui) input[type="range"],
-.mdst-range {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: var(--mdst-space-1);
-  background: var(--mdst-color-fg);
-  border-radius: var(--mdst-space-1);
-  box-shadow: none;
-  cursor: pointer;
-  outline: none;
-}
-
-:where(.mdst-ui) input[type="range"]:focus-visible,
-.mdst-range:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-space-1);
-}
-
-:where(.mdst-ui) input[type="range"]:disabled,
-.mdst-range:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) input[type="range"]:disabled::-webkit-slider-thumb,
-.mdst-range:disabled::-webkit-slider-thumb {
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) input[type="range"]:disabled::-moz-range-thumb,
-.mdst-range:disabled::-moz-range-thumb {
-  cursor: not-allowed;
-}
-
-/* Webkit (Chrome, Safari, Edge) */
-
-:where(.mdst-ui) input[type="range"]::-webkit-slider-thumb,
-.mdst-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: var(--mdst-space-4);
-  height: var(--mdst-space-4);
-  box-sizing: border-box;
-  background: var(--mdst-color-bg);
-  border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
-  border-radius: 50%;
-  box-shadow: none;
-  cursor: pointer;
-  transition: background var(--mdst-transition);
-}
-
-/* Firefox */
-
-:where(.mdst-ui) input[type="range"]::-moz-range-thumb,
-.mdst-range::-moz-range-thumb {
-  appearance: none;
-  width: var(--mdst-space-4);
-  height: var(--mdst-space-4);
-  box-sizing: border-box;
-  background: var(--mdst-color-bg);
-  border: calc(var(--mdst-space-px) * 3) solid var(--mdst-color-fg);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background var(--mdst-transition);
-}
-
-:where(.mdst-ui) input[type="range"]::-moz-range-track,
-.mdst-range::-moz-range-track {
-  background: transparent;
-}
-
-/* Skeleton */
-
-@keyframes mdst-shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-.mdst-skeleton {
-  display: block;
-  height: 1em;
-  width: 100%;
-  border-radius: var(--mdst-radius);
-  background: linear-gradient(
-    90deg,
-    var(--mdst-color-subtle) 25%,
-    color-mix(in srgb, var(--mdst-color-subtle) 50%, var(--mdst-color-bg) 50%) 50%,
-    var(--mdst-color-subtle) 75%
-  );
-  background-size: 200% 100%;
-  animation: mdst-shimmer 1.5s ease-in-out infinite;
-
-  /* Text line placeholder */
-
-  &.mdst-skeleton--text {
-    height: 1em;
-    width: 100%;
-  }
-
-  /* Heading placeholder */
-
-  &.mdst-skeleton--heading {
-    height: 1.5em;
-  }
-
-  /* Circle shape — set size via inline style or custom class */
-
-  &.mdst-skeleton--circle {
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-  }
-}
-
-/* Spinner */
-
-@keyframes mdst-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.mdst-spinner {
-  display: inline-block;
-  width: 1.25em;
-  height: 1.25em;
-  border: 2px solid currentColor;
-  border-right-color: transparent;
-  border-radius: 50%;
-  animation: mdst-spin 0.6s linear infinite;
-  vertical-align: middle;
-  flex-shrink: 0;
-
-  /* Sizes */
-
-  &.mdst-spinner--sm {
-    width: 0.875em;
-    height: 0.875em;
-    border-width: 1.5px;
-  }
-
-  &.mdst-spinner--lg {
-    width: 2em;
-    height: 2em;
-    border-width: 3px;
-  }
-}
-
-
-/* Stepper / Wizard */
-
-.mdst-stepper {
-  display: flex;
-  align-items: flex-start;
-  width: 100%;
-  font-family: var(--mdst-font-ui);
-
-  /* Step */
-
-  & .mdst-stepper-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-    position: relative;
-    text-align: center;
-
-    /* Connector line between steps */
-
-    &:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      top: 1rem;
-      left: 50%;
-      right: -50%;
-      height: var(--mdst-border-width);
-      background: var(--mdst-color-border);
-    }
-
-    /* Completed connector */
-
-    &[data-state="completed"]:not(:last-child)::after {
-      background: var(--mdst-color-fg);
-    }
-
-    /* States */
-
-    &[data-state="completed"] {
-      & .mdst-stepper-indicator {
-        background: var(--mdst-color-fg);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-fg);
-      }
-
-      & .mdst-stepper-label {
-        color: var(--mdst-color-fg);
-      }
-    }
-
-    &[data-state="active"] {
-      & .mdst-stepper-indicator {
-        border-color: var(--mdst-color-fg);
-        font-weight: 700;
-      }
-
-      & .mdst-stepper-label {
-        font-weight: 600;
-        color: var(--mdst-color-fg);
-      }
-    }
-
-    &[data-state="upcoming"] {
-      & .mdst-stepper-indicator {
-        border-color: var(--mdst-color-border);
-        color: var(--mdst-color-muted);
-      }
-
-      & .mdst-stepper-label {
-        color: var(--mdst-color-muted);
-      }
-    }
-
-    &[data-state="error"] {
-      & .mdst-stepper-indicator {
-        border-color: var(--mdst-color-error);
-        color: var(--mdst-color-error);
-      }
-
-      & .mdst-stepper-label {
-        color: var(--mdst-color-error);
-      }
-    }
-  }
-
-  /* Indicator (circle) */
-
-  & .mdst-stepper-indicator {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    font-size: var(--mdst-text-sm);
-    font-weight: 600;
-    background: var(--mdst-color-bg);
-    color: var(--mdst-color-fg);
-    position: relative;
-    z-index: 1;
-    transition:
-      background var(--mdst-transition),
-      color var(--mdst-transition),
-      border-color var(--mdst-transition);
-  }
-
-  /* Label */
-
-  & .mdst-stepper-label {
-    margin-top: var(--mdst-space-xs);
-    font-size: var(--mdst-text-sm);
-    color: var(--mdst-color-fg);
-    padding: 0 var(--mdst-space-xs);
-    transition: color var(--mdst-transition);
-  }
-
-  /* Vertical variant */
-
-  &.mdst-stepper--vertical {
-    flex-direction: column;
-    align-items: flex-start;
-
-    & .mdst-stepper-step {
-      flex-direction: row;
-      align-items: flex-start;
-      flex: none;
-      width: 100%;
-      text-align: left;
-
-      /* Vertical connector */
-
-      &:not(:last-child)::after {
-        top: 2rem;
-        left: 1rem;
-        right: auto;
-        width: var(--mdst-border-width);
-        height: calc(100% - 2rem + var(--mdst-space-md));
-        transform: translateX(-50%);
-      }
-
-      &:not(:last-child) {
-        padding-bottom: var(--mdst-space-md);
-      }
-    }
-
-    & .mdst-stepper-label {
-      margin-top: 0;
-      margin-left: var(--mdst-space-sm);
-      padding: 0;
-      line-height: 2rem;
-    }
-  }
-
-  /* Compact variant */
-
-  &.mdst-stepper--compact {
-    & .mdst-stepper-indicator {
-      width: 1.5rem;
-      height: 1.5rem;
-      font-size: var(--mdst-text-xs);
-    }
-
-    & .mdst-stepper-label {
-      font-size: var(--mdst-text-xs);
-    }
-
-    & .mdst-stepper-step:not(:last-child)::after {
-      top: 0.75rem;
-      left: 50%;
-      right: -50%;
-    }
-
-    /* Compact + vertical */
+    /* Vertical variant */
 
     &.mdst-stepper--vertical {
-      & .mdst-stepper-step:not(:last-child)::after {
-        top: 1.5rem;
-        left: 0.75rem;
-        height: calc(100% - 1.5rem + var(--mdst-space-sm));
+      flex-direction: column;
+      align-items: flex-start;
+
+      & .mdst-stepper__step {
+        flex-direction: row;
+        align-items: flex-start;
+        flex: none;
+        width: 100%;
+        text-align: start;
+
+        /* Vertical connector */
+
+        &:not(:last-child)::after {
+          top: 2rem;
+          inset-inline-start: 1rem;
+          inset-inline-end: auto;
+          width: var(--mdst-border-width);
+          height: calc(100% - 2rem + var(--mdst-space-md));
+          transform: translateX(calc(-50% * var(--_dir, 1)));
+        }
+
+        &:not(:last-child) {
+          padding-bottom: var(--mdst-space-md);
+        }
       }
 
-      & .mdst-stepper-label {
-        line-height: 1.5rem;
+      & .mdst-stepper__label {
+        margin-top: 0;
+        margin-inline-start: var(--mdst-space-sm);
+        padding: 0;
+        line-height: 2rem;
+      }
+    }
+
+    /* Compact variant */
+
+    &.mdst-stepper--sm {
+      & .mdst-stepper__indicator {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: var(--mdst-text-xs);
       }
 
-      & .mdst-stepper-step:not(:last-child) {
-        padding-bottom: var(--mdst-space-sm);
+      & .mdst-stepper__label {
+        font-size: var(--mdst-text-xs);
       }
+
+      & .mdst-stepper__step:not(:last-child)::after {
+        top: 0.75rem;
+        inset-inline-start: 50%;
+        inset-inline-end: -50%;
+      }
+
+      /* Compact + vertical */
+
+      &.mdst-stepper--vertical {
+        & .mdst-stepper__step:not(:last-child)::after {
+          top: 1.5rem;
+          inset-inline-start: 0.75rem;
+          height: calc(100% - 1.5rem + var(--mdst-space-sm));
+        }
+
+        & .mdst-stepper__label {
+          line-height: 1.5rem;
+        }
+
+        & .mdst-stepper__step:not(:last-child) {
+          padding-bottom: var(--mdst-space-sm);
+        }
+      }
+    }
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    .mdst-stepper .mdst-stepper__step:not(:last-child)::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+
+    .mdst-stepper .mdst-stepper__step[data-state="completed"] .mdst-stepper__indicator {
+      forced-color-adjust: none;
+      background: Highlight;
+      color: HighlightText;
+      border-color: Highlight;
     }
   }
 }
 
-/* Table */
+@layer mdst-ui.components {
+  /* Table */
 
-.mdst-table-wrap {
-  width: 100%;
-  overflow-x: auto;
-}
-
-:where(.mdst-ui) table,
-.mdst-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: inherit;
-}
-
-:where(.mdst-ui) th,
-.mdst-table th {
-  text-align: left;
-  font-size: var(--mdst-text-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--mdst-color-muted);
-  padding: var(--mdst-space-sm) var(--mdst-space-md) var(--mdst-space-sm) 0;
-  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-}
-
-:where(.mdst-ui) th:last-child,
-.mdst-table th:last-child {
-  padding-right: 0;
-}
-
-:where(.mdst-ui) td,
-.mdst-table td {
-  padding: var(--mdst-space-md) var(--mdst-space-md) var(--mdst-space-md) 0;
-  vertical-align: middle;
-  border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
-}
-
-.mdst-table td > .mdst-pre {
-  overflow-x: auto;
-}
-
-:where(.mdst-ui) td:last-child,
-.mdst-table td:last-child {
-  padding-right: 0;
-}
-
-:where(.mdst-ui) tbody tr:last-child td,
-.mdst-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* Variants */
-
-:where(.mdst-ui) table.mdst-table--bordered,
-.mdst-table.mdst-table--bordered {
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-}
-
-:where(.mdst-ui) table.mdst-table--bordered th,
-:where(.mdst-ui) table.mdst-table--bordered td,
-.mdst-table.mdst-table--bordered th,
-.mdst-table.mdst-table--bordered td {
-  padding: var(--mdst-space-sm) var(--mdst-space-md);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-}
-
-:where(.mdst-ui) table.mdst-table--striped tbody tr:nth-child(odd),
-.mdst-table.mdst-table--striped tbody tr:nth-child(odd) {
-  background: var(--mdst-color-subtle);
-}
-
-:where(.mdst-ui) table.mdst-table--compact th,
-.mdst-table.mdst-table--compact th {
-  padding: var(--mdst-space-xs) var(--mdst-space-sm) var(--mdst-space-xs) 0;
-}
-
-:where(.mdst-ui) table.mdst-table--compact th:last-child,
-.mdst-table.mdst-table--compact th:last-child {
-  padding-right: 0;
-}
-
-:where(.mdst-ui) table.mdst-table--compact td,
-.mdst-table.mdst-table--compact td {
-  padding: var(--mdst-space-sm) var(--mdst-space-sm) var(--mdst-space-sm) 0;
-}
-
-:where(.mdst-ui) table.mdst-table--compact td:last-child,
-.mdst-table.mdst-table--compact td:last-child {
-  padding-right: 0;
-}
-
-/* Fixed/Equal column widths */
-
-:where(.mdst-ui) table.mdst-table--fixed,
-.mdst-table.mdst-table--fixed {
-  table-layout: fixed;
-}
-
-/* Stack variant - stacks rows on mobile */
-
-@media (max-width: 480px) {
-  :where(.mdst-ui) table.mdst-table--stack thead,
-  .mdst-table--stack thead {
-    display: none;
-  }
-
-  :where(.mdst-ui) table.mdst-table--stack tbody,
-  :where(.mdst-ui) table.mdst-table--stack tr,
-  :where(.mdst-ui) table.mdst-table--stack td,
-  .mdst-table--stack tbody,
-  .mdst-table--stack tr,
-  .mdst-table--stack td {
-    display: block;
+  .mdst-table-wrap {
     width: 100%;
+    overflow-x: auto;
   }
 
-  :where(.mdst-ui) table.mdst-table--stack tr,
-  .mdst-table--stack tr {
-    padding: var(--mdst-space-md) 0;
+  :where(.mdst-ui) table,
+  .mdst-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: inherit;
+  }
+
+  :where(.mdst-ui) th,
+  .mdst-table th {
+    text-align: start;
+    font-size: var(--mdst-text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--mdst-color-muted);
+    padding: var(--mdst-space-sm) var(--mdst-space-md) var(--mdst-space-sm) 0;
+    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  :where(.mdst-ui) th:where(:last-child),
+  .mdst-table th:last-child {
+    padding-inline-end: 0;
+  }
+
+  :where(.mdst-ui) td,
+  .mdst-table td {
+    padding: var(--mdst-space-md) var(--mdst-space-md) var(--mdst-space-md) 0;
+    vertical-align: middle;
     border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
   }
 
-  :where(.mdst-ui) table.mdst-table--stack tbody tr:last-child,
-  .mdst-table--stack tbody tr:last-child {
-    border-bottom: none;
-  }
-
-  :where(.mdst-ui) table.mdst-table--stack td,
-  .mdst-table--stack td {
-    padding: 0;
-    border-bottom: none;
-  }
-
-  :where(.mdst-ui) table.mdst-table--stack td:first-child,
-  .mdst-table--stack td:first-child {
-    margin-bottom: var(--mdst-space-sm);
-  }
-}
-
-/* Tabs */
-
-.mdst-tabs {
-  display: flex;
-  flex-direction: column;
-
-  /* Tabs List */
-
-  & .mdst-tabs-list {
-    display: flex;
+  .mdst-table td > .mdst-pre {
     overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-    margin: 0;
-    padding: 0;
-    list-style: none;
   }
 
-  /* Individual Tab */
-
-  & .mdst-tab {
-    padding: var(--mdst-space-sm) var(--mdst-space-md);
-    white-space: nowrap;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-family: var(--mdst-font-ui);
-    font-size: inherit;
-    line-height: var(--mdst-line-height);
-    color: var(--mdst-color-muted);
-    border-bottom: 2px solid transparent;
-    margin-bottom: calc(-1 * var(--mdst-border-width));
-    transition:
-      color var(--mdst-transition),
-      border-color var(--mdst-transition),
-      background-color var(--mdst-transition);
-
-    &:hover {
-      color: var(--mdst-color-fg);
-    }
-
-    &[data-state="active"] {
-      color: var(--mdst-color-fg);
-      font-weight: 600;
-      border-bottom-color: var(--mdst-color-fg);
-    }
-
-    &[data-state="inactive"] {
-      color: var(--mdst-color-muted);
-      border-bottom-color: transparent;
-    }
-
-    &[data-disabled],
-    &[data-disabled="true"] {
-      opacity: 0.5;
-      cursor: not-allowed;
-
-      &:hover {
-        color: var(--mdst-color-muted);
-      }
-    }
+  :where(.mdst-ui) td:where(:last-child),
+  .mdst-table td:last-child {
+    padding-inline-end: 0;
   }
 
-  /* Tab Panel */
-
-  & .mdst-tabs-panel {
-    padding: var(--mdst-space-md) 0;
-
-    &[data-state="inactive"] {
-      display: none;
-    }
-
-    &[data-state="active"] {
-      display: block;
-    }
+  :where(.mdst-ui) tbody tr:where(:last-child) td,
+  .mdst-table tbody tr:last-child td {
+    border-bottom: none;
   }
-
-  /* Variant: Pills */
-
-  &.mdst-tabs--pills {
-    & .mdst-tabs-list {
-      border-bottom: none;
-      gap: var(--mdst-space-xs);
-    }
-
-    & .mdst-tab {
-      border-bottom: none;
-      margin-bottom: 0;
-      border-radius: var(--mdst-radius);
-      padding: var(--mdst-space-xs) var(--mdst-space-md);
-
-      &[data-state="active"] {
-        background: var(--mdst-color-fg);
-        color: var(--mdst-color-bg);
-      }
-
-      &:hover:not([data-state="active"]):not([data-disabled]) {
-        background: var(--mdst-color-surface);
-        color: var(--mdst-color-fg);
-      }
-    }
-  }
-
-  /* Variant: Vertical */
-
-  &.mdst-tabs--vertical {
-    flex-direction: row;
-
-    & .mdst-tabs-list {
-      flex-direction: column;
-      border-bottom: none;
-      border-right: var(--mdst-border-width) solid var(--mdst-color-border);
-      min-width: 10rem;
-    }
-
-    & .mdst-tab {
-      border-bottom: none;
-      margin-bottom: 0;
-      border-right: 2px solid transparent;
-      margin-right: calc(-1 * var(--mdst-border-width));
-      text-align: left;
-
-      &[data-state="active"] {
-        border-right-color: var(--mdst-color-fg);
-        border-bottom-color: transparent;
-      }
-    }
-
-    & .mdst-tabs-panel {
-      padding: 0 var(--mdst-space-md);
-      flex: 1;
-    }
-  }
-
-  /* Variant: Compact */
-
-  &.mdst-tabs--compact {
-    & .mdst-tab {
-      padding: var(--mdst-space-xs) var(--mdst-space-sm);
-      font-size: var(--mdst-text-sm);
-    }
-
-    & .mdst-tabs-panel {
-      padding: var(--mdst-space-sm) 0;
-    }
-  }
-}
-
-/* Tag */
-
-.mdst-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--mdst-space-xs);
-  padding: 0.25em 0.5em;
-  font-size: var(--mdst-text-sm);
-  line-height: 1;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  white-space: nowrap;
-  vertical-align: middle;
 
   /* Variants */
 
-  &.mdst-tag--solid {
-    background: var(--mdst-color-fg);
-    color: var(--mdst-color-bg);
+  :where(.mdst-ui) table.mdst-table--bordered,
+  .mdst-table.mdst-table--bordered {
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
   }
 
-  &.mdst-tag--subtle {
+  :where(.mdst-ui) table.mdst-table--bordered th,
+  :where(.mdst-ui) table.mdst-table--bordered td,
+  .mdst-table.mdst-table--bordered th,
+  .mdst-table.mdst-table--bordered td {
+    padding: var(--mdst-space-sm) var(--mdst-space-md);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
+
+  :where(.mdst-ui) table.mdst-table--striped tbody tr:where(:nth-child(odd)),
+  .mdst-table.mdst-table--striped tbody tr:nth-child(odd) {
     background: var(--mdst-color-subtle);
-    border-color: transparent;
   }
 
-  &.mdst-tag--ghost {
-    border-color: transparent;
-    background: transparent;
+  :where(.mdst-ui) table.mdst-table--sm th,
+  .mdst-table.mdst-table--sm th {
+    padding: var(--mdst-space-xs) var(--mdst-space-sm) var(--mdst-space-xs) 0;
   }
 
-  /* Status */
+  :where(.mdst-ui) table.mdst-table--sm th:where(:last-child),
+  .mdst-table.mdst-table--sm th:last-child {
+    padding-inline-end: 0;
+  }
 
-  &.mdst-tag--error {
-    border-color: var(--mdst-color-error);
-    color: var(--mdst-color-error);
+  :where(.mdst-ui) table.mdst-table--sm td,
+  .mdst-table.mdst-table--sm td {
+    padding: var(--mdst-space-sm) var(--mdst-space-sm) var(--mdst-space-sm) 0;
+  }
+
+  :where(.mdst-ui) table.mdst-table--sm td:where(:last-child),
+  .mdst-table.mdst-table--sm td:last-child {
+    padding-inline-end: 0;
+  }
+
+  /* Striped rows have a visible edge, so inset the first and last cells */
+
+  :where(.mdst-ui) table.mdst-table--striped :is(th, td):first-child,
+  .mdst-table.mdst-table--striped :is(th, td):first-child {
+    padding-inline-start: var(--mdst-space-sm);
+  }
+
+  :where(.mdst-ui) table.mdst-table--striped :where(:is(th, td):last-child),
+  .mdst-table.mdst-table--striped :is(th, td):last-child {
+    padding-inline-end: var(--mdst-space-sm);
+  }
+
+  /* Fixed/Equal column widths */
+
+  :where(.mdst-ui) table.mdst-table--fixed,
+  .mdst-table.mdst-table--fixed {
+    table-layout: fixed;
+  }
+
+  /* Stack variant - stacks rows on mobile */
+
+  @media (max-width: 480px) {
+    :where(.mdst-ui) table.mdst-table--stack thead,
+    .mdst-table.mdst-table--stack thead {
+      display: none;
+    }
+
+    :where(.mdst-ui) table.mdst-table--stack tbody,
+    :where(.mdst-ui) table.mdst-table--stack tr,
+    :where(.mdst-ui) table.mdst-table--stack td,
+    .mdst-table.mdst-table--stack tbody,
+    .mdst-table.mdst-table--stack tr,
+    .mdst-table.mdst-table--stack td {
+      display: block;
+      width: 100%;
+    }
+
+    :where(.mdst-ui) table.mdst-table--stack tr,
+    .mdst-table.mdst-table--stack tr {
+      padding: var(--mdst-space-md) 0;
+      border-bottom: var(--mdst-border-width) solid var(--mdst-color-subtle);
+    }
+
+    :where(.mdst-ui) table.mdst-table--stack tbody tr:where(:last-child),
+    .mdst-table.mdst-table--stack tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    :where(.mdst-ui) table.mdst-table--stack td,
+    .mdst-table.mdst-table--stack td {
+      padding: 0;
+      border-bottom: none;
+    }
+
+    :where(.mdst-ui) table.mdst-table--stack td:where(:first-child),
+    .mdst-table.mdst-table--stack td:first-child {
+      margin-bottom: var(--mdst-space-sm);
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Tabs */
+
+  .mdst-tabs {
+    display: flex;
+    flex-direction: column;
+
+    /* Tabs List */
+
+    & .mdst-tabs__list {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* Individual Tab */
+
+    & .mdst-tabs__tab {
+      padding: var(--mdst-space-sm) var(--mdst-space-md);
+      white-space: nowrap;
+      border: none;
+      background: none;
+      box-shadow: none;
+      cursor: pointer;
+      font-family: var(--mdst-font-ui);
+      font-size: inherit;
+      line-height: var(--mdst-line-height);
+      color: var(--mdst-color-muted);
+      border-bottom: 2px solid transparent;
+      margin-bottom: calc(-1 * var(--mdst-border-width));
+      transition:
+        color var(--mdst-transition),
+        border-color var(--mdst-transition),
+        background-color var(--mdst-transition);
+
+      &:hover {
+        color: var(--mdst-color-fg);
+      }
+
+      /* Inside: the scrolling tab list would clip an outer ring */
+      &:focus-visible {
+        outline-offset: -2px;
+      }
+
+      &[data-state="active"] {
+        color: var(--mdst-color-fg);
+        font-weight: 600;
+        border-bottom-color: var(--mdst-color-fg);
+      }
+
+      &[data-state="inactive"] {
+        color: var(--mdst-color-muted);
+        border-bottom-color: transparent;
+      }
+
+      &[data-disabled],
+      &[data-disabled="true"] {
+        opacity: var(--mdst-disabled-opacity);
+        cursor: not-allowed;
+
+        &:hover {
+          color: var(--mdst-color-muted);
+        }
+      }
+    }
+
+    /* Tab Panel */
+
+    & .mdst-tabs__panel {
+      padding: var(--mdst-space-md) 0;
+
+      &[data-state="inactive"] {
+        display: none;
+      }
+
+      &[data-state="active"] {
+        display: block;
+      }
+    }
+
+    /* Variant: Pills */
+
+    &.mdst-tabs--pills {
+      & .mdst-tabs__list {
+        border-bottom: none;
+        gap: var(--mdst-space-xs);
+      }
+
+      & .mdst-tabs__tab {
+        border-bottom: none;
+        margin-bottom: 0;
+        border-radius: var(--mdst-radius);
+        padding: var(--mdst-space-xs) var(--mdst-space-md);
+
+        &[data-state="active"] {
+          background: var(--mdst-color-fg);
+          color: var(--mdst-color-bg);
+        }
+
+        &:hover:not([data-state="active"]):not([data-disabled]) {
+          background: var(--mdst-color-subtle);
+          color: var(--mdst-color-fg);
+        }
+      }
+    }
+
+    /* Variant: Vertical */
+
+    &.mdst-tabs--vertical {
+      flex-direction: row;
+
+      & .mdst-tabs__list {
+        flex-direction: column;
+        border-bottom: none;
+        border-inline-end: var(--mdst-border-width) solid var(--mdst-color-border);
+        min-width: 10rem;
+      }
+
+      & .mdst-tabs__tab {
+        border-bottom: none;
+        margin-bottom: 0;
+        border-inline-end: 2px solid transparent;
+        margin-inline-end: calc(-1 * var(--mdst-border-width));
+        text-align: start;
+
+        &[data-state="active"] {
+          border-inline-end-color: var(--mdst-color-fg);
+          border-bottom-color: transparent;
+        }
+      }
+
+      & .mdst-tabs__panel {
+        padding: 0 var(--mdst-space-md);
+        flex: 1;
+      }
+    }
+
+    /* Variant: Compact */
+
+    &.mdst-tabs--sm {
+      & .mdst-tabs__tab {
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        font-size: var(--mdst-text-sm);
+      }
+
+      & .mdst-tabs__panel {
+        padding: var(--mdst-space-sm) 0;
+      }
+    }
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    .mdst-tabs.mdst-tabs--pills .mdst-tabs__tab[data-state="active"] {
+      forced-color-adjust: none;
+      background: Highlight;
+      color: HighlightText;
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Tag */
+
+  .mdst-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-xs);
+    padding: 0.25em 0.5em;
+    font-size: var(--mdst-text-sm);
+    line-height: 1;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    white-space: nowrap;
+    vertical-align: middle;
+
+    /* Variants */
 
     &.mdst-tag--solid {
-      background: var(--mdst-color-error);
+      background: var(--mdst-color-fg);
       color: var(--mdst-color-bg);
-      border-color: var(--mdst-color-error);
-    }
-
-    &.mdst-tag--subtle {
-      background: color-mix(in srgb, var(--mdst-color-error) 10%, transparent);
-      border-color: transparent;
-    }
-  }
-
-  &.mdst-tag--success {
-    border-color: var(--mdst-color-success);
-    color: var(--mdst-color-success);
-
-    &.mdst-tag--solid {
-      background: var(--mdst-color-success);
-      color: var(--mdst-color-bg);
-      border-color: var(--mdst-color-success);
-    }
-
-    &.mdst-tag--subtle {
-      background: color-mix(in srgb, var(--mdst-color-success) 10%, transparent);
-      border-color: transparent;
-    }
-  }
-
-  &.mdst-tag--muted {
-    border-color: var(--mdst-color-muted);
-    color: var(--mdst-color-muted);
-
-    &.mdst-tag--solid {
-      background: var(--mdst-color-muted);
-      color: var(--mdst-color-bg);
-      border-color: var(--mdst-color-muted);
     }
 
     &.mdst-tag--subtle {
       background: var(--mdst-color-subtle);
       border-color: transparent;
+    }
+
+    &.mdst-tag--borderless {
+      border-color: transparent;
+      background: transparent;
+    }
+
+    /* Status */
+
+    &.mdst-tag--danger {
+      border-color: var(--mdst-color-danger);
+      color: var(--mdst-color-danger);
+
+      &.mdst-tag--solid {
+        background: var(--mdst-color-danger);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-danger);
+      }
+
+      &.mdst-tag--subtle {
+        background: color-mix(in srgb, var(--mdst-color-danger) 10%, transparent);
+        border-color: transparent;
+      }
+    }
+
+    &.mdst-tag--success {
+      border-color: var(--mdst-color-success);
+      color: var(--mdst-color-success);
+
+      &.mdst-tag--solid {
+        background: var(--mdst-color-success);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-success);
+      }
+
+      &.mdst-tag--subtle {
+        background: color-mix(in srgb, var(--mdst-color-success) 10%, transparent);
+        border-color: transparent;
+      }
+    }
+
+    &.mdst-tag--warning {
+      border-color: var(--mdst-color-warning);
+      color: var(--mdst-color-warning);
+
+      &.mdst-tag--solid {
+        background: var(--mdst-color-warning);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-warning);
+      }
+
+      &.mdst-tag--subtle {
+        background: color-mix(in srgb, var(--mdst-color-warning) 10%, transparent);
+        border-color: transparent;
+      }
+    }
+
+    &.mdst-tag--info {
+      border-color: var(--mdst-color-info, var(--mdst-color-fg));
+      color: var(--mdst-color-info, var(--mdst-color-fg));
+
+      &.mdst-tag--solid {
+        background: var(--mdst-color-info, var(--mdst-color-fg));
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-info, var(--mdst-color-fg));
+      }
+
+      &.mdst-tag--subtle {
+        background: color-mix(in srgb, var(--mdst-color-info, var(--mdst-color-fg)) 10%, transparent);
+        border-color: transparent;
+      }
+    }
+
+    &.mdst-tag--muted {
+      border-color: var(--mdst-color-muted);
       color: var(--mdst-color-muted);
+
+      &.mdst-tag--solid {
+        background: var(--mdst-color-muted);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-muted);
+      }
+
+      &.mdst-tag--subtle {
+        background: var(--mdst-color-subtle);
+        border-color: transparent;
+        color: var(--mdst-color-muted);
+      }
+    }
+
+    /* Sizes */
+
+    &.mdst-tag--sm {
+      font-size: var(--mdst-text-xs);
+      padding: 0.1875em 0.375em;
+    }
+
+    &.mdst-tag--lg {
+      font-size: var(--mdst-text-base);
+      padding: 0.3125em 0.625em;
+    }
+
+    /* Pill shape */
+
+    &.mdst-tag--pill {
+      border-radius: 9999px;
+      padding-inline: 0.75em;
+    }
+
+    /* Interactive (dismissible / clickable) */
+
+    &.mdst-tag--interactive {
+      cursor: pointer;
+      transition: opacity var(--mdst-transition);
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+
+    /* Dismiss button inside a tag */
+
+    & .mdst-tag__dismiss {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      /* Square, so the focus ring is a neat square */
+      width: 1.25em;
+      aspect-ratio: 1;
+      border: none;
+      background: none;
+      box-shadow: none;
+      color: inherit;
+      cursor: pointer;
+      opacity: 0.6;
+      font-size: 1em;
+      line-height: 1;
+      transition: opacity var(--mdst-transition-fast);
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:focus-visible {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@layer mdst-ui.components {
+  /* Toast */
+
+  .mdst-toast {
+    display: flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+    padding: var(--mdst-space-sm) var(--mdst-space-md);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    font-family: var(--mdst-font-ui);
+    font-size: var(--mdst-text-sm);
+    line-height: var(--mdst-line-height);
+    transition:
+      opacity var(--mdst-transition-slow),
+      visibility var(--mdst-transition-slow);
+
+    /* State: visible */
+
+    &[data-state="visible"] {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* State: hidden */
+
+    &[data-state="hidden"] {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Status: one accent edge at the start, coloured by the variant */
+
+    &:is(.mdst-toast--success, .mdst-toast--danger, .mdst-toast--warning, .mdst-toast--info) {
+      border-inline-start: 3px solid var(--_accent);
+    }
+
+    &.mdst-toast--success {
+      --_accent: var(--mdst-color-success);
+    }
+
+    &.mdst-toast--danger {
+      --_accent: var(--mdst-color-danger);
+    }
+
+    &.mdst-toast--warning {
+      --_accent: var(--mdst-color-warning);
+    }
+
+    &.mdst-toast--info {
+      --_accent: var(--mdst-color-info, var(--mdst-color-fg));
     }
   }
 
-  /* Sizes */
+  /* Toast close button */
 
-  &.mdst-tag--sm {
-    font-size: var(--mdst-text-xs);
-    padding: 0.1875em 0.375em;
-  }
-
-  &.mdst-tag--lg {
-    font-size: var(--mdst-text-base);
-    padding: 0.3125em 0.625em;
-  }
-
-  /* Pill shape */
-
-  &.mdst-tag--pill {
-    border-radius: 9999px;
-    padding-inline: 0.75em;
-  }
-
-  /* Interactive (dismissible / clickable) */
-
-  &.mdst-tag--interactive {
-    cursor: pointer;
-    transition: opacity var(--mdst-transition);
-
-    &:hover {
-      opacity: 0.75;
-    }
-  }
-
-  /* Dismiss button inside a tag */
-
-  & .mdst-tag-dismiss {
+  .mdst-toast__close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     margin: 0;
+    margin-inline-start: auto;
+    /* Square, so the focus ring is a neat square */
+    width: 1.5em;
+    aspect-ratio: 1;
     border: none;
     background: none;
+    box-shadow: none;
     color: inherit;
     cursor: pointer;
     opacity: 0.6;
@@ -3178,561 +3706,503 @@ h6 {
     &:hover {
       opacity: 1;
     }
+
+    &:focus-visible {
+      opacity: 1;
+    }
+  }
+
+  /* Toast group (stacking container) */
+
+  .mdst-toast-group {
+    position: fixed;
+    bottom: var(--mdst-space-md);
+    inset-inline-end: var(--mdst-space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--mdst-space-sm);
+    z-index: calc(var(--mdst-z-overlay) + 1);
   }
 }
 
-/* Toast */
+@layer mdst-ui.components {
+  /* Toolbar */
 
-.mdst-toast {
-  display: flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-  padding: var(--mdst-space-sm) var(--mdst-space-md);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  font-family: var(--mdst-font-ui);
-  font-size: var(--mdst-text-sm);
-  line-height: var(--mdst-line-height);
-  transition:
-    opacity 150ms ease-out,
-    visibility 150ms;
-
-  /* State: visible */
-
-  &[data-state="visible"] {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* State: hidden */
-
-  &[data-state="hidden"] {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  /* Variant: success */
-
-  &[data-variant="success"] {
-    border-left: 3px solid var(--mdst-color-success);
-  }
-
-  /* Variant: error */
-
-  &[data-variant="error"] {
-    border-left: 3px solid var(--mdst-color-error);
-  }
-
-  /* Variant: warning */
-
-  &[data-variant="warning"] {
-    border-left: 3px solid var(--mdst-color-warning);
-  }
-
-  /* Variant: info */
-
-  &[data-variant="info"] {
-    border-left: 3px solid var(--mdst-color-fg);
-  }
-}
-
-/* Toast close button */
-
-.mdst-toast-close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-  margin-left: auto;
-  border: none;
-  background: none;
-  color: inherit;
-  cursor: pointer;
-  opacity: 0.6;
-  font-size: 1em;
-  line-height: 1;
-  transition: opacity var(--mdst-transition-fast);
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-/* Toast group (stacking container) */
-
-.mdst-toast-group {
-  position: fixed;
-  bottom: var(--mdst-space-md);
-  right: var(--mdst-space-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--mdst-space-sm);
-  z-index: 2000;
-}
-
-/* Toolbar */
-
-.mdst-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-  font-family: var(--mdst-font-ui);
-  font-size: var(--mdst-text-sm);
-
-  /* Group of related controls */
-
-  & .mdst-toolbar-group {
+  .mdst-toolbar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--mdst-space-xs);
+    gap: var(--mdst-space-sm);
+    font-family: var(--mdst-font-ui);
+    font-size: var(--mdst-text-sm);
 
-    /* Attached: controls share borders and read as one segmented unit */
+    /* Group of related controls */
 
-    &.mdst-toolbar-group--attached {
-      flex-wrap: nowrap;
-      gap: 0;
+    & .mdst-toolbar__group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--mdst-space-xs);
 
-      & > * + * {
-        margin-inline-start: calc(var(--mdst-border-width) * -1);
-      }
+      /* Attached: controls share borders and read as one segmented unit */
 
-      & > :not(:first-child, :last-child) {
-        border-radius: 0;
-      }
+      &.mdst-toolbar__group--attached {
+        flex-wrap: nowrap;
+        gap: 0;
 
-      & > :first-child:not(:last-child) {
-        border-start-end-radius: 0;
-        border-end-end-radius: 0;
-      }
+        & > * + * {
+          margin-inline-start: calc(var(--mdst-border-width) * -1);
+        }
 
-      & > :last-child:not(:first-child) {
-        border-start-start-radius: 0;
-        border-end-start-radius: 0;
-      }
+        & > :not(:first-child, :last-child) {
+          border-radius: 0;
+        }
 
-      /* Lift the hovered / focused control so its full border shows */
-      & > :hover,
-      & > :focus-visible {
-        position: relative;
-        z-index: 1;
+        & > :first-child:not(:last-child) {
+          border-start-end-radius: 0;
+          border-end-end-radius: 0;
+        }
+
+        & > :last-child:not(:first-child) {
+          border-start-start-radius: 0;
+          border-end-start-radius: 0;
+        }
+
+        /* Lift the hovered / focused control so its full border shows */
+        & > :hover,
+        & > :focus-visible {
+          position: relative;
+          z-index: 1;
+        }
       }
     }
+
+    /* Spacer: pushes everything after it to the far end */
+
+    & .mdst-toolbar__spacer {
+      flex: 1 1 0;
+    }
+
+    /* Separator: vertical rule between groups (use <hr> or role="separator") */
+
+    & .mdst-toolbar__separator {
+      align-self: stretch;
+      width: 0;
+      height: auto;
+      min-height: 1.5em;
+      margin: 0;
+      border: none;
+      border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
+    }
+
+    /* Form controls size to their content instead of filling the row */
+
+    /* :where() keeps this at the toolbar's own strength, so components with
+       their own sizing (OTP digits, colour picker) keep it */
+    & :where(input:not([type="checkbox"], [type="radio"]), select) {
+      width: auto;
+      min-width: 0;
+    }
+
+    /* Variants */
+
+    &.mdst-toolbar--bordered {
+      padding: var(--mdst-space-sm);
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      border-radius: var(--mdst-radius);
+      background: var(--mdst-color-bg);
+    }
   }
+}
 
-  /* Spacer: pushes everything after it to the far end */
+@layer mdst-ui.components {
+  /* Tooltip (Popover-based) */
 
-  & .mdst-toolbar-spacer {
-    flex: 1 1 0;
-  }
-
-  /* Separator: vertical rule between groups (use <hr> or role="separator") */
-
-  & .mdst-toolbar-separator {
-    align-self: stretch;
-    width: 0;
-    height: auto;
-    min-height: 1.5em;
-    margin: 0;
-    border: none;
-    border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
-  }
-
-  /* Form controls size to their content instead of filling the row */
-
-  & :is(input:not([type="checkbox"], [type="radio"]), select) {
-    width: auto;
-    min-width: 0;
-  }
-
-  /* Toggle buttons: aria-pressed="true" reads as on */
-
-  & [aria-pressed="true"] {
-    background: var(--mdst-color-fg);
-    color: var(--mdst-color-bg);
-    border-color: var(--mdst-color-fg);
-  }
-
-  /* Variants */
-
-  &.mdst-toolbar--bordered {
-    padding: var(--mdst-space-sm);
+  .mdst-tooltip {
+    padding: var(--mdst-space-xs) var(--mdst-space-sm);
     border: var(--mdst-border-width) solid var(--mdst-color-border);
     border-radius: var(--mdst-radius);
-    background: var(--mdst-color-bg);
+    background: var(--mdst-color-fg);
+    color: var(--mdst-color-bg);
+    font-size: var(--mdst-text-sm);
+    box-shadow: var(--mdst-shadow-sm);
+    max-width: 16rem;
+    text-align: center;
+
+    /* Centered fallback: browsers without CSS anchor positioning keep the
+       popover centered on screen rather than pinned to a corner. The @supports
+       block below pins it to the trigger where anchor positioning is available. */
+    margin: auto;
+
+    /* Anchor positioning links the tooltip to its invoking trigger.
+       Baseline Chrome 129 / Firefox 147 / Safari 26; older browsers keep the
+       centered fallback above. */
+    @supports (position-area: bottom) {
+      position-area: bottom;
+      margin: 0;
+      margin-top: var(--mdst-space-xs);
+
+      /* Position modifiers (default is bottom) */
+
+      &.mdst-tooltip--top {
+        position-area: top;
+        margin: 0;
+        margin-bottom: var(--mdst-space-xs);
+      }
+
+      /* Start and end follow the text direction (left and right in LTR) */
+      &.mdst-tooltip--start {
+        position-area: inline-start;
+        margin: 0;
+        margin-inline-end: var(--mdst-space-xs);
+      }
+
+      &.mdst-tooltip--end {
+        position-area: inline-end;
+        margin: 0;
+        margin-inline-start: var(--mdst-space-xs);
+      }
+    }
   }
 }
 
-/* Tooltip (Popover-based) */
+@layer mdst-ui.components {
+  /* Typography */
 
-.mdst-tooltip {
-  padding: var(--mdst-space-xs) var(--mdst-space-sm);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-fg);
-  color: var(--mdst-color-bg);
-  font-size: var(--mdst-text-sm);
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
-  max-width: 16rem;
-  text-align: center;
-
-  /* Centered fallback: browsers without CSS anchor positioning keep the
-     popover centered on screen rather than pinned to a corner. The @supports
-     block below pins it to the trigger where anchor positioning is available. */
-  margin: auto;
-
-  &:popover-open {
-    opacity: 1;
+  /* Reading face and colours — set once on the container so every element
+     inside .mdst-ui inherits them (td, li, summary included, with nothing left
+     to fall back to browser defaults). Zero specificity: any user rule on the
+     container wins. Components opt into --mdst-font-ui or --mdst-font-mono
+     explicitly. */
+  :where(.mdst-ui) {
+    font-family: var(--mdst-font-text);
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background-color: var(--mdst-color-bg);
   }
 
-  /* Anchor positioning links the tooltip to its invoking trigger.
-     Baseline Chrome 129 / Firefox 147 / Safari 26; older browsers keep the
-     centered fallback above. */
-  @supports (position-area: bottom) {
-    position-area: bottom;
+  /* Flow — space between the children of plain containers, so plain HTML
+     reads as a page. Runs in the .mdst-ui root and in unclassed sectioning,
+     form, and wrapper elements. Give a container a class (usually because you
+     lay it out with flex or grid) and its spacing is yours. Zero specificity;
+     tune or turn off with --mdst-flow-space. */
+  :where(
+      .mdst-ui,
+      .mdst-ui :is(main, article, section, header, footer, aside, div, form, fieldset, details, blockquote, dd):not([class]),
+      .mdst-form,
+      .mdst-fieldset
+    )
+    > :where(:not(:first-child, legend + *, dialog, [popover])) {
+    margin-block-start: var(--mdst-flow-space);
+  }
+
+  :where(.mdst-ui) h1,
+  :where(.mdst-ui) h2,
+  :where(.mdst-ui) h3,
+  :where(.mdst-ui) h4,
+  :where(.mdst-ui) h5,
+  :where(.mdst-ui) h6,
+  .mdst-h1,
+  .mdst-h2,
+  .mdst-h3,
+  .mdst-h4,
+  .mdst-h5,
+  .mdst-h6 {
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  :where(.mdst-ui) h1,
+  .mdst-h1 {
+    font-size: 2.5rem;
+  }
+
+  :where(.mdst-ui) h2,
+  .mdst-h2 {
+    font-size: 2rem;
+  }
+
+  :where(.mdst-ui) h3,
+  .mdst-h3 {
+    font-size: 1.5rem;
+  }
+
+  :where(.mdst-ui) h4,
+  .mdst-h4 {
+    font-size: 1.25rem;
+  }
+
+  :where(.mdst-ui) h5,
+  .mdst-h5 {
+    font-size: 1rem;
+  }
+
+  :where(.mdst-ui) h6,
+  .mdst-h6 {
+    font-size: 0.875rem;
+  }
+
+  /* Paragraph — inherits size and colour, so text inside components that set
+     their own (a tooltip, a small banner, a coloured tag) keeps them */
+
+  :where(.mdst-ui) p,
+  .mdst-p {
+    line-height: var(--mdst-line-height);
+  }
+
+  :where(.mdst-ui) p.mdst-p--sm,
+  .mdst-p--sm {
+    font-size: var(--mdst-text-sm);
+  }
+
+  :where(.mdst-ui) p.mdst-p--lg,
+  .mdst-p--lg {
+    font-size: var(--mdst-text-lg);
+  }
+
+  :where(.mdst-ui) p.mdst-p--muted,
+  .mdst-p--muted {
+    color: var(--mdst-color-muted);
+  }
+
+  /* Links — inherit the text colour; the underline marks them */
+
+  :where(.mdst-ui) a,
+  .mdst-a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* Strong / Bold */
+
+  :where(.mdst-ui) strong,
+  .mdst-strong {
+    font-weight: 600;
+  }
+
+  /* Emphasis / Italic */
+
+  :where(.mdst-ui) em,
+  .mdst-em {
+    font-style: italic;
+  }
+
+  /* Small */
+
+  :where(.mdst-ui) small,
+  .mdst-small {
+    font-size: var(--mdst-text-sm);
+  }
+
+  /* Mark / Highlight */
+
+  :where(.mdst-ui) mark,
+  .mdst-mark {
+    background-color: var(--mdst-color-subtle);
+    padding: 0.1em 0.2em;
+  }
+
+  /* Keyboard */
+
+  :where(.mdst-ui) kbd,
+  .mdst-kbd {
+    font-family: var(--mdst-font-mono);
+    font-size: 0.875em;
+    padding: 0.125em 0.375em;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-subtle);
+    white-space: nowrap;
+  }
+
+  /* Abbreviation — only when it carries an expansion */
+
+  :where(.mdst-ui) abbr:where([title]),
+  .mdst-abbr {
+    text-decoration: underline dotted;
+    text-underline-offset: 0.15em;
+    cursor: help;
+  }
+
+  /* Edits — deleted and inserted text */
+
+  :where(.mdst-ui) del,
+  .mdst-del {
+    text-decoration: line-through;
+    background-color: color-mix(in srgb, var(--mdst-color-danger) 12%, transparent);
+  }
+
+  :where(.mdst-ui) ins,
+  .mdst-ins {
+    text-decoration: none;
+    background-color: color-mix(in srgb, var(--mdst-color-success) 12%, transparent);
+  }
+
+  /* Strikethrough — no longer accurate, but not an edit */
+
+  :where(.mdst-ui) s,
+  .mdst-s {
+    text-decoration: line-through;
+    color: var(--mdst-color-muted);
+  }
+
+  /* Citation */
+
+  :where(.mdst-ui) cite,
+  .mdst-cite {
+    font-style: italic;
+    color: var(--mdst-color-muted);
+  }
+
+  /* Sample output and variables */
+
+  :where(.mdst-ui) samp,
+  .mdst-samp {
+    font-family: var(--mdst-font-mono);
+    font-size: 0.875em;
+    padding: 0.125em 0.375em;
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-subtle);
+  }
+
+  :where(.mdst-ui) var,
+  .mdst-var {
+    font-family: var(--mdst-font-mono);
+    font-size: 0.875em;
+    font-style: italic;
+  }
+
+  /* Subscript / Superscript — don't stretch the line height */
+
+  :where(.mdst-ui) sub,
+  :where(.mdst-ui) sup,
+  .mdst-sub,
+  .mdst-sup {
+    position: relative;
+    font-size: 0.75em;
+    line-height: 0;
+    vertical-align: baseline;
+  }
+
+  :where(.mdst-ui) sub,
+  .mdst-sub {
+    bottom: -0.25em;
+  }
+
+  :where(.mdst-ui) sup,
+  .mdst-sup {
+    top: -0.5em;
+  }
+
+  /* Blockquote */
+
+  :where(.mdst-ui) blockquote,
+  .mdst-blockquote {
+    margin-inline: 0;
+    padding-inline-start: var(--mdst-space-md);
+    border-inline-start: var(--mdst-space-1) solid var(--mdst-color-border);
+    font-style: italic;
+    color: var(--mdst-color-muted);
+  }
+
+  /* Horizontal Rule */
+
+  :where(.mdst-ui) hr,
+  .mdst-hr {
+    border: none;
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+    margin: var(--mdst-space-lg) 0;
+  }
+
+  :where(.mdst-ui) hr.mdst-hr--flush,
+  .mdst-hr--flush {
     margin: 0;
-    margin-top: var(--mdst-space-xs);
+  }
 
-    /* Position modifiers (default is bottom) */
+  /* Lists */
 
-    &.mdst-tooltip--top {
-      position-area: top;
-      margin: 0;
-      margin-bottom: var(--mdst-space-xs);
-    }
+  :where(.mdst-ui) ul,
+  :where(.mdst-ui) ol,
+  .mdst-ul,
+  .mdst-ol {
+    padding-inline-start: var(--mdst-space-lg);
+    line-height: var(--mdst-line-height);
+  }
 
-    &.mdst-tooltip--left {
-      position-area: left;
-      margin: 0;
-      margin-right: var(--mdst-space-xs);
-    }
+  :where(.mdst-ui) ul,
+  .mdst-ul {
+    list-style-type: disc;
+  }
 
-    &.mdst-tooltip--right {
-      position-area: right;
-      margin: 0;
-      margin-left: var(--mdst-space-xs);
+  :where(.mdst-ui) ol,
+  .mdst-ol {
+    list-style-type: decimal;
+  }
+
+  :where(.mdst-ui) li,
+  .mdst-li {
+    margin-bottom: var(--mdst-space-xs);
+  }
+
+  :where(.mdst-ui) li:where(:last-child),
+  .mdst-li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Unstyled list */
+
+  :where(.mdst-ui) ul.mdst-ul--unstyled,
+  .mdst-ul--unstyled {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  /* Windows High Contrast (forced colours) removes fills, so the parts that
+     show state are redrawn in the user's system colours. */
+  @media (forced-colors: active) {
+    :where(.mdst-ui) ins,
+    .mdst-ins {
+      text-decoration: underline;
     }
   }
 }
 
-/* Typography */
-
-/* Reading face — set once on the container so every element inside .mdst-ui
-   inherits it (td, li, summary included, with nothing left to fall back to
-   browser defaults). Zero specificity: any user rule on the container wins.
-   Components opt into --mdst-font-ui or --mdst-font-mono explicitly. */
-:where(.mdst-ui) {
-  font-family: var(--mdst-font-text);
-  line-height: var(--mdst-line-height);
-}
-
-:where(.mdst-ui) h1,
-:where(.mdst-ui) h2,
-:where(.mdst-ui) h3,
-:where(.mdst-ui) h4,
-:where(.mdst-ui) h5,
-:where(.mdst-ui) h6,
-.mdst-h1,
-.mdst-h2,
-.mdst-h3,
-.mdst-h4,
-.mdst-h5,
-.mdst-h6 {
-  font-weight: 600;
-  line-height: 1.25;
-  color: var(--mdst-color-fg);
-}
-
-:where(.mdst-ui) h1,
-.mdst-h1 {
-  font-size: 2.5rem;
-}
-
-:where(.mdst-ui) h2,
-.mdst-h2 {
-  font-size: 2rem;
-}
-
-:where(.mdst-ui) h3,
-.mdst-h3 {
-  font-size: 1.5rem;
-}
-
-:where(.mdst-ui) h4,
-.mdst-h4 {
-  font-size: 1.25rem;
-}
-
-:where(.mdst-ui) h5,
-.mdst-h5 {
-  font-size: 1rem;
-}
-
-:where(.mdst-ui) h6,
-.mdst-h6 {
-  font-size: 0.875rem;
-}
-
-/* Paragraph */
-
-:where(.mdst-ui) p,
-.mdst-p {
-  font-size: var(--mdst-text-base);
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-}
-
-:where(.mdst-ui) p.mdst-p--sm,
-.mdst-p--sm {
-  font-size: var(--mdst-text-sm);
-}
-
-:where(.mdst-ui) p.mdst-p--lg,
-.mdst-p--lg {
-  font-size: var(--mdst-text-lg);
-}
-
-:where(.mdst-ui) p.mdst-p--muted,
-.mdst-p--muted {
-  color: var(--mdst-color-muted);
-}
-
-/* Links */
-
-:where(.mdst-ui) a,
-.mdst-a {
-  color: var(--mdst-color-fg);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
-}
-
-:where(.mdst-ui) a:focus-visible,
-.mdst-a:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
-
-/* Strong / Bold */
-
-:where(.mdst-ui) strong,
-.mdst-strong {
-  font-weight: 600;
-}
-
-/* Emphasis / Italic */
-
-:where(.mdst-ui) em,
-.mdst-em {
-  font-style: italic;
-}
-
-/* Small */
-
-:where(.mdst-ui) small,
-.mdst-small {
-  font-size: var(--mdst-text-sm);
-}
-
-/* Mark / Highlight */
-
-:where(.mdst-ui) mark,
-.mdst-mark {
-  background-color: var(--mdst-color-subtle);
-  padding: 0.1em 0.2em;
-}
-
-/* Keyboard */
-
-:where(.mdst-ui) kbd,
-.mdst-kbd {
-  font-family: var(--mdst-font-mono);
-  font-size: 0.875em;
-  padding: 0.125em 0.375em;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-subtle);
-  white-space: nowrap;
-}
-
-/* Abbreviation — only when it carries an expansion */
-
-:where(.mdst-ui) abbr[title],
-.mdst-abbr {
-  text-decoration: underline dotted;
-  text-underline-offset: 0.15em;
-  cursor: help;
-}
-
-/* Edits — deleted and inserted text */
-
-:where(.mdst-ui) del,
-.mdst-del {
-  text-decoration: line-through;
-  background-color: color-mix(in srgb, var(--mdst-color-error) 12%, transparent);
-}
-
-:where(.mdst-ui) ins,
-.mdst-ins {
-  text-decoration: none;
-  background-color: color-mix(in srgb, var(--mdst-color-success) 12%, transparent);
-}
-
-/* Strikethrough — no longer accurate, but not an edit */
-
-:where(.mdst-ui) s,
-.mdst-s {
-  text-decoration: line-through;
-  color: var(--mdst-color-muted);
-}
-
-/* Citation */
-
-:where(.mdst-ui) cite,
-.mdst-cite {
-  font-style: italic;
-  color: var(--mdst-color-muted);
-}
-
-/* Sample output and variables */
-
-:where(.mdst-ui) samp,
-.mdst-samp {
-  font-family: var(--mdst-font-mono);
-  font-size: 0.875em;
-  padding: 0.125em 0.375em;
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-subtle);
-}
-
-:where(.mdst-ui) var,
-.mdst-var {
-  font-family: var(--mdst-font-mono);
-  font-size: 0.875em;
-  font-style: italic;
-}
-
-/* Subscript / Superscript — don't stretch the line height */
-
-:where(.mdst-ui) sub,
-:where(.mdst-ui) sup,
-.mdst-sub,
-.mdst-sup {
-  position: relative;
-  font-size: 0.75em;
-  line-height: 0;
-  vertical-align: baseline;
-}
-
-:where(.mdst-ui) sub,
-.mdst-sub {
-  bottom: -0.25em;
-}
-
-:where(.mdst-ui) sup,
-.mdst-sup {
-  top: -0.5em;
-}
-
-/* Blockquote */
-
-:where(.mdst-ui) blockquote,
-.mdst-blockquote {
-  margin: 0;
-  padding-left: var(--mdst-space-md);
-  border-left: var(--mdst-space-1) solid var(--mdst-color-border);
-  font-style: italic;
-  color: var(--mdst-color-muted);
-}
-
-/* Horizontal Rule */
-
-:where(.mdst-ui) hr,
-.mdst-hr {
-  border: none;
-  border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-  margin: var(--mdst-space-lg) 0;
-}
-
-:where(.mdst-ui) hr.mdst-hr--flush,
-.mdst-hr--flush {
-  margin: 0;
-}
-
-/* Lists */
-
-:where(.mdst-ui) ul,
-:where(.mdst-ui) ol,
-.mdst-ul,
-.mdst-ol {
-  padding-left: var(--mdst-space-lg);
-  line-height: var(--mdst-line-height);
-}
-
-:where(.mdst-ui) ul,
-.mdst-ul {
-  list-style-type: disc;
-}
-
-:where(.mdst-ui) ol,
-.mdst-ol {
-  list-style-type: decimal;
-}
-
-:where(.mdst-ui) li,
-.mdst-li {
-  margin-bottom: var(--mdst-space-xs);
-}
-
-:where(.mdst-ui) li:last-child,
-.mdst-li:last-child {
-  margin-bottom: 0;
-}
-
-/* Unstyled list */
-
-:where(.mdst-ui) ul.mdst-ul--unstyled,
-.mdst-ul--unstyled {
-  list-style: none;
-  padding-left: 0;
-}
-
-/* Utilities */
-
-/* Screen reader only — visually hidden but accessible */
-
-.mdst-sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Text truncation — single-line ellipsis overflow */
-
-.mdst-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Muted text color */
-
-.mdst-muted {
-  color: var(--mdst-color-muted);
-}
-
-/* Monospace font */
-
-.mdst-mono {
-  font-family: var(--mdst-font-mono);
+@layer mdst-ui.components {
+  /* Utilities */
+
+  /* Screen reader only — visually hidden but accessible */
+
+  .mdst-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Text truncation — single-line ellipsis overflow */
+
+  .mdst-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Muted text color */
+
+  .mdst-muted {
+    color: var(--mdst-color-muted);
+  }
+
+  /* Monospace font */
+
+  .mdst-mono {
+    font-family: var(--mdst-font-mono);
+  }
 }
 

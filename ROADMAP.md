@@ -10,7 +10,7 @@ Future components, enhancements, and project goals for modest-ui.
 
 A small colored dot that indicates connection state, availability, or health.
 
-- Semantic colors: `--success`, `--warning`, `--error`
+- Status colours: `--success`, `--info`, `--warning`, `--danger`
 - Optional pulse animation: `--pulse`
 - Inline with text via flexbox label wrapper
 
@@ -25,11 +25,11 @@ Dedicated textarea styling (currently `textarea.mdst-input` exists but is minima
 
 - Auto-resize hint via `field-sizing: content` (progressive enhancement)
 - Min/max height variants
-- Borderless variant for embedded use (`--ghost`)
+- Borderless variant for embedded use (`--borderless`)
 
 ```html
 <textarea class="mdst-textarea" rows="3" placeholder="Type a message..."></textarea>
-<textarea class="mdst-textarea mdst-textarea--ghost" rows="1"></textarea>
+<textarea class="mdst-textarea mdst-textarea--borderless" rows="1"></textarea>
 ```
 
 ### Icon Button
@@ -37,7 +37,7 @@ Dedicated textarea styling (currently `textarea.mdst-input` exists but is minima
 A square or circular button designed for icon-only use (no text label).
 
 - Fixed dimensions (e.g. `--sm` 32px, default 40px, `--lg` 48px)
-- Variants: `--ghost`, `--solid`, `--circle`
+- Variants: `--borderless`, `--solid`, `--circle`
 - Works with inline SVG or emoji content
 
 ```html
@@ -54,7 +54,6 @@ A square or circular button designed for icon-only use (no text label).
 ### Button
 
 - **Icon-with-text layout**: Ensure `.mdst-button svg` or `.mdst-button img` get sensible default sizing (e.g. `1em`).
-- **Danger variant**: `--danger` for destructive actions (red on hover).
 
 ### Details
 
@@ -68,8 +67,8 @@ A square or circular button designed for icon-only use (no text label).
 
 ### Pre
 
-- **Header bar**: Optional `.mdst-pre-header` for a label/language bar above the code block (common in documentation and chat UIs).
-- **Copy button area**: A positioned area for a copy-to-clipboard button (`.mdst-pre-actions`), CSS-only layout with the button itself left to the consumer.
+- **Header bar**: Optional `.mdst-pre__header` for a label/language bar above the code block (common in documentation and chat UIs).
+- **Copy button area**: A positioned area for a copy-to-clipboard button (`.mdst-pre__actions`), CSS-only layout with the button itself left to the consumer.
 
 ### Input
 
@@ -101,6 +100,6 @@ Small utility classes that reduce the need for bespoke CSS in consuming apps. Th
 
 ## Community & Project
 
-- [ ] **GitHub Discussions** — Enable Discussions for questions, ideas, and "show & tell" from the community
-- [ ] **GitHub Sponsors** — Set up sponsorship for anyone who wants to support ongoing development
+- [x] **GitHub Discussions** — Enable Discussions for questions, ideas, and "show & tell" from the community
+- [x] **GitHub Sponsors** — Set up sponsorship for anyone who wants to support ongoing development
 - [ ] **dev.to / Hacker News article** — Write an introduction post explaining the philosophy and announce the project

@@ -222,51 +222,33 @@ Each component lives in its own folder:
 components/
 └── my-component/
     ├── my-component.css    # Component styles (required)
-    ├── preview.html        # Documentation preview (required)
-    └── my-component.js     # Optional JavaScript
+    ├── config.js           # Title, class name, and description (required)
+    └── preview.html        # Documentation preview (required)
 ```
+
+modest-ui is CSS only. If a docs page needs JavaScript to demonstrate behaviour (switching tabs, revealing a password), keep it in `preview.html` and label it as example code.
 
 ## CSS Guidelines
 
 ### Tokens
 
-Always use design tokens from `base/tokens.css`:
+Always use design tokens from `base/tokens.css` rather than raw values. The full list, with defaults, is in that file and in `llms.txt`. The groups:
 
-```css
-/* Colors */
---mdst-color-fg
---mdst-color-bg
---mdst-color-border
---mdst-color-muted
---mdst-color-subtle
---mdst-color-focus
---mdst-color-danger
---mdst-color-success
-
-/* Spacing */
---mdst-space-xs  /* 0.25rem */
---mdst-space-sm  /* 0.5rem */
---mdst-space-md  /* 1rem */
---mdst-space-lg  /* 1.5rem */
---mdst-space-xl  /* 2rem */
-
-/* Typography */
---mdst-font-sans
---mdst-font-mono
---mdst-text-xs
---mdst-text-sm
---mdst-text-base
---mdst-text-lg
-
-/* Other */
---mdst-radius
---mdst-border-width
---mdst-transition
-```
+- **Colour:** `--mdst-color-fg`, `-bg`, `-border`, `-muted`, `-subtle`, `-focus`, `-danger`, `-warning`, `-success` (and optional `--mdst-color-info`)
+- **Type:** `--mdst-font-text`, `--mdst-font-ui`, `--mdst-font-mono`, `--mdst-text-xs` to `--mdst-text-xl`, `--mdst-line-height`
+- **Space:** `--mdst-space-xs` to `--mdst-space-xl` (and the numeric scale they alias), `--mdst-flow-space`
+- **Shape:** `--mdst-radius`, `--mdst-border-width`
+- **Focus:** `--mdst-focus-offset` (and optional `--mdst-focus-ring`)
+- **Motion:** `--mdst-transition-fast`, `--mdst-transition`, `--mdst-transition-slow`
+- **Depth:** `--mdst-shadow-sm`, `--mdst-shadow`, `--mdst-backdrop`, `--mdst-z-overlay`
+- **State:** `--mdst-disabled-opacity`
 
 ### Native CSS Nesting
 
-All component CSS must use native CSS nesting. Each component should have a **single top-level selector** (the root block class), with everything else nested inside it:
+Two shapes, depending on whether the component has a classless form:
+
+- **Classless and class share rules** (button, input, checkbox, table…): flat, comma-separated selector lists, so every classless selector stays visible and greppable. `button.css` is the model.
+- **Class-only components** (card, tabs, toast…): native CSS nesting under a **single top-level selector**, the block class, with everything else nested inside it:
 
 - **Pseudo-classes** (`:hover`, `:focus-visible`, `:disabled`, `:checked`) nest with `&:pseudo`
 - **Pseudo-elements** (`::before`, `::after`, `::backdrop`) nest with `&::pseudo`
@@ -430,26 +412,20 @@ End each preview with a usage section:
 
 ## Scripts
 
-- `npm run dev` - Start local server at http://localhost:8000
-- `npm run generate` - Scan components and update sidebar + classNames in index.html
-- `npm run build` - Bundle all CSS into dist/modest-ui.css
+- `npm run dev` - Build everything and serve the site at http://localhost:8000
+- `npm run build` - Build the bundle (`dist/`), `llms.txt`, and the docs site
 
 ## Adding a New Component
 
-1. Create the component folder with CSS and preview.html (see Component Structure above)
-2. Add the import to `index.css`
-3. Run `npm run generate` — this automatically updates:
-   - The sidebar links in `index.html`
-   - The `classNames` object used for displaying the class in the header
-
-### Class Name Convention
-
-By default, the generate script derives class names using `.mdst-{slug}` (e.g., `button` → `.mdst-button`).
-
-For components that don't follow this convention, add an override in `scripts/generate-preview.js`:
+1. Create the component folder with `<slug>.css`, `config.js`, and `preview.html` (see Component Structure above)
+2. Wrap the CSS in `@layer mdst-ui.components { … }` and add the import to `index.css`
+3. Run `npm run build`. The sidebar, the docs page header, and `llms.txt` all come from `config.js`:
 
 ```javascript
-const classOverrides = {
-  typography: ".mdst-*",
+export default {
+  title: "Toggle",
+  className: ".mdst-toggle", // shown in the docs header
+  description: "One sentence on what it is and its main variants.",
+  group: "Input" // optional: nests it under a sidebar group
 };
 ```

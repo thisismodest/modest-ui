@@ -44,7 +44,7 @@ Add the stylesheet and put `.mdst-ui` on the body. That's it.
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@1.1.0/dist/modest-ui.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@2/dist/modest-ui.min.css" />
   </head>
   <body class="mdst-ui">
     <h1>Hello world</h1>
@@ -106,7 +106,16 @@ If you use layers yourself (Tailwind v4 does), set where modest-ui sits with one
 @layer reset, mdst-ui, utilities;
 ```
 
-Every file layers itself, so this works the same for the bundle, `index.css`, or individual component files. One thing to know: blanket resets in your own CSS (for example `button { background: none }`) also win. Put them in a layer before `mdst-ui` if you want modest-ui to style over them.
+Every file layers itself, so this works the same for the bundle, `index.css`, or individual component files.
+
+One thing to know: blanket element resets in your own CSS also win. A rule like `button { color: inherit; background: transparent }` (Tailwind's preflight has one) will override modest-ui's button colours. Put resets like that in a layer before `mdst-ui`:
+
+```css
+@layer reset, mdst-ui;
+@layer reset {
+  /* your reset */
+}
+```
 
 ---
 
@@ -115,10 +124,10 @@ Every file layers itself, so this works the same for the bundle, `index.css`, or
 ### CDN (recommended)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@1.1.0/dist/modest-ui.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@2/dist/modest-ui.min.css" />
 ```
 
-Use `@1` instead of a pinned version to always get the latest 1.x release.
+`@2` gets the latest 2.x release. v2 renamed classes, so projects on v1 should stay on `@1` until they migrate (see [CHANGELOG.md](CHANGELOG.md)).
 
 ### npm
 
@@ -242,23 +251,24 @@ This keeps modest-ui dependency-free while letting you use whatever interaction 
 
 ## Development
 
-Start a local server to preview components:
+Build everything and start a local server:
 
 ```bash
 npm run dev
 ```
 
-Then open [http://localhost:8000](http://localhost:8000)
+Then open [http://localhost:8000](http://localhost:8000). `npm run build` alone regenerates `dist/`, `llms.txt`, and the site.
 
 ### Adding a new component
 
-1. Create a folder in `components/` with your component CSS and a `preview.html`:
+1. Create a folder in `components/` with the CSS, a `config.js`, and a `preview.html`:
 
 ```
 components/
 └── my-component/
-    ├── my-component.css
-    └── preview.html
+    ├── my-component.css   # wrapped in @layer mdst-ui.components { … }
+    ├── config.js          # title, className, description (required)
+    └── preview.html       # the docs page body
 ```
 
 2. Add the import to `index.css`:
@@ -267,20 +277,19 @@ components/
 @import "./components/my-component/my-component.css";
 ```
 
-3. Generate and build:
+3. Build:
 
 ```bash
-npm run generate  # Updates sidebar in index.html
-npm run build     # Bundles CSS to dist/
+npm run build
 ```
 
-See [CONVENTIONS.md](CONVENTIONS.md) for component and preview formatting guidelines.
+The sidebar, docs page, and `llms.txt` entry are generated from the folder. See [CONVENTIONS.md](CONVENTIONS.md) for the rules components follow.
 
 ### Releasing a new version
 
-The version in `package.json` is the single source of truth. Running `npm run build` propagates it everywhere — the site, this README, CDN links, and `llms.txt`.
+The version in `package.json` is the single source of truth. `npm run build` carries it into the site and `llms.txt`. `dist/` and `llms.txt` are committed, and CI fails a PR if they're out of date.
 
-1. Bump the version in `package.json`:
+1. Move the `[Unreleased]` notes in `CHANGELOG.md` under the new version, then bump the version in `package.json`:
 
 ```bash
 npm version patch  # or minor / major
@@ -321,27 +330,23 @@ available a few moments after the publish job finishes.
 
 ## Browser Support
 
-modest-ui targets modern evergreen browsers (Chrome, Edge, Firefox, Safari) and
-uses current CSS such as nesting, `:where()`, and `color-mix()` — all Baseline
-across those engines. On current versions every classless default and component
-renders consistently.
+modest-ui targets current evergreen browsers. The minimums come from CSS nesting, `:has()`, and cascade layers:
 
-A few components use very recently-Baseline CSS and degrade gracefully on
-browsers that predate it:
+| Browser | Minimum |
+| --- | --- |
+| Chrome, Edge | 120 |
+| Firefox | 121 |
+| Safari (macOS and iOS) | 17.2 |
 
-- **`tooltip`** and **`popover --anchored`** anchor to their trigger via CSS
-  anchor positioning (`position-area`), Baseline only since Chrome 129 /
-  Firefox 147 / Safari 26. On older browsers the anchoring is guarded behind
-  `@supports`, so they fall back to a centered popover — usable, just not
-  anchored.
-- **`details`** styles its open content via the `::details-content`
-  pseudo-element (Baseline Chrome 131 / Firefox 143 / Safari 18.4). On browsers
-  older than that the disclosure still opens and closes — it just shows the
-  content without the added padding and divider.
-- **`drawer`** slide-in uses `@starting-style` and `transition-behavior:
-allow-discrete`; without them it simply appears instead of sliding.
+Some features degrade gracefully on browsers older than their own support:
 
-There is no IE11 support. If you need it, this isn't the library for you.
+- **Dark mode** uses `light-dark()`. Without it, pages stay light.
+- **`tooltip`** and **`popover --anchored`** use CSS anchor positioning (Chrome 129, Firefox 147, Safari 26). Without it they fall back to a centred popover.
+- **`details`** content padding uses `::details-content` (Chrome 131, Firefox 143, Safari 18.4). Without it the disclosure still works, without the padding and divider.
+- **`drawer`**, **`banner`**, and **`toast`** enter and leave with `@starting-style`. Without it they appear without animating.
+- **Invalid fields** use `:user-invalid` alongside `aria-invalid`. Without it, only `aria-invalid` shows the error state.
+
+There is no IE11 support.
 
 ## Contributing
 

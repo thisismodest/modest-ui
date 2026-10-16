@@ -28,22 +28,19 @@ async function resolveImports(filePath, processedFiles = new Set()) {
   const resolvedLines = [];
 
   for (const line of lines) {
-    const importMatch = line.match(/@import\s+(?:url\()?["']([^"']+)["']\)?;?/);
+    // Only a line that is an @import statement, so a commented-out import
+    // (or one mentioned in a comment) is left alone
+    const importMatch = line.match(/^\s*@import\s+(?:url\()?["']([^"']+)["']\)?;?/);
 
     if (importMatch) {
       const importPath = importMatch[1];
       // Resolve relative path
       const absolutePath = join(dirname(filePath), importPath);
 
-      try {
-        // Recursively resolve the imported file
-        const importedContent = await resolveImports(absolutePath, processedFiles);
-        resolvedLines.push(importedContent);
-      } catch (err) {
-        console.error(`Error importing ${importPath} from ${filePath}:`, err.message);
-        // Keep the original import if resolution fails
-        resolvedLines.push(line);
-      }
+      // A missing file is an error: shipping a bundle with an unresolved
+      // @import would silently drop a component
+      const importedContent = await resolveImports(absolutePath, processedFiles);
+      resolvedLines.push(importedContent);
     } else {
       resolvedLines.push(line);
     }

@@ -17,11 +17,11 @@ Then open [http://localhost:8000](http://localhost:8000) to browse components lo
 
 ## Adding a Component
 
-1. Create a folder in `components/` with CSS, `preview.html`, and optional `config.js`
-2. Add the import to `index.css`
-3. Run `npm run generate` to update the sidebar and class names
-4. Run `npm run build` to bundle CSS to `dist/`
-5. Test it across themes
+1. Create a folder in `components/` with the CSS, `preview.html`, and `config.js` (all three are required)
+2. Wrap the CSS in `@layer mdst-ui.components { … }` and add the import to `index.css`
+3. Run `npm run build`, which regenerates the bundle, `llms.txt`, and the docs site (including the sidebar)
+4. Commit `dist/` and `llms.txt` with your change; CI checks they're up to date
+5. Test it across themes, in a right-to-left page, and with forced colours
 
 See [CONVENTIONS.md](CONVENTIONS.md) for the full specification on naming, structure, classless defaults, and preview format.
 
