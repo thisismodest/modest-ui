@@ -9,7 +9,7 @@ The public API is the set of CSS custom properties (`--mdst-*`) and class names
 `llms.txt`. Renaming or removing a documented token or class is a breaking
 change; adding new ones is a minor change.
 
-## [Unreleased]
+## [2.0.0] - 2026-10-16
 
 2.0 is a clean break: v1 names are not kept as aliases. Pin `mdst-ui@1` to stay
 on v1. To upgrade, apply the renames below, then check the removed tokens.
