@@ -39,6 +39,10 @@
     <!-- JSONLD -->
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      /* Our page reset sits below modest-ui, so it never overrides it */
+      @layer site-reset, mdst-ui;
+    </style>
     <link rel="stylesheet" href="/dist/modest-ui.min.css" />
     <script src="/base/theme-persist.js"></script>
     <link rel="stylesheet" href="/base/preview.css" />
@@ -60,36 +64,38 @@
         transform: none;
       }
 
-      /* Site reset. The docs shell isn't inside .mdst-ui, so it brings its own
-         (modest-ui's reset only applies inside .mdst-ui). */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
+      @layer site-reset {
+        /* Site reset. The docs shell isn't inside .mdst-ui, so it brings its own
+           (modest-ui's reset only applies inside .mdst-ui). */
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+        }
 
-      * {
-        margin: 0;
-      }
+        * {
+          margin: 0;
+        }
 
-      img,
-      picture,
-      video,
-      canvas,
-      svg {
-        display: block;
-        max-width: 100%;
-      }
+        img,
+        picture,
+        video,
+        canvas,
+        svg {
+          display: block;
+          max-width: 100%;
+        }
 
-      a {
-        color: inherit;
-      }
+        a {
+          color: inherit;
+        }
 
-      input,
-      button,
-      textarea,
-      select {
-        font: inherit;
+        input,
+        button,
+        textarea,
+        select {
+          font: inherit;
+        }
       }
 
       html,

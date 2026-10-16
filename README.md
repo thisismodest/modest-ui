@@ -110,12 +110,20 @@ Every file layers itself, so this works the same for the bundle, `index.css`, or
 
 One thing to know: blanket element resets in your own CSS also win. A rule like `button { color: inherit; background: transparent }` (Tailwind's preflight has one) will override modest-ui's button colours. Put resets like that in a layer before `mdst-ui`:
 
-```css
-@layer reset, mdst-ui;
-@layer reset {
-  /* your reset */
-}
+```html
+<!-- Declare the order before modest-ui loads: the first declaration wins -->
+<style>
+  @layer reset, mdst-ui;
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdst-ui@2/dist/modest-ui.min.css" />
+<style>
+  @layer reset {
+    /* your reset */
+  }
+</style>
 ```
+
+The modest-ui docs site and examples do exactly this.
 
 ---
 
