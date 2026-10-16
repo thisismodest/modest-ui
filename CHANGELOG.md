@@ -61,6 +61,12 @@ elements, so they keep their names.
   whatever its specificity or load order. Each file layers itself, so this
   applies to the bundle, `index.css`, and cherry-picked files alike. Blanket
   resets in your CSS also win; put them in a layer before `mdst-ui` if needed.
+- **Reset is scoped to `.mdst-ui`.** It used to restyle the whole page
+  (`* { margin: 0 }`, block images, `body` line-height). Now it only applies
+  inside `.mdst-ui`, and the `.mdst-ui` element itself keeps its own margin.
+  Elements with an `mdst-` class get `border-box` sizing wherever they are,
+  so class-only components still size correctly outside `.mdst-ui`. If your
+  page relied on the old global reset, add your own.
 - **Classless selectors** now only count the element (attribute selectors and
   pseudo-classes moved into `:where()`), so any modest-ui class beats any
   classless default. This fixes radio cards inside `.mdst-ui`, a filled square

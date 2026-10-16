@@ -26,6 +26,31 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
+      /* Page reset. These examples use modest-ui by class, outside .mdst-ui,
+         so the page brings its own reset. */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      * {
+        margin: 0;
+      }
+
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      input,
+      button,
+      textarea,
+      select {
+        font: inherit;
+      }
+
       body {
         font-family: var(--mdst-font-sans);
         line-height: var(--mdst-line-height);

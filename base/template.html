@@ -44,10 +44,32 @@
     <link rel="stylesheet" href="/base/preview.css" />
     <!-- HEAD_EXTRA -->
     <style>
+      /* Site reset. The docs shell isn't inside .mdst-ui, so it brings its own
+         (modest-ui's reset only applies inside .mdst-ui). */
       *,
       *::before,
       *::after {
         box-sizing: border-box;
+      }
+
+      * {
+        margin: 0;
+      }
+
+      img,
+      picture,
+      video,
+      canvas,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      input,
+      button,
+      textarea,
+      select {
+        font: inherit;
       }
 
       html,
@@ -59,6 +81,8 @@
       }
 
       body {
+        line-height: var(--mdst-line-height);
+        -webkit-font-smoothing: antialiased;
         font-family: var(--mdst-font-sans);
         background: var(--mdst-color-bg);
         color: var(--mdst-color-fg);

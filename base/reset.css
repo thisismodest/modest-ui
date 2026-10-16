@@ -1,50 +1,46 @@
 @layer mdst-ui.base {
   /*
    * Minimal reset
-   * Only the essentials — no opinions
+   * Scoped to .mdst-ui, so nothing outside it is touched. The .mdst-ui
+   * element itself keeps its own margin (e.g. <body>'s).
    */
 
-  *,
-  *::before,
-  *::after {
+  :where(.mdst-ui),
+  :where(.mdst-ui) *,
+  :where(.mdst-ui) *::before,
+  :where(.mdst-ui) *::after {
     box-sizing: border-box;
   }
 
-  * {
+  :where(.mdst-ui) * {
     margin: 0;
   }
 
-  body {
-    line-height: var(--mdst-line-height, 1.5);
+  :where(.mdst-ui) {
     -webkit-font-smoothing: antialiased;
   }
 
-  img,
-  picture,
-  video,
-  canvas,
-  svg {
+  :where(.mdst-ui) :where(img, picture, video, canvas, svg) {
     display: block;
     max-width: 100%;
   }
 
-  a,
-  input,
-  button,
-  textarea,
-  select {
+  :where(.mdst-ui) :where(a, input, button, textarea, select) {
     font: inherit;
     color: inherit;
   }
 
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  :where(.mdst-ui) :where(p, h1, h2, h3, h4, h5, h6) {
     overflow-wrap: break-word;
+  }
+
+  /* Class-only use outside .mdst-ui: components still size predictably
+     (inputs are width: 100% plus padding, for example) without touching
+     anything else on the page. */
+  [class*="mdst-"],
+  [class*="mdst-"]::before,
+  [class*="mdst-"]::after {
+    box-sizing: border-box;
   }
 
   /* Form controls and code blocks used by class (even outside .mdst-ui) drop
