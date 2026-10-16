@@ -60,12 +60,12 @@
     --mdst-flow-space: 1em;
 
     /* Focus: one keyboard focus ring for every component (:focus-visible).
-       By default it's 2px solid in --mdst-color-focus, overlapping the
-       component's 1px border so it reads as a heavier edge. Set --mdst-focus-ring
+       By default it's 2px solid in --mdst-color-focus, drawn flush against
+       the component's edge (--mdst-focus-offset). Set --mdst-focus-ring
        to replace it everywhere, e.g. 3px dashed hotpink, or none if you draw
        your own:
          --mdst-focus-ring: 2px solid var(--mdst-color-focus); */
-    --mdst-focus-offset: -1px;
+    --mdst-focus-offset: 0px;
 
     /* Border */
     --mdst-radius: 0;

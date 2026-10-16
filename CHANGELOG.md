@@ -118,8 +118,9 @@ elements, so they keep their names.
   speed. Only values you change are added to the generated CSS, and the
   preview pins a hovered and a focused button so those settings are visible.
 - Focus ring: every component now uses the same keyboard focus ring
-  (`:focus-visible`), 2px solid in `--mdst-color-focus`, overlapping the
-  component's border by 1px (`--mdst-focus-offset: -1px`). Set `--mdst-focus-ring` to replace it everywhere
+  (`:focus-visible`), 2px solid in `--mdst-color-focus`, drawn flush against
+  the component's edge (`--mdst-focus-offset: 0px`). Set `--mdst-focus-ring` to
+  replace it everywhere
   (any outline value, or `none`). Text inputs, textareas, selects, the file
   input, and OTP digits draw it flush to their border; tabs and `summary` draw
   it inside. Previously focus styles varied between components, and focused
