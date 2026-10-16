@@ -1,6 +1,6 @@
 export default {
   title: "Range",
-  className: ".mdst-range",
+  className: ".mdst-input",
   group: "Input",
   description: "Range slider styled to match the rest of the library.",
 };

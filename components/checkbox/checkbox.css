@@ -1,12 +1,16 @@
 @layer mdst-ui.components {
-  /* Checkbox */
+  /* Checkbox
+     A checkbox with role="switch" is drawn as a toggle (below) instead. */
 
-  :where(.mdst-ui) input:where([type="checkbox"]),
-  .mdst-checkbox {
+  :where(.mdst-ui) input:where([type="checkbox"]:not([role="switch"])),
+  .mdst-input:where([type="checkbox"]:not([role="switch"])) {
     -webkit-appearance: none;
     appearance: none;
     /* Border included in the size, so a user's border-box reset changes nothing */
     box-sizing: border-box;
+    /* --mdst-border-width is in em, so match the surrounding text even
+       outside .mdst-ui, where inputs default to a smaller font */
+    font-size: inherit;
     flex-shrink: 0;
     width: calc(0.875rem + 2 * var(--mdst-border-width));
     height: calc(0.875rem + 2 * var(--mdst-border-width));
@@ -18,8 +22,8 @@
     transition: border-color var(--mdst-transition);
   }
 
-  :where(.mdst-ui) input:where([type="checkbox"]:checked)::after,
-  .mdst-checkbox:checked::after {
+  :where(.mdst-ui) input:where([type="checkbox"]:not([role="switch"]):checked)::after,
+  .mdst-input:where([type="checkbox"]:not([role="switch"]):checked)::after {
     content: "";
     position: absolute;
     inset: 2px;
@@ -27,15 +31,15 @@
   }
 
   :where(.mdst-ui) input:where([type="checkbox"]:disabled),
-  .mdst-checkbox:disabled {
+  .mdst-input:where([type="checkbox"]:disabled) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
-  /* Checkbox with label wrapper */
+  /* A label wrapping a checkbox or toggle */
 
   :where(.mdst-ui) label:where(:has(> input[type="checkbox"])),
-  .mdst-checkbox-label {
+  label:where(:has(> .mdst-input[type="checkbox"])) {
     display: inline-flex;
     align-items: center;
     gap: var(--mdst-space-sm);
@@ -46,26 +50,29 @@
   }
 
   :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)),
-  .mdst-checkbox-label:has(.mdst-checkbox:disabled) {
+  label:where(:has(> .mdst-input[type="checkbox"]:disabled)) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
   /* The label already fades, so the control inside doesn't fade twice */
   :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)) > input,
-  label:has(> .mdst-toggle:disabled) > .mdst-toggle,
-  .mdst-checkbox-label:has(.mdst-checkbox:disabled) .mdst-checkbox {
+  label:where(:has(> .mdst-input[type="checkbox"]:disabled)) > .mdst-input {
     opacity: 1;
   }
 
-  /* Toggle variant */
+  /* Toggle: a checkbox with role="switch", which is also what makes screen
+     readers announce it as a switch */
 
-  :where(.mdst-ui) input.mdst-toggle:where([type="checkbox"]),
-  .mdst-toggle {
+  :where(.mdst-ui) input:where([type="checkbox"][role="switch"]),
+  .mdst-input:where([type="checkbox"][role="switch"]) {
     -webkit-appearance: none;
     appearance: none;
     /* Border included in the size, so a user's border-box reset changes nothing */
     box-sizing: border-box;
+    /* --mdst-border-width is in em, so match the surrounding text even
+       outside .mdst-ui, where inputs default to a smaller font */
+    font-size: inherit;
     flex-shrink: 0;
     width: calc(2.125rem + 2 * var(--mdst-border-width));
     height: calc(1.125rem + 2 * var(--mdst-border-width));
@@ -99,11 +106,6 @@
         background var(--mdst-transition);
     }
 
-    /* Suppress the classless checkbox tick when used on a bare element */
-    &::after {
-      content: none;
-    }
-
     &:checked {
       background: var(--mdst-color-fg);
       border-color: var(--mdst-color-fg);
@@ -119,28 +121,29 @@
       cursor: not-allowed;
     }
 
-    /* Toggle rounded variant */
+  }
 
-    &.mdst-toggle--pill {
-      border-radius: 9999px;
+  /* Pill variant */
 
-      &::before {
-        border-radius: 50%;
-      }
+  .mdst-input--pill:where([type="checkbox"][role="switch"]) {
+    border-radius: 9999px;
+
+    &::before {
+      border-radius: 50%;
     }
   }
 
   /* Windows High Contrast (forced colours) removes fills, so the parts that
      show state are redrawn in the user's system colours. */
   @media (forced-colors: active) {
-    :where(.mdst-ui) input:where([type="checkbox"]:checked)::after,
-    .mdst-checkbox:checked::after {
+    :where(.mdst-ui) input:where([type="checkbox"]:not([role="switch"]):checked)::after,
+    .mdst-input:where([type="checkbox"]:not([role="switch"]):checked)::after {
       forced-color-adjust: none;
       background: CanvasText;
     }
 
-    :where(.mdst-ui) input.mdst-toggle:where([type="checkbox"]),
-    .mdst-toggle {
+    :where(.mdst-ui) input:where([type="checkbox"][role="switch"]),
+    .mdst-input:where([type="checkbox"][role="switch"]) {
       forced-color-adjust: none;
       background: Canvas;
       border-color: CanvasText;

@@ -4,6 +4,8 @@
  * Used by build-site.js.
  */
 
+const escapeHtml = (str) => String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
 /**
  * Group and sort components into a mixed list of ungrouped links and grouped submenus.
  * Components with a `group` property are collected under that group name.
@@ -56,15 +58,15 @@ export function renderComponentLinks(components, options = {}) {
       const c = item.component;
       const active = c.slug === activeSlug ? " active" : "";
       const extra = linkAttrs(c);
-      lines.push(`${indent}<a href="${href(c)}" class="sidebar-link${active}"${extra}>${c.title}</a>`);
+      lines.push(`${indent}<a href="${href(c)}" class="sidebar-link${active}"${extra}>${escapeHtml(c.title)}</a>`);
     } else {
       // Open by default so the grouped pages are as easy to find as the rest
       lines.push(`${indent}<details class="sidebar-group" open>`);
-      lines.push(`${indent}  <summary class="sidebar-group-title">${item.groupName}</summary>`);
+      lines.push(`${indent}  <summary class="sidebar-group-title">${escapeHtml(item.groupName)}</summary>`);
       for (const c of item.children) {
         const active = c.slug === activeSlug ? " active" : "";
         const extra = linkAttrs(c);
-        lines.push(`${indent}  <a href="${href(c)}" class="sidebar-link sidebar-link--grouped${active}"${extra}>${c.title}</a>`);
+        lines.push(`${indent}  <a href="${href(c)}" class="sidebar-link sidebar-link--grouped${active}"${extra}>${escapeHtml(c.title)}</a>`);
       }
       lines.push(`${indent}</details>`);
     }

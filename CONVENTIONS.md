@@ -108,7 +108,7 @@ Inside a classless selector, only the element type may add specificity. Attribut
 /* Right — (0, 0, 1), so any class beats it */
 :where(.mdst-ui) input:where([type="checkbox"]:checked)::after { … }
 
-/* Wrong — (0, 2, 1), beats single classes like .mdst-toggle */
+/* Wrong — (0, 2, 1), beats single classes like .mdst-input--pill */
 :where(.mdst-ui) input[type="checkbox"]:checked::after { … }
 ```
 
@@ -143,15 +143,18 @@ Variants follow the same idea: they set the component's public variables (`--mds
 
 Components that map 1:1 to a native HTML element:
 
+Every `<input>` type shares one class, `.mdst-input`, and each component styles its own type with `.mdst-input:where([type="…"])`. The text field rule skips the types that have their own component, so no two rules compete.
+
 | Component  | Selector                                                                                   |
 | ---------- | ------------------------------------------------------------------------------------------ |
 | Button     | `button`, `input[type="submit"]`, `input[type="reset"]`, `input[type="button"]`            |
-| Input      | `input:not([type="checkbox"], [type="radio"], ...)`, `textarea`                            |
-| Checkbox   | `input[type="checkbox"]`                                                                   |
+| Text       | `input:not([type="checkbox"], [type="radio"], ...)`, `textarea`                            |
+| Checkbox   | `input[type="checkbox"]`, and `[role="switch"]` for the toggle                            |
 | Radio      | `input[type="radio"]`                                                                      |
-| Dropdown   | `select`                                                                                   |
-| File Input | `input[type="file"]`                                                                       |
 | Range      | `input[type="range"]`                                                                      |
+| File       | `input[type="file"]`                                                                       |
+| Color      | `input[type="color"]`                                                                      |
+| Dropdown   | `select`                                                                                   |
 | Details    | `details`                                                                                  |
 | Dialog     | `dialog`                                                                                   |
 | Table      | `table`, `th`, `td`                                                                        |
@@ -258,8 +261,7 @@ Two shapes, depending on whether the component has a classless form:
 
 Exceptions for separate top-level blocks:
 
-- **Wrapper/sibling elements** that are not DOM children of the root (e.g. `.mdst-checkbox-label` wraps the checkbox, `.mdst-radio-label` wraps the radio)
-- **Replacement elements** that go on a different element entirely (e.g. `.mdst-toggle` replaces `.mdst-checkbox` on the input)
+- **Wrapper elements** that are not DOM children of the root (e.g. the `label` that wraps a checkbox, matched with `label:has(> .mdst-input[type="checkbox"])`)
 - **Unrelated element collections** (e.g. typography classes like `.mdst-h1`, `.mdst-p`, `.mdst-a`)
 - **`@media` blocks** remain at the top level with their component selector nested inside
 
@@ -422,8 +424,8 @@ End each preview with a usage section:
 
 ```javascript
 export default {
-  title: "Toggle",
-  className: ".mdst-toggle", // shown in the docs header
+  title: "Stepper",
+  className: ".mdst-stepper", // shown in the docs header
   description: "One sentence on what it is and its main variants.",
   group: "Input" // optional: nests it under a sidebar group
 };

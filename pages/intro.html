@@ -672,9 +672,9 @@
               <div class="home-split"><span>Onboarding</span><span>3 of 4</span></div>
               <progress class="mdst-progress" value="75" max="100">75%</progress>
             </div>
-            <label class="mdst-checkbox-label home-setting">
+            <label class="home-setting">
               Weekly summary
-              <input type="checkbox" role="switch" class="mdst-toggle" checked />
+              <input type="checkbox" role="switch" class="mdst-input" checked />
             </label>
             <div class="home-row">
               <button type="button" class="mdst-button mdst-button--solid mdst-button--sm">Message</button>
@@ -718,8 +718,8 @@
                     <input type="checkbox" aria-label="Toggle password visibility" />
                   </div>
                 </div>
-                <label class="mdst-checkbox-label">
-                  <input type="checkbox" class="mdst-checkbox" checked />
+                <label>
+                  <input type="checkbox" class="mdst-input" checked />
                   Keep me signed in
                 </label>
                 <button type="submit" class="mdst-button mdst-button--solid">Sign in</button>
@@ -790,17 +790,17 @@
                 <h3>Notifications</h3>
               </div>
               <div class="mdst-card__body home-stack">
-                <label class="mdst-checkbox-label home-setting">
+                <label class="home-setting">
                   Product updates
-                  <input type="checkbox" role="switch" class="mdst-toggle" checked />
+                  <input type="checkbox" role="switch" class="mdst-input" checked />
                 </label>
-                <label class="mdst-checkbox-label home-setting">
+                <label class="home-setting">
                   Mentions
-                  <input type="checkbox" role="switch" class="mdst-toggle" checked />
+                  <input type="checkbox" role="switch" class="mdst-input" checked />
                 </label>
-                <label class="mdst-checkbox-label home-setting">
+                <label class="home-setting">
                   Marketing
-                  <input type="checkbox" role="switch" class="mdst-toggle" />
+                  <input type="checkbox" role="switch" class="mdst-input" />
                 </label>
                 <label class="home-field">
                   Digest frequency
@@ -812,7 +812,7 @@
                 </label>
                 <label class="home-field">
                   Volume
-                  <input type="range" class="mdst-range" min="0" max="100" value="60" />
+                  <input type="range" class="mdst-input" min="0" max="100" value="60" />
                 </label>
               </div>
             </div>
@@ -1063,7 +1063,7 @@
                 <div class="home-field">
                   <span>Ink colour</span>
                   <div class="color-field">
-                    <input type="color" class="mdst-color-picker" value="#4338ca" data-token="--mdst-color-fg" aria-label="Ink colour" />
+                    <input type="color" class="mdst-input" value="#4338ca" data-token="--mdst-color-fg" aria-label="Ink colour" />
                     <input type="text" class="mdst-input color-hex" value="#4338ca" aria-label="Ink colour hex" readonly />
                   </div>
                 </div>
@@ -1706,7 +1706,7 @@ import "mdst-ui";</pre>
               "      <label>I'm a",
               "        <select><option>Designer</option><option>Engineer</option><option>Founder</option></select>",
               "      </label>",
-              '      <label class="mdst-checkbox-label"><input type="checkbox" /> Send me product updates</label>',
+              '      <label><input type="checkbox" /> Send me product updates</label>',
               '      <button class="mdst-button--solid">Join waitlist</button>',
               "    </form>",
               "  </div>",

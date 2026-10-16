@@ -1,6 +1,6 @@
 export default {
   title: "File",
-  className: ".mdst-file-input",
+  className: ".mdst-input",
   group: "Input",
-  description: "Styled native file input with drag-and-drop support. No JavaScript required.",
+  description: "Native file input with a styled \"Choose file\" button. No JavaScript required.",
 };

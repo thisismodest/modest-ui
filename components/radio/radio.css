@@ -2,7 +2,7 @@
   /* Radio */
 
   :where(.mdst-ui) input:where([type="radio"]),
-  .mdst-radio {
+  .mdst-input:where([type="radio"]) {
     -webkit-appearance: none;
     appearance: none;
     flex-shrink: 0;
@@ -12,13 +12,15 @@
     border: var(--mdst-border-width) solid var(--mdst-color-border);
     /* Border included in the size, so a user's border-box reset changes nothing */
     box-sizing: border-box;
+    /* --mdst-border-width is in em, so match the surrounding text */
+    font-size: inherit;
     border-radius: 50%;
     cursor: pointer;
     position: relative;
   }
 
   :where(.mdst-ui) input:where([type="radio"]:checked)::after,
-  .mdst-radio:checked::after {
+  .mdst-input:where([type="radio"]:checked)::after {
     content: "";
     position: absolute;
     inset: 3px;
@@ -27,15 +29,15 @@
   }
 
   :where(.mdst-ui) input:where([type="radio"]:disabled),
-  .mdst-radio:disabled {
+  .mdst-input:where([type="radio"]:disabled) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
-  /* Radio with label wrapper */
+  /* A label wrapping a radio */
 
   :where(.mdst-ui) label:where(:has(> input[type="radio"])),
-  .mdst-radio-label {
+  label:where(:has(> .mdst-input[type="radio"])) {
     display: inline-flex;
     align-items: center;
     gap: var(--mdst-space-sm);
@@ -46,14 +48,14 @@
   }
 
   :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)),
-  .mdst-radio-label:has(.mdst-radio:disabled) {
+  label:where(:has(> .mdst-input[type="radio"]:disabled)) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
   /* The label already fades, so the radio inside doesn't fade twice */
   :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)) > input,
-  .mdst-radio-label:has(.mdst-radio:disabled) .mdst-radio {
+  label:where(:has(> .mdst-input[type="radio"]:disabled)) > .mdst-input {
     opacity: 1;
   }
 
@@ -83,7 +85,7 @@
     overflow: hidden;
 
     /* Visually hide the native radio input while keeping it keyboard-accessible */
-    & .mdst-radio {
+    & input[type="radio"] {
       position: absolute;
       opacity: 0;
       pointer-events: none;
@@ -93,18 +95,18 @@
       background: var(--mdst-color-subtle);
     }
 
-    &:has(.mdst-radio:checked) {
+    &:has(input[type="radio"]:checked) {
       border-color: var(--mdst-color-fg);
       outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-fg);
       outline-offset: calc(-1 * var(--mdst-border-width));
     }
 
-    &:has(.mdst-radio:focus-visible) {
+    &:has(input[type="radio"]:focus-visible) {
       outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
       outline-offset: var(--mdst-focus-offset);
     }
 
-    &:has(.mdst-radio:disabled) {
+    &:has(input[type="radio"]:disabled) {
       opacity: var(--mdst-disabled-opacity);
       cursor: not-allowed;
 
@@ -126,7 +128,7 @@
      show state are redrawn in the user's system colours. */
   @media (forced-colors: active) {
     :where(.mdst-ui) input:where([type="radio"]:checked)::after,
-    .mdst-radio:checked::after {
+    .mdst-input:where([type="radio"]:checked)::after {
       forced-color-adjust: none;
       background: CanvasText;
     }

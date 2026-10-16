@@ -100,21 +100,26 @@ function formatTokens(groups) {
 
 /**
  * Every class a component's CSS defines, except ones that belong to another
- * component (e.g. .mdst-code referenced inside pre.css). Ownership goes to the
- * longest matching component slug, so .mdst-otp-input belongs to otp-input,
- * not input. Classes with no matching slug (.mdst-toggle in checkbox.css,
- * .mdst-fieldset in form.css) belong to the file that defines them.
+ * component (e.g. .mdst-code referenced inside pre.css). A class belongs to
+ * a component when its block is that component's className (.mdst-input and
+ * .mdst-input--pill in checkbox.css), or failing that to the longest matching
+ * slug, so .mdst-otp-input belongs to otp-input, not input. Classes with no
+ * matching slug (.mdst-fieldset in form.css) belong to the file that defines
+ * them.
  */
-function extractClasses(css, slug, allSlugs) {
+function extractClasses(css, slug, className, allSlugs) {
   const owner = (cls) => {
     const matches = allSlugs.filter((s) => cls === `mdst-${s}` || cls.startsWith(`mdst-${s}-`) || cls.startsWith(`mdst-${s}_`));
     return matches.sort((a, b) => b.length - a.length)[0];
   };
+  const block = (cls) => cls.split(/__|--/)[0];
   const classes = new Set();
   for (const [, cls] of css.matchAll(/\.(mdst-[\w-]+)/g)) {
     if (cls === "mdst-ui") continue;
-    const own = owner(cls);
-    if (own && own !== slug) continue;
+    if (`.${block(cls)}` !== className) {
+      const own = owner(cls);
+      if (own && own !== slug) continue;
+    }
     classes.add(`.${cls}`);
   }
   return [...classes].sort();
@@ -212,11 +217,11 @@ behaviour you own (switching tabs, showing a toast, revealing a password).
    \`aria-selected\`, \`aria-disabled\`). Never use data attributes for colour or size.
 5. Theme with \`--mdst-*\` tokens. Don't restyle components to change colours.
 6. Put your own layout CSS outside any cascade layer; it always wins.
-7. Form controls take one class on the \`<input>\` itself, by type:
-   \`.mdst-input\` (text, email, number, date…), \`.mdst-file-input\`,
-   \`.mdst-color-picker\`, \`.mdst-checkbox\`, \`.mdst-toggle\`, \`.mdst-radio\`,
-   \`.mdst-range\`. Only password and OTP have a wrapper, and their inputs
-   inside it take no element class.
+7. Every \`<input>\` takes the same class, \`.mdst-input\`, and is styled by its
+   \`type\`: text, email, number, date, checkbox, radio, range, file, color.
+   A checkbox with \`role="switch"\` is drawn as a toggle. Labels need no
+   class. Only password and OTP have a wrapper (\`.mdst-password-input\`,
+   \`.mdst-otp-input\`), and the inputs inside take no element class.
 
 ## Naming
 
@@ -233,16 +238,15 @@ Shared modifier vocabulary:
 
 ## Classless elements
 
-Styled automatically inside \`.mdst-ui\`: button, input (text, email, etc.),
-textarea, select, input[type="checkbox"], input[type="radio"],
-input[type="range"], input[type="file"], input[type="color"], form, fieldset, legend, label,
-details, dialog, table, progress, meter, code, pre, h1–h6, p, a, strong, em,
-small, mark, kbd, abbr[title], del, ins, s, cite, samp, var, sub, sup,
-blockquote, hr, ul, ol, li.
+Styled automatically inside \`.mdst-ui\`: button, input (every type, as with
+\`.mdst-input\`), input[type="checkbox"][role="switch"] (a toggle), textarea,
+select, form, fieldset, legend, label, details, dialog, table, progress,
+meter, code, pre, h1–h6, p, a, strong, em, small, mark, kbd, abbr[title], del,
+ins, s, cite, samp, var, sub, sup, blockquote, hr, ul, ol, li.
 
 Class-only components: avatar, badge, banner, breadcrumbs, card, drawer,
-otp-input, password-input, popover, skeleton, spinner, stepper, tabs, tag,
-toast, toggle (.mdst-toggle), toolbar, tooltip, utilities.
+otp-input, password-input, popover, radio cards, skeleton, spinner, stepper,
+tabs, tag, toast, toolbar, tooltip, utilities.
 
 ## Behaviour to know
 
@@ -302,7 +306,7 @@ async function main() {
   for (const component of components) {
     const css = await readFile(join(COMPONENTS_DIR, component.slug, `${component.slug}.css`), "utf-8");
     const preview = await readFile(join(COMPONENTS_DIR, component.slug, "preview.html"), "utf-8");
-    const classes = extractClasses(css, component.slug, slugs);
+    const classes = extractClasses(css, component.slug, component.className, slugs);
     data.push({ component, classes, usage: extractUsage(preview) });
     console.log(`  ✓ ${component.title} (${classes.length} classes)`);
   }

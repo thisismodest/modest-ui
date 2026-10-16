@@ -19,7 +19,7 @@
         gap: var(--mdst-space-sm);
       }
 
-      .preview-color-row .mdst-input {
+      .preview-color-row input[type="text"] {
         width: 7rem;
         font-family: var(--mdst-font-mono);
       }
@@ -38,20 +38,20 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name">.mdst-color-picker</span>
+              <span class="class-name">.mdst-input</span>
             </td>
             <td>
-              <input type="color" class="mdst-color-picker" value="#000000" aria-label="Color picker example" />
+              <input type="color" class="mdst-input" value="#000000" aria-label="Color picker example" />
             </td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-color-picker</span></span><br />
-              <span class="class-name"><span class="dim">.mdst-input</span></span>
+              <span class="class-name">.mdst-input</span> <span class="class-name">type="color"</span><br />
+              <span class="class-name">.mdst-input</span> <span class="class-name">type="text"</span>
             </td>
             <td>
               <div class="preview-color-row">
-                <input type="color" class="mdst-color-picker" value="#4A3F1F" aria-label="Color picker example" />
+                <input type="color" class="mdst-input" value="#4A3F1F" aria-label="Color picker example" />
                 <input type="text" class="mdst-input" value="#4A3F1F" aria-label="Hex value" />
               </div>
             </td>
@@ -72,10 +72,10 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-color-picker</span>--square</span>
+              <span class="class-name"><span class="dim">.mdst-input</span>--square</span>
             </td>
             <td>
-              <input type="color" class="mdst-color-picker mdst-color-picker--square" value="#F4E3C1" aria-label="Color picker example" />
+              <input type="color" class="mdst-input mdst-input--square" value="#F4E3C1" aria-label="Color picker example" />
             </td>
           </tr>
         </tbody>
@@ -95,7 +95,7 @@
           <tr>
             <td><span class="class-name">disabled</span></td>
             <td>
-              <input type="color" class="mdst-color-picker" value="#666666" disabled aria-label="Color picker example" />
+              <input type="color" class="mdst-input" value="#666666" disabled aria-label="Color picker example" />
             </td>
           </tr>
         </tbody>
@@ -110,14 +110,14 @@
 
     <div class="code-section">
       <div class="code-section-header">Usage</div>
-      <pre class="mdst-pre"><code>&lt;input type="color" class="mdst-color-picker" value="#000000" /&gt;
+      <pre class="mdst-pre"><code>&lt;input type="color" class="mdst-input" value="#000000" /&gt;
 
 &lt;!-- Square, following --mdst-radius --&gt;
-&lt;input type="color" class="mdst-color-picker mdst-color-picker--square" value="#F4E3C1" /&gt;
+&lt;input type="color" class="mdst-input mdst-input--square" value="#F4E3C1" /&gt;
 
 &lt;!-- With the hex value beside it --&gt;
 &lt;div style="display: flex; gap: 0.5rem; align-items: center"&gt;
-  &lt;input type="color" class="mdst-color-picker" value="#4A3F1F" /&gt;
+  &lt;input type="color" class="mdst-input" value="#4A3F1F" /&gt;
   &lt;input type="text" class="mdst-input" value="#4A3F1F" style="width: 7rem" /&gt;
 &lt;/div&gt;</code></pre>
     </div>

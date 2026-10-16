@@ -81,9 +81,6 @@
      spacing in the components layer still applies. */
   .mdst-input,
   .mdst-dropdown,
-  .mdst-checkbox,
-  .mdst-toggle,
-  .mdst-radio,
   .mdst-pre {
     margin: 0;
   }

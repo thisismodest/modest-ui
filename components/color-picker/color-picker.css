@@ -1,17 +1,19 @@
 @layer mdst-ui.components {
   /* Color Picker
      Classless (a bare input[type="color"] inside .mdst-ui) and class-based
-     (.mdst-color-picker on the input) share every rule. To show the hex value
-     next to it, pair it with a .mdst-input. */
+     (.mdst-input on the input) share every rule. To show the hex value next
+     to it, put a text .mdst-input beside it. */
 
   :where(.mdst-ui) input:where([type="color"]),
-  .mdst-color-picker {
+  .mdst-input:where([type="color"]) {
     -webkit-appearance: none;
     appearance: none;
     display: inline-block;
     width: var(--mdst-space-8);
     height: var(--mdst-space-8);
     padding: 0;
+    /* --mdst-border-width is in em, so match the surrounding text */
+    font-size: inherit;
     vertical-align: middle;
     background: none;
     border: var(--mdst-border-width) solid var(--mdst-color-border);
@@ -21,12 +23,12 @@
   }
 
   :where(.mdst-ui) input:where([type="color"]:focus-visible),
-  .mdst-color-picker:focus-visible {
+  .mdst-input:where([type="color"]:focus-visible) {
     outline-offset: 0;
   }
 
   :where(.mdst-ui) input:where([type="color"]:disabled),
-  .mdst-color-picker:disabled {
+  .mdst-input:where([type="color"]:disabled) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
@@ -34,12 +36,12 @@
   /* Webkit (Chrome, Safari, Edge) */
 
   :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch-wrapper,
-  .mdst-color-picker::-webkit-color-swatch-wrapper {
+  .mdst-input:where([type="color"])::-webkit-color-swatch-wrapper {
     padding: 0;
   }
 
   :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch,
-  .mdst-color-picker::-webkit-color-swatch {
+  .mdst-input:where([type="color"])::-webkit-color-swatch {
     border: none;
     border-radius: var(--_radius, 50%);
   }
@@ -47,14 +49,14 @@
   /* Firefox */
 
   :where(.mdst-ui) input:where([type="color"])::-moz-color-swatch,
-  .mdst-color-picker::-moz-color-swatch {
+  .mdst-input:where([type="color"])::-moz-color-swatch {
     border: none;
     border-radius: var(--_radius, 50%);
   }
 
   /* Square variant: follows the theme's radius */
 
-  .mdst-color-picker--square {
+  .mdst-input--square:where([type="color"]) {
     --_radius: var(--mdst-radius);
   }
 }

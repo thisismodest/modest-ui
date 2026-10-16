@@ -35,23 +35,28 @@ the same modifier name in every component.
 | `.mdst-otp-input-digit` | a plain `<input>` inside `.mdst-otp-input` |
 | `.mdst-otp-input-separator` | `.mdst-otp-input__separator` |
 | `.mdst-password-input__field`, `__toggle` | a `.mdst-input` and a plain checkbox inside `.mdst-password-input` |
-| `<div class="mdst-file-input">` around `.mdst-file-input__field` | `.mdst-file-input` on the `<input type="file">` itself (variants too) |
-| `<div class="mdst-color-picker">` around `.mdst-color-picker__input` | `.mdst-color-picker` on the `<input type="color">` itself (`--square` too) |
-| `.mdst-color-picker__text` | removed: put a `.mdst-input` next to the swatch |
+| `.mdst-checkbox`, `.mdst-radio`, `.mdst-range` | `.mdst-input` (styled by `type`) |
+| `<div class="mdst-file-input">` around `.mdst-file-input__field` | `.mdst-input` on the `<input type="file">` |
+| `<div class="mdst-color-picker">` around `.mdst-color-picker__input` | `.mdst-input` on the `<input type="color">` |
+| `.mdst-color-picker__text` | removed: put a text `.mdst-input` next to the swatch |
+| `.mdst-checkbox-label`, `.mdst-radio-label` | removed: a plain `<label>` around the input |
+| `.mdst-file-input--inverted`, `--borderless` | `.mdst-input--solid`, `--borderless` |
+| `.mdst-color-picker--square` | `.mdst-input--square` |
 | `--ghost` (button, dropdown, tag) | `--borderless` |
-| `--inverted` (button, file input) | `--solid` |
+| `--inverted` (button) | `--solid` |
 | `--compact` (card, details, pre, table, tabs, stepper, breadcrumbs) | `--sm` |
 | `--error` (badge, tag, progress, OTP input) | `--danger` |
 | `data-variant="success\|error\|warning\|info"` (banner, toast) | `.mdst-banner--success`, `--danger`, `--warning`, `--info` (same for toast) |
-| `.mdst-checkbox--toggle`, `.mdst-checkbox--toggle-rounded` | `.mdst-toggle`, `.mdst-toggle--pill` |
+| `.mdst-checkbox--toggle`, `.mdst-checkbox--toggle-rounded` | `role="switch"` on the checkbox, and `.mdst-input--pill` |
 | `--mdst-color-error` | `--mdst-color-danger` |
 | `.mdst-tooltip--left`, `.mdst-tooltip--right` | `.mdst-tooltip--start`, `.mdst-tooltip--end` |
 | `.mdst-drawer--left` | `.mdst-drawer--start` |
 | `.mdst-badge--top-right` | `.mdst-badge--top-end` |
 
-Each input type takes one class on the `<input>` itself: `.mdst-input`,
-`.mdst-file-input`, `.mdst-color-picker`, `.mdst-checkbox`, `.mdst-radio`, and
-`.mdst-range`. Wrappers are only kept where they do layout (password, OTP).
+Every `<input>` takes one class, `.mdst-input`, and is styled by its `type`,
+the same way the classless styles work. A checkbox with `role="switch"` is
+drawn as a toggle, which is also what makes screen readers announce it as a
+switch. Wrappers are only kept where they do layout (password, OTP).
 
 Data attributes are now only for runtime state (`data-state`). Unchanged
 blocks with hyphenated names (`.mdst-toast-group`, `.mdst-avatar-group`,
@@ -127,6 +132,9 @@ elements, so they keep their names.
 - `checkbox`, `toggle`, `radio`: sized with `border-box` and the border
   included, so a project-wide `box-sizing: border-box` reset no longer
   shrinks them or pushes the toggle's thumb over its border.
+- Checkboxes, radios, toggles, and colour swatches used by class outside
+  `.mdst-ui` are the same size as inside it. Their border width is in `em`,
+  and they were picking up the browser's smaller input font.
 - Disabled checkboxes and radios inside a label fade once, not twice (the
   label and the control both faded, leaving 25%).
 - `file-input`: the class-based field now looks the same as the classless
@@ -174,9 +182,11 @@ elements, so they keep their names.
 - A bare `<input type="color">` inside `.mdst-ui` is styled as a swatch, like
   the other input types. Date and time inputs match the height of the other
   fields.
-- Docs: checkbox, colour, file, OTP, password, radio, range, and text are
-  grouped under Input in the sidebar, and the Text page shows email, number,
-  search, date, and time fields.
+- `.mdst-input--borderless` on text fields: no border, same padding, and
+  invalid fields still show red.
+- Docs: checkbox, colour, date and time, file, OTP, password, radio, range,
+  and text are grouped under Input in the sidebar. The new Date & time page
+  covers date, time, datetime-local, month, and week.
 - `package.json` has `unpkg` and `jsdelivr` fields, so the bare CDN URL
   (`cdn.jsdelivr.net/npm/mdst-ui@2`) serves the minified bundle instead of
   `index.css` and its 37 imports.

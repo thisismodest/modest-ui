@@ -44,11 +44,11 @@ behaviour you own (switching tabs, showing a toast, revealing a password).
    `aria-selected`, `aria-disabled`). Never use data attributes for colour or size.
 5. Theme with `--mdst-*` tokens. Don't restyle components to change colours.
 6. Put your own layout CSS outside any cascade layer; it always wins.
-7. Form controls take one class on the `<input>` itself, by type:
-   `.mdst-input` (text, email, number, date…), `.mdst-file-input`,
-   `.mdst-color-picker`, `.mdst-checkbox`, `.mdst-toggle`, `.mdst-radio`,
-   `.mdst-range`. Only password and OTP have a wrapper, and their inputs
-   inside it take no element class.
+7. Every `<input>` takes the same class, `.mdst-input`, and is styled by its
+   `type`: text, email, number, date, checkbox, radio, range, file, color.
+   A checkbox with `role="switch"` is drawn as a toggle. Labels need no
+   class. Only password and OTP have a wrapper (`.mdst-password-input`,
+   `.mdst-otp-input`), and the inputs inside take no element class.
 
 ## Naming
 
@@ -65,16 +65,15 @@ Shared modifier vocabulary:
 
 ## Classless elements
 
-Styled automatically inside `.mdst-ui`: button, input (text, email, etc.),
-textarea, select, input[type="checkbox"], input[type="radio"],
-input[type="range"], input[type="file"], input[type="color"], form, fieldset, legend, label,
-details, dialog, table, progress, meter, code, pre, h1–h6, p, a, strong, em,
-small, mark, kbd, abbr[title], del, ins, s, cite, samp, var, sub, sup,
-blockquote, hr, ul, ol, li.
+Styled automatically inside `.mdst-ui`: button, input (every type, as with
+`.mdst-input`), input[type="checkbox"][role="switch"] (a toggle), textarea,
+select, form, fieldset, legend, label, details, dialog, table, progress,
+meter, code, pre, h1–h6, p, a, strong, em, small, mark, kbd, abbr[title], del,
+ins, s, cite, samp, var, sub, sup, blockquote, hr, ul, ol, li.
 
 Class-only components: avatar, badge, banner, breadcrumbs, card, drawer,
-otp-input, password-input, popover, skeleton, spinner, stepper, tabs, tag,
-toast, toggle (.mdst-toggle), toolbar, tooltip, utilities.
+otp-input, password-input, popover, radio cards, skeleton, spinner, stepper,
+tabs, tag, toast, toolbar, tooltip, utilities.
 
 ## Behaviour to know
 
@@ -535,38 +534,36 @@ Classes:
 
 ---
 
-### Checkbox `.mdst-checkbox`
+### Checkbox `.mdst-input`
 
-Checkbox and toggle switch, with label support, checked, and disabled states.
+Checkbox, and a toggle switch for checkboxes with role="switch". Label support, checked, and disabled states.
 
 Classes:
-- `.mdst-checkbox`
-- `.mdst-checkbox-label`
-- `.mdst-toggle`
-- `.mdst-toggle--pill`
+- `.mdst-input`
+- `.mdst-input--pill`
 
 ```html
 <!-- With label (recommended) -->
-<label class="mdst-checkbox-label">
-  <input type="checkbox" class="mdst-checkbox" />
+<label>
+  <input type="checkbox" class="mdst-input" />
   Label text
 </label>
 
 <!-- Standalone -->
-<input type="checkbox" class="mdst-checkbox" />
+<input type="checkbox" class="mdst-input" />
 
 <!-- States -->
-<input type="checkbox" class="mdst-checkbox" checked />
-<input type="checkbox" class="mdst-checkbox" disabled />
+<input type="checkbox" class="mdst-input" checked />
+<input type="checkbox" class="mdst-input" disabled />
 
 <!-- Toggle -->
-<input type="checkbox" class="mdst-toggle" />
-<input type="checkbox" class="mdst-toggle" checked />
-<input type="checkbox" class="mdst-toggle" disabled />
+<input type="checkbox" class="mdst-input" role="switch" />
+<input type="checkbox" class="mdst-input" role="switch" checked />
+<input type="checkbox" class="mdst-input" role="switch" disabled />
 
 <!-- Toggle rounded -->
-<input type="checkbox" class="mdst-toggle mdst-toggle--pill" />
-<input type="checkbox" class="mdst-toggle mdst-toggle--pill" checked />
+<input type="checkbox" class="mdst-input mdst-input--pill" role="switch" />
+<input type="checkbox" class="mdst-input mdst-input--pill" role="switch" checked />
 ```
 
 ---
@@ -584,25 +581,45 @@ Classes:
 
 ---
 
-### Color `.mdst-color-picker`
+### Color `.mdst-input`
 
 Native colour input drawn as a round or square swatch.
 
 Classes:
-- `.mdst-color-picker`
-- `.mdst-color-picker--square`
+- `.mdst-input`
+- `.mdst-input--square`
 
 ```html
-<input type="color" class="mdst-color-picker" value="#000000" />
+<input type="color" class="mdst-input" value="#000000" />
 
 <!-- Square, following --mdst-radius -->
-<input type="color" class="mdst-color-picker mdst-color-picker--square" value="#F4E3C1" />
+<input type="color" class="mdst-input mdst-input--square" value="#F4E3C1" />
 
 <!-- With the hex value beside it -->
 <div style="display: flex; gap: 0.5rem; align-items: center">
-  <input type="color" class="mdst-color-picker" value="#4A3F1F" />
+  <input type="color" class="mdst-input" value="#4A3F1F" />
   <input type="text" class="mdst-input" value="#4A3F1F" style="width: 7rem" />
 </div>
+```
+
+---
+
+### Date & time `.mdst-input`
+
+Date, time, datetime-local, month, and week inputs, styled to match the text fields. The pickers are the browser's own.
+
+Classes:
+- `.mdst-input`
+
+```html
+<input type="date" class="mdst-input" />
+<input type="time" class="mdst-input" />
+<input type="datetime-local" class="mdst-input" />
+<input type="month" class="mdst-input" />
+<input type="week" class="mdst-input" />
+
+<!-- Limit the range -->
+<input type="date" class="mdst-input" min="2026-10-01" max="2026-10-31" />
 ```
 
 ---
@@ -776,33 +793,33 @@ Classes:
 
 ---
 
-### File `.mdst-file-input`
+### File `.mdst-input`
 
-Styled native file input with drag-and-drop support. No JavaScript required.
+Native file input with a styled "Choose file" button. No JavaScript required.
 
 Classes:
-- `.mdst-file-input`
-- `.mdst-file-input--borderless`
-- `.mdst-file-input--solid`
+- `.mdst-input`
+- `.mdst-input--borderless`
+- `.mdst-input--solid`
 
 ```html
 <!-- Basic file input -->
-<input type="file" class="mdst-file-input" />
+<input type="file" class="mdst-input" />
 
 <!-- Borderless -->
-<input type="file" class="mdst-file-input mdst-file-input--borderless" />
+<input type="file" class="mdst-input mdst-input--borderless" />
 
 <!-- Solid button -->
-<input type="file" class="mdst-file-input mdst-file-input--solid" />
+<input type="file" class="mdst-input mdst-input--solid" />
 
 <!-- Disabled -->
-<input type="file" class="mdst-file-input" disabled />
+<input type="file" class="mdst-input" disabled />
 
 <!-- Accept only images -->
-<input type="file" class="mdst-file-input" accept="image/*,.png,.jpg,.jpeg,.gif,.webp" />
+<input type="file" class="mdst-input" accept="image/*,.png,.jpg,.jpeg,.gif,.webp" />
 
 <!-- Multiple files -->
-<input type="file" class="mdst-file-input" multiple />
+<input type="file" class="mdst-input" multiple />
 ```
 
 ---
@@ -843,18 +860,18 @@ form { --mdst-flow-space: 0.75rem; }
 
 ### Text `.mdst-input`
 
-Text, email, number, search, date, and time inputs, plus textarea. Styled classless or with .mdst-input, with focus and invalid states.
+Text, email, number, search, tel, and url inputs, plus textarea. Styled classless or with .mdst-input, with borderless, focus, and invalid states.
 
 Classes:
 - `.mdst-input`
+- `.mdst-input--borderless`
 
 ```html
 <!-- Text input -->
 <input type="text" class="mdst-input" placeholder="Enter text" />
 
-<!-- Any text-like type: email, number, search, date, time, and so on -->
+<!-- Any text-like type: email, number, search, tel, url -->
 <input type="email" class="mdst-input" placeholder="you@example.com" />
-<input type="date" class="mdst-input" />
 
 <!-- Invalid -->
 <input type="email" class="mdst-input" aria-invalid="true" />
@@ -1078,33 +1095,32 @@ Classes:
 
 ---
 
-### Radio `.mdst-radio`
+### Radio `.mdst-input`
 
 Radio button with label support, group layout, and selectable cards.
 
 Classes:
-- `.mdst-radio`
+- `.mdst-input`
 - `.mdst-radio-card`
 - `.mdst-radio-card-group`
 - `.mdst-radio-group`
-- `.mdst-radio-label`
 - `.mdst-radio-group--horizontal`
 
 ```html
 <!-- With label (recommended) -->
-<label class="mdst-radio-label">
-  <input type="radio" name="group" class="mdst-radio" />
+<label>
+  <input type="radio" name="group" class="mdst-input" />
   Label text
 </label>
 
 <!-- Radio group (vertical) -->
 <div class="mdst-radio-group">
-  <label class="mdst-radio-label">
-    <input type="radio" name="group" class="mdst-radio" checked />
+  <label>
+    <input type="radio" name="group" class="mdst-input" checked />
     Option 1
   </label>
-  <label class="mdst-radio-label">
-    <input type="radio" name="group" class="mdst-radio" />
+  <label>
+    <input type="radio" name="group" class="mdst-input" />
     Option 2
   </label>
 </div>
@@ -1117,11 +1133,11 @@ Classes:
 <!-- Radio card -->
 <div class="mdst-radio-card-group">
   <label class="mdst-radio-card">
-    <input type="radio" name="group" class="mdst-radio" checked />
+    <input type="radio" name="group" class="mdst-input" checked />
     Any content here
   </label>
   <label class="mdst-radio-card">
-    <input type="radio" name="group" class="mdst-radio" />
+    <input type="radio" name="group" class="mdst-input" />
     Any content here
   </label>
 </div>
@@ -1129,22 +1145,22 @@ Classes:
 
 ---
 
-### Range `.mdst-range`
+### Range `.mdst-input`
 
 Range slider styled to match the rest of the library.
 
 Classes:
-- `.mdst-range`
+- `.mdst-input`
 
 ```html
 <!-- Basic range -->
-<input type="range" class="mdst-range" min="0" max="100" value="50" />
+<input type="range" class="mdst-input" min="0" max="100" value="50" />
 
 <!-- With steps -->
-<input type="range" class="mdst-range" min="0" max="100" value="25" step="25" />
+<input type="range" class="mdst-input" min="0" max="100" value="25" step="25" />
 
 <!-- Disabled -->
-<input type="range" class="mdst-range" min="0" max="100" value="75" disabled />
+<input type="range" class="mdst-input" min="0" max="100" value="75" disabled />
 ```
 
 ---
@@ -1636,24 +1652,25 @@ Banner:         .mdst-banner  + __actions  __close  __content  | --border-bottom
 Breadcrumbs:    .mdst-breadcrumbs  | --arrow  --sm
 Button:         .mdst-button  | --borderless  --danger  --lg  --sm  --solid
 Card:           .mdst-card  + __body  __footer  __header  | --borderless  --flush  --interactive  --sm  --borderless  --borderless
-Checkbox:       .mdst-checkbox  .mdst-checkbox-label  .mdst-toggle  | --pill
+Checkbox:       .mdst-input  | --pill
 Code:           .mdst-code
-Color:          .mdst-color-picker  | --square
+Color:          .mdst-input  | --square
+Date & time:    .mdst-input
 Details:        .mdst-details  | --borderless  --section  --sm
 Dialog:         .mdst-dialog  + __body  __close  __footer  __header  __title  | --full  --lg  --sm
 Drawer:         .mdst-drawer  + __body  __close  __footer  __header  | --full  --lg  --sm  --start
 Dropdown:       .mdst-dropdown  | --borderless  --inline  --lg  --sm
-File:           .mdst-file-input  | --borderless  --solid
+File:           .mdst-input  | --borderless  --solid
 Form:           .mdst-fieldset  .mdst-form  .mdst-legend
-Text:           .mdst-input
+Text:           .mdst-input  | --borderless
 Meter:          .mdst-meter  | --lg  --sm
 OTP:            .mdst-otp-input  + __separator  | --danger  --success
 Password:       .mdst-password-input
 Popover:        .mdst-popover  | --anchored  --lg  --sm
 Pre:            .mdst-pre  | --borderless  --scroll  --sm
 Progress:       .mdst-progress  | --danger  --lg  --sm  --success
-Radio:          .mdst-radio  .mdst-radio-card  .mdst-radio-card-group  .mdst-radio-group  .mdst-radio-label  | --horizontal
-Range:          .mdst-range
+Radio:          .mdst-input  .mdst-radio-card  .mdst-radio-card-group  .mdst-radio-group  | --horizontal
+Range:          .mdst-input
 Skeleton:       .mdst-skeleton  | --circle  --heading  --text
 Spinner:        .mdst-spinner  | --lg  --sm
 Stepper:        .mdst-stepper  + __indicator  __label  __step  | --sm  --vertical

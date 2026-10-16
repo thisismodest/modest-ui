@@ -215,9 +215,6 @@
      spacing in the components layer still applies. */
   .mdst-input,
   .mdst-dropdown,
-  .mdst-checkbox,
-  .mdst-toggle,
-  .mdst-radio,
   .mdst-pre {
     margin: 0;
   }
@@ -994,14 +991,18 @@
 }
 
 @layer mdst-ui.components {
-  /* Checkbox */
+  /* Checkbox
+     A checkbox with role="switch" is drawn as a toggle (below) instead. */
 
-  :where(.mdst-ui) input:where([type="checkbox"]),
-  .mdst-checkbox {
+  :where(.mdst-ui) input:where([type="checkbox"]:not([role="switch"])),
+  .mdst-input:where([type="checkbox"]:not([role="switch"])) {
     -webkit-appearance: none;
     appearance: none;
     /* Border included in the size, so a user's border-box reset changes nothing */
     box-sizing: border-box;
+    /* --mdst-border-width is in em, so match the surrounding text even
+       outside .mdst-ui, where inputs default to a smaller font */
+    font-size: inherit;
     flex-shrink: 0;
     width: calc(0.875rem + 2 * var(--mdst-border-width));
     height: calc(0.875rem + 2 * var(--mdst-border-width));
@@ -1013,8 +1014,8 @@
     transition: border-color var(--mdst-transition);
   }
 
-  :where(.mdst-ui) input:where([type="checkbox"]:checked)::after,
-  .mdst-checkbox:checked::after {
+  :where(.mdst-ui) input:where([type="checkbox"]:not([role="switch"]):checked)::after,
+  .mdst-input:where([type="checkbox"]:not([role="switch"]):checked)::after {
     content: "";
     position: absolute;
     inset: 2px;
@@ -1022,15 +1023,15 @@
   }
 
   :where(.mdst-ui) input:where([type="checkbox"]:disabled),
-  .mdst-checkbox:disabled {
+  .mdst-input:where([type="checkbox"]:disabled) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
-  /* Checkbox with label wrapper */
+  /* A label wrapping a checkbox or toggle */
 
   :where(.mdst-ui) label:where(:has(> input[type="checkbox"])),
-  .mdst-checkbox-label {
+  label:where(:has(> .mdst-input[type="checkbox"])) {
     display: inline-flex;
     align-items: center;
     gap: var(--mdst-space-sm);
@@ -1041,26 +1042,29 @@
   }
 
   :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)),
-  .mdst-checkbox-label:has(.mdst-checkbox:disabled) {
+  label:where(:has(> .mdst-input[type="checkbox"]:disabled)) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
   /* The label already fades, so the control inside doesn't fade twice */
   :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)) > input,
-  label:has(> .mdst-toggle:disabled) > .mdst-toggle,
-  .mdst-checkbox-label:has(.mdst-checkbox:disabled) .mdst-checkbox {
+  label:where(:has(> .mdst-input[type="checkbox"]:disabled)) > .mdst-input {
     opacity: 1;
   }
 
-  /* Toggle variant */
+  /* Toggle: a checkbox with role="switch", which is also what makes screen
+     readers announce it as a switch */
 
-  :where(.mdst-ui) input.mdst-toggle:where([type="checkbox"]),
-  .mdst-toggle {
+  :where(.mdst-ui) input:where([type="checkbox"][role="switch"]),
+  .mdst-input:where([type="checkbox"][role="switch"]) {
     -webkit-appearance: none;
     appearance: none;
     /* Border included in the size, so a user's border-box reset changes nothing */
     box-sizing: border-box;
+    /* --mdst-border-width is in em, so match the surrounding text even
+       outside .mdst-ui, where inputs default to a smaller font */
+    font-size: inherit;
     flex-shrink: 0;
     width: calc(2.125rem + 2 * var(--mdst-border-width));
     height: calc(1.125rem + 2 * var(--mdst-border-width));
@@ -1094,11 +1098,6 @@
         background var(--mdst-transition);
     }
 
-    /* Suppress the classless checkbox tick when used on a bare element */
-    &::after {
-      content: none;
-    }
-
     &:checked {
       background: var(--mdst-color-fg);
       border-color: var(--mdst-color-fg);
@@ -1114,28 +1113,29 @@
       cursor: not-allowed;
     }
 
-    /* Toggle rounded variant */
+  }
 
-    &.mdst-toggle--pill {
-      border-radius: 9999px;
+  /* Pill variant */
 
-      &::before {
-        border-radius: 50%;
-      }
+  .mdst-input--pill:where([type="checkbox"][role="switch"]) {
+    border-radius: 9999px;
+
+    &::before {
+      border-radius: 50%;
     }
   }
 
   /* Windows High Contrast (forced colours) removes fills, so the parts that
      show state are redrawn in the user's system colours. */
   @media (forced-colors: active) {
-    :where(.mdst-ui) input:where([type="checkbox"]:checked)::after,
-    .mdst-checkbox:checked::after {
+    :where(.mdst-ui) input:where([type="checkbox"]:not([role="switch"]):checked)::after,
+    .mdst-input:where([type="checkbox"]:not([role="switch"]):checked)::after {
       forced-color-adjust: none;
       background: CanvasText;
     }
 
-    :where(.mdst-ui) input.mdst-toggle:where([type="checkbox"]),
-    .mdst-toggle {
+    :where(.mdst-ui) input:where([type="checkbox"][role="switch"]),
+    .mdst-input:where([type="checkbox"][role="switch"]) {
       forced-color-adjust: none;
       background: Canvas;
       border-color: CanvasText;
@@ -1174,17 +1174,19 @@
 @layer mdst-ui.components {
   /* Color Picker
      Classless (a bare input[type="color"] inside .mdst-ui) and class-based
-     (.mdst-color-picker on the input) share every rule. To show the hex value
-     next to it, pair it with a .mdst-input. */
+     (.mdst-input on the input) share every rule. To show the hex value next
+     to it, put a text .mdst-input beside it. */
 
   :where(.mdst-ui) input:where([type="color"]),
-  .mdst-color-picker {
+  .mdst-input:where([type="color"]) {
     -webkit-appearance: none;
     appearance: none;
     display: inline-block;
     width: var(--mdst-space-8);
     height: var(--mdst-space-8);
     padding: 0;
+    /* --mdst-border-width is in em, so match the surrounding text */
+    font-size: inherit;
     vertical-align: middle;
     background: none;
     border: var(--mdst-border-width) solid var(--mdst-color-border);
@@ -1194,12 +1196,12 @@
   }
 
   :where(.mdst-ui) input:where([type="color"]:focus-visible),
-  .mdst-color-picker:focus-visible {
+  .mdst-input:where([type="color"]:focus-visible) {
     outline-offset: 0;
   }
 
   :where(.mdst-ui) input:where([type="color"]:disabled),
-  .mdst-color-picker:disabled {
+  .mdst-input:where([type="color"]:disabled) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
@@ -1207,12 +1209,12 @@
   /* Webkit (Chrome, Safari, Edge) */
 
   :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch-wrapper,
-  .mdst-color-picker::-webkit-color-swatch-wrapper {
+  .mdst-input:where([type="color"])::-webkit-color-swatch-wrapper {
     padding: 0;
   }
 
   :where(.mdst-ui) input:where([type="color"])::-webkit-color-swatch,
-  .mdst-color-picker::-webkit-color-swatch {
+  .mdst-input:where([type="color"])::-webkit-color-swatch {
     border: none;
     border-radius: var(--_radius, 50%);
   }
@@ -1220,15 +1222,44 @@
   /* Firefox */
 
   :where(.mdst-ui) input:where([type="color"])::-moz-color-swatch,
-  .mdst-color-picker::-moz-color-swatch {
+  .mdst-input:where([type="color"])::-moz-color-swatch {
     border: none;
     border-radius: var(--_radius, 50%);
   }
 
   /* Square variant: follows the theme's radius */
 
-  .mdst-color-picker--square {
+  .mdst-input--square:where([type="color"]) {
     --_radius: var(--mdst-radius);
+  }
+}
+
+@layer mdst-ui.components {
+  /* Date and time
+     date, time, datetime-local, month, and week inputs get the text field
+     styles from input.css (classless, or with .mdst-input). These rules even
+     out what browsers add on top. */
+
+  /* Chrome pads its inner edit box, which makes these fields taller than
+     the other inputs */
+
+  :where(.mdst-ui) input::-webkit-datetime-edit,
+  :where(.mdst-ui) input::-webkit-datetime-edit-fields-wrapper,
+  .mdst-input::-webkit-datetime-edit,
+  .mdst-input::-webkit-datetime-edit-fields-wrapper {
+    padding-block: 0;
+  }
+
+  :where(.mdst-ui) input::-webkit-calendar-picker-indicator,
+  .mdst-input::-webkit-calendar-picker-indicator {
+    margin-block: 0;
+    padding-block: 0;
+    cursor: pointer;
+  }
+
+  :where(.mdst-ui) input:where(:disabled)::-webkit-calendar-picker-indicator,
+  .mdst-input:where(:disabled)::-webkit-calendar-picker-indicator {
+    cursor: not-allowed;
   }
 }
 
@@ -1774,18 +1805,11 @@
 
 @layer mdst-ui.components {
   /* File Input
-
      Classless (a bare input[type="file"] inside .mdst-ui) and class-based
-     (.mdst-file-input inside a .mdst-file-input wrapper) share every
-     rule, so both look the same. */
-
-  .mdst-file-input {
-    display: block;
-    width: 100%;
-  }
+     (.mdst-input on the input) share every rule, so both look the same. */
 
   :where(.mdst-ui) input:where([type="file"]),
-  .mdst-file-input {
+  .mdst-input:where([type="file"]) {
     display: block;
     width: 100%;
     color: var(--mdst-color-muted);
@@ -1801,17 +1825,17 @@
   }
 
   :where(.mdst-ui) input:where([type="file"]:focus),
-  .mdst-file-input:focus {
+  .mdst-input:where([type="file"]:focus) {
     border-color: var(--mdst-color-focus);
   }
 
   :where(.mdst-ui) input:where([type="file"]:focus-visible),
-  .mdst-file-input:focus-visible {
+  .mdst-input:where([type="file"]:focus-visible) {
     outline-offset: 0;
   }
 
   :where(.mdst-ui) input:where([type="file"]:disabled),
-  .mdst-file-input:disabled {
+  .mdst-input:where([type="file"]:disabled) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
@@ -1820,7 +1844,7 @@
      and the same variables */
 
   :where(.mdst-ui) input:where([type="file"])::file-selector-button,
-  .mdst-file-input::file-selector-button {
+  .mdst-input:where([type="file"])::file-selector-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1844,30 +1868,30 @@
   }
 
   :where(.mdst-ui) input:where([type="file"]:hover)::file-selector-button,
-  .mdst-file-input:hover::file-selector-button {
+  .mdst-input:where([type="file"]:hover)::file-selector-button {
     --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
   }
 
   :where(.mdst-ui) input:where([type="file"]:disabled)::file-selector-button,
-  .mdst-file-input:disabled::file-selector-button {
+  .mdst-input:where([type="file"]:disabled)::file-selector-button {
     --_hover: none;
     cursor: not-allowed;
   }
 
-  /* Variants: on the input, with or without .mdst-file-input */
+  /* Variants: on the input, with or without .mdst-input */
 
-  .mdst-file-input--solid::file-selector-button {
+  .mdst-input--solid:where([type="file"])::file-selector-button {
     --_bg: var(--mdst-color-fg);
     --_fg: var(--mdst-color-bg);
     border-color: var(--mdst-color-fg);
   }
 
-  .mdst-file-input--borderless,
-  .mdst-file-input--borderless:focus {
+  .mdst-input--borderless:where([type="file"]),
+  .mdst-input--borderless:where([type="file"]):focus {
     border-color: transparent;
   }
 
-  .mdst-file-input--borderless {
+  .mdst-input--borderless:where([type="file"]) {
     padding: 0;
   }
 }
@@ -1920,7 +1944,11 @@
 }
 
 @layer mdst-ui.components {
-  /* Input */
+  /* Input
+     Text-like fields: text, email, number, search, tel, url, password, and
+     textarea. .mdst-input also styles checkbox, radio, range, file, and colour
+     inputs by their type; those rules live in their own components, and the
+     selectors here skip them. */
 
   :where(.mdst-ui)
     input:where(:not(
@@ -1935,7 +1963,7 @@
       [type="hidden"]
     )),
   :where(.mdst-ui) textarea,
-  .mdst-input {
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])) {
     -webkit-appearance: none;
     appearance: none;
     display: block;
@@ -1964,9 +1992,17 @@
       [type="hidden"]
     ))::placeholder,
   :where(.mdst-ui) textarea::placeholder,
-  .mdst-input::placeholder {
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"]))::placeholder {
     color: var(--mdst-color-muted);
     opacity: 1;
+  }
+
+  /* Borderless: the field keeps its padding, so it lines up with bordered
+     fields, but draws no border. Declared before invalid, so errors still
+     show. */
+
+  .mdst-input--borderless:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])) {
+    border-color: transparent;
   }
 
   /* Invalid: aria-invalid="true", or the browser's own validation once the
@@ -1991,8 +2027,12 @@
       [type="hidden"]
     ):focus),
   :where(.mdst-ui) textarea:where(:focus),
-  .mdst-input:focus {
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])):focus {
     border-color: var(--mdst-color-focus);
+  }
+
+  .mdst-input--borderless:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])):focus {
+    border-color: transparent;
   }
 
   :where(.mdst-ui)
@@ -2008,7 +2048,7 @@
       [type="hidden"]
     ):focus-visible),
   :where(.mdst-ui) textarea:where(:focus-visible),
-  .mdst-input:focus-visible {
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])):focus-visible {
     outline-offset: 0;
   }
 
@@ -2025,25 +2065,9 @@
       [type="hidden"]
     ):disabled),
   :where(.mdst-ui) textarea:where(:disabled),
-  .mdst-input:disabled {
+  .mdst-input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="file"], [type="color"])):disabled {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
-  }
-
-  /* Date and time fields: Chrome pads its inner edit box, which makes them
-     taller than the other inputs */
-
-  :where(.mdst-ui) input::-webkit-datetime-edit,
-  :where(.mdst-ui) input::-webkit-datetime-edit-fields-wrapper,
-  .mdst-input::-webkit-datetime-edit,
-  .mdst-input::-webkit-datetime-edit-fields-wrapper {
-    padding-block: 0;
-  }
-
-  :where(.mdst-ui) input::-webkit-calendar-picker-indicator,
-  .mdst-input::-webkit-calendar-picker-indicator {
-    margin-block: 0;
-    padding-block: 0;
   }
 
   /* Textarea variant */
@@ -2561,7 +2585,7 @@
   /* Radio */
 
   :where(.mdst-ui) input:where([type="radio"]),
-  .mdst-radio {
+  .mdst-input:where([type="radio"]) {
     -webkit-appearance: none;
     appearance: none;
     flex-shrink: 0;
@@ -2571,13 +2595,15 @@
     border: var(--mdst-border-width) solid var(--mdst-color-border);
     /* Border included in the size, so a user's border-box reset changes nothing */
     box-sizing: border-box;
+    /* --mdst-border-width is in em, so match the surrounding text */
+    font-size: inherit;
     border-radius: 50%;
     cursor: pointer;
     position: relative;
   }
 
   :where(.mdst-ui) input:where([type="radio"]:checked)::after,
-  .mdst-radio:checked::after {
+  .mdst-input:where([type="radio"]:checked)::after {
     content: "";
     position: absolute;
     inset: 3px;
@@ -2586,15 +2612,15 @@
   }
 
   :where(.mdst-ui) input:where([type="radio"]:disabled),
-  .mdst-radio:disabled {
+  .mdst-input:where([type="radio"]:disabled) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
-  /* Radio with label wrapper */
+  /* A label wrapping a radio */
 
   :where(.mdst-ui) label:where(:has(> input[type="radio"])),
-  .mdst-radio-label {
+  label:where(:has(> .mdst-input[type="radio"])) {
     display: inline-flex;
     align-items: center;
     gap: var(--mdst-space-sm);
@@ -2605,14 +2631,14 @@
   }
 
   :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)),
-  .mdst-radio-label:has(.mdst-radio:disabled) {
+  label:where(:has(> .mdst-input[type="radio"]:disabled)) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
   /* The label already fades, so the radio inside doesn't fade twice */
   :where(.mdst-ui) label:where(:has(> input[type="radio"]:disabled)) > input,
-  .mdst-radio-label:has(.mdst-radio:disabled) .mdst-radio {
+  label:where(:has(> .mdst-input[type="radio"]:disabled)) > .mdst-input {
     opacity: 1;
   }
 
@@ -2642,7 +2668,7 @@
     overflow: hidden;
 
     /* Visually hide the native radio input while keeping it keyboard-accessible */
-    & .mdst-radio {
+    & input[type="radio"] {
       position: absolute;
       opacity: 0;
       pointer-events: none;
@@ -2652,18 +2678,18 @@
       background: var(--mdst-color-subtle);
     }
 
-    &:has(.mdst-radio:checked) {
+    &:has(input[type="radio"]:checked) {
       border-color: var(--mdst-color-fg);
       outline: calc(var(--mdst-border-width) * 2) solid var(--mdst-color-fg);
       outline-offset: calc(-1 * var(--mdst-border-width));
     }
 
-    &:has(.mdst-radio:focus-visible) {
+    &:has(input[type="radio"]:focus-visible) {
       outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
       outline-offset: var(--mdst-focus-offset);
     }
 
-    &:has(.mdst-radio:disabled) {
+    &:has(input[type="radio"]:disabled) {
       opacity: var(--mdst-disabled-opacity);
       cursor: not-allowed;
 
@@ -2685,7 +2711,7 @@
      show state are redrawn in the user's system colours. */
   @media (forced-colors: active) {
     :where(.mdst-ui) input:where([type="radio"]:checked)::after,
-    .mdst-radio:checked::after {
+    .mdst-input:where([type="radio"]:checked)::after {
       forced-color-adjust: none;
       background: CanvasText;
     }
@@ -2696,7 +2722,7 @@
   /* Range Slider */
 
   :where(.mdst-ui) input:where([type="range"]),
-  .mdst-range {
+  .mdst-input:where([type="range"]) {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
@@ -2708,25 +2734,25 @@
   }
 
   :where(.mdst-ui) input:where([type="range"]:disabled),
-  .mdst-range:disabled {
+  .mdst-input:where([type="range"]:disabled) {
     opacity: var(--mdst-disabled-opacity);
     cursor: not-allowed;
   }
 
   :where(.mdst-ui) input:where([type="range"]:disabled)::-webkit-slider-thumb,
-  .mdst-range:disabled::-webkit-slider-thumb {
+  .mdst-input:where([type="range"]:disabled)::-webkit-slider-thumb {
     cursor: not-allowed;
   }
 
   :where(.mdst-ui) input:where([type="range"]:disabled)::-moz-range-thumb,
-  .mdst-range:disabled::-moz-range-thumb {
+  .mdst-input:where([type="range"]:disabled)::-moz-range-thumb {
     cursor: not-allowed;
   }
 
   /* Webkit (Chrome, Safari, Edge) */
 
   :where(.mdst-ui) input:where([type="range"])::-webkit-slider-thumb,
-  .mdst-range::-webkit-slider-thumb {
+  .mdst-input:where([type="range"])::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: var(--mdst-space-4);
@@ -2743,7 +2769,7 @@
   /* Firefox */
 
   :where(.mdst-ui) input:where([type="range"])::-moz-range-thumb,
-  .mdst-range::-moz-range-thumb {
+  .mdst-input:where([type="range"])::-moz-range-thumb {
     appearance: none;
     width: var(--mdst-space-4);
     height: var(--mdst-space-4);
@@ -2756,7 +2782,7 @@
   }
 
   :where(.mdst-ui) input:where([type="range"])::-moz-range-track,
-  .mdst-range::-moz-range-track {
+  .mdst-input:where([type="range"])::-moz-range-track {
     background: transparent;
   }
 
@@ -2764,7 +2790,7 @@
      show state are redrawn in the user's system colours. */
   @media (forced-colors: active) {
     :where(.mdst-ui) input:where([type="range"]),
-    .mdst-range {
+    .mdst-input:where([type="range"]) {
       forced-color-adjust: none;
       background: CanvasText;
 

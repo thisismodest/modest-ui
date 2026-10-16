@@ -209,7 +209,7 @@
         <div class="control-group">
           <label>Foreground <code>--mdst-color-fg</code></label>
           <div class="color-field">
-            <input type="color" class="mdst-color-picker" data-var="--mdst-color-fg" value="#000000" />
+            <input type="color" class="mdst-input" data-var="--mdst-color-fg" value="#000000" />
             <input type="text" class="mdst-input color-hex" data-var="--mdst-color-fg" value="#000000" />
           </div>
         </div>
@@ -217,7 +217,7 @@
         <div class="control-group">
           <label>Background <code>--mdst-color-bg</code></label>
           <div class="color-field">
-            <input type="color" class="mdst-color-picker" data-var="--mdst-color-bg" value="#ffffff" />
+            <input type="color" class="mdst-input" data-var="--mdst-color-bg" value="#ffffff" />
             <input type="text" class="mdst-input color-hex" data-var="--mdst-color-bg" value="#ffffff" />
           </div>
         </div>
@@ -225,7 +225,7 @@
         <div class="control-group">
           <label>Border <code>--mdst-color-border</code></label>
           <div class="color-field">
-            <input type="color" class="mdst-color-picker" data-var="--mdst-color-border" value="#000000" />
+            <input type="color" class="mdst-input" data-var="--mdst-color-border" value="#000000" />
             <input type="text" class="mdst-input color-hex" data-var="--mdst-color-border" value="#000000" />
           </div>
         </div>
@@ -233,7 +233,7 @@
         <div class="control-group">
           <label>Muted <code>--mdst-color-muted</code></label>
           <div class="color-field">
-            <input type="color" class="mdst-color-picker" data-var="--mdst-color-muted" value="#666666" />
+            <input type="color" class="mdst-input" data-var="--mdst-color-muted" value="#666666" />
             <input type="text" class="mdst-input color-hex" data-var="--mdst-color-muted" value="#666666" />
           </div>
         </div>
@@ -241,7 +241,7 @@
         <div class="control-group">
           <label>Subtle <code>--mdst-color-subtle</code></label>
           <div class="color-field">
-            <input type="color" class="mdst-color-picker" data-var="--mdst-color-subtle" value="#f5f5f5" />
+            <input type="color" class="mdst-input" data-var="--mdst-color-subtle" value="#f5f5f5" />
             <input type="text" class="mdst-input color-hex" data-var="--mdst-color-subtle" value="#f5f5f5" />
           </div>
         </div>
@@ -249,7 +249,7 @@
         <div class="control-group">
           <label>Focus <code>--mdst-color-focus</code></label>
           <div class="color-field">
-            <input type="color" class="mdst-color-picker" data-var="--mdst-color-focus" value="#000000" />
+            <input type="color" class="mdst-input" data-var="--mdst-color-focus" value="#000000" />
             <input type="text" class="mdst-input color-hex" data-var="--mdst-color-focus" value="#000000" />
           </div>
         </div>
@@ -257,7 +257,7 @@
         <div class="control-group">
           <label>Danger <code>--mdst-color-danger</code></label>
           <div class="color-field">
-            <input type="color" class="mdst-color-picker" data-var="--mdst-color-danger" value="#dc2626" />
+            <input type="color" class="mdst-input" data-var="--mdst-color-danger" value="#dc2626" />
             <input type="text" class="mdst-input color-hex" data-var="--mdst-color-danger" value="#dc2626" />
           </div>
         </div>
@@ -265,7 +265,7 @@
         <div class="control-group">
           <label>Success <code>--mdst-color-success</code></label>
           <div class="color-field">
-            <input type="color" class="mdst-color-picker" data-var="--mdst-color-success" value="#15803d" />
+            <input type="color" class="mdst-input" data-var="--mdst-color-success" value="#15803d" />
             <input type="text" class="mdst-input color-hex" data-var="--mdst-color-success" value="#15803d" />
           </div>
         </div>
@@ -278,7 +278,7 @@
         <div class="control-group">
           <label>Radius <code>--mdst-radius</code></label>
           <div class="control-row">
-            <input type="range" class="mdst-range" data-var="--mdst-radius" min="0" max="16" step="1" value="0" />
+            <input type="range" class="mdst-input" data-var="--mdst-radius" min="0" max="16" step="1" value="0" />
             <span class="value" data-value="--mdst-radius">0px</span>
           </div>
         </div>
@@ -286,7 +286,7 @@
         <div class="control-group">
           <label>Width <code>--mdst-border-width</code></label>
           <div class="control-row">
-            <input type="range" class="mdst-range" data-var="--mdst-border-width" min="1" max="4" step="0.5" value="1" />
+            <input type="range" class="mdst-input" data-var="--mdst-border-width" min="1" max="4" step="0.5" value="1" />
             <span class="value" data-value="--mdst-border-width">1px</span>
           </div>
         </div>
@@ -323,22 +323,22 @@
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
-          <input type="range" class="mdst-range" value="50" style="max-width: 150px" />
+          <input type="range" class="mdst-input" value="50" style="max-width: 150px" />
         </div>
         <div class="preview-row">
-          <input type="file" class="mdst-file-input" style="max-width: 250px" />
+          <input type="file" class="mdst-input" style="max-width: 250px" />
         </div>
         <div class="preview-row">
-          <label class="mdst-checkbox-label">
-            <input type="checkbox" class="mdst-checkbox" checked />
+          <label>
+            <input type="checkbox" class="mdst-input" checked />
             Checkbox
           </label>
-          <label class="mdst-radio-label">
-            <input type="radio" name="preview-radio" class="mdst-radio" checked />
+          <label>
+            <input type="radio" name="preview-radio" class="mdst-input" checked />
             Radio
           </label>
-          <label class="mdst-radio-label">
-            <input type="radio" name="preview-radio" class="mdst-radio" />
+          <label>
+            <input type="radio" name="preview-radio" class="mdst-input" />
             Radio
           </label>
         </div>
@@ -527,14 +527,14 @@
             const label = `<label>${control.label} <code>${control.var}</code></label>`;
             if (control.type === "color") {
               wrap.innerHTML = `${label}<div class="color-field">
-                <input type="color" class="mdst-color-picker" data-tune="${control.var}" value="${control.default}" />
+                <input type="color" class="mdst-input" data-tune="${control.var}" value="${control.default}" />
                 <input type="text" class="mdst-input color-hex" data-tune="${control.var}" value="${control.default.toUpperCase()}" /></div>`;
             } else if (control.type === "select") {
               const options = control.options.map(([text, value]) => `<option value="${value.replace(/"/g, "&quot;")}">${text}</option>`).join("");
               wrap.innerHTML = `${label}<select class="mdst-dropdown" data-tune="${control.var}">${options}</select>`;
             } else {
               wrap.innerHTML = `${label}<div class="control-row">
-                <input type="range" class="mdst-range" data-tune="${control.var}" min="${control.min}" max="${control.max}" step="${control.step}" value="${control.default}" />
+                <input type="range" class="mdst-input" data-tune="${control.var}" min="${control.min}" max="${control.max}" step="${control.step}" value="${control.default}" />
                 <span class="value" data-tune-value="${control.var}">${control.default}${control.unit}</span></div>`;
             }
             grid.appendChild(wrap);
@@ -672,7 +672,7 @@
       }
 
       // Color picker handlers
-      document.querySelectorAll(".mdst-color-picker[data-var]").forEach((input) => {
+      document.querySelectorAll("input[type=color][data-var]").forEach((input) => {
         input.addEventListener("input", (e) => {
           const varName = e.target.dataset.var;
           const value = e.target.value;
@@ -698,7 +698,7 @@
             updateCSSVar(varName, value);
 
             // Sync color input
-            const colorInput = document.querySelector(`.mdst-color-picker[data-var="${varName}"]`);
+            const colorInput = document.querySelector(`input[type=color][data-var="${varName}"]`);
             if (colorInput) {
               colorInput.value = value;
             }
