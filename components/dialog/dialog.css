@@ -1,109 +1,112 @@
-/* Dialog */
+@layer mdst-ui.components {
+  /* Dialog */
 
-:where(.mdst-ui) dialog,
-.mdst-dialog {
-  padding: 0;
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
-  color: var(--mdst-color-fg);
-  max-width: min(90vw, 32rem);
-  max-height: 90vh;
+  :where(.mdst-ui) dialog,
+  .mdst-dialog {
+    padding: 0;
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
+    color: var(--mdst-color-fg);
+    max-width: min(90vw, 32rem);
+    max-height: 90vh;
 
-  /* Center the dialog */
-  margin: auto;
-  position: fixed;
-  inset: 0;
-  width: fit-content;
-  height: fit-content;
-}
+    /* Center the dialog */
+    margin: auto;
+    position: fixed;
+    inset: 0;
+    width: fit-content;
+    height: fit-content;
+  }
 
-:where(.mdst-ui) dialog::backdrop,
-.mdst-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
-}
+  :where(.mdst-ui) dialog::backdrop,
+  .mdst-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
 
-/* Dialog Header */
+  /* Dialog Header */
 
-:where(.mdst-ui) dialog .mdst-dialog-header,
-.mdst-dialog .mdst-dialog-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--mdst-space-md);
-  padding: var(--mdst-space-md);
-  border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-}
+  :where(.mdst-ui) dialog .mdst-dialog__header,
+  .mdst-dialog .mdst-dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--mdst-space-md);
+    padding: var(--mdst-space-md);
+    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
 
-:where(.mdst-ui) dialog .mdst-dialog-title,
-.mdst-dialog .mdst-dialog-title {
-  margin: 0;
-  font-size: var(--mdst-text-lg);
-  font-weight: 600;
-  line-height: var(--mdst-line-height);
-}
+  :where(.mdst-ui) dialog .mdst-dialog__title,
+  .mdst-dialog .mdst-dialog__title {
+    margin: 0;
+    font-size: var(--mdst-text-lg);
+    font-weight: 600;
+    line-height: var(--mdst-line-height);
+  }
 
-:where(.mdst-ui) dialog .mdst-dialog-close,
-.mdst-dialog .mdst-dialog-close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--mdst-space-xs);
-  background: transparent;
-  border: none;
-  border-radius: var(--mdst-radius);
-  cursor: pointer;
-  color: var(--mdst-color-muted);
-  transition: color var(--mdst-transition);
-}
+  :where(.mdst-ui) dialog .mdst-dialog__close,
+  .mdst-dialog .mdst-dialog__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--mdst-space-xs);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: var(--mdst-radius);
+    cursor: pointer;
+    color: var(--mdst-color-muted);
+    transition: color var(--mdst-transition);
+  }
 
-:where(.mdst-ui) dialog .mdst-dialog-close:hover,
-.mdst-dialog .mdst-dialog-close:hover {
-  background: transparent;
-  border: none;
-  color: var(--mdst-color-fg);
-}
+  :where(.mdst-ui) dialog .mdst-dialog__close:where(:hover),
+  .mdst-dialog .mdst-dialog__close:hover {
+    background: transparent;
+    border: none;
+    color: var(--mdst-color-fg);
+  }
 
-:where(.mdst-ui) dialog .mdst-dialog-close:focus-visible,
-.mdst-dialog .mdst-dialog-close:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
+  :where(.mdst-ui) dialog .mdst-dialog__close:where(:focus-visible),
+  .mdst-dialog .mdst-dialog__close:focus-visible {
+    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+    outline-offset: var(--mdst-focus-offset);
+  }
 
-/* Dialog Body */
+  /* Dialog Body */
 
-:where(.mdst-ui) dialog .mdst-dialog-body,
-.mdst-dialog .mdst-dialog-body {
-  padding: var(--mdst-space-md);
-  overflow-y: auto;
-}
+  :where(.mdst-ui) dialog .mdst-dialog__body,
+  .mdst-dialog .mdst-dialog__body {
+    padding: var(--mdst-space-md);
+    overflow-y: auto;
+  }
 
-/* Dialog Footer */
+  /* Dialog Footer */
 
-:where(.mdst-ui) dialog .mdst-dialog-footer,
-.mdst-dialog .mdst-dialog-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--mdst-space-sm);
-  padding: var(--mdst-space-md);
-  border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-}
+  :where(.mdst-ui) dialog .mdst-dialog__footer,
+  .mdst-dialog .mdst-dialog__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--mdst-space-sm);
+    padding: var(--mdst-space-md);
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
+  }
 
-/* Variants */
+  /* Variants */
 
-:where(.mdst-ui) dialog.mdst-dialog--sm,
-.mdst-dialog.mdst-dialog--sm {
-  max-width: min(90vw, 24rem);
-}
+  :where(.mdst-ui) dialog.mdst-dialog--sm,
+  .mdst-dialog.mdst-dialog--sm {
+    max-width: min(90vw, 24rem);
+  }
 
-:where(.mdst-ui) dialog.mdst-dialog--lg,
-.mdst-dialog.mdst-dialog--lg {
-  max-width: min(90vw, 48rem);
-}
+  :where(.mdst-ui) dialog.mdst-dialog--lg,
+  .mdst-dialog.mdst-dialog--lg {
+    max-width: min(90vw, 48rem);
+  }
 
-:where(.mdst-ui) dialog.mdst-dialog--full,
-.mdst-dialog.mdst-dialog--full {
-  max-width: 90vw;
-  max-height: 90vh;
+  :where(.mdst-ui) dialog.mdst-dialog--full,
+  .mdst-dialog.mdst-dialog--full {
+    max-width: 90vw;
+    max-height: 90vh;
+  }
 }

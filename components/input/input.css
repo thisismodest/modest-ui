@@ -1,93 +1,121 @@
-/* Input */
+@layer mdst-ui.components {
+  /* Input */
 
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  ),
-:where(.mdst-ui) textarea,
-.mdst-input {
-  -webkit-appearance: none;
-  appearance: none;
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: var(--mdst-space-sm);
-  font-family: var(--mdst-font-ui);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  color: var(--mdst-color-fg);
-  background-color: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  outline: none;
-  transition: border-color var(--mdst-transition);
-}
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    )),
+  :where(.mdst-ui) textarea,
+  .mdst-input {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    padding: var(--mdst-space-sm);
+    font-family: var(--mdst-font-ui);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    color: var(--mdst-color-fg);
+    background-color: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    outline: none;
+    transition: border-color var(--mdst-transition);
+  }
 
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  )::placeholder,
-:where(.mdst-ui) textarea::placeholder,
-.mdst-input::placeholder {
-  color: var(--mdst-color-muted);
-  opacity: 1;
-}
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ))::placeholder,
+  :where(.mdst-ui) textarea::placeholder,
+  .mdst-input::placeholder {
+    color: var(--mdst-color-muted);
+    opacity: 1;
+  }
 
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  ):focus,
-:where(.mdst-ui) textarea:focus,
-.mdst-input:focus {
-  border-color: var(--mdst-color-focus);
-}
+  /* Invalid: aria-invalid="true", or the browser's own validation once the
+     user has interacted (:user-invalid). Declared before focus, so a focused
+     field still shows the focus colour. */
 
-:where(.mdst-ui)
-  input:not(
-    [type="checkbox"],
-    [type="radio"],
-    [type="range"],
-    [type="file"],
-    [type="color"],
-    [type="submit"],
-    [type="reset"],
-    [type="button"],
-    [type="hidden"]
-  ):disabled,
-:where(.mdst-ui) textarea:disabled,
-.mdst-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+  :where(.mdst-ui) :is(input, textarea):is([aria-invalid="true"], :user-invalid),
+  .mdst-input:is([aria-invalid="true"], :user-invalid) {
+    border-color: var(--mdst-color-danger);
+  }
 
-/* Textarea variant */
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ):focus),
+  :where(.mdst-ui) textarea:where(:focus),
+  .mdst-input:focus {
+    border-color: var(--mdst-color-focus);
+  }
 
-:where(.mdst-ui) textarea,
-.mdst-input:is(textarea) {
-  min-height: 6rem;
-  resize: vertical;
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ):focus-visible),
+  :where(.mdst-ui) textarea:where(:focus-visible),
+  .mdst-input:focus-visible {
+    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+    outline-offset: 0;
+  }
+
+  :where(.mdst-ui)
+    input:where(:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="submit"],
+      [type="reset"],
+      [type="button"],
+      [type="hidden"]
+    ):disabled),
+  :where(.mdst-ui) textarea:where(:disabled),
+  .mdst-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Textarea variant */
+
+  :where(.mdst-ui) textarea,
+  .mdst-input:is(textarea) {
+    min-height: 6rem;
+    resize: vertical;
+  }
 }

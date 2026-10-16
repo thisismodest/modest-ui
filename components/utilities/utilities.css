@@ -1,35 +1,37 @@
-/* Utilities */
+@layer mdst-ui.components {
+  /* Utilities */
 
-/* Screen reader only — visually hidden but accessible */
+  /* Screen reader only — visually hidden but accessible */
 
-.mdst-sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
+  .mdst-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
-/* Text truncation — single-line ellipsis overflow */
+  /* Text truncation — single-line ellipsis overflow */
 
-.mdst-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+  .mdst-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-/* Muted text color */
+  /* Muted text color */
 
-.mdst-muted {
-  color: var(--mdst-color-muted);
-}
+  .mdst-muted {
+    color: var(--mdst-color-muted);
+  }
 
-/* Monospace font */
+  /* Monospace font */
 
-.mdst-mono {
-  font-family: var(--mdst-font-mono);
+  .mdst-mono {
+    font-family: var(--mdst-font-mono);
+  }
 }

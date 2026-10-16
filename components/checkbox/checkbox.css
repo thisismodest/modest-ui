@@ -1,139 +1,127 @@
-/* Checkbox */
+@layer mdst-ui.components {
+  /* Checkbox */
 
-:where(.mdst-ui) input[type="checkbox"],
-.mdst-checkbox {
-  -webkit-appearance: none;
-  appearance: none;
-  box-sizing: content-box;
-  flex-shrink: 0;
-  width: 0.875rem;
-  height: 0.875rem;
-  margin: 0;
-  background: var(--mdst-color-bg);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: 0;
-  cursor: pointer;
-  position: relative;
-  transition: border-color var(--mdst-transition);
-}
+  :where(.mdst-ui) input:where([type="checkbox"]),
+  .mdst-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: content-box;
+    flex-shrink: 0;
+    width: 0.875rem;
+    height: 0.875rem;
+    background: var(--mdst-color-bg);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    transition: border-color var(--mdst-transition);
+  }
 
-:where(.mdst-ui) input[type="checkbox"]:checked::after,
-.mdst-checkbox:checked::after {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  background: var(--mdst-color-fg);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:hover,
-.mdst-checkbox:hover {
-  border-color: var(--mdst-color-muted);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:focus-visible,
-.mdst-checkbox:focus-visible {
-  outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-  outline-offset: var(--mdst-border-width);
-}
-
-:where(.mdst-ui) input[type="checkbox"]:disabled,
-.mdst-checkbox:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-:where(.mdst-ui) input[type="checkbox"]:disabled:hover,
-.mdst-checkbox:disabled:hover {
-  border-color: var(--mdst-color-border);
-}
-
-/* Checkbox with label wrapper */
-
-:where(.mdst-ui) label:has(> input[type="checkbox"]),
-.mdst-checkbox-label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
-  font-size: inherit;
-  line-height: var(--mdst-line-height);
-  cursor: pointer;
-  user-select: none;
-}
-
-:where(.mdst-ui) label:has(> input[type="checkbox"]:disabled),
-.mdst-checkbox-label:has(.mdst-checkbox:disabled) {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Toggle variant */
-
-.mdst-checkbox--toggle {
-  -webkit-appearance: none;
-  appearance: none;
-  box-sizing: content-box;
-  flex-shrink: 0;
-  width: 2.125rem;
-  height: 1.125rem;
-  margin: 0;
-  background: var(--mdst-color-subtle);
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: 0;
-  cursor: pointer;
-  position: relative;
-  transition:
-    background var(--mdst-transition),
-    border-color var(--mdst-transition);
-
-  &::before {
+  :where(.mdst-ui) input:where([type="checkbox"]:checked)::after,
+  .mdst-checkbox:checked::after {
     content: "";
     position: absolute;
-    height: 0.875rem;
-    width: 0.875rem;
-    left: 2px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--mdst-color-muted);
-    transition:
-      transform var(--mdst-transition),
-      background var(--mdst-transition);
-  }
-
-  &:checked {
+    inset: 2px;
     background: var(--mdst-color-fg);
-    border-color: var(--mdst-color-fg);
-
-    &::before {
-      transform: translateY(-50%) translateX(1rem);
-      background: var(--mdst-color-bg);
-    }
   }
 
-  &:hover {
-    border-color: var(--mdst-color-muted);
+  :where(.mdst-ui) input:where([type="checkbox"]:focus-visible),
+  .mdst-checkbox:focus-visible {
+    outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+    outline-offset: var(--mdst-focus-offset);
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--mdst-color-focus);
-    outline-offset: 2px;
-  }
-
-  &:disabled {
+  :where(.mdst-ui) input:where([type="checkbox"]:disabled),
+  .mdst-checkbox:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-
-    &:hover {
-      border-color: var(--mdst-color-border);
-    }
   }
 
-  /* Toggle rounded variant */
+  /* Checkbox with label wrapper */
 
-  &.mdst-checkbox--toggle-rounded {
-    border-radius: 9999px;
+  :where(.mdst-ui) label:where(:has(> input[type="checkbox"])),
+  .mdst-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
+    font-size: inherit;
+    line-height: var(--mdst-line-height);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  :where(.mdst-ui) label:where(:has(> input[type="checkbox"]:disabled)),
+  .mdst-checkbox-label:has(.mdst-checkbox:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Toggle variant */
+
+  :where(.mdst-ui) input.mdst-toggle:where([type="checkbox"]),
+  .mdst-toggle {
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: content-box;
+    flex-shrink: 0;
+    width: 2.125rem;
+    height: 1.125rem;
+    background: var(--mdst-color-subtle);
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    transition:
+      background var(--mdst-transition),
+      border-color var(--mdst-transition);
 
     &::before {
-      border-radius: 50%;
+      content: "";
+      position: absolute;
+      height: 0.875rem;
+      width: 0.875rem;
+      left: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--mdst-color-muted);
+      transition:
+        transform var(--mdst-transition),
+        background var(--mdst-transition);
+    }
+
+    /* Suppress the classless checkbox tick when used on a bare element */
+    &::after {
+      content: none;
+    }
+
+    &:checked {
+      background: var(--mdst-color-fg);
+      border-color: var(--mdst-color-fg);
+
+      &::before {
+        transform: translateY(-50%) translateX(1rem);
+        background: var(--mdst-color-bg);
+      }
+    }
+
+    &:focus-visible {
+      outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+      outline-offset: var(--mdst-focus-offset);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Toggle rounded variant */
+
+    &.mdst-toggle--pill {
+      border-radius: 9999px;
+
+      &::before {
+        border-radius: 50%;
+      }
     }
   }
 }

@@ -1,80 +1,87 @@
-/*
- * OTP Input
- *
- * Usage:
- * <div class="mdst-otp-input">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- * </div>
- *
- * With separator:
- * <div class="mdst-otp-input">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <span class="mdst-otp-input-separator"></span>
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- *   <input type="text" maxlength="1" class="mdst-otp-input-digit" inputmode="numeric">
- * </div>
- */
+@layer mdst-ui.components {
+  /*
+   * OTP Input
+   *
+   * Usage:
+   * <div class="mdst-otp-input">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   * </div>
+   *
+   * With separator:
+   * <div class="mdst-otp-input">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <span class="mdst-otp-input__separator"></span>
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   *   <input type="text" maxlength="1" class="mdst-otp-input__digit" inputmode="numeric">
+   * </div>
+   */
 
-.mdst-otp-input {
-  display: inline-flex;
-  gap: var(--mdst-space-sm);
-  align-items: center;
+  .mdst-otp-input {
+    display: inline-flex;
+    gap: var(--mdst-space-sm);
+    align-items: center;
 
-  & .mdst-otp-input-digit {
-    width: 1.5em;
-    height: 2em;
-    padding: 0;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: var(--mdst-radius);
-    background: var(--mdst-color-bg);
-    color: var(--mdst-color-fg);
-    font-family: var(--mdst-font-mono);
-    font-size: 1.25em;
-    text-align: center;
-    caret-color: var(--mdst-color-fg);
-    transition: border-color var(--mdst-transition);
+    & .mdst-otp-input__digit {
+      width: 1.5em;
+      height: 2em;
+      padding: 0;
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      border-radius: var(--mdst-radius);
+      background: var(--mdst-color-bg);
+      color: var(--mdst-color-fg);
+      font-family: var(--mdst-font-mono);
+      font-size: 1.25em;
+      text-align: center;
+      caret-color: var(--mdst-color-fg);
+      transition: border-color var(--mdst-transition);
 
-    &:focus {
-      outline: none;
-      border-color: var(--mdst-color-focus);
+      &:focus {
+        outline: none;
+        border-color: var(--mdst-color-focus);
+      }
+
+      &:focus-visible {
+        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+        outline-offset: 0;
+      }
+
+      &::placeholder {
+        color: var(--mdst-color-muted);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* Filled state - when digit has a value */
+      &:not(:placeholder-shown) {
+        border-color: var(--mdst-color-fg);
+      }
     }
 
-    &::placeholder {
-      color: var(--mdst-color-muted);
+    /* Separator (e.g., dash between groups) */
+
+    & .mdst-otp-input__separator {
+      width: 0.5em;
+      height: 0.0625em;
+      background: var(--mdst-color-border);
     }
 
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    /* Error state */
+
+    &.mdst-otp-input--danger .mdst-otp-input__digit {
+      border-color: var(--mdst-color-danger);
     }
 
-    /* Filled state - when digit has a value */
-    &:not(:placeholder-shown) {
-      border-color: var(--mdst-color-fg);
+    /* Success state */
+
+    &.mdst-otp-input--success .mdst-otp-input__digit {
+      border-color: var(--mdst-color-success);
     }
-  }
-
-  /* Separator (e.g., dash between groups) */
-
-  & .mdst-otp-input-separator {
-    width: 0.5em;
-    height: 0.0625em;
-    background: var(--mdst-color-border);
-  }
-
-  /* Error state */
-
-  &.mdst-otp-input--error .mdst-otp-input-digit {
-    border-color: var(--mdst-color-error);
-  }
-
-  /* Success state */
-
-  &.mdst-otp-input--success .mdst-otp-input-digit {
-    border-color: var(--mdst-color-success);
   }
 }

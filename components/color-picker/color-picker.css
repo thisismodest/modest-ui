@@ -1,96 +1,103 @@
-/* Color Picker */
+@layer mdst-ui.components {
+  /* Color Picker */
 
-.mdst-color-picker {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--mdst-space-sm);
+  .mdst-color-picker {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mdst-space-sm);
 
-  & .mdst-color-picker__input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: var(--mdst-space-8);
-    height: var(--mdst-space-8);
-    padding: 0;
-    background: none;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: 50%;
-    cursor: pointer;
-    outline: none;
-    transition: border-color var(--mdst-transition);
-
-    &:focus-visible {
-      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-      outline-offset: var(--mdst-border-width);
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Webkit (Chrome, Safari, Edge) */
-
-    &::-webkit-color-swatch-wrapper {
+    & .mdst-color-picker__input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: var(--mdst-space-8);
+      height: var(--mdst-space-8);
       padding: 0;
-    }
-
-    &::-webkit-color-swatch {
-      border: none;
+      background: none;
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
       border-radius: 50%;
+      cursor: pointer;
+      outline: none;
+      transition: border-color var(--mdst-transition);
+
+      &:focus-visible {
+        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+        outline-offset: var(--mdst-focus-offset);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* Webkit (Chrome, Safari, Edge) */
+
+      &::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+
+      &::-webkit-color-swatch {
+        border: none;
+        border-radius: 50%;
+      }
+
+      /* Firefox */
+
+      &::-moz-color-swatch {
+        border: none;
+        border-radius: 50%;
+      }
     }
 
-    /* Firefox */
+    /* Text input variant */
 
-    &::-moz-color-swatch {
-      border: none;
-      border-radius: 50%;
-    }
-  }
-
-  /* Text input variant */
-
-  & .mdst-color-picker__text {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 5rem;
-    height: var(--mdst-space-8);
-    padding: 0 var(--mdst-space-sm);
-    font-family: var(--mdst-font-mono);
-    font-size: var(--mdst-text-sm);
-    text-transform: uppercase;
-    color: var(--mdst-color-fg);
-    background: var(--mdst-color-bg);
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
-    border-radius: var(--mdst-radius);
-    outline: none;
-    transition: border-color var(--mdst-transition);
-
-    &::placeholder {
-      color: var(--mdst-color-muted);
-      text-transform: none;
-    }
-
-    &:focus {
-      border-color: var(--mdst-color-focus);
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
-
-  /* Square variant */
-
-  &.mdst-color-picker--square .mdst-color-picker__input {
-    border-radius: var(--mdst-radius);
-
-    &::-webkit-color-swatch {
+    & .mdst-color-picker__text {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 5rem;
+      height: var(--mdst-space-8);
+      padding: 0 var(--mdst-space-sm);
+      font-family: var(--mdst-font-mono);
+      font-size: var(--mdst-text-sm);
+      text-transform: uppercase;
+      color: var(--mdst-color-fg);
+      background: var(--mdst-color-bg);
+      border: var(--mdst-border-width) solid var(--mdst-color-border);
       border-radius: var(--mdst-radius);
+      outline: none;
+      transition: border-color var(--mdst-transition);
+
+      &::placeholder {
+        color: var(--mdst-color-muted);
+        text-transform: none;
+      }
+
+      &:focus {
+        border-color: var(--mdst-color-focus);
+      }
+
+      &:focus-visible {
+        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+        outline-offset: 0;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
 
-    &::-moz-color-swatch {
+    /* Square variant */
+
+    &.mdst-color-picker--square .mdst-color-picker__input {
       border-radius: var(--mdst-radius);
+
+      &::-webkit-color-swatch {
+        border-radius: var(--mdst-radius);
+      }
+
+      &::-moz-color-swatch {
+        border-radius: var(--mdst-radius);
+      }
     }
   }
 }

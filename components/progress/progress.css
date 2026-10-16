@@ -1,77 +1,79 @@
-/* Progress Bar */
+@layer mdst-ui.components {
+  /* Progress Bar */
 
-:where(.mdst-ui) progress,
-.mdst-progress {
-  appearance: none;
-  -webkit-appearance: none;
-  display: block;
-  width: 100%;
-  height: var(--mdst-space-sm);
-  border: none;
-  border-radius: var(--mdst-radius);
-  overflow: hidden;
-  background: var(--mdst-color-subtle);
-  color: var(--mdst-color-fg);
-
-  /* Webkit (Chrome, Safari, Edge) - bar background */
-
-  &::-webkit-progress-bar {
+  :where(.mdst-ui) progress,
+  .mdst-progress {
+    appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    height: var(--mdst-space-sm);
+    border: none;
+    border-radius: var(--mdst-radius);
+    overflow: hidden;
     background: var(--mdst-color-subtle);
-    border-radius: var(--mdst-radius);
-  }
+    color: var(--mdst-color-fg);
 
-  /* Webkit - value fill */
+    /* Webkit (Chrome, Safari, Edge) - bar background */
 
-  &::-webkit-progress-value {
-    background: var(--mdst-color-fg);
-    border-radius: var(--mdst-radius);
-    transition: width var(--mdst-transition);
-  }
+    &::-webkit-progress-bar {
+      background: var(--mdst-color-subtle);
+      border-radius: var(--mdst-radius);
+    }
 
-  /* Firefox - value fill */
-
-  &::-moz-progress-bar {
-    background: var(--mdst-color-fg);
-    border-radius: var(--mdst-radius);
-  }
-
-  /* Status: Error */
-
-  &.mdst-progress--error {
-    color: var(--mdst-color-error);
+    /* Webkit - value fill */
 
     &::-webkit-progress-value {
-      background: var(--mdst-color-error);
+      background: var(--mdst-color-fg);
+      border-radius: var(--mdst-radius);
+      transition: width var(--mdst-transition);
     }
+
+    /* Firefox - value fill */
 
     &::-moz-progress-bar {
-      background: var(--mdst-color-error);
-    }
-  }
-
-  /* Status: Success */
-
-  &.mdst-progress--success {
-    color: var(--mdst-color-success);
-
-    &::-webkit-progress-value {
-      background: var(--mdst-color-success);
+      background: var(--mdst-color-fg);
+      border-radius: var(--mdst-radius);
     }
 
-    &::-moz-progress-bar {
-      background: var(--mdst-color-success);
+    /* Status: Error */
+
+    &.mdst-progress--danger {
+      color: var(--mdst-color-danger);
+
+      &::-webkit-progress-value {
+        background: var(--mdst-color-danger);
+      }
+
+      &::-moz-progress-bar {
+        background: var(--mdst-color-danger);
+      }
     }
-  }
 
-  /* Size: Small */
+    /* Status: Success */
 
-  &.mdst-progress--sm {
-    height: var(--mdst-space-xs);
-  }
+    &.mdst-progress--success {
+      color: var(--mdst-color-success);
 
-  /* Size: Large */
+      &::-webkit-progress-value {
+        background: var(--mdst-color-success);
+      }
 
-  &.mdst-progress--lg {
-    height: var(--mdst-space-md);
+      &::-moz-progress-bar {
+        background: var(--mdst-color-success);
+      }
+    }
+
+    /* Size: Small */
+
+    &.mdst-progress--sm {
+      height: var(--mdst-space-xs);
+    }
+
+    /* Size: Large */
+
+    &.mdst-progress--lg {
+      height: var(--mdst-space-md);
+    }
   }
 }

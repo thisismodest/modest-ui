@@ -1,47 +1,61 @@
-/*
- * Minimal reset
- * Only the essentials — no opinions
- */
+@layer mdst-ui.base {
+  /*
+   * Minimal reset
+   * Only the essentials — no opinions
+   */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-* {
-  margin: 0;
-}
+  * {
+    margin: 0;
+  }
 
-body {
-  line-height: var(--mdst-line-height, 1.5);
-  -webkit-font-smoothing: antialiased;
-}
+  body {
+    line-height: var(--mdst-line-height, 1.5);
+    -webkit-font-smoothing: antialiased;
+  }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
 
-a,
-input,
-button,
-textarea,
-select {
-  font: inherit;
-  color: inherit;
-}
+  a,
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  /* Form controls and code blocks used by class (even outside .mdst-ui) drop
+     the browser's default margins. This lives in the base layer, so flow
+     spacing in the components layer still applies. */
+  .mdst-input,
+  .mdst-dropdown,
+  .mdst-checkbox,
+  .mdst-toggle,
+  .mdst-radio,
+  .mdst-pre {
+    margin: 0;
+  }
 }

@@ -1,90 +1,78 @@
-/* Card */
+@layer mdst-ui.components {
+  /* Card */
 
-.mdst-card {
-  border: var(--mdst-border-width) solid var(--mdst-color-border);
-  border-radius: var(--mdst-radius);
-  background: var(--mdst-color-bg);
+  .mdst-card {
+    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border-radius: var(--mdst-radius);
+    background: var(--mdst-color-bg);
 
-  & .mdst-card-header {
-    padding: var(--mdst-space-md);
-    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-    font-weight: 600;
-
-    & + .mdst-card-body {
-      border-top: none;
-    }
-
-    /* Borderless header — removes the bottom border from the header */
-    &.mdst-card-header--borderless {
-      border-bottom: none;
-    }
-  }
-
-  & .mdst-card-body {
-    padding: var(--mdst-space-md);
-
-    & + .mdst-card-footer {
-      border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-    }
-  }
-
-  & .mdst-card-footer {
-    margin-top: auto;
-    padding: var(--mdst-space-md);
-    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-
-    /* Borderless footer — removes the top border from the footer */
-    &.mdst-card-footer--borderless {
-      border-top: none;
-    }
-  }
-
-  /* Variants */
-
-  &.mdst-card--borderless {
-    border: none;
-
-    & > .mdst-card-header {
+    & .mdst-card__header {
+      padding: var(--mdst-space-md);
       border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      font-weight: 600;
+
+      /* Borderless header — removes the bottom border from the header */
+      &.mdst-card__header--borderless {
+        border-bottom: none;
+      }
     }
 
-    & > .mdst-card-footer {
+    & .mdst-card__body {
+      padding: var(--mdst-space-md);
+    }
+
+    & .mdst-card__footer {
+      margin-top: auto;
+      padding: var(--mdst-space-md);
       border-top: var(--mdst-border-width) solid var(--mdst-color-border);
-    }
-  }
 
-  &.mdst-card--interactive {
-    transition:
-      box-shadow var(--mdst-transition),
-      border-color var(--mdst-transition);
-    cursor: pointer;
-
-    &:hover {
-      border-color: var(--mdst-color-fg);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      /* Borderless footer — removes the top border from the footer */
+      &.mdst-card__footer--borderless {
+        border-top: none;
+      }
     }
 
-    &:focus-visible {
-      outline: var(--mdst-border-width) solid var(--mdst-color-focus);
-      outline-offset: var(--mdst-border-width);
+    /* Variants */
+
+    /* Only the outer border goes; header and footer dividers stay unless they
+       are borderless too */
+    &.mdst-card--borderless {
+      border: none;
     }
-  }
 
-  /* Padding variants */
+    &.mdst-card--interactive {
+      transition:
+        box-shadow var(--mdst-transition),
+        border-color var(--mdst-transition);
+      cursor: pointer;
 
-  &.mdst-card--compact {
-    & > .mdst-card-header,
-    & > .mdst-card-body,
-    & > .mdst-card-footer {
-      padding: var(--mdst-space-sm);
+      &:hover {
+        border-color: var(--mdst-color-fg);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      &:focus-visible {
+        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+        outline-offset: var(--mdst-focus-offset);
+      }
     }
-  }
 
-  /* Flush — no padding, for embedding raw content like tables or images */
+    /* Padding variants */
 
-  &.mdst-card--flush {
-    & > .mdst-card-body {
-      padding: 0;
+    &.mdst-card--sm {
+      & > .mdst-card__header,
+      & > .mdst-card__body,
+      & > .mdst-card__footer {
+        padding: var(--mdst-space-sm);
+      }
+    }
+
+    /* Flush — no padding, for embedding raw content like tables or images */
+
+    &.mdst-card--flush {
+      & > .mdst-card__body {
+        padding: 0;
+      }
     }
   }
 }

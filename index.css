@@ -1,5 +1,10 @@
 /* modest-ui - Minimal CSS component library */
 
+/* Everything is in the mdst-ui cascade layer (each file wraps itself), so
+   any CSS of yours outside a layer always wins. To order it against your
+   own layers: @layer reset, mdst-ui, utilities; */
+@layer mdst-ui.base, mdst-ui.components;
+
 /* Base */
 @import "./base/tokens.css";
 @import "./base/reset.css";
@@ -20,6 +25,7 @@
 @import "./components/drawer/drawer.css";
 @import "./components/dropdown/dropdown.css";
 @import "./components/file-input/file-input.css";
+@import "./components/form/form.css";
 @import "./components/input/input.css";
 @import "./components/meter/meter.css";
 @import "./components/otp-input/otp-input.css";

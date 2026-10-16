@@ -1,62 +1,101 @@
-:root {
-  /* Colors */
-  --mdst-color-fg: #000;
-  --mdst-color-bg: #fff;
-  --mdst-color-border: #000;
-  --mdst-color-muted: #666;
-  --mdst-color-subtle: #f5f5f5;
-  --mdst-color-surface: #f5f5f5;
-  --mdst-color-focus: #000;
-  --mdst-color-error: #dc2626;
-  --mdst-color-warning: #f59e0b;
-  --mdst-color-success: #16a34a;
+/* Layer order: base (tokens, reset) below components. Any CSS outside
+   a layer, such as your own, always wins over modest-ui. */
+@layer mdst-ui.base, mdst-ui.components;
 
-  /* Button hover */
-  --mdst-button-hover-bg: var(--mdst-color-fg);
-  --mdst-button-hover-color: var(--mdst-color-bg);
-  --mdst-button-hover-border: var(--mdst-color-fg);
+@layer mdst-ui.base {
+  :root {
+    /* Colors */
+    --mdst-color-fg: #000;
+    --mdst-color-bg: #fff;
+    --mdst-color-border: #000;
+    --mdst-color-muted: #666;
+    --mdst-color-subtle: #f5f5f5;
+    --mdst-color-surface: #f5f5f5;
+    --mdst-color-focus: #000;
+    --mdst-color-danger: #dc2626;
+    --mdst-color-warning: #f59e0b;
+    --mdst-color-success: #16a34a;
+    /* --mdst-color-info is optional: info variants use the text colour unless
+       you set it, e.g. --mdst-color-info: #2563eb; */
 
-  /* Typography */
-  --mdst-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
-  --mdst-line-height: 1.5;
+    /* Typography */
+    --mdst-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mdst-font-mono: ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    --mdst-line-height: 1.5;
 
-  /* Semantic font roles — text is the reading face (prose inherits it from
-     the .mdst-ui container); ui is the interface face (components and form
-     controls). Override --mdst-font-text to retheme prose without touching
-     components. */
-  --mdst-font-text: var(--mdst-font-sans);
-  --mdst-font-ui: var(--mdst-font-sans);
+    /* Semantic font roles — text is the reading face (prose inherits it from
+       the .mdst-ui container); ui is the interface face (components and form
+       controls). Override --mdst-font-text to retheme prose without touching
+       components. */
+    --mdst-font-text: var(--mdst-font-sans);
+    --mdst-font-ui: var(--mdst-font-sans);
 
-  /* Font sizes */
-  --mdst-text-xs: 0.75rem;
-  --mdst-text-sm: 0.875rem;
-  --mdst-text-base: 1rem;
-  --mdst-text-lg: 1.125rem;
-  --mdst-text-xl: 1.25rem;
+    /* Font sizes */
+    --mdst-text-xs: 0.75rem;
+    --mdst-text-sm: 0.875rem;
+    --mdst-text-base: 1rem;
+    --mdst-text-lg: 1.125rem;
+    --mdst-text-xl: 1.25rem;
 
-  /* Spacing */
-  --mdst-space-px: 0.0625rem;
-  --mdst-space-1: 0.25rem;
-  --mdst-space-2: 0.5rem;
-  --mdst-space-3: 0.75rem;
-  --mdst-space-4: 1rem;
-  --mdst-space-5: 1.25rem;
-  --mdst-space-6: 1.5rem;
-  --mdst-space-8: 2rem;
+    /* Spacing */
+    --mdst-space-px: 0.0625rem;
+    --mdst-space-1: 0.25rem;
+    --mdst-space-2: 0.5rem;
+    --mdst-space-3: 0.75rem;
+    --mdst-space-4: 1rem;
+    --mdst-space-5: 1.25rem;
+    --mdst-space-6: 1.5rem;
+    --mdst-space-8: 2rem;
 
-  /* Semantic spacing aliases */
-  --mdst-space-xs: var(--mdst-space-1);
-  --mdst-space-sm: var(--mdst-space-2);
-  --mdst-space-md: var(--mdst-space-4);
-  --mdst-space-lg: var(--mdst-space-6);
-  --mdst-space-xl: var(--mdst-space-8);
+    /* Semantic spacing aliases */
+    --mdst-space-xs: var(--mdst-space-1);
+    --mdst-space-sm: var(--mdst-space-2);
+    --mdst-space-md: var(--mdst-space-4);
+    --mdst-space-lg: var(--mdst-space-6);
+    --mdst-space-xl: var(--mdst-space-8);
 
-  /* Border */
-  --mdst-radius: 0;
-  --mdst-border-width: 0.0625em;
+    /* Flow: space between block elements (headings, paragraphs, lists, tables,
+       form fields). In em, so it scales with each element's font size.
+       Set to 0 to turn it off. */
+    --mdst-flow-space: 1em;
 
-  /* Transitions */
-  --mdst-transition-fast: 50ms ease-out;
-  --mdst-transition: 100ms ease-out;
+    /* Focus: one keyboard focus ring for every component (:focus-visible).
+       By default it's 2px solid in --mdst-color-focus, overlapping the
+       component's 1px border so it reads as a heavier edge. Set --mdst-focus-ring
+       to replace it everywhere, e.g. 3px dashed hotpink, or none if you draw
+       your own:
+         --mdst-focus-ring: 2px solid var(--mdst-color-focus); */
+    --mdst-focus-offset: -1px;
+
+    /* Border */
+    --mdst-radius: 0;
+    --mdst-border-width: 0.0625em;
+
+    /* Transitions */
+    --mdst-transition-fast: 50ms ease-out;
+    --mdst-transition: 100ms ease-out;
+  }
+
+  /* Dark mode is opt-in, using the standard color-scheme property:
+
+       :root { color-scheme: light dark; }   follow the visitor's system
+       :root { color-scheme: dark; }         always dark
+
+     Without it, pages stay light everywhere. Browsers without light-dark()
+     stay light. Setting the colour tokens yourself replaces both values. */
+
+  @supports (color: light-dark(#000, #fff)) {
+    :root {
+      --mdst-color-fg: light-dark(#000, #fff);
+      --mdst-color-bg: light-dark(#fff, #1a1a1a);
+      --mdst-color-border: light-dark(#000, #fff);
+      --mdst-color-muted: light-dark(#666, #999);
+      --mdst-color-subtle: light-dark(#f5f5f5, #2a2a2a);
+      --mdst-color-surface: light-dark(#f5f5f5, #2a2a2a);
+      --mdst-color-focus: light-dark(#000, #fff);
+      --mdst-color-danger: light-dark(#dc2626, #f87171);
+      --mdst-color-warning: light-dark(#f59e0b, #fbbf24);
+      --mdst-color-success: light-dark(#16a34a, #4ade80);
+    }
+  }
 }

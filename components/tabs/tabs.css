@@ -1,152 +1,161 @@
-/* Tabs */
+@layer mdst-ui.components {
+  /* Tabs */
 
-.mdst-tabs {
-  display: flex;
-  flex-direction: column;
-
-  /* Tabs List */
-
-  & .mdst-tabs-list {
+  .mdst-tabs {
     display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
+    flex-direction: column;
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+    /* Tabs List */
 
-  /* Individual Tab */
+    & .mdst-tabs__list {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
 
-  & .mdst-tab {
-    padding: var(--mdst-space-sm) var(--mdst-space-md);
-    white-space: nowrap;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-family: var(--mdst-font-ui);
-    font-size: inherit;
-    line-height: var(--mdst-line-height);
-    color: var(--mdst-color-muted);
-    border-bottom: 2px solid transparent;
-    margin-bottom: calc(-1 * var(--mdst-border-width));
-    transition:
-      color var(--mdst-transition),
-      border-color var(--mdst-transition),
-      background-color var(--mdst-transition);
-
-    &:hover {
-      color: var(--mdst-color-fg);
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      border-bottom: var(--mdst-border-width) solid var(--mdst-color-border);
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    &[data-state="active"] {
-      color: var(--mdst-color-fg);
-      font-weight: 600;
-      border-bottom-color: var(--mdst-color-fg);
-    }
+    /* Individual Tab */
 
-    &[data-state="inactive"] {
+    & .mdst-tabs__tab {
+      padding: var(--mdst-space-sm) var(--mdst-space-md);
+      white-space: nowrap;
+      border: none;
+      background: none;
+      box-shadow: none;
+      cursor: pointer;
+      font-family: var(--mdst-font-ui);
+      font-size: inherit;
+      line-height: var(--mdst-line-height);
       color: var(--mdst-color-muted);
-      border-bottom-color: transparent;
-    }
-
-    &[data-disabled],
-    &[data-disabled="true"] {
-      opacity: 0.5;
-      cursor: not-allowed;
+      border-bottom: 2px solid transparent;
+      margin-bottom: calc(-1 * var(--mdst-border-width));
+      transition:
+        color var(--mdst-transition),
+        border-color var(--mdst-transition),
+        background-color var(--mdst-transition);
 
       &:hover {
-        color: var(--mdst-color-muted);
-      }
-    }
-  }
-
-  /* Tab Panel */
-
-  & .mdst-tabs-panel {
-    padding: var(--mdst-space-md) 0;
-
-    &[data-state="inactive"] {
-      display: none;
-    }
-
-    &[data-state="active"] {
-      display: block;
-    }
-  }
-
-  /* Variant: Pills */
-
-  &.mdst-tabs--pills {
-    & .mdst-tabs-list {
-      border-bottom: none;
-      gap: var(--mdst-space-xs);
-    }
-
-    & .mdst-tab {
-      border-bottom: none;
-      margin-bottom: 0;
-      border-radius: var(--mdst-radius);
-      padding: var(--mdst-space-xs) var(--mdst-space-md);
-
-      &[data-state="active"] {
-        background: var(--mdst-color-fg);
-        color: var(--mdst-color-bg);
-      }
-
-      &:hover:not([data-state="active"]):not([data-disabled]) {
-        background: var(--mdst-color-surface);
         color: var(--mdst-color-fg);
       }
-    }
-  }
 
-  /* Variant: Vertical */
-
-  &.mdst-tabs--vertical {
-    flex-direction: row;
-
-    & .mdst-tabs-list {
-      flex-direction: column;
-      border-bottom: none;
-      border-right: var(--mdst-border-width) solid var(--mdst-color-border);
-      min-width: 10rem;
-    }
-
-    & .mdst-tab {
-      border-bottom: none;
-      margin-bottom: 0;
-      border-right: 2px solid transparent;
-      margin-right: calc(-1 * var(--mdst-border-width));
-      text-align: left;
+      /* Inside: the scrolling tab list would clip an outer ring */
+      &:focus-visible {
+        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+        outline-offset: -2px;
+      }
 
       &[data-state="active"] {
-        border-right-color: var(--mdst-color-fg);
+        color: var(--mdst-color-fg);
+        font-weight: 600;
+        border-bottom-color: var(--mdst-color-fg);
+      }
+
+      &[data-state="inactive"] {
+        color: var(--mdst-color-muted);
         border-bottom-color: transparent;
+      }
+
+      &[data-disabled],
+      &[data-disabled="true"] {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        &:hover {
+          color: var(--mdst-color-muted);
+        }
       }
     }
 
-    & .mdst-tabs-panel {
-      padding: 0 var(--mdst-space-md);
-      flex: 1;
+    /* Tab Panel */
+
+    & .mdst-tabs__panel {
+      padding: var(--mdst-space-md) 0;
+
+      &[data-state="inactive"] {
+        display: none;
+      }
+
+      &[data-state="active"] {
+        display: block;
+      }
     }
-  }
 
-  /* Variant: Compact */
+    /* Variant: Pills */
 
-  &.mdst-tabs--compact {
-    & .mdst-tab {
-      padding: var(--mdst-space-xs) var(--mdst-space-sm);
-      font-size: var(--mdst-text-sm);
+    &.mdst-tabs--pills {
+      & .mdst-tabs__list {
+        border-bottom: none;
+        gap: var(--mdst-space-xs);
+      }
+
+      & .mdst-tabs__tab {
+        border-bottom: none;
+        margin-bottom: 0;
+        border-radius: var(--mdst-radius);
+        padding: var(--mdst-space-xs) var(--mdst-space-md);
+
+        &[data-state="active"] {
+          background: var(--mdst-color-fg);
+          color: var(--mdst-color-bg);
+        }
+
+        &:hover:not([data-state="active"]):not([data-disabled]) {
+          background: var(--mdst-color-surface);
+          color: var(--mdst-color-fg);
+        }
+      }
     }
 
-    & .mdst-tabs-panel {
-      padding: var(--mdst-space-sm) 0;
+    /* Variant: Vertical */
+
+    &.mdst-tabs--vertical {
+      flex-direction: row;
+
+      & .mdst-tabs__list {
+        flex-direction: column;
+        border-bottom: none;
+        border-right: var(--mdst-border-width) solid var(--mdst-color-border);
+        min-width: 10rem;
+      }
+
+      & .mdst-tabs__tab {
+        border-bottom: none;
+        margin-bottom: 0;
+        border-right: 2px solid transparent;
+        margin-right: calc(-1 * var(--mdst-border-width));
+        text-align: left;
+
+        &[data-state="active"] {
+          border-right-color: var(--mdst-color-fg);
+          border-bottom-color: transparent;
+        }
+      }
+
+      & .mdst-tabs__panel {
+        padding: 0 var(--mdst-space-md);
+        flex: 1;
+      }
+    }
+
+    /* Variant: Compact */
+
+    &.mdst-tabs--sm {
+      & .mdst-tabs__tab {
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        font-size: var(--mdst-text-sm);
+      }
+
+      & .mdst-tabs__panel {
+        padding: var(--mdst-space-sm) 0;
+      }
     }
   }
 }
