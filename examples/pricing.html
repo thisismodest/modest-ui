@@ -24,48 +24,15 @@
       content="A pricing page built with modest-ui, featuring tiered plan cards, feature comparison table, FAQ section, and monthly/yearly billing toggle."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-      /* Our page reset sits below modest-ui, so it never overrides it */
-      @layer page-reset, mdst-ui;
-    </style>
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
-      @layer page-reset {
-        /* Page reset. These examples use modest-ui by class, outside .mdst-ui,
-           so the page brings its own reset. */
-        *,
-        *::before,
-        *::after {
-          box-sizing: border-box;
-        }
-
-        * {
-          margin: 0;
-        }
-
-        img,
-        svg {
-          display: block;
-          max-width: 100%;
-        }
-
-        a {
-          color: inherit;
-        }
-
-        input,
-        button,
-        textarea,
-        select {
-          font: inherit;
-        }
+      body {
+        margin: 0;
       }
 
-      body {
-        font-family: var(--mdst-font-sans);
-        line-height: var(--mdst-line-height);
-        color: var(--mdst-color-fg);
-        background: var(--mdst-color-bg);
+      /* Full-width bands sit flush, with no flow spacing between them */
+      body > * {
+        margin-block: 0;
       }
 
       /* Header */
@@ -141,6 +108,7 @@
           color var(--mdst-transition),
           background var(--mdst-transition),
           border-color var(--mdst-transition);
+        box-shadow: none;
       }
 
       .billing-option:hover {
@@ -249,7 +217,7 @@
         margin: 0 0 var(--mdst-space-lg);
       }
 
-      .pricing-card-cta .mdst-button {
+      .pricing-card-cta button {
         width: 100%;
       }
 
@@ -277,6 +245,7 @@
         display: flex;
         align-items: start;
         gap: var(--mdst-space-sm);
+        margin: 0;
       }
 
       .pricing-features-list li::before {
@@ -550,7 +519,7 @@
           flex-direction: column;
         }
 
-        .cta-buttons .mdst-button {
+        .cta-buttons button {
           width: 100%;
         }
 
@@ -562,15 +531,15 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <!-- Header -->
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <nav class="site-nav">
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Product</button>
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Docs</button>
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Blog</button>
-        <button type="button" class="mdst-button mdst-button--sm">Sign In</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Product</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Docs</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Blog</button>
+        <button type="button" class="mdst-button--sm">Sign In</button>
       </nav>
     </header>
 
@@ -606,7 +575,7 @@
           <div class="mdst-card__body">
             <p class="pricing-card-desc">Perfect for side projects, experiments, and trying things out.</p>
             <div class="pricing-card-cta">
-              <button type="button" class="mdst-button">Get Started</button>
+              <button type="button">Get Started</button>
             </div>
           </div>
           <div class="mdst-card__footer">
@@ -638,7 +607,7 @@
           <div class="mdst-card__body">
             <p class="pricing-card-desc">For professionals and growing teams who need more power and flexibility.</p>
             <div class="pricing-card-cta">
-              <button type="button" class="mdst-button mdst-button--solid">Start Free Trial</button>
+              <button type="button" class="mdst-button--solid">Start Free Trial</button>
             </div>
           </div>
           <div class="mdst-card__footer">
@@ -669,7 +638,7 @@
           <div class="mdst-card__body">
             <p class="pricing-card-desc">For orgs that need advanced security, compliance, and dedicated support.</p>
             <div class="pricing-card-cta">
-              <button type="button" class="mdst-button">Contact Sales</button>
+              <button type="button">Contact Sales</button>
             </div>
           </div>
           <div class="mdst-card__footer">
@@ -853,7 +822,7 @@
       </div>
 
       <div class="faq-list">
-        <details class="mdst-details mdst-details--section faq-item" open>
+        <details class="mdst-details--section faq-item" open>
           <summary>Can I switch plans at any time?</summary>
           <p>
             Yes. You can upgrade or downgrade your plan at any time. When upgrading, you'll be charged the prorated difference for the
@@ -861,7 +830,7 @@
           </p>
         </details>
 
-        <details class="mdst-details mdst-details--section faq-item">
+        <details class="mdst-details--section faq-item">
           <summary>Is there a free trial for the Pro plan?</summary>
           <p>
             Absolutely. Every Pro plan starts with a 14-day free trial, no credit card required. You'll have full access to all Pro features
@@ -869,7 +838,7 @@
           </p>
         </details>
 
-        <details class="mdst-details mdst-details--section faq-item">
+        <details class="mdst-details--section faq-item">
           <summary>What happens if I exceed my API request limit?</summary>
           <p>
             We won't cut you off. If you go over your monthly limit, we'll send you a notification and give you a grace period. Consistent
@@ -877,7 +846,7 @@
           </p>
         </details>
 
-        <details class="mdst-details mdst-details--section faq-item">
+        <details class="mdst-details--section faq-item">
           <summary>Do you offer discounts for startups or non-profits?</summary>
           <p>
             Yes! We offer 50% off Pro and Enterprise plans for verified non-profits and early-stage startups (under $1M in funding). Reach
@@ -885,7 +854,7 @@
           </p>
         </details>
 
-        <details class="mdst-details mdst-details--section faq-item">
+        <details class="mdst-details--section faq-item">
           <summary>What payment methods do you accept?</summary>
           <p>
             We accept all major credit cards (Visa, Mastercard, American Express) and can arrange invoicing for annual Enterprise contracts.
@@ -893,7 +862,7 @@
           </p>
         </details>
 
-        <details class="mdst-details mdst-details--section faq-item">
+        <details class="mdst-details--section faq-item">
           <summary>Can I cancel at any time?</summary>
           <p>
             Yes, you can cancel at any time with no cancellation fees. Your plan will remain active until the end of your current billing
@@ -909,8 +878,8 @@
         <h2>Not sure which plan is right for you?</h2>
         <p>Talk to our team and we'll help you figure out the best option for your needs. No pressure, no commitment.</p>
         <div class="cta-buttons">
-          <button type="button" class="mdst-button mdst-button--solid">Talk to Sales</button>
-          <button type="button" class="mdst-button">View Documentation</button>
+          <button type="button" class="mdst-button--solid">Talk to Sales</button>
+          <button type="button">View Documentation</button>
         </div>
         <p class="cta-sub">Or start free and upgrade later, no credit card required.</p>
       </div>

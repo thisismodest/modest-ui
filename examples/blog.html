@@ -24,48 +24,10 @@
       content="A minimal blog built with modest-ui, featuring an article list, tags, and a full article reading view."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-      /* Our page reset sits below modest-ui, so it never overrides it */
-      @layer page-reset, mdst-ui;
-    </style>
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
-      @layer page-reset {
-        /* Page reset. These examples use modest-ui by class, outside .mdst-ui,
-           so the page brings its own reset. */
-        *,
-        *::before,
-        *::after {
-          box-sizing: border-box;
-        }
-
-        * {
-          margin: 0;
-        }
-
-        img,
-        svg {
-          display: block;
-          max-width: 100%;
-        }
-
-        a {
-          color: inherit;
-        }
-
-        input,
-        button,
-        textarea,
-        select {
-          font: inherit;
-        }
-      }
-
       body {
-        font-family: var(--mdst-font-sans);
-        line-height: var(--mdst-line-height);
-        color: var(--mdst-color-fg);
-        background: var(--mdst-color-bg);
+        margin: 0;
       }
 
       /* Header */
@@ -319,6 +281,7 @@
         border: none;
         padding: 0;
         font-family: inherit;
+        box-shadow: none;
       }
 
       .article-back:hover {
@@ -445,6 +408,7 @@
       .article-author-info h4 {
         font-weight: 600;
         margin: 0 0 var(--mdst-space-xs);
+        font-size: var(--mdst-text-base);
       }
 
       .article-author-info p {
@@ -497,6 +461,7 @@
       .newsletter h3 {
         font-weight: 600;
         margin: 0 0 var(--mdst-space-xs);
+        font-size: var(--mdst-text-lg);
       }
 
       .newsletter p {
@@ -512,7 +477,7 @@
         margin: 0 auto;
       }
 
-      .newsletter-form .mdst-input {
+      .newsletter-form input {
         flex: 1;
       }
 
@@ -589,14 +554,14 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <!-- Header -->
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <nav class="site-nav">
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Archive</button>
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">About</button>
-        <button type="button" class="mdst-button mdst-button--sm mdst-button--solid">Subscribe</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Archive</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">About</button>
+        <button type="button" class="mdst-button--sm mdst-button--solid">Subscribe</button>
       </nav>
     </header>
 
@@ -822,9 +787,9 @@
 
       <!-- Pagination -->
       <div class="pagination">
-        <button type="button" class="mdst-button mdst-button--sm" disabled>← Newer</button>
+        <button type="button" class="mdst-button--sm" disabled>← Newer</button>
         <span class="pagination-info">Page 1 of 4</span>
-        <button type="button" class="mdst-button mdst-button--sm">Older →</button>
+        <button type="button" class="mdst-button--sm">Older →</button>
       </div>
     </div>
 
@@ -908,7 +873,7 @@
             you spend your tokens. The best rule I've found:
           </p>
 
-          <pre class="mdst-pre"><code class="mdst-code">if (technology.solves_core_problem && technology.has_strong_community) {
+          <pre><code>if (technology.solves_core_problem && technology.has_strong_community) {
   consider_adopting();
 } else {
   stick_with_boring();
@@ -976,8 +941,8 @@
           <h3>Stay in the loop</h3>
           <p>Get new posts delivered to your inbox. No spam, unsubscribe anytime.</p>
           <div class="newsletter-form">
-            <input type="email" class="mdst-input" placeholder="you@example.com" />
-            <button type="button" class="mdst-button mdst-button--solid">Subscribe</button>
+            <input type="email" placeholder="you@example.com" />
+            <button type="button" class="mdst-button--solid">Subscribe</button>
           </div>
         </div>
       </div>

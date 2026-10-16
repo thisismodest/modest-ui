@@ -24,48 +24,10 @@
       content="Authentication forms built with modest-ui, including login, registration, and password reset pages."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-      /* Our page reset sits below modest-ui, so it never overrides it */
-      @layer page-reset, mdst-ui;
-    </style>
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
-      @layer page-reset {
-        /* Page reset. These examples use modest-ui by class, outside .mdst-ui,
-           so the page brings its own reset. */
-        *,
-        *::before,
-        *::after {
-          box-sizing: border-box;
-        }
-
-        * {
-          margin: 0;
-        }
-
-        img,
-        svg {
-          display: block;
-          max-width: 100%;
-        }
-
-        a {
-          color: inherit;
-        }
-
-        input,
-        button,
-        textarea,
-        select {
-          font: inherit;
-        }
-      }
-
       body {
-        font-family: var(--mdst-font-sans);
-        line-height: var(--mdst-line-height);
-        color: var(--mdst-color-fg);
-        background: var(--mdst-color-bg);
+        margin: 0;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -126,6 +88,9 @@
         margin: 0 0 var(--mdst-space-md);
         font-size: var(--mdst-text-sm);
         line-height: 1.6;
+        padding: 0;
+        border: 0;
+        color: inherit;
       }
 
       .testimonial-author {
@@ -225,23 +190,10 @@
         margin-bottom: var(--mdst-space-lg);
       }
 
+      /* Library buttons, full width in the grid */
       .oauth-btn {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: var(--mdst-space-xs);
-        padding: var(--mdst-space-sm) var(--mdst-space-md);
-        background: none;
-        border: var(--mdst-border-width) solid var(--mdst-color-border);
-        cursor: pointer;
-        font-family: inherit;
         font-size: var(--mdst-text-sm);
-        color: var(--mdst-color-fg);
-        transition: background var(--mdst-transition);
-      }
-
-      .oauth-btn:hover {
-        background: var(--mdst-color-subtle);
       }
 
       .oauth-btn svg {
@@ -307,6 +259,7 @@
         cursor: pointer;
         padding: 0;
         font-family: inherit;
+        box-shadow: none;
       }
 
       .form-link:hover {
@@ -375,6 +328,7 @@
         display: flex;
         align-items: center;
         gap: var(--mdst-space-xs);
+        margin: 0;
       }
 
       .password-reqs li.met {
@@ -408,7 +362,8 @@
         font-family: inherit;
         font-size: inherit;
         padding: 0;
-      }
+      box-shadow: none;
+    }
 
       .auth-footer a:hover,
       .auth-footer button:hover {
@@ -544,7 +499,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <div class="auth-layout">
       <!-- Left panel — branding -->
       <div class="auth-brand">
@@ -559,7 +514,7 @@
             </blockquote>
             <div class="testimonial-author">
               <div class="testimonial-avatar">RK</div>
-              <div>
+              <div class="testimonial-person">
                 <div class="testimonial-name">Ravi Kumar</div>
                 <div class="testimonial-role">Lead Engineer at Figment</div>
               </div>
@@ -579,7 +534,7 @@
           <!-- ============================================ -->
           <div class="auth-view active" id="view-login">
             <div class="auth-top-link">
-              <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm" onclick="showView('signup')">
+              <button type="button" class="mdst-button--borderless mdst-button--sm" onclick="showView('signup')">
                 Create account
               </button>
             </div>
@@ -626,7 +581,7 @@
             <form class="auth-form" onsubmit="return false;">
               <div class="form-group">
                 <label for="login-email">Email</label>
-                <input type="email" id="login-email" class="mdst-input" placeholder="you@company.com" />
+                <input type="email" id="login-email" placeholder="you@company.com" />
               </div>
 
               <div class="form-group">
@@ -639,7 +594,6 @@
                     type="password"
                     autocomplete="current-password"
                     id="login-password"
-                    class="mdst-input"
                     placeholder="••••••••"
                   />
                   <input type="checkbox" aria-label="Toggle password visibility" />
@@ -648,12 +602,12 @@
 
               <div class="form-row" style="margin-top: var(--mdst-space-xs)">
                 <label>
-                  <input type="checkbox" class="mdst-input" checked />
+                  <input type="checkbox" checked />
                   Remember me
                 </label>
               </div>
 
-              <button class="mdst-button mdst-button--solid form-submit" onclick="showView('verify')" type="submit">Sign In</button>
+              <button class="mdst-button--solid form-submit" onclick="showView('verify')" type="submit">Sign In</button>
             </form>
 
             <div class="auth-footer">Don't have an account? <button type="button" onclick="showView('signup')">Sign up</button></div>
@@ -664,7 +618,7 @@
           <!-- ============================================ -->
           <div class="auth-view" id="view-signup">
             <div class="auth-top-link">
-              <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm" onclick="showView('login')">Sign in</button>
+              <button type="button" class="mdst-button--borderless mdst-button--sm" onclick="showView('login')">Sign in</button>
             </div>
 
             <div class="auth-header">
@@ -710,17 +664,17 @@
               <div class="form-group-row">
                 <div class="form-group">
                   <label for="signup-first">First name</label>
-                  <input type="text" id="signup-first" class="mdst-input" placeholder="Jane" />
+                  <input type="text" id="signup-first" placeholder="Jane" />
                 </div>
                 <div class="form-group">
                   <label for="signup-last">Last name</label>
-                  <input type="text" id="signup-last" class="mdst-input" placeholder="Doe" />
+                  <input type="text" id="signup-last" placeholder="Doe" />
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="signup-email">Work email</label>
-                <input type="email" id="signup-email" class="mdst-input" placeholder="you@company.com" />
+                <input type="email" id="signup-email" placeholder="you@company.com" />
               </div>
 
               <div class="form-group">
@@ -730,7 +684,6 @@
                     type="password"
                     autocomplete="new-password"
                     id="signup-password"
-                    class="mdst-input"
                     placeholder="Create a strong password"
                     oninput="updatePasswordStrength(this.value)"
                   />
@@ -753,7 +706,7 @@
 
               <div class="form-group">
                 <label for="signup-team">Team size</label>
-                <select id="signup-team" class="mdst-dropdown" style="width: 100%">
+                <select id="signup-team" style="width: 100%">
                   <option value="">Select team size</option>
                   <option>Just me</option>
                   <option>2–10</option>
@@ -765,12 +718,12 @@
 
               <div style="margin-top: var(--mdst-space-xs)">
                 <label>
-                  <input type="checkbox" class="mdst-input" />
+                  <input type="checkbox" />
                   <span> I agree to the <a href="#terms-of-service">Terms of Service</a> and <a href="#privacy-policy">Privacy Policy</a> </span>
                 </label>
               </div>
 
-              <button class="mdst-button mdst-button--solid form-submit" type="submit" onclick="showView('verify')">
+              <button class="mdst-button--solid form-submit" type="submit" onclick="showView('verify')">
                 Create Account
               </button>
             </form>
@@ -798,7 +751,7 @@
                 <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
               </div>
 
-              <button type="button" class="mdst-button mdst-button--solid" style="width: 100%" onclick="showView('login')">
+              <button type="button" class="mdst-button--solid" style="width: 100%" onclick="showView('login')">
                 Verify Email
               </button>
             </form>
@@ -823,10 +776,10 @@
             <form class="auth-form" onsubmit="return false;">
               <div class="form-group">
                 <label for="forgot-email">Email address</label>
-                <input type="email" id="forgot-email" class="mdst-input" placeholder="you@company.com" />
+                <input type="email" id="forgot-email" placeholder="you@company.com" />
               </div>
 
-              <button class="mdst-button mdst-button--solid form-submit" type="submit" onclick="showView('reset-sent')">
+              <button class="mdst-button--solid form-submit" type="submit" onclick="showView('reset-sent')">
                 Send Reset Link
               </button>
             </form>
@@ -849,8 +802,8 @@
             </div>
 
             <div style="display: flex; flex-direction: column; gap: var(--mdst-space-sm); margin-top: var(--mdst-space-md)">
-              <button type="button" class="mdst-button" onclick="showView('reset')">I have a reset link (demo)</button>
-              <button type="button" class="mdst-button mdst-button--borderless" onclick="showView('login')">← Back to sign in</button>
+              <button type="button" onclick="showView('reset')">I have a reset link (demo)</button>
+              <button type="button" class="mdst-button--borderless" onclick="showView('login')">← Back to sign in</button>
             </div>
           </div>
 
@@ -871,7 +824,6 @@
                     type="password"
                     autocomplete="new-password"
                     id="reset-password"
-                    class="mdst-input"
                     placeholder="••••••••"
                   />
                   <input type="checkbox" aria-label="Toggle password visibility" />
@@ -886,14 +838,13 @@
                     type="password"
                     autocomplete="new-password"
                     id="reset-confirm"
-                    class="mdst-input"
                     placeholder="••••••••"
                   />
                   <input type="checkbox" aria-label="Toggle password visibility" />
                 </div>
               </div>
 
-              <button class="mdst-button mdst-button--solid form-submit" type="submit" onclick="showView('reset-success')">
+              <button class="mdst-button--solid form-submit" type="submit" onclick="showView('reset-success')">
                 Reset Password
               </button>
             </form>
@@ -913,7 +864,7 @@
               <p>Your password has been successfully reset. You can now sign in with your new credentials.</p>
             </div>
 
-            <button type="button" class="mdst-button mdst-button--solid" style="width: 100%" onclick="showView('login')">
+            <button type="button" class="mdst-button--solid" style="width: 100%" onclick="showView('login')">
               Continue to Sign In
             </button>
           </div>

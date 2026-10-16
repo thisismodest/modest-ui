@@ -24,48 +24,10 @@
       content="An admin dashboard built with modest-ui, featuring stat cards, a data table, activity feed, and sidebar navigation."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-      /* Our page reset sits below modest-ui, so it never overrides it */
-      @layer page-reset, mdst-ui;
-    </style>
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
-      @layer page-reset {
-        /* Page reset. These examples use modest-ui by class, outside .mdst-ui,
-           so the page brings its own reset. */
-        *,
-        *::before,
-        *::after {
-          box-sizing: border-box;
-        }
-
-        * {
-          margin: 0;
-        }
-
-        img,
-        svg {
-          display: block;
-          max-width: 100%;
-        }
-
-        a {
-          color: inherit;
-        }
-
-        input,
-        button,
-        textarea,
-        select {
-          font: inherit;
-        }
-      }
-
       body {
-        font-family: var(--mdst-font-sans);
-        line-height: var(--mdst-line-height);
-        color: var(--mdst-color-fg);
-        background: var(--mdst-color-bg);
+        margin: 0;
       }
 
       /* Layout */
@@ -228,6 +190,7 @@
         align-items: center;
         gap: var(--mdst-space-xs);
         transition: background var(--mdst-transition);
+        box-shadow: none;
       }
 
       .notification-btn:hover {
@@ -345,7 +308,7 @@
         overflow-x: auto;
       }
 
-      .table-wrap .mdst-table td {
+      .table-wrap table td {
         white-space: nowrap;
       }
 
@@ -479,6 +442,8 @@
         font-size: var(--mdst-text-sm);
         color: var(--mdst-color-fg);
         transition: background var(--mdst-transition);
+        box-shadow: none;
+        justify-content: flex-start;
       }
 
       .quick-action-btn:hover {
@@ -528,17 +493,18 @@
         cursor: pointer;
         color: var(--mdst-color-fg);
         font-size: var(--mdst-text-sm);
+        box-shadow: none;
       }
 
       /* Dialog */
-      .mdst-dialog {
+      dialog {
         border: var(--mdst-border-width) solid var(--mdst-color-border);
         padding: 0;
         max-width: 28rem;
         width: 90vw;
       }
 
-      .mdst-dialog::backdrop {
+      dialog::backdrop {
         background: rgba(0, 0, 0, 0.4);
       }
 
@@ -564,6 +530,7 @@
         font-size: var(--mdst-text-lg);
         padding: 0;
         line-height: 1;
+        box-shadow: none;
       }
 
       .dialog-close:hover {
@@ -670,7 +637,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <div class="dash-layout">
       <!-- Sidebar -->
       <aside class="dash-sidebar" id="sidebar">
@@ -761,11 +728,11 @@
         <header class="topbar">
           <button type="button" class="dash-mobile-menu-btn" id="mobile-menu-btn">☰ Menu</button>
           <div class="topbar-search">
-            <input type="text" class="mdst-input" placeholder="Search orders, customers, products..." />
+            <input type="text" placeholder="Search orders, customers, products..." />
           </div>
           <div class="topbar-actions">
             <button type="button" class="notification-btn">🔔 <span class="notification-dot"></span></button>
-            <select class="mdst-dropdown mdst-dropdown--sm mdst-dropdown--borderless">
+            <select class="mdst-dropdown--sm mdst-dropdown--borderless">
               <option>Last 30 days</option>
               <option>Last 7 days</option>
               <option>Last 90 days</option>
@@ -779,8 +746,8 @@
           <div class="content-header">
             <h1><a href="/examples/" style="text-decoration: none">← Examples</a></h1>
             <div class="content-header-actions">
-              <button type="button" class="mdst-button mdst-button--sm mdst-button--borderless">Export</button>
-              <button type="button" class="mdst-button mdst-button--sm mdst-button--solid" id="new-order-btn">+ New Order</button>
+              <button type="button" class="mdst-button--sm mdst-button--borderless">Export</button>
+              <button type="button" class="mdst-button--sm mdst-button--solid" id="new-order-btn">+ New Order</button>
             </div>
           </div>
 
@@ -840,8 +807,8 @@
                 <div class="mdst-card__body" style="padding: 0">
                   <div class="table-toolbar" style="padding: var(--mdst-space-sm) var(--mdst-space-md) 0">
                     <div class="table-toolbar-left">
-                      <input type="text" class="mdst-input" placeholder="Search orders..." style="max-width: 14rem" />
-                      <select class="mdst-dropdown mdst-dropdown--sm">
+                      <input type="text" placeholder="Search orders..." style="max-width: 14rem" />
+                      <select class="mdst-dropdown--sm">
                         <option>All Status</option>
                         <option>Completed</option>
                         <option>Processing</option>
@@ -850,16 +817,16 @@
                       </select>
                     </div>
                     <div class="table-toolbar-right">
-                      <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">↓ Export</button>
+                      <button type="button" class="mdst-button--borderless mdst-button--sm">↓ Export</button>
                     </div>
                   </div>
                   <div class="table-wrap">
-                    <table class="mdst-table">
+                    <table>
                       <thead>
                         <tr>
                           <th style="padding-left: var(--mdst-space-md)">
                             <label style="margin: 0">
-                              <input type="checkbox" class="mdst-input" id="select-all" />
+                              <input type="checkbox" id="select-all" />
                               <span class="mdst-sr-only">Select all orders</span>
                             </label>
                           </th>
@@ -874,7 +841,7 @@
                       <tbody>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-input" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7291</span></td>
                           <td>
@@ -890,12 +857,12 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$284.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 15, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-input" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7290</span></td>
                           <td>
@@ -911,12 +878,12 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$1,420.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 15, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-input" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7289</span></td>
                           <td>
@@ -932,12 +899,12 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$89.50</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 14, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-input" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7288</span></td>
                           <td>
@@ -953,12 +920,12 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$635.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 14, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-input" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7287</span></td>
                           <td>
@@ -974,12 +941,12 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$192.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 13, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding-left: var(--mdst-space-md)">
-                            <input type="checkbox" class="mdst-input" />
+                            <input type="checkbox" />
                           </td>
                           <td><span style="font-family: var(--mdst-font-mono); font-size: var(--mdst-text-sm)">#ORD-7286</span></td>
                           <td>
@@ -995,7 +962,7 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$47.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 13, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                       </tbody>
@@ -1006,8 +973,8 @@
                   <div class="table-pagination" style="width: 100%">
                     <span>Showing 1–6 of 1,247</span>
                     <div class="table-pagination-btns">
-                      <button type="button" class="mdst-button mdst-button--sm" disabled>← Prev</button>
-                      <button type="button" class="mdst-button mdst-button--sm">Next →</button>
+                      <button type="button" class="mdst-button--sm" disabled>← Prev</button>
+                      <button type="button" class="mdst-button--sm">Next →</button>
                     </div>
                   </div>
                 </div>
@@ -1028,7 +995,7 @@
               <div class="mdst-card">
                 <div class="mdst-card__header" style="display: flex; justify-content: space-between; align-items: center">
                   <span>Recent Activity</span>
-                  <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">View all</button>
+                  <button type="button" class="mdst-button--borderless mdst-button--sm">View all</button>
                 </div>
                 <div class="mdst-card__body">
                   <div class="activity-list">
@@ -1098,7 +1065,7 @@
     </div>
 
     <!-- New Order Dialog -->
-    <dialog class="mdst-dialog" id="new-order-dialog">
+    <dialog id="new-order-dialog">
       <div class="dialog-header">
         <h2>New Order</h2>
         <button type="button" class="dialog-close" onclick="document.getElementById('new-order-dialog').close()">✕</button>
@@ -1106,12 +1073,12 @@
       <div class="dialog-body">
         <div class="form-group">
           <label for="order-customer">Customer</label>
-          <input id="order-customer" type="text" class="mdst-input" placeholder="Search customers..." />
+          <input id="order-customer" type="text" placeholder="Search customers..." />
         </div>
         <div class="form-row">
           <div class="form-group">
             <label for="order-product">Product</label>
-            <select id="order-product" class="mdst-dropdown" style="width: 100%">
+            <select id="order-product" style="width: 100%">
               <option>Select product</option>
               <option>Ceramic Mug — White</option>
               <option>Ceramic Mug — Midnight</option>
@@ -1121,25 +1088,25 @@
           </div>
           <div class="form-group">
             <label for="order-quantity">Quantity</label>
-            <input id="order-quantity" type="number" class="mdst-input" value="1" min="1" />
+            <input id="order-quantity" type="number" value="1" min="1" />
           </div>
         </div>
         <div class="form-group">
           <label for="order-notes">Notes</label>
-          <textarea id="order-notes" class="mdst-input" rows="3" placeholder="Optional order notes..."></textarea>
+          <textarea id="order-notes" rows="3" placeholder="Optional order notes..."></textarea>
         </div>
         <div class="form-group">
           <label>
-            <input type="checkbox" class="mdst-input" />
+            <input type="checkbox" />
             Send confirmation email to customer
           </label>
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button mdst-button--borderless" onclick="document.getElementById('new-order-dialog').close()">
+        <button type="button" class="mdst-button--borderless" onclick="document.getElementById('new-order-dialog').close()">
           Cancel
         </button>
-        <button type="button" class="mdst-button mdst-button--solid" onclick="document.getElementById('new-order-dialog').close()">
+        <button type="button" class="mdst-button--solid" onclick="document.getElementById('new-order-dialog').close()">
           Create Order
         </button>
       </div>

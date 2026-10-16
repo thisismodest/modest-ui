@@ -24,48 +24,15 @@
       content="A marketing landing page built with modest-ui, featuring a hero section, feature grid, testimonials, and call-to-action footer."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-      /* Our page reset sits below modest-ui, so it never overrides it */
-      @layer page-reset, mdst-ui;
-    </style>
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
-      @layer page-reset {
-        /* Page reset. These examples use modest-ui by class, outside .mdst-ui,
-           so the page brings its own reset. */
-        *,
-        *::before,
-        *::after {
-          box-sizing: border-box;
-        }
-
-        * {
-          margin: 0;
-        }
-
-        img,
-        svg {
-          display: block;
-          max-width: 100%;
-        }
-
-        a {
-          color: inherit;
-        }
-
-        input,
-        button,
-        textarea,
-        select {
-          font: inherit;
-        }
+      body {
+        margin: 0;
       }
 
-      body {
-        font-family: var(--mdst-font-sans);
-        line-height: var(--mdst-line-height);
-        color: var(--mdst-color-fg);
-        background: var(--mdst-color-bg);
+      /* Full-width bands sit flush, with no flow spacing between them */
+      body > * {
+        margin-block: 0;
       }
 
       /* Header */
@@ -209,6 +176,7 @@
       .mdst-card__body h3 {
         font-weight: 600;
         margin: 0 0 var(--mdst-space-xs);
+        font-size: var(--mdst-text-lg);
       }
 
       .mdst-card__body p {
@@ -258,6 +226,7 @@
         display: flex;
         align-items: center;
         gap: var(--mdst-space-sm);
+        margin: 0;
       }
 
       .showcase-text li::before {
@@ -393,7 +362,7 @@
         margin: 0 auto;
       }
 
-      .cta-form .mdst-input {
+      .cta-form input {
         flex: 1;
       }
 
@@ -518,7 +487,7 @@
           flex-direction: column;
         }
 
-        .hero-actions .mdst-button {
+        .hero-actions button {
           width: 100%;
         }
 
@@ -538,15 +507,15 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <!-- Header -->
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <nav class="site-nav">
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Features</button>
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Pricing</button>
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Docs</button>
-        <button type="button" class="mdst-button mdst-button--sm">Sign In</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Features</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Pricing</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Docs</button>
+        <button type="button" class="mdst-button--sm">Sign In</button>
       </nav>
     </header>
 
@@ -556,8 +525,8 @@
       <h1>Ship faster with less complexity</h1>
       <p>A developer platform that eliminates boilerplate, automates the boring parts, and lets you focus on what matters: your product.</p>
       <div class="hero-actions">
-        <button type="button" class="mdst-button mdst-button--solid mdst-button--lg">Get Started Free</button>
-        <button type="button" class="mdst-button mdst-button--lg">View Documentation</button>
+        <button type="button" class="mdst-button--solid mdst-button--lg">Get Started Free</button>
+        <button type="button" class="mdst-button--lg">View Documentation</button>
       </div>
       <p class="hero-sub">No credit card required · Free for up to 3 projects</p>
     </section>
@@ -638,18 +607,18 @@
             <li>Custom domains with instant SSL</li>
             <li>Rollback to any previous deploy</li>
           </ul>
-          <button type="button" class="mdst-button mdst-button--solid">Start Building</button>
+          <button type="button" class="mdst-button--solid">Start Building</button>
         </div>
         <div class="showcase-preview">
           <h4>Create a new project</h4>
           <div class="form-row">
             <div class="form-group">
               <label for="deploy-project-name">Project Name</label>
-              <input id="deploy-project-name" type="text" class="mdst-input" placeholder="my-app" />
+              <input id="deploy-project-name" type="text" placeholder="my-app" />
             </div>
             <div class="form-group">
               <label for="deploy-framework">Framework</label>
-              <select id="deploy-framework" class="mdst-dropdown">
+              <select id="deploy-framework">
                 <option>Next.js</option>
                 <option>Remix</option>
                 <option>Astro</option>
@@ -659,11 +628,11 @@
           </div>
           <div class="form-group">
             <label for="deploy-repository">Repository</label>
-            <input id="deploy-repository" type="text" class="mdst-input" placeholder="github.com/you/my-app" />
+            <input id="deploy-repository" type="text" placeholder="github.com/you/my-app" />
           </div>
           <div class="form-group">
             <label for="deploy-branch">Branch</label>
-            <select id="deploy-branch" class="mdst-dropdown" style="width: 100%">
+            <select id="deploy-branch" style="width: 100%">
               <option>main</option>
               <option>develop</option>
               <option>staging</option>
@@ -671,10 +640,10 @@
           </div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--mdst-space-md)">
             <label>
-              <input type="checkbox" class="mdst-input" checked />
+              <input type="checkbox" checked />
               Auto-deploy on push
             </label>
-            <button type="button" class="mdst-button mdst-button--solid mdst-button--sm">Deploy</button>
+            <button type="button" class="mdst-button--solid mdst-button--sm">Deploy</button>
           </div>
         </div>
       </div>
@@ -694,7 +663,7 @@
             </p>
             <div class="testimonial-author">
               <div class="testimonial-avatar">JF</div>
-              <div>
+              <div class="testimonial-person">
                 <div class="testimonial-name">Jamie Fontaine</div>
                 <div class="testimonial-role">Frontend Lead at Pebblework</div>
               </div>
@@ -709,7 +678,7 @@
             </p>
             <div class="testimonial-author">
               <div class="testimonial-avatar">TN</div>
-              <div>
+              <div class="testimonial-person">
                 <div class="testimonial-name">Tomás Nuñez</div>
                 <div class="testimonial-role">Engineering Manager at Glassbox</div>
               </div>
@@ -723,7 +692,7 @@
             </p>
             <div class="testimonial-author">
               <div class="testimonial-avatar">RH</div>
-              <div>
+              <div class="testimonial-person">
                 <div class="testimonial-name">Ren Hayashi</div>
                 <div class="testimonial-role">Founder at Terracotta Labs</div>
               </div>
@@ -739,8 +708,8 @@
         <h2>Ready to get started?</h2>
         <p>Join thousands of developers shipping faster. Start free, upgrade when you're ready.</p>
         <div class="cta-form">
-          <input type="email" class="mdst-input" placeholder="you@company.com" />
-          <button type="button" class="mdst-button mdst-button--solid">Get Started</button>
+          <input type="email" placeholder="you@company.com" />
+          <button type="button" class="mdst-button--solid">Get Started</button>
         </div>
         <p class="cta-note">Free forever for personal projects. No credit card required.</p>
       </div>

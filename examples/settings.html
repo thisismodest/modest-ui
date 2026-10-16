@@ -24,48 +24,10 @@
       content="An application settings page built with modest-ui, featuring profile editing, notification preferences, session management, and a danger zone."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-      /* Our page reset sits below modest-ui, so it never overrides it */
-      @layer page-reset, mdst-ui;
-    </style>
     <link rel="stylesheet" href="../dist/modest-ui.css" />
     <style>
-      @layer page-reset {
-        /* Page reset. These examples use modest-ui by class, outside .mdst-ui,
-           so the page brings its own reset. */
-        *,
-        *::before,
-        *::after {
-          box-sizing: border-box;
-        }
-
-        * {
-          margin: 0;
-        }
-
-        img,
-        svg {
-          display: block;
-          max-width: 100%;
-        }
-
-        a {
-          color: inherit;
-        }
-
-        input,
-        button,
-        textarea,
-        select {
-          font: inherit;
-        }
-      }
-
       body {
-        font-family: var(--mdst-font-sans);
-        line-height: var(--mdst-line-height);
-        color: var(--mdst-color-fg);
-        background: var(--mdst-color-bg);
+        margin: 0;
       }
 
       /* Header */
@@ -142,6 +104,8 @@
         background: none;
         font-family: inherit;
         text-align: left;
+        box-shadow: none;
+        justify-content: flex-start;
       }
 
       .settings-nav-link:hover {
@@ -446,27 +410,7 @@
         margin: 0;
       }
 
-      .danger-btn {
-        display: inline-flex;
-        align-items: center;
-        padding: var(--mdst-space-xs) var(--mdst-space-md);
-        font-size: var(--mdst-text-sm);
-        font-family: inherit;
-        border: var(--mdst-border-width) solid var(--mdst-color-danger);
-        background: none;
-        color: var(--mdst-color-danger);
-        cursor: pointer;
-        transition:
-          background var(--mdst-transition),
-          color var(--mdst-transition);
-        white-space: nowrap;
-        flex-shrink: 0;
-      }
 
-      .danger-btn:hover {
-        background: var(--mdst-color-danger);
-        color: var(--mdst-color-bg);
-      }
 
       /* Connected accounts */
       .connected-item {
@@ -513,14 +457,14 @@
       }
 
       /* Dialog */
-      .mdst-dialog {
+      dialog {
         border: var(--mdst-border-width) solid var(--mdst-color-border);
         padding: 0;
         max-width: 28rem;
         width: 90vw;
       }
 
-      .mdst-dialog::backdrop {
+      dialog::backdrop {
         background: rgba(0, 0, 0, 0.4);
       }
 
@@ -546,6 +490,7 @@
         font-size: var(--mdst-text-lg);
         padding: 0;
         line-height: 1;
+        box-shadow: none;
       }
 
       .dialog-close:hover {
@@ -673,8 +618,7 @@
           flex-direction: column;
         }
 
-        .dialog-footer .mdst-button,
-        .dialog-footer .danger-btn {
+        .dialog-footer button {
           width: 100%;
           justify-content: center;
         }
@@ -687,13 +631,13 @@
       }
     </style>
   </head>
-  <body>
+  <body class="mdst-ui">
     <!-- Header -->
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <div class="header-right">
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Docs</button>
-        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Dashboard</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Docs</button>
+        <button type="button" class="mdst-button--borderless mdst-button--sm">Dashboard</button>
         <div class="header-avatar">JD</div>
       </div>
     </header>
@@ -731,7 +675,7 @@
             <div class="avatar-section">
               <div class="avatar-preview">JD</div>
               <div class="avatar-actions">
-                <input type="file" class="mdst-input mdst-input--borderless" accept=".jpg,.jpeg,.png,.gif" />
+                <input type="file" class="mdst-input--borderless" accept=".jpg,.jpeg,.png,.gif" />
                 <p>JPG, PNG, or GIF. Max 2MB. Recommended 256×256px.</p>
               </div>
             </div>
@@ -739,29 +683,29 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="first-name">First name</label>
-                <input type="text" id="first-name" class="mdst-input" value="Jane" />
+                <input type="text" id="first-name" value="Jane" />
               </div>
               <div class="form-group">
                 <label for="last-name">Last name</label>
-                <input type="text" id="last-name" class="mdst-input" value="Doe" />
+                <input type="text" id="last-name" value="Doe" />
               </div>
             </div>
 
             <div class="form-group">
               <label for="display-name">Display name</label>
-              <input type="text" id="display-name" class="mdst-input" value="janedoe" />
+              <input type="text" id="display-name" value="janedoe" />
               <p class="form-hint">This is your public display name. It can be your real name or a pseudonym.</p>
             </div>
 
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" class="mdst-input" value="jane@example.com" />
+              <input type="email" id="email" value="jane@example.com" />
               <p class="form-hint">Used for sign-in, notifications, and account recovery.</p>
             </div>
 
             <div class="form-group">
               <label for="bio">Bio</label>
-              <textarea id="bio" class="mdst-input" rows="3" placeholder="Tell us a little about yourself...">
+              <textarea id="bio" rows="3" placeholder="Tell us a little about yourself...">
 Staff engineer. Building reliable systems and occasionally writing about it.</textarea>
               <p class="form-hint">Brief description shown on your profile. Max 160 characters.</p>
             </div>
@@ -769,17 +713,17 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             <div class="form-row">
               <div class="form-group">
                 <label for="website">Website</label>
-                <input type="url" id="website" class="mdst-input" placeholder="https://yoursite.com" value="https://janedoe.dev" />
+                <input type="url" id="website" placeholder="https://yoursite.com" value="https://janedoe.dev" />
               </div>
               <div class="form-group">
                 <label for="location">Location</label>
-                <input type="text" id="location" class="mdst-input" placeholder="City, Country" value="London, UK" />
+                <input type="text" id="location" placeholder="City, Country" value="London, UK" />
               </div>
             </div>
 
             <div class="form-group">
               <label for="timezone">Timezone</label>
-              <select id="timezone" class="mdst-dropdown" style="width: 100%">
+              <select id="timezone" style="width: 100%">
                 <option>UTC-12:00 (Baker Island)</option>
                 <option>UTC-08:00 (Pacific Time)</option>
                 <option>UTC-05:00 (Eastern Time)</option>
@@ -792,8 +736,8 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button mdst-button--borderless" onclick="showToast('Changes discarded')">Cancel</button>
-              <button type="button" class="mdst-button mdst-button--solid" onclick="showToast('Profile saved')">Save Changes</button>
+              <button type="button" class="mdst-button--borderless" onclick="showToast('Changes discarded')">Cancel</button>
+              <button type="button" class="mdst-button--solid" onclick="showToast('Profile saved')">Save Changes</button>
             </div>
           </div>
         </div>
@@ -816,7 +760,6 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   type="password"
                   autocomplete="current-password"
                   id="current-password"
-                  class="mdst-input"
                   placeholder="••••••••"
                 />
                 <input type="checkbox" aria-label="Toggle password visibility" />
@@ -831,7 +774,6 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     type="password"
                     autocomplete="new-password"
                     id="new-password"
-                    class="mdst-input"
                     placeholder="••••••••"
                   />
                   <input type="checkbox" aria-label="Toggle password visibility" />
@@ -845,7 +787,6 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     type="password"
                     autocomplete="new-password"
                     id="confirm-password"
-                    class="mdst-input"
                     placeholder="••••••••"
                   />
                   <input type="checkbox" aria-label="Toggle password visibility" />
@@ -854,7 +795,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button mdst-button--solid" onclick="showToast('Password updated')">
+              <button type="button" class="mdst-button--solid" onclick="showToast('Password updated')">
                 Update Password
               </button>
             </div>
@@ -868,8 +809,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="mdst-card mdst-card--sm">
-              <div
-                class="mdst-card__body"
+              <div class="mdst-card__body"
                 style="display: flex; justify-content: space-between; align-items: center; gap: var(--mdst-space-md)"
               >
                 <div>
@@ -881,7 +821,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 <span class="mdst-tag mdst-tag--muted mdst-tag--sm">Not enabled</span>
               </div>
               <div class="mdst-card__footer">
-                <button type="button" class="mdst-button mdst-button--sm">Enable 2FA</button>
+                <button type="button" class="mdst-button--sm">Enable 2FA</button>
               </div>
             </div>
           </div>
@@ -897,32 +837,32 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
               <div class="connected-item">
                 <div class="connected-info">
                   <div class="connected-icon">G</div>
-                  <div>
+                  <div class="connected-text">
                     <div class="connected-name">Google</div>
                     <div class="connected-detail">jane@example.com</div>
                   </div>
                 </div>
-                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Disconnect</button>
+                <button type="button" class="mdst-button--borderless mdst-button--sm">Disconnect</button>
               </div>
               <div class="connected-item">
                 <div class="connected-info">
                   <div class="connected-icon">⌥</div>
-                  <div>
+                  <div class="connected-text">
                     <div class="connected-name">GitHub</div>
                     <div class="connected-detail">@janedoe</div>
                   </div>
                 </div>
-                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Disconnect</button>
+                <button type="button" class="mdst-button--borderless mdst-button--sm">Disconnect</button>
               </div>
               <div class="connected-item">
                 <div class="connected-info">
                   <div class="connected-icon">S</div>
-                  <div>
+                  <div class="connected-text">
                     <div class="connected-name">Slack</div>
                     <div class="connected-detail" style="color: var(--mdst-color-muted)">Not connected</div>
                   </div>
                 </div>
-                <button type="button" class="mdst-button mdst-button--sm">Connect</button>
+                <button type="button" class="mdst-button--sm">Connect</button>
               </div>
             </div>
           </div>
@@ -943,19 +883,19 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
               <span class="form-group-label" id="theme-label">Theme</span>
               <div class="mdst-radio-card-group" role="radiogroup" aria-labelledby="theme-label">
                 <label class="mdst-radio-card">
-                  <input type="radio" name="theme" value="light" class="mdst-input" checked />
+                  <input type="radio" name="theme" value="light" checked />
                   <div class="theme-preview" style="background: #fff; color: #000">☀</div>
                   <div class="mdst-small mdst-strong">Light</div>
                   <div class="mdst-small mdst-muted">Clean and bright</div>
                 </label>
                 <label class="mdst-radio-card">
-                  <input type="radio" name="theme" value="dark" class="mdst-input" />
+                  <input type="radio" name="theme" value="dark" />
                   <div class="theme-preview" style="background: #111; color: #fff">☾</div>
                   <div class="mdst-small mdst-strong">Dark</div>
                   <div class="mdst-small mdst-muted">Easy on the eyes</div>
                 </label>
                 <label class="mdst-radio-card">
-                  <input type="radio" name="theme" value="system" class="mdst-input" />
+                  <input type="radio" name="theme" value="system" />
                   <div class="theme-preview" style="background: linear-gradient(135deg, #fff 50%, #111 50%); color: #666">◑</div>
                   <div class="mdst-small mdst-strong">System</div>
                   <div class="mdst-small mdst-muted">Follow OS setting</div>
@@ -970,7 +910,6 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 <input
                   type="range"
                   id="font-size"
-                  class="mdst-input"
                   min="12"
                   max="18"
                   value="14"
@@ -989,7 +928,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             <!-- Density -->
             <div class="form-group">
               <label for="density">Layout density</label>
-              <select id="density" class="mdst-dropdown" style="max-width: 16rem">
+              <select id="density" style="max-width: 16rem">
                 <option>Comfortable</option>
                 <option selected>Default</option>
                 <option>Compact</option>
@@ -1004,15 +943,15 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <label for="collapsed-sidebar" style="margin-bottom: 0">Collapsed sidebar</label>
                   <p class="form-hint" style="margin-top: 2px">Start with the sidebar collapsed on desktop.</p>
                 </div>
-                <input type="checkbox" class="mdst-input" role="switch" id="collapsed-sidebar" />
+                <input type="checkbox" role="switch" id="collapsed-sidebar" />
               </div>
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button mdst-button--borderless" onclick="showToast('Reset to defaults')">
+              <button type="button" class="mdst-button--borderless" onclick="showToast('Reset to defaults')">
                 Reset to Defaults
               </button>
-              <button type="button" class="mdst-button mdst-button--solid" onclick="showToast('Appearance saved')">Save Changes</button>
+              <button type="button" class="mdst-button--solid" onclick="showToast('Appearance saved')">Save Changes</button>
             </div>
           </div>
         </div>
@@ -1036,7 +975,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     Master toggle for all notification channels.
                   </p>
                 </div>
-                <input type="checkbox" class="mdst-input" role="switch" checked />
+                <input type="checkbox" role="switch" checked />
               </div>
             </div>
 
@@ -1050,11 +989,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" checked />
+                    <input type="checkbox" role="switch" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" checked />
+                    <input type="checkbox" role="switch" checked />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1066,11 +1005,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" checked />
+                    <input type="checkbox" role="switch" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" />
+                    <input type="checkbox" role="switch" />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1082,11 +1021,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" checked />
+                    <input type="checkbox" role="switch" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" checked />
+                    <input type="checkbox" role="switch" checked />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1103,11 +1042,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" checked />
+                    <input type="checkbox" role="switch" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" checked />
+                    <input type="checkbox" role="switch" checked />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1119,11 +1058,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" checked />
+                    <input type="checkbox" role="switch" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" />
+                    <input type="checkbox" role="switch" />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1135,11 +1074,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" />
+                    <input type="checkbox" role="switch" />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-input" role="switch" />
+                    <input type="checkbox" role="switch" />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1149,7 +1088,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             <!-- Digest frequency -->
             <div class="form-group" style="margin-top: var(--mdst-space-lg)">
               <label for="digest">Email digest frequency</label>
-              <select id="digest" class="mdst-dropdown" style="max-width: 16rem">
+              <select id="digest" style="max-width: 16rem">
                 <option>Real-time</option>
                 <option selected>Daily summary</option>
                 <option>Weekly summary</option>
@@ -1159,7 +1098,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button mdst-button--solid" onclick="showToast('Notification preferences saved')">
+              <button type="button" class="mdst-button--solid" onclick="showToast('Notification preferences saved')">
                 Save Preferences
               </button>
             </div>
@@ -1191,26 +1130,26 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <p class="session-device">Safari on iPhone</p>
                   <p class="session-detail">London, UK · IP 82.132.40.2 · Last active 2 hours ago</p>
                 </div>
-                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Revoke</button>
+                <button type="button" class="mdst-button--borderless mdst-button--sm">Revoke</button>
               </div>
               <div class="session-item">
                 <div class="session-info">
                   <p class="session-device">Firefox on Windows</p>
                   <p class="session-detail">Manchester, UK · IP 81.98.12.42 · Last active 3 days ago</p>
                 </div>
-                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Revoke</button>
+                <button type="button" class="mdst-button--borderless mdst-button--sm">Revoke</button>
               </div>
               <div class="session-item">
                 <div class="session-info">
                   <p class="session-device">Relay CLI</p>
                   <p class="session-detail">API token · Created Dec 1, 2024 · Last used 5 hours ago</p>
                 </div>
-                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Revoke</button>
+                <button type="button" class="mdst-button--borderless mdst-button--sm">Revoke</button>
               </div>
             </div>
 
             <div class="form-actions form-actions--left" style="margin-top: var(--mdst-space-md)">
-              <button type="button" class="mdst-button mdst-button--sm" onclick="showToast('All other sessions revoked')">
+              <button type="button" class="mdst-button--sm" onclick="showToast('All other sessions revoked')">
                 Revoke All Other Sessions
               </button>
             </div>
@@ -1234,8 +1173,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <p>Download a copy of all your data including projects, settings, and activity history.</p>
                 </div>
                 <button
-                  type="button"
-                  class="mdst-button mdst-button--sm"
+                  type="button" class="mdst-button--sm"
                   onclick="showToast(`Export started, you'll receive an email when ready`)"
                 >
                   Export Data
@@ -1246,14 +1184,14 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <h4>Transfer ownership</h4>
                   <p>Transfer all your projects and data to another account. You'll retain read-only access.</p>
                 </div>
-                <button type="button" class="danger-btn" onclick="document.getElementById('transfer-dialog').showModal()">Transfer</button>
+                <button type="button" class="mdst-button--danger mdst-button--sm" onclick="document.getElementById('transfer-dialog').showModal()">Transfer</button>
               </div>
               <div class="danger-item">
                 <div class="danger-item-info">
                   <h4>Deactivate account</h4>
                   <p>Temporarily disable your account. Your data will be preserved and you can reactivate at any time.</p>
                 </div>
-                <button type="button" class="danger-btn" onclick="document.getElementById('deactivate-dialog').showModal()">
+                <button type="button" class="mdst-button--danger mdst-button--sm" onclick="document.getElementById('deactivate-dialog').showModal()">
                   Deactivate
                 </button>
               </div>
@@ -1262,7 +1200,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <h4>Delete account</h4>
                   <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
                 </div>
-                <button type="button" class="danger-btn" onclick="document.getElementById('delete-dialog').showModal()">
+                <button type="button" class="mdst-button--danger mdst-button--sm" onclick="document.getElementById('delete-dialog').showModal()">
                   Delete Account
                 </button>
               </div>
@@ -1273,7 +1211,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     </div>
 
     <!-- Transfer Dialog -->
-    <dialog class="mdst-dialog" id="transfer-dialog">
+    <dialog id="transfer-dialog">
       <div class="dialog-header">
         <h2>Transfer ownership</h2>
         <button type="button" class="dialog-close" onclick="document.getElementById('transfer-dialog').close()">✕</button>
@@ -1282,20 +1220,19 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         <p>Enter the email address of the account you want to transfer ownership to. They must have an existing Relay account.</p>
         <div class="form-group">
           <label for="transfer-email">Recipient email</label>
-          <input type="email" id="transfer-email" class="mdst-input" placeholder="colleague@company.com" />
+          <input type="email" id="transfer-email" placeholder="colleague@company.com" />
         </div>
         <div class="form-group">
           <label for="transfer-confirm">Type <strong>TRANSFER</strong> to confirm</label>
-          <input type="text" id="transfer-confirm" class="mdst-input" placeholder="TRANSFER" />
+          <input type="text" id="transfer-confirm" placeholder="TRANSFER" />
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button mdst-button--borderless" onclick="document.getElementById('transfer-dialog').close()">
+        <button type="button" class="mdst-button--borderless" onclick="document.getElementById('transfer-dialog').close()">
           Cancel
         </button>
         <button
-          type="button"
-          class="danger-btn"
+          type="button" class="mdst-button--danger mdst-button--sm"
           onclick="
             document.getElementById('transfer-dialog').close();
             showToast('Transfer request sent');
@@ -1307,7 +1244,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     </dialog>
 
     <!-- Deactivate Dialog -->
-    <dialog class="mdst-dialog" id="deactivate-dialog">
+    <dialog id="deactivate-dialog">
       <div class="dialog-header">
         <h2>Deactivate account</h2>
         <button type="button" class="dialog-close" onclick="document.getElementById('deactivate-dialog').close()">✕</button>
@@ -1329,7 +1266,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         <p>Your data will be preserved. You can reactivate at any time by signing in again.</p>
         <div class="form-group">
           <label for="deactivate-reason">Reason (optional)</label>
-          <select id="deactivate-reason" class="mdst-dropdown" style="width: 100%">
+          <select id="deactivate-reason" style="width: 100%">
             <option value="">Select a reason</option>
             <option>Taking a break</option>
             <option>Switching to another service</option>
@@ -1340,12 +1277,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button mdst-button--borderless" onclick="document.getElementById('deactivate-dialog').close()">
+        <button type="button" class="mdst-button--borderless" onclick="document.getElementById('deactivate-dialog').close()">
           Cancel
         </button>
         <button
-          type="button"
-          class="danger-btn"
+          type="button" class="mdst-button--danger mdst-button--sm"
           onclick="
             document.getElementById('deactivate-dialog').close();
             showToast('Account deactivated');
@@ -1357,7 +1293,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     </dialog>
 
     <!-- Delete Dialog -->
-    <dialog class="mdst-dialog" id="delete-dialog">
+    <dialog id="delete-dialog">
       <div class="dialog-header">
         <h2>Delete account</h2>
         <button type="button" class="dialog-close" onclick="document.getElementById('delete-dialog').close()">✕</button>
@@ -1380,20 +1316,19 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </ul>
         <div class="form-group">
           <label for="delete-email">Enter your email address to confirm</label>
-          <input type="email" id="delete-email" class="mdst-input" placeholder="jane@example.com" />
+          <input type="email" id="delete-email" placeholder="jane@example.com" />
         </div>
         <div class="form-group">
           <label for="delete-confirm">Type <strong>DELETE MY ACCOUNT</strong> to confirm</label>
-          <input type="text" id="delete-confirm" class="mdst-input" placeholder="DELETE MY ACCOUNT" />
+          <input type="text" id="delete-confirm" placeholder="DELETE MY ACCOUNT" />
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button mdst-button--borderless" onclick="document.getElementById('delete-dialog').close()">
+        <button type="button" class="mdst-button--borderless" onclick="document.getElementById('delete-dialog').close()">
           Cancel
         </button>
         <button
-          type="button"
-          class="danger-btn"
+          type="button" class="mdst-button--danger mdst-button--sm"
           onclick="
             document.getElementById('delete-dialog').close();
             showToast('Account deleted');
@@ -1462,7 +1397,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
       }
 
       // Close dialogs on backdrop click
-      document.querySelectorAll(".mdst-dialog").forEach((dialog) => {
+      document.querySelectorAll("dialog").forEach((dialog) => {
         dialog.addEventListener("click", function (e) {
           if (e.target === this) this.close();
         });
