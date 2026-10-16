@@ -348,10 +348,10 @@ Classes:
 
 ```html
 <!-- In the flow of the page -->
-<div class="mdst-banner mdst-banner--info" role="region" aria-label="Announcement">
+<section class="mdst-banner mdst-banner--info" aria-label="Announcement">
   <div class="mdst-banner__content">Scheduled maintenance on Sunday.</div>
   <button class="mdst-banner__close" aria-label="Dismiss">✕</button>
-</div>
+</section>
 
 <!-- Sticky to the top of a scrolling section -->
 <section style="overflow-y: auto">
@@ -360,18 +360,18 @@ Classes:
 </section>
 
 <!-- Fixed to the bottom of the viewport (cookie consent) -->
-<div class="mdst-banner mdst-banner--fixed mdst-banner--bottom"
-     data-state="visible" role="region" aria-label="Cookie consent">
+<section class="mdst-banner mdst-banner--fixed mdst-banner--bottom"
+     data-state="visible" aria-label="Cookie consent">
   <div class="mdst-banner__content">We use analytics cookies.</div>
   <div class="mdst-banner__actions">
     <button class="mdst-button mdst-button--sm">Reject</button>
     <button class="mdst-button mdst-button--sm mdst-button--solid">Accept</button>
   </div>
-</div>
+</section>
 
 <!-- Compact card fixed to the bottom-right corner -->
-<div class="mdst-banner mdst-banner--sm mdst-banner--fixed mdst-banner--bottom mdst-banner--end"
-     data-state="visible" role="region" aria-label="Cookie consent">...</div>
+<section class="mdst-banner mdst-banner--sm mdst-banner--fixed mdst-banner--bottom mdst-banner--end"
+     data-state="visible" aria-label="Cookie consent">...</section>
 
 <!-- Edge-to-edge fixed banner -->
 <div class="mdst-banner mdst-banner--fixed mdst-banner--top" style="--mdst-banner-offset: 0">...</div>
@@ -402,8 +402,8 @@ Classes:
 <!-- Class-based breadcrumbs -->
 <nav class="mdst-breadcrumbs" aria-label="Breadcrumb">
   <ol>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Products</a></li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#products">Products</a></li>
     <li><span aria-current="page">Widget</span></li>
   </ol>
 </nav>
@@ -411,7 +411,7 @@ Classes:
 <!-- Arrow separator -->
 <nav class="mdst-breadcrumbs mdst-breadcrumbs--arrow" aria-label="Breadcrumb">
   <ol>
-    <li><a href="#">Home</a></li>
+    <li><a href="#home">Home</a></li>
     <li><span aria-current="page">Page</span></li>
   </ol>
 </nav>
@@ -419,7 +419,7 @@ Classes:
 <!-- Compact -->
 <nav class="mdst-breadcrumbs mdst-breadcrumbs--sm" aria-label="Breadcrumb">
   <ol>
-    <li><a href="#">Home</a></li>
+    <li><a href="#home">Home</a></li>
     <li><span aria-current="page">Page</span></li>
   </ol>
 </nav>
@@ -452,8 +452,8 @@ Classes:
 <!-- Toggle buttons -->
 <button class="mdst-button" aria-pressed="true">Bold</button>
 
-<!-- Links can't be disabled, so use aria-disabled -->
-<a class="mdst-button" aria-disabled="true">Unavailable</a>
+<!-- Links can't be disabled: drop the href, keep role="link", add aria-disabled -->
+<a class="mdst-button" role="link" aria-disabled="true">Unavailable</a>
 
 /* Hover: any box-shadow, or none */
 :root { --mdst-button-hover-shadow: none; }
@@ -1562,7 +1562,7 @@ Classes:
 <p class="mdst-p mdst-p--muted">Muted text.</p>
 
 <!-- Inline -->
-<a href="#" class="mdst-a">Link</a>
+<a href="#docs" class="mdst-a">Link</a>
 <strong class="mdst-strong">Bold</strong>
 <em class="mdst-em">Italic</em>
 <mark class="mdst-mark">Highlight</mark>

@@ -182,6 +182,8 @@ elements, so they keep their names.
 - A bare `<input type="color">` inside `.mdst-ui` is styled as a swatch, like
   the other input types. Date and time inputs match the height of the other
   fields.
+- `.mdst-card` works on an `<a>`, so a whole card can be a link (no underline,
+  inherited colour).
 - `.mdst-input--borderless` on text fields: no border, same padding, and
   invalid fields still show red.
 - Docs: checkbox, colour, date and time, file, OTP, password, radio, range,

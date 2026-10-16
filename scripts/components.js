@@ -39,7 +39,7 @@ export async function getComponents() {
     } catch (err) {
       throw new Error(`components/${slug}/config.js failed to load: ${err.message}`);
     }
-    if (!config || !config.title) {
+    if (!config?.title) {
       throw new Error(`components/${slug}/config.js must export a default object with a title`);
     }
 

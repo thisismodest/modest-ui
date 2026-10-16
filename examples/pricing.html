@@ -290,8 +290,8 @@
         color: var(--mdst-color-muted);
       }
 
-      .feature-muted::before {
-        content: "—" !important;
+      .pricing-features-list .feature-muted::before {
+        content: "—";
         color: var(--mdst-color-muted);
         font-weight: 400;
       }
@@ -920,17 +920,18 @@
     <footer class="site-footer">
       <span>&copy; 2026 Example Pricing. All rights reserved.</span>
       <div class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Twitter</a>
-        <a href="#">GitHub</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+        <a href="https://x.com">Twitter</a>
+        <a href="https://github.com/thisismodest/modest-ui">GitHub</a>
       </div>
     </footer>
 
     <script>
+      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function setBilling(period) {
-        var monthly = document.getElementById("toggle-monthly");
-        var yearly = document.getElementById("toggle-yearly");
+        const monthly = document.getElementById("toggle-monthly");
+        const yearly = document.getElementById("toggle-yearly");
 
         if (period === "monthly") {
           monthly.classList.add("active");
@@ -941,8 +942,8 @@
         }
 
         // Update prices
-        document.querySelectorAll("[data-monthly]").forEach(function (el) {
-          var value = period === "monthly" ? el.getAttribute("data-monthly") : el.getAttribute("data-yearly");
+        document.querySelectorAll("[data-monthly]").forEach((el) => {
+          const value = period === "monthly" ? el.getAttribute("data-monthly") : el.getAttribute("data-yearly");
           if (el.classList.contains("pricing-amount")) {
             el.textContent = value;
           } else {

@@ -238,7 +238,11 @@ alignButtons.forEach((button) =&gt; {
       const demoEditor = document.querySelector("#demo-editor");
       const demoItems = [...demoToolbar.querySelectorAll("button")];
 
-      demoItems.forEach((item, i) => (item.tabIndex = i === 0 ? 0 : -1));
+      demoItems.forEach((item, i) => {
+
+        item.tabIndex = i === 0 ? 0 : -1;
+
+      });
 
       demoToolbar.addEventListener("keydown", (event) => {
         const keys = { ArrowRight: 1, ArrowLeft: -1, Home: "first", End: "last" };
@@ -257,7 +261,9 @@ alignButtons.forEach((button) =&gt; {
       // Roving focus should follow clicks too
       demoItems.forEach((item) => {
         item.addEventListener("click", () => {
-          demoItems.forEach((other) => (other.tabIndex = other === item ? 0 : -1));
+          demoItems.forEach((other) => {
+            other.tabIndex = other === item ? 0 : -1;
+          });
         });
       });
 
@@ -282,14 +288,20 @@ alignButtons.forEach((button) =&gt; {
       const demoAlign = demoToolbar.querySelectorAll("[data-align]");
       demoAlign.forEach((button) => {
         button.addEventListener("click", () => {
-          demoAlign.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+          demoAlign.forEach((b) => {
+            b.setAttribute("aria-pressed", String(b === button));
+          });
           renderEditor();
         });
       });
 
       document.querySelector("#demo-reset").addEventListener("click", () => {
-        demoToolbar.querySelectorAll("[data-style]").forEach((b) => b.setAttribute("aria-pressed", "false"));
-        demoAlign.forEach((b, i) => b.setAttribute("aria-pressed", String(i === 0)));
+        demoToolbar.querySelectorAll("[data-style]").forEach((b) => {
+          b.setAttribute("aria-pressed", "false");
+        });
+        demoAlign.forEach((b, i) => {
+          b.setAttribute("aria-pressed", String(i === 0));
+        });
         renderEditor();
       });
     </script>

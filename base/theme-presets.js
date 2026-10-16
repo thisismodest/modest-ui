@@ -1,8 +1,9 @@
 // Shared theme presets and helpers.
 // Used by both the theme playground and the site-wide preset switcher.
 
-var mdstTheme = (function () {
-  var unitVars = {
+// A global, so the theme playground and the preset switcher can share it
+window.mdstTheme = (() => {
+  const unitVars = {
     "--mdst-radius": "px",
     "--mdst-border-width": "px",
   };
@@ -18,7 +19,7 @@ var mdstTheme = (function () {
     return cssValue;
   }
 
-  var presets = {
+  const presets = {
     // ── Core ──────────────────────────────────────────────
     default: {
       "--mdst-color-fg": "#000000",
@@ -245,7 +246,7 @@ var mdstTheme = (function () {
   };
 
   // Groups for rendering optgroups in dropdowns
-  var presetGroups = [
+  const presetGroups = [
     {
       label: "Core",
       presets: ["default", "dark", "rounded", "highcontrast"],
@@ -265,7 +266,7 @@ var mdstTheme = (function () {
   ];
 
   // Display names for presets (only where they differ from the key)
-  var presetLabels = {
+  const presetLabels = {
     default: "Default",
     dark: "Dark",
     rounded: "Rounded",
@@ -288,8 +289,8 @@ var mdstTheme = (function () {
 
   // Build CSS-ready vars object from a raw preset
   function buildCSSVars(rawPreset) {
-    var result = {};
-    for (var key in rawPreset) {
+    const result = {};
+    for (const key in rawPreset) {
       result[key] = toCSSValue(key, rawPreset[key]);
     }
     return result;
@@ -297,17 +298,17 @@ var mdstTheme = (function () {
 
   // Apply a CSS vars object to :root
   function applyVars(cssVars) {
-    var style = document.documentElement.style;
-    for (var key in cssVars) {
+    const style = document.documentElement.style;
+    for (const key in cssVars) {
       style.setProperty(key, cssVars[key]);
     }
   }
 
   // Clear all theme overrides from :root inline styles
   function clearVars() {
-    var style = document.documentElement.style;
-    var keys = Object.keys(presets.default);
-    for (var i = 0; i < keys.length; i++) {
+    const style = document.documentElement.style;
+    const keys = Object.keys(presets.default);
+    for (let i = 0; i < keys.length; i++) {
       style.removeProperty(keys[i]);
     }
   }
@@ -316,7 +317,7 @@ var mdstTheme = (function () {
   function persist(cssVars) {
     try {
       localStorage.setItem("mdst-theme", JSON.stringify(cssVars));
-    } catch (e) {
+    } catch {
       localStorage.removeItem("mdst-theme");
     }
   }
@@ -324,14 +325,14 @@ var mdstTheme = (function () {
   // Load stored CSS vars, or null if nothing valid is stored
   function load() {
     try {
-      var raw = localStorage.getItem("mdst-theme");
+      const raw = localStorage.getItem("mdst-theme");
       if (!raw) return null;
-      var stored = JSON.parse(raw);
+      const stored = JSON.parse(raw);
       if (!stored || typeof stored !== "object" || Array.isArray(stored)) {
         throw 0;
       }
       return stored;
-    } catch (e) {
+    } catch {
       localStorage.removeItem("mdst-theme");
       return null;
     }
@@ -339,9 +340,9 @@ var mdstTheme = (function () {
 
   // Apply a named preset: set vars, persist, return true. Returns false if unknown.
   function applyPreset(name) {
-    var preset = presets[name];
+    const preset = presets[name];
     if (!preset) return false;
-    var cssVars = buildCSSVars(preset);
+    const cssVars = buildCSSVars(preset);
     applyVars(cssVars);
     persist(cssVars);
     return true;
@@ -355,12 +356,12 @@ var mdstTheme = (function () {
 
   // Detect which preset matches a CSS vars object, or null if custom
   function detectPreset(cssVars) {
-    var names = Object.keys(presets);
-    for (var i = 0; i < names.length; i++) {
-      var name = names[i];
-      var preset = buildCSSVars(presets[name]);
-      var match = true;
-      for (var key in preset) {
+    const names = Object.keys(presets);
+    for (let i = 0; i < names.length; i++) {
+      const name = names[i];
+      const preset = buildCSSVars(presets[name]);
+      let match = true;
+      for (const key in preset) {
         if (preset[key] !== cssVars[key]) {
           match = false;
           break;
@@ -373,13 +374,13 @@ var mdstTheme = (function () {
 
   // Build <optgroup> and <option> elements into a <select>
   function buildSelectOptions(selectEl, includeCustom) {
-    for (var i = 0; i < presetGroups.length; i++) {
-      var group = presetGroups[i];
-      var optgroup = document.createElement("optgroup");
+    for (let i = 0; i < presetGroups.length; i++) {
+      const group = presetGroups[i];
+      const optgroup = document.createElement("optgroup");
       optgroup.label = group.label;
-      for (var j = 0; j < group.presets.length; j++) {
-        var name = group.presets[j];
-        var opt = document.createElement("option");
+      for (let j = 0; j < group.presets.length; j++) {
+        const name = group.presets[j];
+        const opt = document.createElement("option");
         opt.value = name;
         opt.textContent = presetLabels[name] || name;
         optgroup.appendChild(opt);
@@ -387,7 +388,7 @@ var mdstTheme = (function () {
       selectEl.appendChild(optgroup);
     }
     if (includeCustom) {
-      var customOpt = document.createElement("option");
+      const customOpt = document.createElement("option");
       customOpt.value = "";
       customOpt.textContent = "Custom";
       customOpt.disabled = true;

@@ -208,8 +208,8 @@ function dismiss(toast) {
         const toast = document.createElement("output");
         toast.className = "mdst-toast";
         toast.setAttribute("data-state", "visible");
-        if (variant) toast.classList.add("mdst-toast--" + variant);
-        toast.textContent = demoMessages[variant] + " ";
+        if (variant) toast.classList.add(`mdst-toast--${variant}`);
+        toast.textContent = `${demoMessages[variant]} `;
 
         const close = document.createElement("button");
         close.className = "mdst-toast__close";

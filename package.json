@@ -38,6 +38,7 @@
   "scripts": {
     "dev": "npm run build && python3 -m http.server 8000 -d site",
     "build": "node scripts/build-bundle.js && node scripts/build-llms.js && node scripts/build-site.js",
+    "lint": "npx --yes @biomejs/biome@2 lint .",
     "prepublishOnly": "npm run build"
   },
   "keywords": [

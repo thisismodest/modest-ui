@@ -225,7 +225,8 @@
         margin-bottom: 0;
       }
 
-      .form-group label {
+      .form-group label,
+      .form-group-label {
         display: block;
         font-size: var(--mdst-text-sm);
         font-weight: 500;
@@ -939,8 +940,8 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
 
             <!-- Theme -->
             <div class="form-group">
-              <label>Theme</label>
-              <div class="mdst-radio-card-group">
+              <span class="form-group-label" id="theme-label">Theme</span>
+              <div class="mdst-radio-card-group" role="radiogroup" aria-labelledby="theme-label">
                 <label class="mdst-radio-card">
                   <input type="radio" name="theme" value="light" class="mdst-input" checked />
                   <div class="theme-preview" style="background: #fff; color: #000">☀</div>
@@ -1000,10 +1001,10 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             <div class="form-group">
               <div style="display: flex; align-items: center; justify-content: space-between; max-width: 20rem">
                 <div>
-                  <label style="margin-bottom: 0">Collapsed sidebar</label>
+                  <label for="collapsed-sidebar" style="margin-bottom: 0">Collapsed sidebar</label>
                   <p class="form-hint" style="margin-top: 2px">Start with the sidebar collapsed on desktop.</p>
                 </div>
-                <input type="checkbox" class="mdst-input" role="switch" />
+                <input type="checkbox" class="mdst-input" role="switch" id="collapsed-sidebar" />
               </div>
             </div>
 
@@ -1410,27 +1411,28 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
 
     <script>
       // Section switching
+      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function showSection(sectionName) {
         // Hide all panels
-        document.querySelectorAll(".settings-panel").forEach(function (panel) {
+        document.querySelectorAll(".settings-panel").forEach((panel) => {
           panel.style.display = "none";
         });
 
         // Show target panel
-        var target = document.getElementById("section-" + sectionName);
+        const target = document.getElementById(`section-${sectionName}`);
         if (target) {
           target.style.display = "block";
         }
 
         // Update nav
-        document.querySelectorAll(".settings-nav-link").forEach(function (link) {
+        document.querySelectorAll(".settings-nav-link").forEach((link) => {
           link.classList.remove("settings-nav-link--active");
         });
 
         // Find the clicked link (match by onclick content)
-        document.querySelectorAll(".settings-nav-link").forEach(function (link) {
-          var onclick = link.getAttribute("onclick") || "";
-          if (onclick.indexOf("'" + sectionName + "'") !== -1) {
+        document.querySelectorAll(".settings-nav-link").forEach((link) => {
+          const onclick = link.getAttribute("onclick") || "";
+          if (onclick.indexOf(`'${sectionName}'`) !== -1) {
             link.classList.add("settings-nav-link--active");
           }
         });
@@ -1440,10 +1442,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
       }
 
       // Toast notification
-      var toastTimeout;
+      let toastTimeout;
+      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function showToast(message) {
-        var toast = document.getElementById("toast");
-        var toastMessage = document.getElementById("toast-message");
+        const toast = document.getElementById("toast");
+        const toastMessage = document.getElementById("toast-message");
         toastMessage.textContent = message;
 
         // Clear any existing timeout
@@ -1453,13 +1456,13 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
 
         toast.classList.add("show");
 
-        toastTimeout = setTimeout(function () {
+        toastTimeout = setTimeout(() => {
           toast.classList.remove("show");
         }, 3000);
       }
 
       // Close dialogs on backdrop click
-      document.querySelectorAll(".mdst-dialog").forEach(function (dialog) {
+      document.querySelectorAll(".mdst-dialog").forEach((dialog) => {
         dialog.addEventListener("click", function (e) {
           if (e.target === this) this.close();
         });

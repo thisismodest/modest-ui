@@ -123,8 +123,9 @@
               <span class="class-name">&lt;a&gt;</span> <span class="class-name">aria-disabled</span>
             </td>
             <td>
-              <a href="#" class="mdst-button">Link</a>
-              <a class="mdst-button" aria-disabled="true">Disabled link</a>
+              <a href="#docs" class="mdst-button">Read the docs</a>
+              <!-- biome-ignore lint/a11y/useValidAnchor: a disabled link has no href by design -->
+              <a class="mdst-button" role="link" aria-disabled="true">Disabled link</a>
             </td>
           </tr>
         </tbody>
@@ -216,8 +217,8 @@
 &lt;!-- Toggle buttons --&gt;
 &lt;button class="mdst-button" aria-pressed="true"&gt;Bold&lt;/button&gt;
 
-&lt;!-- Links can't be disabled, so use aria-disabled --&gt;
-&lt;a class="mdst-button" aria-disabled="true"&gt;Unavailable&lt;/a&gt;
+&lt;!-- Links can't be disabled: drop the href, keep role="link", add aria-disabled --&gt;
+&lt;a class="mdst-button" role="link" aria-disabled="true"&gt;Unavailable&lt;/a&gt;
 
 /* Hover: any box-shadow, or none */
 :root { --mdst-button-hover-shadow: none; }

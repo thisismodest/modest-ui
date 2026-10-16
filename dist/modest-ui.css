@@ -967,7 +967,13 @@
         border-color: var(--mdst-color-fg);
         box-shadow: var(--mdst-shadow);
       }
+    }
 
+    /* A card can be a link, making the whole card the click target */
+    &:is(a) {
+      display: block;
+      color: inherit;
+      text-decoration: none;
     }
 
     /* Padding variants */

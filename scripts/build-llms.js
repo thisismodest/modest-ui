@@ -159,9 +159,9 @@ function formatQuickReference(data) {
   for (const { component, classes } of data) {
     const { blocks, elements, modifiers } = groupClasses(classes);
     const parts = [blocks.join("  ")];
-    if (elements.length) parts.push("+ " + elements.map((e) => e.slice(e.indexOf("__"))).join("  "));
-    if (modifiers.length) parts.push("| " + modifiers.map((m) => m.slice(m.indexOf("--"))).join("  "));
-    lines.push(`${(component.title + ":").padEnd(16)}${parts.join("  ")}`);
+    if (elements.length) parts.push(`+ ${elements.map((e) => e.slice(e.indexOf("__"))).join("  ")}`);
+    if (modifiers.length) parts.push(`| ${modifiers.map((m) => m.slice(m.indexOf("--"))).join("  ")}`);
+    lines.push(`${(`${component.title}:`).padEnd(16)}${parts.join("  ")}`);
   }
   return lines.join("\n");
 }
@@ -320,7 +320,7 @@ async function main() {
     formatQuickReference(data)
   ];
 
-  const output = sections.join("\n\n---\n\n") + "\n";
+  const output = `${sections.join("\n\n---\n\n")}\n`;
   await writeFile(OUTPUT_PATH, output);
   console.log(`\n✓ llms.txt written (${(output.length / 1024).toFixed(1)} KB)`);
 }

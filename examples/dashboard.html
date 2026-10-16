@@ -677,8 +677,8 @@
         <strong>Dashboard</strong>
         <nav class="sidebar-nav">
           <div class="dash-sidebar-section">Overview</div>
-          <a href="#" class="dash-sidebar-link dash-sidebar-link--active">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#dashboard" class="dash-sidebar-link dash-sidebar-link--active">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -687,8 +687,8 @@
             </svg>
             Dashboard
           </a>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#analytics" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -699,8 +699,8 @@
           </a>
 
           <div class="dash-sidebar-section">Management</div>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#customers" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -709,8 +709,8 @@
             </svg>
             Customers
           </a>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#orders" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -719,8 +719,8 @@
             </svg>
             Orders
           </a>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#products" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -731,8 +731,8 @@
           </a>
 
           <div class="dash-sidebar-section">Settings</div>
-          <a href="#" class="dash-sidebar-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <a href="#settings" class="dash-sidebar-link">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -860,6 +860,7 @@
                           <th style="padding-left: var(--mdst-space-md)">
                             <label style="margin: 0">
                               <input type="checkbox" class="mdst-input" id="select-all" />
+                              <span class="mdst-sr-only">Select all orders</span>
                             </label>
                           </th>
                           <th>Order</th>
@@ -1104,13 +1105,13 @@
       </div>
       <div class="dialog-body">
         <div class="form-group">
-          <label>Customer</label>
-          <input type="text" class="mdst-input" placeholder="Search customers..." />
+          <label for="order-customer">Customer</label>
+          <input id="order-customer" type="text" class="mdst-input" placeholder="Search customers..." />
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Product</label>
-            <select class="mdst-dropdown" style="width: 100%">
+            <label for="order-product">Product</label>
+            <select id="order-product" class="mdst-dropdown" style="width: 100%">
               <option>Select product</option>
               <option>Ceramic Mug — White</option>
               <option>Ceramic Mug — Midnight</option>
@@ -1119,13 +1120,13 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Quantity</label>
-            <input type="number" class="mdst-input" value="1" min="1" />
+            <label for="order-quantity">Quantity</label>
+            <input id="order-quantity" type="number" class="mdst-input" value="1" min="1" />
           </div>
         </div>
         <div class="form-group">
-          <label>Notes</label>
-          <textarea class="mdst-input" rows="3" placeholder="Optional order notes..."></textarea>
+          <label for="order-notes">Notes</label>
+          <textarea id="order-notes" class="mdst-input" rows="3" placeholder="Optional order notes..."></textarea>
         </div>
         <div class="form-group">
           <label>
@@ -1150,18 +1151,18 @@
       const overlay = document.getElementById("sidebar-overlay");
       const menuBtn = document.getElementById("mobile-menu-btn");
 
-      menuBtn.addEventListener("click", function () {
+      menuBtn.addEventListener("click", () => {
         sidebar.classList.toggle("open");
         overlay.classList.toggle("open");
       });
 
-      overlay.addEventListener("click", function () {
+      overlay.addEventListener("click", () => {
         sidebar.classList.remove("open");
         overlay.classList.remove("open");
       });
 
       // New order dialog trigger
-      document.getElementById("new-order-btn").addEventListener("click", function () {
+      document.getElementById("new-order-btn").addEventListener("click", () => {
         document.getElementById("new-order-dialog").showModal();
       });
 

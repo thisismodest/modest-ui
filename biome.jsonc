@@ -1,0 +1,29 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "files": {
+    // Generated output and dependencies
+    "includes": ["**", "!dist", "!site", "!node_modules", "!llms.txt"]
+  },
+  // The repo isn't formatted with Biome; lint only
+  "formatter": { "enabled": false },
+  "assist": { "enabled": false },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "a11y": {
+        // Toggles are <input type="checkbox" role="switch">. The native input
+        // already exposes its checked state, and ARIA in HTML says not to add
+        // aria-checked to it.
+        "useAriaPropsForRole": "off"
+      },
+      "style": {
+        // Flags any later selector with lower specificity, even when the two
+        // rules set different properties or target different states (a
+        // checked toggle's thumb position vs. a pill toggle's thumb radius).
+        // The cascade is checked visually instead.
+        "noDescendingSpecificity": "off"
+      }
+    }
+  }
+}
