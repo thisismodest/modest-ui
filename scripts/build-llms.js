@@ -147,9 +147,9 @@ function extractClasses(css, slug, className) {
  * or __ sub-element of the base) or a modifier (-- variant).
  *
  *   .mdst-card            → base
- *   .mdst-card-header     → element
+ *   .mdst-card__header     → element
  *   .mdst-card__input     → element
- *   .mdst-card--compact   → modifier
+ *   .mdst-card--sm   → modifier
  */
 function groupClasses(classes, baseClassName) {
   const modifiers = [];
@@ -165,7 +165,7 @@ function groupClasses(classes, baseClassName) {
     if (plain.includes("--")) {
       modifiers.push(cls);
     } else if (baseRoot && plain !== baseRoot && plain.startsWith(baseRoot)) {
-      // It's a child/sub-element of the base (e.g. mdst-card-header, mdst-color-picker__input)
+      // It's a child/sub-element of the base (e.g. mdst-card__header, mdst-color-picker__input)
       elements.push(cls);
     } else {
       bases.push(cls);
@@ -248,7 +248,7 @@ function buildQuickReference(componentData) {
     const basePart = bases.join("  ");
 
     // Strip the base class prefix from element names for compact display
-    // e.g. .mdst-card-header → -header, .mdst-color-picker__input → __input
+    // e.g. .mdst-card__header → -header, .mdst-color-picker__input → __input
     const baseRoot = component.className && !component.className.includes("*") ? component.className.replace(/^\./, "") : null;
     const elementPart = elements.length
       ? "  +  " +
@@ -405,10 +405,10 @@ Classless selectors use \`:where(.mdst-ui)\` so specificity stays at zero — an
 Add variant modifiers directly to bare elements without the base class:
 
 \`\`\`html
-<button class="mdst-button--ghost">Ghost</button>
-<button class="mdst-button--inverted">Inverted</button>
+<button class="mdst-button--borderless">Ghost</button>
+<button class="mdst-button--solid">Inverted</button>
 <table class="mdst-table--striped">...</table>
-<details class="mdst-details--compact">...</details>
+<details class="mdst-details--sm">...</details>
 \`\`\`
 
 Elements that map to native tags: button, input (text/email/etc), textarea, select, input[type="checkbox"], input[type="radio"], input[type="range"], input[type="file"], details, dialog, table, code, pre, h1-h6, p, a, strong, em, small, mark, blockquote, hr, ul, ol, li.

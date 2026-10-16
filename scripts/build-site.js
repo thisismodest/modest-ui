@@ -3,6 +3,7 @@
 import { cp, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { gzipSync } from "node:zlib";
 import siteConfig from "../site.config.js";
 import { renderComponentLinks } from "./sidebar.js";
 
@@ -185,8 +186,10 @@ function render(template, slots) {
   const scriptsHtml = slots.scripts.length ? slots.scripts.map((s) => `    ${s}`).join("\n") : "";
   html = replaceSlot(html, "<!-- SCRIPTS -->", scriptsHtml);
 
-  // Replace CDN_URL last so it resolves inside injected content (e.g. intro page)
+  // Replace CDN_URL and VERSION last so they resolve inside injected content (e.g. intro page)
   html = replaceSlot(html, "<!-- CDN_URL -->", siteConfig.cdnUrl, true);
+  html = replaceSlot(html, "<!-- CSS_SIZE -->", cssSize, true);
+  html = replaceSlot(html, "<!-- VERSION -->", siteConfig.version, true);
 
   return html;
 }
@@ -334,6 +337,17 @@ async function copyStaticAssets() {
 // Main
 // ---------------------------------------------------------------------------
 
+/**
+ * Gzipped size of the minified bundle, e.g. "9 kB", so copy that quotes it
+ * can't go stale.
+ */
+async function getCssSize() {
+  const css = await readFile(join(ROOT, "dist", "modest-ui.min.css"));
+  return `${Math.round(gzipSync(css).length / 1024)} kB`;
+}
+
+let cssSize = "";
+
 async function main() {
   try {
     console.log("Building static site…\n");
@@ -341,6 +355,7 @@ async function main() {
     await mkdir(SITE_DIR, { recursive: true });
 
     const template = await readFile(TEMPLATE_PATH, "utf-8");
+    cssSize = await getCssSize();
     const components = await getComponents();
     const pages = await getPages();
 

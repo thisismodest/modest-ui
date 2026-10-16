@@ -171,12 +171,12 @@
         font-size: var(--mdst-text-lg);
       }
 
-      .mdst-card-body h3 {
+      .mdst-card__body h3 {
         font-weight: 600;
         margin: 0 0 var(--mdst-space-xs);
       }
 
-      .mdst-card-body p {
+      .mdst-card__body p {
         font-size: var(--mdst-text-sm);
         color: var(--mdst-color-muted);
         margin: 0;
@@ -487,7 +487,7 @@
           width: 100%;
         }
 
-        .site-nav .mdst-button--ghost {
+        .site-nav .mdst-button--borderless {
           display: none;
         }
 
@@ -508,9 +508,9 @@
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <nav class="site-nav">
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Features</button>
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Pricing</button>
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Docs</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Features</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Pricing</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Docs</button>
         <button type="button" class="mdst-button mdst-button--sm">Sign In</button>
       </nav>
     </header>
@@ -521,7 +521,7 @@
       <h1>Ship faster with less complexity</h1>
       <p>A developer platform that eliminates boilerplate, automates the boring parts, and lets you focus on what matters: your product.</p>
       <div class="hero-actions">
-        <button type="button" class="mdst-button mdst-button--inverted mdst-button--lg">Get Started Free</button>
+        <button type="button" class="mdst-button mdst-button--solid mdst-button--lg">Get Started Free</button>
         <button type="button" class="mdst-button mdst-button--lg">View Documentation</button>
       </div>
       <p class="hero-sub">No credit card required · Free for up to 3 projects</p>
@@ -547,42 +547,42 @@
       </div>
       <div class="features-grid">
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">⚡</div>
             <h3>Instant Deploys</h3>
             <p>Push to git and your changes are live in seconds. Zero-config CI/CD built right in.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">🔒</div>
             <h3>Secure by Default</h3>
             <p>Automatic SSL, environment variable encryption, and SOC 2 compliance out of the box.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">📊</div>
             <h3>Built-in Analytics</h3>
             <p>Real-time performance metrics without third-party scripts slowing down your site.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">🌐</div>
             <h3>Edge Network</h3>
             <p>Served from 200+ edge locations worldwide. Your users get sub-50ms response times.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">🔌</div>
             <h3>Integrations</h3>
             <p>First-class support for databases, auth providers, and every major framework.</p>
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <div class="feature-icon">👥</div>
             <h3>Team Collaboration</h3>
             <p>Preview deployments, branch environments, and granular role-based access for your team.</p>
@@ -603,7 +603,7 @@
             <li>Custom domains with instant SSL</li>
             <li>Rollback to any previous deploy</li>
           </ul>
-          <button type="button" class="mdst-button mdst-button--inverted">Start Building</button>
+          <button type="button" class="mdst-button mdst-button--solid">Start Building</button>
         </div>
         <div class="showcase-preview">
           <h4>Create a new project</h4>
@@ -639,7 +639,7 @@
               <input type="checkbox" class="mdst-checkbox" checked />
               Auto-deploy on push
             </label>
-            <button type="button" class="mdst-button mdst-button--inverted mdst-button--sm">Deploy</button>
+            <button type="button" class="mdst-button mdst-button--solid mdst-button--sm">Deploy</button>
           </div>
         </div>
       </div>
@@ -653,7 +653,7 @@
       </div>
       <div class="testimonials-grid">
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <p class="testimonial-quote">
               "Finally a CSS library that gets out of the way. Just clean, native HTML with a few classes, exactly how it should be."
             </p>
@@ -667,7 +667,7 @@
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <p class="testimonial-quote">
               "Lightweight, themeable, and the components look great out of the box. Swapped our old UI kit in a day and haven't looked
               back."
@@ -682,7 +682,7 @@
           </div>
         </div>
         <div class="mdst-card">
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <p class="testimonial-quote">
               "No JavaScript, no build step, just drop in a stylesheet and go. It's the simplest way to make something look polished fast."
             </p>
@@ -705,7 +705,7 @@
         <p>Join thousands of developers shipping faster. Start free, upgrade when you're ready.</p>
         <div class="cta-form">
           <input type="email" class="mdst-input" placeholder="you@company.com" />
-          <button type="button" class="mdst-button mdst-button--inverted">Get Started</button>
+          <button type="button" class="mdst-button mdst-button--solid">Get Started</button>
         </div>
         <p class="cta-note">Free forever for personal projects. No credit card required.</p>
       </div>

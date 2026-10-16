@@ -202,7 +202,7 @@
       .notification-dot {
         width: 0.375rem;
         height: 0.375rem;
-        background: var(--mdst-color-error);
+        background: var(--mdst-color-danger);
         border-radius: 50%;
       }
 
@@ -270,7 +270,7 @@
       }
 
       .stat-change--down {
-        color: var(--mdst-color-error);
+        color: var(--mdst-color-danger);
       }
 
       /* Content grid */
@@ -400,8 +400,8 @@
       }
 
       .activity-dot--error {
-        background: var(--mdst-color-error);
-        border-color: var(--mdst-color-error);
+        background: var(--mdst-color-danger);
+        border-color: var(--mdst-color-danger);
       }
 
       .activity-dot--muted {
@@ -730,7 +730,7 @@
           </div>
           <div class="topbar-actions">
             <button type="button" class="notification-btn">🔔 <span class="notification-dot"></span></button>
-            <select class="mdst-dropdown mdst-dropdown--sm mdst-dropdown--ghost">
+            <select class="mdst-dropdown mdst-dropdown--sm mdst-dropdown--borderless">
               <option>Last 30 days</option>
               <option>Last 7 days</option>
               <option>Last 90 days</option>
@@ -744,15 +744,15 @@
           <div class="content-header">
             <h1><a href="/examples/" style="text-decoration: none">← Examples</a></h1>
             <div class="content-header-actions">
-              <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost">Export</button>
-              <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted" id="new-order-btn">+ New Order</button>
+              <button type="button" class="mdst-button mdst-button--sm mdst-button--borderless">Export</button>
+              <button type="button" class="mdst-button mdst-button--sm mdst-button--solid" id="new-order-btn">+ New Order</button>
             </div>
           </div>
 
           <!-- Stat cards -->
           <div class="stats-grid">
-            <div class="mdst-card mdst-card--compact">
-              <div class="mdst-card-body">
+            <div class="mdst-card mdst-card--sm">
+              <div class="mdst-card__body">
                 <p class="stat-label">Total Revenue</p>
                 <p class="stat-value">$48,352</p>
                 <div class="stat-change stat-change--up">
@@ -761,8 +761,8 @@
                 </div>
               </div>
             </div>
-            <div class="mdst-card mdst-card--compact">
-              <div class="mdst-card-body">
+            <div class="mdst-card mdst-card--sm">
+              <div class="mdst-card__body">
                 <p class="stat-label">Orders</p>
                 <p class="stat-value">1,247</p>
                 <div class="stat-change stat-change--up">
@@ -771,8 +771,8 @@
                 </div>
               </div>
             </div>
-            <div class="mdst-card mdst-card--compact">
-              <div class="mdst-card-body">
+            <div class="mdst-card mdst-card--sm">
+              <div class="mdst-card__body">
                 <p class="stat-label">Customers</p>
                 <p class="stat-value">3,891</p>
                 <div class="stat-change stat-change--up">
@@ -781,8 +781,8 @@
                 </div>
               </div>
             </div>
-            <div class="mdst-card mdst-card--compact">
-              <div class="mdst-card-body">
+            <div class="mdst-card mdst-card--sm">
+              <div class="mdst-card__body">
                 <p class="stat-label">Refund Rate</p>
                 <p class="stat-value">2.4%</p>
                 <div class="stat-change stat-change--down">
@@ -798,11 +798,11 @@
             <!-- Table section -->
             <div class="table-section">
               <div class="mdst-card">
-                <div class="mdst-card-header" style="display: flex; justify-content: space-between; align-items: center">
+                <div class="mdst-card__header" style="display: flex; justify-content: space-between; align-items: center">
                   <span>Recent Orders</span>
                   <span style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); font-weight: 400">1,247 total</span>
                 </div>
-                <div class="mdst-card-body" style="padding: 0">
+                <div class="mdst-card__body" style="padding: 0">
                   <div class="table-toolbar" style="padding: var(--mdst-space-sm) var(--mdst-space-md) 0">
                     <div class="table-toolbar-left">
                       <input type="text" class="mdst-input" placeholder="Search orders..." style="max-width: 14rem" />
@@ -815,7 +815,7 @@
                       </select>
                     </div>
                     <div class="table-toolbar-right">
-                      <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">↓ Export</button>
+                      <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">↓ Export</button>
                     </div>
                   </div>
                   <div class="table-wrap">
@@ -854,7 +854,7 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$284.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 15, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
@@ -875,7 +875,7 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$1,420.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 15, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
@@ -896,7 +896,7 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$89.50</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 14, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
@@ -913,11 +913,11 @@
                               </div>
                             </div>
                           </td>
-                          <td><span class="mdst-tag mdst-tag--error mdst-tag--subtle mdst-tag--sm">Cancelled</span></td>
+                          <td><span class="mdst-tag mdst-tag--danger mdst-tag--subtle mdst-tag--sm">Cancelled</span></td>
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$635.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 14, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
@@ -938,7 +938,7 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$192.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 13, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                         <tr>
@@ -959,14 +959,14 @@
                           <td style="font-weight: 500; font-size: var(--mdst-text-sm)">$47.00</td>
                           <td style="font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Dec 13, 2024</td>
                           <td>
-                            <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">···</button>
+                            <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">···</button>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <div class="mdst-card-footer">
+                <div class="mdst-card__footer">
                   <div class="table-pagination" style="width: 100%">
                     <span>Showing 1–6 of 1,247</span>
                     <div class="table-pagination-btns">
@@ -982,19 +982,19 @@
             <div class="right-col">
               <!-- Revenue chart placeholder -->
               <div class="mdst-card">
-                <div class="mdst-card-header">Revenue Overview</div>
-                <div class="mdst-card-body" style="padding: 0">
+                <div class="mdst-card__header">Revenue Overview</div>
+                <div class="mdst-card__body" style="padding: 0">
                   <div class="chart-placeholder">Chart goes here</div>
                 </div>
               </div>
 
               <!-- Activity feed -->
               <div class="mdst-card">
-                <div class="mdst-card-header" style="display: flex; justify-content: space-between; align-items: center">
+                <div class="mdst-card__header" style="display: flex; justify-content: space-between; align-items: center">
                   <span>Recent Activity</span>
-                  <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">View all</button>
+                  <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">View all</button>
                 </div>
-                <div class="mdst-card-body">
+                <div class="mdst-card__body">
                   <div class="activity-list">
                     <div class="activity-item">
                       <div class="activity-dot activity-dot--success"></div>
@@ -1037,8 +1037,8 @@
 
               <!-- Quick actions -->
               <div class="mdst-card">
-                <div class="mdst-card-header">Quick Actions</div>
-                <div class="mdst-card-body">
+                <div class="mdst-card__header">Quick Actions</div>
+                <div class="mdst-card__body">
                   <div class="quick-actions">
                     <button type="button" class="quick-action-btn" onclick="document.getElementById('new-order-dialog').showModal()">
                       <span class="quick-action-icon">+</span>
@@ -1100,10 +1100,10 @@
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button mdst-button--ghost" onclick="document.getElementById('new-order-dialog').close()">
+        <button type="button" class="mdst-button mdst-button--borderless" onclick="document.getElementById('new-order-dialog').close()">
           Cancel
         </button>
-        <button type="button" class="mdst-button mdst-button--inverted" onclick="document.getElementById('new-order-dialog').close()">
+        <button type="button" class="mdst-button mdst-button--solid" onclick="document.getElementById('new-order-dialog').close()">
           Create Order
         </button>
       </div>

@@ -130,6 +130,26 @@
         margin-bottom: var(--mdst-space-sm);
       }
 
+      /* Pinned samples so hover and focus settings are visible without
+         hovering or tabbing. They mirror button.css and the focus ring. */
+      .preview-hovered {
+        --_hover: var(--mdst-button-hover-shadow, inset 0 0 0 var(--mdst-border-width) currentColor);
+      }
+
+      .preview-focused {
+        outline: var(--mdst-focus-ring, 2px solid var(--mdst-color-focus));
+        outline-offset: var(--mdst-focus-offset);
+      }
+
+      .preview-text {
+        max-width: 32rem;
+        background: transparent;
+      }
+
+      .preview-text h4 {
+        font-size: var(--mdst-text-base);
+      }
+
       @media (max-width: 480px) {
         .presets {
           max-width: 100%;
@@ -151,16 +171,13 @@
           --mdst-color-muted: #666666;
           --mdst-color-subtle: #f5f5f5;
           --mdst-color-focus: #000000;
-          --mdst-color-error: #dc2626;
+          --mdst-color-danger: #dc2626;
           --mdst-color-success: #16a34a;
-          --mdst-button-hover-bg: #000000;
-          --mdst-button-hover-color: #ffffff;
-          --mdst-button-hover-border: #000000;
           --mdst-radius: 0;
           --mdst-border-width: 1;
         }</pre>
       <button type="button" class="mdst-button mdst-button--sm" id="copy-btn">Copy CSS</button>
-      <button type="button" class="mdst-button mdst-button--sm mdst-button--ghost" id="reset-btn">Reset</button>
+      <button type="button" class="mdst-button mdst-button--sm mdst-button--borderless" id="reset-btn">Reset</button>
     </div>
 
     <details class="mdst-details mdst-details--section" open>
@@ -222,10 +239,10 @@
         </div>
 
         <div class="control-group">
-          <label>Error <code>--mdst-color-error</code></label>
+          <label>Danger <code>--mdst-color-danger</code></label>
           <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-error" value="#dc2626" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-error" value="#dc2626" />
+            <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-danger" value="#dc2626" />
+            <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-danger" value="#dc2626" />
           </div>
         </div>
 
@@ -234,30 +251,6 @@
           <div class="mdst-color-picker">
             <input type="color" class="mdst-color-picker__input" data-var="--mdst-color-success" value="#16a34a" />
             <input type="text" class="mdst-color-picker__text" data-var="--mdst-color-success" value="#16a34a" />
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label>Button Hover BG <code>--mdst-button-hover-bg</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-button-hover-bg" value="#000000" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-button-hover-bg" value="#000000" />
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label>Button Hover Text <code>--mdst-button-hover-color</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-button-hover-color" value="#ffffff" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-button-hover-color" value="#ffffff" />
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label>Button Hover Border <code>--mdst-button-hover-border</code></label>
-          <div class="mdst-color-picker">
-            <input type="color" class="mdst-color-picker__input" data-var="--mdst-button-hover-border" value="#000000" />
-            <input type="text" class="mdst-color-picker__text" data-var="--mdst-button-hover-border" value="#000000" />
           </div>
         </div>
       </div>
@@ -284,14 +277,23 @@
       </div>
     </details>
 
+    <!-- Fine-tuning sections are generated from TUNING in the script below -->
+    <div id="tuning"></div>
+
     <details class="mdst-details mdst-details--section" open>
       <summary>Preview</summary>
       <div class="preview-section">
         <h3>Components</h3>
         <div class="preview-row">
+          <button type="button" class="mdst-button preview-hovered">Hovered</button>
+          <button type="button" class="mdst-button mdst-button--solid preview-hovered">Hovered</button>
+          <button type="button" class="mdst-button preview-focused">Focused</button>
+          <button type="button" class="mdst-button mdst-button--solid preview-focused">Focused</button>
+        </div>
+        <div class="preview-row">
           <button type="button" class="mdst-button">Default</button>
-          <button type="button" class="mdst-button mdst-button--inverted">Inverted</button>
-          <button type="button" class="mdst-button mdst-button--ghost">Ghost</button>
+          <button type="button" class="mdst-button mdst-button--solid">Solid</button>
+          <button type="button" class="mdst-button mdst-button--borderless">Borderless</button>
           <button type="button" class="mdst-button" disabled>Disabled</button>
         </div>
         <div class="preview-row">
@@ -337,51 +339,57 @@
           <span class="mdst-tag mdst-tag--solid">Solid</span>
           <span class="mdst-tag mdst-tag--subtle">Subtle</span>
           <span class="mdst-tag mdst-tag--success mdst-tag--pill">Active</span>
-          <span class="mdst-tag mdst-tag--error mdst-tag--solid mdst-tag--pill">Outage</span>
+          <span class="mdst-tag mdst-tag--danger mdst-tag--solid mdst-tag--pill">Outage</span>
           <span class="mdst-tag mdst-tag--muted mdst-tag--sm">Meta</span>
           <span class="mdst-tag mdst-tag--subtle"
-            >Dismiss <button type="button" class="mdst-tag-dismiss" aria-label="Remove">&times;</button></span
+            >Dismiss <button type="button" class="mdst-tag__dismiss" aria-label="Remove">&times;</button></span
           >
         </div>
         <div class="preview-row" style="align-items: flex-start">
           <div class="mdst-card" style="max-width: 220px; flex: 1">
-            <div class="mdst-card-header">Card Title</div>
-            <div class="mdst-card-body">
+            <div class="mdst-card__header">Card Title</div>
+            <div class="mdst-card__body">
               <p style="margin: 0; font-size: var(--mdst-text-sm)">Body content with header and footer.</p>
             </div>
-            <div class="mdst-card-footer" style="display: flex; gap: var(--mdst-space-sm)">
-              <button type="button" class="mdst-button mdst-button--inverted mdst-button--sm">Action</button>
-              <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Cancel</button>
+            <div class="mdst-card__footer" style="display: flex; gap: var(--mdst-space-sm)">
+              <button type="button" class="mdst-button mdst-button--solid mdst-button--sm">Action</button>
+              <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Cancel</button>
             </div>
           </div>
           <div class="mdst-card mdst-card--interactive" style="max-width: 220px; flex: 1">
-            <div class="mdst-card-body">
+            <div class="mdst-card__body">
               <p style="margin: 0; font-size: var(--mdst-text-sm)">Interactive card. Hover to preview.</p>
             </div>
           </div>
-          <div class="mdst-card mdst-card--compact" style="max-width: 220px; flex: 1">
-            <div class="mdst-card-body">
+          <div class="mdst-card mdst-card--sm" style="max-width: 220px; flex: 1">
+            <div class="mdst-card__body">
               <p style="margin: 0; font-size: var(--mdst-text-sm); color: var(--mdst-color-muted)">Status</p>
               <p style="margin: var(--mdst-space-xs) 0 0; font-weight: 600">All systems operational</p>
             </div>
           </div>
         </div>
+        <h3 style="margin-top: var(--mdst-space-md); margin-bottom: var(--mdst-space-sm)">Text</h3>
+        <div class="mdst-ui preview-text">
+          <h4>Reading font and flow</h4>
+          <p>Paragraphs use the reading font and line height. Space between blocks follows the flow setting.</p>
+          <p>A second paragraph, with <a href="#">a link</a> and some <code>inline code</code>.</p>
+        </div>
         <h3 style="margin-top: var(--mdst-space-md); margin-bottom: var(--mdst-space-sm)">States</h3>
         <div class="preview-row">
-          <div class="mdst-otp-input mdst-otp-input--error">
-            <input type="text" maxlength="1" class="mdst-otp-input-digit" value="1" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input-digit" value="2" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input-digit" value="3" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input-digit" value="4" readonly />
+          <div class="mdst-otp-input mdst-otp-input--danger">
+            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="1" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="2" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="3" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="4" readonly />
           </div>
-          <span style="font-size: var(--mdst-text-sm); color: var(--mdst-color-error)">Error state</span>
+          <span style="font-size: var(--mdst-text-sm); color: var(--mdst-color-danger)">Error state</span>
         </div>
         <div class="preview-row">
           <div class="mdst-otp-input mdst-otp-input--success">
-            <input type="text" maxlength="1" class="mdst-otp-input-digit" value="1" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input-digit" value="2" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input-digit" value="3" readonly />
-            <input type="text" maxlength="1" class="mdst-otp-input-digit" value="4" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="1" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="2" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="3" readonly />
+            <input type="text" maxlength="1" class="mdst-otp-input__digit" value="4" readonly />
           </div>
           <span style="font-size: var(--mdst-text-sm); color: var(--mdst-color-success)">Success state</span>
         </div>
@@ -393,6 +401,185 @@
 
       const currentValues = { ...presets.default };
 
+      // Fine-tuning: variables outside the presets. Each control writes one
+      // CSS variable; anything left at its default is unset, so the library
+      // default applies and it stays out of the generated CSS.
+      const FONTS = [
+        ["System sans", ""],
+        ["Serif", "Charter, 'Iowan Old Style', Georgia, serif"],
+        ["Rounded", "ui-rounded, 'SF Pro Rounded', system-ui, sans-serif"],
+        ["Mono", "ui-monospace, 'SF Mono', Menlo, Consolas, monospace"],
+      ];
+
+      const TUNING = [
+        {
+          group: "More colours",
+          controls: [
+            { var: "--mdst-color-warning", label: "Warning", type: "color", default: "#f59e0b" },
+            { var: "--mdst-color-surface", label: "Surface", type: "color", default: "#f5f5f5" },
+          ],
+        },
+        {
+          group: "Typography",
+          controls: [
+            { var: "--mdst-font-text", label: "Reading font", type: "select", options: FONTS },
+            { var: "--mdst-font-ui", label: "Interface font", type: "select", options: FONTS },
+            { var: "--mdst-line-height", label: "Line height", type: "range", min: 1.2, max: 1.8, step: 0.05, default: 1.5, unit: "" },
+          ],
+        },
+        {
+          group: "Spacing",
+          controls: [{ var: "--mdst-flow-space", label: "Flow space", type: "range", min: 0, max: 2, step: 0.25, default: 1, unit: "em" }],
+        },
+        {
+          group: "Focus",
+          controls: [
+            {
+              var: "--mdst-focus-ring",
+              label: "Ring",
+              type: "select",
+              options: [
+                ["2px solid (default)", ""],
+                ["1px solid", "1px solid var(--mdst-color-focus)"],
+                ["3px solid", "3px solid var(--mdst-color-focus)"],
+                ["2px dashed", "2px dashed var(--mdst-color-focus)"],
+                ["2px dotted", "2px dotted var(--mdst-color-focus)"],
+                ["None (draw your own)", "none"],
+              ],
+            },
+            { var: "--mdst-focus-offset", label: "Ring offset", type: "range", min: -2, max: 4, step: 1, default: -1, unit: "px" },
+          ],
+        },
+        {
+          group: "Buttons",
+          controls: [
+            {
+              var: "--mdst-button-hover-shadow",
+              label: "Hover",
+              type: "select",
+              options: [
+                ["Ring (default)", ""],
+                ["Thick ring", "inset 0 0 0 calc(var(--mdst-border-width) * 2) currentColor"],
+                ["Lift", "3px 3px 0 currentColor"],
+                ["None", "none"],
+              ],
+            },
+          ],
+        },
+        {
+          group: "Motion",
+          controls: [
+            { var: "--mdst-transition", label: "Transition", type: "range", min: 0, max: 400, step: 25, default: 100, unit: "ms", suffix: " ease-out" },
+          ],
+        },
+      ];
+
+      const TUNING_CONTROLS = TUNING.flatMap((g) => g.controls);
+      const tuningValues = {}; // var -> CSS value, only when changed
+
+      function tuningCSS(control, raw) {
+        if (control.type === "range") return raw + control.unit + (control.suffix || "");
+        return raw;
+      }
+
+      function isTuningDefault(control, raw) {
+        if (control.type === "select") return raw === "";
+        return String(raw).toLowerCase() === String(control.default).toLowerCase();
+      }
+
+      function setTuning(control, raw) {
+        const style = document.documentElement.style;
+        if (isTuningDefault(control, raw)) {
+          delete tuningValues[control.var];
+          style.removeProperty(control.var);
+        } else {
+          tuningValues[control.var] = tuningCSS(control, raw);
+          style.setProperty(control.var, tuningValues[control.var]);
+        }
+      }
+
+      function renderTuning() {
+        const root = document.getElementById("tuning");
+        TUNING.forEach((group) => {
+          const details = document.createElement("details");
+          details.className = "mdst-details mdst-details--section";
+          details.open = true;
+          details.innerHTML = `<summary>${group.group}</summary>`;
+          const grid = document.createElement("div");
+          grid.className = "controls controls--grid";
+
+          group.controls.forEach((control) => {
+            const wrap = document.createElement("div");
+            wrap.className = "control-group";
+            const label = `<label>${control.label} <code>${control.var}</code></label>`;
+            if (control.type === "color") {
+              wrap.innerHTML = `${label}<div class="mdst-color-picker">
+                <input type="color" class="mdst-color-picker__input" data-tune="${control.var}" value="${control.default}" />
+                <input type="text" class="mdst-color-picker__text" data-tune="${control.var}" value="${control.default.toUpperCase()}" /></div>`;
+            } else if (control.type === "select") {
+              const options = control.options.map(([text, value]) => `<option value="${value.replace(/"/g, "&quot;")}">${text}</option>`).join("");
+              wrap.innerHTML = `${label}<select class="mdst-dropdown" data-tune="${control.var}">${options}</select>`;
+            } else {
+              wrap.innerHTML = `${label}<div class="control-row">
+                <input type="range" class="mdst-range" data-tune="${control.var}" min="${control.min}" max="${control.max}" step="${control.step}" value="${control.default}" />
+                <span class="value" data-tune-value="${control.var}">${control.default}${control.unit}</span></div>`;
+            }
+            grid.appendChild(wrap);
+          });
+
+          details.appendChild(grid);
+          root.appendChild(details);
+        });
+
+        root.addEventListener("input", (e) => {
+          const control = TUNING_CONTROLS.find((c) => c.var === e.target.dataset.tune);
+          if (!control) return;
+          let raw = e.target.value;
+          if (control.type === "color") {
+            if (e.target.type === "text") {
+              raw = raw.startsWith("#") ? raw : "#" + raw;
+              if (!/^#[0-9A-Fa-f]{6}$/.test(raw)) return;
+            }
+            syncTuningInputs(control, raw);
+          }
+          if (control.type === "range") syncTuningInputs(control, raw);
+          setTuning(control, raw);
+          persistTheme();
+          updateOutput();
+        });
+      }
+
+      function syncTuningInputs(control, raw) {
+        document.querySelectorAll(`[data-tune="${control.var}"]`).forEach((input) => {
+          input.value = input.type === "text" ? String(raw).toUpperCase() : raw;
+        });
+        const display = document.querySelector(`[data-tune-value="${control.var}"]`);
+        if (display) display.textContent = raw + control.unit;
+      }
+
+      function resetTuning() {
+        TUNING_CONTROLS.forEach((control) => {
+          const raw = control.type === "select" ? "" : control.default;
+          setTuning(control, raw);
+          syncTuningInputs(control, raw);
+        });
+      }
+
+      // Turn a stored CSS value back into a control value
+      function restoreTuning(stored) {
+        TUNING_CONTROLS.forEach((control) => {
+          if (!(control.var in stored)) return;
+          const css = stored[control.var];
+          let raw = css;
+          if (control.type === "range") raw = parseFloat(css);
+          if (control.type === "select" && !control.options.some(([, value]) => value === css)) return;
+          setTuning(control, raw);
+          syncTuningInputs(control, raw);
+        });
+      }
+
+      renderTuning();
+
       function syncHeaderSwitcher() {
         const switcher = document.getElementById("theme-switcher");
         if (!switcher) return;
@@ -403,7 +590,7 @@
 
       function persistTheme() {
         const cssVars = buildCSSVars(currentValues);
-        persist(cssVars);
+        persist({ ...cssVars, ...tuningValues });
         syncHeaderSwitcher();
       }
 
@@ -422,6 +609,12 @@
 
         for (const [key, value] of Object.entries(currentValues)) {
           lines.push(`  ${key}: ${toCSSValue(key, value)};`);
+        }
+
+        const tuned = Object.entries(tuningValues);
+        if (tuned.length) {
+          lines.push("", "  /* Fine-tuning */");
+          for (const [key, value] of tuned) lines.push(`  ${key}: ${value};`);
         }
 
         lines.push("}");
@@ -466,7 +659,7 @@
       }
 
       // Color picker handlers
-      document.querySelectorAll(".mdst-color-picker__input").forEach((input) => {
+      document.querySelectorAll(".mdst-color-picker__input[data-var]").forEach((input) => {
         input.addEventListener("input", (e) => {
           const varName = e.target.dataset.var;
           const value = e.target.value;
@@ -480,7 +673,7 @@
         });
       });
 
-      document.querySelectorAll(".mdst-color-picker__text").forEach((input) => {
+      document.querySelectorAll(".mdst-color-picker__text[data-var]").forEach((input) => {
         input.addEventListener("input", (e) => {
           let value = e.target.value;
           if (value && !value.startsWith("#")) {
@@ -540,6 +733,7 @@
       // Reset button
       document.getElementById("reset-btn").addEventListener("click", () => {
         mdstTheme.reset();
+        resetTuning();
         Object.assign(currentValues, presets.default);
         syncAllInputs();
         updateOutput();
@@ -576,6 +770,7 @@
           }
 
           syncAllInputs();
+          restoreTuning(stored);
 
           // Try to match a preset for the dropdown
           const match = detectPreset(buildCSSVars(currentValues));

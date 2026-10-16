@@ -122,11 +122,11 @@
       }
 
       .settings-nav-link--danger {
-        color: var(--mdst-color-error);
+        color: var(--mdst-color-danger);
       }
 
       .settings-nav-link--danger:hover {
-        color: var(--mdst-color-error);
+        color: var(--mdst-color-danger);
         background: var(--mdst-color-subtle);
       }
 
@@ -374,11 +374,11 @@
 
       /* Danger zone */
       .danger-zone {
-        border: var(--mdst-border-width) solid var(--mdst-color-error);
+        border: var(--mdst-border-width) solid var(--mdst-color-danger);
       }
 
-      .danger-zone .mdst-card-header {
-        color: var(--mdst-color-error);
+      .danger-zone .mdst-card__header {
+        color: var(--mdst-color-danger);
       }
 
       .danger-item {
@@ -416,9 +416,9 @@
         padding: var(--mdst-space-xs) var(--mdst-space-md);
         font-size: var(--mdst-text-sm);
         font-family: inherit;
-        border: var(--mdst-border-width) solid var(--mdst-color-error);
+        border: var(--mdst-border-width) solid var(--mdst-color-danger);
         background: none;
-        color: var(--mdst-color-error);
+        color: var(--mdst-color-danger);
         cursor: pointer;
         transition:
           background var(--mdst-transition),
@@ -428,7 +428,7 @@
       }
 
       .danger-btn:hover {
-        background: var(--mdst-color-error);
+        background: var(--mdst-color-danger);
         color: var(--mdst-color-bg);
       }
 
@@ -614,7 +614,7 @@
       }
 
       @media (max-width: 480px) {
-        .header-right .mdst-button--ghost {
+        .header-right .mdst-button--borderless {
           display: none;
         }
 
@@ -656,8 +656,8 @@
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <div class="header-right">
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Docs</button>
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Dashboard</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Docs</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Dashboard</button>
         <div class="header-avatar">JD</div>
       </div>
     </header>
@@ -758,8 +758,8 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button mdst-button--ghost" onclick="showToast('Changes discarded')">Cancel</button>
-              <button type="button" class="mdst-button mdst-button--inverted" onclick="showToast('Profile saved')">Save Changes</button>
+              <button type="button" class="mdst-button mdst-button--borderless" onclick="showToast('Changes discarded')">Cancel</button>
+              <button type="button" class="mdst-button mdst-button--solid" onclick="showToast('Profile saved')">Save Changes</button>
             </div>
           </div>
         </div>
@@ -820,7 +820,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button mdst-button--inverted" onclick="showToast('Password updated')">
+              <button type="button" class="mdst-button mdst-button--solid" onclick="showToast('Password updated')">
                 Update Password
               </button>
             </div>
@@ -833,9 +833,9 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
               <p>Add an extra layer of security to your account by requiring a verification code in addition to your password.</p>
             </div>
 
-            <div class="mdst-card mdst-card--compact">
+            <div class="mdst-card mdst-card--sm">
               <div
-                class="mdst-card-body"
+                class="mdst-card__body"
                 style="display: flex; justify-content: space-between; align-items: center; gap: var(--mdst-space-md)"
               >
                 <div>
@@ -846,7 +846,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <span class="mdst-tag mdst-tag--muted mdst-tag--sm">Not enabled</span>
               </div>
-              <div class="mdst-card-footer">
+              <div class="mdst-card__footer">
                 <button type="button" class="mdst-button mdst-button--sm">Enable 2FA</button>
               </div>
             </div>
@@ -868,7 +868,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     <div class="connected-detail">jane@example.com</div>
                   </div>
                 </div>
-                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Disconnect</button>
+                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Disconnect</button>
               </div>
               <div class="connected-item">
                 <div class="connected-info">
@@ -878,7 +878,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                     <div class="connected-detail">@janedoe</div>
                   </div>
                 </div>
-                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Disconnect</button>
+                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Disconnect</button>
               </div>
               <div class="connected-item">
                 <div class="connected-info">
@@ -970,15 +970,15 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <label style="margin-bottom: 0">Collapsed sidebar</label>
                   <p class="form-hint" style="margin-top: 2px">Start with the sidebar collapsed on desktop.</p>
                 </div>
-                <input type="checkbox" class="mdst-checkbox--toggle" />
+                <input type="checkbox" class="mdst-toggle" />
               </div>
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button mdst-button--ghost" onclick="showToast('Reset to defaults')">
+              <button type="button" class="mdst-button mdst-button--borderless" onclick="showToast('Reset to defaults')">
                 Reset to Defaults
               </button>
-              <button type="button" class="mdst-button mdst-button--inverted" onclick="showToast('Appearance saved')">Save Changes</button>
+              <button type="button" class="mdst-button mdst-button--solid" onclick="showToast('Appearance saved')">Save Changes</button>
             </div>
           </div>
         </div>
@@ -994,15 +994,15 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <!-- Global toggle -->
-            <div class="mdst-card mdst-card--compact" style="margin-bottom: var(--mdst-space-lg)">
-              <div class="mdst-card-body" style="display: flex; justify-content: space-between; align-items: center">
+            <div class="mdst-card mdst-card--sm" style="margin-bottom: var(--mdst-space-lg)">
+              <div class="mdst-card__body" style="display: flex; justify-content: space-between; align-items: center">
                 <div>
                   <p style="font-size: var(--mdst-text-sm); font-weight: 500; margin: 0 0 2px">Enable notifications</p>
                   <p style="font-size: var(--mdst-text-xs); color: var(--mdst-color-muted); margin: 0">
                     Master toggle for all notification channels.
                   </p>
                 </div>
-                <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                <input type="checkbox" class="mdst-toggle" checked />
               </div>
             </div>
 
@@ -1016,11 +1016,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <input type="checkbox" class="mdst-toggle" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <input type="checkbox" class="mdst-toggle" checked />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1032,11 +1032,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <input type="checkbox" class="mdst-toggle" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" />
+                    <input type="checkbox" class="mdst-toggle" />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1048,11 +1048,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <input type="checkbox" class="mdst-toggle" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <input type="checkbox" class="mdst-toggle" checked />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1069,11 +1069,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <input type="checkbox" class="mdst-toggle" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <input type="checkbox" class="mdst-toggle" checked />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1085,11 +1085,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" checked />
+                    <input type="checkbox" class="mdst-toggle" checked />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" />
+                    <input type="checkbox" class="mdst-toggle" />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1101,11 +1101,11 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <div class="notification-controls">
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" />
+                    <input type="checkbox" class="mdst-toggle" />
                     <span class="notification-channel-label">Email</span>
                   </div>
                   <div class="notification-channel">
-                    <input type="checkbox" class="mdst-checkbox--toggle" />
+                    <input type="checkbox" class="mdst-toggle" />
                     <span class="notification-channel-label">Push</span>
                   </div>
                 </div>
@@ -1125,7 +1125,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button mdst-button--inverted" onclick="showToast('Notification preferences saved')">
+              <button type="button" class="mdst-button mdst-button--solid" onclick="showToast('Notification preferences saved')">
                 Save Preferences
               </button>
             </div>
@@ -1157,21 +1157,21 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <p class="session-device">Safari on iPhone</p>
                   <p class="session-detail">London, UK · IP 82.132.40.2 · Last active 2 hours ago</p>
                 </div>
-                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
+                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Revoke</button>
               </div>
               <div class="session-item">
                 <div class="session-info">
                   <p class="session-device">Firefox on Windows</p>
                   <p class="session-detail">Manchester, UK · IP 81.98.12.42 · Last active 3 days ago</p>
                 </div>
-                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
+                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Revoke</button>
               </div>
               <div class="session-item">
                 <div class="session-info">
                   <p class="session-device">Relay CLI</p>
                   <p class="session-detail">API token · Created Dec 1, 2024 · Last used 5 hours ago</p>
                 </div>
-                <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Revoke</button>
+                <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Revoke</button>
               </div>
             </div>
 
@@ -1256,7 +1256,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button mdst-button--ghost" onclick="document.getElementById('transfer-dialog').close()">
+        <button type="button" class="mdst-button mdst-button--borderless" onclick="document.getElementById('transfer-dialog').close()">
           Cancel
         </button>
         <button
@@ -1306,7 +1306,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button mdst-button--ghost" onclick="document.getElementById('deactivate-dialog').close()">
+        <button type="button" class="mdst-button mdst-button--borderless" onclick="document.getElementById('deactivate-dialog').close()">
           Cancel
         </button>
         <button
@@ -1354,7 +1354,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button mdst-button--ghost" onclick="document.getElementById('delete-dialog').close()">
+        <button type="button" class="mdst-button mdst-button--borderless" onclick="document.getElementById('delete-dialog').close()">
           Cancel
         </button>
         <button

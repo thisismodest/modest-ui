@@ -159,16 +159,16 @@
         white-space: nowrap;
       }
 
-      .pricing-card > .mdst-card-header {
+      .pricing-card > .mdst-card__header {
         padding: var(--mdst-space-lg) var(--mdst-space-lg) 0;
         font-weight: normal;
       }
 
-      .pricing-card > .mdst-card-body {
+      .pricing-card > .mdst-card__body {
         padding: 0 var(--mdst-space-lg) var(--mdst-space-lg);
       }
 
-      .pricing-card > .mdst-card-footer {
+      .pricing-card > .mdst-card__footer {
         padding: var(--mdst-space-lg);
         flex: 1;
       }
@@ -497,7 +497,7 @@
       }
 
       @media (max-width: 480px) {
-        .site-nav .mdst-button--ghost {
+        .site-nav .mdst-button--borderless {
           display: none;
         }
 
@@ -532,9 +532,9 @@
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <nav class="site-nav">
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Product</button>
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Docs</button>
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Blog</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Product</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Docs</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Blog</button>
         <button type="button" class="mdst-button mdst-button--sm">Sign In</button>
       </nav>
     </header>
@@ -560,7 +560,7 @@
       <div class="pricing-grid">
         <!-- Free -->
         <div class="mdst-card pricing-card">
-          <div class="mdst-card-header mdst-card-header--borderless">
+          <div class="mdst-card__header mdst-card__header--borderless">
             <div class="pricing-card-name">Starter</div>
             <div class="pricing-card-price">
               <span class="pricing-amount">$0</span>
@@ -568,13 +568,13 @@
             </div>
             <div class="pricing-annual-note">&nbsp;</div>
           </div>
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <p class="pricing-card-desc">Perfect for side projects, experiments, and trying things out.</p>
             <div class="pricing-card-cta">
               <button type="button" class="mdst-button">Get Started</button>
             </div>
           </div>
-          <div class="mdst-card-footer">
+          <div class="mdst-card__footer">
             <div class="pricing-features-title">What's included</div>
             <ul class="pricing-features-list">
               <li>Up to 3 projects</li>
@@ -592,7 +592,7 @@
         <!-- Pro (featured) -->
         <div class="mdst-card pricing-card pricing-card--featured">
           <div class="pricing-card-badge">Most Popular</div>
-          <div class="mdst-card-header mdst-card-header--borderless">
+          <div class="mdst-card__header mdst-card__header--borderless">
             <div class="pricing-card-name">Pro</div>
             <div class="pricing-card-price">
               <span class="pricing-amount" data-monthly="$24" data-yearly="$19">$24</span>
@@ -600,13 +600,13 @@
             </div>
             <div class="pricing-annual-note" data-monthly="&nbsp;" data-yearly="$228 billed annually">&nbsp;</div>
           </div>
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <p class="pricing-card-desc">For professionals and growing teams who need more power and flexibility.</p>
             <div class="pricing-card-cta">
-              <button type="button" class="mdst-button mdst-button--inverted">Start Free Trial</button>
+              <button type="button" class="mdst-button mdst-button--solid">Start Free Trial</button>
             </div>
           </div>
-          <div class="mdst-card-footer">
+          <div class="mdst-card__footer">
             <div class="pricing-features-title">Everything in Starter, plus</div>
             <ul class="pricing-features-list">
               <li class="feature-highlight">Unlimited projects</li>
@@ -623,7 +623,7 @@
 
         <!-- Enterprise -->
         <div class="mdst-card pricing-card">
-          <div class="mdst-card-header mdst-card-header--borderless">
+          <div class="mdst-card__header mdst-card__header--borderless">
             <div class="pricing-card-name">Enterprise</div>
             <div class="pricing-card-price">
               <span class="pricing-amount" data-monthly="$89" data-yearly="$71">$89</span>
@@ -631,13 +631,13 @@
             </div>
             <div class="pricing-annual-note" data-monthly="&nbsp;" data-yearly="$852 billed annually">&nbsp;</div>
           </div>
-          <div class="mdst-card-body">
+          <div class="mdst-card__body">
             <p class="pricing-card-desc">For orgs that need advanced security, compliance, and dedicated support.</p>
             <div class="pricing-card-cta">
               <button type="button" class="mdst-button">Contact Sales</button>
             </div>
           </div>
-          <div class="mdst-card-footer">
+          <div class="mdst-card__footer">
             <div class="pricing-features-title">Everything in Pro, plus</div>
             <ul class="pricing-features-list">
               <li class="feature-highlight">Unlimited team members</li>
@@ -874,7 +874,7 @@
         <h2>Not sure which plan is right for you?</h2>
         <p>Talk to our team and we'll help you figure out the best option for your needs. No pressure, no commitment.</p>
         <div class="cta-buttons">
-          <button type="button" class="mdst-button mdst-button--inverted">Talk to Sales</button>
+          <button type="button" class="mdst-button mdst-button--solid">Talk to Sales</button>
           <button type="button" class="mdst-button">View Documentation</button>
         </div>
         <p class="cta-sub">Or start free and upgrade later, no credit card required.</p>

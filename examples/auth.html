@@ -307,7 +307,7 @@
       }
 
       .password-strength-bar--weak {
-        background: var(--mdst-color-error);
+        background: var(--mdst-color-danger);
       }
 
       .password-strength-bar--medium {
@@ -423,7 +423,7 @@
       /* Error state */
       .form-error {
         font-size: var(--mdst-text-xs);
-        color: var(--mdst-color-error);
+        color: var(--mdst-color-danger);
         margin-top: 2px;
       }
 
@@ -439,8 +439,8 @@
       }
 
       .auth-alert--error {
-        border-color: var(--mdst-color-error);
-        color: var(--mdst-color-error);
+        border-color: var(--mdst-color-danger);
+        color: var(--mdst-color-danger);
         background: transparent;
       }
 
@@ -502,7 +502,7 @@
           grid-template-columns: 1fr;
         }
 
-        .otp-group .mdst-otp-input-digit {
+        .otp-group .mdst-otp-input__digit {
           width: 2.5rem;
           height: 2.5rem;
         }
@@ -544,7 +544,7 @@
           <!-- ============================================ -->
           <div class="auth-view active" id="view-login">
             <div class="auth-top-link">
-              <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm" onclick="showView('signup')">
+              <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm" onclick="showView('signup')">
                 Create account
               </button>
             </div>
@@ -618,7 +618,7 @@
                 </label>
               </div>
 
-              <button class="mdst-button mdst-button--inverted form-submit" onclick="showView('verify')" type="submit">Sign In</button>
+              <button class="mdst-button mdst-button--solid form-submit" onclick="showView('verify')" type="submit">Sign In</button>
             </form>
 
             <div class="auth-footer">Don't have an account? <button type="button" onclick="showView('signup')">Sign up</button></div>
@@ -629,7 +629,7 @@
           <!-- ============================================ -->
           <div class="auth-view" id="view-signup">
             <div class="auth-top-link">
-              <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm" onclick="showView('login')">Sign in</button>
+              <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm" onclick="showView('login')">Sign in</button>
             </div>
 
             <div class="auth-header">
@@ -735,7 +735,7 @@
                 </label>
               </div>
 
-              <button class="mdst-button mdst-button--inverted form-submit" type="submit" onclick="showView('verify')">
+              <button class="mdst-button mdst-button--solid form-submit" type="submit" onclick="showView('verify')">
                 Create Account
               </button>
             </form>
@@ -754,16 +754,16 @@
 
             <form class="auth-form" onsubmit="return false;" style="align-items: center">
               <div class="mdst-otp-input otp-group">
-                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
-                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
-                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
-                <span class="mdst-otp-input-separator"></span>
-                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
-                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
-                <input type="text" class="mdst-otp-input-digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <span class="mdst-otp-input__separator"></span>
+                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
+                <input type="text" class="mdst-otp-input__digit" maxlength="1" inputmode="numeric" placeholder="0" />
               </div>
 
-              <button type="button" class="mdst-button mdst-button--inverted" style="width: 100%" onclick="showView('login')">
+              <button type="button" class="mdst-button mdst-button--solid" style="width: 100%" onclick="showView('login')">
                 Verify Email
               </button>
             </form>
@@ -791,7 +791,7 @@
                 <input type="email" id="forgot-email" class="mdst-input" placeholder="you@company.com" />
               </div>
 
-              <button class="mdst-button mdst-button--inverted form-submit" type="submit" onclick="showView('reset-sent')">
+              <button class="mdst-button mdst-button--solid form-submit" type="submit" onclick="showView('reset-sent')">
                 Send Reset Link
               </button>
             </form>
@@ -815,7 +815,7 @@
 
             <div style="display: flex; flex-direction: column; gap: var(--mdst-space-sm); margin-top: var(--mdst-space-md)">
               <button type="button" class="mdst-button" onclick="showView('reset')">I have a reset link (demo)</button>
-              <button type="button" class="mdst-button mdst-button--ghost" onclick="showView('login')">← Back to sign in</button>
+              <button type="button" class="mdst-button mdst-button--borderless" onclick="showView('login')">← Back to sign in</button>
             </div>
           </div>
 
@@ -858,7 +858,7 @@
                 </div>
               </div>
 
-              <button class="mdst-button mdst-button--inverted form-submit" type="submit" onclick="showView('reset-success')">
+              <button class="mdst-button mdst-button--solid form-submit" type="submit" onclick="showView('reset-success')">
                 Reset Password
               </button>
             </form>
@@ -878,7 +878,7 @@
               <p>Your password has been successfully reset. You can now sign in with your new credentials.</p>
             </div>
 
-            <button type="button" class="mdst-button mdst-button--inverted" style="width: 100%" onclick="showView('login')">
+            <button type="button" class="mdst-button mdst-button--solid" style="width: 100%" onclick="showView('login')">
               Continue to Sign In
             </button>
           </div>
@@ -940,7 +940,7 @@
       }
 
       // OTP auto-advance
-      document.querySelectorAll(".otp-group .mdst-otp-input-digit").forEach(function (input, index, inputs) {
+      document.querySelectorAll(".otp-group .mdst-otp-input__digit").forEach(function (input, index, inputs) {
         input.addEventListener("input", function () {
           if (this.value.length === 1 && index < inputs.length - 1) {
             inputs[index + 1].focus();

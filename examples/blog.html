@@ -433,13 +433,13 @@
         gap: var(--mdst-space-md);
       }
 
-      .related-grid .mdst-card-body h4 {
+      .related-grid .mdst-card__body h4 {
         font-weight: 600;
         font-size: var(--mdst-text-base);
         margin: 0 0 var(--mdst-space-xs);
       }
 
-      .related-grid .mdst-card-body p {
+      .related-grid .mdst-card__body p {
         font-size: var(--mdst-text-sm);
         color: var(--mdst-color-muted);
         margin: 0 0 var(--mdst-space-sm);
@@ -538,7 +538,7 @@
           font-size: 1.5rem;
         }
 
-        .site-nav .mdst-button--ghost {
+        .site-nav .mdst-button--borderless {
           display: none;
         }
 
@@ -559,9 +559,9 @@
     <header class="site-header">
       <a href="/examples/" class="site-logo" style="text-decoration: none; color: inherit">← Examples</a>
       <nav class="site-nav">
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">Archive</button>
-        <button type="button" class="mdst-button mdst-button--ghost mdst-button--sm">About</button>
-        <button type="button" class="mdst-button mdst-button--sm mdst-button--inverted">Subscribe</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">Archive</button>
+        <button type="button" class="mdst-button mdst-button--borderless mdst-button--sm">About</button>
+        <button type="button" class="mdst-button mdst-button--sm mdst-button--solid">Subscribe</button>
       </nav>
     </header>
 
@@ -912,7 +912,7 @@
           <h3>Related Posts</h3>
           <div class="related-grid">
             <div class="mdst-card mdst-card--interactive" onclick="window.scrollTo(0, 0)">
-              <div class="mdst-card-body">
+              <div class="mdst-card__body">
                 <h4>Ship small, ship often</h4>
                 <p>A practical guide to incremental delivery that keeps momentum high and risk low.</p>
                 <div class="post-meta">
@@ -923,7 +923,7 @@
               </div>
             </div>
             <div class="mdst-card mdst-card--interactive" onclick="window.scrollTo(0, 0)">
-              <div class="mdst-card-body">
+              <div class="mdst-card__body">
                 <h4>Why your CSS doesn't need a framework</h4>
                 <p>Modern CSS is more capable than you think. Here's what it can do natively.</p>
                 <div class="post-meta">
@@ -942,7 +942,7 @@
           <p>Get new posts delivered to your inbox. No spam, unsubscribe anytime.</p>
           <div class="newsletter-form">
             <input type="email" class="mdst-input" placeholder="you@example.com" />
-            <button type="button" class="mdst-button mdst-button--inverted">Subscribe</button>
+            <button type="button" class="mdst-button mdst-button--solid">Subscribe</button>
           </div>
         </div>
       </div>
