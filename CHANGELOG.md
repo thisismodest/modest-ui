@@ -195,8 +195,8 @@ elements, so they keep their names.
   unclassed `main`, `section`, `article`, `header`, `footer`, `aside`, `div`,
   `form`, `fieldset`, `details`, `blockquote`, `dd`) are spaced by
   `--mdst-flow-space` (default `1em`, so it scales with each element). Give a
-  container a class and its spacing is yours, so flex and grid layouts don't
-  get doubled gaps. Dialogs, popovers, and pinned (sticky or fixed) banners
+  container a class or an inline `style` and its spacing is yours, so flex
+  and grid layouts don't get doubled gaps. Dialogs, popovers, and pinned (sticky or fixed) banners
   are left alone. Spacing only goes above an element when something visible
   comes before it, so a leading script, style, hidden element, or skip link
   never puts a gap at the top of the page. Zero specificity; set the token to `0` to turn it off.

@@ -245,7 +245,8 @@ tag, toast, toggle (.mdst-toggle), toolbar, tooltip, utilities.
   beats it. To order against other layers: \`@layer reset, mdst-ui, utilities;\`
 - Flow spacing: children of plain containers inside \`.mdst-ui\` (the root and
   unclassed main, section, article, div, form, fieldset, …) are spaced by
-  \`--mdst-flow-space\`. Give a container a class to lay it out yourself.
+  \`--mdst-flow-space\`. Give a container a class or an inline style to lay it
+  out yourself.
 - Dark mode is opt-in: \`:root { color-scheme: light dark; }\` follows the
   system, \`color-scheme: dark\` forces it. Without it pages stay light.
 - Focus: one keyboard ring for everything (\`--mdst-focus-ring\`,

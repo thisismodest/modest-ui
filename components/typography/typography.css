@@ -15,12 +15,12 @@
 
   /* Flow — space between the children of plain containers, so plain HTML
      reads as a page. Runs in the .mdst-ui root and in unclassed sectioning,
-     form, and wrapper elements. Give a container a class (usually because you
-     lay it out with flex or grid) and its spacing is yours. Zero specificity;
-     tune or turn off with --mdst-flow-space. */
+     form, and wrapper elements. Give a container a class or an inline style
+     (usually because you lay it out with flex or grid) and its spacing is
+     yours. Zero specificity; tune or turn off with --mdst-flow-space. */
   :where(
       .mdst-ui,
-      .mdst-ui :is(main, article, section, header, footer, aside, div, form, fieldset, details, blockquote, dd):not([class]),
+      .mdst-ui :is(main, article, section, header, footer, aside, div, form, fieldset, details, blockquote, dd):not([class], [style]),
       .mdst-form,
       .mdst-fieldset
     )

@@ -209,8 +209,8 @@ yourself, your values are used in both modes.
 Inside `.mdst-ui`, the children of plain containers (the root, and unclassed
 `main`, `section`, `article`, `div`, `form`, and so on) are spaced by one token.
 It's in `em`, so headings get more room than paragraphs. Give a container a
-class (for example to lay it out with grid) and its spacing is yours. Any
-margin you set wins.
+class or an inline `style` (for example to lay it out with grid) and its
+spacing is yours. Any margin you set wins.
 
 ```css
 :root {

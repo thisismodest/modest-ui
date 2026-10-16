@@ -25,6 +25,7 @@
     /* Individual Tab */
 
     & .mdst-tabs__tab {
+      display: block;
       padding: var(--mdst-space-sm) var(--mdst-space-md);
       white-space: nowrap;
       border: none;
