@@ -633,9 +633,7 @@
             <span class="mdst-tag mdst-tag--pill mdst-tag--borderless">v<!-- VERSION --></span>
           </div>
           <h1 id="home-heading">A minimal, themeable CSS component library.</h1>
-          <p class="home-hero-lead">
-            Write plain HTML and get styled components automatically, or use classes when you need more control.
-          </p>
+          <p class="home-hero-lead">Write plain HTML and get styled components automatically, or use classes when you need more control.</p>
 
           <div class="home-install">
             <!-- biome-ignore lint/a11y/useSemanticElements: a group of toggle buttons, not form fields -->
@@ -657,7 +655,10 @@
             <a href="/llms.txt">or read the llms.txt</a>
           </div>
 
-          <p class="home-meta">~<!-- CSS_SIZE --> gzipped · No JavaScript required · Works with any framework, or none</p>
+          <p class="home-meta">
+            ~<!-- CSS_SIZE -->
+            gzipped · No JavaScript required · Works with any framework, or none
+          </p>
         </div>
 
         <figure class="home-specimen" aria-label="One component shown in different themes">
@@ -709,7 +710,7 @@
               <div class="mdst-card__header">
                 <h3>Welcome back</h3>
               </div>
-              <form class="mdst-card__body home-stack" onsubmit="return false">
+              <form class="mdst-card__body home-stack" onsubmit="return false;">
                 <label class="home-field">
                   Email
                   <input type="email" class="mdst-input" placeholder="you@example.com" autocomplete="off" />
@@ -911,16 +912,48 @@
 
         <div class="mdst-tabs mdst-tabs--pills" data-home-tabs>
           <div class="mdst-tabs__list" role="tablist" aria-label="How modest-ui works">
-            <button type="button" class="mdst-tabs__tab" role="tab" data-state="active" aria-selected="true" aria-controls="layer-1" id="layer-1-tab">
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="active"
+              aria-selected="true"
+              aria-controls="layer-1"
+              id="layer-1-tab"
+            >
               1 · Plain HTML
             </button>
-            <button type="button" class="mdst-tabs__tab" role="tab" data-state="inactive" aria-selected="false" aria-controls="layer-2" id="layer-2-tab">
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="layer-2"
+              id="layer-2-tab"
+            >
               2 · Variants
             </button>
-            <button type="button" class="mdst-tabs__tab" role="tab" data-state="inactive" aria-selected="false" aria-controls="layer-3" id="layer-3-tab">
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="layer-3"
+              id="layer-3-tab"
+            >
               3 · State
             </button>
-            <button type="button" class="mdst-tabs__tab" role="tab" data-state="inactive" aria-selected="false" aria-controls="layer-4" id="layer-4-tab">
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="layer-4"
+              id="layer-4-tab"
+            >
               4 · Make it yours
             </button>
           </div>
@@ -946,7 +979,7 @@
 &lt;/body&gt;</code></pre>
               <div class="home-result">
                 <span class="home-result-label">Result · zero classes</span>
-                <form class="home-stack" onsubmit="return false">
+                <form class="home-stack" onsubmit="return false;">
                   <label for="demo-name">Name</label>
                   <input id="demo-name" placeholder="Ada" autocomplete="off" />
                   <select aria-label="Role">
@@ -1135,7 +1168,10 @@
           <div class="mdst-card">
             <div class="mdst-card__body">
               <h3>The whole library in one file</h3>
-              <p><a href="/llms.txt" class="mdst-a">llms.txt</a> lists every class, token, and pattern. Drop it into context and your agent knows the system.</p>
+              <p>
+                <a href="/llms.txt" class="mdst-a">llms.txt</a> lists every class, token, and pattern. Drop it into context and your agent
+                knows the system.
+              </p>
             </div>
           </div>
           <div class="mdst-card">
@@ -1193,42 +1229,56 @@
 
         <div class="home-grid">
           <a href="/examples/landing.html" class="mdst-card mdst-card--interactive home-example">
-            <div class="home-wire" aria-hidden="true"><i class="w-head"></i><i class="w-narrow"></i><i class="w-narrow"></i><span class="w-row"><i></i><i></i><i></i></span></div>
+            <div class="home-wire" aria-hidden="true">
+              <i class="w-head"></i><i class="w-narrow"></i><i class="w-narrow"></i><span class="w-row"><i></i><i></i><i></i></span>
+            </div>
             <div class="mdst-card__body">
               <h3>Landing page</h3>
               <p>Hero, feature grid, testimonials, and a call to action.</p>
             </div>
           </a>
           <a href="/examples/dashboard.html" class="mdst-card mdst-card--interactive home-example">
-            <div class="home-wire" aria-hidden="true"><span class="w-side"><i></i><i></i></span></div>
+            <div class="home-wire" aria-hidden="true">
+              <span class="w-side"><i></i><i></i></span>
+            </div>
             <div class="mdst-card__body">
               <h3>Dashboard</h3>
               <p>Stat cards, a data table, and action controls.</p>
             </div>
           </a>
           <a href="/examples/pricing.html" class="mdst-card mdst-card--interactive home-example">
-            <div class="home-wire" aria-hidden="true"><i class="w-head w-narrow"></i><span class="w-row"><i style="height: 3.5rem"></i><i style="height: 3.5rem"></i><i style="height: 3.5rem"></i></span></div>
+            <div class="home-wire" aria-hidden="true">
+              <i class="w-head w-narrow"></i
+              ><span class="w-row"><i style="height: 3.5rem"></i><i style="height: 3.5rem"></i><i style="height: 3.5rem"></i></span>
+            </div>
             <div class="mdst-card__body">
               <h3>Pricing</h3>
               <p>Plan comparison, billing toggle, and FAQ.</p>
             </div>
           </a>
           <a href="/examples/auth.html" class="mdst-card mdst-card--interactive home-example">
-            <div class="home-wire" aria-hidden="true"><i class="w-head w-narrow"></i><i class="w-narrow" style="height: 1rem"></i><i class="w-narrow" style="height: 1rem"></i><i class="w-narrow" style="height: 1rem; opacity: 0.6"></i></div>
+            <div class="home-wire" aria-hidden="true">
+              <i class="w-head w-narrow"></i><i class="w-narrow" style="height: 1rem"></i><i class="w-narrow" style="height: 1rem"></i
+              ><i class="w-narrow" style="height: 1rem; opacity: 0.6"></i>
+            </div>
             <div class="mdst-card__body">
               <h3>Authentication</h3>
               <p>Login, registration, and password reset forms.</p>
             </div>
           </a>
           <a href="/examples/blog.html" class="mdst-card mdst-card--interactive home-example">
-            <div class="home-wire" aria-hidden="true"><i class="w-head"></i><i></i><i></i><i style="width: 70%"></i><i class="w-head" style="margin-top: 0.4rem"></i><i></i></div>
+            <div class="home-wire" aria-hidden="true">
+              <i class="w-head"></i><i></i><i></i><i style="width: 70%"></i><i class="w-head" style="margin-top: 0.4rem"></i><i></i>
+            </div>
             <div class="mdst-card__body">
               <h3>Blog</h3>
               <p>Article list, tags, and a full reading view.</p>
             </div>
           </a>
           <a href="/examples/settings.html" class="mdst-card mdst-card--interactive home-example">
-            <div class="home-wire" aria-hidden="true"><span class="w-side"><i></i><i style="opacity: 0.12"></i></span></div>
+            <div class="home-wire" aria-hidden="true">
+              <span class="w-side"><i></i><i style="opacity: 0.12"></i></span>
+            </div>
             <div class="mdst-card__body">
               <h3>Settings</h3>
               <p>Profile editing, notification preferences, and a danger zone.</p>
@@ -1244,15 +1294,44 @@
 
         <div class="mdst-tabs home-install-tabs" data-home-tabs>
           <div class="mdst-tabs__list" role="tablist" aria-label="Install method">
-            <button type="button" class="mdst-tabs__tab" role="tab" data-state="active" aria-selected="true" aria-controls="inst-npm" id="inst-npm-tab">npm</button>
-            <button type="button" class="mdst-tabs__tab" role="tab" data-state="inactive" aria-selected="false" aria-controls="inst-cdn" id="inst-cdn-tab">CDN</button>
-            <button type="button" class="mdst-tabs__tab" role="tab" data-state="inactive" aria-selected="false" aria-controls="inst-pick" id="inst-pick-tab">
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="active"
+              aria-selected="true"
+              aria-controls="inst-npm"
+              id="inst-npm-tab"
+            >
+              npm
+            </button>
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="inst-cdn"
+              id="inst-cdn-tab"
+            >
+              CDN
+            </button>
+            <button
+              type="button"
+              class="mdst-tabs__tab"
+              role="tab"
+              data-state="inactive"
+              aria-selected="false"
+              aria-controls="inst-pick"
+              id="inst-pick-tab"
+            >
               Cherry-pick
             </button>
           </div>
           <div class="mdst-tabs__panel" role="tabpanel" id="inst-npm" aria-labelledby="inst-npm-tab" data-state="active">
             <pre>npm install mdst-ui</pre>
-            <pre>/* in your CSS */
+            <pre>
+/* in your CSS */
 @import "mdst-ui/dist/modest-ui.css";
 
 /* or in your JS bundler */
@@ -1271,7 +1350,8 @@ import "mdst-ui";</pre>
 &lt;/html&gt;</pre>
           </div>
           <div class="mdst-tabs__panel" role="tabpanel" id="inst-pick" aria-labelledby="inst-pick-tab" data-state="inactive">
-            <pre>/* Always include tokens first */
+            <pre>
+/* Always include tokens first */
 @import "mdst-ui/base/tokens.css";
 
 /* Then only what you need */
@@ -1310,8 +1390,12 @@ import "mdst-ui";</pre>
           </details>
           <details class="mdst-details mdst-details--section">
             <summary>Theming with tokens</summary>
-            <p>Override CSS custom properties to make it yours. Try the <a href="/theme/" class="mdst-a">Theme Playground</a> to generate them.</p>
-            <pre>:root {
+            <p>
+              Override CSS custom properties to make it yours. Try the <a href="/theme/" class="mdst-a">Theme Playground</a> to generate
+              them.
+            </p>
+            <pre>
+:root {
   --mdst-color-fg: #000;
   --mdst-color-bg: #fff;
   --mdst-color-border: #000;
@@ -1332,7 +1416,9 @@ import "mdst-ui";</pre>
           <div class="home-row">
             <a href="https://github.com/thisismodest/modest-ui" class="mdst-button mdst-button--solid">View on GitHub</a>
             <a href="https://www.npmjs.com/package/mdst-ui" class="mdst-button">npm package</a>
-            <a href="https://github.com/thisismodest/modest-ui/blob/main/CONTRIBUTING.md" class="mdst-button mdst-button--borderless">Contribute</a>
+            <a href="https://github.com/thisismodest/modest-ui/blob/main/CONTRIBUTING.md" class="mdst-button mdst-button--borderless"
+              >Contribute</a
+            >
           </div>
         </div>
       </section>
@@ -1669,7 +1755,7 @@ import "mdst-ui";</pre>
             html: [
               '<section class="pg-section">',
               '  <div class="pg-inner pg-center pg-quote">',
-              "    <blockquote>“We replaced three UI kits with one stylesheet. Our AI-generated screens finally look like they belong together.”</blockquote>",
+              "    <blockquote>“We replaced three UI kits with one stylesheet. Our screens finally look consistent.”</blockquote>",
               '    <div class="pg-person">',
               '      <span class="mdst-avatar">SR</span>',
               '      <div><strong>Sam Rivera</strong><br /><small class="pg-muted">CTO, Northwind</small></div>',
@@ -1800,9 +1886,7 @@ import "mdst-ui";</pre>
         }
 
         function pageBody() {
-          return page
-            .map((key) => BLOCKS[key].html.join("\n"))
-            .join("\n\n");
+          return page.map((key) => BLOCKS[key].html.join("\n")).join("\n\n");
         }
 
         function renderBuilder() {
@@ -1856,7 +1940,7 @@ import "mdst-ui";</pre>
           var pad = new Array(spaces + 1).join(" ");
           return text
             .split("\n")
-            .map((line) => line ? pad + line : line)
+            .map((line) => (line ? pad + line : line))
             .join("\n");
         }
 
