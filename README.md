@@ -297,10 +297,10 @@ The sidebar, docs page, and `llms.txt` entry are generated from the folder. See 
 
 The version in `package.json` is the single source of truth. `npm run build` carries it into the site and `llms.txt`. `dist/` and `llms.txt` are committed, and CI fails a PR if they're out of date.
 
-1. Move the `[Unreleased]` notes in `CHANGELOG.md` under the new version, then bump the version in `package.json`:
+1. Move the `[Unreleased]` notes in `CHANGELOG.md` under the new version, then bump the version in `package.json` (without a commit or tag yet: those come once the build is in):
 
 ```bash
-npm version patch  # or minor / major
+npm version patch --no-git-tag-version  # or minor / major
 ```
 
 2. Rebuild everything:
@@ -317,7 +317,7 @@ git commit -m "release vX.Y.Z"
 git push origin main
 ```
 
-4. Tag the release:
+4. Tag that commit and push the tag:
 
 ```bash
 git tag vX.Y.Z
@@ -327,11 +327,14 @@ git push origin vX.Y.Z
 Pushing a `v*` tag does two things automatically:
 
 - **jsDelivr** resolves the tag for the `/gh/` CDN path.
-- The **Publish to npm** workflow (`.github/workflows/publish.yml`) builds the
-  bundle and runs `npm publish`, releasing the new version as `mdst-ui`. It
-  authenticates via npm **Trusted Publishing** (OIDC), so no token is stored in
-  the repo, and provenance is generated automatically. The GitHub repo/workflow
-  must be registered as a Trusted Publisher on the npm package settings page.
+- The **Publish to npm** workflow (`.github/workflows/publish.yml`) checks the tag
+  matches `package.json` and is on `main`, builds the bundle, and runs
+  `npm publish`, releasing the new version as `mdst-ui`. It runs in the `npm`
+  environment and authenticates with npm's **trusted publishing** (OIDC), so no
+  token is stored, and provenance is generated automatically. Then it makes a
+  GitHub Release from the tag.
+
+Only the maintainer can create `v*` tags.
 
 The `/npm/` CDN path (`cdn.jsdelivr.net/npm/mdst-ui@X.Y.Z/...`) becomes
 available a few moments after the publish job finishes.
