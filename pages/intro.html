@@ -1565,7 +1565,9 @@ import "mdst-ui";</pre>
             paused = false;
           });
 
-          setInterval(() => {
+          var cycling = setInterval(() => {
+            // Gone once another page is swapped in (see the template): stop
+            if (!specimen.isConnected) return clearInterval(cycling);
             if (paused || document.hidden) return;
             var name = cycle[index++ % cycle.length];
             applyScoped(specimen, name);

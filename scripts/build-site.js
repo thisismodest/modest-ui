@@ -75,8 +75,20 @@ function extractHeadStyles(html) {
   const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
   if (!headMatch) return "";
   const re = /<style[^>]*>[\s\S]*?<\/style>/gi;
-  const styles = Array.from(headMatch[1].matchAll(re), (m) => m[0]);
+  // Marked as the page's own, so moving to another page can swap them (see the template)
+  const styles = Array.from(headMatch[1].matchAll(re), (m) => m[0].replace(/^<style/i, "<style data-page"));
   return styles.join("\n");
+}
+
+/**
+ * Mark a page's script as its own, for the template's page swapping to find. A
+ * classic script also gets a scope of its own: swapped in without a reload, it can
+ * run again, beside other pages' scripts, so its names mustn't be global.
+ */
+function pageScript(script) {
+  const [, attrs, body] = script.match(/^<script([^>]*)>([\s\S]*)<\/script>$/i);
+  const classic = !/\b(type|src)=/i.test(attrs);
+  return `<script data-page${attrs}>${classic ? `(() => {${body}})();` : body}</script>`;
 }
 
 function extractScripts(bodyContent, slug, type) {
@@ -88,9 +100,9 @@ function extractScripts(bodyContent, slug, type) {
   // Rewrite relative imports so they work from /slug/index.html
   const rewrittenScripts = scripts.map((script) => {
     if (type === "component") {
-      return script.replace(/from\s+["']\.\/([^"']+)["']/g, `from "../components/${slug}/$1"`);
+      script = script.replace(/from\s+["']\.\/([^"']+)["']/g, `from "../components/${slug}/$1"`);
     }
-    return script;
+    return pageScript(script);
   });
 
   return { cleanBody, scripts: rewrittenScripts };

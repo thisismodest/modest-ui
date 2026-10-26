@@ -48,7 +48,8 @@
     <script src="/base/theme-persist.js"></script>
     <link rel="stylesheet" href="/base/preview.css" />
     <!-- HEAD_EXTRA -->
-    <style>
+    <!-- Pages' own styles come before this one, so its layout wins (page swapping keeps that order) -->
+    <style id="site-style">
       /* Hidden until focused, then shown above everything */
       .skip-link {
         position: absolute;
@@ -708,6 +709,86 @@
           event.preventDefault();
           sidebar.open = true;
           input.focus();
+        });
+      })();
+
+      // Moving between the docs' pages, only the page itself is loaded and swapped
+      // in: the sidebar stays as it is, scrolled and searched, with no flash. Any
+      // other link, or any failure, loads the page as usual.
+      (() => {
+        const content = () => document.getElementById("main-content");
+        let latest = 0;
+        let shown = location.pathname; // the page whose content is showing
+        history.replaceState({ scroll: 0 }, "");
+
+        // The docs' own pages are folders on this site (not /examples/*.html)
+        const isPage = (url) => url.origin === location.origin && url.pathname.endsWith("/");
+
+        async function show(url, { push, scroll = 0 }) {
+          const mine = ++latest;
+          let page;
+          try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(res.status);
+            page = new DOMParser().parseFromString(await res.text(), "text/html");
+            if (!page.querySelector(".main")) throw new Error("not a docs page");
+          } catch {
+            return push ? location.assign(url) : location.reload();
+          }
+          if (mine !== latest) return; // another link was clicked meanwhile
+
+          // Before the address changes, so analytics records the new title
+          document.title = page.title;
+          for (const selector of ['meta[name="description"]', 'link[rel="canonical"]']) {
+            const from = page.querySelector(selector);
+            const to = document.querySelector(selector);
+            if (from && to) to.replaceWith(from);
+          }
+          if (push) {
+            history.replaceState({ scroll: content().scrollTop }, "");
+            history.pushState({ scroll: 0 }, "", url);
+          }
+
+          document.querySelectorAll("style[data-page]").forEach((style) => style.remove());
+          document.getElementById("site-style").before(...page.querySelectorAll("style[data-page]"));
+          document.querySelector(".main").replaceWith(page.querySelector(".main"));
+          shown = url.pathname;
+          for (const link of document.querySelectorAll(".sidebar-nav .sidebar-link")) {
+            link.classList.toggle("active", new URL(link.href).pathname === url.pathname);
+          }
+          sidebar.removeAttribute("open");
+
+          // The page's own scripts, run afresh (a parsed page's scripts never run)
+          document.querySelectorAll("script[data-page]").forEach((script) => script.remove());
+          for (const from of page.querySelectorAll("script[data-page]")) {
+            const script = document.createElement("script");
+            for (const { name, value } of from.attributes) script.setAttribute(name, value);
+            script.textContent = from.textContent;
+            document.body.append(script);
+          }
+
+          const target = url.hash && document.getElementById(decodeURIComponent(url.hash.slice(1)));
+          if (target) target.scrollIntoView();
+          else content().scrollTop = scroll;
+          // Screen readers start reading from the new page, as on a full load
+          if (push) content().focus({ preventScroll: true });
+        }
+
+        document.addEventListener("click", (event) => {
+          const link = event.target.closest("a[href]");
+          if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          if (link.target || link.hasAttribute("download")) return;
+          const url = new URL(link.href);
+          // A link within this page is the browser's to follow
+          if (!isPage(url) || url.pathname === location.pathname) return;
+          event.preventDefault();
+          show(url, { push: true });
+        });
+
+        addEventListener("popstate", (event) => {
+          // Back or forward within one page (a #link) is the browser's
+          if (location.pathname === shown) return;
+          show(new URL(location.href), { push: false, scroll: event.state?.scroll ?? 0 });
         });
       })();
 
