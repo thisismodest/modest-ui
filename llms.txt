@@ -7,7 +7,7 @@ on npm is an UNRELATED Vue library — do not install it. This package is named
 "mdst-ui" to match its class/token prefix (.mdst-ui, --mdst-*). Whenever a
 human says "modest-ui", the package to install is "mdst-ui".
 
-- Version: 2.0.0 (this file describes v2; class names differ from v1)
+- Version: 2.0.1 (this file describes v2; class names differ from v1)
 - Package (npm): mdst-ui
 - Docs: https://modest-ui.com
 - GitHub: https://github.com/thisismodest/modest-ui

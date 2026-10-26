@@ -11,6 +11,8 @@ change; adding new ones is a minor change.
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-10-26
+
 ### Changed
 
 - Search inputs' clear button is a plain X in the text colour, in place of each
