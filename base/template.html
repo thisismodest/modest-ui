@@ -242,6 +242,27 @@
         gap: var(--mdst-space-xs);
       }
 
+      /* Sized like the links below it */
+      .sidebar-search input {
+        width: 100%;
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        font-size: var(--mdst-text-sm);
+      }
+
+      /* Links and groups are display: block, which would beat [hidden] */
+      .sidebar-nav [hidden],
+      .sidebar-search[hidden],
+      .sidebar-search-empty[hidden] {
+        display: none;
+      }
+
+      .sidebar-search-empty {
+        margin: 0;
+        padding: var(--mdst-space-xs) var(--mdst-space-sm);
+        font-size: var(--mdst-text-sm);
+        color: var(--mdst-color-muted);
+      }
+
       .sidebar-link {
         display: block;
         padding: var(--mdst-space-xs) var(--mdst-space-sm);
@@ -583,9 +604,16 @@
           <span class="sidebar-close" aria-hidden="true">&#8249;</span>
         </summary>
         <div class="sidebar-content">
+          <!-- Shown by the script below: without it, there's nothing to filter with -->
+          <search class="sidebar-search" hidden>
+            <label for="sidebar-search" class="mdst-sr-only">Search components</label>
+            <input type="search" id="sidebar-search" placeholder="Search" autocomplete="off" spellcheck="false" />
+            <p class="mdst-sr-only" id="sidebar-search-count" aria-live="polite"></p>
+          </search>
           <nav class="sidebar-nav" aria-label="Component navigation">
             <!-- SIDEBAR -->
           </nav>
+          <p class="sidebar-search-empty" hidden>No components match.</p>
           <div class="sidebar-footer">
             <div class="theme-switcher">
               <label for="theme-switcher" aria-label="Theme">◑</label>
@@ -638,6 +666,50 @@
       sidebarOverlay.addEventListener("click", () => {
         sidebar.removeAttribute("open");
       });
+
+      // Search: hide the links that don't match every word typed, and groups left
+      // empty. Enter opens the first match; Escape clears; "/" jumps to the box.
+      (() => {
+        const input = document.getElementById("sidebar-search");
+        document.querySelector(".sidebar-search").hidden = false;
+        const count = document.getElementById("sidebar-search-count");
+        const empty = document.querySelector(".sidebar-search-empty");
+        const separator = document.querySelector(".sidebar-separator");
+        const links = [...document.querySelectorAll(".sidebar-nav .sidebar-link")];
+        const groups = [...document.querySelectorAll(".sidebar-nav .sidebar-group")];
+
+        const filter = () => {
+          const words = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+          let shown = 0;
+          for (const link of links) {
+            link.hidden = !words.every((word) => link.dataset.search.includes(word));
+            if (!link.hidden) shown++;
+          }
+          for (const group of groups) {
+            group.hidden = !group.querySelector(".sidebar-link:not([hidden])");
+            if (words.length && !group.hidden) group.open = true;
+          }
+          if (separator) separator.hidden = words.length > 0;
+          empty.hidden = shown > 0;
+          count.textContent = words.length ? `${shown} ${shown === 1 ? "result" : "results"}` : "";
+        };
+
+        input.addEventListener("input", filter);
+        input.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") links.find((link) => !link.hidden)?.click();
+          if (event.key === "Escape" && input.value) {
+            input.value = "";
+            filter();
+          }
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key !== "/" || event.metaKey || event.ctrlKey || event.altKey) return;
+          if (event.target.closest("input, textarea, select, [contenteditable]")) return;
+          event.preventDefault();
+          sidebar.open = true;
+          input.focus();
+        });
+      })();
 
       // Theme switcher
       (() => {

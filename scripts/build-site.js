@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
 import siteConfig from "../site.config.js";
 import { getComponents } from "./components.js";
-import { renderComponentLinks } from "./sidebar.js";
+import { renderComponentLinks, searchText } from "./sidebar.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -106,7 +106,7 @@ function buildSidebar(components, pages, activeSlug) {
       const active = p.slug === activeSlug ? " active" : "";
       const href = p.slug === "intro" ? "/" : `/${p.slug}/`;
       const label = p.slug === "intro" ? "Introduction" : p.title;
-      return `            <a href="${href}" class="sidebar-link${active}">${label}</a>`;
+      return `            <a href="${href}" class="sidebar-link${active}"${searchText({ title: label })}>${label}</a>`;
     })
     .join("\n");
 

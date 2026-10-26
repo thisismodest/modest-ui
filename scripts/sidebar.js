@@ -7,6 +7,17 @@
 const escapeHtml = (str) => String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 /**
+ * The words the sidebar search matches a link on: its title, slug, class name,
+ * group, and keywords (other names people use, such as "modal" for Dialog). Not
+ * the description, which names other components too often to narrow anything.
+ */
+export function searchText(item) {
+  const words = [item.title, item.slug?.replace(/-/g, " "), item.className, item.group, ...(item.keywords ?? [])];
+  const text = words.filter(Boolean).join(" ").toLowerCase();
+  return ` data-search="${escapeHtml(text).replace(/"/g, "&quot;")}"`;
+}
+
+/**
  * Group and sort components into a mixed list of ungrouped links and grouped submenus.
  * Components with a `group` property are collected under that group name.
  * Groups and ungrouped items are sorted alphabetically together.
@@ -57,7 +68,7 @@ export function renderComponentLinks(components, options = {}) {
     if (item.type === "link") {
       const c = item.component;
       const active = c.slug === activeSlug ? " active" : "";
-      const extra = linkAttrs(c);
+      const extra = linkAttrs(c) + searchText(c);
       lines.push(`${indent}<a href="${href(c)}" class="sidebar-link${active}"${extra}>${escapeHtml(c.title)}</a>`);
     } else {
       // Open by default so the grouped pages are as easy to find as the rest
@@ -65,7 +76,7 @@ export function renderComponentLinks(components, options = {}) {
       lines.push(`${indent}  <summary class="sidebar-group-title">${escapeHtml(item.groupName)}</summary>`);
       for (const c of item.children) {
         const active = c.slug === activeSlug ? " active" : "";
-        const extra = linkAttrs(c);
+        const extra = linkAttrs(c) + searchText(c);
         lines.push(`${indent}  <a href="${href(c)}" class="sidebar-link sidebar-link--grouped${active}"${extra}>${escapeHtml(c.title)}</a>`);
       }
       lines.push(`${indent}</details>`);

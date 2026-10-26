@@ -224,7 +224,7 @@ Each component lives in its own folder:
 components/
 └── my-component/
     ├── my-component.css    # Component styles (required)
-    ├── config.js           # Title, class name, and description (required)
+    ├── config.js           # Title, class name, and description (required); search keywords and group (optional)
     └── preview.html        # Documentation preview (required)
 ```
 
@@ -427,6 +427,7 @@ export default {
   title: "Stepper",
   className: ".mdst-stepper", // shown in the docs header
   description: "One sentence on what it is and its main variants.",
+  keywords: ["modal", "popup"], // optional: other names people search the sidebar for
   group: "Input" // optional: nests it under a sidebar group
 };
 ```
