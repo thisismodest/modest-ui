@@ -52,6 +52,44 @@
     opacity: 1;
   }
 
+  /* Search: the browser's own clear button, drawn as a plain X in the text
+     colour, not each browser's own (blue in some, grey in others), and shown
+     whenever there's text to clear, not only on hover. Browsers without one,
+     such as Firefox, show nothing. */
+
+  :where(.mdst-ui) input:where([type="search"])::-webkit-search-cancel-button,
+  .mdst-input:where([type="search"])::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.875em;
+    height: 0.875em;
+    margin-inline-start: var(--mdst-space-sm);
+    cursor: pointer;
+    background-color: currentColor;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3'%3E%3Cpath d='M5 5l14 14M19 5 5 19'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3'%3E%3Cpath d='M5 5l14 14M19 5 5 19'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+
+  /* Chrome hides it unless hovered or focused; it still goes when the field is
+     empty, read-only, or disabled */
+  :where(.mdst-ui) input:where([type="search"]:enabled:read-write)::-webkit-search-cancel-button,
+  .mdst-input:where([type="search"]:enabled:read-write)::-webkit-search-cancel-button {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (forced-colors: active) {
+    :where(.mdst-ui) input:where([type="search"])::-webkit-search-cancel-button,
+    .mdst-input:where([type="search"])::-webkit-search-cancel-button {
+      forced-color-adjust: none;
+      background-color: CanvasText;
+    }
+  }
+
   /* Borderless: the field keeps its padding, so it lines up with bordered
      fields, but draws no border. Declared before invalid, so errors still
      show. */

@@ -9,6 +9,14 @@ The public API is the set of CSS custom properties (`--mdst-*`) and class names
 `llms.txt`. Renaming or removing a documented token or class is a breaking
 change; adding new ones is a minor change.
 
+## [Unreleased]
+
+### Changed
+
+- Search inputs' clear button is a plain X in the text colour, in place of each
+  browser's own, and shows whenever there's text to clear, not only on hover
+  (in browsers that have one: not Firefox).
+
 ## [2.0.0] - 2026-10-16
 
 2.0 is a clean break: v1 names are not kept as aliases. Pin `mdst-ui@1` to stay
