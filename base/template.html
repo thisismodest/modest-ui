@@ -163,6 +163,22 @@
         padding: var(--mdst-space-md);
       }
 
+      /* A thin scrollbar in the border colour, where one shows at all */
+      .sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: var(--mdst-color-border) transparent;
+      }
+
+      /* Safari, which doesn't take the two above */
+      .sidebar::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb {
+        background: var(--mdst-color-border);
+        border-radius: 3px;
+      }
+
       @media (max-width: 640px) {
         .sidebar {
           position: fixed;
@@ -204,7 +220,11 @@
         height: 100%;
       }
 
+      /* Open, it fits beside a scrollbar rather than running under one. Its
+         least width keeps it from squashing as the sidebar slides open. */
       .sidebar[open] .sidebar-content {
+        width: auto;
+        min-width: calc(14rem - (2 * var(--mdst-space-md)) - 16px);
         opacity: 1;
         pointer-events: auto;
       }
@@ -223,6 +243,22 @@
 
       .sidebar-title::-webkit-details-marker {
         display: none;
+      }
+
+      /* The name goes home. The logo does too where the sidebar is always open
+         (below); on narrow screens it's left to open the sidebar, so only the
+         name, shown once it's open, is a link there. */
+      .sidebar-home {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        color: inherit;
+        text-decoration: none;
+        pointer-events: none;
+      }
+
+      .sidebar-home .logo {
+        pointer-events: auto;
       }
 
       .sidebar-logo {
@@ -568,6 +604,10 @@
             pointer-events: none;
           }
 
+          .sidebar-home {
+            pointer-events: auto;
+          }
+
           .sidebar:not([open]) .logo {
             display: flex;
           }
@@ -581,7 +621,10 @@
             margin: 0;
           }
 
+          /* Always this wide here, so it can fit beside a scrollbar
+             rather than run under it */
           .sidebar .sidebar-content {
+            width: auto;
             opacity: 1;
             pointer-events: auto;
           }
@@ -594,14 +637,16 @@
     <div class="layout">
       <details class="sidebar" id="sidebar">
         <summary class="sidebar-title" aria-label="Navigation">
-          <div class="sidebar-logo">
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-              <rect x="6" y="10" width="4" height="16" fill="currentColor" />
-              <rect x="14" y="6" width="4" height="20" fill="currentColor" />
-              <rect x="22" y="10" width="4" height="16" fill="currentColor" />
-            </svg>
-          </div>
-          <div class="logo">modest-ui</div>
+          <a href="/" class="sidebar-home">
+            <span class="sidebar-logo">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+                <rect x="6" y="10" width="4" height="16" fill="currentColor" />
+                <rect x="14" y="6" width="4" height="20" fill="currentColor" />
+                <rect x="22" y="10" width="4" height="16" fill="currentColor" />
+              </svg>
+            </span>
+            <span class="logo">modest-ui</span>
+          </a>
           <span class="sidebar-close" aria-hidden="true">&#8249;</span>
         </summary>
         <div class="sidebar-content">
