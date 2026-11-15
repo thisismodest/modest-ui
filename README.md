@@ -2,6 +2,8 @@
 
 A minimal, themeable CSS component library. Black and white by default.
 
+![modest-ui — plain HTML styled with zero classes, rethemed with a few tokens](https://raw.githubusercontent.com/yasirwhite/opendemo-media/main/thisismodest-modest-ui/modest-ui-demo.gif)
+
 > **The npm package is [`mdst-ui`](https://www.npmjs.com/package/mdst-ui), not `modest-ui`.**
 > The name `modest-ui` on npm is an **unrelated Vue library** — do not install it.
 > This package is named `mdst-ui` to match its class/token prefix (`.mdst-ui`, `--mdst-*`),
