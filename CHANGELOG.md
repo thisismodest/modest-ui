@@ -11,6 +11,8 @@ change; adding new ones is a minor change.
 
 ## [Unreleased]
 
+## [2.1.1] - 2026-11-16
+
 ### Changed
 
 - `--mdst-color-subtle` (the light fill behind skeletons, progress and meter

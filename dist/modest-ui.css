@@ -22,10 +22,14 @@
     --mdst-color-bg: #fff;
     --mdst-color-border: #000;
     --mdst-color-muted: #666;
-    --mdst-color-subtle: #f5f5f5;
+    /* Subtle (light fills: skeletons, tracks, code, table lines) is mixed
+       from the text and background colours, so a theme that only sets
+       those two still gets a subtle shade that shows. If you set it
+       yourself, keep it visibly different from the background. */
+    --mdst-color-subtle: color-mix(in srgb, var(--mdst-color-fg) 4%, var(--mdst-color-bg));
     --mdst-color-focus: #000;
     --mdst-color-danger: #dc2626;
-    --mdst-color-warning: #b45309;
+    --mdst-color-warning: #9d6e00;
     --mdst-color-success: #15803d;
     /* --mdst-color-info is optional: .mdst-info uses the text colour unless
        you set it, e.g. --mdst-color-info: #2563eb; */
@@ -123,10 +127,14 @@
       --mdst-color-bg: light-dark(#fff, #1a1a1a);
       --mdst-color-border: light-dark(#000, #fff);
       --mdst-color-muted: light-dark(#666, #999);
-      --mdst-color-subtle: light-dark(#f5f5f5, #2a2a2a);
+      /* #f5f5f5 and #2a2a2a with the default colours */
+      --mdst-color-subtle: light-dark(
+        color-mix(in srgb, var(--mdst-color-fg) 4%, var(--mdst-color-bg)),
+        color-mix(in srgb, var(--mdst-color-fg) 7%, var(--mdst-color-bg))
+      );
       --mdst-color-focus: light-dark(#000, #fff);
       --mdst-color-danger: light-dark(#dc2626, #f87171);
-      --mdst-color-warning: light-dark(#b45309, #fbbf24);
+      --mdst-color-warning: light-dark(#9d6e00, #db9705);
       --mdst-color-success: light-dark(#15803d, #4ade80);
     }
   }
@@ -1181,7 +1189,6 @@
   }
 }
 
-/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Details (Toggle/Disclosure) */
 
@@ -2286,7 +2293,6 @@
   }
 }
 
-/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Password Input
      A wrapper around the field (a .mdst-input, or a bare input inside
@@ -2299,12 +2305,6 @@
     position: relative;
     width: 100%;
     cursor: text;
-
-    &:has(> input:not([type="checkbox"]):disabled) > input[type="checkbox"] {
-      opacity: var(--mdst-disabled-opacity);
-      cursor: not-allowed;
-      pointer-events: none;
-    }
 
     & > input:not([type="checkbox"]) {
       padding-inline-end: calc(var(--mdst-space-md) + 1.5em + var(--mdst-space-sm));
@@ -2366,6 +2366,14 @@
         -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
         mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
       }
+    }
+
+    /* The toggle follows the field: disabled with it */
+
+    &:has(> input:not([type="checkbox"]):disabled) > input[type="checkbox"] {
+      opacity: var(--mdst-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
     }
   }
 
@@ -2859,8 +2867,10 @@
   /* Windows High Contrast (forced colours) removes fills, so the parts that
      show state are redrawn in the user's system colours. */
   @media (forced-colors: active) {
+    /* CanvasText, not GrayText: themes only promise that text colour
+       contrasts with the page, and GrayText can be close to it */
     .mdst-skeleton {
-      outline: 1px solid GrayText;
+      outline: 1px solid CanvasText;
     }
   }
 }
@@ -2912,7 +2922,6 @@
 }
 
 
-/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Stepper / Wizard */
 
@@ -2949,60 +2958,6 @@
         inset-inline-end: -50%;
         height: var(--mdst-border-width);
         background: var(--mdst-color-border);
-      }
-
-      /* Completed connector */
-
-      &[data-state="completed"]:not(:last-child)::after {
-        background: var(--mdst-color-fg);
-      }
-
-      /* States */
-
-      &[data-state="completed"] {
-        & .mdst-stepper__indicator {
-          background: var(--mdst-color-fg);
-          color: var(--mdst-color-bg);
-          border-color: var(--mdst-color-fg);
-        }
-
-        & .mdst-stepper__label {
-          color: var(--mdst-color-fg);
-        }
-      }
-
-      &[data-state="active"] {
-        & .mdst-stepper__indicator {
-          border-color: var(--mdst-color-fg);
-          font-weight: 700;
-        }
-
-        & .mdst-stepper__label {
-          font-weight: 600;
-          color: var(--mdst-color-fg);
-        }
-      }
-
-      &[data-state="upcoming"] {
-        & .mdst-stepper__indicator {
-          border-color: var(--mdst-color-border);
-          color: var(--mdst-color-muted);
-        }
-
-        & .mdst-stepper__label {
-          color: var(--mdst-color-muted);
-        }
-      }
-
-      &[data-state="error"] {
-        & .mdst-stepper__indicator {
-          border-color: var(--mdst-color-danger);
-          color: var(--mdst-color-danger);
-        }
-
-        & .mdst-stepper__label {
-          color: var(--mdst-color-danger);
-        }
       }
     }
 
@@ -3112,6 +3067,62 @@
         }
       }
     }
+
+    /* States last, so they refine the base and variant rules above */
+
+    /* Completed connector */
+
+    & .mdst-stepper__step[data-state="completed"]:not(:last-child)::after {
+      background: var(--mdst-color-fg);
+    }
+
+    /* States */
+
+    & .mdst-stepper__step[data-state="completed"] {
+      & .mdst-stepper__indicator {
+        background: var(--mdst-color-fg);
+        color: var(--mdst-color-bg);
+        border-color: var(--mdst-color-fg);
+      }
+
+      & .mdst-stepper__label {
+        color: var(--mdst-color-fg);
+      }
+    }
+
+    & .mdst-stepper__step[data-state="active"] {
+      & .mdst-stepper__indicator {
+        border-color: var(--mdst-color-fg);
+        font-weight: 700;
+      }
+
+      & .mdst-stepper__label {
+        font-weight: 600;
+        color: var(--mdst-color-fg);
+      }
+    }
+
+    & .mdst-stepper__step[data-state="upcoming"] {
+      & .mdst-stepper__indicator {
+        border-color: var(--mdst-color-border);
+        color: var(--mdst-color-muted);
+      }
+
+      & .mdst-stepper__label {
+        color: var(--mdst-color-muted);
+      }
+    }
+
+    & .mdst-stepper__step[data-state="error"] {
+      & .mdst-stepper__indicator {
+        border-color: var(--mdst-color-danger);
+        color: var(--mdst-color-danger);
+      }
+
+      & .mdst-stepper__label {
+        color: var(--mdst-color-danger);
+      }
+    }
   }
 
   /* Windows High Contrast (forced colours) removes fills, so the parts that
@@ -3131,7 +3142,6 @@
   }
 }
 
-/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Table */
 
