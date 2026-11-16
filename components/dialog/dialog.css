@@ -19,6 +19,15 @@
     height: fit-content;
   }
 
+  /* A bare dialog (no class, no .mdst-dialog__ parts) has nothing to pad it,
+     so it gets padding of its own, and its children get flow spacing (see
+     typography). Give it a class, or build it from the parts, and the
+     inside is yours. */
+
+  :where(.mdst-ui) dialog:where(:not([class], [style], :has(> [class*="mdst-dialog__"]))) {
+    padding: var(--mdst-space-md);
+  }
+
   :where(.mdst-ui) dialog::backdrop,
   .mdst-dialog::backdrop {
     background: var(--mdst-backdrop);
@@ -49,7 +58,14 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--mdst-space-xs);
+    /* Square around an icon, so the focus ring is a neat square; a word
+       instead of an icon widens it rather than spilling out */
+    height: 2em;
+    min-width: 2em;
+    padding: 0 0.125em;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
     background: transparent;
     border: none;
     box-shadow: none;

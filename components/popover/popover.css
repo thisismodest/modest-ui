@@ -1,6 +1,10 @@
 @layer mdst-ui.components {
-  /* Popover */
+  /* Popover
+     Classless: any [popover] inside .mdst-ui gets the panel look, at zero
+     specificity, so components built on popover (tooltip) and your own
+     classes replace it. Class-based: .mdst-popover anywhere. */
 
+  :where(.mdst-ui) :where([popover]),
   .mdst-popover {
     padding: var(--mdst-space-md);
     border: var(--mdst-border-width) solid var(--mdst-color-border);
@@ -15,32 +19,35 @@
     inset: 0;
     width: fit-content;
     height: fit-content;
+  }
 
-    /* Anchored positioning - use with anchor="" HTML attribute.
-       Guarded so browsers without CSS anchor positioning (Baseline Chrome 129 /
-       Firefox 147 / Safari 26) keep the centered default above instead of
-       mispositioning. */
+  /* Anchored positioning - use with anchor="" HTML attribute.
+     Guarded so browsers without CSS anchor positioning (Baseline Chrome 129 /
+     Firefox 147 / Safari 26) keep the centered default above instead of
+     mispositioning. */
 
-    @supports (position-area: bottom) {
-      &.mdst-popover--anchored {
-        position: absolute;
-        inset: unset;
-        margin: 0;
-        position-area: bottom;
-        margin-top: var(--mdst-space-xs);
-      }
+  @supports (position-area: bottom) {
+    :where(.mdst-ui) [popover].mdst-popover--anchored,
+    .mdst-popover.mdst-popover--anchored {
+      position: absolute;
+      inset: unset;
+      margin: 0;
+      position-area: bottom;
+      margin-top: var(--mdst-space-xs);
     }
+  }
 
-    /* Variants */
+  /* Variants */
 
-    &.mdst-popover--sm {
-      padding: var(--mdst-space-sm);
-      font-size: var(--mdst-text-sm);
-    }
+  :where(.mdst-ui) [popover].mdst-popover--sm,
+  .mdst-popover.mdst-popover--sm {
+    padding: var(--mdst-space-sm);
+    font-size: var(--mdst-text-sm);
+  }
 
-    &.mdst-popover--lg {
-      padding: var(--mdst-space-lg);
-      max-width: 24rem;
-    }
+  :where(.mdst-ui) [popover].mdst-popover--lg,
+  .mdst-popover.mdst-popover--lg {
+    padding: var(--mdst-space-lg);
+    max-width: 24rem;
   }
 }

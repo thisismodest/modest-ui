@@ -19,6 +19,15 @@
     border-radius: var(--mdst-radius);
   }
 
+  /* The content starts below the legend, not below the border line through
+     it, so the legend already adds space at the top. A smaller top padding
+     keeps the legend close to its content without the top looking heavy. */
+
+  :where(.mdst-ui) fieldset:where(:has(> legend)),
+  .mdst-fieldset:has(> legend) {
+    padding-block-start: var(--mdst-space-sm);
+  }
+
   :where(.mdst-ui) legend,
   .mdst-legend {
     padding-inline: var(--mdst-space-xs);
@@ -42,5 +51,20 @@
   :where(.mdst-ui :is(form, fieldset):not([class]), .mdst-form, .mdst-fieldset) > :where(input, select, textarea) + small {
     display: block;
     margin-block-start: var(--mdst-space-xs);
+  }
+
+  /* Output: a calculated value, in figures of equal width so it doesn't
+     shift about as it changes */
+
+  :where(.mdst-ui) output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Error text: when the field is invalid (aria-invalid="true", or the
+     browser's own validation once the user has interacted), the <small>
+     after it takes the error colour, matching the field's border. */
+
+  :where(.mdst-ui :is(form, fieldset):not([class]), .mdst-form, .mdst-fieldset) > :where(input, select, textarea):where([aria-invalid="true"], :user-invalid) + small {
+    color: var(--mdst-color-danger);
   }
 }

@@ -3,5 +3,5 @@ export default {
   className: ".mdst-form",
   keywords: ["fieldset", "label", "field", "validation"],
   description:
-    "A light structure layer for plain forms: fields stack under their labels, fieldsets get a border and legend, and invalid fields show in the error colour. Zero specificity, so your own styles always win.",
+    "A light structure layer for plain forms: fields stack under their labels, fieldsets get a border and legend, and invalid fields and the `<small>` after them show in the error colour. Zero specificity, so your own styles always win.",
 };
