@@ -492,8 +492,18 @@
         white-space: nowrap;
       }
 
+      /* Theme, links, and version stay in view at the bottom while the
+         component list scrolls under them. The background hides the list
+         behind; the theme switcher's top border separates the two. It
+         reaches down over the sidebar's bottom padding, so no strip of the
+         list shows beneath it. */
       .sidebar-footer {
+        position: sticky;
+        bottom: calc(-1 * var(--mdst-space-md));
         margin-top: auto;
+        margin-bottom: calc(-1 * var(--mdst-space-md));
+        padding-bottom: var(--mdst-space-md);
+        background: var(--mdst-color-bg);
       }
 
       .github-link {
