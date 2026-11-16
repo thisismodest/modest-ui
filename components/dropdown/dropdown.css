@@ -33,6 +33,12 @@
     transition: border-color var(--mdst-transition);
   }
 
+  /* Option group labels: bold like the browser's, without its italic */
+
+  :where(.mdst-ui) optgroup {
+    font-style: normal;
+  }
+
   :where(.mdst-ui) select:where(:is([aria-invalid="true"], :user-invalid)),
   .mdst-dropdown:is([aria-invalid="true"], :user-invalid) {
     border-color: var(--mdst-color-danger);

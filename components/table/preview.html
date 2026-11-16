@@ -16,6 +16,7 @@
     <div class="section">
       <div class="section-header">Basic Table</div>
       <table class="mdst-table">
+        <caption>Colour tokens</caption>
         <thead>
           <tr>
             <th>Name</th>
@@ -207,6 +208,7 @@
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- Basic table --&gt;
 &lt;table class="mdst-table"&gt;
+  &lt;caption&gt;Optional caption&lt;/caption&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt;Header&lt;/th&gt;
@@ -219,6 +221,12 @@
       &lt;td&gt;Cell&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Total&lt;/th&gt;
+      &lt;td&gt;£120&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
 &lt;/table&gt;
 
 &lt;!-- With scroll wrapper --&gt;

@@ -20,9 +20,13 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  :where(.mdst-ui) :where(img, picture, video, canvas, svg) {
+  :where(.mdst-ui) :where(img, picture, video, audio, canvas, svg, iframe, embed, object) {
     display: block;
     max-width: 100%;
+  }
+
+  :where(.mdst-ui) iframe {
+    border: 0;
   }
 
   :where(.mdst-ui) :where(a, input, button, textarea, select) {

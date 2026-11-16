@@ -244,6 +244,70 @@
       </table>
     </div>
 
+    <div class="section">
+      <div class="section-header">Classless only</div>
+      <p class="footnote">These elements have no class; they're styled inside <code class="mdst-code">.mdst-ui</code>.</p>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody class="mdst-ui">
+          <tr>
+            <td><span class="class-name">dl</span></td>
+            <td>
+              <dl>
+                <dt>Plan</dt>
+                <dd>Pro, billed yearly</dd>
+                <dt>Renews</dt>
+                <dd>14 March</dd>
+              </dl>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">figure</span></td>
+            <td>
+              <figure>
+                <blockquote>Less, but better.</blockquote>
+                <figcaption>Dieter Rams</figcaption>
+              </figure>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">hgroup</span></td>
+            <td>
+              <hgroup>
+                <h3>Release notes</h3>
+                <p>Version 2.1</p>
+              </hgroup>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">nav a[aria-current]</span></td>
+            <td>
+              <nav aria-label="Example">
+                <a href="#home">Home</a> · <a href="#docs" aria-current="page">Docs</a> · <a href="#blog">Blog</a>
+              </nav>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="class-name">address</span></td>
+            <td>
+              <address>1 Example Street, London</address>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="footnote">
+        Also inside <code class="mdst-code">.mdst-ui</code>: headings balance their lines, paragraphs avoid a lone last word,
+        <code class="mdst-code">menu</code> is styled like a list, <code class="mdst-code">[aria-busy="true"]</code> shows a
+        progress cursor, iframes lose their border, and pages print in light mode without splitting code, quotes, figures, or
+        table rows across pages.
+      </p>
+    </div>
+
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- Headings --&gt;
@@ -277,7 +341,13 @@ H&lt;sub&gt;2&lt;/sub&gt;O  mc&lt;sup&gt;2&lt;/sup&gt;
 &lt;!-- Lists --&gt;
 &lt;ul class="mdst-ul"&gt;
   &lt;li class="mdst-li"&gt;Item&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
+&lt;/ul&gt;
+
+&lt;!-- Classless only, inside .mdst-ui --&gt;
+&lt;dl&gt;&lt;dt&gt;Plan&lt;/dt&gt;&lt;dd&gt;Pro&lt;/dd&gt;&lt;/dl&gt;
+&lt;figure&gt;&lt;img src="…" alt="…"&gt;&lt;figcaption&gt;Caption&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;hgroup&gt;&lt;h2&gt;Title&lt;/h2&gt;&lt;p&gt;Subtitle&lt;/p&gt;&lt;/hgroup&gt;
+&lt;nav&gt;&lt;a href="/docs" aria-current="page"&gt;Docs&lt;/a&gt;&lt;/nav&gt;</code></pre>
     </div>
   </body>
 </html>
