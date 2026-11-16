@@ -9,6 +9,7 @@ All technical rules — naming, CSS patterns, classless defaults, preview format
 ```bash
 git clone https://github.com/thisismodest/modest-ui.git
 cd modest-ui
+nvm use   # Node 26, from .nvmrc (CI uses the same file)
 npm install
 npm run dev
 ```
