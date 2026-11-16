@@ -592,10 +592,6 @@
           <h2>
             <a
               href="#article"
-              onclick="
-                showArticle();
-                return false;
-              "
               >The case for boring technology</a
             >
           </h2>
@@ -631,10 +627,6 @@
             <h3>
               <a
                 href="#article"
-                onclick="
-                  showArticle();
-                  return false;
-                "
                 >Design tokens are a Trojan horse for design systems</a
               >
             </h3>
@@ -665,10 +657,6 @@
             <h3>
               <a
                 href="#article"
-                onclick="
-                  showArticle();
-                  return false;
-                "
                 >Rethinking error states: when failure is a feature</a
               >
             </h3>
@@ -699,10 +687,6 @@
             <h3>
               <a
                 href="#article"
-                onclick="
-                  showArticle();
-                  return false;
-                "
                 >Ship small, ship often: a practical guide to incremental delivery</a
               >
             </h3>
@@ -733,10 +717,6 @@
             <h3>
               <a
                 href="#article"
-                onclick="
-                  showArticle();
-                  return false;
-                "
                 >Why your CSS doesn't need a framework</a
               >
             </h3>
@@ -767,10 +747,6 @@
             <h3>
               <a
                 href="#article"
-                onclick="
-                  showArticle();
-                  return false;
-                "
                 >The art of the one-line README change</a
               >
             </h3>
@@ -796,7 +772,7 @@
 
     <!-- Article view -->
     <div class="page article-view" id="article-view">
-      <button type="button" class="article-back" onclick="showList()">← Back to all posts</button>
+      <button type="button" class="article-back">← Back to all posts</button>
 
       <article>
         <div class="article-header">
@@ -960,19 +936,27 @@
     </footer>
 
     <script>
-      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function showArticle() {
         document.getElementById("blog-list").style.display = "none";
         document.getElementById("article-view").style.display = "block";
         window.scrollTo(0, 0);
       }
 
-      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function showList() {
         document.getElementById("blog-list").style.display = "block";
         document.getElementById("article-view").style.display = "none";
         window.scrollTo(0, 0);
       }
+
+      // Every post links to the one sample article
+      for (const link of document.querySelectorAll('a[href="#article"]')) {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          showArticle();
+        });
+      }
+
+      document.querySelector(".article-back").addEventListener("click", showList);
     </script>
   </body>
 </html>

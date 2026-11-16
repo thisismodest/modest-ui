@@ -535,7 +535,7 @@
           <!-- ============================================ -->
           <div class="auth-view active" id="view-login">
             <div class="auth-top-link">
-              <button type="button" class="mdst-button--borderless mdst-button--sm" onclick="showView('signup')">
+              <button type="button" class="mdst-button--borderless mdst-button--sm" data-view="signup">
                 Create account
               </button>
             </div>
@@ -579,7 +579,7 @@
 
             <div class="auth-divider">or continue with email</div>
 
-            <form class="auth-form" onsubmit="return false;">
+            <form class="auth-form">
               <div class="form-group">
                 <label for="login-email">Email</label>
                 <input type="email" id="login-email" placeholder="you@company.com" />
@@ -588,7 +588,7 @@
               <div class="form-group">
                 <div class="form-row">
                   <label for="login-password">Password</label>
-                  <button class="form-link" type="button" onclick="showView('forgot')">Forgot password?</button>
+                  <button class="form-link" type="button" data-view="forgot">Forgot password?</button>
                 </div>
                 <div class="mdst-password-input">
                   <input
@@ -608,10 +608,10 @@
                 </label>
               </div>
 
-              <button class="mdst-button--solid form-submit" onclick="showView('verify')" type="submit">Sign In</button>
+              <button class="mdst-button--solid form-submit" data-view="verify" type="submit">Sign In</button>
             </form>
 
-            <div class="auth-footer">Don't have an account? <button type="button" onclick="showView('signup')">Sign up</button></div>
+            <div class="auth-footer">Don't have an account? <button type="button" data-view="signup">Sign up</button></div>
           </div>
 
           <!-- ============================================ -->
@@ -619,7 +619,7 @@
           <!-- ============================================ -->
           <div class="auth-view" id="view-signup">
             <div class="auth-top-link">
-              <button type="button" class="mdst-button--borderless mdst-button--sm" onclick="showView('login')">Sign in</button>
+              <button type="button" class="mdst-button--borderless mdst-button--sm" data-view="login">Sign in</button>
             </div>
 
             <div class="auth-header">
@@ -661,7 +661,7 @@
 
             <div class="auth-divider">or continue with email</div>
 
-            <form class="auth-form" onsubmit="return false;">
+            <form class="auth-form">
               <div class="form-group-row">
                 <div class="form-group">
                   <label for="signup-first">First name</label>
@@ -686,7 +686,6 @@
                     autocomplete="new-password"
                     id="signup-password"
                     placeholder="Create a strong password"
-                    oninput="updatePasswordStrength(this.value)"
                   />
                   <input type="checkbox" aria-label="Toggle password visibility" />
                 </div>
@@ -724,12 +723,12 @@
                 </label>
               </div>
 
-              <button class="mdst-button--solid form-submit" type="submit" onclick="showView('verify')">
+              <button class="mdst-button--solid form-submit" type="submit" data-view="verify">
                 Create Account
               </button>
             </form>
 
-            <div class="auth-footer">Already have an account? <button type="button" onclick="showView('login')">Sign in</button></div>
+            <div class="auth-footer">Already have an account? <button type="button" data-view="login">Sign in</button></div>
           </div>
 
           <!-- ============================================ -->
@@ -741,7 +740,7 @@
               <p>We've sent a 6-digit verification code to <strong>you@company.com</strong>. Enter it below to verify your account.</p>
             </div>
 
-            <form class="auth-form" onsubmit="return false;" style="align-items: center">
+            <form class="auth-form" style="align-items: center">
               <div class="mdst-otp-input otp-group">
                 <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
                 <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
@@ -752,16 +751,16 @@
                 <input type="text" maxlength="1" inputmode="numeric" placeholder="0" />
               </div>
 
-              <button type="button" class="mdst-button--solid" style="width: 100%" onclick="showView('login')">
+              <button type="button" class="mdst-button--solid" style="width: 100%" data-view="login">
                 Verify Email
               </button>
             </form>
 
             <div class="auth-footer" style="margin-top: var(--mdst-space-lg)">
               <p style="margin: 0 0 var(--mdst-space-sm)">
-                Didn't receive the email? <button type="button" onclick="alert('Code resent!')">Resend code</button>
+                Didn't receive the email? <button type="button" data-resend>Resend code</button>
               </p>
-              <p style="margin: 0"><button type="button" onclick="showView('signup')">← Back to signup</button></p>
+              <p style="margin: 0"><button type="button" data-view="signup">← Back to signup</button></p>
             </div>
           </div>
 
@@ -774,18 +773,18 @@
               <p>Enter the email associated with your account and we'll send you a reset link.</p>
             </div>
 
-            <form class="auth-form" onsubmit="return false;">
+            <form class="auth-form">
               <div class="form-group">
                 <label for="forgot-email">Email address</label>
                 <input type="email" id="forgot-email" placeholder="you@company.com" />
               </div>
 
-              <button class="mdst-button--solid form-submit" type="submit" onclick="showView('reset-sent')">
+              <button class="mdst-button--solid form-submit" type="submit" data-view="reset-sent">
                 Send Reset Link
               </button>
             </form>
 
-            <div class="auth-footer">Remember your password? <button type="button" onclick="showView('login')">Sign in</button></div>
+            <div class="auth-footer">Remember your password? <button type="button" data-view="login">Sign in</button></div>
           </div>
 
           <!-- ============================================ -->
@@ -803,8 +802,8 @@
             </div>
 
             <div style="display: flex; flex-direction: column; gap: var(--mdst-space-sm); margin-top: var(--mdst-space-md)">
-              <button type="button" onclick="showView('reset')">I have a reset link (demo)</button>
-              <button type="button" class="mdst-button--borderless" onclick="showView('login')">← Back to sign in</button>
+              <button type="button" data-view="reset">I have a reset link (demo)</button>
+              <button type="button" class="mdst-button--borderless" data-view="login">← Back to sign in</button>
             </div>
           </div>
 
@@ -817,7 +816,7 @@
               <p>Your new password must be different from previously used passwords.</p>
             </div>
 
-            <form class="auth-form" onsubmit="return false;">
+            <form class="auth-form">
               <div class="form-group">
                 <label for="reset-password">New password</label>
                 <div class="mdst-password-input">
@@ -845,13 +844,13 @@
                 </div>
               </div>
 
-              <button class="mdst-button--solid form-submit" type="submit" onclick="showView('reset-success')">
+              <button class="mdst-button--solid form-submit" type="submit" data-view="reset-success">
                 Reset Password
               </button>
             </form>
 
             <div class="auth-footer">
-              <button type="button" onclick="showView('login')">← Back to sign in</button>
+              <button type="button" data-view="login">← Back to sign in</button>
             </div>
           </div>
 
@@ -865,7 +864,7 @@
               <p>Your password has been successfully reset. You can now sign in with your new credentials.</p>
             </div>
 
-            <button type="button" class="mdst-button--solid" style="width: 100%" onclick="showView('login')">
+            <button type="button" class="mdst-button--solid" style="width: 100%" data-view="login">
               Continue to Sign In
             </button>
           </div>
@@ -875,7 +874,6 @@
 
     <script>
       // View switching
-      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function showView(viewName) {
         document.querySelectorAll(".auth-view").forEach((view) => {
           view.classList.remove("active");
@@ -887,7 +885,6 @@
       }
 
       // Password strength indicator
-      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function updatePasswordStrength(password) {
         let score = 0;
         const hasLength = password.length >= 8;
@@ -947,6 +944,22 @@
           this.value = this.value.replace(/[^0-9]/g, "");
         });
       });
+
+      // Buttons and links that switch views carry the view's name
+      for (const trigger of document.querySelectorAll("[data-view]")) {
+        trigger.addEventListener("click", () => showView(trigger.dataset.view));
+      }
+
+      // A demo: the forms don't submit anywhere
+      for (const form of document.querySelectorAll("form")) {
+        form.addEventListener("submit", (event) => event.preventDefault());
+      }
+
+      document.getElementById("signup-password").addEventListener("input", (event) => {
+        updatePasswordStrength(event.target.value);
+      });
+
+      document.querySelector("[data-resend]").addEventListener("click", () => alert("Code resent!"));
     </script>
     <script>
       // Show or hide the password by switching the field's type when the eye
