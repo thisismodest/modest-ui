@@ -42,7 +42,8 @@ body {
 
 .footnote {
   font-size: var(--mdst-text-xs);
-  line-height: 1.4;
+  /* Room for inline code boxes, so wrapped lines of them don't touch */
+  line-height: 1.8;
   color: var(--mdst-color-muted);
   margin-top: var(--mdst-space-md);
   padding-top: var(--mdst-space-md);
