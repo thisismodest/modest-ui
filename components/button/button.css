@@ -30,9 +30,9 @@
     font-size: inherit;
     line-height: var(--mdst-line-height);
     text-decoration: none;
-    color: var(--mdst-button-fg, var(--mdst-button-tone, var(--mdst-color-fg)));
+    color: var(--mdst-button-fg, var(--mdst-tone, var(--mdst-button-tone, var(--mdst-color-fg))));
     background: var(--mdst-button-bg, var(--mdst-color-bg));
-    border: var(--mdst-border-width) solid var(--mdst-button-border, var(--mdst-color-border));
+    border: var(--mdst-border-width) solid var(--mdst-button-border, var(--mdst-tone, var(--mdst-color-border)));
     border-radius: var(--mdst-radius);
     box-shadow: var(--_hover, none);
     cursor: pointer;
@@ -67,12 +67,9 @@
   }
 
   /* Variants: single classes that set variables, so they work on <button>,
-     <input>, and <a> alike and combine freely (e.g. danger + inverted). */
-
-  .mdst-button--danger {
-    --mdst-button-tone: var(--mdst-color-danger);
-    --mdst-button-border: var(--mdst-color-danger);
-  }
+     <input>, and <a> alike and combine freely (e.g. .mdst-danger + solid).
+     A tone class (.mdst-danger and friends) sets --mdst-tone, which colours
+     the text and border, and the fill when solid. */
 
   .mdst-button--borderless {
     --mdst-button-bg: transparent;
@@ -85,9 +82,9 @@
   .mdst-button--solid,
   :where(.mdst-ui) :where([aria-pressed="true"]),
   .mdst-button[aria-pressed="true"] {
-    --mdst-button-bg: var(--mdst-button-tone, var(--mdst-color-fg));
+    --mdst-button-bg: var(--mdst-tone, var(--mdst-button-tone, var(--mdst-color-fg)));
     --mdst-button-fg: var(--mdst-color-bg);
-    --mdst-button-border: var(--mdst-button-tone, var(--mdst-color-fg));
+    --mdst-button-border: var(--mdst-tone, var(--mdst-button-tone, var(--mdst-color-fg)));
   }
 
   /* Sizes (input-qualified so they also beat the classless input rule) */
@@ -113,5 +110,11 @@
       color: HighlightText;
       border-color: Highlight;
     }
+  }
+
+  /* Deprecated: remove in 3.0. Use .mdst-danger. */
+
+  .mdst-button--danger {
+    --mdst-tone: var(--mdst-color-danger);
   }
 }

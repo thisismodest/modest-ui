@@ -1,3 +1,4 @@
+<!-- biome-ignore-all lint/a11y/useAriaPropsForRole: a native checkbox with role="switch" already exposes its checked state, so aria-checked would only duplicate it and could go stale -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -1121,7 +1122,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 <div class="session-info">
                   <p class="session-device">
                     Chrome on macOS
-                    <span class="mdst-tag mdst-tag--success mdst-tag--sm mdst-tag--pill">Current</span>
+                    <span class="mdst-tag mdst-success mdst-tag--sm mdst-tag--pill">Current</span>
                   </p>
                   <p class="session-detail">London, UK · IP 82.132.40.1 · Active now</p>
                 </div>
@@ -1185,14 +1186,14 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <h4>Transfer ownership</h4>
                   <p>Transfer all your projects and data to another account. You'll retain read-only access.</p>
                 </div>
-                <button type="button" class="mdst-button--danger mdst-button--sm" onclick="document.getElementById('transfer-dialog').showModal()">Transfer</button>
+                <button type="button" class="mdst-danger mdst-button--sm" onclick="document.getElementById('transfer-dialog').showModal()">Transfer</button>
               </div>
               <div class="danger-item">
                 <div class="danger-item-info">
                   <h4>Deactivate account</h4>
                   <p>Temporarily disable your account. Your data will be preserved and you can reactivate at any time.</p>
                 </div>
-                <button type="button" class="mdst-button--danger mdst-button--sm" onclick="document.getElementById('deactivate-dialog').showModal()">
+                <button type="button" class="mdst-danger mdst-button--sm" onclick="document.getElementById('deactivate-dialog').showModal()">
                   Deactivate
                 </button>
               </div>
@@ -1201,7 +1202,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <h4>Delete account</h4>
                   <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
                 </div>
-                <button type="button" class="mdst-button--danger mdst-button--sm" onclick="document.getElementById('delete-dialog').showModal()">
+                <button type="button" class="mdst-danger mdst-button--sm" onclick="document.getElementById('delete-dialog').showModal()">
                   Delete Account
                 </button>
               </div>
@@ -1233,7 +1234,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
           Cancel
         </button>
         <button
-          type="button" class="mdst-button--danger mdst-button--sm"
+          type="button" class="mdst-danger mdst-button--sm"
           onclick="
             document.getElementById('transfer-dialog').close();
             showToast('Transfer request sent');
@@ -1282,7 +1283,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
           Cancel
         </button>
         <button
-          type="button" class="mdst-button--danger mdst-button--sm"
+          type="button" class="mdst-danger mdst-button--sm"
           onclick="
             document.getElementById('deactivate-dialog').close();
             showToast('Account deactivated');
@@ -1329,7 +1330,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
           Cancel
         </button>
         <button
-          type="button" class="mdst-button--danger mdst-button--sm"
+          type="button" class="mdst-danger mdst-button--sm"
           onclick="
             document.getElementById('delete-dialog').close();
             showToast('Account deleted');

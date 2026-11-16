@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../code/code.css" />
     <link rel="stylesheet" href="../button/button.css" />
     <link rel="stylesheet" href="tag.css" />
+    <link rel="stylesheet" href="../tone/tone.css" />
   </head>
   <body>
     <div class="section">
@@ -82,42 +83,42 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-tag</span>--danger</span>
+              <span class="class-name"><span class="dim">.mdst-tag</span> .mdst-danger</span>
             </td>
             <td>
-              <span class="mdst-tag mdst-tag--danger">Danger</span>
-              <span class="mdst-tag mdst-tag--danger mdst-tag--solid">Solid</span>
-              <span class="mdst-tag mdst-tag--danger mdst-tag--subtle">Subtle</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="class-name"><span class="dim">.mdst-tag</span>--success</span>
-            </td>
-            <td>
-              <span class="mdst-tag mdst-tag--success">Success</span>
-              <span class="mdst-tag mdst-tag--success mdst-tag--solid">Solid</span>
-              <span class="mdst-tag mdst-tag--success mdst-tag--subtle">Subtle</span>
+              <span class="mdst-tag mdst-danger">Danger</span>
+              <span class="mdst-tag mdst-danger mdst-tag--solid">Solid</span>
+              <span class="mdst-tag mdst-danger mdst-tag--subtle">Subtle</span>
             </td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-tag</span>--warning</span>
+              <span class="class-name"><span class="dim">.mdst-tag</span> .mdst-success</span>
             </td>
             <td>
-              <span class="mdst-tag mdst-tag--warning">Warning</span>
-              <span class="mdst-tag mdst-tag--warning mdst-tag--solid">Solid</span>
-              <span class="mdst-tag mdst-tag--warning mdst-tag--subtle">Subtle</span>
+              <span class="mdst-tag mdst-success">Success</span>
+              <span class="mdst-tag mdst-success mdst-tag--solid">Solid</span>
+              <span class="mdst-tag mdst-success mdst-tag--subtle">Subtle</span>
             </td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-tag</span>--info</span>
+              <span class="class-name"><span class="dim">.mdst-tag</span> .mdst-warning</span>
             </td>
             <td>
-              <span class="mdst-tag mdst-tag--info">Info</span>
-              <span class="mdst-tag mdst-tag--info mdst-tag--solid">Solid</span>
-              <span class="mdst-tag mdst-tag--info mdst-tag--subtle">Subtle</span>
+              <span class="mdst-tag mdst-warning">Warning</span>
+              <span class="mdst-tag mdst-warning mdst-tag--solid">Solid</span>
+              <span class="mdst-tag mdst-warning mdst-tag--subtle">Subtle</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name"><span class="dim">.mdst-tag</span> .mdst-info</span>
+            </td>
+            <td>
+              <span class="mdst-tag mdst-info">Info</span>
+              <span class="mdst-tag mdst-info mdst-tag--solid">Solid</span>
+              <span class="mdst-tag mdst-info mdst-tag--subtle">Subtle</span>
             </td>
           </tr>
           <tr>
@@ -189,7 +190,7 @@
             <td>
               <span class="mdst-tag">Tag <button type="button" class="mdst-tag__dismiss" aria-label="Remove">&times;</button></span>
               <span class="mdst-tag mdst-tag--subtle">Subtle <button type="button" class="mdst-tag__dismiss" aria-label="Remove">&times;</button></span>
-              <span class="mdst-tag mdst-tag--success mdst-tag--pill">Active <button type="button" class="mdst-tag__dismiss" aria-label="Remove">&times;</button></span>
+              <span class="mdst-tag mdst-success mdst-tag--pill">Active <button type="button" class="mdst-tag__dismiss" aria-label="Remove">&times;</button></span>
             </td>
           </tr>
         </tbody>
@@ -200,15 +201,15 @@
       <div class="section-header">Examples</div>
       <div class="examples" style="gap: var(--mdst-space-md)">
         <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); flex-wrap: wrap">
-          <span class="mdst-tag mdst-tag--success mdst-tag--sm mdst-tag--pill">Today</span>
+          <span class="mdst-tag mdst-success mdst-tag--sm mdst-tag--pill">Today</span>
           <span class="mdst-tag mdst-tag--subtle mdst-tag--sm">v0.1.0</span>
           <span class="mdst-tag mdst-tag--muted mdst-tag--sm">CSS</span>
           <span class="mdst-tag mdst-tag--muted mdst-tag--sm">UI</span>
           <span class="mdst-tag mdst-tag--muted mdst-tag--sm">Minimal</span>
         </div>
         <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); flex-wrap: wrap">
-          <span class="mdst-tag mdst-tag--success mdst-tag--solid mdst-tag--pill mdst-tag--sm">Operational</span>
-          <span class="mdst-tag mdst-tag--danger mdst-tag--solid mdst-tag--pill mdst-tag--sm">Outage</span>
+          <span class="mdst-tag mdst-success mdst-tag--solid mdst-tag--pill mdst-tag--sm">Operational</span>
+          <span class="mdst-tag mdst-danger mdst-tag--solid mdst-tag--pill mdst-tag--sm">Outage</span>
           <span class="mdst-tag mdst-tag--muted mdst-tag--solid mdst-tag--pill mdst-tag--sm">Maintenance</span>
         </div>
         <div style="display: flex; align-items: center; gap: var(--mdst-space-sm); flex-wrap: wrap">
@@ -233,13 +234,13 @@
 &lt;span class="mdst-tag mdst-tag--pill"&gt;Pill&lt;/span&gt;
 
 &lt;!-- Status colors --&gt;
-&lt;span class="mdst-tag mdst-tag--success"&gt;Active&lt;/span&gt;
-&lt;span class="mdst-tag mdst-tag--danger"&gt;Failed&lt;/span&gt;
+&lt;span class="mdst-tag mdst-success"&gt;Active&lt;/span&gt;
+&lt;span class="mdst-tag mdst-danger"&gt;Failed&lt;/span&gt;
 &lt;span class="mdst-tag mdst-tag--muted"&gt;Archived&lt;/span&gt;
 
 &lt;!-- Status + variant combos --&gt;
-&lt;span class="mdst-tag mdst-tag--success mdst-tag--solid"&gt;Online&lt;/span&gt;
-&lt;span class="mdst-tag mdst-tag--danger mdst-tag--subtle"&gt;Offline&lt;/span&gt;
+&lt;span class="mdst-tag mdst-success mdst-tag--solid"&gt;Online&lt;/span&gt;
+&lt;span class="mdst-tag mdst-danger mdst-tag--subtle"&gt;Offline&lt;/span&gt;
 
 &lt;!-- Sizes --&gt;
 &lt;span class="mdst-tag mdst-tag--sm"&gt;Small&lt;/span&gt;

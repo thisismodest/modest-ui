@@ -14,7 +14,7 @@
     --mdst-color-danger: #dc2626;
     --mdst-color-warning: #b45309;
     --mdst-color-success: #15803d;
-    /* --mdst-color-info is optional: info variants use the text colour unless
+    /* --mdst-color-info is optional: .mdst-info uses the text colour unless
        you set it, e.g. --mdst-color-info: #2563eb; */
 
     /* Typography */

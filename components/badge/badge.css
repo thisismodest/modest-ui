@@ -11,23 +11,29 @@
     font-family: var(--mdst-font-ui);
     line-height: 1;
     border-radius: 9999px;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border: var(--mdst-border-width) solid var(--mdst-tone, var(--mdst-color-border));
     background: var(--mdst-color-bg);
-    color: var(--mdst-color-fg);
+    color: var(--mdst-tone, var(--mdst-color-fg));
     white-space: nowrap;
     vertical-align: middle;
     box-sizing: border-box;
 
+    /* Tone (.mdst-danger and friends, or your own --mdst-tone) colours the
+       text and border, and each variant below. Subtle tints the background
+       with 10% of the tone; with no tone, --_tone-subtle is invalid and
+       falls back to --mdst-color-subtle. */
+    --_tone-subtle: color-mix(in srgb, var(--mdst-tone) 10%, transparent);
+
     /* Variants */
 
     &.mdst-badge--solid {
-      background: var(--mdst-color-fg);
+      background: var(--mdst-tone, var(--mdst-color-fg));
       color: var(--mdst-color-bg);
-      border-color: var(--mdst-color-fg);
+      border-color: var(--mdst-tone, var(--mdst-color-fg));
     }
 
     &.mdst-badge--subtle {
-      background: var(--mdst-color-subtle);
+      background: var(--_tone-subtle, var(--mdst-color-subtle));
       border-color: transparent;
     }
 
@@ -37,117 +43,17 @@
       min-width: 0;
       padding: 0;
       font-size: var(--mdst-text-base);
-      background: var(--mdst-color-fg);
+      background: var(--mdst-tone, var(--mdst-color-fg));
       border-color: transparent;
       overflow: hidden;
       text-indent: -9999px;
     }
 
-    /* Status */
-
-    &.mdst-badge--danger {
-      border-color: var(--mdst-color-danger);
-      color: var(--mdst-color-danger);
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-danger);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-danger);
-      }
-
-      &.mdst-badge--subtle {
-        background: color-mix(in srgb, var(--mdst-color-danger) 10%, transparent);
-        border-color: transparent;
-        color: var(--mdst-color-danger);
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-danger);
-      }
-    }
-
-    &.mdst-badge--success {
-      border-color: var(--mdst-color-success);
-      color: var(--mdst-color-success);
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-success);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-success);
-      }
-
-      &.mdst-badge--subtle {
-        background: color-mix(in srgb, var(--mdst-color-success) 10%, transparent);
-        border-color: transparent;
-        color: var(--mdst-color-success);
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-success);
-      }
-    }
-
-    &.mdst-badge--warning {
-      border-color: var(--mdst-color-warning);
-      color: var(--mdst-color-warning);
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-warning);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-warning);
-      }
-
-      &.mdst-badge--subtle {
-        background: color-mix(in srgb, var(--mdst-color-warning) 10%, transparent);
-        border-color: transparent;
-        color: var(--mdst-color-warning);
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-warning);
-      }
-    }
-
-    &.mdst-badge--info {
-      border-color: var(--mdst-color-info, var(--mdst-color-fg));
-      color: var(--mdst-color-info, var(--mdst-color-fg));
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-info, var(--mdst-color-fg));
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-info, var(--mdst-color-fg));
-      }
-
-      &.mdst-badge--subtle {
-        background: color-mix(in srgb, var(--mdst-color-info, var(--mdst-color-fg)) 10%, transparent);
-        border-color: transparent;
-        color: var(--mdst-color-info, var(--mdst-color-fg));
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-info, var(--mdst-color-fg));
-      }
-    }
+    /* Muted: a quieter badge rather than a status, so it stays a modifier */
 
     &.mdst-badge--muted {
-      border-color: var(--mdst-color-muted);
-      color: var(--mdst-color-muted);
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-muted);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-muted);
-      }
-
-      &.mdst-badge--subtle {
-        background: var(--mdst-color-subtle);
-        border-color: transparent;
-        color: var(--mdst-color-muted);
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-muted);
-      }
+      --mdst-tone: var(--mdst-color-muted);
+      --_tone-subtle: var(--mdst-color-subtle);
     }
 
     /* Sizes */
@@ -179,6 +85,24 @@
       transform: translate(calc(50% * var(--_dir)), -50%);
       z-index: 1;
     }
+  }
+
+  /* Deprecated: remove in 3.0. Use the tone classes (.mdst-danger, …). */
+
+  .mdst-badge--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-badge--success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-badge--warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-badge--info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
   }
 
   /* Windows High Contrast (forced colours) removes fills, so the parts that

@@ -12,12 +12,15 @@
     background: var(--mdst-color-bg);
     color: var(--mdst-color-fg);
     font-family: var(--mdst-font-ui);
+
+    /* The start edge: the border modifiers below set --_start, and a tone
+       (.mdst-danger and friends, or your own --mdst-tone) replaces it with a
+       3px accent edge. With no tone, --_accent is invalid and --_start
+       applies. */
+    --_start: var(--mdst-border-width) solid var(--mdst-color-border);
+    --_accent: 3px solid var(--mdst-tone);
     font-size: var(--mdst-text-sm);
     line-height: var(--mdst-line-height);
-    transition:
-      opacity var(--mdst-transition-slow),
-      translate var(--mdst-transition-slow),
-      display var(--mdst-transition-slow) allow-discrete;
 
     /* Content (grows to fill, pushes actions to the end) */
 
@@ -47,11 +50,14 @@
       justify-content: center;
       align-self: flex-start;
 
-      /* A square one text line tall, so the icon centres on the first line of
-         content and the focus ring is a neat square */
+      /* One text line tall, so the icon centres on the first line of content.
+         Square around an icon, so the focus ring is a neat square; a word
+         instead of an icon widens it rather than spilling out */
       height: calc(1em * var(--mdst-line-height));
-      aspect-ratio: 1;
-      padding: 0;
+      min-width: calc(1em * var(--mdst-line-height));
+      padding: 0 0.125em;
+      white-space: nowrap;
+      flex-shrink: 0;
       margin: 0;
       border: none;
       background: none;
@@ -69,22 +75,14 @@
 
     }
 
-    /* State: visible */
+    /* State: shown and hidden instantly (hidden removes it from layout) */
 
     &[data-state="visible"] {
       display: flex;
-      opacity: 1;
-
-      @starting-style {
-        opacity: 0;
-      }
     }
-
-    /* State: hidden (removed from layout once the fade completes) */
 
     &[data-state="hidden"] {
       display: none;
-      opacity: 0;
     }
 
     /* Sizes */
@@ -99,8 +97,8 @@
       }
     }
 
-    /* Borders: remove all, or keep only the listed edges (combinable).
-       Declared before variants so a variant's accent edge still shows. */
+    /* Borders: remove all, or keep only the listed edges (combinable). A
+       tone's accent edge still shows. */
 
     &:is(
         .mdst-banner--borderless,
@@ -110,6 +108,7 @@
         .mdst-banner--border-end
       ) {
       border: none;
+      --_start: none;
     }
 
     &.mdst-banner--border-top {
@@ -121,33 +120,17 @@
     }
 
     &.mdst-banner--border-start {
-      border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
+      --_start: var(--mdst-border-width) solid var(--mdst-color-border);
     }
 
     &.mdst-banner--border-end {
       border-inline-end: var(--mdst-border-width) solid var(--mdst-color-border);
     }
 
-    /* Status: one accent edge at the start, coloured by the variant */
+    /* Start edge: the doubled class outranks the border modifiers above */
 
-    &:is(.mdst-banner--success, .mdst-banner--danger, .mdst-banner--warning, .mdst-banner--info) {
-      border-inline-start: 3px solid var(--_accent);
-    }
-
-    &.mdst-banner--success {
-      --_accent: var(--mdst-color-success);
-    }
-
-    &.mdst-banner--danger {
-      --_accent: var(--mdst-color-danger);
-    }
-
-    &.mdst-banner--warning {
-      --_accent: var(--mdst-color-warning);
-    }
-
-    &.mdst-banner--info {
-      --_accent: var(--mdst-color-info, var(--mdst-color-fg));
+    &.mdst-banner {
+      border-inline-start: var(--_accent, var(--_start));
     }
 
     /* Position: sticky to the top/bottom edge of its scrolling section.
@@ -194,30 +177,10 @@
 
       &.mdst-banner--top {
         top: var(--mdst-banner-offset, var(--mdst-space-md));
-
-        &[data-state="hidden"] {
-          translate: 0 -0.5rem;
-        }
-
-        &[data-state="visible"] {
-          @starting-style {
-            translate: 0 -0.5rem;
-          }
-        }
       }
 
       &.mdst-banner--bottom {
         bottom: var(--mdst-banner-offset, var(--mdst-space-md));
-
-        &[data-state="hidden"] {
-          translate: 0 0.5rem;
-        }
-
-        &[data-state="visible"] {
-          @starting-style {
-            translate: 0 0.5rem;
-          }
-        }
       }
     }
   }
@@ -233,5 +196,23 @@
         max-width: none;
       }
     }
+  }
+
+  /* Deprecated: remove in 3.0. Use the tone classes (.mdst-danger, …). */
+
+  .mdst-banner--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-banner--success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-banner--warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-banner--info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
   }
 }

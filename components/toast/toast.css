@@ -7,6 +7,11 @@
     gap: var(--mdst-space-sm);
     padding: var(--mdst-space-sm) var(--mdst-space-md);
     border: var(--mdst-border-width) solid var(--mdst-color-border);
+    /* A tone (.mdst-danger and friends, or your own --mdst-tone) draws a 3px
+       accent edge at the start. With no tone, --_accent is invalid and the
+       normal border applies. */
+    --_accent: 3px solid var(--mdst-tone);
+    border-inline-start: var(--_accent, var(--mdst-border-width) solid var(--mdst-color-border));
     border-radius: var(--mdst-radius);
     background: var(--mdst-color-bg);
     color: var(--mdst-color-fg);
@@ -30,28 +35,6 @@
       opacity: 0;
       visibility: hidden;
     }
-
-    /* Status: one accent edge at the start, coloured by the variant */
-
-    &:is(.mdst-toast--success, .mdst-toast--danger, .mdst-toast--warning, .mdst-toast--info) {
-      border-inline-start: 3px solid var(--_accent);
-    }
-
-    &.mdst-toast--success {
-      --_accent: var(--mdst-color-success);
-    }
-
-    &.mdst-toast--danger {
-      --_accent: var(--mdst-color-danger);
-    }
-
-    &.mdst-toast--warning {
-      --_accent: var(--mdst-color-warning);
-    }
-
-    &.mdst-toast--info {
-      --_accent: var(--mdst-color-info, var(--mdst-color-fg));
-    }
   }
 
   /* Toast close button */
@@ -60,12 +43,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    padding: 0 0.125em;
     margin: 0;
     margin-inline-start: auto;
-    /* Square, so the focus ring is a neat square */
-    width: 1.5em;
-    aspect-ratio: 1;
+    /* Square around an icon, so the focus ring is a neat square; a word
+       instead of an icon widens it rather than spilling out */
+    height: 1.5em;
+    min-width: 1.5em;
+    white-space: nowrap;
+    flex-shrink: 0;
     border: none;
     background: none;
     box-shadow: none;
@@ -95,5 +81,23 @@
     flex-direction: column;
     gap: var(--mdst-space-sm);
     z-index: calc(var(--mdst-z-overlay) + 1);
+  }
+
+  /* Deprecated: remove in 3.0. Use the tone classes (.mdst-danger, …). */
+
+  .mdst-toast--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-toast--success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-toast--warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-toast--info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
   }
 }

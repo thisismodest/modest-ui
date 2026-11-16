@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tone</title>
+    <link rel="stylesheet" href="../../base/tokens.css" />
+    <link rel="stylesheet" href="../../base/reset.css" />
+    <link rel="stylesheet" href="../../base/preview.css" />
+    <link rel="stylesheet" href="../table/table.css" />
+    <link rel="stylesheet" href="../pre/pre.css" />
+    <link rel="stylesheet" href="../code/code.css" />
+    <link rel="stylesheet" href="../button/button.css" />
+    <link rel="stylesheet" href="../badge/badge.css" />
+    <link rel="stylesheet" href="../tag/tag.css" />
+    <link rel="stylesheet" href="../progress/progress.css" />
+    <link rel="stylesheet" href="tone.css" />
+    <style>
+      .tone-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+      }
+
+      .tone-row progress {
+        width: 6rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section">
+      <div class="section-header">Tones</div>
+      <table class="mdst-table mdst-table--stack mdst-table--fixed">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-danger</span>
+            </td>
+            <td>
+              <div class="tone-row">
+                <button type="button" class="mdst-button mdst-danger">Delete</button>
+                <button type="button" class="mdst-button mdst-button--solid mdst-danger">Delete</button>
+                <span class="mdst-badge mdst-danger">3</span>
+                <span class="mdst-tag mdst-tag--subtle mdst-danger">Failed</span>
+                <progress class="mdst-progress mdst-danger" value="30" max="100">30%</progress>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-success</span>
+            </td>
+            <td>
+              <div class="tone-row">
+                <button type="button" class="mdst-button mdst-success">Approve</button>
+                <button type="button" class="mdst-button mdst-button--solid mdst-success">Approve</button>
+                <span class="mdst-badge mdst-success">3</span>
+                <span class="mdst-tag mdst-tag--subtle mdst-success">Paid</span>
+                <progress class="mdst-progress mdst-success" value="100" max="100">100%</progress>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-warning</span>
+            </td>
+            <td>
+              <div class="tone-row">
+                <button type="button" class="mdst-button mdst-warning">Review</button>
+                <button type="button" class="mdst-button mdst-button--solid mdst-warning">Review</button>
+                <span class="mdst-badge mdst-warning">3</span>
+                <span class="mdst-tag mdst-tag--subtle mdst-warning">Pending</span>
+                <progress class="mdst-progress mdst-warning" value="60" max="100">60%</progress>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">.mdst-info</span>
+            </td>
+            <td>
+              <div class="tone-row">
+                <button type="button" class="mdst-button mdst-info">Details</button>
+                <button type="button" class="mdst-button mdst-button--solid mdst-info">Details</button>
+                <span class="mdst-badge mdst-info">3</span>
+                <span class="mdst-tag mdst-tag--subtle mdst-info">Draft</span>
+                <progress class="mdst-progress mdst-info" value="45" max="100">45%</progress>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="footnote">
+        Info uses the text colour unless you set <code class="mdst-code">--mdst-color-info</code>. A tone colours only the element
+        it's on, not the elements inside it, so a close button inside a danger banner stays a plain button.
+      </p>
+    </div>
+
+    <div class="code-section">
+      <div class="code-section-header">Usage</div>
+      <pre class="mdst-pre"><code>&lt;!-- One class, any component --&gt;
+&lt;button class="mdst-danger"&gt;Delete&lt;/button&gt;
+&lt;span class="mdst-badge mdst-success"&gt;3&lt;/span&gt;
+&lt;span class="mdst-tag mdst-tag--subtle mdst-warning"&gt;Pending&lt;/span&gt;
+&lt;div class="mdst-banner mdst-info"&gt;…&lt;/div&gt;
+&lt;progress class="mdst-danger" value="30" max="100"&gt;&lt;/progress&gt;
+
+&lt;!-- Combines with each component's variants --&gt;
+&lt;button class="mdst-button--solid mdst-danger"&gt;Delete&lt;/button&gt;
+
+/* Your own tone */
+.brand { --mdst-tone: rebeccapurple; }</code></pre>
+    </div>
+  </body>
+</html>

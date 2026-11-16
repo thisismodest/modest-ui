@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../pre/pre.css" />
     <link rel="stylesheet" href="../code/code.css" />
     <link rel="stylesheet" href="progress.css" />
+    <link rel="stylesheet" href="../tone/tone.css" />
   </head>
   <body>
     <div class="section">
@@ -71,18 +72,18 @@
         <tbody>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-progress</span>--success</span>
+              <span class="class-name"><span class="dim">.mdst-progress</span> .mdst-success</span>
             </td>
             <td>
-              <progress class="mdst-progress mdst-progress--success" value="100" max="100" aria-label="Progress example">100%</progress>
+              <progress class="mdst-progress mdst-success" value="100" max="100" aria-label="Progress example">100%</progress>
             </td>
           </tr>
           <tr>
             <td>
-              <span class="class-name"><span class="dim">.mdst-progress</span>--danger</span>
+              <span class="class-name"><span class="dim">.mdst-progress</span> .mdst-danger</span>
             </td>
             <td>
-              <progress class="mdst-progress mdst-progress--danger" value="35" max="100" aria-label="Progress example">35%</progress>
+              <progress class="mdst-progress mdst-danger" value="35" max="100" aria-label="Progress example">35%</progress>
             </td>
           </tr>
         </tbody>
@@ -142,14 +143,14 @@
             <span>Complete</span>
             <span>100%</span>
           </div>
-          <progress class="mdst-progress mdst-progress--success" value="100" max="100" aria-label="Progress example">100%</progress>
+          <progress class="mdst-progress mdst-success" value="100" max="100" aria-label="Progress example">100%</progress>
         </div>
         <div style="display: flex; flex-direction: column; gap: var(--mdst-space-sm)">
           <div style="display: flex; justify-content: space-between; font-size: var(--mdst-text-sm)">
             <span>Upload failed</span>
             <span>35%</span>
           </div>
-          <progress class="mdst-progress mdst-progress--danger" value="35" max="100" aria-label="Progress example">35%</progress>
+          <progress class="mdst-progress mdst-danger" value="35" max="100" aria-label="Progress example">35%</progress>
         </div>
       </div>
     </div>
@@ -162,9 +163,9 @@
 &lt;!-- Indeterminate (no value attribute) --&gt;
 &lt;progress class="mdst-progress"&gt;Loading…&lt;/progress&gt;
 
-&lt;!-- Status variants --&gt;
-&lt;progress class="mdst-progress mdst-progress--success" value="100" max="100"&gt;100%&lt;/progress&gt;
-&lt;progress class="mdst-progress mdst-progress--danger" value="35" max="100"&gt;35%&lt;/progress&gt;
+&lt;!-- Tones --&gt;
+&lt;progress class="mdst-progress mdst-success" value="100" max="100"&gt;100%&lt;/progress&gt;
+&lt;progress class="mdst-progress mdst-danger" value="35" max="100"&gt;35%&lt;/progress&gt;
 
 &lt;!-- Sizes --&gt;
 &lt;progress class="mdst-progress mdst-progress--sm" value="50" max="100"&gt;50%&lt;/progress&gt;

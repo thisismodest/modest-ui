@@ -117,6 +117,15 @@
         font-size: var(--mdst-text-sm);
       }
 
+      /* Post meta */
+      .post-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--mdst-space-sm);
+        font-size: var(--mdst-text-xs);
+        color: var(--mdst-color-muted);
+      }
+
       .featured-content {
         display: flex;
         flex-direction: column;
@@ -148,15 +157,6 @@
         color: var(--mdst-color-muted);
         font-size: var(--mdst-text-sm);
         margin: 0 0 var(--mdst-space-md);
-      }
-
-      /* Post meta */
-      .post-meta {
-        display: flex;
-        align-items: center;
-        gap: var(--mdst-space-sm);
-        font-size: var(--mdst-text-xs);
-        color: var(--mdst-color-muted);
       }
 
       .post-meta-sep::before {
@@ -465,7 +465,7 @@
         font-size: var(--mdst-text-lg);
       }
 
-      .newsletter p {
+      .newsletter-text {
         font-size: var(--mdst-text-sm);
         color: var(--mdst-color-muted);
         margin: 0 0 var(--mdst-space-md);
@@ -500,12 +500,12 @@
         gap: var(--mdst-space-md);
       }
 
-      .footer-links a {
+      .site-footer .footer-links a {
         color: var(--mdst-color-muted);
         text-decoration: none;
       }
 
-      .footer-links a:hover {
+      .site-footer .footer-links a:hover {
         color: var(--mdst-color-fg);
       }
 
@@ -585,7 +585,7 @@
         <div class="featured-image">848 × 530</div>
         <div class="featured-content">
           <div class="post-meta">
-            <span class="mdst-tag mdst-tag--success mdst-tag--sm mdst-tag--pill">Featured</span>
+            <span class="mdst-tag mdst-success mdst-tag--sm mdst-tag--pill">Featured</span>
             <span class="post-meta-sep"></span>
             <span>8 min read</span>
           </div>
@@ -940,7 +940,7 @@
         <!-- Newsletter -->
         <div class="newsletter">
           <h3>Stay in the loop</h3>
-          <p>Get new posts delivered to your inbox. No spam, unsubscribe anytime.</p>
+          <p class="newsletter-text">Get new posts delivered to your inbox. No spam, unsubscribe anytime.</p>
           <div class="newsletter-form">
             <input type="email" placeholder="you@example.com" />
             <button type="button" class="mdst-button--solid">Subscribe</button>

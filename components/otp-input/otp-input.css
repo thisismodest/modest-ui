@@ -25,11 +25,16 @@
     gap: var(--mdst-space-sm);
     align-items: center;
 
+    /* Tone (.mdst-danger and friends, or your own --mdst-tone) colours every
+       box's border. --mdst-tone doesn't inherit, so it's copied into --_tone
+       for the inputs. */
+    --_tone: var(--mdst-tone);
+
     & > input {
       width: 1.5em;
       height: 2em;
       padding: 0;
-      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      border: var(--mdst-border-width) solid var(--_tone, var(--mdst-color-border));
       border-radius: var(--mdst-radius);
       background: var(--mdst-color-bg);
       color: var(--mdst-color-fg);
@@ -40,7 +45,7 @@
       transition: border-color var(--mdst-transition);
 
       &:focus {
-        border-color: var(--mdst-color-focus);
+        border-color: var(--_tone, var(--mdst-color-focus));
       }
 
       &:focus-visible {
@@ -60,7 +65,7 @@
          Needs a placeholder (e.g. placeholder="0"); without one the browser
          can't tell empty from filled. */
       &[placeholder]:not(:placeholder-shown) {
-        border-color: var(--mdst-color-fg);
+        border-color: var(--_tone, var(--mdst-color-fg));
       }
     }
 
@@ -71,17 +76,15 @@
       height: 0.0625em;
       background: var(--mdst-color-border);
     }
+  }
 
-    /* Error state */
+  /* Deprecated: remove in 3.0. Use .mdst-danger or .mdst-success. */
 
-    &.mdst-otp-input--danger > input {
-      border-color: var(--mdst-color-danger);
-    }
+  .mdst-otp-input--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
 
-    /* Success state */
-
-    &.mdst-otp-input--success > input {
-      border-color: var(--mdst-color-success);
-    }
+  .mdst-otp-input--success {
+    --mdst-tone: var(--mdst-color-success);
   }
 }
