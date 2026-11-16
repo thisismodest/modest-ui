@@ -296,6 +296,10 @@ function theming() {
 }
 \`\`\`
 
+\`--mdst-color-subtle\` is mixed from the text and background colours unless
+you set it; if you do, keep it visibly different from \`--mdst-color-bg\`
+(skeletons, tracks, code, and table lines are drawn in it).
+
 Setting colour tokens yourself replaces both the light and dark values. To keep
 dark mode, set them inside \`@media (prefers-color-scheme: dark)\` too, or use
 \`light-dark()\`:

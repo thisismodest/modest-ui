@@ -193,6 +193,8 @@ Override CSS custom properties to create your own theme:
 }
 ```
 
+`--mdst-color-subtle` is the light fill behind skeletons, progress and meter tracks, code, and table lines. By default it's mixed from your text and background colours, so you only need to set it to change it. If you do, keep it visibly different from `--mdst-color-bg`, or those parts disappear.
+
 Use the [Theme Playground](https://modest-ui.com/theme/) to experiment with different themes.
 
 ### Dark mode

@@ -49,8 +49,10 @@
   /* Windows High Contrast (forced colours) removes fills, so the parts that
      show state are redrawn in the user's system colours. */
   @media (forced-colors: active) {
+    /* CanvasText, not GrayText: themes only promise that text colour
+       contrasts with the page, and GrayText can be close to it */
     .mdst-skeleton {
-      outline: 1px solid GrayText;
+      outline: 1px solid CanvasText;
     }
   }
 }
