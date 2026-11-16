@@ -11,6 +11,8 @@ change; adding new ones is a minor change.
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-11-16
+
 ### Added
 
 - Tone classes: `.mdst-danger`, `.mdst-success`, `.mdst-warning`, and

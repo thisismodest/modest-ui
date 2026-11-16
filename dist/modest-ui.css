@@ -27,7 +27,7 @@
     --mdst-color-danger: #dc2626;
     --mdst-color-warning: #b45309;
     --mdst-color-success: #15803d;
-    /* --mdst-color-info is optional: info variants use the text colour unless
+    /* --mdst-color-info is optional: .mdst-info uses the text colour unless
        you set it, e.g. --mdst-color-info: #2563eb; */
 
     /* Typography */
@@ -154,9 +154,13 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  :where(.mdst-ui) :where(img, picture, video, canvas, svg) {
+  :where(.mdst-ui) :where(img, picture, video, audio, canvas, svg, iframe, embed, object) {
     display: block;
     max-width: 100%;
+  }
+
+  :where(.mdst-ui) iframe {
+    border: 0;
   }
 
   :where(.mdst-ui) :where(a, input, button, textarea, select) {
@@ -309,23 +313,29 @@
     font-family: var(--mdst-font-ui);
     line-height: 1;
     border-radius: 9999px;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border: var(--mdst-border-width) solid var(--mdst-tone, var(--mdst-color-border));
     background: var(--mdst-color-bg);
-    color: var(--mdst-color-fg);
+    color: var(--mdst-tone, var(--mdst-color-fg));
     white-space: nowrap;
     vertical-align: middle;
     box-sizing: border-box;
 
+    /* Tone (.mdst-danger and friends, or your own --mdst-tone) colours the
+       text and border, and each variant below. Subtle tints the background
+       with 10% of the tone; with no tone, --_tone-subtle is invalid and
+       falls back to --mdst-color-subtle. */
+    --_tone-subtle: color-mix(in srgb, var(--mdst-tone) 10%, transparent);
+
     /* Variants */
 
     &.mdst-badge--solid {
-      background: var(--mdst-color-fg);
+      background: var(--mdst-tone, var(--mdst-color-fg));
       color: var(--mdst-color-bg);
-      border-color: var(--mdst-color-fg);
+      border-color: var(--mdst-tone, var(--mdst-color-fg));
     }
 
     &.mdst-badge--subtle {
-      background: var(--mdst-color-subtle);
+      background: var(--_tone-subtle, var(--mdst-color-subtle));
       border-color: transparent;
     }
 
@@ -335,117 +345,17 @@
       min-width: 0;
       padding: 0;
       font-size: var(--mdst-text-base);
-      background: var(--mdst-color-fg);
+      background: var(--mdst-tone, var(--mdst-color-fg));
       border-color: transparent;
       overflow: hidden;
       text-indent: -9999px;
     }
 
-    /* Status */
-
-    &.mdst-badge--danger {
-      border-color: var(--mdst-color-danger);
-      color: var(--mdst-color-danger);
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-danger);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-danger);
-      }
-
-      &.mdst-badge--subtle {
-        background: color-mix(in srgb, var(--mdst-color-danger) 10%, transparent);
-        border-color: transparent;
-        color: var(--mdst-color-danger);
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-danger);
-      }
-    }
-
-    &.mdst-badge--success {
-      border-color: var(--mdst-color-success);
-      color: var(--mdst-color-success);
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-success);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-success);
-      }
-
-      &.mdst-badge--subtle {
-        background: color-mix(in srgb, var(--mdst-color-success) 10%, transparent);
-        border-color: transparent;
-        color: var(--mdst-color-success);
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-success);
-      }
-    }
-
-    &.mdst-badge--warning {
-      border-color: var(--mdst-color-warning);
-      color: var(--mdst-color-warning);
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-warning);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-warning);
-      }
-
-      &.mdst-badge--subtle {
-        background: color-mix(in srgb, var(--mdst-color-warning) 10%, transparent);
-        border-color: transparent;
-        color: var(--mdst-color-warning);
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-warning);
-      }
-    }
-
-    &.mdst-badge--info {
-      border-color: var(--mdst-color-info, var(--mdst-color-fg));
-      color: var(--mdst-color-info, var(--mdst-color-fg));
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-info, var(--mdst-color-fg));
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-info, var(--mdst-color-fg));
-      }
-
-      &.mdst-badge--subtle {
-        background: color-mix(in srgb, var(--mdst-color-info, var(--mdst-color-fg)) 10%, transparent);
-        border-color: transparent;
-        color: var(--mdst-color-info, var(--mdst-color-fg));
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-info, var(--mdst-color-fg));
-      }
-    }
+    /* Muted: a quieter badge rather than a status, so it stays a modifier */
 
     &.mdst-badge--muted {
-      border-color: var(--mdst-color-muted);
-      color: var(--mdst-color-muted);
-
-      &.mdst-badge--solid {
-        background: var(--mdst-color-muted);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-muted);
-      }
-
-      &.mdst-badge--subtle {
-        background: var(--mdst-color-subtle);
-        border-color: transparent;
-        color: var(--mdst-color-muted);
-      }
-
-      &.mdst-badge--dot {
-        background: var(--mdst-color-muted);
-      }
+      --mdst-tone: var(--mdst-color-muted);
+      --_tone-subtle: var(--mdst-color-subtle);
     }
 
     /* Sizes */
@@ -479,6 +389,24 @@
     }
   }
 
+  /* Deprecated: remove in 3.0. Use the tone classes (.mdst-danger, …). */
+
+  .mdst-badge--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-badge--success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-badge--warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-badge--info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
+  }
+
   /* Windows High Contrast (forced colours) removes fills, so the parts that
      show state are redrawn in the user's system colours. */
   @media (forced-colors: active) {
@@ -503,12 +431,15 @@
     background: var(--mdst-color-bg);
     color: var(--mdst-color-fg);
     font-family: var(--mdst-font-ui);
+
+    /* The start edge: the border modifiers below set --_start, and a tone
+       (.mdst-danger and friends, or your own --mdst-tone) replaces it with a
+       3px accent edge. With no tone, --_accent is invalid and --_start
+       applies. */
+    --_start: var(--mdst-border-width) solid var(--mdst-color-border);
+    --_accent: 3px solid var(--mdst-tone);
     font-size: var(--mdst-text-sm);
     line-height: var(--mdst-line-height);
-    transition:
-      opacity var(--mdst-transition-slow),
-      translate var(--mdst-transition-slow),
-      display var(--mdst-transition-slow) allow-discrete;
 
     /* Content (grows to fill, pushes actions to the end) */
 
@@ -538,11 +469,14 @@
       justify-content: center;
       align-self: flex-start;
 
-      /* A square one text line tall, so the icon centres on the first line of
-         content and the focus ring is a neat square */
+      /* One text line tall, so the icon centres on the first line of content.
+         Square around an icon, so the focus ring is a neat square; a word
+         instead of an icon widens it rather than spilling out */
       height: calc(1em * var(--mdst-line-height));
-      aspect-ratio: 1;
-      padding: 0;
+      min-width: calc(1em * var(--mdst-line-height));
+      padding: 0 0.125em;
+      white-space: nowrap;
+      flex-shrink: 0;
       margin: 0;
       border: none;
       background: none;
@@ -560,22 +494,14 @@
 
     }
 
-    /* State: visible */
+    /* State: shown and hidden instantly (hidden removes it from layout) */
 
     &[data-state="visible"] {
       display: flex;
-      opacity: 1;
-
-      @starting-style {
-        opacity: 0;
-      }
     }
-
-    /* State: hidden (removed from layout once the fade completes) */
 
     &[data-state="hidden"] {
       display: none;
-      opacity: 0;
     }
 
     /* Sizes */
@@ -590,8 +516,8 @@
       }
     }
 
-    /* Borders: remove all, or keep only the listed edges (combinable).
-       Declared before variants so a variant's accent edge still shows. */
+    /* Borders: remove all, or keep only the listed edges (combinable). A
+       tone's accent edge still shows. */
 
     &:is(
         .mdst-banner--borderless,
@@ -601,6 +527,7 @@
         .mdst-banner--border-end
       ) {
       border: none;
+      --_start: none;
     }
 
     &.mdst-banner--border-top {
@@ -612,33 +539,17 @@
     }
 
     &.mdst-banner--border-start {
-      border-inline-start: var(--mdst-border-width) solid var(--mdst-color-border);
+      --_start: var(--mdst-border-width) solid var(--mdst-color-border);
     }
 
     &.mdst-banner--border-end {
       border-inline-end: var(--mdst-border-width) solid var(--mdst-color-border);
     }
 
-    /* Status: one accent edge at the start, coloured by the variant */
+    /* Start edge: the doubled class outranks the border modifiers above */
 
-    &:is(.mdst-banner--success, .mdst-banner--danger, .mdst-banner--warning, .mdst-banner--info) {
-      border-inline-start: 3px solid var(--_accent);
-    }
-
-    &.mdst-banner--success {
-      --_accent: var(--mdst-color-success);
-    }
-
-    &.mdst-banner--danger {
-      --_accent: var(--mdst-color-danger);
-    }
-
-    &.mdst-banner--warning {
-      --_accent: var(--mdst-color-warning);
-    }
-
-    &.mdst-banner--info {
-      --_accent: var(--mdst-color-info, var(--mdst-color-fg));
+    &.mdst-banner {
+      border-inline-start: var(--_accent, var(--_start));
     }
 
     /* Position: sticky to the top/bottom edge of its scrolling section.
@@ -685,30 +596,10 @@
 
       &.mdst-banner--top {
         top: var(--mdst-banner-offset, var(--mdst-space-md));
-
-        &[data-state="hidden"] {
-          translate: 0 -0.5rem;
-        }
-
-        &[data-state="visible"] {
-          @starting-style {
-            translate: 0 -0.5rem;
-          }
-        }
       }
 
       &.mdst-banner--bottom {
         bottom: var(--mdst-banner-offset, var(--mdst-space-md));
-
-        &[data-state="hidden"] {
-          translate: 0 0.5rem;
-        }
-
-        &[data-state="visible"] {
-          @starting-style {
-            translate: 0 0.5rem;
-          }
-        }
       }
     }
   }
@@ -724,6 +615,24 @@
         max-width: none;
       }
     }
+  }
+
+  /* Deprecated: remove in 3.0. Use the tone classes (.mdst-danger, …). */
+
+  .mdst-banner--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-banner--success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-banner--warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-banner--info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
   }
 }
 
@@ -829,9 +738,9 @@
     font-size: inherit;
     line-height: var(--mdst-line-height);
     text-decoration: none;
-    color: var(--mdst-button-fg, var(--mdst-button-tone, var(--mdst-color-fg)));
+    color: var(--mdst-button-fg, var(--mdst-tone, var(--mdst-button-tone, var(--mdst-color-fg))));
     background: var(--mdst-button-bg, var(--mdst-color-bg));
-    border: var(--mdst-border-width) solid var(--mdst-button-border, var(--mdst-color-border));
+    border: var(--mdst-border-width) solid var(--mdst-button-border, var(--mdst-tone, var(--mdst-color-border)));
     border-radius: var(--mdst-radius);
     box-shadow: var(--_hover, none);
     cursor: pointer;
@@ -866,12 +775,9 @@
   }
 
   /* Variants: single classes that set variables, so they work on <button>,
-     <input>, and <a> alike and combine freely (e.g. danger + inverted). */
-
-  .mdst-button--danger {
-    --mdst-button-tone: var(--mdst-color-danger);
-    --mdst-button-border: var(--mdst-color-danger);
-  }
+     <input>, and <a> alike and combine freely (e.g. .mdst-danger + solid).
+     A tone class (.mdst-danger and friends) sets --mdst-tone, which colours
+     the text and border, and the fill when solid. */
 
   .mdst-button--borderless {
     --mdst-button-bg: transparent;
@@ -884,9 +790,9 @@
   .mdst-button--solid,
   :where(.mdst-ui) :where([aria-pressed="true"]),
   .mdst-button[aria-pressed="true"] {
-    --mdst-button-bg: var(--mdst-button-tone, var(--mdst-color-fg));
+    --mdst-button-bg: var(--mdst-tone, var(--mdst-button-tone, var(--mdst-color-fg)));
     --mdst-button-fg: var(--mdst-color-bg);
-    --mdst-button-border: var(--mdst-button-tone, var(--mdst-color-fg));
+    --mdst-button-border: var(--mdst-tone, var(--mdst-button-tone, var(--mdst-color-fg)));
   }
 
   /* Sizes (input-qualified so they also beat the classless input rule) */
@@ -912,6 +818,12 @@
       color: HighlightText;
       border-color: Highlight;
     }
+  }
+
+  /* Deprecated: remove in 3.0. Use .mdst-danger. */
+
+  .mdst-button--danger {
+    --mdst-tone: var(--mdst-color-danger);
   }
 }
 
@@ -1269,6 +1181,7 @@
   }
 }
 
+/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Details (Toggle/Disclosure) */
 
@@ -1439,6 +1352,15 @@
     height: fit-content;
   }
 
+  /* A bare dialog (no class, no .mdst-dialog__ parts) has nothing to pad it,
+     so it gets padding of its own, and its children get flow spacing (see
+     typography). Give it a class, or build it from the parts, and the
+     inside is yours. */
+
+  :where(.mdst-ui) dialog:where(:not([class], [style], :has(> [class*="mdst-dialog__"]))) {
+    padding: var(--mdst-space-md);
+  }
+
   :where(.mdst-ui) dialog::backdrop,
   .mdst-dialog::backdrop {
     background: var(--mdst-backdrop);
@@ -1469,7 +1391,14 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--mdst-space-xs);
+    /* Square around an icon, so the focus ring is a neat square; a word
+       instead of an icon widens it rather than spilling out */
+    height: 2em;
+    min-width: 2em;
+    padding: 0 0.125em;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
     background: transparent;
     border: none;
     box-shadow: none;
@@ -1525,7 +1454,6 @@
 @layer mdst-ui.components {
   /* Drawer */
 
-  :where(.mdst-ui) dialog.mdst-drawer,
   .mdst-drawer {
     position: fixed;
     top: 0;
@@ -1573,7 +1501,6 @@
 
   /* Backdrop */
 
-  :where(.mdst-ui) dialog.mdst-drawer::backdrop,
   .mdst-drawer::backdrop {
     background: var(--mdst-backdrop);
     opacity: 0;
@@ -1583,7 +1510,6 @@
       display var(--mdst-transition-slow) allow-discrete;
   }
 
-  :where(.mdst-ui) dialog.mdst-drawer:where([open])::backdrop,
   .mdst-drawer[open]::backdrop {
     opacity: 1;
 
@@ -1594,7 +1520,6 @@
 
   /* Position: start (the left edge in left-to-right pages) */
 
-  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--start,
   .mdst-drawer.mdst-drawer--start {
     inset-inline-end: auto;
     inset-inline-start: 0;
@@ -1613,17 +1538,14 @@
 
   /* Sizes */
 
-  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--sm,
   .mdst-drawer.mdst-drawer--sm {
     width: 16rem;
   }
 
-  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--lg,
   .mdst-drawer.mdst-drawer--lg {
     width: 28rem;
   }
 
-  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--full,
   .mdst-drawer.mdst-drawer--full {
     width: 100%;
     border-inline-start: none;
@@ -1632,7 +1554,6 @@
 
   /* Header */
 
-  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__header,
   .mdst-drawer .mdst-drawer__header {
     display: flex;
     align-items: center;
@@ -1645,7 +1566,6 @@
 
   /* Body */
 
-  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__body,
   .mdst-drawer .mdst-drawer__body {
     padding: var(--mdst-space-md);
     overflow-y: auto;
@@ -1654,7 +1574,6 @@
 
   /* Footer */
 
-  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__footer,
   .mdst-drawer .mdst-drawer__footer {
     display: flex;
     align-items: center;
@@ -1667,12 +1586,18 @@
 
   /* Close button */
 
-  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__close,
   .mdst-drawer .mdst-drawer__close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--mdst-space-xs);
+    /* Square around an icon, so the focus ring is a neat square; a word
+       instead of an icon widens it rather than spilling out */
+    height: 2em;
+    min-width: 2em;
+    padding: 0 0.125em;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
     background: transparent;
     border: none;
     box-shadow: none;
@@ -1721,6 +1646,12 @@
     border-radius: var(--mdst-radius);
     cursor: pointer;
     transition: border-color var(--mdst-transition);
+  }
+
+  /* Option group labels: bold like the browser's, without its italic */
+
+  :where(.mdst-ui) optgroup {
+    font-style: normal;
   }
 
   :where(.mdst-ui) select:where(:is([aria-invalid="true"], :user-invalid)),
@@ -1923,6 +1854,15 @@
     border-radius: var(--mdst-radius);
   }
 
+  /* The content starts below the legend, not below the border line through
+     it, so the legend already adds space at the top. A smaller top padding
+     keeps the legend close to its content without the top looking heavy. */
+
+  :where(.mdst-ui) fieldset:where(:has(> legend)),
+  .mdst-fieldset:has(> legend) {
+    padding-block-start: var(--mdst-space-sm);
+  }
+
   :where(.mdst-ui) legend,
   .mdst-legend {
     padding-inline: var(--mdst-space-xs);
@@ -1947,6 +1887,21 @@
     display: block;
     margin-block-start: var(--mdst-space-xs);
   }
+
+  /* Output: a calculated value, in figures of equal width so it doesn't
+     shift about as it changes */
+
+  :where(.mdst-ui) output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Error text: when the field is invalid (aria-invalid="true", or the
+     browser's own validation once the user has interacted), the <small>
+     after it takes the error colour, matching the field's border. */
+
+  :where(.mdst-ui :is(form, fieldset):not([class]), .mdst-form, .mdst-fieldset) > :where(input, select, textarea):where([aria-invalid="true"], :user-invalid) + small {
+    color: var(--mdst-color-danger);
+  }
 }
 
 @layer mdst-ui.components {
@@ -1966,6 +1921,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     )),
   :where(.mdst-ui) textarea,
@@ -1995,6 +1951,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     ))::placeholder,
   :where(.mdst-ui) textarea::placeholder,
@@ -2068,6 +2025,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     ):focus),
   :where(.mdst-ui) textarea:where(:focus),
@@ -2089,6 +2047,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     ):focus-visible),
   :where(.mdst-ui) textarea:where(:focus-visible),
@@ -2106,6 +2065,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     ):disabled),
   :where(.mdst-ui) textarea:where(:disabled),
@@ -2262,11 +2222,16 @@
     gap: var(--mdst-space-sm);
     align-items: center;
 
+    /* Tone (.mdst-danger and friends, or your own --mdst-tone) colours every
+       box's border. --mdst-tone doesn't inherit, so it's copied into --_tone
+       for the inputs. */
+    --_tone: var(--mdst-tone);
+
     & > input {
       width: 1.5em;
       height: 2em;
       padding: 0;
-      border: var(--mdst-border-width) solid var(--mdst-color-border);
+      border: var(--mdst-border-width) solid var(--_tone, var(--mdst-color-border));
       border-radius: var(--mdst-radius);
       background: var(--mdst-color-bg);
       color: var(--mdst-color-fg);
@@ -2277,7 +2242,7 @@
       transition: border-color var(--mdst-transition);
 
       &:focus {
-        border-color: var(--mdst-color-focus);
+        border-color: var(--_tone, var(--mdst-color-focus));
       }
 
       &:focus-visible {
@@ -2297,7 +2262,7 @@
          Needs a placeholder (e.g. placeholder="0"); without one the browser
          can't tell empty from filled. */
       &[placeholder]:not(:placeholder-shown) {
-        border-color: var(--mdst-color-fg);
+        border-color: var(--_tone, var(--mdst-color-fg));
       }
     }
 
@@ -2308,21 +2273,20 @@
       height: 0.0625em;
       background: var(--mdst-color-border);
     }
+  }
 
-    /* Error state */
+  /* Deprecated: remove in 3.0. Use .mdst-danger or .mdst-success. */
 
-    &.mdst-otp-input--danger > input {
-      border-color: var(--mdst-color-danger);
-    }
+  .mdst-otp-input--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
 
-    /* Success state */
-
-    &.mdst-otp-input--success > input {
-      border-color: var(--mdst-color-success);
-    }
+  .mdst-otp-input--success {
+    --mdst-tone: var(--mdst-color-success);
   }
 }
 
+/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Password Input
      A wrapper around the field (a .mdst-input, or a bare input inside
@@ -2416,8 +2380,12 @@
 }
 
 @layer mdst-ui.components {
-  /* Popover */
+  /* Popover
+     Classless: any [popover] inside .mdst-ui gets the panel look, at zero
+     specificity, so components built on popover (tooltip) and your own
+     classes replace it. Class-based: .mdst-popover anywhere. */
 
+  :where(.mdst-ui) :where([popover]),
   .mdst-popover {
     padding: var(--mdst-space-md);
     border: var(--mdst-border-width) solid var(--mdst-color-border);
@@ -2432,33 +2400,36 @@
     inset: 0;
     width: fit-content;
     height: fit-content;
+  }
 
-    /* Anchored positioning - use with anchor="" HTML attribute.
-       Guarded so browsers without CSS anchor positioning (Baseline Chrome 129 /
-       Firefox 147 / Safari 26) keep the centered default above instead of
-       mispositioning. */
+  /* Anchored positioning - use with anchor="" HTML attribute.
+     Guarded so browsers without CSS anchor positioning (Baseline Chrome 129 /
+     Firefox 147 / Safari 26) keep the centered default above instead of
+     mispositioning. */
 
-    @supports (position-area: bottom) {
-      &.mdst-popover--anchored {
-        position: absolute;
-        inset: unset;
-        margin: 0;
-        position-area: bottom;
-        margin-top: var(--mdst-space-xs);
-      }
+  @supports (position-area: bottom) {
+    :where(.mdst-ui) [popover].mdst-popover--anchored,
+    .mdst-popover.mdst-popover--anchored {
+      position: absolute;
+      inset: unset;
+      margin: 0;
+      position-area: bottom;
+      margin-top: var(--mdst-space-xs);
     }
+  }
 
-    /* Variants */
+  /* Variants */
 
-    &.mdst-popover--sm {
-      padding: var(--mdst-space-sm);
-      font-size: var(--mdst-text-sm);
-    }
+  :where(.mdst-ui) [popover].mdst-popover--sm,
+  .mdst-popover.mdst-popover--sm {
+    padding: var(--mdst-space-sm);
+    font-size: var(--mdst-text-sm);
+  }
 
-    &.mdst-popover--lg {
-      padding: var(--mdst-space-lg);
-      max-width: 24rem;
-    }
+  :where(.mdst-ui) [popover].mdst-popover--lg,
+  .mdst-popover.mdst-popover--lg {
+    padding: var(--mdst-space-lg);
+    max-width: 24rem;
   }
 }
 
@@ -2535,7 +2506,11 @@
     border-radius: var(--mdst-radius);
     overflow: hidden;
     background: var(--mdst-color-subtle);
-    color: var(--mdst-color-fg);
+    /* Tone (.mdst-danger and friends, or your own --mdst-tone) colours the
+       fill. --mdst-tone doesn't inherit, so it's copied into --_tone for the
+       fill pseudo-elements. */
+    --_tone: var(--mdst-tone);
+    color: var(--_tone, var(--mdst-color-fg));
 
     /* Webkit (Chrome, Safari, Edge) - bar background */
 
@@ -2547,7 +2522,7 @@
     /* Webkit - value fill */
 
     &::-webkit-progress-value {
-      background: var(--mdst-color-fg);
+      background: var(--_tone, var(--mdst-color-fg));
       border-radius: var(--mdst-radius);
       transition: width var(--mdst-transition);
     }
@@ -2555,36 +2530,8 @@
     /* Firefox - value fill */
 
     &::-moz-progress-bar {
-      background: var(--mdst-color-fg);
+      background: var(--_tone, var(--mdst-color-fg));
       border-radius: var(--mdst-radius);
-    }
-
-    /* Status: Error */
-
-    &.mdst-progress--danger {
-      color: var(--mdst-color-danger);
-
-      &::-webkit-progress-value {
-        background: var(--mdst-color-danger);
-      }
-
-      &::-moz-progress-bar {
-        background: var(--mdst-color-danger);
-      }
-    }
-
-    /* Status: Success */
-
-    &.mdst-progress--success {
-      color: var(--mdst-color-success);
-
-      &::-webkit-progress-value {
-        background: var(--mdst-color-success);
-      }
-
-      &::-moz-progress-bar {
-        background: var(--mdst-color-success);
-      }
     }
 
     /* Size: Small */
@@ -2598,6 +2545,16 @@
     &.mdst-progress--lg {
       height: var(--mdst-space-md);
     }
+  }
+
+  /* Deprecated: remove in 3.0. Use .mdst-danger or .mdst-success. */
+
+  .mdst-progress--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-progress--success {
+    --mdst-tone: var(--mdst-color-success);
   }
 
   /* Windows High Contrast (forced colours) removes fills, so the parts that
@@ -2955,6 +2912,7 @@
 }
 
 
+/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Stepper / Wizard */
 
@@ -3173,6 +3131,7 @@
   }
 }
 
+/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Table */
 
@@ -3186,6 +3145,15 @@
     width: 100%;
     border-collapse: collapse;
     font-size: inherit;
+  }
+
+  :where(.mdst-ui) caption,
+  .mdst-table caption {
+    caption-side: top;
+    padding-block-end: var(--mdst-space-sm);
+    text-align: start;
+    font-size: var(--mdst-text-sm);
+    color: var(--mdst-color-muted);
   }
 
   :where(.mdst-ui) th,
@@ -3223,6 +3191,21 @@
 
   :where(.mdst-ui) tbody tr:where(:last-child) td,
   .mdst-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Footer: totals read as a summary, in bold under a rule. A th here is a
+     row label ("Total"), so it drops the column-heading style. */
+
+  :where(.mdst-ui) tfoot :where(th, td),
+  .mdst-table tfoot :where(th, td) {
+    padding-block: var(--mdst-space-md);
+    font-size: inherit;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    color: inherit;
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
     border-bottom: none;
   }
 
@@ -3509,22 +3492,28 @@
     padding: 0.25em 0.5em;
     font-size: var(--mdst-text-sm);
     line-height: 1;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border: var(--mdst-border-width) solid var(--mdst-tone, var(--mdst-color-border));
     border-radius: var(--mdst-radius);
     background: var(--mdst-color-bg);
-    color: var(--mdst-color-fg);
+    color: var(--mdst-tone, var(--mdst-color-fg));
     white-space: nowrap;
     vertical-align: middle;
+
+    /* Tone (.mdst-danger and friends, or your own --mdst-tone) colours the
+       text and border, and each variant below. Subtle tints the background
+       with 10% of the tone; with no tone, --_tone-subtle is invalid and
+       falls back to --mdst-color-subtle. */
+    --_tone-subtle: color-mix(in srgb, var(--mdst-tone) 10%, transparent);
 
     /* Variants */
 
     &.mdst-tag--solid {
-      background: var(--mdst-color-fg);
+      background: var(--mdst-tone, var(--mdst-color-fg));
       color: var(--mdst-color-bg);
     }
 
     &.mdst-tag--subtle {
-      background: var(--mdst-color-subtle);
+      background: var(--_tone-subtle, var(--mdst-color-subtle));
       border-color: transparent;
     }
 
@@ -3533,87 +3522,11 @@
       background: transparent;
     }
 
-    /* Status */
-
-    &.mdst-tag--danger {
-      border-color: var(--mdst-color-danger);
-      color: var(--mdst-color-danger);
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-danger);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-danger);
-      }
-
-      &.mdst-tag--subtle {
-        background: color-mix(in srgb, var(--mdst-color-danger) 10%, transparent);
-        border-color: transparent;
-      }
-    }
-
-    &.mdst-tag--success {
-      border-color: var(--mdst-color-success);
-      color: var(--mdst-color-success);
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-success);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-success);
-      }
-
-      &.mdst-tag--subtle {
-        background: color-mix(in srgb, var(--mdst-color-success) 10%, transparent);
-        border-color: transparent;
-      }
-    }
-
-    &.mdst-tag--warning {
-      border-color: var(--mdst-color-warning);
-      color: var(--mdst-color-warning);
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-warning);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-warning);
-      }
-
-      &.mdst-tag--subtle {
-        background: color-mix(in srgb, var(--mdst-color-warning) 10%, transparent);
-        border-color: transparent;
-      }
-    }
-
-    &.mdst-tag--info {
-      border-color: var(--mdst-color-info, var(--mdst-color-fg));
-      color: var(--mdst-color-info, var(--mdst-color-fg));
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-info, var(--mdst-color-fg));
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-info, var(--mdst-color-fg));
-      }
-
-      &.mdst-tag--subtle {
-        background: color-mix(in srgb, var(--mdst-color-info, var(--mdst-color-fg)) 10%, transparent);
-        border-color: transparent;
-      }
-    }
+    /* Muted: a quieter tag rather than a status, so it stays a modifier */
 
     &.mdst-tag--muted {
-      border-color: var(--mdst-color-muted);
-      color: var(--mdst-color-muted);
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-muted);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-muted);
-      }
-
-      &.mdst-tag--subtle {
-        background: var(--mdst-color-subtle);
-        border-color: transparent;
-        color: var(--mdst-color-muted);
-      }
+      --mdst-tone: var(--mdst-color-muted);
+      --_tone-subtle: var(--mdst-color-subtle);
     }
 
     /* Sizes */
@@ -3652,11 +3565,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0;
+      padding: 0 0.125em;
       margin: 0;
-      /* Square, so the focus ring is a neat square */
-      width: 1.25em;
-      aspect-ratio: 1;
+      /* Square around an icon, so the focus ring is a neat square; a word
+         instead of an icon widens it rather than spilling out */
+      height: 1.25em;
+      min-width: 1.25em;
+      white-space: nowrap;
+      flex-shrink: 0;
       border: none;
       background: none;
       box-shadow: none;
@@ -3676,6 +3592,24 @@
       }
     }
   }
+
+  /* Deprecated: remove in 3.0. Use the tone classes (.mdst-danger, …). */
+
+  .mdst-tag--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-tag--success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-tag--warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-tag--info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
+  }
 }
 
 @layer mdst-ui.components {
@@ -3687,6 +3621,11 @@
     gap: var(--mdst-space-sm);
     padding: var(--mdst-space-sm) var(--mdst-space-md);
     border: var(--mdst-border-width) solid var(--mdst-color-border);
+    /* A tone (.mdst-danger and friends, or your own --mdst-tone) draws a 3px
+       accent edge at the start. With no tone, --_accent is invalid and the
+       normal border applies. */
+    --_accent: 3px solid var(--mdst-tone);
+    border-inline-start: var(--_accent, var(--mdst-border-width) solid var(--mdst-color-border));
     border-radius: var(--mdst-radius);
     background: var(--mdst-color-bg);
     color: var(--mdst-color-fg);
@@ -3710,28 +3649,6 @@
       opacity: 0;
       visibility: hidden;
     }
-
-    /* Status: one accent edge at the start, coloured by the variant */
-
-    &:is(.mdst-toast--success, .mdst-toast--danger, .mdst-toast--warning, .mdst-toast--info) {
-      border-inline-start: 3px solid var(--_accent);
-    }
-
-    &.mdst-toast--success {
-      --_accent: var(--mdst-color-success);
-    }
-
-    &.mdst-toast--danger {
-      --_accent: var(--mdst-color-danger);
-    }
-
-    &.mdst-toast--warning {
-      --_accent: var(--mdst-color-warning);
-    }
-
-    &.mdst-toast--info {
-      --_accent: var(--mdst-color-info, var(--mdst-color-fg));
-    }
   }
 
   /* Toast close button */
@@ -3740,12 +3657,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    padding: 0 0.125em;
     margin: 0;
     margin-inline-start: auto;
-    /* Square, so the focus ring is a neat square */
-    width: 1.5em;
-    aspect-ratio: 1;
+    /* Square around an icon, so the focus ring is a neat square; a word
+       instead of an icon widens it rather than spilling out */
+    height: 1.5em;
+    min-width: 1.5em;
+    white-space: nowrap;
+    flex-shrink: 0;
     border: none;
     background: none;
     box-shadow: none;
@@ -3775,6 +3695,59 @@
     flex-direction: column;
     gap: var(--mdst-space-sm);
     z-index: calc(var(--mdst-z-overlay) + 1);
+  }
+
+  /* Deprecated: remove in 3.0. Use the tone classes (.mdst-danger, …). */
+
+  .mdst-toast--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-toast--success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-toast--warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-toast--info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
+  }
+}
+
+/* --mdst-tone is registered so it doesn't inherit: a tone colours the element
+   it's set on, not everything inside it. A danger banner's close button stays
+   a plain button. Components that colour their own children or pseudo-elements
+   (progress, OTP input) copy it into a private variable at their root. */
+@property --mdst-tone {
+  syntax: "*";
+  inherits: false;
+}
+
+@layer mdst-ui.components {
+  /* Tone
+     One class sets the status colour on any component that has one: button,
+     badge, tag, banner, toast, progress, and OTP input. Each component decides
+     how to use it (text, border, fill, or an accent edge).
+
+     Make your own by setting --mdst-tone on the element:
+       .my-brand { --mdst-tone: rebeccapurple; } */
+
+  .mdst-danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
   }
 }
 
@@ -3932,24 +3905,29 @@
     line-height: var(--mdst-line-height);
     color: var(--mdst-color-fg);
     background-color: var(--mdst-color-bg);
+    /* Native controls modest-ui doesn't draw itself pick up the text colour */
+    accent-color: var(--mdst-color-fg);
   }
 
   /* Flow — space between the children of plain containers, so plain HTML
      reads as a page. Runs in the .mdst-ui root and in unclassed sectioning,
-     form, and wrapper elements. Give a container a class or an inline style
+     form, and wrapper elements, popovers, and dialogs not built from the
+     .mdst-dialog__ parts. Give a container a class or an inline style
      (usually because you lay it out with flex or grid) and its spacing is
      yours. Zero specificity; tune or turn off with --mdst-flow-space. */
   :where(
       .mdst-ui,
-      .mdst-ui :is(main, article, section, header, footer, aside, div, form, fieldset, details, blockquote, dd):not([class], [style]),
+      .mdst-ui :is(main, article, section, header, footer, aside, div, form, fieldset, details, blockquote, dd, [popover]):not([class], [style]),
+      .mdst-ui dialog:not([class], [style], :has(> [class*="mdst-dialog__"])),
       .mdst-form,
       .mdst-fieldset
     )
     /* Spacing goes above an element only when something visible comes
        before it. Scripts, styles, hidden elements, inline links and spans
-       (a skip link), and a fieldset's legend don't count, so the first
-       thing you see never gets a top margin. */
-    > :where(:not(script, style, template, link, meta, noscript, a, span, br, [hidden], dialog, [popover], legend))
+       (a skip link), a fieldset's legend, and a details element's summary
+       (its content sits in a padded box of its own) don't count, so the
+       first thing you see never gets a top margin. */
+    > :where(:not(script, style, template, link, meta, noscript, a, span, br, [hidden], dialog, [popover], legend, summary))
     ~ :where(:not(dialog, [popover])) {
     margin-block-start: var(--mdst-flow-space);
   }
@@ -3968,6 +3946,7 @@
   .mdst-h6 {
     font-weight: 600;
     line-height: 1.25;
+    text-wrap: balance;
   }
 
   :where(.mdst-ui) h1,
@@ -4006,6 +3985,7 @@
   :where(.mdst-ui) p,
   .mdst-p {
     line-height: var(--mdst-line-height);
+    text-wrap: pretty;
   }
 
   :where(.mdst-ui) p.mdst-p--sm,
@@ -4030,6 +4010,14 @@
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 0.15em;
+  }
+
+  /* The current page's link in a nav: bold, and no underline since it goes
+     nowhere new */
+
+  :where(.mdst-ui) nav a:where([aria-current]:not([aria-current="false"])) {
+    font-weight: 600;
+    text-decoration: none;
   }
 
   /* Strong / Bold */
@@ -4182,6 +4170,7 @@
 
   :where(.mdst-ui) ul,
   :where(.mdst-ui) ol,
+  :where(.mdst-ui) menu,
   .mdst-ul,
   .mdst-ol {
     padding-inline-start: var(--mdst-space-lg);
@@ -4189,6 +4178,7 @@
   }
 
   :where(.mdst-ui) ul,
+  :where(.mdst-ui) menu,
   .mdst-ul {
     list-style-type: disc;
   }
@@ -4214,6 +4204,74 @@
   .mdst-ul--unstyled {
     list-style: none;
     padding-inline-start: 0;
+  }
+
+  /* Description list: terms in bold, each description indented under its
+     term, and a gap before the next term */
+
+  :where(.mdst-ui) dl {
+    line-height: var(--mdst-line-height);
+  }
+
+  :where(.mdst-ui) dt {
+    font-weight: 600;
+  }
+
+  :where(.mdst-ui) dd {
+    padding-inline-start: var(--mdst-space-md);
+  }
+
+  :where(.mdst-ui) dd + dt {
+    margin-block-start: var(--mdst-space-sm);
+  }
+
+  /* Figure: a small muted caption, close to what it captions */
+
+  :where(.mdst-ui) figcaption {
+    font-size: var(--mdst-text-sm);
+    color: var(--mdst-color-muted);
+  }
+
+  :where(.mdst-ui) figure > * + * {
+    margin-block-start: var(--mdst-space-xs);
+  }
+
+  /* Heading group: the subtitle sits close under the heading, muted */
+
+  :where(.mdst-ui) hgroup > * + * {
+    margin-block-start: var(--mdst-space-xs);
+  }
+
+  :where(.mdst-ui) hgroup > p {
+    color: var(--mdst-color-muted);
+  }
+
+  /* Address: contact details, not emphasis */
+
+  :where(.mdst-ui) address {
+    font-style: normal;
+  }
+
+  /* Busy: a region or control that's loading */
+
+  :where(.mdst-ui) :where([aria-busy="true"]) {
+    cursor: progress;
+  }
+
+  /* Print: always light, and keep blocks and their headings together */
+
+  @media print {
+    :where(.mdst-ui) {
+      color-scheme: light;
+    }
+
+    :where(.mdst-ui) :where(pre, blockquote, figure, img, tr) {
+      break-inside: avoid;
+    }
+
+    :where(.mdst-ui) :where(h1, h2, h3, h4, h5, h6) {
+      break-after: avoid;
+    }
   }
 
   /* Windows High Contrast (forced colours) removes fills, so the parts that
