@@ -12,7 +12,11 @@
     border-radius: var(--mdst-radius);
     overflow: hidden;
     background: var(--mdst-color-subtle);
-    color: var(--mdst-color-fg);
+    /* Tone (.mdst-danger and friends, or your own --mdst-tone) colours the
+       fill. --mdst-tone doesn't inherit, so it's copied into --_tone for the
+       fill pseudo-elements. */
+    --_tone: var(--mdst-tone);
+    color: var(--_tone, var(--mdst-color-fg));
 
     /* Webkit (Chrome, Safari, Edge) - bar background */
 
@@ -24,7 +28,7 @@
     /* Webkit - value fill */
 
     &::-webkit-progress-value {
-      background: var(--mdst-color-fg);
+      background: var(--_tone, var(--mdst-color-fg));
       border-radius: var(--mdst-radius);
       transition: width var(--mdst-transition);
     }
@@ -32,36 +36,8 @@
     /* Firefox - value fill */
 
     &::-moz-progress-bar {
-      background: var(--mdst-color-fg);
+      background: var(--_tone, var(--mdst-color-fg));
       border-radius: var(--mdst-radius);
-    }
-
-    /* Status: Error */
-
-    &.mdst-progress--danger {
-      color: var(--mdst-color-danger);
-
-      &::-webkit-progress-value {
-        background: var(--mdst-color-danger);
-      }
-
-      &::-moz-progress-bar {
-        background: var(--mdst-color-danger);
-      }
-    }
-
-    /* Status: Success */
-
-    &.mdst-progress--success {
-      color: var(--mdst-color-success);
-
-      &::-webkit-progress-value {
-        background: var(--mdst-color-success);
-      }
-
-      &::-moz-progress-bar {
-        background: var(--mdst-color-success);
-      }
     }
 
     /* Size: Small */
@@ -75,6 +51,16 @@
     &.mdst-progress--lg {
       height: var(--mdst-space-md);
     }
+  }
+
+  /* Deprecated: remove in 3.0. Use .mdst-danger or .mdst-success. */
+
+  .mdst-progress--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-progress--success {
+    --mdst-tone: var(--mdst-color-success);
   }
 
   /* Windows High Contrast (forced colours) removes fills, so the parts that

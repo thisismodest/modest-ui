@@ -11,24 +11,29 @@
     line-height: var(--mdst-line-height);
     color: var(--mdst-color-fg);
     background-color: var(--mdst-color-bg);
+    /* Native controls modest-ui doesn't draw itself pick up the text colour */
+    accent-color: var(--mdst-color-fg);
   }
 
   /* Flow — space between the children of plain containers, so plain HTML
      reads as a page. Runs in the .mdst-ui root and in unclassed sectioning,
-     form, and wrapper elements. Give a container a class or an inline style
+     form, and wrapper elements, popovers, and dialogs not built from the
+     .mdst-dialog__ parts. Give a container a class or an inline style
      (usually because you lay it out with flex or grid) and its spacing is
      yours. Zero specificity; tune or turn off with --mdst-flow-space. */
   :where(
       .mdst-ui,
-      .mdst-ui :is(main, article, section, header, footer, aside, div, form, fieldset, details, blockquote, dd):not([class], [style]),
+      .mdst-ui :is(main, article, section, header, footer, aside, div, form, fieldset, details, blockquote, dd, [popover]):not([class], [style]),
+      .mdst-ui dialog:not([class], [style], :has(> [class*="mdst-dialog__"])),
       .mdst-form,
       .mdst-fieldset
     )
     /* Spacing goes above an element only when something visible comes
        before it. Scripts, styles, hidden elements, inline links and spans
-       (a skip link), and a fieldset's legend don't count, so the first
-       thing you see never gets a top margin. */
-    > :where(:not(script, style, template, link, meta, noscript, a, span, br, [hidden], dialog, [popover], legend))
+       (a skip link), a fieldset's legend, and a details element's summary
+       (its content sits in a padded box of its own) don't count, so the
+       first thing you see never gets a top margin. */
+    > :where(:not(script, style, template, link, meta, noscript, a, span, br, [hidden], dialog, [popover], legend, summary))
     ~ :where(:not(dialog, [popover])) {
     margin-block-start: var(--mdst-flow-space);
   }
@@ -47,6 +52,7 @@
   .mdst-h6 {
     font-weight: 600;
     line-height: 1.25;
+    text-wrap: balance;
   }
 
   :where(.mdst-ui) h1,
@@ -85,6 +91,7 @@
   :where(.mdst-ui) p,
   .mdst-p {
     line-height: var(--mdst-line-height);
+    text-wrap: pretty;
   }
 
   :where(.mdst-ui) p.mdst-p--sm,
@@ -109,6 +116,14 @@
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 0.15em;
+  }
+
+  /* The current page's link in a nav: bold, and no underline since it goes
+     nowhere new */
+
+  :where(.mdst-ui) nav a:where([aria-current]:not([aria-current="false"])) {
+    font-weight: 600;
+    text-decoration: none;
   }
 
   /* Strong / Bold */
@@ -261,6 +276,7 @@
 
   :where(.mdst-ui) ul,
   :where(.mdst-ui) ol,
+  :where(.mdst-ui) menu,
   .mdst-ul,
   .mdst-ol {
     padding-inline-start: var(--mdst-space-lg);
@@ -268,6 +284,7 @@
   }
 
   :where(.mdst-ui) ul,
+  :where(.mdst-ui) menu,
   .mdst-ul {
     list-style-type: disc;
   }
@@ -293,6 +310,74 @@
   .mdst-ul--unstyled {
     list-style: none;
     padding-inline-start: 0;
+  }
+
+  /* Description list: terms in bold, each description indented under its
+     term, and a gap before the next term */
+
+  :where(.mdst-ui) dl {
+    line-height: var(--mdst-line-height);
+  }
+
+  :where(.mdst-ui) dt {
+    font-weight: 600;
+  }
+
+  :where(.mdst-ui) dd {
+    padding-inline-start: var(--mdst-space-md);
+  }
+
+  :where(.mdst-ui) dd + dt {
+    margin-block-start: var(--mdst-space-sm);
+  }
+
+  /* Figure: a small muted caption, close to what it captions */
+
+  :where(.mdst-ui) figcaption {
+    font-size: var(--mdst-text-sm);
+    color: var(--mdst-color-muted);
+  }
+
+  :where(.mdst-ui) figure > * + * {
+    margin-block-start: var(--mdst-space-xs);
+  }
+
+  /* Heading group: the subtitle sits close under the heading, muted */
+
+  :where(.mdst-ui) hgroup > * + * {
+    margin-block-start: var(--mdst-space-xs);
+  }
+
+  :where(.mdst-ui) hgroup > p {
+    color: var(--mdst-color-muted);
+  }
+
+  /* Address: contact details, not emphasis */
+
+  :where(.mdst-ui) address {
+    font-style: normal;
+  }
+
+  /* Busy: a region or control that's loading */
+
+  :where(.mdst-ui) :where([aria-busy="true"]) {
+    cursor: progress;
+  }
+
+  /* Print: always light, and keep blocks and their headings together */
+
+  @media print {
+    :where(.mdst-ui) {
+      color-scheme: light;
+    }
+
+    :where(.mdst-ui) :where(pre, blockquote, figure, img, tr) {
+      break-inside: avoid;
+    }
+
+    :where(.mdst-ui) :where(h1, h2, h3, h4, h5, h6) {
+      break-after: avoid;
+    }
   }
 
   /* Windows High Contrast (forced colours) removes fills, so the parts that

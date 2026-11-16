@@ -118,7 +118,14 @@
   &lt;/div&gt;
 &lt;/dialog&gt;
 
-&lt;button commandfor="my-dialog" command="show-modal"&gt;Open Dialog&lt;/button&gt;</code></pre>
+&lt;button commandfor="my-dialog" command="show-modal"&gt;Open Dialog&lt;/button&gt;
+
+&lt;!-- Plain dialog inside .mdst-ui: no class and no parts, so it's padded
+     and its contents are spaced. Add a class to lay it out yourself. --&gt;
+&lt;dialog id="note"&gt;
+  &lt;p&gt;Saved.&lt;/p&gt;
+  &lt;button commandfor="note" command="close"&gt;Close&lt;/button&gt;
+&lt;/dialog&gt;</code></pre>
     </div>
 
     <!-- Modal Dialog -->

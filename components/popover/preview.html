@@ -84,6 +84,18 @@
           </tr>
           <tr>
             <td>
+              <span class="class-name">popovertarget="id"</span>
+            </td>
+            <td>On a button: toggles the popover with that id, no JavaScript needed</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="class-name">commandfor="id" command="…"</span>
+            </td>
+            <td>On a button: <code class="mdst-code">toggle-popover</code>, <code class="mdst-code">show-popover</code>, or <code class="mdst-code">hide-popover</code>. Also opens and closes dialogs</td>
+          </tr>
+          <tr>
+            <td>
               <span class="class-name">anchor="id"</span>
             </td>
             <td>Anchors popover to an element (use with --anchored)</td>
@@ -94,11 +106,21 @@
 
     <div class="code-section">
       <div class="code-section-header">Usage</div>
-      <pre class="mdst-pre"><code>&lt;!-- Basic popover --&gt;
-&lt;button popovertarget="my-popover"&gt;Toggle Popover&lt;/button&gt;
+      <pre class="mdst-pre"><code>&lt;!-- Classless (inside .mdst-ui container) --&gt;
+&lt;div class="mdst-ui"&gt;
+  &lt;button popovertarget="my-popover"&gt;Toggle Popover&lt;/button&gt;
 
-&lt;div id="my-popover" class="mdst-popover" popover&gt;
-  &lt;p&gt;Popover content&lt;/p&gt;
+  &lt;div id="my-popover" popover&gt;
+    &lt;p&gt;Popover content&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Class-based, opened with the command attributes (no JavaScript) --&gt;
+&lt;button commandfor="menu" command="toggle-popover"&gt;Open Menu&lt;/button&gt;
+
+&lt;div id="menu" class="mdst-popover" popover&gt;
+  &lt;p&gt;Menu content&lt;/p&gt;
+  &lt;button commandfor="menu" command="hide-popover"&gt;Close&lt;/button&gt;
 &lt;/div&gt;
 
 &lt;!-- Anchored popover --&gt;

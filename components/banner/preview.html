@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../button/button.css" />
     <link rel="stylesheet" href="../details/details.css" />
     <link rel="stylesheet" href="banner.css" />
+    <link rel="stylesheet" href="../tone/tone.css" />
     <style>
       .preview-stack {
         display: flex;
@@ -105,13 +106,13 @@
             <td>
               <span class="class-name">data-state="visible"</span>
             </td>
-            <td>Banner is shown and fades in</td>
+            <td>Banner is shown</td>
           </tr>
           <tr>
             <td>
               <span class="class-name">data-state="hidden"</span>
             </td>
-            <td>Banner fades out and is removed from layout (<code class="mdst-code">display: none</code>)</td>
+            <td>Banner is hidden and removed from layout (<code class="mdst-code">display: none</code>)</td>
           </tr>
         </tbody>
       </table>
@@ -125,24 +126,24 @@
           <button type="button" class="mdst-banner__close" aria-label="Dismiss">✕</button>
         </section>
 
-        <section class="mdst-banner mdst-banner--info" aria-label="Information">
+        <section class="mdst-banner mdst-info" aria-label="Information">
           <div class="mdst-banner__content"><span class="class-name">info</span>: scheduled maintenance on Sunday at 02:00 UTC.</div>
           <button type="button" class="mdst-banner__close" aria-label="Dismiss">✕</button>
         </section>
 
-        <section class="mdst-banner mdst-banner--success" aria-label="Success">
+        <section class="mdst-banner mdst-success" aria-label="Success">
           <div class="mdst-banner__content"><span class="class-name">success</span>: your account has been verified.</div>
           <button type="button" class="mdst-banner__close" aria-label="Dismiss">✕</button>
         </section>
 
-        <section class="mdst-banner mdst-banner--warning" aria-label="Warning">
+        <section class="mdst-banner mdst-warning" aria-label="Warning">
           <div class="mdst-banner__content"><span class="class-name">warning</span>: your trial ends in 3 days.</div>
           <div class="mdst-banner__actions">
             <button type="button" class="mdst-button mdst-button--sm">Upgrade</button>
           </div>
         </section>
 
-        <section class="mdst-banner mdst-banner--danger" aria-label="Danger">
+        <section class="mdst-banner mdst-danger" aria-label="Danger">
           <div class="mdst-banner__content"><span class="class-name">danger</span>: we couldn&rsquo;t process your last payment.</div>
           <div class="mdst-banner__actions">
             <button type="button" class="mdst-button mdst-button--sm">Update card</button>
@@ -251,7 +252,7 @@
         </tbody>
       </table>
       <p class="footnote">
-        Any border class removes the other edges. A status accent edge (<code class="mdst-code">--success</code>, <code class="mdst-code">--danger</code>, and so on) is always kept.
+        Any border class removes the other edges. A tone's accent edge (<code class="mdst-code">.mdst-success</code>, <code class="mdst-code">.mdst-danger</code>, and so on) is always kept.
       </p>
     </div>
 
@@ -318,7 +319,7 @@
     <div class="section">
       <div class="section-header">Sticky in a Section</div>
       <div class="preview-scroll">
-        <section class="mdst-banner mdst-banner--top mdst-banner--border-bottom mdst-banner--info" aria-label="Section notice">
+        <section class="mdst-banner mdst-banner--top mdst-banner--border-bottom mdst-info" aria-label="Section notice">
           <div class="mdst-banner__content"><span class="class-name">--top</span> stays pinned while this section scrolls.</div>
         </section>
         <div class="preview-scroll-body">
@@ -430,7 +431,7 @@
     <div class="code-section">
       <div class="code-section-header">Usage</div>
       <pre class="mdst-pre"><code>&lt;!-- In the flow of the page --&gt;
-&lt;section class="mdst-banner mdst-banner--info" aria-label="Announcement"&gt;
+&lt;section class="mdst-banner mdst-info" aria-label="Announcement"&gt;
   &lt;div class="mdst-banner__content"&gt;Scheduled maintenance on Sunday.&lt;/div&gt;
   &lt;button class="mdst-banner__close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
 &lt;/section&gt;

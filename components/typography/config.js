@@ -3,5 +3,5 @@ export default {
   className: ".mdst-*",
   keywords: ["headings", "text", "prose", "fonts"],
   description:
-    "Typography utilities for headings, body text, small text, and font styles.",
+    "Headings, body text, inline elements, quotes, and lists, plus classless description lists, figures, heading groups, and the current link in a nav.",
 };

@@ -1,3 +1,4 @@
+<!-- biome-ignore-all lint/a11y/useAriaPropsForRole: a native checkbox with role="switch" already exposes its checked state, so aria-checked would only duplicate it and could go stale -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -399,7 +400,7 @@
         color: var(--mdst-color-muted);
       }
 
-      .home-order li span {
+      .home-order-name {
         flex: 1;
       }
 
@@ -636,7 +637,7 @@
             <span class="mdst-tag mdst-tag--pill mdst-tag--borderless">v<!-- VERSION --></span>
           </div>
           <h1 id="home-heading">A minimal, themeable CSS component library.</h1>
-          <p class="home-hero-lead">Write plain HTML and get styled components automatically, or use classes when you need more control.</p>
+          <p class="home-hero-lead">Write plain HTML with no classes and it’s styled. Add a class when you want a variant or more control.</p>
 
           <div class="home-install">
             <!-- biome-ignore lint/a11y/useSemanticElements: a group of toggle buttons, not form fields -->
@@ -659,8 +660,8 @@
           </div>
 
           <p class="home-meta">
-            ~<!-- CSS_SIZE -->
-            gzipped · No JavaScript required · Works with any framework, or none
+            <!-- CSS_SIZE -->
+            · No JavaScript required · Works with any framework, or none
           </p>
         </div>
 
@@ -672,7 +673,7 @@
                 <strong>Jamie Doe</strong>
                 <small>Product designer</small>
               </div>
-              <span class="mdst-tag mdst-tag--success">Active</span>
+              <span class="mdst-tag mdst-success">Active</span>
             </div>
             <div class="home-field">
               <div class="home-split"><span>Onboarding</span><span>3 of 4</span></div>
@@ -762,7 +763,7 @@
                           <span class="home-person"><span class="mdst-avatar mdst-avatar--sm">AK</span> Ada King</span>
                         </td>
                         <td>Owner</td>
-                        <td><span class="mdst-tag mdst-tag--sm mdst-tag--success">Online</span></td>
+                        <td><span class="mdst-tag mdst-tag--sm mdst-success">Online</span></td>
                       </tr>
                       <tr>
                         <td>
@@ -776,14 +777,14 @@
                           <span class="home-person"><span class="mdst-avatar mdst-avatar--sm">GH</span> Grace H.</span>
                         </td>
                         <td>Engineer</td>
-                        <td><span class="mdst-tag mdst-tag--sm mdst-tag--success">Online</span></td>
+                        <td><span class="mdst-tag mdst-tag--sm mdst-success">Online</span></td>
                       </tr>
                       <tr>
                         <td>
                           <span class="home-person"><span class="mdst-avatar mdst-avatar--sm">MH</span> Margaret H.</span>
                         </td>
                         <td>Design</td>
-                        <td><span class="mdst-tag mdst-tag--sm mdst-tag--danger">Locked</span></td>
+                        <td><span class="mdst-tag mdst-tag--sm mdst-danger">Locked</span></td>
                       </tr>
                     </tbody>
                   </table>
@@ -886,11 +887,11 @@
                 <p class="home-card-title">Feedback</p>
               </div>
               <div class="mdst-card__body home-stack">
-                <output class="mdst-toast mdst-toast--success" data-state="visible">
+                <output class="mdst-toast mdst-success" data-state="visible">
                   Changes saved.
                   <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
                 </output>
-                <output class="mdst-toast mdst-toast--danger" data-state="visible">
+                <output class="mdst-toast mdst-danger" data-state="visible">
                   Payment failed.
                   <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
                 </output>
@@ -1005,7 +1006,7 @@
   Cancel
 &lt;/button&gt;
 
-&lt;span class="mdst-tag mdst-tag--success"&gt;
+&lt;span class="mdst-tag mdst-success"&gt;
   Live
 &lt;/span&gt;
 
@@ -1017,7 +1018,7 @@
                 <div class="home-row">
                   <button type="button" class="mdst-button--solid">Publish</button>
                   <button type="button" class="mdst-button--borderless">Cancel</button>
-                  <span class="mdst-tag mdst-tag--success">Live</span>
+                  <span class="mdst-tag mdst-success">Live</span>
                 </div>
                 <table class="mdst-table--striped mdst-table--sm">
                   <thead>
@@ -1382,6 +1383,10 @@ import "mdst-ui";</pre>
               <strong>Your CSS.</strong> All of modest-ui sits in the <code>mdst-ui</code> cascade layer, so anything you write outside a
               layer wins, whatever its specificity or load order.
             </p>
+            <p>
+              <strong>Your layers.</strong> If you use cascade layers yourself, set where modest-ui sits with one line, such as
+              <code>@layer reset, mdst-ui, utilities;</code>. Declare it before modest-ui loads.
+            </p>
           </details>
           <details class="mdst-details mdst-details--section">
             <summary>Scoped and safe</summary>
@@ -1389,6 +1394,10 @@ import "mdst-ui";</pre>
               Unlike classless frameworks that style every element on the page globally, modest-ui is scoped to <code>.mdst-ui</code>.
               Third-party widgets, embedded content, and anything outside the scope are unaffected. And because it all sits in a cascade
               layer, your own styles always take priority.
+            </p>
+            <p>
+              It’s plain CSS with nothing to initialise, so HTML swapped in by htmx, Turbo, Alpine, or your framework is styled as soon as
+              it lands.
             </p>
           </details>
           <details class="mdst-details mdst-details--section">
@@ -1427,7 +1436,7 @@ import "mdst-ui";</pre>
       </section>
 
       <div class="mdst-toast-group" aria-live="polite">
-        <output class="mdst-toast mdst-toast--success" data-state="hidden" id="home-toast">Copied to clipboard</output>
+        <output class="mdst-toast mdst-success" data-state="hidden" id="home-toast">Copied to clipboard</output>
       </div>
     </div>
 
@@ -1565,7 +1574,7 @@ import "mdst-ui";</pre>
             paused = false;
           });
 
-          var cycling = setInterval(() => {
+          const cycling = setInterval(() => {
             // Gone once another page is swapped in (see the template): stop
             if (!specimen.isConnected) return clearInterval(cycling);
             if (paused || document.hidden) return;
@@ -1779,9 +1788,9 @@ import "mdst-ui";</pre>
               '      <table class="mdst-table--striped">',
               "        <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th>Total</th></tr></thead>",
               "        <tbody>",
-              '          <tr><td>#1042</td><td>Ada King</td><td><span class="mdst-tag mdst-tag--success">Paid</span></td><td>£120</td></tr>',
+              '          <tr><td>#1042</td><td>Ada King</td><td><span class="mdst-tag mdst-success">Paid</span></td><td>£120</td></tr>',
               '          <tr><td>#1041</td><td>Grace Hopper</td><td><span class="mdst-tag mdst-tag--muted">Pending</span></td><td>£48</td></tr>',
-              '          <tr><td>#1040</td><td>Alan Turing</td><td><span class="mdst-tag mdst-tag--danger">Refunded</span></td><td>£96</td></tr>',
+              '          <tr><td>#1040</td><td>Alan Turing</td><td><span class="mdst-tag mdst-danger">Refunded</span></td><td>£96</td></tr>',
               "        </tbody>",
               "      </table>",
               "    </div>",
@@ -1828,7 +1837,7 @@ import "mdst-ui";</pre>
             html: [
               '<section class="pg-section">',
               '  <div class="pg-inner">',
-              '    <div class="mdst-banner mdst-banner--info" role="region" aria-label="Announcement">',
+              '    <div class="mdst-banner mdst-info" role="region" aria-label="Announcement">',
               '      <div class="mdst-banner__content">Acme 2.0 is live. Read what\'s new.</div>',
               '      <div class="mdst-banner__actions"><button class="mdst-button--sm">Read more</button></div>',
               "    </div>",
@@ -1905,6 +1914,7 @@ import "mdst-ui";</pre>
           page.forEach((key, i) => {
             var li = document.createElement("li");
             var name = document.createElement("span");
+            name.className = "home-order-name";
             name.textContent = BLOCKS[key].label;
             var bar = document.createElement("div");
             bar.className = "mdst-toolbar";

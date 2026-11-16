@@ -92,6 +92,10 @@ You can also use the full class-based API directly — `.mdst-button`, `.mdst-in
 
 Unlike classless frameworks that style every element on the page globally, modest-ui is scoped to `.mdst-ui`. Third-party widgets, embedded content, and anything outside the scope are unaffected.
 
+### Works with swapped-in HTML
+
+It's plain CSS with nothing to initialise, so HTML swapped in by htmx, Turbo, Alpine, or your framework is styled as soon as it lands.
+
 ### Your CSS always wins
 
 All of modest-ui lives in a [cascade layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) called `mdst-ui`. Any CSS you write outside a layer beats it, whatever the selector or load order, so a single class is enough to restyle anything:
@@ -247,7 +251,7 @@ Some components need state changes — tabs that switch, steps that advance, toa
 <div class="mdst-tabs__panel" data-state="active">...</div>
 
 <!-- Show a toast -->
-<output class="mdst-toast mdst-toast--success" data-state="visible">Saved.</output>
+<output class="mdst-toast mdst-success" data-state="visible">Saved.</output>
 
 <!-- Advance a stepper -->
 <div class="mdst-stepper__step" data-state="completed">...</div>
@@ -265,7 +269,7 @@ Build everything and start a local server:
 npm run dev
 ```
 
-Then open [http://localhost:8000](http://localhost:8000). `npm run build` alone regenerates `dist/`, `llms.txt`, and the site.
+Then open [http://localhost:8000](http://localhost:8000). `npm run build` alone regenerates `dist/`, `llms.txt`, and the site. `npm run size` checks the gzipped bundle against its budget.
 
 ### Adding a new component
 
@@ -354,7 +358,9 @@ Some features degrade gracefully on browsers older than their own support:
 - **Dark mode** uses `light-dark()`. Without it, pages stay light.
 - **`tooltip`** and **`popover --anchored`** use CSS anchor positioning (Chrome 129, Firefox 147, Safari 26). Without it they fall back to a centred popover.
 - **`details`** content padding uses `::details-content` (Chrome 131, Firefox 143, Safari 18.4). Without it the disclosure still works, without the padding and divider.
-- **`drawer`**, **`banner`**, and **`toast`** enter and leave with `@starting-style`. Without it they appear without animating.
+- **`drawer`** slides in with `@starting-style`. Without it, it appears without animating.
+- **Tone classes** (`.mdst-danger` and the rest) use `@property` so a tone doesn't pass to the elements inside (Firefox 128). In older Firefox, a button inside a danger banner turns red too.
+- **Popovers and dialogs** can be opened without JavaScript using `popovertarget` (Firefox 125) or `command`/`commandfor` (Chrome 135, Firefox 144, Safari 26.2). Where those aren't supported, open them with a line of JavaScript.
 - **Invalid fields** use `:user-invalid` alongside `aria-invalid`. Without it, only `aria-invalid` shows the error state.
 
 There is no IE11 support.

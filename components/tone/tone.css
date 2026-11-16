@@ -1,0 +1,34 @@
+/* --mdst-tone is registered so it doesn't inherit: a tone colours the element
+   it's set on, not everything inside it. A danger banner's close button stays
+   a plain button. Components that colour their own children or pseudo-elements
+   (progress, OTP input) copy it into a private variable at their root. */
+@property --mdst-tone {
+  syntax: "*";
+  inherits: false;
+}
+
+@layer mdst-ui.components {
+  /* Tone
+     One class sets the status colour on any component that has one: button,
+     badge, tag, banner, toast, progress, and OTP input. Each component decides
+     how to use it (text, border, fill, or an accent edge).
+
+     Make your own by setting --mdst-tone on the element:
+       .my-brand { --mdst-tone: rebeccapurple; } */
+
+  .mdst-danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
+  }
+}

@@ -11,6 +11,67 @@ change; adding new ones is a minor change.
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-11-16
+
+### Added
+
+- Tone classes: `.mdst-danger`, `.mdst-success`, `.mdst-warning`, and
+  `.mdst-info` colour any component that takes a status colour (button,
+  badge, tag, banner, toast, progress, and OTP input). They set
+  `--mdst-tone`, which you can also set yourself for a custom tone. A tone
+  colours only the element it's on, not the elements inside it. Every tone
+  now works on every one of those components, where before progress and OTP
+  input only had danger and success, and button only had danger.
+- Any element with the `popover` attribute inside `.mdst-ui` is styled like
+  `.mdst-popover`, and the `--sm`, `--lg`, and `--anchored` modifiers work on
+  it. The docs show opening popovers with `popovertarget` and
+  `command`/`commandfor`, with no JavaScript.
+- Form error text: a `<small>` straight after an invalid field
+  (`aria-invalid="true"` or `:user-invalid`) turns the error colour.
+- Classless styles for `dl`, `dt`, `dd`, `figure`, `figcaption`, `hgroup`,
+  `address`, `menu`, table `caption`, `iframe`, the current link in a `nav`
+  (`a[aria-current]`), and `[aria-busy="true"]`. Headings balance their lines
+  and paragraphs avoid a lone last word. Print keeps a light colour scheme
+  and avoids splitting code, quotes, figures, and table rows across pages.
+- `accent-color` follows the text colour inside `.mdst-ui`.
+- A table footer (`tfoot`) reads as totals: bold, under a rule, with a `th`
+  there styled as a row label rather than a column heading.
+- `audio`, `embed`, and `object` join images and video in the reset (block,
+  no wider than their container). Option group labels drop the browser's
+  italic, and `output` uses figures of equal width.
+- Inside `.mdst-ui`, a bare `[popover]` spaces its contents like other plain
+  containers.
+
+### Changed
+
+- A tag with both `--borderless` and a tone no longer draws a coloured border.
+- Banners appear and disappear instantly. They no longer fade, and fixed
+  banners no longer slide in from their edge.
+- An OTP input with a tone keeps the tone's border colour once a digit is
+  filled in.
+
+### Deprecated
+
+- The status modifiers (`.mdst-button--danger`, `.mdst-badge--success`, and
+  the rest; see `ROADMAP.md`). They still work and will be removed in 3.0. Use
+  the tone classes instead.
+
+### Fixed
+
+- A fieldset with a legend no longer looks top-heavy: the gap between the
+  legend and the content is smaller.
+- The dialog and drawer close buttons are square, so their focus ring is too.
+  Every close and dismiss button (dialog, drawer, banner, toast, and tag)
+  now widens to fit if you put a word in place of the icon, instead of the
+  word spilling out.
+- A `<dialog>` with no class and no `.mdst-dialog__` parts is padded and its
+  contents spaced, instead of sitting flush against its border. Give it a
+  class, or build it from the parts, and the inside is yours, as before.
+- The first element inside an open `<details>` no longer gets a flow-spacing
+  gap below the summary.
+- An image button (`<input type="image">`) inside `.mdst-ui` no longer gets
+  the text-field styles (full width, padding, and a border).
+
 ## [2.0.1] - 2026-10-26
 
 ### Changed

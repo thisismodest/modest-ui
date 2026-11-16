@@ -34,7 +34,8 @@ async function getPages() {
     pages.push({
       slug,
       title: pageConfig.title || slug,
-      description: pageConfig.description || ""
+      description: pageConfig.description || "",
+      unlisted: Boolean(pageConfig.unlisted)
     });
   }
 
@@ -69,6 +70,18 @@ function extractBody(html) {
  */
 function escapeHtml(str) {
   return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+/**
+ * Descriptions may mark code with backticks (`[popover]`). The visible lead
+ * shows those as <code>; meta tags and JSON-LD get the plain text.
+ */
+function plainText(str) {
+  return String(str).replace(/`([^`]+)`/g, "$1");
+}
+
+function leadHtml(str) {
+  return escapeHtml(str).replace(/`([^`]+)`/g, "<code>$1</code>");
 }
 
 function extractHeadStyles(html) {
@@ -114,6 +127,7 @@ function extractScripts(bodyContent, slug, type) {
 
 function buildSidebar(components, pages, activeSlug) {
   const pageLinks = pages
+    .filter((p) => !p.unlisted)
     .map((p) => {
       const active = p.slug === activeSlug ? " active" : "";
       const href = p.slug === "intro" ? "/" : `/${p.slug}/`;
@@ -146,6 +160,7 @@ function render(template, slots) {
   html = replaceSlot(html, "<!-- TITLE -->", slots.title, true);
   html = replaceSlot(html, "<!-- DESCRIPTION -->", slots.description, true);
   html = replaceSlot(html, "<!-- CANONICAL -->", slots.canonical, true);
+  html = replaceSlot(html, "<!-- ROBOTS -->", slots.noindex ? '    <meta name="robots" content="noindex" />' : "");
   html = replaceSlot(html, "<!-- HEADER_TITLE -->", slots.headerTitle);
   html = replaceSlot(html, "<!-- LEAD -->", slots.lead || "");
   html = replaceSlot(html, "<!-- OG_IMAGE -->", `${siteConfig.url}/og-image.png`, true);
@@ -230,7 +245,7 @@ async function buildComponentPage(template, component, components, pages) {
   const pageTitle = `${component.title} | ${siteConfig.name}`;
   const canonicalPath = `/${component.slug}/`;
   const canonical = `${siteConfig.url}${canonicalPath}`;
-  const description = escapeHtml(component.description);
+  const description = escapeHtml(plainText(component.description));
 
   // Breadcrumb: Home > Component. The group (e.g. "Input") is intentionally
   // omitted because it has no page of its own, and a URL-less intermediate
@@ -245,7 +260,7 @@ async function buildComponentPage(template, component, components, pages) {
     description,
     canonical,
     headerTitle: `          <h1>${escapeHtml(displayTitle)}</h1>`,
-    lead: `          <p class="component-lead">${description}</p>`,
+    lead: `          <p class="component-lead">${leadHtml(component.description)}</p>`,
     jsonLd: breadcrumbJsonLd(crumbs),
     className: component.className,
     sidebar: buildSidebar(components, pages, component.slug),
@@ -282,6 +297,7 @@ async function buildStaticPage(template, page, components, pages) {
   const html = render(template, {
     title: pageTitle,
     description: escapeHtml(page.description),
+    noindex: page.unlisted,
     canonical,
     headerTitle: `          <span>${page.title}</span>`,
     jsonLd,
@@ -346,7 +362,8 @@ async function copyStaticAssets() {
  */
 async function getCssSize() {
   const css = await readFile(join(ROOT, "dist", "modest-ui.min.css"));
-  return `${Math.round(gzipSync(css).length / 1024)} kB`;
+  const kb = (bytes) => `~${Math.round(bytes / 1024)} kB`;
+  return `${kb(css.length)} minified · ${kb(gzipSync(css).length)} gzipped`;
 }
 
 let cssSize = "";
@@ -391,10 +408,12 @@ async function main() {
 
     // Sitemap
     const allEntries = [
-      ...pages.map((p) => ({
-        slug: p.slug,
-        path: p.slug === "intro" ? "/" : `/${p.slug}/`
-      })),
+      ...pages
+        .filter((p) => !p.unlisted)
+        .map((p) => ({
+          slug: p.slug,
+          path: p.slug === "intro" ? "/" : `/${p.slug}/`
+        })),
       ...components.map((c) => ({ slug: c.slug, path: `/${c.slug}/` })),
       ...exampleEntries
     ];

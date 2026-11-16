@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../button/button.css" />
     <link rel="stylesheet" href="../details/details.css" />
     <link rel="stylesheet" href="toast.css" />
+    <link rel="stylesheet" href="../tone/tone.css" />
     <style>
       /* Preview overrides: show toast-group inline instead of fixed */
       .preview-toast-group {
@@ -88,22 +89,22 @@
           <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
 
-        <output class="mdst-toast mdst-toast--info" data-state="visible">
+        <output class="mdst-toast mdst-info" data-state="visible">
           <span class="class-name">info</span>: something noteworthy happened.
           <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
 
-        <output class="mdst-toast mdst-toast--success" data-state="visible">
+        <output class="mdst-toast mdst-success" data-state="visible">
           <span class="class-name">success</span>: your changes have been saved.
           <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
 
-        <output class="mdst-toast mdst-toast--danger" data-state="visible">
+        <output class="mdst-toast mdst-danger" data-state="visible">
           <span class="class-name">danger</span>: something went wrong.
           <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
 
-        <output class="mdst-toast mdst-toast--warning" data-state="visible">
+        <output class="mdst-toast mdst-warning" data-state="visible">
           <span class="class-name">warning</span>: please review before continuing.
           <button type="button" class="mdst-toast__close" aria-label="Dismiss">✕</button>
         </output>
@@ -170,13 +171,13 @@ function dismiss(toast) {
 &lt;div class="mdst-toast-group"&gt;
 
   &lt;!-- A visible success toast --&gt;
-  &lt;output class="mdst-toast mdst-toast--success" data-state="visible"&gt;
+  &lt;output class="mdst-toast mdst-success" data-state="visible"&gt;
     Your changes have been saved.
     &lt;button class="mdst-toast__close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
   &lt;/output&gt;
 
   &lt;!-- A hidden toast (waiting to be shown) --&gt;
-  &lt;output class="mdst-toast mdst-toast--danger" data-state="hidden"&gt;
+  &lt;output class="mdst-toast mdst-danger" data-state="hidden"&gt;
     Something went wrong.
     &lt;button class="mdst-toast__close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
   &lt;/output&gt;

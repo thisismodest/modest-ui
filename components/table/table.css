@@ -1,3 +1,4 @@
+/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Table */
 
@@ -11,6 +12,15 @@
     width: 100%;
     border-collapse: collapse;
     font-size: inherit;
+  }
+
+  :where(.mdst-ui) caption,
+  .mdst-table caption {
+    caption-side: top;
+    padding-block-end: var(--mdst-space-sm);
+    text-align: start;
+    font-size: var(--mdst-text-sm);
+    color: var(--mdst-color-muted);
   }
 
   :where(.mdst-ui) th,
@@ -48,6 +58,21 @@
 
   :where(.mdst-ui) tbody tr:where(:last-child) td,
   .mdst-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Footer: totals read as a summary, in bold under a rule. A th here is a
+     row label ("Total"), so it drops the column-heading style. */
+
+  :where(.mdst-ui) tfoot :where(th, td),
+  .mdst-table tfoot :where(th, td) {
+    padding-block: var(--mdst-space-md);
+    font-size: inherit;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    color: inherit;
+    border-top: var(--mdst-border-width) solid var(--mdst-color-border);
     border-bottom: none;
   }
 

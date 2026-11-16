@@ -3,5 +3,5 @@ export default {
   className: ".mdst-dropdown",
   keywords: ["select", "menu", "options"],
   description:
-    "Native select dropdown with borderless and inline variants in multiple sizes.",
+    "Native `<select>` with borderless and inline variants in multiple sizes.",
 };

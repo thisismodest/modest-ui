@@ -25,7 +25,8 @@
       <div class="section-header">Plain HTML</div>
       <p class="footnote">
         No classes. Fields stack under their labels, and invalid fields turn the error colour, either with
-        <code class="mdst-code">aria-invalid="true"</code> or after the user interacts with a field that fails the browser's validation.
+        <code class="mdst-code">aria-invalid="true"</code> or after the user interacts with a field that fails the browser's validation. A
+        <code class="mdst-code">&lt;small&gt;</code> straight after an invalid field turns the error colour too.
       </p>
       <div class="mdst-ui preview-form">
         <form onsubmit="return false">
@@ -78,8 +79,9 @@
 &lt;form class="mdst-form"&gt;…&lt;/form&gt;
 &lt;fieldset class="mdst-fieldset"&gt;&lt;legend class="mdst-legend"&gt;…&lt;/legend&gt;&lt;/fieldset&gt;
 
-&lt;!-- Mark a field invalid --&gt;
+&lt;!-- Mark a field invalid; the &lt;small&gt; after it turns the error colour --&gt;
 &lt;input aria-invalid="true" aria-describedby="email-error"&gt;
+&lt;small id="email-error"&gt;Enter a valid email address.&lt;/small&gt;
 
 /* Tighter or looser forms */
 form { --mdst-flow-space: 0.75rem; }</code></pre>

@@ -8,22 +8,28 @@
     padding: 0.25em 0.5em;
     font-size: var(--mdst-text-sm);
     line-height: 1;
-    border: var(--mdst-border-width) solid var(--mdst-color-border);
+    border: var(--mdst-border-width) solid var(--mdst-tone, var(--mdst-color-border));
     border-radius: var(--mdst-radius);
     background: var(--mdst-color-bg);
-    color: var(--mdst-color-fg);
+    color: var(--mdst-tone, var(--mdst-color-fg));
     white-space: nowrap;
     vertical-align: middle;
+
+    /* Tone (.mdst-danger and friends, or your own --mdst-tone) colours the
+       text and border, and each variant below. Subtle tints the background
+       with 10% of the tone; with no tone, --_tone-subtle is invalid and
+       falls back to --mdst-color-subtle. */
+    --_tone-subtle: color-mix(in srgb, var(--mdst-tone) 10%, transparent);
 
     /* Variants */
 
     &.mdst-tag--solid {
-      background: var(--mdst-color-fg);
+      background: var(--mdst-tone, var(--mdst-color-fg));
       color: var(--mdst-color-bg);
     }
 
     &.mdst-tag--subtle {
-      background: var(--mdst-color-subtle);
+      background: var(--_tone-subtle, var(--mdst-color-subtle));
       border-color: transparent;
     }
 
@@ -32,87 +38,11 @@
       background: transparent;
     }
 
-    /* Status */
-
-    &.mdst-tag--danger {
-      border-color: var(--mdst-color-danger);
-      color: var(--mdst-color-danger);
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-danger);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-danger);
-      }
-
-      &.mdst-tag--subtle {
-        background: color-mix(in srgb, var(--mdst-color-danger) 10%, transparent);
-        border-color: transparent;
-      }
-    }
-
-    &.mdst-tag--success {
-      border-color: var(--mdst-color-success);
-      color: var(--mdst-color-success);
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-success);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-success);
-      }
-
-      &.mdst-tag--subtle {
-        background: color-mix(in srgb, var(--mdst-color-success) 10%, transparent);
-        border-color: transparent;
-      }
-    }
-
-    &.mdst-tag--warning {
-      border-color: var(--mdst-color-warning);
-      color: var(--mdst-color-warning);
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-warning);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-warning);
-      }
-
-      &.mdst-tag--subtle {
-        background: color-mix(in srgb, var(--mdst-color-warning) 10%, transparent);
-        border-color: transparent;
-      }
-    }
-
-    &.mdst-tag--info {
-      border-color: var(--mdst-color-info, var(--mdst-color-fg));
-      color: var(--mdst-color-info, var(--mdst-color-fg));
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-info, var(--mdst-color-fg));
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-info, var(--mdst-color-fg));
-      }
-
-      &.mdst-tag--subtle {
-        background: color-mix(in srgb, var(--mdst-color-info, var(--mdst-color-fg)) 10%, transparent);
-        border-color: transparent;
-      }
-    }
+    /* Muted: a quieter tag rather than a status, so it stays a modifier */
 
     &.mdst-tag--muted {
-      border-color: var(--mdst-color-muted);
-      color: var(--mdst-color-muted);
-
-      &.mdst-tag--solid {
-        background: var(--mdst-color-muted);
-        color: var(--mdst-color-bg);
-        border-color: var(--mdst-color-muted);
-      }
-
-      &.mdst-tag--subtle {
-        background: var(--mdst-color-subtle);
-        border-color: transparent;
-        color: var(--mdst-color-muted);
-      }
+      --mdst-tone: var(--mdst-color-muted);
+      --_tone-subtle: var(--mdst-color-subtle);
     }
 
     /* Sizes */
@@ -151,11 +81,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0;
+      padding: 0 0.125em;
       margin: 0;
-      /* Square, so the focus ring is a neat square */
-      width: 1.25em;
-      aspect-ratio: 1;
+      /* Square around an icon, so the focus ring is a neat square; a word
+         instead of an icon widens it rather than spilling out */
+      height: 1.25em;
+      min-width: 1.25em;
+      white-space: nowrap;
+      flex-shrink: 0;
       border: none;
       background: none;
       box-shadow: none;
@@ -174,5 +107,23 @@
         opacity: 1;
       }
     }
+  }
+
+  /* Deprecated: remove in 3.0. Use the tone classes (.mdst-danger, …). */
+
+  .mdst-tag--danger {
+    --mdst-tone: var(--mdst-color-danger);
+  }
+
+  .mdst-tag--success {
+    --mdst-tone: var(--mdst-color-success);
+  }
+
+  .mdst-tag--warning {
+    --mdst-tone: var(--mdst-color-warning);
+  }
+
+  .mdst-tag--info {
+    --mdst-tone: var(--mdst-color-info, var(--mdst-color-fg));
   }
 }

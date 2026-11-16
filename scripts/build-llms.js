@@ -76,7 +76,8 @@ function formatTokens(groups) {
     "| Token | Effect |",
     "| --- | --- |",
     "| `--mdst-focus-ring` | Replaces the keyboard focus ring, e.g. `3px dashed hotpink`, or `none` |",
-    "| `--mdst-color-info` | Colour for `--info` variants (defaults to the text colour) |",
+    "| `--mdst-color-info` | Colour for `.mdst-info` (defaults to the text colour) |",
+    "| `--mdst-tone` | A custom status colour, set on one element (what `.mdst-danger` and the other tone classes set). Doesn't pass to the elements inside |",
     "| `--mdst-button-hover-shadow` | Button hover (default: an inset ring in the text colour), or `none` |",
     "",
     "### Button variables",
@@ -105,17 +106,19 @@ function formatTokens(groups) {
  * .mdst-input--pill in checkbox.css), or failing that to the longest matching
  * slug, so .mdst-otp-input belongs to otp-input, not input. Classes with no
  * matching slug (.mdst-fieldset in form.css) belong to the file that defines
- * them.
+ * them. Classes only named in comments, and classes the component's config
+ * lists as deprecated, are left out, so tools only learn the current API.
  */
-function extractClasses(css, slug, className, allSlugs) {
+function extractClasses(css, slug, className, allSlugs, deprecated = []) {
   const owner = (cls) => {
     const matches = allSlugs.filter((s) => cls === `mdst-${s}` || cls.startsWith(`mdst-${s}-`) || cls.startsWith(`mdst-${s}_`));
     return matches.sort((a, b) => b.length - a.length)[0];
   };
   const block = (cls) => cls.split(/__|--/)[0];
   const classes = new Set();
-  for (const [, cls] of css.matchAll(/\.(mdst-[\w-]+)/g)) {
-    if (cls === "mdst-ui") continue;
+  const code = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  for (const [, cls] of code.matchAll(/\.(mdst-[\w-]+)/g)) {
+    if (cls === "mdst-ui" || deprecated.includes(`.${cls}`)) continue;
     if (`.${block(cls)}` !== className) {
       const own = owner(cls);
       if (own && own !== slug) continue;
@@ -230,8 +233,14 @@ BEM with the \`mdst-\` prefix:
 - Element: \`.mdst-card__header\`, \`.mdst-tabs__panel\`
 - Modifier: \`.mdst-card--sm\`, \`.mdst-card__header--borderless\`
 
+Status colour is one class for every component, not a modifier:
+\`.mdst-danger\`, \`.mdst-success\`, \`.mdst-warning\`, \`.mdst-info\`
+(\`<button class="mdst-danger">\`, \`<span class="mdst-tag mdst-success">\`).
+Don't write \`.mdst-button--danger\`, \`.mdst-tag--success\`, and so on; those
+are deprecated and removed in 3.0.
+
 Shared modifier vocabulary:
-- Status: \`--success\`, \`--info\`, \`--warning\`, \`--danger\` (and \`--muted\`)
+- Muted (badge and tag): \`--muted\`
 - Fill and edge: \`--solid\`, \`--subtle\`, \`--borderless\`
 - Size: \`--sm\`, \`--lg\`
 - Direction: \`--start\`, \`--end\` (never left/right)
@@ -240,24 +249,33 @@ Shared modifier vocabulary:
 
 Styled automatically inside \`.mdst-ui\`: button, input (every type, as with
 \`.mdst-input\`), input[type="checkbox"][role="switch"] (a toggle), textarea,
-select, form, fieldset, legend, label, details, dialog, table, progress,
+select, form, fieldset, legend, label, details, dialog, [popover], table, progress,
 meter, code, pre, h1–h6, p, a, strong, em, small, mark, kbd, abbr[title], del,
-ins, s, cite, samp, var, sub, sup, blockquote, hr, ul, ol, li.
+ins, s, cite, samp, var, sub, sup, blockquote, hr, ul, ol, menu, li, dl, dt,
+dd, figure, figcaption, hgroup, address, caption, tfoot, optgroup, output,
+media (img, video, audio, iframe, embed, object, canvas, svg), and the current
+link in a nav (\`nav a[aria-current]\`).
 
 Class-only components: avatar, badge, banner, breadcrumbs, card, drawer,
-otp-input, password-input, popover, radio cards, skeleton, spinner, stepper,
-tabs, tag, toast, toolbar, tooltip, utilities.
+otp-input, password-input, radio cards, skeleton, spinner, stepper, tabs,
+tag, toast, tone, toolbar, tooltip, utilities.
 
 ## Behaviour to know
 
 - Cascade layer: everything is in \`@layer mdst-ui\`. Any CSS outside a layer
   beats it. To order against other layers: \`@layer reset, mdst-ui, utilities;\`
 - Flow spacing: children of plain containers inside \`.mdst-ui\` (the root and
-  unclassed main, section, article, div, form, fieldset, …) are spaced by
-  \`--mdst-flow-space\`. Give a container a class or an inline style to lay it
-  out yourself.
+  unclassed main, section, article, div, form, fieldset, popover, …) are
+  spaced by \`--mdst-flow-space\`. Give a container a class or an inline style
+  to lay it out yourself. A \`<dialog>\` with no class and no
+  \`.mdst-dialog__\` parts is padded and spaced the same way.
 - Dark mode is opt-in: \`:root { color-scheme: light dark; }\` follows the
   system, \`color-scheme: dark\` forces it. Without it pages stay light.
+- Form errors: a \`<small>\` straight after an invalid field (\`aria-invalid="true"\`
+  or \`:user-invalid\`) turns the error colour. Use it for the error message.
+- Motion: dialogs, popovers, tooltips, details, and banners appear and
+  disappear instantly. Only the drawer slides and toasts fade. There are no
+  animation classes; any other motion is for your own CSS.
 - Focus: one keyboard ring for everything (\`--mdst-focus-ring\`,
   \`--mdst-focus-offset\`).
 - Right-to-left: components use logical properties and mirror in \`dir="rtl"\`.
@@ -306,7 +324,7 @@ async function main() {
   for (const component of components) {
     const css = await readFile(join(COMPONENTS_DIR, component.slug, `${component.slug}.css`), "utf-8");
     const preview = await readFile(join(COMPONENTS_DIR, component.slug, "preview.html"), "utf-8");
-    const classes = extractClasses(css, component.slug, component.className, slugs);
+    const classes = extractClasses(css, component.slug, component.className, slugs, component.deprecated);
     data.push({ component, classes, usage: extractUsage(preview) });
     console.log(`  ✓ ${component.title} (${classes.length} classes)`);
   }

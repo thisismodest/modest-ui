@@ -7,7 +7,7 @@ on npm is an UNRELATED Vue library — do not install it. This package is named
 "mdst-ui" to match its class/token prefix (.mdst-ui, --mdst-*). Whenever a
 human says "modest-ui", the package to install is "mdst-ui".
 
-- Version: 2.0.1 (this file describes v2; class names differ from v1)
+- Version: 2.1.0 (this file describes v2; class names differ from v1)
 - Package (npm): mdst-ui
 - Docs: https://modest-ui.com
 - GitHub: https://github.com/thisismodest/modest-ui
@@ -57,8 +57,14 @@ BEM with the `mdst-` prefix:
 - Element: `.mdst-card__header`, `.mdst-tabs__panel`
 - Modifier: `.mdst-card--sm`, `.mdst-card__header--borderless`
 
+Status colour is one class for every component, not a modifier:
+`.mdst-danger`, `.mdst-success`, `.mdst-warning`, `.mdst-info`
+(`<button class="mdst-danger">`, `<span class="mdst-tag mdst-success">`).
+Don't write `.mdst-button--danger`, `.mdst-tag--success`, and so on; those
+are deprecated and removed in 3.0.
+
 Shared modifier vocabulary:
-- Status: `--success`, `--info`, `--warning`, `--danger` (and `--muted`)
+- Muted (badge and tag): `--muted`
 - Fill and edge: `--solid`, `--subtle`, `--borderless`
 - Size: `--sm`, `--lg`
 - Direction: `--start`, `--end` (never left/right)
@@ -67,24 +73,33 @@ Shared modifier vocabulary:
 
 Styled automatically inside `.mdst-ui`: button, input (every type, as with
 `.mdst-input`), input[type="checkbox"][role="switch"] (a toggle), textarea,
-select, form, fieldset, legend, label, details, dialog, table, progress,
+select, form, fieldset, legend, label, details, dialog, [popover], table, progress,
 meter, code, pre, h1–h6, p, a, strong, em, small, mark, kbd, abbr[title], del,
-ins, s, cite, samp, var, sub, sup, blockquote, hr, ul, ol, li.
+ins, s, cite, samp, var, sub, sup, blockquote, hr, ul, ol, menu, li, dl, dt,
+dd, figure, figcaption, hgroup, address, caption, tfoot, optgroup, output,
+media (img, video, audio, iframe, embed, object, canvas, svg), and the current
+link in a nav (`nav a[aria-current]`).
 
 Class-only components: avatar, badge, banner, breadcrumbs, card, drawer,
-otp-input, password-input, popover, radio cards, skeleton, spinner, stepper,
-tabs, tag, toast, toolbar, tooltip, utilities.
+otp-input, password-input, radio cards, skeleton, spinner, stepper, tabs,
+tag, toast, tone, toolbar, tooltip, utilities.
 
 ## Behaviour to know
 
 - Cascade layer: everything is in `@layer mdst-ui`. Any CSS outside a layer
   beats it. To order against other layers: `@layer reset, mdst-ui, utilities;`
 - Flow spacing: children of plain containers inside `.mdst-ui` (the root and
-  unclassed main, section, article, div, form, fieldset, …) are spaced by
-  `--mdst-flow-space`. Give a container a class or an inline style to lay it
-  out yourself.
+  unclassed main, section, article, div, form, fieldset, popover, …) are
+  spaced by `--mdst-flow-space`. Give a container a class or an inline style
+  to lay it out yourself. A `<dialog>` with no class and no
+  `.mdst-dialog__` parts is padded and spaced the same way.
 - Dark mode is opt-in: `:root { color-scheme: light dark; }` follows the
   system, `color-scheme: dark` forces it. Without it pages stay light.
+- Form errors: a `<small>` straight after an invalid field (`aria-invalid="true"`
+  or `:user-invalid`) turns the error colour. Use it for the error message.
+- Motion: dialogs, popovers, tooltips, details, and banners appear and
+  disappear instantly. Only the drawer slides and toasts fade. There are no
+  animation classes; any other motion is for your own CSS.
 - Focus: one keyboard ring for everything (`--mdst-focus-ring`,
   `--mdst-focus-offset`).
 - Right-to-left: components use logical properties and mirror in `dir="rtl"`.
@@ -207,7 +222,8 @@ Not set by default; set them to change behaviour everywhere.
 | Token | Effect |
 | --- | --- |
 | `--mdst-focus-ring` | Replaces the keyboard focus ring, e.g. `3px dashed hotpink`, or `none` |
-| `--mdst-color-info` | Colour for `--info` variants (defaults to the text colour) |
+| `--mdst-color-info` | Colour for `.mdst-info` (defaults to the text colour) |
+| `--mdst-tone` | A custom status colour, set on one element (what `.mdst-danger` and the other tone classes set). Doesn't pass to the elements inside |
 | `--mdst-button-hover-shadow` | Button hover (default: an inset ring in the text colour), or `none` |
 
 ### Button variables
@@ -274,21 +290,17 @@ Classes:
 
 ### Badge `.mdst-badge`
 
-Small count and notification indicators. Supports solid, subtle, and dot variants with optional absolute positioning for overlays.
+Small count and notification indicators. Supports solid, subtle, and dot variants, any tone (`.mdst-danger` and friends), and absolute positioning for overlays.
 
 Classes:
 - `.mdst-badge`
-- `.mdst-badge--danger`
 - `.mdst-badge--dot`
-- `.mdst-badge--info`
 - `.mdst-badge--lg`
 - `.mdst-badge--muted`
 - `.mdst-badge--sm`
 - `.mdst-badge--solid`
 - `.mdst-badge--subtle`
-- `.mdst-badge--success`
 - `.mdst-badge--top-end`
-- `.mdst-badge--warning`
 
 ```html
 <!-- Default badge -->
@@ -300,9 +312,9 @@ Classes:
 <span class="mdst-badge mdst-badge--dot"></span>
 
 <!-- Status colors -->
-<span class="mdst-badge mdst-badge--danger mdst-badge--solid">5</span>
-<span class="mdst-badge mdst-badge--success">✓</span>
-<span class="mdst-badge mdst-badge--warning">!</span>
+<span class="mdst-badge mdst-danger mdst-badge--solid">5</span>
+<span class="mdst-badge mdst-success">✓</span>
+<span class="mdst-badge mdst-warning">!</span>
 <span class="mdst-badge mdst-badge--muted">0</span>
 
 <!-- Sizes -->
@@ -312,18 +324,18 @@ Classes:
 <!-- Positioned on an element -->
 <div style="position: relative; display: inline-flex;">
   <button class="mdst-button">Inbox</button>
-  <span class="mdst-badge mdst-badge--solid mdst-badge--danger mdst-badge--top-end">7</span>
+  <span class="mdst-badge mdst-badge--solid mdst-danger mdst-badge--top-end">7</span>
 </div>
 
 <!-- Dot indicator -->
-<span class="mdst-badge mdst-badge--success mdst-badge--dot"></span>
+<span class="mdst-badge mdst-success mdst-badge--dot"></span>
 ```
 
 ---
 
 ### Banner `.mdst-banner`
 
-Full-width message strip for cookie consent, alerts, and announcements. Sits in the page flow, sticks to the top or bottom of a section, or fixes to the viewport. Status variants are modifier classes; visibility is driven by data-state.
+Full-width message strip for cookie consent, alerts, and announcements. Sits in the page flow, sticks to the top or bottom of a section, or fixes to the viewport. Tone classes (`.mdst-danger` and friends) add an accent edge; visibility is driven by `data-state`.
 
 Classes:
 - `.mdst-banner`
@@ -336,19 +348,15 @@ Classes:
 - `.mdst-banner--border-top`
 - `.mdst-banner--borderless`
 - `.mdst-banner--bottom`
-- `.mdst-banner--danger`
 - `.mdst-banner--end`
 - `.mdst-banner--fixed`
-- `.mdst-banner--info`
 - `.mdst-banner--sm`
 - `.mdst-banner--start`
-- `.mdst-banner--success`
 - `.mdst-banner--top`
-- `.mdst-banner--warning`
 
 ```html
 <!-- In the flow of the page -->
-<section class="mdst-banner mdst-banner--info" aria-label="Announcement">
+<section class="mdst-banner mdst-info" aria-label="Announcement">
   <div class="mdst-banner__content">Scheduled maintenance on Sunday.</div>
   <button class="mdst-banner__close" aria-label="Dismiss">✕</button>
 </section>
@@ -391,7 +399,7 @@ Classes:
 
 ### Breadcrumbs `.mdst-breadcrumbs`
 
-Navigation breadcrumb trail with separator support. Works classless via aria-label or with explicit class.
+Navigation breadcrumb trail with separators. Put `.mdst-breadcrumbs` on the `<nav>`, and mark the current page with `aria-current="page"`.
 
 Classes:
 - `.mdst-breadcrumbs`
@@ -429,12 +437,11 @@ Classes:
 
 ### Button `.mdst-button`
 
-Button with solid, borderless, and danger variants, toggle and disabled states, and three sizes. Variants are just variables, so you can make your own.
+Button with solid and borderless variants, any tone (`.mdst-danger` and friends), toggle and disabled states, and three sizes. Variants are just variables, so you can make your own.
 
 Classes:
 - `.mdst-button`
 - `.mdst-button--borderless`
-- `.mdst-button--danger`
 - `.mdst-button--lg`
 - `.mdst-button--sm`
 - `.mdst-button--solid`
@@ -447,7 +454,7 @@ Classes:
 <button class="mdst-button mdst-button--lg">Large</button>
 
 <!-- Danger is a colour: combine it with any variant -->
-<button class="mdst-button mdst-button--danger mdst-button--solid">Delete</button>
+<button class="mdst-button mdst-danger mdst-button--solid">Delete</button>
 
 <!-- Toggle buttons -->
 <button class="mdst-button" aria-pressed="true">Bold</button>
@@ -536,7 +543,7 @@ Classes:
 
 ### Checkbox `.mdst-input`
 
-Checkbox, and a toggle switch for checkboxes with role="switch". Label support, checked, and disabled states.
+Checkbox, and a toggle switch for checkboxes with `role="switch"`. Label support, checked, and disabled states.
 
 Classes:
 - `.mdst-input`
@@ -701,13 +708,20 @@ Classes:
 </dialog>
 
 <button commandfor="my-dialog" command="show-modal">Open Dialog</button>
+
+<!-- Plain dialog inside .mdst-ui: no class and no parts, so it's padded
+     and its contents are spaced. Add a class to lay it out yourself. -->
+<dialog id="note">
+  <p>Saved.</p>
+  <button commandfor="note" command="close">Close</button>
+</dialog>
 ```
 
 ---
 
 ### Drawer `.mdst-drawer`
 
-Side panel built on native <dialog>. Backdrop, focus trapping, Escape to close, and accessibility for free.
+Side panel built on native `<dialog>`. Backdrop, focus trapping, Escape to close, and accessibility for free.
 
 Classes:
 - `.mdst-drawer`
@@ -752,7 +766,7 @@ Classes:
 
 ### Dropdown `.mdst-dropdown`
 
-Native select dropdown with borderless and inline variants in multiple sizes.
+Native `<select>` with borderless and inline variants in multiple sizes.
 
 Classes:
 - `.mdst-dropdown`
@@ -826,7 +840,7 @@ Classes:
 
 ### Form `.mdst-form`
 
-A light structure layer for plain forms: fields stack under their labels, fieldsets get a border and legend, and invalid fields show in the error colour. Zero specificity, so your own styles always win.
+A light structure layer for plain forms: fields stack under their labels, fieldsets get a border and legend, and invalid fields and the `<small>` after them show in the error colour. Zero specificity, so your own styles always win.
 
 Classes:
 - `.mdst-fieldset`
@@ -849,8 +863,9 @@ Classes:
 <form class="mdst-form">…</form>
 <fieldset class="mdst-fieldset"><legend class="mdst-legend">…</legend></fieldset>
 
-<!-- Mark a field invalid -->
+<!-- Mark a field invalid; the <small> after it turns the error colour -->
 <input aria-invalid="true" aria-describedby="email-error">
+<small id="email-error">Enter a valid email address.</small>
 
 /* Tighter or looser forms */
 form { --mdst-flow-space: 0.75rem; }
@@ -860,7 +875,7 @@ form { --mdst-flow-space: 0.75rem; }
 
 ### Text `.mdst-input`
 
-Text, email, number, search, tel, and url inputs, plus textarea. Styled classless or with .mdst-input, with borderless, focus, and invalid states.
+Text, email, number, search, tel, and url inputs, plus textarea. Styled classless or with `.mdst-input`, with borderless, focus, and invalid states.
 
 Classes:
 - `.mdst-input`
@@ -887,7 +902,7 @@ Classes:
 
 ### Meter `.mdst-meter`
 
-Styles the native <meter> element for scalar values like storage, scores, or password strength. Fill colour follows the low, high, and optimum attributes.
+Styles the native `<meter>` element for scalar values like storage, scores, or password strength. Fill colour follows the low, high, and optimum attributes.
 
 Classes:
 - `.mdst-meter`
@@ -921,13 +936,11 @@ Classes:
 
 ### OTP `.mdst-otp-input`
 
-One-time password digits with danger and success states. Auto-advance and paste are a few lines of your own JavaScript; the docs include an example.
+One-time password digits coloured by any tone class (`.mdst-danger`, `.mdst-success`, and friends). Auto-advance and paste are a few lines of your own JavaScript; the docs include an example.
 
 Classes:
 - `.mdst-otp-input`
 - `.mdst-otp-input__separator`
-- `.mdst-otp-input--danger`
-- `.mdst-otp-input--success`
 
 ```html
 <!-- 4-digit code -->
@@ -948,17 +961,17 @@ Classes:
 </div>
 
 <!-- Error state -->
-<div class="mdst-otp-input mdst-otp-input--danger">...</div>
+<div class="mdst-otp-input mdst-danger">...</div>
 
 <!-- Success state -->
-<div class="mdst-otp-input mdst-otp-input--success">...</div>
+<div class="mdst-otp-input mdst-success">...</div>
 ```
 
 ---
 
 ### Password `.mdst-password-input`
 
-Password field with an eye toggle. The field is a real type="password"; showing the text takes a few lines of your own JavaScript.
+Password field with an eye toggle. The field is a real `type="password"`; showing the text takes a few lines of your own JavaScript.
 
 Classes:
 - `.mdst-password-input`
@@ -1002,7 +1015,7 @@ Classes:
 
 ### Popover `.mdst-popover`
 
-Popover component using the native Popover API for tooltips and dropdowns.
+Panels for menus, pickers, and other content that opens over the page, using the native Popover API. Any element with the `[popover]` attribute inside `.mdst-ui` is styled with no class; elsewhere, use `.mdst-popover`. Open them with `popovertarget` or `command`, no JavaScript needed.
 
 Classes:
 - `.mdst-popover`
@@ -1011,11 +1024,21 @@ Classes:
 - `.mdst-popover--sm`
 
 ```html
-<!-- Basic popover -->
-<button popovertarget="my-popover">Toggle Popover</button>
+<!-- Classless (inside .mdst-ui container) -->
+<div class="mdst-ui">
+  <button popovertarget="my-popover">Toggle Popover</button>
 
-<div id="my-popover" class="mdst-popover" popover>
-  <p>Popover content</p>
+  <div id="my-popover" popover>
+    <p>Popover content</p>
+  </div>
+</div>
+
+<!-- Class-based, opened with the command attributes (no JavaScript) -->
+<button commandfor="menu" command="toggle-popover">Open Menu</button>
+
+<div id="menu" class="mdst-popover" popover>
+  <p>Menu content</p>
+  <button commandfor="menu" command="hide-popover">Close</button>
 </div>
 
 <!-- Anchored popover -->
@@ -1063,14 +1086,12 @@ Classes:
 
 ### Progress `.mdst-progress`
 
-Progress bar component styling the native <progress> element with size and status variants.
+Styles the native `<progress>` element, with size variants and any tone (`.mdst-danger` and friends).
 
 Classes:
 - `.mdst-progress`
-- `.mdst-progress--danger`
 - `.mdst-progress--lg`
 - `.mdst-progress--sm`
-- `.mdst-progress--success`
 
 ```html
 <!-- Default progress bar -->
@@ -1079,9 +1100,9 @@ Classes:
 <!-- Indeterminate (no value attribute) -->
 <progress class="mdst-progress">Loading…</progress>
 
-<!-- Status variants -->
-<progress class="mdst-progress mdst-progress--success" value="100" max="100">100%</progress>
-<progress class="mdst-progress mdst-progress--danger" value="35" max="100">35%</progress>
+<!-- Tones -->
+<progress class="mdst-progress mdst-success" value="100" max="100">100%</progress>
+<progress class="mdst-progress mdst-danger" value="35" max="100">35%</progress>
 
 <!-- Sizes -->
 <progress class="mdst-progress mdst-progress--sm" value="50" max="100">50%</progress>
@@ -1239,7 +1260,7 @@ Classes:
 
 ### Stepper `.mdst-stepper`
 
-Multi-step progress indicator driven by data-state attributes for completed, active, upcoming, and error states.
+Multi-step progress indicator driven by `data-state` for completed, active, upcoming, and error states.
 
 Classes:
 - `.mdst-stepper`
@@ -1267,7 +1288,7 @@ step.dataset.state = "error";
 
 ### Table `.mdst-table`
 
-Table component with bordered, striped, small, equal, and stacked variants.
+Table component with a muted caption, a bold footer for totals, and bordered, striped, small, equal, and stacked variants.
 
 Classes:
 - `.mdst-table`
@@ -1281,6 +1302,7 @@ Classes:
 ```html
 <!-- Basic table -->
 <table class="mdst-table">
+  <caption>Optional caption</caption>
   <thead>
     <tr>
       <th>Header</th>
@@ -1293,6 +1315,12 @@ Classes:
       <td>Cell</td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <th>Total</th>
+      <td>£120</td>
+    </tr>
+  </tfoot>
 </table>
 
 <!-- With scroll wrapper -->
@@ -1311,7 +1339,7 @@ Classes:
 
 ### Tabs `.mdst-tabs`
 
-Data-attribute-driven tabbed interface with pills, vertical, and small variants.
+Tabbed interface driven by `data-state`, with pills, vertical, and small variants.
 
 Classes:
 - `.mdst-tabs`
@@ -1341,14 +1369,12 @@ data-state="inactive"        Panel is hidden (display: none)
 
 ### Tag `.mdst-tag`
 
-Inline labels for status, categories, and metadata. Supports solid, subtle, and borderless variants, status colours, with optional dismiss button.
+Inline labels for status, categories, and metadata. Supports solid, subtle, and borderless variants, any tone (`.mdst-danger` and friends), and an optional dismiss button.
 
 Classes:
 - `.mdst-tag`
 - `.mdst-tag__dismiss`
 - `.mdst-tag--borderless`
-- `.mdst-tag--danger`
-- `.mdst-tag--info`
 - `.mdst-tag--interactive`
 - `.mdst-tag--lg`
 - `.mdst-tag--muted`
@@ -1356,8 +1382,6 @@ Classes:
 - `.mdst-tag--sm`
 - `.mdst-tag--solid`
 - `.mdst-tag--subtle`
-- `.mdst-tag--success`
-- `.mdst-tag--warning`
 
 ```html
 <!-- Default tag -->
@@ -1372,13 +1396,13 @@ Classes:
 <span class="mdst-tag mdst-tag--pill">Pill</span>
 
 <!-- Status colors -->
-<span class="mdst-tag mdst-tag--success">Active</span>
-<span class="mdst-tag mdst-tag--danger">Failed</span>
+<span class="mdst-tag mdst-success">Active</span>
+<span class="mdst-tag mdst-danger">Failed</span>
 <span class="mdst-tag mdst-tag--muted">Archived</span>
 
 <!-- Status + variant combos -->
-<span class="mdst-tag mdst-tag--success mdst-tag--solid">Online</span>
-<span class="mdst-tag mdst-tag--danger mdst-tag--subtle">Offline</span>
+<span class="mdst-tag mdst-success mdst-tag--solid">Online</span>
+<span class="mdst-tag mdst-danger mdst-tag--subtle">Offline</span>
 
 <!-- Sizes -->
 <span class="mdst-tag mdst-tag--sm">Small</span>
@@ -1395,29 +1419,25 @@ Classes:
 
 ### Toast `.mdst-toast`
 
-Notification toast messages with success, info, warning, and danger variants. Visibility is driven by data-state.
+Notification toast messages coloured by the tone classes (`.mdst-success`, `.mdst-info`, `.mdst-warning`, `.mdst-danger`). Visibility is driven by `data-state`.
 
 Classes:
 - `.mdst-toast`
 - `.mdst-toast-group`
 - `.mdst-toast__close`
-- `.mdst-toast--danger`
-- `.mdst-toast--info`
-- `.mdst-toast--success`
-- `.mdst-toast--warning`
 
 ```html
 <!-- Toast group (fixed container) -->
 <div class="mdst-toast-group">
 
   <!-- A visible success toast -->
-  <output class="mdst-toast mdst-toast--success" data-state="visible">
+  <output class="mdst-toast mdst-success" data-state="visible">
     Your changes have been saved.
     <button class="mdst-toast__close" aria-label="Dismiss">✕</button>
   </output>
 
   <!-- A hidden toast (waiting to be shown) -->
-  <output class="mdst-toast mdst-toast--danger" data-state="hidden">
+  <output class="mdst-toast mdst-danger" data-state="hidden">
     Something went wrong.
     <button class="mdst-toast__close" aria-label="Dismiss">✕</button>
   </output>
@@ -1433,6 +1453,33 @@ Classes:
     el.setAttribute("data-state", "hidden");
   }
 </script>
+```
+
+---
+
+### Tone `.mdst-danger`
+
+One set of status classes for every component that takes a colour: `.mdst-danger`, `.mdst-success`, `.mdst-warning`, and `.mdst-info`. Works on button, badge, tag, banner, toast, progress, and OTP input. Set `--mdst-tone` to make your own.
+
+Classes:
+- `.mdst-danger`
+- `.mdst-info`
+- `.mdst-success`
+- `.mdst-warning`
+
+```html
+<!-- One class, any component -->
+<button class="mdst-danger">Delete</button>
+<span class="mdst-badge mdst-success">3</span>
+<span class="mdst-tag mdst-tag--subtle mdst-warning">Pending</span>
+<div class="mdst-banner mdst-info">…</div>
+<progress class="mdst-danger" value="30" max="100"></progress>
+
+<!-- Combines with each component's variants -->
+<button class="mdst-button--solid mdst-danger">Delete</button>
+
+/* Your own tone */
+.brand { --mdst-tone: rebeccapurple; }
 ```
 
 ---
@@ -1515,7 +1562,7 @@ Classes:
 
 ### Typography `.mdst-*`
 
-Typography utilities for headings, body text, small text, and font styles.
+Headings, body text, inline elements, quotes, and lists, plus classless description lists, figures, heading groups, and the current link in a nav.
 
 Classes:
 - `.mdst-a`
@@ -1585,13 +1632,19 @@ H<sub>2</sub>O  mc<sup>2</sup>
 <ul class="mdst-ul">
   <li class="mdst-li">Item</li>
 </ul>
+
+<!-- Classless only, inside .mdst-ui -->
+<dl><dt>Plan</dt><dd>Pro</dd></dl>
+<figure><img src="…" alt="…"><figcaption>Caption</figcaption></figure>
+<hgroup><h2>Title</h2><p>Subtitle</p></hgroup>
+<nav><a href="/docs" aria-current="page">Docs</a></nav>
 ```
 
 ---
 
 ### Utilities `.mdst-*`
 
-Small utility classes for common layout and text patterns: screen-reader-only, truncation, centering, and more.
+Small utility classes for common text patterns: screen-reader-only, truncation, muted, and monospace.
 
 Classes:
 - `.mdst-mono`
@@ -1647,10 +1700,10 @@ dark mode, set them inside `@media (prefers-color-scheme: dark)` too, or use
 ## Quick Class Reference
 
 Avatar:         .mdst-avatar  .mdst-avatar-group  | --lg  --sm  --square  --xl
-Badge:          .mdst-badge  | --danger  --dot  --info  --lg  --muted  --sm  --solid  --subtle  --success  --top-end  --warning
-Banner:         .mdst-banner  + __actions  __close  __content  | --border-bottom  --border-end  --border-start  --border-top  --borderless  --bottom  --danger  --end  --fixed  --info  --sm  --start  --success  --top  --warning
+Badge:          .mdst-badge  | --dot  --lg  --muted  --sm  --solid  --subtle  --top-end
+Banner:         .mdst-banner  + __actions  __close  __content  | --border-bottom  --border-end  --border-start  --border-top  --borderless  --bottom  --end  --fixed  --sm  --start  --top
 Breadcrumbs:    .mdst-breadcrumbs  | --arrow  --sm
-Button:         .mdst-button  | --borderless  --danger  --lg  --sm  --solid
+Button:         .mdst-button  | --borderless  --lg  --sm  --solid
 Card:           .mdst-card  + __body  __footer  __header  | --borderless  --flush  --interactive  --sm  --borderless  --borderless
 Checkbox:       .mdst-input  | --pill
 Code:           .mdst-code
@@ -1664,11 +1717,11 @@ File:           .mdst-input  | --borderless  --solid
 Form:           .mdst-fieldset  .mdst-form  .mdst-legend
 Text:           .mdst-input  | --borderless
 Meter:          .mdst-meter  | --lg  --sm
-OTP:            .mdst-otp-input  + __separator  | --danger  --success
+OTP:            .mdst-otp-input  + __separator
 Password:       .mdst-password-input
 Popover:        .mdst-popover  | --anchored  --lg  --sm
 Pre:            .mdst-pre  | --borderless  --scroll  --sm
-Progress:       .mdst-progress  | --danger  --lg  --sm  --success
+Progress:       .mdst-progress  | --lg  --sm
 Radio:          .mdst-input  .mdst-radio-card  .mdst-radio-card-group  .mdst-radio-group  | --horizontal
 Range:          .mdst-input
 Skeleton:       .mdst-skeleton  | --circle  --heading  --text
@@ -1676,8 +1729,9 @@ Spinner:        .mdst-spinner  | --lg  --sm
 Stepper:        .mdst-stepper  + __indicator  __label  __step  | --sm  --vertical
 Table:          .mdst-table  .mdst-table-wrap  | --bordered  --fixed  --sm  --stack  --striped
 Tabs:           .mdst-tabs  + __list  __panel  __tab  | --pills  --sm  --vertical
-Tag:            .mdst-tag  + __dismiss  | --borderless  --danger  --info  --interactive  --lg  --muted  --pill  --sm  --solid  --subtle  --success  --warning
-Toast:          .mdst-toast  .mdst-toast-group  + __close  | --danger  --info  --success  --warning
+Tag:            .mdst-tag  + __dismiss  | --borderless  --interactive  --lg  --muted  --pill  --sm  --solid  --subtle
+Toast:          .mdst-toast  .mdst-toast-group  + __close
+Tone:           .mdst-danger  .mdst-info  .mdst-success  .mdst-warning
 Toolbar:        .mdst-toolbar  + __group  __separator  __spacer  | --bordered  --attached
 Tooltip:        .mdst-tooltip  | --end  --start  --top
 Typography:     .mdst-a  .mdst-abbr  .mdst-blockquote  .mdst-cite  .mdst-del  .mdst-em  .mdst-fieldset  .mdst-h1  .mdst-h2  .mdst-h3  .mdst-h4  .mdst-h5  .mdst-h6  .mdst-hr  .mdst-ins  .mdst-kbd  .mdst-li  .mdst-mark  .mdst-ol  .mdst-p  .mdst-s  .mdst-samp  .mdst-small  .mdst-strong  .mdst-sub  .mdst-sup  .mdst-ul  .mdst-var  | --flush  --lg  --muted  --sm  --unstyled

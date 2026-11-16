@@ -1,7 +1,6 @@
 @layer mdst-ui.components {
   /* Drawer */
 
-  :where(.mdst-ui) dialog.mdst-drawer,
   .mdst-drawer {
     position: fixed;
     top: 0;
@@ -49,7 +48,6 @@
 
   /* Backdrop */
 
-  :where(.mdst-ui) dialog.mdst-drawer::backdrop,
   .mdst-drawer::backdrop {
     background: var(--mdst-backdrop);
     opacity: 0;
@@ -59,7 +57,6 @@
       display var(--mdst-transition-slow) allow-discrete;
   }
 
-  :where(.mdst-ui) dialog.mdst-drawer:where([open])::backdrop,
   .mdst-drawer[open]::backdrop {
     opacity: 1;
 
@@ -70,7 +67,6 @@
 
   /* Position: start (the left edge in left-to-right pages) */
 
-  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--start,
   .mdst-drawer.mdst-drawer--start {
     inset-inline-end: auto;
     inset-inline-start: 0;
@@ -89,17 +85,14 @@
 
   /* Sizes */
 
-  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--sm,
   .mdst-drawer.mdst-drawer--sm {
     width: 16rem;
   }
 
-  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--lg,
   .mdst-drawer.mdst-drawer--lg {
     width: 28rem;
   }
 
-  :where(.mdst-ui) dialog.mdst-drawer.mdst-drawer--full,
   .mdst-drawer.mdst-drawer--full {
     width: 100%;
     border-inline-start: none;
@@ -108,7 +101,6 @@
 
   /* Header */
 
-  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__header,
   .mdst-drawer .mdst-drawer__header {
     display: flex;
     align-items: center;
@@ -121,7 +113,6 @@
 
   /* Body */
 
-  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__body,
   .mdst-drawer .mdst-drawer__body {
     padding: var(--mdst-space-md);
     overflow-y: auto;
@@ -130,7 +121,6 @@
 
   /* Footer */
 
-  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__footer,
   .mdst-drawer .mdst-drawer__footer {
     display: flex;
     align-items: center;
@@ -143,12 +133,18 @@
 
   /* Close button */
 
-  :where(.mdst-ui) dialog.mdst-drawer .mdst-drawer__close,
   .mdst-drawer .mdst-drawer__close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--mdst-space-xs);
+    /* Square around an icon, so the focus ring is a neat square; a word
+       instead of an icon widens it rather than spilling out */
+    height: 2em;
+    min-width: 2em;
+    padding: 0 0.125em;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
     background: transparent;
     border: none;
     box-shadow: none;

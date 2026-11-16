@@ -29,6 +29,13 @@ export default {
     theme: {
       title: "Theme Playground",
       description: "Interactive theme playground to customise design tokens and generate CSS variables."
+    },
+    // A working page: every HTML element, and whether modest-ui styles it.
+    // Unlisted: no sidebar link, left out of the sitemap, and marked noindex.
+    elements: {
+      title: "HTML elements",
+      description: "Every HTML element rendered inside .mdst-ui, marked with whether modest-ui styles it.",
+      unlisted: true
     }
   }
 };

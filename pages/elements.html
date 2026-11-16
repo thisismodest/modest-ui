@@ -1,0 +1,303 @@
+<!-- biome-ignore-all lint/a11y/useAriaPropsForRole: a native checkbox with role="switch" already exposes its checked state, so aria-checked would only duplicate it and could go stale -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML elements</title>
+    <style>
+      .el-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--mdst-space-sm);
+      }
+
+      .el-table {
+        table-layout: fixed;
+      }
+
+      .el-table th:first-child {
+        width: 28%;
+      }
+
+      .el-table th:last-child {
+        width: 9rem;
+      }
+
+      .el-table td {
+        overflow-wrap: anywhere;
+      }
+
+      .el-table td > :where(table) {
+        font-size: var(--mdst-text-sm);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- A plain div, so its contents get flow spacing -->
+    <div>
+    <p>
+      Every HTML element, rendered inside <code>.mdst-ui</code> with no classes. The last column comes from the stylesheet that's
+      loaded, checked when the page opens, so it's always current:
+    </p>
+    <ul>
+      <li><span class="mdst-tag mdst-tag--sm mdst-success">Styled</span> a modest-ui rule styles it.</li>
+      <li><span class="mdst-tag mdst-tag--sm mdst-warning">Reset</span> only the reset touches it (beyond the margin and box-sizing reset every element gets).</li>
+      <li><span class="mdst-tag mdst-tag--sm">Spacing</span> the elements inside it are spaced apart.</li>
+      <li><span class="mdst-tag mdst-tag--sm mdst-tag--muted">Default</span> the browser's own styles.</li>
+    </ul>
+    <p class="el-summary" id="el-summary" aria-live="polite"></p>
+
+        <h2>Sections</h2>
+        <table class="el-table">
+          <thead><tr><th>Element</th><th>Example</th><th>modest-ui</th></tr></thead>
+          <tbody>
+            <tr><td><code>article</code></td><td><article data-check="article"><p>First paragraph.</p><p>Second paragraph.</p></article></td><td class="el-status" data-for="article"></td></tr>
+            <tr><td><code>section</code></td><td><section data-check="section"><p>First paragraph.</p><p>Second paragraph.</p></section></td><td class="el-status" data-for="section"></td></tr>
+            <tr><td><code>aside</code></td><td><aside data-check="aside"><p>First paragraph.</p><p>Second paragraph.</p></aside></td><td class="el-status" data-for="aside"></td></tr>
+            <tr><td><code>nav</code></td><td><nav data-check="nav" aria-label="Example"><a href="#home">Home</a> · <a href="#docs">Docs</a></nav></td><td class="el-status" data-for="nav"></td></tr>
+            <tr><td><code>nav a[aria-current]</code></td><td><nav aria-label="Example current"><a href="#home">Home</a> · <a href="#docs" aria-current="page" data-check="nav a[aria-current]">Docs</a></nav></td><td class="el-status" data-for="nav a[aria-current]"></td></tr>
+            <tr><td><code>header</code></td><td><header data-check="header"><p>First paragraph.</p><p>Second paragraph.</p></header></td><td class="el-status" data-for="header"></td></tr>
+            <tr><td><code>footer</code></td><td><footer data-check="footer"><p>First paragraph.</p><p>Second paragraph.</p></footer></td><td class="el-status" data-for="footer"></td></tr>
+            <tr><td><code>main</code></td><td><main data-check="main"><p>First paragraph.</p><p>Second paragraph.</p></main></td><td class="el-status" data-for="main"></td></tr>
+            <tr><td><code>search</code></td><td><search data-check="search"><input type="search" placeholder="Search" aria-label="Search" /></search></td><td class="el-status" data-for="search"></td></tr>
+            <tr><td><code>address</code></td><td><address data-check="address">1 Example Street, London</address></td><td class="el-status" data-for="address"></td></tr>
+            <tr><td><code>hgroup</code></td><td><hgroup data-check="hgroup"><h3>Heading</h3><p>Subtitle</p></hgroup></td><td class="el-status" data-for="hgroup"></td></tr>
+            <tr><td><code>h1</code></td><td><h1 data-check="h1">Heading 1</h1></td><td class="el-status" data-for="h1"></td></tr>
+            <tr><td><code>h2</code></td><td><h2 data-check="h2">Heading 2</h2></td><td class="el-status" data-for="h2"></td></tr>
+            <tr><td><code>h3</code></td><td><h3 data-check="h3">Heading 3</h3></td><td class="el-status" data-for="h3"></td></tr>
+            <tr><td><code>h4</code></td><td><h4 data-check="h4">Heading 4</h4></td><td class="el-status" data-for="h4"></td></tr>
+            <tr><td><code>h5</code></td><td><h5 data-check="h5">Heading 5</h5></td><td class="el-status" data-for="h5"></td></tr>
+            <tr><td><code>h6</code></td><td><h6 data-check="h6">Heading 6</h6></td><td class="el-status" data-for="h6"></td></tr>
+          </tbody>
+        </table>
+        <h2>Grouping</h2>
+        <table class="el-table">
+          <thead><tr><th>Element</th><th>Example</th><th>modest-ui</th></tr></thead>
+          <tbody>
+            <tr><td><code>p</code></td><td><p data-check="p">A paragraph of text.</p></td><td class="el-status" data-for="p"></td></tr>
+            <tr><td><code>div</code></td><td><div data-check="div"><p>First paragraph.</p><p>Second paragraph.</p></div></td><td class="el-status" data-for="div"></td></tr>
+            <tr><td><code>blockquote</code></td><td><blockquote data-check="blockquote"><p>Less, but better.</p></blockquote></td><td class="el-status" data-for="blockquote"></td></tr>
+            <tr><td><code>figure</code></td><td><figure data-check="figure"><img src="/favicon.svg" alt="" width="32" height="32" /><figcaption>A caption</figcaption></figure></td><td class="el-status" data-for="figure"></td></tr>
+            <tr><td><code>figcaption</code></td><td><figure><img src="/favicon.svg" alt="" width="32" height="32" /><figcaption data-check="figcaption">A caption</figcaption></figure></td><td class="el-status" data-for="figcaption"></td></tr>
+            <tr><td><code>hr</code></td><td><hr data-check="hr" /></td><td class="el-status" data-for="hr"></td></tr>
+            <tr><td><code>pre</code></td><td><pre data-check="pre">const x = 1;
+console.log(x);</pre></td><td class="el-status" data-for="pre"></td></tr>
+            <tr><td><code>ul</code></td><td><ul data-check="ul"><li>One</li><li>Two</li></ul></td><td class="el-status" data-for="ul"></td></tr>
+            <tr><td><code>ol</code></td><td><ol data-check="ol"><li>One</li><li>Two</li></ol></td><td class="el-status" data-for="ol"></td></tr>
+            <tr><td><code>li</code></td><td><ul><li data-check="li">One</li><li>Two</li></ul></td><td class="el-status" data-for="li"></td></tr>
+            <tr><td><code>menu</code></td><td><menu data-check="menu"><li>Copy</li><li>Paste</li></menu></td><td class="el-status" data-for="menu"></td></tr>
+            <tr><td><code>dl</code></td><td><dl data-check="dl"><dt>Term</dt><dd>Description</dd></dl></td><td class="el-status" data-for="dl"></td></tr>
+            <tr><td><code>dt</code></td><td><dl><dt data-check="dt">Term</dt><dd>Description</dd></dl></td><td class="el-status" data-for="dt"></td></tr>
+            <tr><td><code>dd</code></td><td><dl><dt>Term</dt><dd data-check="dd">Description</dd></dl></td><td class="el-status" data-for="dd"></td></tr>
+          </tbody>
+        </table>
+        <h2>Text</h2>
+        <table class="el-table">
+          <thead><tr><th>Element</th><th>Example</th><th>modest-ui</th></tr></thead>
+          <tbody>
+            <tr><td><code>a</code></td><td><a href="#link" data-check="a">A link to somewhere</a></td><td class="el-status" data-for="a"></td></tr>
+            <tr><td><code>em</code></td><td><em data-check="em">Emphasis</em></td><td class="el-status" data-for="em"></td></tr>
+            <tr><td><code>strong</code></td><td><strong data-check="strong">Strong</strong></td><td class="el-status" data-for="strong"></td></tr>
+            <tr><td><code>small</code></td><td><small data-check="small">Small print</small></td><td class="el-status" data-for="small"></td></tr>
+            <tr><td><code>s</code></td><td><s data-check="s">£40</s></td><td class="el-status" data-for="s"></td></tr>
+            <tr><td><code>cite</code></td><td><cite data-check="cite">The Elements of Style</cite></td><td class="el-status" data-for="cite"></td></tr>
+            <tr><td><code>q</code></td><td><q data-check="q">A short quote</q></td><td class="el-status" data-for="q"></td></tr>
+            <tr><td><code>dfn</code></td><td><dfn data-check="dfn">Definition</dfn></td><td class="el-status" data-for="dfn"></td></tr>
+            <tr><td><code>abbr[title]</code></td><td><abbr title="Cascading Style Sheets" data-check="abbr[title]">CSS</abbr></td><td class="el-status" data-for="abbr[title]"></td></tr>
+            <tr><td><code>abbr</code></td><td><abbr data-check="abbr">CSS</abbr></td><td class="el-status" data-for="abbr"></td></tr>
+            <tr><td><code>ruby</code></td><td><ruby data-check="ruby">漢<rp>(</rp><rt>kan</rt><rp>)</rp></ruby></td><td class="el-status" data-for="ruby"></td></tr>
+            <tr><td><code>rt</code></td><td><ruby>漢<rt data-check="rt">kan</rt></ruby></td><td class="el-status" data-for="rt"></td></tr>
+            <tr><td><code>data</code></td><td><data value="42" data-check="data">Forty-two</data></td><td class="el-status" data-for="data"></td></tr>
+            <tr><td><code>time</code></td><td><time datetime="2026-11-16" data-check="time">16 November</time></td><td class="el-status" data-for="time"></td></tr>
+            <tr><td><code>code</code></td><td><code data-check="code">let x = 1</code></td><td class="el-status" data-for="code"></td></tr>
+            <tr><td><code>var</code></td><td><var data-check="var">x</var></td><td class="el-status" data-for="var"></td></tr>
+            <tr><td><code>samp</code></td><td><samp data-check="samp">File saved.</samp></td><td class="el-status" data-for="samp"></td></tr>
+            <tr><td><code>kbd</code></td><td><kbd data-check="kbd">Ctrl</kbd></td><td class="el-status" data-for="kbd"></td></tr>
+            <tr><td><code>sub</code></td><td>H<sub data-check="sub">2</sub>O</td><td class="el-status" data-for="sub"></td></tr>
+            <tr><td><code>sup</code></td><td>mc<sup data-check="sup">2</sup></td><td class="el-status" data-for="sup"></td></tr>
+            <tr><td><code>i</code></td><td><i data-check="i">Italic</i></td><td class="el-status" data-for="i"></td></tr>
+            <tr><td><code>b</code></td><td><b data-check="b">Bold</b></td><td class="el-status" data-for="b"></td></tr>
+            <tr><td><code>u</code></td><td><u data-check="u">Underline</u></td><td class="el-status" data-for="u"></td></tr>
+            <tr><td><code>mark</code></td><td><mark data-check="mark">Highlight</mark></td><td class="el-status" data-for="mark"></td></tr>
+            <tr><td><code>bdi</code></td><td><bdi data-check="bdi">إيان</bdi></td><td class="el-status" data-for="bdi"></td></tr>
+            <tr><td><code>bdo</code></td><td><bdo dir="rtl" data-check="bdo">Reversed</bdo></td><td class="el-status" data-for="bdo"></td></tr>
+            <tr><td><code>span</code></td><td><span data-check="span">Span</span></td><td class="el-status" data-for="span"></td></tr>
+            <tr><td><code>br</code></td><td>Line one<br data-check="br" />line two</td><td class="el-status" data-for="br"></td></tr>
+            <tr><td><code>wbr</code></td><td>Super<wbr data-check="wbr" />califragilistic</td><td class="el-status" data-for="wbr"></td></tr>
+            <tr><td><code>ins</code></td><td><ins data-check="ins">Added</ins></td><td class="el-status" data-for="ins"></td></tr>
+            <tr><td><code>del</code></td><td><del data-check="del">Removed</del></td><td class="el-status" data-for="del"></td></tr>
+          </tbody>
+        </table>
+        <h2>Embedded</h2>
+        <table class="el-table">
+          <thead><tr><th>Element</th><th>Example</th><th>modest-ui</th></tr></thead>
+          <tbody>
+            <tr><td><code>img</code></td><td><img src="/favicon.svg" alt="" width="32" height="32" data-check="img" /></td><td class="el-status" data-for="img"></td></tr>
+            <tr><td><code>picture</code></td><td><picture data-check="picture"><img src="/favicon.svg" alt="" width="32" height="32" /></picture></td><td class="el-status" data-for="picture"></td></tr>
+            <tr><td><code>svg</code></td><td><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" data-check="svg"><circle cx="16" cy="16" r="12" fill="currentColor" /></svg></td><td class="el-status" data-for="svg"></td></tr>
+            <tr><td><code>canvas</code></td><td><canvas width="64" height="32" data-check="canvas"></canvas></td><td class="el-status" data-for="canvas"></td></tr>
+            <tr><td><code>iframe</code></td><td><iframe title="Example" srcdoc="&lt;p style=&quot;font-family:sans-serif&quot;&gt;An iframe&lt;/p&gt;" width="200" height="60" data-check="iframe"></iframe></td><td class="el-status" data-for="iframe"></td></tr>
+            <tr><td><code>video</code></td><td><video controls width="200" height="60" data-check="video"><track kind="captions" src="data:text/vtt,WEBVTT" srclang="en" label="English" /></video></td><td class="el-status" data-for="video"></td></tr>
+            <tr><td><code>audio</code></td><td><audio controls data-check="audio"><track kind="captions" src="data:text/vtt,WEBVTT" srclang="en" label="English" /></audio></td><td class="el-status" data-for="audio"></td></tr>
+            <tr><td><code>embed</code></td><td><embed type="image/svg+xml" src="/favicon.svg" width="32" height="32" data-check="embed" /></td><td class="el-status" data-for="embed"></td></tr>
+            <tr><td><code>object</code></td><td><object type="image/svg+xml" data="/favicon.svg" width="32" height="32" aria-label="Logo" data-check="object"></object></td><td class="el-status" data-for="object"></td></tr>
+            <tr><td><code>math</code></td><td><math data-check="math"><mi>x</mi><mo>=</mo><mn>2</mn></math></td><td class="el-status" data-for="math"></td></tr>
+          </tbody>
+        </table>
+        <h2>Tables</h2>
+        <table class="el-table">
+          <thead><tr><th>Element</th><th>Example</th><th>modest-ui</th></tr></thead>
+          <tbody>
+            <tr><td><code>table</code></td><td><table data-check="table"><tr><th>Head</th></tr><tr><td>Cell</td></tr></table></td><td class="el-status" data-for="table"></td></tr>
+            <tr><td><code>caption</code></td><td><table><caption data-check="caption">Caption</caption><colgroup><col /><col /></colgroup><thead><tr><th>Head</th><th>Head</th></tr></thead><tbody><tr><td>Cell</td><td>Cell</td></tr></tbody><tfoot><tr><td>Foot</td><td>Foot</td></tr></tfoot></table></td><td class="el-status" data-for="caption"></td></tr>
+            <tr><td><code>th</code></td><td><table><caption>Caption</caption><colgroup><col /><col /></colgroup><thead><tr><th data-check="th">Head</th><th>Head</th></tr></thead><tbody><tr><td>Cell</td><td>Cell</td></tr></tbody><tfoot><tr><td>Foot</td><td>Foot</td></tr></tfoot></table></td><td class="el-status" data-for="th"></td></tr>
+            <tr><td><code>tr</code></td><td><table><caption>Caption</caption><colgroup><col /><col /></colgroup><thead><tr><th>Head</th><th>Head</th></tr></thead><tbody><tr data-check="tr"><td>Cell</td><td>Cell</td></tr></tbody><tfoot><tr><td>Foot</td><td>Foot</td></tr></tfoot></table></td><td class="el-status" data-for="tr"></td></tr>
+            <tr><td><code>td</code></td><td><table><caption>Caption</caption><colgroup><col /><col /></colgroup><thead><tr><th>Head</th><th>Head</th></tr></thead><tbody><tr><td data-check="td">Cell</td><td>Cell</td></tr></tbody><tfoot><tr><td>Foot</td><td>Foot</td></tr></tfoot></table></td><td class="el-status" data-for="td"></td></tr>
+            <tr><td><code>thead</code></td><td><table><thead data-check="thead"><tr><th>Head</th></tr></thead></table></td><td class="el-status" data-for="thead"></td></tr>
+            <tr><td><code>tbody</code></td><td><table><tbody data-check="tbody"><tr><td>Cell</td></tr></tbody></table></td><td class="el-status" data-for="tbody"></td></tr>
+            <tr><td><code>tfoot</code></td><td><table><tfoot data-check="tfoot"><tr><td>Foot</td></tr></tfoot></table></td><td class="el-status" data-for="tfoot"></td></tr>
+            <tr><td><code>colgroup / col</code></td><td><table><colgroup data-check="colgroup / col"><col /></colgroup><tr><td>Cell</td></tr></table></td><td class="el-status" data-for="colgroup / col"></td></tr>
+          </tbody>
+        </table>
+        <h2>Forms</h2>
+        <table class="el-table">
+          <thead><tr><th>Element</th><th>Example</th><th>modest-ui</th></tr></thead>
+          <tbody>
+            <tr><td><code>form</code></td><td><form data-check="form" onsubmit="return false"><label for="el-f1">Name</label><input id="el-f1" /></form></td><td class="el-status" data-for="form"></td></tr>
+            <tr><td><code>fieldset</code></td><td><fieldset data-check="fieldset"><legend>Legend</legend><p>Inside a fieldset.</p></fieldset></td><td class="el-status" data-for="fieldset"></td></tr>
+            <tr><td><code>legend</code></td><td><fieldset><legend data-check="legend">Legend</legend><p>Inside a fieldset.</p></fieldset></td><td class="el-status" data-for="legend"></td></tr>
+            <tr><td><code>label</code></td><td><label data-check="label"><input type="checkbox" /> Remember me</label></td><td class="el-status" data-for="label"></td></tr>
+            <tr><td><code>input (no type)</code></td><td><input aria-label="Text" placeholder="Text" data-check="input (no type)" /></td><td class="el-status" data-for="input (no type)"></td></tr>
+            <tr><td><code>input[type=&quot;text&quot;]</code></td><td><input type="text" aria-label="text" data-check="input[type=&quot;text&quot;]" /></td><td class="el-status" data-for="input[type=&quot;text&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;email&quot;]</code></td><td><input type="email" aria-label="email" data-check="input[type=&quot;email&quot;]" /></td><td class="el-status" data-for="input[type=&quot;email&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;password&quot;]</code></td><td><input type="password" aria-label="password" data-check="input[type=&quot;password&quot;]" /></td><td class="el-status" data-for="input[type=&quot;password&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;number&quot;]</code></td><td><input type="number" aria-label="number" data-check="input[type=&quot;number&quot;]" /></td><td class="el-status" data-for="input[type=&quot;number&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;search&quot;]</code></td><td><input type="search" aria-label="search" data-check="input[type=&quot;search&quot;]" /></td><td class="el-status" data-for="input[type=&quot;search&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;tel&quot;]</code></td><td><input type="tel" aria-label="tel" data-check="input[type=&quot;tel&quot;]" /></td><td class="el-status" data-for="input[type=&quot;tel&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;url&quot;]</code></td><td><input type="url" aria-label="url" data-check="input[type=&quot;url&quot;]" /></td><td class="el-status" data-for="input[type=&quot;url&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;date&quot;]</code></td><td><input type="date" aria-label="date" data-check="input[type=&quot;date&quot;]" /></td><td class="el-status" data-for="input[type=&quot;date&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;time&quot;]</code></td><td><input type="time" aria-label="time" data-check="input[type=&quot;time&quot;]" /></td><td class="el-status" data-for="input[type=&quot;time&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;datetime-local&quot;]</code></td><td><input type="datetime-local" aria-label="datetime-local" data-check="input[type=&quot;datetime-local&quot;]" /></td><td class="el-status" data-for="input[type=&quot;datetime-local&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;month&quot;]</code></td><td><input type="month" aria-label="month" data-check="input[type=&quot;month&quot;]" /></td><td class="el-status" data-for="input[type=&quot;month&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;week&quot;]</code></td><td><input type="week" aria-label="week" data-check="input[type=&quot;week&quot;]" /></td><td class="el-status" data-for="input[type=&quot;week&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;color&quot;]</code></td><td><input type="color" aria-label="color" data-check="input[type=&quot;color&quot;]" /></td><td class="el-status" data-for="input[type=&quot;color&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;range&quot;]</code></td><td><input type="range" aria-label="range" data-check="input[type=&quot;range&quot;]" /></td><td class="el-status" data-for="input[type=&quot;range&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;checkbox&quot;]</code></td><td><input type="checkbox" aria-label="checkbox" data-check="input[type=&quot;checkbox&quot;]" /></td><td class="el-status" data-for="input[type=&quot;checkbox&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;radio&quot;]</code></td><td><input type="radio" aria-label="radio" data-check="input[type=&quot;radio&quot;]" /></td><td class="el-status" data-for="input[type=&quot;radio&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;file&quot;]</code></td><td><input type="file" aria-label="file" data-check="input[type=&quot;file&quot;]" /></td><td class="el-status" data-for="input[type=&quot;file&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;checkbox&quot;][role=&quot;switch&quot;]</code></td><td><input type="checkbox" role="switch" aria-label="Switch" data-check="input[type=&quot;checkbox&quot;][role=&quot;switch&quot;]" /></td><td class="el-status" data-for="input[type=&quot;checkbox&quot;][role=&quot;switch&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;submit&quot;]</code></td><td><input type="submit" aria-label="submit" value="Submit" data-check="input[type=&quot;submit&quot;]" /></td><td class="el-status" data-for="input[type=&quot;submit&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;reset&quot;]</code></td><td><input type="reset" aria-label="reset" value="Reset" data-check="input[type=&quot;reset&quot;]" /></td><td class="el-status" data-for="input[type=&quot;reset&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;button&quot;]</code></td><td><input type="button" aria-label="button" value="Button" data-check="input[type=&quot;button&quot;]" /></td><td class="el-status" data-for="input[type=&quot;button&quot;]"></td></tr>
+            <tr><td><code>input[type=&quot;image&quot;]</code></td><td><input type="image" src="/favicon.svg" alt="Go" width="24" height="24" data-check="input[type=&quot;image&quot;]" /></td><td class="el-status" data-for="input[type=&quot;image&quot;]"></td></tr>
+            <tr><td><code>button</code></td><td><button type="button" data-check="button">Button</button></td><td class="el-status" data-for="button"></td></tr>
+            <tr><td><code>select</code></td><td><select aria-label="Select" data-check="select"><option>One</option><option>Two</option></select></td><td class="el-status" data-for="select"></td></tr>
+            <tr><td><code>select[multiple]</code></td><td><select multiple aria-label="Multiple" data-check="select[multiple]"><option>One</option><option>Two</option></select></td><td class="el-status" data-for="select[multiple]"></td></tr>
+            <tr><td><code>optgroup</code></td><td><select aria-label="Grouped"><optgroup label="Group" data-check="optgroup"><option>One</option></optgroup></select></td><td class="el-status" data-for="optgroup"></td></tr>
+            <tr><td><code>option</code></td><td><select aria-label="Option"><option data-check="option">One</option></select></td><td class="el-status" data-for="option"></td></tr>
+            <tr><td><code>datalist</code></td><td><input list="el-dl" aria-label="With suggestions" placeholder="Type" /><datalist id="el-dl" data-check="datalist"><option value="One"></option><option value="Two"></option></datalist></td><td class="el-status" data-for="datalist"></td></tr>
+            <tr><td><code>textarea</code></td><td><textarea rows="2" aria-label="Textarea" data-check="textarea"></textarea></td><td class="el-status" data-for="textarea"></td></tr>
+            <tr><td><code>output</code></td><td><output data-check="output">42</output></td><td class="el-status" data-for="output"></td></tr>
+            <tr><td><code>progress</code></td><td><progress value="60" max="100" data-check="progress">60%</progress></td><td class="el-status" data-for="progress"></td></tr>
+            <tr><td><code>meter</code></td><td><meter value="0.6" data-check="meter">60%</meter></td><td class="el-status" data-for="meter"></td></tr>
+            <tr><td><code>small after an invalid field</code></td><td><input aria-invalid="true" aria-label="Invalid" value="nope" /><small data-check="small after an invalid field">Error message</small></td><td class="el-status" data-for="small after an invalid field"></td></tr>
+          </tbody>
+        </table>
+        <h2>Interactive</h2>
+        <table class="el-table">
+          <thead><tr><th>Element</th><th>Example</th><th>modest-ui</th></tr></thead>
+          <tbody>
+            <tr><td><code>details</code></td><td><details data-check="details" open><summary>Summary</summary><p>First paragraph.</p><p>Second paragraph.</p></details></td><td class="el-status" data-for="details"></td></tr>
+            <tr><td><code>summary</code></td><td><details><summary data-check="summary">Summary</summary><p>Details content.</p></details></td><td class="el-status" data-for="summary"></td></tr>
+            <tr><td><code>dialog</code></td><td><button type="button" commandfor="el-dialog" command="show-modal">Open dialog</button><dialog id="el-dialog" data-check="dialog"><p>A bare dialog.</p><button type="button" commandfor="el-dialog" command="close">Close</button></dialog></td><td class="el-status" data-for="dialog"></td></tr>
+            <tr><td><code>[popover]</code></td><td><button type="button" popovertarget="el-popover">Open popover</button><div id="el-popover" popover data-check="[popover]"><p>A bare popover.</p><button type="button" popovertarget="el-popover" popovertargetaction="hide">Close</button></div></td><td class="el-status" data-for="[popover]"></td></tr>
+            <tr><td><code>[aria-busy=&quot;true&quot;]</code></td><td><div aria-busy="true" data-check="[aria-busy=&quot;true&quot;]">Loading region (hover for the cursor)</div></td><td class="el-status" data-for="[aria-busy=&quot;true&quot;]"></td></tr>
+          </tbody>
+        </table>
+
+
+    <h2>Not rendered</h2>
+    <p>
+      These don't draw anything on the page, so there's nothing to style: <code>html</code>, <code>head</code>, <code>body</code>,
+      <code>title</code>, <code>base</code>, <code>link</code>, <code>meta</code>, <code>style</code>, <code>script</code>,
+      <code>noscript</code>, <code>template</code>, <code>slot</code>, <code>source</code>, <code>track</code>, <code>map</code>,
+      <code>area</code>, and the hidden input (<code>input[type="hidden"]</code>).
+    </p>
+    </div>
+
+    <script>
+      // Collect modest-ui's classless rules (selectors that mention .mdst-ui),
+      // noting which are the reset (base layer) and which add flow spacing.
+      // Rules inside media queries (print, forced colours) are left out.
+      const rules = [];
+      const walk = (list, base) => {
+        for (const rule of list) {
+          if (rule instanceof CSSLayerBlockRule) walk(rule.cssRules, base || rule.name.endsWith("base"));
+          else if (rule instanceof CSSSupportsRule) walk(rule.cssRules, base);
+          else if (rule instanceof CSSStyleRule && rule.selectorText.includes("mdst-ui")) {
+            // The blanket reset (margin, box-sizing) hits every element, so it says nothing
+            if (base && rule.selectorText.includes("*")) continue;
+            const flow = rule.style.getPropertyValue("margin-block-start").includes("flow-space");
+            rules.push({ selector: rule.selectorText, kind: base ? "reset" : flow ? "flow" : "styled" });
+          }
+        }
+      };
+      for (const sheet of document.styleSheets) {
+        try {
+          walk(sheet.cssRules, false);
+        } catch {
+          // A stylesheet from another origin can't be read
+        }
+      }
+
+      const matching = (el, kind) =>
+        rules.filter((r) => {
+          if (r.kind !== kind) return false;
+          try {
+            return el.matches(r.selector);
+          } catch {
+            return false;
+          }
+        });
+
+      const TAGS = {
+        styled: ["Styled", "mdst-success"],
+        reset: ["Reset", "mdst-warning"],
+        flow: ["Spacing", ""],
+        default: ["Default", "mdst-tag--muted"],
+      };
+      const counts = { styled: 0, reset: 0, flow: 0, default: 0 };
+
+      for (const cell of document.querySelectorAll(".el-status")) {
+        const el = cell.closest("tr").querySelector(`[data-check="${CSS.escape(cell.dataset.for)}"]`);
+        const kinds = [];
+        const styled = matching(el, "styled");
+        if (styled.length) kinds.push("styled");
+        else if (matching(el, "reset").length) kinds.push("reset");
+        // Spacing: the last child gets a gap, from flow spacing or from a
+        // rule written for this element's children (figure > * + *)
+        const second = el.children.length > 1 ? el.lastElementChild : null;
+        const tag = el.localName;
+        if (
+          second &&
+          (matching(second, "flow").length || matching(second, "styled").some((r) => r.selector.includes(`${tag} >`)))
+        )
+          kinds.push("flow");
+        if (!kinds.length) kinds.push("default");
+
+        for (const kind of kinds) {
+          counts[kind]++;
+          const tag = document.createElement("span");
+          tag.className = `mdst-tag mdst-tag--sm ${TAGS[kind][1]}`.trim();
+          tag.textContent = TAGS[kind][0];
+          cell.append(tag, " ");
+        }
+        if (styled.length) cell.title = styled.map((r) => r.selector).join("\n");
+      }
+
+      document.getElementById("el-summary").textContent =
+        `${counts.styled} styled, ${counts.reset} reset only, ${counts.default} browser default, ${counts.flow} spacing their contents.`;
+    </script>
+  </body>
+</html>

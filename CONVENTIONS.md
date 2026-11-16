@@ -18,9 +18,10 @@ Guidelines for contributing to modest-ui.
   - Element (a part inside a block): `.mdst-component__element`, e.g. `.mdst-dialog__header`, `.mdst-tabs__panel`
   - Modifier: `.mdst-component--variant`, or `.mdst-component__element--variant` on an element
 - **Shared modifier vocabulary**, so the same idea has the same name everywhere:
-  - Status: `--success`, `--info`, `--warning`, `--danger` (plus `--muted` where it applies)
+  - Muted: `--muted` on badge and tag (a quieter look, not a status)
   - Fill and edge: `--solid` (filled with the colour), `--subtle` (tinted), `--borderless` (no visible border)
   - Size: `--sm`, `--lg` (and `--xl` where a component needs it)
+- **Status colour is a tone class**, not a modifier: `.mdst-danger`, `.mdst-success`, `.mdst-warning`, `.mdst-info` work on every component that takes a status colour (see Tone below).
 - **Data attributes are for runtime state** that JS toggles (`data-state`), never for fixed choices like status or size.
 
 ## Classless Defaults
@@ -139,6 +140,12 @@ So state rules only change a private variable, and the base rule reads it. A com
 
 Variants follow the same idea: they set the component's public variables (`--mdst-button-tone`, `--mdst-button-bg`, …) instead of properties, so a single class works on any element, combines with other variants, and users can write their own variant the same way.
 
+### Tone
+
+The tone classes (`components/tone/tone.css`) only set `--mdst-tone`, which is registered with `@property` so it doesn't inherit: a tone colours the element it's on, never the elements inside it. A component that takes a status colour reads it with a fallback, `color: var(--mdst-tone, var(--mdst-color-fg))`. If its children or pseudo-elements need the colour (progress, OTP input), copy it into a private variable at the component's root (`--_tone: var(--mdst-tone)`) and read that instead.
+
+To show something only when a tone is set (the accent edge on banner and toast), build it in a private variable that references `--mdst-tone` with no fallback, such as `--_accent: 3px solid var(--mdst-tone)`. With no tone that variable is invalid, so `var(--_accent, <default>)` falls back.
+
 ### What gets classless defaults
 
 Components that map 1:1 to a native HTML element:
@@ -154,13 +161,14 @@ Every `<input>` type shares one class, `.mdst-input`, and each component styles 
 | Range      | `input[type="range"]`                                                                      |
 | File       | `input[type="file"]`                                                                       |
 | Color      | `input[type="color"]`                                                                      |
-| Dropdown   | `select`                                                                                   |
+| Dropdown   | `select`, `optgroup`                                                                       |
 | Details    | `details`                                                                                  |
-| Dialog     | `dialog`                                                                                   |
-| Table      | `table`, `th`, `td`                                                                        |
+| Dialog     | `dialog` (padded, with flow spacing, when it has no class and no `__` parts)               |
+| Popover    | `[popover]`                                                                                |
+| Table      | `table`, `caption`, `th`, `td`, `tfoot`                                                    |
 | Code       | `code`                                                                                     |
 | Pre        | `pre`                                                                                      |
-| Typography | `h1`–`h6`, `p`, `a`, `strong`, `em`, `small`, `mark`, `kbd`, `abbr[title]`, `del`, `ins`, `s`, `cite`, `samp`, `var`, `sub`, `sup`, `blockquote`, `hr`, `ul`, `ol`, `li` |
+| Typography | `h1`–`h6`, `p`, `a`, `strong`, `em`, `small`, `mark`, `kbd`, `abbr[title]`, `del`, `ins`, `s`, `cite`, `samp`, `var`, `sub`, `sup`, `blockquote`, `hr`, `ul`, `ol`, `menu`, `li`, `dl`, `dt`, `dd`, `figure`, `figcaption`, `hgroup`, `address`, `nav a[aria-current]` |
 | Progress   | `progress` |
 | Meter      | `meter` |
 
@@ -172,7 +180,6 @@ Components that don't map to a single native element (they use generic tags like
 - Tag (`.mdst-tag`)
 - Toolbar (`.mdst-toolbar`)
 - Tooltip (`.mdst-tooltip`)
-- Popover (`.mdst-popover`)
 - Password Input (`.mdst-password-input`)
 - OTP Input (`.mdst-otp-input`)
 - Badge (`.mdst-badge`)
@@ -187,7 +194,7 @@ Components that don't map to a single native element (they use generic tags like
 
 Some components need state changes — tabs that switch, steps that advance, toasts that appear. Instead of shipping JavaScript, modest-ui styles every possible state via data attributes. You bring whatever JS you want (a framework, vanilla event listeners, Alpine.js) and toggle `data-state` and friends. We handle the CSS, you handle the behavior.
 
-Data attributes are for runtime state only. Fixed choices such as colour or size are modifier classes (`.mdst-toast--success`), the same as every other component.
+Data attributes are for runtime state only. Fixed choices such as colour or size are classes (`.mdst-success`, `.mdst-button--sm`), the same as every other component.
 
 | Component | Data Attributes                                 |
 | --------- | ----------------------------------------------- |
@@ -244,6 +251,16 @@ Always use design tokens from `base/tokens.css` rather than raw values. The full
 - **Motion:** `--mdst-transition-fast`, `--mdst-transition`, `--mdst-transition-slow`
 - **Depth:** `--mdst-shadow-sm`, `--mdst-shadow`, `--mdst-backdrop`, `--mdst-z-overlay`
 - **State:** `--mdst-disabled-opacity`
+
+### Icon buttons
+
+Icon-only buttons (close, dismiss) set a `height` and an equal `min-width` in `em`, with a little inline padding and `white-space: nowrap`. Around an icon they're square, so the focus ring is square; if someone puts a word in instead, the button widens to fit rather than overflowing.
+
+### Motion
+
+Animate only when the movement tells the user something, such as a drawer sliding in from the edge it belongs to, with its backdrop fading alongside. Everything else appears and disappears instantly: dialogs, popovers, tooltips, details, and banners. Toasts fade, since they arrive on their own rather than in answer to something the user did. Use only effects that behave the same in every supported browser. Transitions use the `--mdst-transition*` tokens, which drop to `0s` under `prefers-reduced-motion`.
+
+Animating those other elements is the user's decision, not the library's. Don't add it by default or as a modifier; anyone who wants it can add it in their own CSS.
 
 ### Native CSS Nesting
 
@@ -415,6 +432,7 @@ End each preview with a usage section:
 
 - `npm run dev` - Build everything and serve the site at http://localhost:8000
 - `npm run build` - Build the bundle (`dist/`), `llms.txt`, and the docs site
+- `npm run size` - Check the gzipped bundle against the size budget (CI runs this too)
 
 ## Adding a New Component
 
@@ -426,8 +444,9 @@ End each preview with a usage section:
 export default {
   title: "Stepper",
   className: ".mdst-stepper", // shown in the docs header
-  description: "One sentence on what it is and its main variants.",
+  description: "One sentence on what it is and its main variants.", // `backticks` show as code on the page
   keywords: ["modal", "popup"], // optional: other names people search the sidebar for
-  group: "Input" // optional: nests it under a sidebar group
+  group: "Input", // optional: nests it under a sidebar group
+  deprecated: [".mdst-stepper--old"] // optional: classes that still work but are left out of llms.txt
 };
 ```
