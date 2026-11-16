@@ -29,6 +29,7 @@ window.mdstTheme = (() => {
       "--mdst-color-subtle": "#f5f5f5",
       "--mdst-color-focus": "#000000",
       "--mdst-color-danger": "#dc2626",
+      "--mdst-color-warning": "#9d6e00",
       "--mdst-color-success": "#15803d",
       "--mdst-radius": "0",
       "--mdst-border-width": "1",
@@ -42,18 +43,19 @@ window.mdstTheme = (() => {
       "--mdst-color-focus": "#ffffff",
       "--mdst-color-danger": "#f87171",
       "--mdst-color-success": "#4ade80",
+      "--mdst-color-warning": "#db9705",
       "--mdst-radius": "0",
       "--mdst-border-width": "1",
     },
     rounded: {
       "--mdst-color-fg": "#000000",
       "--mdst-color-bg": "#ffffff",
-      "--mdst-color-border": "#d1d5db",
+      "--mdst-color-border": "#8994a3",
       "--mdst-color-muted": "#6b7280",
       "--mdst-color-subtle": "#f9fafb",
       "--mdst-color-focus": "#3b82f6",
-      "--mdst-color-danger": "#ef4444",
-      "--mdst-color-success": "#22c55e",
+      "--mdst-color-danger": "#e91414",
+      "--mdst-color-success": "#178740",
       "--mdst-radius": "8",
       "--mdst-border-width": "1",
     },
@@ -62,10 +64,10 @@ window.mdstTheme = (() => {
       "--mdst-color-bg": "#ffffff",
       "--mdst-color-border": "#000000",
       "--mdst-color-muted": "#000000",
-      "--mdst-color-subtle": "#ffffff",
       "--mdst-color-focus": "#0000ff",
-      "--mdst-color-danger": "#ff0000",
-      "--mdst-color-success": "#008000",
+      "--mdst-color-danger": "#b60000",
+      "--mdst-color-success": "#006800",
+      "--mdst-color-warning": "#755200",
       "--mdst-radius": "0",
       "--mdst-border-width": "2",
     },
@@ -75,7 +77,7 @@ window.mdstTheme = (() => {
       "--mdst-color-fg": "#1e3a5f",
       "--mdst-color-bg": "#ffffff",
       "--mdst-color-border": "#1e3a5f",
-      "--mdst-color-muted": "#5a7a9a",
+      "--mdst-color-muted": "#597998",
       "--mdst-color-subtle": "#e8f0f8",
       "--mdst-color-focus": "#2563eb",
       "--mdst-color-danger": "#dc2626",
@@ -90,8 +92,8 @@ window.mdstTheme = (() => {
       "--mdst-color-muted": "#9d5c83",
       "--mdst-color-subtle": "#fce7f3",
       "--mdst-color-focus": "#db2777",
-      "--mdst-color-danger": "#e11d48",
-      "--mdst-color-success": "#059669",
+      "--mdst-color-danger": "#dc1c47",
+      "--mdst-color-success": "#04815a",
       "--mdst-radius": "6",
       "--mdst-border-width": "1",
     },
@@ -111,7 +113,7 @@ window.mdstTheme = (() => {
       "--mdst-color-fg": "#0c2d48",
       "--mdst-color-bg": "#f0f9ff",
       "--mdst-color-border": "#0369a1",
-      "--mdst-color-muted": "#4b7c9e",
+      "--mdst-color-muted": "#477595",
       "--mdst-color-subtle": "#e0f2fe",
       "--mdst-color-focus": "#0284c7",
       "--mdst-color-danger": "#dc2626",
@@ -122,24 +124,24 @@ window.mdstTheme = (() => {
     pastel: {
       "--mdst-color-fg": "#5b4b8a",
       "--mdst-color-bg": "#fdf4f5",
-      "--mdst-color-border": "#d4a5a5",
-      "--mdst-color-muted": "#9a8c98",
+      "--mdst-color-border": "#bf7a7a",
+      "--mdst-color-muted": "#7b6c78",
       "--mdst-color-subtle": "#f0e6ef",
       "--mdst-color-focus": "#c9ada7",
-      "--mdst-color-danger": "#e07a7a",
-      "--mdst-color-success": "#7ab08e",
+      "--mdst-color-danger": "#d03636",
+      "--mdst-color-success": "#497b5c",
       "--mdst-radius": "12",
       "--mdst-border-width": "1.5",
     },
     warm: {
       "--mdst-color-fg": "#3d2c29",
       "--mdst-color-bg": "#faf6f1",
-      "--mdst-color-border": "#c9b99a",
-      "--mdst-color-muted": "#8b7355",
+      "--mdst-color-border": "#a38957",
+      "--mdst-color-muted": "#836c50",
       "--mdst-color-subtle": "#f0e9df",
       "--mdst-color-focus": "#b08968",
       "--mdst-color-danger": "#c44536",
-      "--mdst-color-success": "#6b8f71",
+      "--mdst-color-success": "#5a785f",
       "--mdst-radius": "4",
       "--mdst-border-width": "1",
     },
@@ -147,7 +149,7 @@ window.mdstTheme = (() => {
       "--mdst-color-fg": "#2e1065",
       "--mdst-color-bg": "#faf5ff",
       "--mdst-color-border": "#7c3aed",
-      "--mdst-color-muted": "#7c6b9e",
+      "--mdst-color-muted": "#79689c",
       "--mdst-color-subtle": "#f3e8ff",
       "--mdst-color-focus": "#8b5cf6",
       "--mdst-color-danger": "#dc2626",
@@ -160,24 +162,26 @@ window.mdstTheme = (() => {
     midnight: {
       "--mdst-color-fg": "#e2e8f0",
       "--mdst-color-bg": "#0f172a",
-      "--mdst-color-border": "#334155",
+      "--mdst-color-border": "#516786",
       "--mdst-color-muted": "#94a3b8",
       "--mdst-color-subtle": "#1e293b",
       "--mdst-color-focus": "#3b82f6",
       "--mdst-color-danger": "#f87171",
       "--mdst-color-success": "#4ade80",
+      "--mdst-color-warning": "#db9705",
       "--mdst-radius": "6",
       "--mdst-border-width": "1",
     },
     ember: {
       "--mdst-color-fg": "#fde8d8",
       "--mdst-color-bg": "#1c1210",
-      "--mdst-color-border": "#78350f",
+      "--mdst-color-border": "#a34814",
       "--mdst-color-muted": "#a18072",
       "--mdst-color-subtle": "#2c1a14",
       "--mdst-color-focus": "#f59e0b",
       "--mdst-color-danger": "#ef4444",
       "--mdst-color-success": "#34d399",
+      "--mdst-color-warning": "#db9705",
       "--mdst-radius": "4",
       "--mdst-border-width": "1",
     },
@@ -185,11 +189,12 @@ window.mdstTheme = (() => {
       "--mdst-color-fg": "#00EE00",
       "--mdst-color-bg": "#0d0d0d",
       "--mdst-color-border": "#00EE00",
-      "--mdst-color-muted": "#098109",
+      "--mdst-color-muted": "#0a8f0a",
       "--mdst-color-subtle": "#1a1a1a",
       "--mdst-color-focus": "#52017e",
       "--mdst-color-danger": "#ff0000",
       "--mdst-color-success": "#00d5ff",
+      "--mdst-color-warning": "#db9705",
       "--mdst-radius": "0",
       "--mdst-border-width": "1",
     },
@@ -202,8 +207,8 @@ window.mdstTheme = (() => {
       "--mdst-color-muted": "#000000",
       "--mdst-color-subtle": "#ffff00",
       "--mdst-color-focus": "#ff0000",
-      "--mdst-color-danger": "#ff0000",
-      "--mdst-color-success": "#00ff00",
+      "--mdst-color-danger": "#ed0000",
+      "--mdst-color-success": "#008800",
       "--mdst-radius": "0",
       "--mdst-border-width": "3",
     },
@@ -216,25 +221,27 @@ window.mdstTheme = (() => {
       "--mdst-color-focus": "#1a1a1a",
       "--mdst-color-danger": "#9a2c2c",
       "--mdst-color-success": "#2c6e49",
+      "--mdst-color-warning": "#916600",
       "--mdst-radius": "0",
       "--mdst-border-width": "2",
     },
     mono: {
       "--mdst-color-fg": "#222222",
       "--mdst-color-bg": "#f8f8f8",
-      "--mdst-color-border": "#cccccc",
-      "--mdst-color-muted": "#888888",
+      "--mdst-color-border": "#8e8e8e",
+      "--mdst-color-muted": "#717171",
       "--mdst-color-subtle": "#eeeeee",
       "--mdst-color-focus": "#444444",
       "--mdst-color-danger": "#cc0000",
-      "--mdst-color-success": "#008800",
+      "--mdst-color-success": "#008400",
       "--mdst-radius": "2",
       "--mdst-border-width": "1",
     },
     swiss: {
       "--mdst-color-fg": "#1a1a1a",
       "--mdst-color-bg": "#ffffff",
-      "--mdst-color-border": "#e5e5e5",
+      // Light, but at least 3:1 on white, so field edges stay visible
+      "--mdst-color-border": "#8a8a8a",
       "--mdst-color-muted": "#737373",
       "--mdst-color-subtle": "#fafafa",
       "--mdst-color-focus": "#dc2626",
@@ -288,6 +295,30 @@ window.mdstTheme = (() => {
   };
 
   // Build CSS-ready vars object from a raw preset
+  /* A preset only lists the tokens it changes. resolvePreset fills in the
+     rest from the default preset, and subtle from the same mix tokens.css
+     uses (4% of the text colour into the background), so every preset
+     sets every token and switching themes never leaves one behind. */
+  function mixHex(a, b, amount) {
+    const channel = (hex, i) => parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16);
+    let out = "#";
+    for (let i = 0; i < 3; i++) {
+      const value = Math.round(channel(a, i) * amount + channel(b, i) * (1 - amount));
+      out += value.toString(16).padStart(2, "0");
+    }
+    return out;
+  }
+
+  function resolvePreset(name) {
+    const preset = presets[name];
+    if (!preset) return null;
+    const resolved = { ...presets.default, ...preset };
+    if (!("--mdst-color-subtle" in preset)) {
+      resolved["--mdst-color-subtle"] = mixHex(resolved["--mdst-color-fg"], resolved["--mdst-color-bg"], 0.04);
+    }
+    return resolved;
+  }
+
   function buildCSSVars(rawPreset) {
     const result = {};
     for (const key in rawPreset) {
@@ -307,7 +338,7 @@ window.mdstTheme = (() => {
   // Clear all theme overrides from :root inline styles
   function clearVars() {
     const style = document.documentElement.style;
-    const keys = Object.keys(presets.default);
+    const keys = Object.keys(resolvePreset("default"));
     for (let i = 0; i < keys.length; i++) {
       style.removeProperty(keys[i]);
     }
@@ -340,7 +371,7 @@ window.mdstTheme = (() => {
 
   // Apply a named preset: set vars, persist, return true. Returns false if unknown.
   function applyPreset(name) {
-    const preset = presets[name];
+    const preset = resolvePreset(name);
     if (!preset) return false;
     const cssVars = buildCSSVars(preset);
     applyVars(cssVars);
@@ -359,7 +390,7 @@ window.mdstTheme = (() => {
     const names = Object.keys(presets);
     for (let i = 0; i < names.length; i++) {
       const name = names[i];
-      const preset = buildCSSVars(presets[name]);
+      const preset = buildCSSVars(resolvePreset(name));
       let match = true;
       for (const key in preset) {
         if (preset[key] !== cssVars[key]) {
@@ -401,6 +432,7 @@ window.mdstTheme = (() => {
     toCSSValue: toCSSValue,
     toRawValue: toRawValue,
     presets: presets,
+    resolvePreset: resolvePreset,
     presetGroups: presetGroups,
     presetLabels: presetLabels,
     buildCSSVars: buildCSSVars,

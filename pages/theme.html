@@ -429,7 +429,7 @@
         {
           group: "More colours",
           controls: [
-            { var: "--mdst-color-warning", label: "Warning", type: "color", default: "#b45309" },
+            { var: "--mdst-color-warning", label: "Warning", type: "color", default: "#9d6e00" },
           ],
         },
         {
@@ -663,7 +663,7 @@
       }
 
       function applyPreset(presetName) {
-        const preset = presets[presetName];
+        const preset = mdstTheme.resolvePreset(presetName);
         if (!preset) return;
 
         for (const [varName, value] of Object.entries(preset)) {
@@ -734,7 +734,7 @@
       if (headerSwitcher) {
         headerSwitcher.addEventListener("change", (e) => {
           if (!e.target.value) return;
-          const preset = presets[e.target.value];
+          const preset = mdstTheme.resolvePreset(e.target.value);
           if (!preset) return;
           Object.assign(currentValues, preset);
           syncAllInputs();
