@@ -1044,7 +1044,7 @@
                 <div class="mdst-card__header">Quick Actions</div>
                 <div class="mdst-card__body">
                   <div class="quick-actions">
-                    <button type="button" class="quick-action-btn" onclick="document.getElementById('new-order-dialog').showModal()">
+                    <button type="button" class="quick-action-btn" commandfor="new-order-dialog" command="show-modal">
                       <span class="quick-action-icon">+</span>
                       <span class="quick-action-label">New Order<small>Create a manual order</small></span>
                     </button>
@@ -1069,7 +1069,7 @@
     <dialog id="new-order-dialog">
       <div class="dialog-header">
         <h2>New Order</h2>
-        <button type="button" class="dialog-close" onclick="document.getElementById('new-order-dialog').close()">✕</button>
+        <button type="button" class="dialog-close" commandfor="new-order-dialog" command="close">✕</button>
       </div>
       <div class="dialog-body">
         <div class="form-group">
@@ -1104,10 +1104,10 @@
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button--borderless" onclick="document.getElementById('new-order-dialog').close()">
+        <button type="button" class="mdst-button--borderless" commandfor="new-order-dialog" command="close">
           Cancel
         </button>
-        <button type="button" class="mdst-button--solid" onclick="document.getElementById('new-order-dialog').close()">
+        <button type="button" class="mdst-button--solid" commandfor="new-order-dialog" command="close">
           Create Order
         </button>
       </div>

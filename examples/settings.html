@@ -1,4 +1,3 @@
-<!-- biome-ignore-all lint/a11y/useAriaPropsForRole: a native checkbox with role="switch" already exposes its checked state, so aria-checked would only duplicate it and could go stale -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -648,12 +647,12 @@
     <div class="settings-layout">
       <!-- Sidebar nav -->
       <nav class="settings-nav">
-        <button type="button" class="settings-nav-link settings-nav-link--active" onclick="showSection('profile')">Profile</button>
-        <button type="button" class="settings-nav-link" onclick="showSection('account')">Account</button>
-        <button type="button" class="settings-nav-link" onclick="showSection('appearance')">Appearance</button>
-        <button type="button" class="settings-nav-link" onclick="showSection('notifications')">Notifications</button>
-        <button type="button" class="settings-nav-link" onclick="showSection('sessions')">Sessions</button>
-        <button type="button" class="settings-nav-link settings-nav-link--danger" onclick="showSection('danger')">Danger Zone</button>
+        <button type="button" class="settings-nav-link settings-nav-link--active" data-section="profile">Profile</button>
+        <button type="button" class="settings-nav-link" data-section="account">Account</button>
+        <button type="button" class="settings-nav-link" data-section="appearance">Appearance</button>
+        <button type="button" class="settings-nav-link" data-section="notifications">Notifications</button>
+        <button type="button" class="settings-nav-link" data-section="sessions">Sessions</button>
+        <button type="button" class="settings-nav-link settings-nav-link--danger" data-section="danger">Danger Zone</button>
       </nav>
 
       <!-- Content -->
@@ -738,8 +737,8 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button--borderless" onclick="showToast('Changes discarded')">Cancel</button>
-              <button type="button" class="mdst-button--solid" onclick="showToast('Profile saved')">Save Changes</button>
+              <button type="button" class="mdst-button--borderless" data-toast="Changes discarded">Cancel</button>
+              <button type="button" class="mdst-button--solid" data-toast="Profile saved">Save Changes</button>
             </div>
           </div>
         </div>
@@ -797,7 +796,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button--solid" onclick="showToast('Password updated')">
+              <button type="button" class="mdst-button--solid" data-toast="Password updated">
                 Update Password
               </button>
             </div>
@@ -917,7 +916,6 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   value="14"
                   step="1"
                   style="flex: 1"
-                  oninput="document.getElementById('font-size-value').textContent = this.value + 'px'"
                 />
                 <span
                   id="font-size-value"
@@ -950,10 +948,10 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button--borderless" onclick="showToast('Reset to defaults')">
+              <button type="button" class="mdst-button--borderless" data-toast="Reset to defaults">
                 Reset to Defaults
               </button>
-              <button type="button" class="mdst-button--solid" onclick="showToast('Appearance saved')">Save Changes</button>
+              <button type="button" class="mdst-button--solid" data-toast="Appearance saved">Save Changes</button>
             </div>
           </div>
         </div>
@@ -1100,7 +1098,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions">
-              <button type="button" class="mdst-button--solid" onclick="showToast('Notification preferences saved')">
+              <button type="button" class="mdst-button--solid" data-toast="Notification preferences saved">
                 Save Preferences
               </button>
             </div>
@@ -1151,7 +1149,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
             </div>
 
             <div class="form-actions form-actions--left" style="margin-top: var(--mdst-space-md)">
-              <button type="button" class="mdst-button--sm" onclick="showToast('All other sessions revoked')">
+              <button type="button" class="mdst-button--sm" data-toast="All other sessions revoked">
                 Revoke All Other Sessions
               </button>
             </div>
@@ -1176,7 +1174,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                 </div>
                 <button
                   type="button" class="mdst-button--sm"
-                  onclick="showToast(`Export started, you'll receive an email when ready`)"
+                  data-toast="Export started, you'll receive an email when ready"
                 >
                   Export Data
                 </button>
@@ -1186,14 +1184,14 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <h4>Transfer ownership</h4>
                   <p>Transfer all your projects and data to another account. You'll retain read-only access.</p>
                 </div>
-                <button type="button" class="mdst-danger mdst-button--sm" onclick="document.getElementById('transfer-dialog').showModal()">Transfer</button>
+                <button type="button" class="mdst-danger mdst-button--sm" commandfor="transfer-dialog" command="show-modal">Transfer</button>
               </div>
               <div class="danger-item">
                 <div class="danger-item-info">
                   <h4>Deactivate account</h4>
                   <p>Temporarily disable your account. Your data will be preserved and you can reactivate at any time.</p>
                 </div>
-                <button type="button" class="mdst-danger mdst-button--sm" onclick="document.getElementById('deactivate-dialog').showModal()">
+                <button type="button" class="mdst-danger mdst-button--sm" commandfor="deactivate-dialog" command="show-modal">
                   Deactivate
                 </button>
               </div>
@@ -1202,7 +1200,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
                   <h4>Delete account</h4>
                   <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
                 </div>
-                <button type="button" class="mdst-danger mdst-button--sm" onclick="document.getElementById('delete-dialog').showModal()">
+                <button type="button" class="mdst-danger mdst-button--sm" commandfor="delete-dialog" command="show-modal">
                   Delete Account
                 </button>
               </div>
@@ -1216,7 +1214,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     <dialog id="transfer-dialog">
       <div class="dialog-header">
         <h2>Transfer ownership</h2>
-        <button type="button" class="dialog-close" onclick="document.getElementById('transfer-dialog').close()">✕</button>
+        <button type="button" class="dialog-close" commandfor="transfer-dialog" command="close">✕</button>
       </div>
       <div class="dialog-body">
         <p>Enter the email address of the account you want to transfer ownership to. They must have an existing Relay account.</p>
@@ -1230,15 +1228,14 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button--borderless" onclick="document.getElementById('transfer-dialog').close()">
+        <button type="button" class="mdst-button--borderless" commandfor="transfer-dialog" command="close">
           Cancel
         </button>
         <button
           type="button" class="mdst-danger mdst-button--sm"
-          onclick="
-            document.getElementById('transfer-dialog').close();
-            showToast('Transfer request sent');
-          "
+          commandfor="transfer-dialog"
+          command="close"
+          data-toast="Transfer request sent"
         >
           Transfer Ownership
         </button>
@@ -1249,7 +1246,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     <dialog id="deactivate-dialog">
       <div class="dialog-header">
         <h2>Deactivate account</h2>
-        <button type="button" class="dialog-close" onclick="document.getElementById('deactivate-dialog').close()">✕</button>
+        <button type="button" class="dialog-close" commandfor="deactivate-dialog" command="close">✕</button>
       </div>
       <div class="dialog-body">
         <p>Deactivating your account will:</p>
@@ -1279,15 +1276,14 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button--borderless" onclick="document.getElementById('deactivate-dialog').close()">
+        <button type="button" class="mdst-button--borderless" commandfor="deactivate-dialog" command="close">
           Cancel
         </button>
         <button
           type="button" class="mdst-danger mdst-button--sm"
-          onclick="
-            document.getElementById('deactivate-dialog').close();
-            showToast('Account deactivated');
-          "
+          commandfor="deactivate-dialog"
+          command="close"
+          data-toast="Account deactivated"
         >
           Deactivate Account
         </button>
@@ -1298,7 +1294,7 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
     <dialog id="delete-dialog">
       <div class="dialog-header">
         <h2>Delete account</h2>
-        <button type="button" class="dialog-close" onclick="document.getElementById('delete-dialog').close()">✕</button>
+        <button type="button" class="dialog-close" commandfor="delete-dialog" command="close">✕</button>
       </div>
       <div class="dialog-body">
         <p><strong>This action is permanent and cannot be undone.</strong></p>
@@ -1326,15 +1322,14 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
         </div>
       </div>
       <div class="dialog-footer">
-        <button type="button" class="mdst-button--borderless" onclick="document.getElementById('delete-dialog').close()">
+        <button type="button" class="mdst-button--borderless" commandfor="delete-dialog" command="close">
           Cancel
         </button>
         <button
           type="button" class="mdst-danger mdst-button--sm"
-          onclick="
-            document.getElementById('delete-dialog').close();
-            showToast('Account deleted');
-          "
+          commandfor="delete-dialog"
+          command="close"
+          data-toast="Account deleted"
         >
           Permanently Delete
         </button>
@@ -1348,7 +1343,6 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
 
     <script>
       // Section switching
-      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function showSection(sectionName) {
         // Hide all panels
         document.querySelectorAll(".settings-panel").forEach((panel) => {
@@ -1366,13 +1360,8 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
           link.classList.remove("settings-nav-link--active");
         });
 
-        // Find the clicked link (match by onclick content)
-        document.querySelectorAll(".settings-nav-link").forEach((link) => {
-          const onclick = link.getAttribute("onclick") || "";
-          if (onclick.indexOf(`'${sectionName}'`) !== -1) {
-            link.classList.add("settings-nav-link--active");
-          }
-        });
+        // Mark the link for this section
+        document.querySelector(`.settings-nav-link[data-section="${sectionName}"]`)?.classList.add("settings-nav-link--active");
 
         // Scroll to top
         window.scrollTo(0, 0);
@@ -1380,7 +1369,6 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
 
       // Toast notification
       let toastTimeout;
-      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function showToast(message) {
         const toast = document.getElementById("toast");
         const toastMessage = document.getElementById("toast-message");
@@ -1397,6 +1385,19 @@ Staff engineer. Building reliable systems and occasionally writing about it.</te
           toast.classList.remove("show");
         }, 3000);
       }
+
+      // Nav links and save buttons carry their section or message
+      for (const link of document.querySelectorAll("[data-section]")) {
+        link.addEventListener("click", () => showSection(link.dataset.section));
+      }
+
+      for (const button of document.querySelectorAll("[data-toast]")) {
+        button.addEventListener("click", () => showToast(button.dataset.toast));
+      }
+
+      document.getElementById("font-size").addEventListener("input", (event) => {
+        document.getElementById("font-size-value").textContent = `${event.target.value}px`;
+      });
 
       // Close dialogs on backdrop click
       document.querySelectorAll("dialog").forEach((dialog) => {

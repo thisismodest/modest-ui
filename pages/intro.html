@@ -1,4 +1,3 @@
-<!-- biome-ignore-all lint/a11y/useAriaPropsForRole: a native checkbox with role="switch" already exposes its checked state, so aria-checked would only duplicate it and could go stale -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -603,11 +602,12 @@
         margin-inline: auto;
       }
 
-      /* Theme switches apply instantly: every element fading at once grates */
+      /* Theme switches apply instantly: every element fading at once grates.
+         No !important needed: modest-ui sits in a cascade layer, so this
+         unlayered rule beats every component's own transition. */
       .home-instant,
       .home-instant * {
-        /* biome-ignore lint/complexity/noImportantStyles: has to beat every component's own transition */
-        transition: none !important;
+        transition: none;
       }
 
       /* Colour swatch with its hex value beside it */
@@ -640,7 +640,6 @@
           <p class="home-hero-lead">Write plain HTML with no classes and it’s styled. Add a class when you want a variant or more control.</p>
 
           <div class="home-install">
-            <!-- biome-ignore lint/a11y/useSemanticElements: a group of toggle buttons, not form fields -->
             <div class="mdst-toolbar" role="group" aria-label="Install method">
               <div class="mdst-toolbar__group mdst-toolbar__group--attached">
                 <button type="button" class="mdst-button" aria-pressed="true" data-install="npm">npm</button>
@@ -700,7 +699,6 @@
         <h2 class="home-title" id="looks-heading">Try a theme</h2>
         <p class="home-intro">These are stock components, and each theme only changes a handful of CSS variables.</p>
 
-        <!-- biome-ignore lint/a11y/useSemanticElements: a group of toggle buttons, not form fields -->
         <div class="mdst-toolbar home-themes" role="group" aria-label="Theme">
           <div class="mdst-toolbar__group" id="theme-chips"></div>
           <div class="mdst-toolbar__spacer"></div>
@@ -1151,7 +1149,6 @@
               <i></i><i></i><i></i>
               <span>your-next-project.com</span>
             </div>
-            <!-- biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region needs tabindex so keyboard users can scroll it -->
             <section class="home-canvas mdst-ui" id="builder-canvas" tabindex="0" aria-label="Page preview"></section>
           </div>
         </div>
@@ -1519,7 +1516,7 @@ import "mdst-ui";</pre>
           el.classList.add("home-instant");
           // Always set the preset's tokens, including Default, so the area
           // shows the real default rather than the visitor's saved site theme
-          var vars = theme.buildCSSVars(theme.presets[name]);
+          var vars = theme.buildCSSVars(theme.resolvePreset(name));
           for (var key in vars) el.style.setProperty(key, vars[key]);
           el.offsetHeight;
           el.classList.remove("home-instant");
@@ -1962,7 +1959,7 @@ import "mdst-ui";</pre>
         // Copy HTML links the CDN; Open in new tab uses this site's own bundle,
         // so the preview matches the page even before a release reaches npm
         function exportHTML(stylesheet) {
-          var chosen = theme && builderTheme.value !== "default" ? theme.buildCSSVars(theme.presets[builderTheme.value]) : null;
+          var chosen = theme && builderTheme.value !== "default" ? theme.buildCSSVars(theme.resolvePreset(builderTheme.value)) : null;
           var tokens = chosen
             ? ":root {\n" +
               Object.keys(chosen)

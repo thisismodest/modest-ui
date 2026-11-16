@@ -1,4 +1,3 @@
-/* biome-ignore-all lint/style/noDescendingSpecificity: each rule pairs a zero-specificity classless selector with its class-based one, and state rules are written before the base rules they refine; the higher-specificity rule is the one meant to win */
 @layer mdst-ui.components {
   /* Details (Toggle/Disclosure) */
 

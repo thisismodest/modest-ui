@@ -11,6 +11,29 @@ change; adding new ones is a minor change.
 
 ## [Unreleased]
 
+## [2.1.1] - 2026-11-16
+
+### Changed
+
+- `--mdst-color-subtle` (the light fill behind skeletons, progress and meter
+  tracks, code, and table lines) is mixed from `--mdst-color-fg` and
+  `--mdst-color-bg` by default, instead of a fixed grey. The default theme
+  looks the same in light and dark mode, but a theme that only sets text and
+  background colours now gets a subtle shade that matches. Before, a dark
+  theme kept a light grey, and a theme with subtle set to its background
+  lost those parts entirely. Setting `--mdst-color-subtle` yourself works as
+  before.
+- The warning colour is yellower: `#9d6e00`, a gold, in light mode (was
+  `#b45309`, an orange-brown) and `#db9705` in dark mode (was `#fbbf24`).
+  Both pass 4.5:1: the light one against white, as text and behind white
+  text, and the dark one against the dark background.
+
+### Fixed
+
+- Skeletons were invisible in some high-contrast themes: their forced-colours
+  outline used `GrayText`, which can match the page background. They now use
+  `CanvasText`, like progress and meter.
+
 ## [2.1.0] - 2026-11-16
 
 ### Added

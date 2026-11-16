@@ -495,7 +495,6 @@
       // and log them so you can see what would be sent to Google Analytics.
       window.dataLayer = window.dataLayer || [];
       function gtag() {
-        // biome-ignore lint/complexity/noArguments: gtag.js expects the arguments object, not an array
         window.dataLayer.push(arguments);
         const [command, action, params] = window.dataLayer.at(-1);
         demoLog.textContent += `gtag("${command}", "${action}", ${JSON.stringify(params)})\n`;

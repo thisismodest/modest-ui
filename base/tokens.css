@@ -9,10 +9,14 @@
     --mdst-color-bg: #fff;
     --mdst-color-border: #000;
     --mdst-color-muted: #666;
-    --mdst-color-subtle: #f5f5f5;
+    /* Subtle (light fills: skeletons, tracks, code, table lines) is mixed
+       from the text and background colours, so a theme that only sets
+       those two still gets a subtle shade that shows. If you set it
+       yourself, keep it visibly different from the background. */
+    --mdst-color-subtle: color-mix(in srgb, var(--mdst-color-fg) 4%, var(--mdst-color-bg));
     --mdst-color-focus: #000;
     --mdst-color-danger: #dc2626;
-    --mdst-color-warning: #b45309;
+    --mdst-color-warning: #9d6e00;
     --mdst-color-success: #15803d;
     /* --mdst-color-info is optional: .mdst-info uses the text colour unless
        you set it, e.g. --mdst-color-info: #2563eb; */
@@ -110,10 +114,14 @@
       --mdst-color-bg: light-dark(#fff, #1a1a1a);
       --mdst-color-border: light-dark(#000, #fff);
       --mdst-color-muted: light-dark(#666, #999);
-      --mdst-color-subtle: light-dark(#f5f5f5, #2a2a2a);
+      /* #f5f5f5 and #2a2a2a with the default colours */
+      --mdst-color-subtle: light-dark(
+        color-mix(in srgb, var(--mdst-color-fg) 4%, var(--mdst-color-bg)),
+        color-mix(in srgb, var(--mdst-color-fg) 7%, var(--mdst-color-bg))
+      );
       --mdst-color-focus: light-dark(#000, #fff);
       --mdst-color-danger: light-dark(#dc2626, #f87171);
-      --mdst-color-warning: light-dark(#b45309, #fbbf24);
+      --mdst-color-warning: light-dark(#9d6e00, #db9705);
       --mdst-color-success: light-dark(#15803d, #4ade80);
     }
   }

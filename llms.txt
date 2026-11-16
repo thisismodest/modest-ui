@@ -7,7 +7,7 @@ on npm is an UNRELATED Vue library — do not install it. This package is named
 "mdst-ui" to match its class/token prefix (.mdst-ui, --mdst-*). Whenever a
 human says "modest-ui", the package to install is "mdst-ui".
 
-- Version: 2.1.0 (this file describes v2; class names differ from v1)
+- Version: 2.1.1 (this file describes v2; class names differ from v1)
 - Package (npm): mdst-ui
 - Docs: https://modest-ui.com
 - GitHub: https://github.com/thisismodest/modest-ui
@@ -113,17 +113,22 @@ Override these custom properties on `:root` (or any element) to theme modest-ui.
 
 ### Colors
 
-| Token                | Value   |
-| -------------------- | ------- |
-| --mdst-color-fg      | #000    |
-| --mdst-color-bg      | #fff    |
-| --mdst-color-border  | #000    |
-| --mdst-color-muted   | #666    |
-| --mdst-color-subtle  | #f5f5f5 |
-| --mdst-color-focus   | #000    |
-| --mdst-color-danger  | #dc2626 |
-| --mdst-color-warning | #b45309 |
-| --mdst-color-success | #15803d |
+| Token               | Value |
+| ------------------- | ----- |
+| --mdst-color-fg     | #000  |
+| --mdst-color-bg     | #fff  |
+| --mdst-color-border | #000  |
+| --mdst-color-muted  | #666  |
+
+### Subtle (light fills
+
+| Token                | Value                                                             |
+| -------------------- | ----------------------------------------------------------------- |
+| --mdst-color-subtle  | color-mix(in srgb, var(--mdst-color-fg) 4%, var(--mdst-color-bg)) |
+| --mdst-color-focus   | #000                                                              |
+| --mdst-color-danger  | #dc2626                                                           |
+| --mdst-color-warning | #9d6e00                                                           |
+| --mdst-color-success | #15803d                                                           |
 
 ### Typography
 
@@ -1682,6 +1687,10 @@ Classes:
   --mdst-font-text: Charter, Georgia, serif;
 }
 ```
+
+`--mdst-color-subtle` is mixed from the text and background colours unless
+you set it; if you do, keep it visibly different from `--mdst-color-bg`
+(skeletons, tracks, code, and table lines are drawn in it).
 
 Setting colour tokens yourself replaces both the light and dark values. To keep
 dark mode, set them inside `@media (prefers-color-scheme: dark)` too, or use

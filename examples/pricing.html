@@ -551,8 +551,8 @@
 
       <!-- Billing toggle -->
       <div class="billing-toggle">
-        <button type="button" class="billing-option active" id="toggle-monthly" onclick="setBilling('monthly')">Monthly</button>
-        <button type="button" class="billing-option" id="toggle-yearly" onclick="setBilling('yearly')">
+        <button type="button" class="billing-option active" id="toggle-monthly" data-billing="monthly">Monthly</button>
+        <button type="button" class="billing-option" id="toggle-yearly" data-billing="yearly">
           Yearly<span class="billing-badge mdst-tag mdst-success mdst-tag--sm" style="margin-left: var(--mdst-space-xs)"
             >Save 20%</span
           >
@@ -898,7 +898,6 @@
     </footer>
 
     <script>
-      // biome-ignore lint/correctness/noUnusedVariables: called from onclick attributes
       function setBilling(period) {
         const monthly = document.getElementById("toggle-monthly");
         const yearly = document.getElementById("toggle-yearly");
@@ -920,6 +919,10 @@
             el.innerHTML = value;
           }
         });
+      }
+
+      for (const button of document.querySelectorAll("[data-billing]")) {
+        button.addEventListener("click", () => setBilling(button.dataset.billing));
       }
     </script>
   </body>
