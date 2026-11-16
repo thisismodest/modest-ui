@@ -3,5 +3,5 @@ export default {
   className: ".mdst-tabs",
   keywords: ["tab panel", "tablist"],
   description:
-    "Data-attribute-driven tabbed interface with pills, vertical, and small variants.",
+    "Tabbed interface driven by `data-state`, with pills, vertical, and small variants.",
 };
