@@ -15,6 +15,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     )),
   :where(.mdst-ui) textarea,
@@ -44,6 +45,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     ))::placeholder,
   :where(.mdst-ui) textarea::placeholder,
@@ -117,6 +119,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     ):focus),
   :where(.mdst-ui) textarea:where(:focus),
@@ -138,6 +141,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     ):focus-visible),
   :where(.mdst-ui) textarea:where(:focus-visible),
@@ -155,6 +159,7 @@
       [type="submit"],
       [type="reset"],
       [type="button"],
+      [type="image"],
       [type="hidden"]
     ):disabled),
   :where(.mdst-ui) textarea:where(:disabled),
